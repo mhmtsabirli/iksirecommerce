@@ -5,20 +5,20 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class ProductCategories : Base
+    class ProductCategories : ModelBase
     {
         public int ParentId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public ProductCategories CreateProductCategories(int id, int createuser, DateTime createdate, int edituser, DateTime editdate,int parentid, string title, string description)
+        public ProductCategories CreateProductCategories(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate,int parentid, string title, string description)
         {
             ProductCategories Pc = new ProductCategories();
             Pc.ParentId = parentid;
             Pc.Title = title;
             Pc.Description = description;
 
-            Pc.CreateBase( id,  createuser,  createdate,  edituser,  editdate);
+            Pc.CreateBase( id,  createUserId,  createdate,  edituser,  editdate);
 
             return Pc;
         }

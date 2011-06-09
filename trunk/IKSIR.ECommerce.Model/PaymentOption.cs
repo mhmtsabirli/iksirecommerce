@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class PaymentOption : Base
+    class PaymentOption : ModelBase
     {
         public int EnumValueId { get; set; }
         public string CreditCardHolder { get; set; }
@@ -13,7 +13,7 @@ namespace IKSIR.ECommerce.Model
         public string ExpireDate { get; set; }
         public string Cvv2 { get; set; }
 
-        public PaymentOption CreatePaymentOption(int id, int createuser, DateTime createdate, int edituser, DateTime editdate, int enumvalueid, string creditcardholder, string creditcardnumber, string expiredate, string cvv2)
+        public PaymentOption CreatePaymentOption(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, int enumvalueid, string creditcardholder, string creditcardnumber, string expiredate, string cvv2)
         {
             PaymentOption Op = new PaymentOption();
             Op.EnumValueId = enumvalueid;
@@ -22,7 +22,7 @@ namespace IKSIR.ECommerce.Model
             Op.ExpireDate = expiredate;
             Op.Cvv2 = cvv2;
 
-            Op.CreateBase(id, createuser, createdate, edituser, editdate);
+            Op.CreateBase(id, createUserId, createdate, edituser, editdate);
 
             return Op;
         }

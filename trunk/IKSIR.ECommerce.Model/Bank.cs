@@ -5,17 +5,14 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class Bank : Base
+    class Bank : ModelBase
     {
         public string BankName { get; set; }
 
-        public Bank CreateBank(int id, int createuser, DateTime createdate, int edituser, DateTime editdate, string bankname)
+        public Bank(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string bankName)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            Bank b = new Bank();
-            b.BankName = bankname;
-            b.CreateBase(id, createuser, createdate, edituser, editdate);
-
-            return b;
+            this.BankName = bankName;
         }
     }
 }

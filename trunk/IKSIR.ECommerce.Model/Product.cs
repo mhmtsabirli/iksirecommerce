@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class Product : Base
+    class Product : ModelBase
     {
         public string Title { get; set; }
         public string Description { get; set; }
@@ -14,7 +14,7 @@ namespace IKSIR.ECommerce.Model
         public DateTime AlertDate { get; set; }
         public int ProductCategoryId { get; set; }
 
-        public Product CreateProduct(int id, int createuser, DateTime createdate, int edituser, DateTime editdate,string title, string description, string productcode, int minstock, DateTime alertdate, int productcategoryid) 
+        public Product CreateProduct(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate,string title, string description, string productcode, int minstock, DateTime alertdate, int productcategoryid) 
         {
             Product p = new Product();
             p.Title = title;
@@ -23,7 +23,7 @@ namespace IKSIR.ECommerce.Model
             p.MinStock = minstock;
             p.AlertDate = alertdate;
             p.ProductCategoryId = productcategoryid;
-            p.CreateBase(id, createuser, createdate, edituser, editdate);
+            p.CreateBase(id, createUserId, createdate, edituser, editdate);
             
             return p;
         }

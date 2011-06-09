@@ -5,19 +5,19 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class PropertyValue : Base
+    class PropertyValue : ModelBase
     {
         public int PropertyId { get; set; }
         public string Value { get; set; }
 
-        public PropertyValue CreatePropertyValue(int id, int createuser, DateTime createdate, int edituser, DateTime editdate, int propertyid, string value)
+        public PropertyValue CreatePropertyValue(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, int propertyid, string value)
         {
             PropertyValue Pv = new PropertyValue();
 
             Pv.PropertyId = propertyid;
             Pv.Value = value;
 
-            Pv.CreateBase(id, createuser, createdate, edituser, editdate);
+            Pv.CreateBase(id, createUserId, createdate, edituser, editdate);
 
             return Pv;
         }

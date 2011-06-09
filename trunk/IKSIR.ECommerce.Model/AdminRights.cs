@@ -5,18 +5,16 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class AdminRights : Base
+    class AdminRights : ModelBase
     {
-        public int AdminId { get; set; }
-        public int RightId { get; set; }
+        public Admin Admin { get; set; }
+        public List<Right> Rights { get; set; }
 
-        public AdminRights CreateAdminRights(int id, int createuser, DateTime createdate, int edituser, DateTime editdate, int adminid, int rightid)
+        public AdminRights(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Admin admin, List<Right> rights)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            AdminRights Ar = new AdminRights();
-            Ar.AdminId = adminid;
-            Ar.RightId = rightid;
-            Ar.CreateBase(id, createuser, createdate, edituser,editdate);
-            return Ar;
+            this.Admin = admin;
+            this.Rights = rights;
         }
     }
 }

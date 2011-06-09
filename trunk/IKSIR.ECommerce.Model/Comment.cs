@@ -5,23 +5,20 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class Comment : Base
+    class Comment : ModelBase
     {
-        public int UserId { get; set; }
-        public string value { get; set; }
+        public User User { get; set; }
+        public string Value { get; set; }
         public string Ip { get; set; }
-        public int Website { get; set; }
+        public int WebSite { get; set; }
 
-        public Comment CreateComment(int id, int createuser, DateTime createdate, int edituser, DateTime editdate,int userid, string value, string ip, int website)
+        public Comment(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, User user, string value, string ip, int webSite)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            Comment c = new Comment();
-            c.UserId = userid;
-            c.value = value;
-            c.Ip = ip;
-            c.Website = website;
-            c.CreateBase( id,  createuser,  createdate,  edituser,  editdate);
-
-            return c;
+            this.User = user;
+            this.Value = value;
+            this.Ip = ip;
+            this.WebSite = webSite;
         }
     }
 }

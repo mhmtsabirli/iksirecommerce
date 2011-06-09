@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class Order : Base
+    class Order : ModelBase
     {
         public int UserId { get; set; }
         public string Ip { get; set; }
@@ -25,7 +25,7 @@ namespace IKSIR.ECommerce.Model
         public decimal TotalPrice { get; set; }
         public DateTime ShipmentDate { get; set; }
 
-        public Order CreateOrder(int id, int createuser, DateTime createdate, int edituser, DateTime editdate, int userid, string ip, string host, string cargonumber,
+        public Order CreateOrder(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, int userid, string ip, string host, string cargonumber,
             string cargoname, int billingaddressid, int enumvalueid, int paymentoptionid, decimal price, int tax, int invoiceid, int shipmmentaddressid,
             int paymenttype, int discount, int status, decimal totalprice, DateTime shipmmentdate)
         {
@@ -47,7 +47,7 @@ namespace IKSIR.ECommerce.Model
             o.Status = status;
             o.TotalPrice = totalprice;
             o.ShipmentDate = shipmmentdate;
-            o.CreateBase(id, createuser, createdate, edituser, editdate);
+            o.CreateBase(id, createUserId, createdate, edituser, editdate);
 
             return o;
         }

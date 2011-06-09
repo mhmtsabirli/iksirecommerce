@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class VPOSPaymentCardLogs : Base
+    class VPOSPaymentCardLogs : ModelBase
     {
         public string BankName { get; set; }
         public string CreditCardCode { get; set; }
@@ -20,7 +20,7 @@ namespace IKSIR.ECommerce.Model
         public int TransactionId { get; set; }
         public string RawData { get; set; }
 
-        public VPOSPaymentCardLogs CreateVPOSPaymentCardLogs(int id, int createuser, DateTime createdate, int edituser, DateTime editdate, string bankname, string creditcardcode,
+        public VPOSPaymentCardLogs CreateVPOSPaymentCardLogs(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, string bankname, string creditcardcode,
             string creditcardname, string creditcardproductcode, string creditcardproductname, string paymentcardbonusmultiplier,
             string currentproductcode, string currentproductname, decimal amount, decimal bonusamount, int transactionid, string rawdata)
         {
@@ -38,7 +38,7 @@ namespace IKSIR.ECommerce.Model
             Vpcl.TransactionId = transactionid;
             Vpcl.RawData = rawdata;
 
-            Vpcl.CreateBase(id, createuser, createdate, edituser, editdate);
+            Vpcl.CreateBase(id, createUserId, createdate, edituser, editdate);
 
             return Vpcl;
         }

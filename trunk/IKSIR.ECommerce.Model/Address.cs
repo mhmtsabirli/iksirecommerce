@@ -5,31 +5,32 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class Address : Base
+    class Address : ModelBase
     {
+        #region Properties
         public int Type { get; set; }
-        public int CountryId { get; set; }
-        public int CityId { get; set; }
-        public int DistrictId { get; set; }
+        public Country Country { get; set; }
+        public City City { get; set; }
+        public District District { get; set; }
         public string Description { get; set; }
         public string PostalCode { get; set; }
         public string Phone { get; set; }
-        public int UserId { get; set; }
+        public User User { get; set; }
+        #endregion
 
-        public Address CreateAddress(int id, int createuser, DateTime createdate, int edituser, DateTime editdate, int type, int countryid, int cityid, int districtid, string description, string postalcode, string phone, int userid)
+        #region Constructors
+        public Address(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int type, Country country, City city, District district, string description, string postalCode, string phone, User user)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            Address ad = new Address();
-            ad.Type = type;
-            ad.CountryId = countryid;
-            ad.CityId = cityid;
-            ad.DistrictId = districtid;
-            ad.Description = description;
-            ad.PostalCode = postalcode;
-            ad.Phone = phone;
-            ad.UserId = userid;
-            ad.CreateBase(id, createuser, createdate, edituser, editdate);
-            return ad;
+            this.Type = type;
+            this.Country = country;
+            this.City = city;
+            this.District = district;
+            this.Description = description;
+            this.PostalCode = postalCode;
+            this.Phone = phone;
+            this.User = user;
         }
-
+        #endregion
     }
 }

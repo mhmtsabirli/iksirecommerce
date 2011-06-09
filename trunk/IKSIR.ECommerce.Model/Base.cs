@@ -5,24 +5,21 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    public class Base
+    public class ModelBase
     {
         public int Id { get; set; }
-        public int CreateUser { get; set; }
+        public int CreateUserId { get; set; }
         public DateTime CreateDate { get; set; }
-        public int EditUser { get; set; }
+        public int EditUserId { get; set; }
         public DateTime EditDate { get; set; }
 
-        public Base CreateBase(int id, int createuser, DateTime createdate, int edituser, DateTime editdate)
+        public ModelBase (int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate)
         {
-            Base bs = new Base();
-            bs.CreateDate = createdate;
-            bs.CreateUser = createuser;
-            bs.EditDate = editdate;
-            bs.EditUser = edituser;
-            bs.Id = id;
-
-            return bs;
+            this.Id = id;
+            this.CreateUserId = createUserId;
+            this.CreateDate = createDate;
+            this.EditUserId = editUserId;
+            this.EditDate = editDate;
         }
     }
 }

@@ -5,21 +5,16 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class City : Base
+    class City : ModelBase
     {
-        public int CountryId { get; set; }
+        public Country Country { get; set; }
         public string Name { get; set; }
 
-        public City CreateCity(int id, int createuser, DateTime createdate, int edituser, DateTime editdate, int counryid, string name)
+        public City(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Country country, string name)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            City c = new City();
-            c.CountryId = counryid;
-            c.Name = name;
-            c.CreateBase(id, createuser, createdate, edituser, editdate);
-
-            return c;
-
+            this.Country = country;
+            this.Name = name;
         }
-
     }
 }

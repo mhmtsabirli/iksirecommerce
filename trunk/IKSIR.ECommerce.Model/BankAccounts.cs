@@ -5,23 +5,20 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class BankAccounts : Base
+    class BankAccounts : ModelBase
     {
         public int BankId { get; set; }
         public string AccountNo { get; set; }
         public string Branch { get; set; }
         public string Description { get; set; }
 
-        public BankAccounts CreateBankAccounts(int id, int createuser, DateTime createdate, int edituser, DateTime editdate, int bankid, string accountno, string branch, string description)
+        public BankAccounts(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int bankId, string accountNo, string branch, string description)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            BankAccounts ba = new BankAccounts();
-            ba.BankId = bankid;
-            ba.AccountNo = accountno;
-            ba.Branch = branch;
-            ba.Description = description;
-            ba.CreateBase(id, createuser, createdate, edituser, editdate);
-
-            return ba;
+            this.BankId = bankId;
+            this.AccountNo = accountNo;
+            this.Branch = branch;
+            this.Description = description;
         }
 
     }

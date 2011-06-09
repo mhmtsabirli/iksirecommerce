@@ -5,17 +5,14 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class Enum : Base
+    class Enum : ModelBase
     {
         public string Name { get; set; }
 
-        public Enum CreateEnum(int id, int createuser, DateTime createdate, int edituser, DateTime editdate, string name)
+        public Enum(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string name)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            Enum e = new Enum();
-            e.Name = name;
-            e.CreateBase(id, createuser, createdate, edituser, editdate);
-
-            return e;
+            this.Name = name;
         }
     }
 }

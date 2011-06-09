@@ -5,23 +5,20 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class Invoice : Base
+    class Invoice : ModelBase
     {
-        public int OrderId { get; set; }
+        public Order Order { get; set; }
         public string InvoiceNumber { get; set; }
-        public int Status { get; set; }
         public DateTime InvoiceDate { get; set; }
+        public int Status { get; set; }
 
-        public Invoice CreateInvoice(int id, int createuser, DateTime createdate, int edituser, DateTime editdate,int orderid, string invoicenumber, int status, DateTime invoicedate)
+        public Invoice(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Order order, string invoiceNumber, DateTime invoiceDate, int status)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            Invoice I = new Invoice();
-            I.OrderId = orderid;
-            I.InvoiceDate = invoicedate;
-            I.Status = status;
-            I.InvoiceDate = invoicedate;
-            I.CreateBase( id,  createuser,  createdate,  edituser,  editdate);
-
-            return I;
+            this.Order = order;
+            this.InvoiceNumber = invoiceNumber;
+            this.InvoiceDate = invoiceDate;
+            this.Status = status;
         }
     }
 }

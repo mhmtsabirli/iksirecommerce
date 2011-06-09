@@ -5,16 +5,16 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class Site : Base
+    class Site : ModelBase
     {
         public string Name { get; set; }
 
-        public Site CreateSite(int id, int createuser, DateTime createdate, int edituser, DateTime editdate, string name)
+        public Site CreateSite(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, string name)
         {
             Site s = new Site();
             s.Name = name;
 
-            s.CreateBase(id, createuser, createdate, edituser, editdate);
+            s.CreateBase(id, createUserId, createdate, edituser, editdate);
 
             return s;
         }

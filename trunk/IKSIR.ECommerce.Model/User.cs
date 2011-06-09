@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class User : Base
+    class User : ModelBase
     {
         public string UserName { get; set; }
         public string Name { get; set; }
@@ -19,7 +19,7 @@ namespace IKSIR.ECommerce.Model
         public int SiteId { get; set; }
         public string Password { get; set; }
 
-        public User CreateUser(int id, int createuser, DateTime createdate, int edituser, DateTime editdate,string username, string name,
+        public User createUserId(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate,string username, string name,
             string surname, string email, DateTime birthdate, string mobilephone, string tcid, int status, DateTime lastlogindate, int siteid, string password)
         {
             User u = new User();
@@ -34,7 +34,7 @@ namespace IKSIR.ECommerce.Model
             u.LastLoginDate = lastlogindate;
             u.SiteId = siteid;
             u.Password = password;
-            u.CreateBase( id,  createuser,  createdate,  edituser,  editdate);
+            u.CreateBase( id,  createUserId,  createdate,  edituser,  editdate);
 
             return u;
 
