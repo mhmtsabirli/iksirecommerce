@@ -14,7 +14,7 @@ namespace IKSIR.ECommerce.Model
         public User User { get; set; }
         public bool IsActive { get; set; }
 
-        public ItemComments(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, EnumValue itemTypeId, EnumValue itemId, int commentId, User user, bool isActive)
+        public ItemComments(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, EnumValue itemType, EnumValue item, int commentId, User user, bool isActive)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
 
