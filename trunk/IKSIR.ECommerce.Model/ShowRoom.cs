@@ -8,9 +8,9 @@ namespace IKSIR.ECommerce.Model
     class ShowRoom : ModelBase
     {
         public Product Item { get; set; }
-        public EnumValues EnumValue { get; set; }
+        public EnumValue EnumValue { get; set; }
 
-        public ShowRoom(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Product item, EnumValues enumValue)
+        public ShowRoom(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Product item, EnumValue enumValue)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             

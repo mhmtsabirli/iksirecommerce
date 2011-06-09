@@ -12,10 +12,10 @@ namespace IKSIR.ECommerce.Model
         public string ProductCode { get; set; }
         public int MinStock { get; set; }
         public DateTime AlertDate { get; set; }
-        public ProductCategories ProductCategory { get; set; }
+        public ProductCategory ProductCategory { get; set; }
 
         public Product(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string title,
-            string description, string productCode, int minStock, DateTime alertdate, ProductCategories productCategory) 
+            string description, string productCode, int minStock, DateTime alertdate, ProductCategory productCategory) 
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             

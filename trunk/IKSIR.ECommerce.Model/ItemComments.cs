@@ -8,18 +8,18 @@ namespace IKSIR.ECommerce.Model
     class ItemComments : ModelBase
     {
 
-        public int ItemTypeId { get; set; }
-        public int ItemId { get; set; }
+        public EnumValue ItemType { get; set; }
+        public EnumValue Item { get; set; }
         public int CommentId { get; set; }
         public User User { get; set; }
         public bool IsActive { get; set; }
 
-        public ItemComments(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int itemTypeId, int itemId, int commentId, User user, bool isActive)
+        public ItemComments(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, EnumValue itemTypeId, EnumValue itemId, int commentId, User user, bool isActive)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
 
-            this.ItemTypeId = itemTypeId;
-            this.ItemId = itemId;
+            this.ItemType = itemType;
+            this.Item = item;
             this.CommentId = commentId;
             this.User = user;
             this.IsActive = isActive;

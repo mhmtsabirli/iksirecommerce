@@ -5,20 +5,21 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class Property : ModelBase
+    class ProductCategory : ModelBase
     {
+        public int ParentId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public List<PropertyValue> PropertyValue { get; set; }
 
-        public Property(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string title, string description,List<PropertyValue> propertyValue)
+        public ProductCategory(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate,
+            int parentId, string title, string description)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             
+            this.ParentId = parentId;
             this.Title = title;
             this.Description = description;
-            this.PropertyValue = propertyValue;
-     
+
         }
     }
 }

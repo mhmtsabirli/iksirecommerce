@@ -8,10 +8,10 @@ namespace IKSIR.ECommerce.Model
     class ItemMultimedias : ModelBase
     {
         public int ItemId { get; set; }
-        public int Type { get; set; }
-        public int ItemType { get; set; }
+        public EnumValue Type { get; set; }
+        public EnumValue ItemType { get; set; }
 
-        public ItemMultimedias(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int itemId, int type, int itemType)
+        public ItemMultimedias(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int itemId, EnumValue type, EnumValue itemType)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
 

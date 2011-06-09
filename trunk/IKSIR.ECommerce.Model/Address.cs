@@ -8,7 +8,7 @@ namespace IKSIR.ECommerce.Model
     class Address : ModelBase
     {
         #region Properties
-        public int Type { get; set; }
+        public EnumValue Type { get; set; }
         public Country Country { get; set; }
         public City City { get; set; }
         public District District { get; set; }
@@ -19,7 +19,7 @@ namespace IKSIR.ECommerce.Model
         #endregion
 
         #region Constructors
-        public Address(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int type, Country country, City city, District district, string description, string postalCode, string phone, User user)
+        public Address(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, EnumValue type, Country country, City city, District district, string description, string postalCode, string phone, User user)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.Type = type;

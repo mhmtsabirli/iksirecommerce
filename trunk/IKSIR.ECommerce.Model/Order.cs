@@ -13,7 +13,7 @@ namespace IKSIR.ECommerce.Model
         public string CargoNumber { get; set; }
         public string CargoName { get; set; }
         public Address BillingAddress { get; set; }
-        public EnumValues EnumValue { get; set; }
+        public EnumValue EnumValue { get; set; }
         public PaymentOption PaymentOption { get; set; }
         public decimal Price { get; set; }
         public int Tax { get; set; }
@@ -26,7 +26,7 @@ namespace IKSIR.ECommerce.Model
         public DateTime ShipmentDate { get; set; }
 
         public Order(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, User user, string ip, string host, string cargoNumber,
-            string cargoName, Address billingAddress, EnumValues enumValue, PaymentOption paymentOption, decimal price, int tax, Invoice invoice, Address shipmmentAddress,
+            string cargoName, Address billingAddress, EnumValue enumValue, PaymentOption paymentOption, decimal price, int tax, Invoice invoice, Address shipmmentAddress,
             int paymenttype, int discount, int status, decimal totalprice, DateTime shipmmentDate)
             : base(id, createUserId, createDate, editUserId, editDate)
         {

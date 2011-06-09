@@ -5,20 +5,16 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class Multimedias : ModelBase
+    class EnumValue : ModelBase
     {
-        public EnumValue Type { get; set; }
+        public Enum Enum { get; set; }
         public string Value { get; set; }
 
-        public Multimedias(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, EnumValue type, string value)
+        public EnumValue(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Enum @enum, string value)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
-
-            this.Type = type;
+            this.Enum = @enum;
             this.Value = value;
-
-
-
         }
     }
 }

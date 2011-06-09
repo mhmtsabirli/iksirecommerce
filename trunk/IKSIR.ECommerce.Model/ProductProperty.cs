@@ -5,22 +5,20 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model
 {
-    class PropertyValue : ModelBase
+    class ProductProperty : ModelBase
     {
         public Property Property { get; set; }
-        public string Value { get; set; }
+        public int ProductId { get; set; }
 
-        public PropertyValue(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Property property, string value)
+        public ProductProperty(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Property property, int productid)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             
-
             this.Property = property;
-            this.Value = value;
-
-            
+            this.ProductId = productid;
 
             
         }
     }
 }
+;
