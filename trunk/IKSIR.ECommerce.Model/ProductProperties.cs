@@ -7,18 +7,17 @@ namespace IKSIR.ECommerce.Model
 {
     class ProductProperties : ModelBase
     {
-        public int PropertyId { get; set; }
+        public Property Property { get; set; }
         public int ProductId { get; set; }
 
-        public ProductProperties CreateProductProperties(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, int propertyid, int productid)
+        public ProductProperties(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Property property, int productid)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            ProductProperties Pp = new ProductProperties();
-            Pp.PropertyId = propertyid;
-            Pp.ProductId = productid;
+            
+            this.Property = property;
+            this.ProductId = productid;
 
-            Pp.CreateBase(id, createUserId, createdate, edituser, editdate);
-
-            return Pp;
+            
         }
     }
 }

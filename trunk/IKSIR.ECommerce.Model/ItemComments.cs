@@ -7,23 +7,25 @@ namespace IKSIR.ECommerce.Model
 {
     class ItemComments : ModelBase
     {
+
         public int ItemTypeId { get; set; }
         public int ItemId { get; set; }
         public int CommentId { get; set; }
-        public int UserId { get; set; }
+        public User User { get; set; }
         public bool IsActive { get; set; }
 
-        public ItemComments CreateItemComments(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate,int itemtypeid, int itemid, int commentid, int userid, bool isactive)
+        public ItemComments(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int itemTypeId, int itemId, int commentId, User user, bool isActive)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            ItemComments Ic = new ItemComments();
-            Ic.ItemTypeId = itemtypeid;
-            Ic.ItemId = itemid;
-            Ic.CommentId = commentid;
-            Ic.UserId = userid;
-            Ic.IsActive = isactive;
-            Ic.CreateBase( id,  createUserId,  createdate,  edituser,  editdate);
 
-            return Ic;
+            this.ItemTypeId = itemTypeId;
+            this.ItemId = itemId;
+            this.CommentId = commentId;
+            this.User = user;
+            this.IsActive = isActive;
+           
+
+            
         }
     }
 }

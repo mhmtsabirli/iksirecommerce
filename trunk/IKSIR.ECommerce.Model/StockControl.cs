@@ -11,15 +11,16 @@ namespace IKSIR.ECommerce.Model
         public int MinStock { get; set; }
         public DateTime AlertDate { get; set; }
 
-        public StockControl CreateStockControl(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, int stockid, int minstock, DateTime alertdate)
+        public StockControl(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int stockId, int minStock, DateTime alertDate)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            StockControl Sc = new StockControl();
-            Sc.StockId = stockid;
-            Sc.MinStock = minstock;
-            Sc.AlertDate = alertdate;
-            Sc.CreateBase(id, createUserId, createdate, edituser, editdate);
 
-            return Sc;
+            this.StockId = stockId;
+            this.MinStock = minStock;
+            this.AlertDate = alertDate;
+
+
+
         }
 
     }

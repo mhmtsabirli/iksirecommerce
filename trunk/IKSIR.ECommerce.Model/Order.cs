@@ -7,49 +7,50 @@ namespace IKSIR.ECommerce.Model
 {
     class Order : ModelBase
     {
-        public int UserId { get; set; }
+        public User User { get; set; }
         public string Ip { get; set; }
         public string Host { get; set; }
         public string CargoNumber { get; set; }
         public string CargoName { get; set; }
-        public int BillingAddressId { get; set; }
-        public int EnumValueId { get; set; }
-        public int PaymentOptionId { get; set; }
+        public Address BillingAddress { get; set; }
+        public EnumValues EnumValue { get; set; }
+        public PaymentOption PaymentOption { get; set; }
         public decimal Price { get; set; }
         public int Tax { get; set; }
-        public int InvoiceId { get; set; }
-        public int ShipmentAddressId { get; set; }
+        public Invoice Invoice { get; set; }
+        public Address ShipmentAddress { get; set; }
         public int PaymentType { get; set; }
         public int Discount { get; set; }
         public int Status { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime ShipmentDate { get; set; }
 
-        public Order CreateOrder(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, int userid, string ip, string host, string cargonumber,
-            string cargoname, int billingaddressid, int enumvalueid, int paymentoptionid, decimal price, int tax, int invoiceid, int shipmmentaddressid,
-            int paymenttype, int discount, int status, decimal totalprice, DateTime shipmmentdate)
+        public Order(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, User user, string ip, string host, string cargoNumber,
+            string cargoName, Address billingAddress, EnumValues enumValue, PaymentOption paymentOption, decimal price, int tax, Invoice invoice, Address shipmmentAddress,
+            int paymenttype, int discount, int status, decimal totalprice, DateTime shipmmentDate)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            Order o = new Order();
-            o.UserId = userid;
-            o.Ip = ip;
-            o.Host = host;
-            o.CargoNumber = cargonumber;
-            o.CargoName = cargoname;
-            o.BillingAddressId = billingaddressid;
-            o.EnumValueId = enumvalueid;
-            o.PaymentOptionId = paymentoptionid;
-            o.Price = price;
-            o.Tax = tax;
-            o.InvoiceId = invoiceid;
-            o.ShipmentAddressId = shipmmentaddressid;
-            o.PaymentType = paymenttype;
-            o.Discount = discount;
-            o.Status = status;
-            o.TotalPrice = totalprice;
-            o.ShipmentDate = shipmmentdate;
-            o.CreateBase(id, createUserId, createdate, edituser, editdate);
 
-            return o;
+            this.User = user;
+            this.Ip = ip;
+            this.Host = host;
+            this.CargoNumber = cargoNumber;
+            this.CargoName = cargoName;
+            this.BillingAddress = billingAddress;
+            this.EnumValue = enumValue;
+            this.PaymentOption = paymentOption;
+            this.Price = price;
+            this.Tax = tax;
+            this.Invoice = invoice;
+            this.ShipmentAddress = shipmmentAddress;
+            this.PaymentType = paymenttype;
+            this.Discount = discount;
+            this.Status = status;
+            this.TotalPrice = totalprice;
+            this.ShipmentDate = shipmmentDate;
+            
+
+            
         }
 
     }

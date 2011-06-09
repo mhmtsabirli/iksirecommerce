@@ -9,18 +9,17 @@ namespace IKSIR.ECommerce.Model
     {
         public string Term { get; set; }
         public decimal Rate { get; set; }
-        public int BankId { get; set; }
+        public Bank Bank { get; set; }
 
-        public PaymentRate CreatePaymentRate(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, string term, decimal rate, int bankid)
+        public PaymentRate(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string term, decimal rate, Bank bank)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            PaymentRate Pr = new PaymentRate();
-            Pr.Term = term;
-            Pr.Rate = rate;
-            Pr.BankId = bankid;
+            
+            this.Term = term;
+            this.Rate = rate;
+            this.Bank = bank;
 
-            Pr.CreateBase(id, createUserId, createdate, edituser, editdate);
-
-            return Pr;
+     
         }
     }
 }

@@ -7,24 +7,24 @@ namespace IKSIR.ECommerce.Model
 {
     class PaymentOption : ModelBase
     {
-        public int EnumValueId { get; set; }
+        public EnumValues EnumValue { get; set; }
         public string CreditCardHolder { get; set; }
         public string CreditCardNumber { get; set; }
         public string ExpireDate { get; set; }
         public string Cvv2 { get; set; }
 
-        public PaymentOption CreatePaymentOption(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, int enumvalueid, string creditcardholder, string creditcardnumber, string expiredate, string cvv2)
+        public PaymentOption(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, EnumValues enumValue, string creditcardholder, string creditcardnumber, string expiredate, string cvv2)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            PaymentOption Op = new PaymentOption();
-            Op.EnumValueId = enumvalueid;
-            Op.CreditCardHolder = creditcardholder;
-            Op.CreditCardNumber = creditcardnumber;
-            Op.ExpireDate = expiredate;
-            Op.Cvv2 = cvv2;
+            this.EnumValue = enumValue;
+            this.CreditCardHolder = creditcardholder;
+            this.CreditCardNumber = creditcardnumber;
+            this.ExpireDate = expiredate;
+            this.Cvv2 = cvv2;
 
-            Op.CreateBase(id, createUserId, createdate, edituser, editdate);
+            
 
-            return Op;
+            
         }
     }
 }

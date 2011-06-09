@@ -12,20 +12,22 @@ namespace IKSIR.ECommerce.Model
         public string ProductCode { get; set; }
         public int MinStock { get; set; }
         public DateTime AlertDate { get; set; }
-        public int ProductCategoryId { get; set; }
+        public ProductCategories ProductCategory { get; set; }
 
-        public Product CreateProduct(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate,string title, string description, string productcode, int minstock, DateTime alertdate, int productcategoryid) 
+        public Product(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string title,
+            string description, string productCode, int minStock, DateTime alertdate, ProductCategories productCategory) 
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            Product p = new Product();
-            p.Title = title;
-            p.Description = description;
-            p.ProductCode = productcode;
-            p.MinStock = minstock;
-            p.AlertDate = alertdate;
-            p.ProductCategoryId = productcategoryid;
-            p.CreateBase(id, createUserId, createdate, edituser, editdate);
             
-            return p;
+            this.Title = title;
+            this.Description = description;
+            this.ProductCode = productCode;
+            this.MinStock = minStock;
+            this.AlertDate = alertdate;
+            this.ProductCategory = productCategory;
+            
+            
+            
         }
     }
 }

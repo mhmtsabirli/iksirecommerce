@@ -10,14 +10,15 @@ namespace IKSIR.ECommerce.Model
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public Right CreateRight(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, string title, string description)
+        public Right(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string title, string description)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            Right r = new Right();
-            r.Title = title;
-            r.Description = description;
-            r.CreateBase(id, createUserId, createdate, edituser, editdate);
+            
+            this.Title = title;
+            this.Description = description;
+            
 
-            return r;
+            
         }
     }
 }

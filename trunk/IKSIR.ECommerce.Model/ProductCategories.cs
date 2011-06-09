@@ -11,16 +11,15 @@ namespace IKSIR.ECommerce.Model
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public ProductCategories CreateProductCategories(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate,int parentid, string title, string description)
+        public ProductCategories(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate,
+            int parentId, string title, string description)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            ProductCategories Pc = new ProductCategories();
-            Pc.ParentId = parentid;
-            Pc.Title = title;
-            Pc.Description = description;
+            
+            this.ParentId = parentId;
+            this.Title = title;
+            this.Description = description;
 
-            Pc.CreateBase( id,  createUserId,  createdate,  edituser,  editdate);
-
-            return Pc;
         }
     }
 }

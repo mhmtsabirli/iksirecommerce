@@ -10,16 +10,17 @@ namespace IKSIR.ECommerce.Model
         public int PropertyId { get; set; }
         public string Value { get; set; }
 
-        public PropertyValue CreatePropertyValue(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, int propertyid, string value)
+        public PropertyValue(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int propertyId, string value)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            PropertyValue Pv = new PropertyValue();
+            
 
-            Pv.PropertyId = propertyid;
-            Pv.Value = value;
+            this.PropertyId = propertyId;
+            this.Value = value;
 
-            Pv.CreateBase(id, createUserId, createdate, edituser, editdate);
+            
 
-            return Pv;
+            
         }
     }
 }

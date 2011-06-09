@@ -9,27 +9,28 @@ namespace IKSIR.ECommerce.Model
     {
         public int UserId { get; set; }
         public int OrderId { get; set; }
-        public int AddressId { get; set; }
+        public Address Address { get; set; }
         public int Count { get; set; }
         public decimal UnitPrice { get; set; }
         public int Discount { get; set; }
-        public int ProductId { get; set; }
+        public Product Product { get; set; }
 
-        public OrderItems CreateOrderItems(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, int userid, int orderid, int addressid,
-            int count, decimal unitprice, int discount, int productid)
+        public OrderItems(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int userId, int orderId, Address address,
+            int count, decimal unitprice, int discount, Product product)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            OrderItems Oi = new OrderItems();
-            Oi.UserId = userid;
-            Oi.OrderId = orderid;
-            Oi.AddressId = addressid;
-            Oi.Count = count;
-            Oi.UnitPrice = unitprice;
-            Oi.Discount = discount;
-            Oi.ProductId = productid;
 
-            Oi.CreateBase(id, createUserId, createdate, edituser, editdate);
+            this.UserId = userId;
+            this.OrderId = orderId;
+            this.Address = address;
+            this.Count = count;
+            this.UnitPrice = unitprice;
+            this.Discount = discount;
+            this.Product = product;
 
-            return Oi;
+            
+
+            
         }
     }
 }

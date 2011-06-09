@@ -7,17 +7,18 @@ namespace IKSIR.ECommerce.Model
 {
     class ShowRoom : ModelBase
     {
-        public int ItemId { get; set; }
-        public int EnumValueId { get; set; }
+        public Product Item { get; set; }
+        public EnumValues EnumValue { get; set; }
 
-        public ShowRoom CreateShowRoom(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate,int itemid, int enumvalueid)
+        public ShowRoom(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Product item, EnumValues enumValue)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            ShowRoom Sr = new ShowRoom();
-            Sr.ItemId = itemid;
-            Sr.EnumValueId = enumvalueid;
-            Sr.CreateBase( id,  createUserId,  createdate,  edituser,  editdate);
+            
+            this.Item = item;
+            this.EnumValue = enumValue;
+            
 
-            return Sr;
+            
         }
     }
 }

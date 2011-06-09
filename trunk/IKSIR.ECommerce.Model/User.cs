@@ -16,27 +16,28 @@ namespace IKSIR.ECommerce.Model
         public string TcId { get; set; }
         public int Status { get; set; }
         public DateTime LastLoginDate { get; set; }
-        public int SiteId { get; set; }
+        public Site Site { get; set; }
         public string Password { get; set; }
 
-        public User createUserId(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate,string username, string name,
-            string surname, string email, DateTime birthdate, string mobilephone, string tcid, int status, DateTime lastlogindate, int siteid, string password)
+        public User(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string userName, string name,
+            string surName, string eMail, DateTime birthDate, string mobilePhone, string tcId, int status, DateTime lastLoginDate, Site site, string password)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            User u = new User();
-            u.UserName = username;
-            u.Name = name;
-            u.SurName = surname;
-            u.Email = email;
-            u.BirthDate = birthdate;
-            u.MobilePhone = mobilephone;
-            u.TcId = tcid;
-            u.Status = status;
-            u.LastLoginDate = lastlogindate;
-            u.SiteId = siteid;
-            u.Password = password;
-            u.CreateBase( id,  createUserId,  createdate,  edituser,  editdate);
+            
+            this.UserName = userName;
+            this.Name = name;
+            this.SurName = surName;
+            this.Email = eMail;
+            this.BirthDate = birthDate;
+            this.MobilePhone = mobilePhone;
+            this.TcId = tcId;
+            this.Status = status;
+            this.LastLoginDate = lastLoginDate;
+            this.Site = site;
+            this.Password = password;
+            
 
-            return u;
+            
 
         }
     }

@@ -10,14 +10,15 @@ namespace IKSIR.ECommerce.Model
      public int   TypeId {get;set;}
      public string Value { get; set; }
 
-     public Multimedias CreateMultimedias(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate,int typeid, string value)
+     public Multimedias(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int typeId, string value)
+         : base(id, createUserId, createDate, editUserId, editDate)
      {
-         Multimedias m = new Multimedias();
-         m.TypeId = typeid;
-         m.Value = value;
-         m.CreateBase( id,  createUserId,  createdate,  edituser,  editdate);
 
-         return m;
+         this.TypeId = typeId;
+         this.Value = value;
+        
+
+        
      }
     }
 }

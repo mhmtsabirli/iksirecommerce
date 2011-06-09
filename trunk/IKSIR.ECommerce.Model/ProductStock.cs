@@ -10,15 +10,13 @@ namespace IKSIR.ECommerce.Model
         public int ProductId { get; set; }
         public int Stock { get; set; }
 
-        public ProductStock CreateProductStock(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate,int productid, int stock)
+        public ProductStock(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate,int productId, int stock)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            ProductStock Ps = new ProductStock();
-            Ps.ProductId = productid;
-            Ps.Stock = stock;
+            
+            this.ProductId = productId;
+            this.Stock = stock;
 
-            Ps.CreateBase(id, createUserId, createdate, edituser, editdate);
-
-            return Ps;
         }
     }
 }

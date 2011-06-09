@@ -10,14 +10,13 @@ namespace IKSIR.ECommerce.Model
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public Property CreateProperty(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate,string title, string description)
+        public Property(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string title, string description)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            Property p = new Property();
-            p.Title = title;
-            p.Description = description;
-            p.CreateBase( id,  createUserId,  createdate,  edituser,  editdate);
-
-            return p;
+            
+            this.Title = title;
+            this.Description = description;
+     
         }
     }
 }

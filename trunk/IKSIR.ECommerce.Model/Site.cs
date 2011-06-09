@@ -9,14 +9,15 @@ namespace IKSIR.ECommerce.Model
     {
         public string Name { get; set; }
 
-        public Site CreateSite(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, string name)
+        public Site(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string name)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            Site s = new Site();
-            s.Name = name;
+            
+            this.Name = name;
 
-            s.CreateBase(id, createUserId, createdate, edituser, editdate);
+            
 
-            return s;
+            
         }
     }
 }

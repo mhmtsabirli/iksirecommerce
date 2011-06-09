@@ -20,27 +20,26 @@ namespace IKSIR.ECommerce.Model
         public int TransactionId { get; set; }
         public string RawData { get; set; }
 
-        public VPOSPaymentCardLogs CreateVPOSPaymentCardLogs(int id, int createUserId, DateTime createdate, int edituser, DateTime editdate, string bankname, string creditcardcode,
-            string creditcardname, string creditcardproductcode, string creditcardproductname, string paymentcardbonusmultiplier,
-            string currentproductcode, string currentproductname, decimal amount, decimal bonusamount, int transactionid, string rawdata)
+        public VPOSPaymentCardLogs(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string bankName, string creditCardCode,
+            string creditCardName, string creditCardProductCode, string creditCardProductName, string paymentCardBonusMultiplier,
+            string currentProductCode, string currentProductName, decimal amount, decimal bonusAmaunt, int transactionId, string rawData)
+            : base(id, createUserId, createDate, editUserId, editDate)
         {
-            VPOSPaymentCardLogs Vpcl = new VPOSPaymentCardLogs();
-            Vpcl.BankName = bankname;
-            Vpcl.CreditCardCode = creditcardcode;
-            Vpcl.CreditCardName = creditcardname;
-            Vpcl.CreditCardProductCode = creditcardproductcode;
-            Vpcl.CreditCardProductName = creditcardproductname;
-            Vpcl.PaymentCardBonusMultiplier = paymentcardbonusmultiplier;
-            Vpcl.CurrentProductCode = currentproductname;
-            Vpcl.CurrentProductName = currentproductcode;
-            Vpcl.Amount = amount;
-            Vpcl.BonusAmount = bonusamount;
-            Vpcl.TransactionId = transactionid;
-            Vpcl.RawData = rawdata;
 
-            Vpcl.CreateBase(id, createUserId, createdate, edituser, editdate);
+            this.BankName = bankName;
+            this.CreditCardCode = creditCardCode;
+            this.CreditCardName = creditCardName;
+            this.CreditCardProductCode = creditCardProductCode;
+            this.CreditCardProductName = creditCardProductName;
+            this.PaymentCardBonusMultiplier = paymentCardBonusMultiplier;
+            this.CurrentProductCode = currentProductCode;
+            this.CurrentProductName = currentProductName;
+            this.Amount = amount;
+            this.BonusAmount = bonusAmaunt;
+            this.TransactionId = transactionId;
+            this.RawData = rawData;
 
-            return Vpcl;
+
         }
     }
 }
