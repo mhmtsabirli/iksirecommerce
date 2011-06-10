@@ -1,8 +1,0 @@
-<Modules>
-  <Module PersistentId="8307DA2E-BD32-4F5B-8437-5FE89F708F8C" ModuleId="IKSIR.ECommerce" />
-  <Module PersistentId="68211693-45E9-4680-AB84-BD59BC16326D" ModuleId="IKSIR.ECommerce.Model" />
-  <Module PersistentId="9938A7AE-7B49-446B-9431-EEB85A940E37" ModuleId="IKSIR.ECommerce.Infrastructure" />
-  <Module PersistentId="CB9240A3-D81B-40AF-88CC-0AA2A84D90AE" ModuleId="IKSIR.ECommerce.Test" />
-  <Module PersistentId="11D3C706-3459-4CB3-8AE9-1B5EC9D791B9" ModuleId="IKSIR.ECommerce.UI" />
-  <Module PersistentId="38A3993C-5118-4424-A5F0-08E1EAD848AA" ModuleId="IKSIR.ECommerce.Management" />
-</Modules>
