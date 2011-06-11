@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -40,7 +41,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtension.cs" />
+    <Compile Include="Extensions\PageExtension.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Extensions\TextBoxExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataBlock\SqlDataBlock.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\" />
+    <Folder Include="DataLayer\AdminDataLayer\" />
+    <Folder Include="DataLayer\CommonDataLayer\" />
+    <Folder Include="DataLayer\MembershipDataLayer\" />
+    <Folder Include="DataLayer\ProductDataLayer\" />
+    <Folder Include="DataLayer\ShoppingDataLayer\" />
+    <Folder Include="DataLayer\SiteDataLayer\" />
+    <Folder Include="Logging\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
