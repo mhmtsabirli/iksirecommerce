@@ -1,5 +1,0 @@
-C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Toolkit\obj\Release\ResolveAssemblyReference.cache
-C:\Projects\IKSIR.ECommerce\Outpıut\Release\IKSIR.ECommerce.Toolkit.dll
-C:\Projects\IKSIR.ECommerce\Outpıut\Release\IKSIR.ECommerce.Toolkit.pdb
-C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Toolkit\obj\Release\IKSIR.ECommerce.Toolkit.dll
-C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Toolkit\obj\Release\IKSIR.ECommerce.Toolkit.pdb
