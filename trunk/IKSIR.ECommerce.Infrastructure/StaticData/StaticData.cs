@@ -16,7 +16,7 @@ namespace IKSIR.ECommerce.Infrastructure.StaticData
     public class Idevit
     {        
         public const string SiteTitle = "Idevit E-Ticaret";
-        public const string cssPatht ="C:\idevit.css";
+        public const string cssPatht ="C:idevit.css";
         public const string ConnectionString = "";
     }
 }

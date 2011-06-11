@@ -40,24 +40,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base.cs" />
+    <Compile Include="DataLayer\CommonDataLayer\AddressData.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\PageExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Extensions\TextBoxExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataBlock\SqlDataBlock.cs" />
+    <Compile Include="DataLayer\DataBlock\SqlDataBlock.cs" />
+    <Compile Include="StaticData\StaticData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
     <Folder Include="DataLayer\AdminDataLayer\" />
-    <Folder Include="DataLayer\CommonDataLayer\" />
     <Folder Include="DataLayer\MembershipDataLayer\" />
     <Folder Include="DataLayer\ProductDataLayer\" />
     <Folder Include="DataLayer\ShoppingDataLayer\" />
     <Folder Include="DataLayer\SiteDataLayer\" />
     <Folder Include="Logging\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IKSIR.ECommerce.Model\IKSIR.ECommerce.Model.csproj">
+      <Project>{68211693-45E9-4680-AB84-BD59BC16326D}</Project>
+      <Name>IKSIR.ECommerce.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
