@@ -6,7 +6,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Model.ShoppingModel
 {
-    class PaymentOption : ModelBase
+    public class PaymentOption : ModelBase
     {
         public EnumValue EnumValue { get; set; }
         public string CreditCardHolder { get; set; }

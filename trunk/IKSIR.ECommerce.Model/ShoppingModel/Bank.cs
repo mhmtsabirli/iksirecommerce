@@ -6,7 +6,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Model.ShoppingModel
 {
-    class Bank : ModelBase
+    public class Bank : ModelBase
     {
         public string BankName { get; set; }
 

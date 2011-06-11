@@ -6,7 +6,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Model.AdminModel
 {
-    class Right : ModelBase
+    public class Right : ModelBase
     {
         public string Title { get; set; }
         public string Description { get; set; }

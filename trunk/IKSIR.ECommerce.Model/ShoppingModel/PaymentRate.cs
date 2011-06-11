@@ -6,7 +6,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Model.ShoppingModel
 {
-    class PaymentRate : ModelBase
+    public class PaymentRate : ModelBase
     {
         public string Term { get; set; }
         public decimal Rate { get; set; }

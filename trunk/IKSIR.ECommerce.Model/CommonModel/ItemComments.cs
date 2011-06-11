@@ -7,7 +7,7 @@ using IKSIR.ECommerce.Model.MembershipModel;
 
 namespace IKSIR.ECommerce.Model.ProductModel
 {
-    class ItemComments : ModelBase
+    public class ItemComments : ModelBase
     {
 
         public EnumValue ItemType { get; set; }

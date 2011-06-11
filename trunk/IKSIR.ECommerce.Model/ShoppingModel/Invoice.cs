@@ -6,7 +6,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Model.ShoppingModel
 {
-    class Invoice : ModelBase
+    public class Invoice : ModelBase
     {
         public Order Order { get; set; }
         public string InvoiceNumber { get; set; }

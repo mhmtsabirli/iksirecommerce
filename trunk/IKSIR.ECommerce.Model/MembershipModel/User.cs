@@ -7,7 +7,7 @@ using IKSIR.ECommerce.Model.SiteModel;
 
 namespace IKSIR.ECommerce.Model.MembershipModel
 {
-    class User : ModelBase
+    public class User : ModelBase
     {
         public string UserName { get; set; }
         public string Name { get; set; }

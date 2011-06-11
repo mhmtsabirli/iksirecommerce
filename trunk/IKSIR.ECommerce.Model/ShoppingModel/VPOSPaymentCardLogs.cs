@@ -6,7 +6,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Model.ShoppingModel
 {
-    class VPOSPaymentCardLogs : ModelBase
+    public class VPOSPaymentCardLogs : ModelBase
     {
         public string BankName { get; set; }
         public string CreditCardCode { get; set; }

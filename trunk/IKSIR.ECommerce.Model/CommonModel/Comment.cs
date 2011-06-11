@@ -6,7 +6,7 @@ using IKSIR.ECommerce.Model.MembershipModel;
 
 namespace IKSIR.ECommerce.Model.CommonModel
 {
-    class Comment : ModelBase
+    public class Comment : ModelBase
     {
         public User User { get; set; }
         public string Value { get; set; }

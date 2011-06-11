@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model.CommonModel
 {
-    class Country : ModelBase
+    public class Country : ModelBase
     {
         public string Name { get; set; }
 

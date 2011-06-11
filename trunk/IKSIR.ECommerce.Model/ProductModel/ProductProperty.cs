@@ -6,7 +6,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Model.ProductModel
 {
-    class ProductProperty : ModelBase
+    public class ProductProperty : ModelBase
     {
         public Property Property { get; set; }
         public int ProductId { get; set; }

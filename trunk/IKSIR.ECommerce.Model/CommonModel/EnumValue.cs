@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model.CommonModel
 {
-    class EnumValue : ModelBase
+    public class EnumValue : ModelBase
     {
         public Enum Enum { get; set; }
         public string Value { get; set; }

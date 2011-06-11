@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model.CommonModel
 {
-    class ItemMultimedias : ModelBase
+    public class ItemMultimedias : ModelBase
     {
         public int ItemId { get; set; }
         public EnumValue Type { get; set; }

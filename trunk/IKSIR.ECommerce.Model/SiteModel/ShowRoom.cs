@@ -7,7 +7,7 @@ using IKSIR.ECommerce.Model.ProductModel;
 
 namespace IKSIR.ECommerce.Model.SiteModel
 {
-    class ShowRoom : ModelBase
+    public class ShowRoom : ModelBase
     {
         public Product Item { get; set; }
         public EnumValue EnumValue { get; set; }

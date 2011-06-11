@@ -6,7 +6,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Model.AdminModel
 {
-    class AdminRights : ModelBase
+    public class AdminRights : ModelBase
     {
         public Admin Admin { get; set; }
         public List<Right> Rights { get; set; }

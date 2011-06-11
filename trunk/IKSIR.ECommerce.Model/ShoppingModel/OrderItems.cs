@@ -7,7 +7,7 @@ using IKSIR.ECommerce.Model.ProductModel;
 
 namespace IKSIR.ECommerce.Model.ShoppingModel
 {
-    class OrderItems : ModelBase
+    public class OrderItems : ModelBase
     {
         public int UserId { get; set; }
         public int OrderId { get; set; }

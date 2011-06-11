@@ -7,7 +7,7 @@ using IKSIR.ECommerce.Model.MembershipModel;
 
 namespace IKSIR.ECommerce.Model.CommonModel
 {
-    class Address : ModelBase
+    public class Address : ModelBase
     {
         #region Properties
         public EnumValue Type { get; set; }

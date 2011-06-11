@@ -7,7 +7,7 @@ using IKSIR.ECommerce.Model.MembershipModel;
 
 namespace IKSIR.ECommerce.Model.ShoppingModel
 {
-    class Order : ModelBase
+    public class Order : ModelBase
     {
         public User User { get; set; }
         public string Ip { get; set; }

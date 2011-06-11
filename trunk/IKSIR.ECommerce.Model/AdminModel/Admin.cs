@@ -7,7 +7,7 @@ using IKSIR.ECommerce.Model.SiteModel;
 
 namespace IKSIR.ECommerce.Model.AdminModel
 {
-    class Admin : ModelBase
+    public class Admin : ModelBase
     {
         public string UserName { get; set; }
         public string Name { get; set; }

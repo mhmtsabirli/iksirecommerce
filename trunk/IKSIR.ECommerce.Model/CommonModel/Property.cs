@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IKSIR.ECommerce.Model.CommonModel
 {
-    class Property : ModelBase
+    public class Property : ModelBase
     {
         public string Title { get; set; }
         public string Description { get; set; }
