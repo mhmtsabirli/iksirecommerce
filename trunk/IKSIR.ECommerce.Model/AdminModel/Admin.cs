@@ -17,7 +17,7 @@ namespace IKSIR.ECommerce.Model.AdminModel
         public Site Site { get; set; }
 
         public Admin(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string userName, string name, string email, string password, DateTime lastLoginDate, Site site)
-            : base(id, createUserId, createDate, editUserId, editDate)
+         : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.UserName = userName;
             this.Name = name;
