@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
+
 namespace IKSIR.ECommerce.UI
 {
     public partial class _Default : System.Web.UI.Page
@@ -12,6 +14,7 @@ namespace IKSIR.ECommerce.UI
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            
         }
     }
 }
