@@ -4,8 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using IKSIR.ECommerce.Infrastructure.DataLayer.CommonData;
+using IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer;
+using IKSIR.ECommerce.Infrastructure;
 using IKSIR.ECommerce.Model.CommonModel;
+using IKSIR.ECommerce.Model.AdminModel;
+using System.Reflection;
+
+using System.Data;
+
 
 
 namespace WebApplication1
@@ -14,9 +20,53 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-              AddressData item = new AddressData();
-             List<Address> addressList = item.WebGetMembershipAddresses(1,1);
-        
+            AdminData adminData = new AdminData();
+
+            DataTable dt = adminData.WebGetMembershipAdminDetails(1);
+            MapList<Admin>(dt);
+
+
         }
+        public static List<T> MapList<T>(DataTable dt)
+        {
+            List<T> list = new List<T>();
+            PropertyInfo[] infos = typeof(T).GetProperties();
+            Type type = typeof(T);
+
+            object[] b = new object[infos.Length];
+
+            for (int i = 0; i < infos.Length; i++)
+                b[i] = null;
+
+
+            T a = (T)Activator.CreateInstance(typeof(T),b);
+            foreach (DataRow dr in dt.Rows)
+            {
+                foreach (PropertyInfo info in infos)
+                {
+                    switch (info.PropertyType.ToString())
+                    {
+                        case "System.DateTime":
+                            info.SetValue(a, DBHelper.DateValue(dr[info.Name]), null);
+                            break;
+                        case "System.Int32":
+                            info.SetValue(a, DBHelper.IntValue(dr[info.Name]), null);
+                            break;
+                        case "System.String":
+                            info.SetValue(a, DBHelper.StrValue(dr[info.Name]), null);
+                            break;
+                        case "System.Decimal":
+                            info.SetValue(a, DBHelper.DecValue(dr[info.Name]), null);
+                            break;
+                        default:
+                            info.SetValue(a, dr[info.Name], null);
+                            break;
+                        
+                    }
+                }
+                list.Add(a);
+            } return list;
+        }
+
     }
 }
