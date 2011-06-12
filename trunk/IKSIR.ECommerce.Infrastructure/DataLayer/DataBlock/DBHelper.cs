@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IKSIR.ECommerce.Infrastructure
+namespace IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock
 {
     public class DBHelper
     {
         public static int IntValue(object value)
         {
-            if (value == null || value == DBNull.Value)
+            if (value == null || value == DBNull.Value || value == "")
                 return 0;
             else
                 return Convert.ToInt32(value);
         }
 
-        public static string StrValue(object value)
+        public static string StringValue(object value)
         {
             if (value == null || value == DBNull.Value)
                 return "";
@@ -32,7 +32,7 @@ namespace IKSIR.ECommerce.Infrastructure
         }
         public static DateTime DateValue(object value)
         {
-            if (value == null || value == DBNull.Value)
+            if (value == null || value == DBNull.Value || value == "")
                 return Convert.ToDateTime("01.01.2000");
             else
                 return Convert.ToDateTime(value);

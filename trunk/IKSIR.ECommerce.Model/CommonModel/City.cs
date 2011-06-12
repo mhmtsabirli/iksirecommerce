@@ -16,5 +16,10 @@ namespace IKSIR.ECommerce.Model.CommonModel
             this.Country = country;
             this.Name = name;
         }
+
+        public City()
+        {
+            // TODO: Complete member initialization
+        }
     }
 }

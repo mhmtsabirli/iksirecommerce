@@ -14,5 +14,10 @@ namespace IKSIR.ECommerce.Model.CommonModel
         {
             this.Name = name;
         }
+
+        public Country()
+        {
+            // TODO: Complete member initialization
+        }
     }
 }

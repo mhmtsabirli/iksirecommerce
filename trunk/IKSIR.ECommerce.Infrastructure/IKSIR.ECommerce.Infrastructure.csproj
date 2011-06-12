@@ -42,8 +42,7 @@
   <ItemGroup>
     <Compile Include="DataLayer\AdminDataLayer\AdminData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\AddressData.cs" />
-    <Compile Include="DataLayer\CommonDataLayer\SiteData.cs" />
-    <Compile Include="DBHelper.cs" />
+    <Compile Include="DataLayer\DataBlock\DBHelper.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\PageExtension.cs" />

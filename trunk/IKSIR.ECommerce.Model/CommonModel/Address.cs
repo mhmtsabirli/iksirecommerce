@@ -33,6 +33,11 @@ namespace IKSIR.ECommerce.Model.CommonModel
             this.Phone = phone;
             this.User = user;
         }
+
+        public Address()
+        {
+            // TODO: Complete member initialization
+        }
         #endregion
     }
 }

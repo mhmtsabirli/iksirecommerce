@@ -8,18 +8,22 @@ namespace IKSIR.ECommerce.Model.CommonModel
     public class ModelBase
     {
         public int Id { get; set; }
-        public int CreateUserId { get; set; }
+        public int CreateAdminId { get; set; }
         public DateTime CreateDate { get; set; }
-        public int EditUserId { get; set; }
+        public int EditAdminId { get; set; }
         public DateTime EditDate { get; set; }
 
-        public ModelBase (int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate)
+        public ModelBase (int id, int createAdminId, DateTime createDate, int editAdminId, DateTime editDate)
         {
             this.Id = id;
-            this.CreateUserId = createUserId;
+            this.CreateAdminId = createAdminId;
             this.CreateDate = createDate;
-            this.EditUserId = editUserId;
+            this.EditAdminId = editAdminId;
             this.EditDate = editDate;
+        }
+        public ModelBase()
+        { 
+            
         }
     }
 }
