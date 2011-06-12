@@ -1,7 +1,7 @@
 C:\Projects\IKSIR.ECommerce\Outpıut\Debug\IKSIR.ECommerce.Infrastructure.dll
 C:\Projects\IKSIR.ECommerce\Outpıut\Debug\IKSIR.ECommerce.Infrastructure.pdb
+C:\Projects\IKSIR.ECommerce\Output\Debug\IKSIR.ECommerce.Infrastructure.dll
+C:\Projects\IKSIR.ECommerce\Output\Debug\IKSIR.ECommerce.Infrastructure.pdb
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Infrastructure\obj\Debug\ResolveAssemblyReference.cache
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Infrastructure\obj\Debug\IKSIR.ECommerce.Infrastructure.dll
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Infrastructure\obj\Debug\IKSIR.ECommerce.Infrastructure.pdb
-C:\Projects\IKSIR.ECommerce\Output\Debug\IKSIR.ECommerce.Infrastructure.dll
-C:\Projects\IKSIR.ECommerce\Output\Debug\IKSIR.ECommerce.Infrastructure.pdb

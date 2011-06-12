@@ -40,7 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataLayer\AdminDataLayer\AdminData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\AddressData.cs" />
+    <Compile Include="DataLayer\CommonDataLayer\SiteData.cs" />
+    <Compile Include="DBHelper.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\PageExtension.cs" />
@@ -52,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
-    <Folder Include="DataLayer\AdminDataLayer\" />
     <Folder Include="DataLayer\MembershipDataLayer\" />
     <Folder Include="DataLayer\ProductDataLayer\" />
     <Folder Include="DataLayer\ShoppingDataLayer\" />
