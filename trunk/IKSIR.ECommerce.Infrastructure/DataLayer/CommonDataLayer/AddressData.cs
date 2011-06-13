@@ -11,7 +11,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonData
 {
     public class AddressData
     {
-        public Address GetAddress(Address itemAddress)
+        public Address Get(Address itemAddress)
         {
             var returnValue = new Address();
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -38,7 +38,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonData
             return returnValue;
         }
 
-        public int InsertAdress(Address itemAddress)
+        public int Insert(Address itemAddress)
         {
             var returnValue = 0;
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -57,7 +57,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonData
             return returnValue;
         }
 
-        public int UpdateAddress(Address itemAddress)
+        public int Update(Address itemAddress)
         {
             var returnValue = 0;
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -77,7 +77,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonData
             return returnValue;
         }
 
-        public int DeleteAddress(Address itemAddress)
+        public int Delete(Address itemAddress)
         {
             var returnValue = 0;
 
