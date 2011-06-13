@@ -1,9 +1,0 @@
-C:\Projects\IKSIR.ECommerce\iksirecommerce\WebApplication1\bin\WebApplication1.dll
-C:\Projects\IKSIR.ECommerce\iksirecommerce\WebApplication1\bin\WebApplication1.pdb
-C:\Projects\IKSIR.ECommerce\iksirecommerce\WebApplication1\bin\IKSIR.ECommerce.Infrastructure.dll
-C:\Projects\IKSIR.ECommerce\iksirecommerce\WebApplication1\bin\IKSIR.ECommerce.Infrastructure.pdb
-C:\Projects\IKSIR.ECommerce\iksirecommerce\WebApplication1\obj\Debug\ResolveAssemblyReference.cache
-C:\Projects\IKSIR.ECommerce\iksirecommerce\WebApplication1\obj\Debug\WebApplication1.dll
-C:\Projects\IKSIR.ECommerce\iksirecommerce\WebApplication1\obj\Debug\WebApplication1.pdb
-C:\Projects\IKSIR.ECommerce\iksirecommerce\WebApplication1\bin\IKSIR.ECommerce.Model.dll
-C:\Projects\IKSIR.ECommerce\iksirecommerce\WebApplication1\bin\IKSIR.ECommerce.Model.pdb
