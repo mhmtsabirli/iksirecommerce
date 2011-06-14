@@ -43,6 +43,9 @@
     <Compile Include="DataLayer\AdminDataLayer\AdminData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\AddressData.cs" />
     <Compile Include="DataLayer\DataBlock\DBHelper.cs" />
+    <Compile Include="DataLayer\ProductDataLayer\ProductCategoryData.cs" />
+    <Compile Include="DataLayer\ProductDataLayer\ProductData.cs" />
+    <Compile Include="DataLayer\ProductDataLayer\ProductPropertyData.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\PageExtension.cs" />
@@ -55,7 +58,6 @@
   <ItemGroup>
     <Folder Include="Components\" />
     <Folder Include="DataLayer\MembershipDataLayer\" />
-    <Folder Include="DataLayer\ProductDataLayer\" />
     <Folder Include="DataLayer\ShoppingDataLayer\" />
     <Folder Include="DataLayer\SiteDataLayer\" />
     <Folder Include="Logging\" />
