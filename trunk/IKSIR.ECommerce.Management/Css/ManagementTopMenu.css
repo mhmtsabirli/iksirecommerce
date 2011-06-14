@@ -1,4 +1,4 @@
-﻿ul {
+﻿#nav ul {
   font-family: Arial, Verdana;
   font-size: 14px;
   margin: 0;
@@ -6,13 +6,13 @@
   list-style: none;
   width:100%
 }
-ul li {
+#nav ul li {
   display: block;
   position: relative;
   float: left;
 }
-li ul { display: none; width:100% }
-ul li a {
+#nav li ul { display: none; width:100% }
+#nav ul li a {
   display: block;
   text-decoration: none;
   color: #ffffff;
@@ -22,15 +22,15 @@ ul li a {
   margin-left: 1px;
   white-space: nowrap;
 }
-ul li a:hover { background: #617F8A; }
-li:hover ul {
+#nav ul li a:hover { background: #617F8A; }
+#nav li:hover ul {
   display: block;
   position: absolute;
 }
-li:hover li {
+#nav li:hover li {
   float: none;
   font-size: 11px;
 }
-li:hover a { background: #617F8A; }
-li:hover li a:hover { background: #95A9B1; }
-img {border:none;}
+#nav li:hover a { background: #617F8A; }
+#nav li:hover li a:hover { background: #95A9B1; }
+#nav img {border:none;}
