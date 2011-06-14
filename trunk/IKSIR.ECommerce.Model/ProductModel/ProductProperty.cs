@@ -17,6 +17,10 @@ namespace IKSIR.ECommerce.Model.ProductModel
             this.Property = property;
             this.ProductId = productid;
         }
+        public ProductProperty()
+        {
+        }
     }
+
+
 }
-;
