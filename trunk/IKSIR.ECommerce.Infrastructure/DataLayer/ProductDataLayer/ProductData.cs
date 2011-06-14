@@ -16,7 +16,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             var returnValue = new Product();
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemProduct.Id));
-            parameters.Add(new SqlParameter("@ProductCategoryId	", itemProduct.ProductCategory.Id));
+          //  parameters.Add(new SqlParameter("@ProductCategoryId	", itemProduct.ProductCategory[0].Id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProduct", parameters);
             dr.Read();
             //TODO => tayfun
@@ -31,7 +31,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             returnValue.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
             returnValue.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
             returnValue.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
-            returnValue.ProductCategory = ProductCategoryData.GetProductCategoryById((DBHelper.IntValue(dr["ProductCategory"].ToString())));
+            //returnValue.ProductCategory = ProductCategoryData.GetProductCategoryById((DBHelper.IntValue(dr["ProductCategory"].ToString())));
             dr.Close();
             return returnValue;
         }
