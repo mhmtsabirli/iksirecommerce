@@ -26,5 +26,10 @@ namespace IKSIR.ECommerce.Model.ProductModel
             this.AlertDate = alertdate;
             this.ProductCategory = productCategory;
         }
+        public Product()
+        {
+            // TODO: Complete member initialization
+        }
     }
+       
 }
