@@ -25,84 +25,59 @@
                 <p>
                     Yönetim Paneli</p>
                 <div class="clear">
-                <div id="nav">
-                <ul id="menu">
-                    <li><a href="">
-                        <img src="../Images/Home.png" />&nbsp;Ana Sayfa</a> </li>
-                    <li><a href="">
-                        <img src="../Images/Stock.png" />&nbsp;Stok</a>
-                        <ul>
-                            <li><a href="">Cozy Couch</a></li>
-                            <li><a href="">Great Table</a></li>
-                            <li><a href="">Small Chair</a></li>
-                            <li><a href="">Shiny Shelf</a></li>
-                            <li><a href="">Invisible Nothing</a></li>
+                    <div id="nav">
+                        <ul id="menu">
+                            <li><a href="">
+                                <img src="../Images/Home.png" />&nbsp;Ana Sayfa</a> </li>
+                            <li><a href="">
+                                <img src="../Images/Stock.png" />&nbsp;Stok</a>
+                                <ul>
+                                    <li><a href="">Cozy Couch</a></li>
+                                    <li><a href="">Great Table</a></li>
+                                    <li><a href="">Small Chair</a></li>
+                                    <li><a href="">Shiny Shelf</a></li>
+                                    <li><a href="">Invisible Nothing</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="">
+                                <img src="../Images/Cart.png" />&nbsp;Satış</a>
+                                <ul>
+                                    <li><a href="">Online</a></li>
+                                    <li><a href="">Right Here</a></li>
+                                    <li><a href="">Somewhere Else</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="">
+                                <img src="../Images/Reports.png" />&nbsp;Raporlar</a>
+                                <ul>
+                                    <li><a href="">Online</a></li>
+                                    <li><a href="">Right Here</a></li>
+                                    <li><a href="">Somewhere Else</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="">
+                                <img src="../Images/Settings.png" />&nbsp;Ayarlar</a>
+                                <ul>
+                                    <li><a href="">Online</a></li>
+                                    <li><a href="">Right Here</a></li>
+                                    <li><a href="">Somewhere Else</a></li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                    <li><a href="">
-                        <img src="../Images/Cart.png" />&nbsp;Satış</a>
-                        <ul>
-                            <li><a href="">Online</a></li>
-                            <li><a href="">Right Here</a></li>
-                            <li><a href="">Somewhere Else</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="">
-                        <img src="../Images/Reports.png" />&nbsp;Raporlar</a>
-                        <ul>
-                            <li><a href="">Online</a></li>
-                            <li><a href="">Right Here</a></li>
-                            <li><a href="">Somewhere Else</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="">
-                        <img src="../Images/Settings.png" />&nbsp;Ayarlar</a>
-                        <ul>
-                            <li><a href="">Online</a></li>
-                            <li><a href="">Right Here</a></li>
-                            <li><a href="">Somewhere Else</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                    </div>
                 </div>
             </div>
             <!-- end header -->
-            
             <!-- end nav -->
             <div id="main">
                 <div id="content">
-                    <h2>
-                        Welcome to our website</h2>
-                    <p>
-                        This is 'mountain', a free css template with jquery slider. It is suitable for all
-                        types of websites including businesses, organisations and personal sites.</p>
-                    <p>
-                        It is released under the Creative Commons licence, which means you are free to use
-                        it however you want, edit it or redistribute it as long as you keep the link at
-                        the bottom to <a href="http://www.electrictowelrail.org.uk">Electric Towel Rail</a>.
-                        This is a small way of saying thanks and giving credit for the large amount of time
-                        spent freely developing this template.</p>
-                    <p>
-                        Photos are taken from <a href="http://www.sxc.hu/">stock.xchng</a>.</p>
-                    <p>
-                        Morbi nisl nibh, mollis id vulputate nec; tempus vel nibh. Suspendisse adipiscing
-                        volutpat purus et tempor. Mauris faucibus lacus quis nisl scelerisque bibendum!
-                        Sed interdum mattis augue quis elementum. Nullam suscipit nibh quis mi cursus ullamcorper!
-                        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                        mus.
-                    </p>
-                    <p>
-                        Proin viverra volutpat sem; a mollis tellus condimentum vitae. Aenean dictum posuere
-                        arcu, a facilisis nulla gravida non. Maecenas imperdiet neque id leo congue vitae
-                        tincidunt tellus porttitor. Donec lectus nibh, consectetur auctor luctus non, eleifend
-                        a nisi.
-                    </p>
+                    <asp:ContentPlaceHolder ID="cphContent" runat="server">
+                    </asp:ContentPlaceHolder>
                 </div>
                 <!-- end content -->
                 <div class="sidebar">
                     <h4>
-                        Our Services</h4>
+                        Sık Kullanılanlar</h4>
                     <ul>
                         <li><a href="#">Curabitur convallis urna quis </a></li>
                         <li><a href="#">Dui blandit et blandit justo </a></li>
@@ -112,7 +87,7 @@
                         <li><a href="#">Ante ipsum primis in faucibus </a></li>
                     </ul>
                     <h4>
-                        Latest News</h4>
+                        Son Haberler</h4>
                     <div class="news-item">
                         <span class="date">08.03.2011</span> <a href="#">Lorem ipsum dolor sit</a> Proin
                         vitae lorem vel tortor vestibulum fringilla vel ut turpis.
@@ -142,10 +117,6 @@
                                 CSS</abbr></a></p>
     </div>
     <!-- end footer -->
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-    </div>
     </form>
 </body>
 </html>
