@@ -1,0 +1,64 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterManagement.master.cs"
+    Inherits="IKSIR.ECommerce.Management.MasterPage.MasterManagement" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/Css/Management.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/Css/ManagementTopMenu.css" media="screen" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div id="divMenu">
+        <ul id="menu">
+            <li><a href="">
+                <img src="../Images/Home.png" />&nbsp;Ana Sayfa</a> </li>
+            <li><a href="">
+                <img src="../Images/Stock.png" />&nbsp;Stok</a>
+                <ul>
+                    <li><a href="">Cozy Couch</a></li>
+                    <li><a href="">Great Table</a></li>
+                    <li><a href="">Small Chair</a></li>
+                    <li><a href="">Shiny Shelf</a></li>
+                    <li><a href="">Invisible Nothing</a></li>
+                </ul>
+            </li>
+            <li><a href="">
+                <img src="../Images/Cart.png" />&nbsp;Satış</a>
+                <ul>
+                    <li><a href="">Online</a></li>
+                    <li><a href="">Right Here</a></li>
+                    <li><a href="">Somewhere Else</a></li>
+                </ul>
+            </li>
+            <li><a href="">
+                <img src="../Images/Reports.png" />&nbsp;Raporlar</a>
+                <ul>
+                    <li><a href="">Online</a></li>
+                    <li><a href="">Right Here</a></li>
+                    <li><a href="">Somewhere Else</a></li>
+                </ul>
+            </li>
+            <li><a href="">
+                <img src="../Images/Settings.png" />&nbsp;Ayarlar</a>
+                <ul>
+                    <li><a href="">Online</a></li>
+                    <li><a href="">Right Here</a></li>
+                    <li><a href="">Somewhere Else</a></li>
+                </ul>
+            </li>
+            <li>
+            <img src="http://www.eviniyenileturkiye.com/images/logolar/idevit.jpg" />
+            </li>
+        </ul>
+    </div>
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
