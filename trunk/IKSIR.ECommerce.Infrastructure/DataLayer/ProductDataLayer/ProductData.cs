@@ -16,7 +16,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             var returnValue = new Product();
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemProduct.Id));
-          //  parameters.Add(new SqlParameter("@ProductCategoryId	", itemProduct.ProductCategory[0].Id));
+            parameters.Add(new SqlParameter("@ProductCategoryId	", itemProduct.ProductCategory.Id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProduct", parameters);
             dr.Read();
             //TODO => tayfun
@@ -92,9 +92,10 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@ProductCategoryId	", itemProduct.ProductCategory.Id));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProduct", parameters);
 
-            var item = new Product();
+         
             while (dr.Read())
             {
+                var item = new Product();
                 //TODO => tayfun
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());

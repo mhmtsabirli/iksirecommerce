@@ -75,16 +75,18 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
 
         public static List<ProductCategory> GetProductCategoryList(ProductCategory itemProductCategory)
         {
-            List<ProductCategory> itemProductCategoryList = new List<ProductCategory>();
+            List<ProductCategory> itemProductCategoryList = null;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemProductCategory.Id));
-           // parameters.Add(new SqlParameter("@ProductCategoryId	", itemProductCategory.ParentId.Id));
+            if(itemProductCategory.ParentId != null)
+            parameters.Add(new SqlParameter("@ProductCategoryId	", itemProductCategory.ParentId[0].Id));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductCategory", parameters);
-
-            var item = new ProductCategory();
+            itemProductCategoryList = new List<ProductCategory>();
+            
             while (dr.Read())
             {
+                var item = new ProductCategory();
                 //TODO => tayfun
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
@@ -108,12 +110,12 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
 
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@ParentId", productCategoryId));
-            //   parameters.Add(new SqlParameter("@ProductCategoryId	", itemProductCategory.ParentId.Id));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductCategory", parameters);
 
-            var item = new ProductCategory();
+           
             while (dr.Read())
             {
+                var item = new ProductCategory();
                 //TODO => tayfun
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
