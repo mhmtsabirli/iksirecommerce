@@ -135,6 +135,9 @@ namespace IKSIR.ECommerce.Management.Product
         private void GetList()
         {
             List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
+            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
+            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
+            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
             if (txtFilterCategoryName.Text != "")
                 itemList.Where(x => x.Title.Contains(txtFilterCategoryName.Text));
             if (ddlFilterParentCategories.SelectedValue != "-1" && ddlFilterParentCategories.SelectedValue != "" )
