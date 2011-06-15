@@ -145,7 +145,8 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4" GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%">
+                                <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
+                                    GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%">
                                     <Columns>
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>
