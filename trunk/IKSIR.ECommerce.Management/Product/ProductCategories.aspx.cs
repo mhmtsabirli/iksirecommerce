@@ -13,13 +13,11 @@ namespace IKSIR.ECommerce.Management.Product
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            GetCategoryList();
-            GetList();
-        }
-
-        private void GetCategoryList()
-        {
-            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
+            if (!Page.IsPostBack)
+            {
+                BindValues();
+                GetList();
+            }
         }
 
         protected void lbtnNew_Click(object sender, EventArgs e)
@@ -112,6 +110,27 @@ namespace IKSIR.ECommerce.Management.Product
             //    lblError.Text = "Item silerken bir hata oluştu.";
             //}
         }
+
+        protected void btnFilter_Click(object sender, EventArgs e)
+        {
+            GetList();
+        }
+
+        private void BindValues()
+        {
+            //Buralarda tüm kategoriler gelecek istediği kategorinin altına tanımlama yapabilecek.
+            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
+            ddlParentCategories.DataSource = itemList;
+            ddlParentCategories.DataTextField = "Title";
+            ddlParentCategories.DataValueField = "Id";
+            ddlParentCategories.DataBind();
+
+            ddlFilterParentCategories.DataSource = itemList;
+            ddlFilterParentCategories.DataTextField = "Title";
+            ddlFilterParentCategories.DataValueField = "Id";
+            ddlFilterParentCategories.DataBind();
+        }
+
         private void GetList()
         {
             List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
@@ -164,9 +183,5 @@ namespace IKSIR.ECommerce.Management.Product
             btnSave.CommandArgument = string.Empty;
         }
 
-        protected void btnFilter_Click(object sender, EventArgs e)
-        {
-            GetList();
-        }
     }
 }
