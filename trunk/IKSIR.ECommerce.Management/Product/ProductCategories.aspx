@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
-        Ürünler</h2>
+        Ürün Kategorileri</h2>
     <p>
         Ürünler için kategori tanımlama güncelleme ekranı.
     </p>

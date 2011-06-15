@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
+using IKSIR.ECommerce.Model.ProductModel;
 
 namespace IKSIR.ECommerce.Management.Product
 {
@@ -119,10 +121,10 @@ namespace IKSIR.ECommerce.Management.Product
         {
             //Buralarda tüm kategoriler gelecek istediği kategorinin altına tanımlama yapabilecek.
             List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
-            ddlParentCategories.DataSource = itemList;
-            ddlParentCategories.DataTextField = "Title";
-            ddlParentCategories.DataValueField = "Id";
-            ddlParentCategories.DataBind();
+            ddlCategories.DataSource = itemList;
+            ddlCategories.DataTextField = "Title";
+            ddlCategories.DataValueField = "Id";
+            ddlCategories.DataBind();
 
             ddlFilterParentCategories.DataSource = itemList;
             ddlFilterParentCategories.DataTextField = "Title";
@@ -162,7 +164,7 @@ namespace IKSIR.ECommerce.Management.Product
             }
             else
             {
-                item.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedValue) };
+                item.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlCategories.SelectedValue) };
                 item.Title = txtCategoryName.Text.Trim();
                 item.Description = txtDescription.Text.Trim();
                 if (ProductCategoryData.Insert(item) > 0)
@@ -179,7 +181,7 @@ namespace IKSIR.ECommerce.Management.Product
 
         private void ClearForm()
         {
-            ddlParentCategories.SelectedIndex = -1;
+            ddlCategories.SelectedIndex = -1;
             txtCategoryName.Text = string.Empty;
             txtDescription.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
