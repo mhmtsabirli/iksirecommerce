@@ -16,5 +16,8 @@ namespace IKSIR.ECommerce.Model.CommonModel
             this.Name = name;
             this.EnumValue = enumValue;
         }
+        public Enum()
+        {
+        }
     }
 }

@@ -7,14 +7,17 @@ namespace IKSIR.ECommerce.Model.CommonModel
 {
     public class EnumValue : ModelBase
     {
-        public Enum Enum { get; set; }
+        public int EnumId { get; set; }
         public string Value { get; set; }
 
-        public EnumValue(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Enum @enum, string value)
+        public EnumValue(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int enumId, string value)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
-            this.Enum = @enum;
+            this.EnumId = enumId;
             this.Value = value;
+        }
+        public EnumValue()
+        {
         }
     }
 }
