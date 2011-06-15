@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="DataLayer\AdminDataLayer\AdminData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\AddressData.cs" />
+    <Compile Include="DataLayer\CommonDataLayer\EnumData.cs" />
+    <Compile Include="DataLayer\CommonDataLayer\EnumValueData.cs" />
     <Compile Include="DataLayer\DataBlock\DBHelper.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ProductCategoryData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ProductData.cs" />
