@@ -22,7 +22,10 @@ namespace IKSIR.ECommerce.Management.Product
 
         protected void lbtnNew_Click(object sender, EventArgs e)
         {
-
+            ClearForm();
+            lblId.Text = "Yeni Kayıt";
+            pnlForm.Visible = true;
+            txtCategoryName.Focus();
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -55,8 +58,6 @@ namespace IKSIR.ECommerce.Management.Product
                     lblError.Text = "Item başarıyla kaydedildi.";
                     ClearForm();
                     pnlForm.Visible = false;
-                    int count = 0;
-                    //Proxies.Instance.CacheWrapper.Clear();
                     GetList();
                 }
                 else
