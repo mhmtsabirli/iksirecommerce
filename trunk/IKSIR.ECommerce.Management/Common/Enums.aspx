@@ -1,14 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
-    AutoEventWireup="true" CodeBehind="ProductCategories.aspx.cs" Inherits="IKSIR.ECommerce.Management.Product.ProductCategories"
+    AutoEventWireup="true" CodeBehind="Enums.aspx.cs" Inherits="IKSIR.ECommerce.Management.Common.Enums"
     Theme="ManagementGridView" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
-        Ürün Kategorileri</h2>
+        Enum Tanımları</h2>
     <p>
-        Ürünler için kategori tanımlama güncelleme ekranı.
+        Enum tanımlama güncelleme ekranı.
     </p>
     <table id="tblMngForm">
         <tr>
@@ -25,7 +25,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Ürün Kategori Formu</strong>
+                                <strong>Enum Formu</strong>
                             </td>
                         </tr>
                         <tr>
@@ -43,48 +43,18 @@
                         </tr>
                         <tr>
                             <td>
-                                Üst Kategori
+                                Enum Adı
                             </td>
                             <td>
                                 :
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" ID="ddlParentCategories">
-                                </asp:DropDownList>
+                              <asp:TextBox runat="server" ID="txtEnumName"></asp:TextBox>
                             </td>
                             <td>
-                                <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="ddlParentCategories"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Üst kategorisi seçmelisiniz"
+                                <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="txtEnumName"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Enum Adı Girmelisiniz"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Kategori Adı
-                            </td>
-                            <td>
-                                :
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtCategoryName"></asp:TextBox>
-                            </td>
-                            <td>
-                                <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtCategoryName"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Kategori Adı alanı zorunlu"
-                                    ForeColor="Red">*</asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Açıklama
-                            </td>
-                            <td>
-                                :
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtDescription" TextMode="MultiLine"></asp:TextBox>
-                            </td>
-                            <td>
                             </td>
                         </tr>
                         <tr>
@@ -104,33 +74,18 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Kategori Filtreleme</strong>
+                                <strong>Enum Filtreleme</strong>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Üst Kategori
+                                Enum Adı
                             </td>
                             <td>
                                 :
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" ID="ddlFilterParentCategories">
-                                </asp:DropDownList>
-                            </td>
-                            <td rowspan="2">
-                                <asp:Button runat="server" ID="btnFilter" Text="Filtrele" OnClick="btnFilter_Click" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Kategori Adı
-                            </td>
-                            <td>
-                                :
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtFilterCategoryName"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtFilterEnumName"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
@@ -140,7 +95,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Kategori Listesi</strong>
+                                <strong>Enum Listesi</strong>
                             </td>
                         </tr>
                         <tr>
@@ -156,14 +111,12 @@
                                                     CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
+                                        <asp:BoundField DataField="Id" HeaderText="Değer" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Id" />
-                                        <asp:BoundField DataField="Title" HeaderText="Title" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="Title" />
-                                        <asp:BoundField DataField="Description" HeaderText="Description" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="Description" />
-                                        <asp:TemplateField HeaderText="Value" Visible="false">
-                                            <ItemTemplate>
+                                        <asp:BoundField DataField="Name" HeaderText="Name" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="Name" />
+                                             <asp:TemplateField HeaderText="Id" Visible="false">
+                                         <ItemTemplate>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>

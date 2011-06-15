@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
-using IKSIR.ECommerce.Model.ProductModel;
+using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
+using IKSIR.ECommerce.Model.CommonModel;
 
-namespace IKSIR.ECommerce.Management.Product
+namespace IKSIR.ECommerce.Management.Common
 {
-    public partial class ProductCategories : System.Web.UI.Page
+    public partial class EnumValues : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,7 +25,7 @@ namespace IKSIR.ECommerce.Management.Product
             ClearForm();
             lblId.Text = "Yeni Kayıt";
             pnlForm.Visible = true;
-            txtCategoryName.Focus();
+            txtEnumValueName.Focus();
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -93,17 +93,19 @@ namespace IKSIR.ECommerce.Management.Product
 
         private void GetItem(int itemId)
         {
-            var item = new ProductCategory() { Id = Convert.ToInt32(itemId) };
-            ProductCategory itemProduct = ProductCategoryData.Get(item);
+            var item = new IKSIR.ECommerce.Model.CommonModel.EnumValue  () { Id = Convert.ToInt32(itemId) };
+            IKSIR.ECommerce.Model.CommonModel.EnumValue itemEnumValue = EnumValueData.Get(item);
             //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
             //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
             //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            txtCategoryName.Text = itemProduct.Title.ToString();
-            txtDescription.Text = itemProduct.Description.ToString();
-            if (itemProduct.ParentCategory != null)
-                ddlParentCategories.SelectedValue = (itemProduct.ParentCategory.Id.ToString());
+            txtEnumValueName.Text = itemEnumValue.Value.ToString();
+            if (itemEnumValue.EnumId != null)
+            {
+                ddlEnums.SelectedValue = (itemEnumValue.EnumId.ToString());
+                
+            }
             else
-                ddlParentCategories.SelectedValue = "";
+                ddlEnums.SelectedValue = "";
 
             pnlForm.Visible = true;
 
@@ -131,8 +133,8 @@ namespace IKSIR.ECommerce.Management.Product
         private bool DeleteItem(int itemId)
         {
             bool returnValue = false;
-            var item = new ProductCategory() { Id = itemId };
-            if (ProductCategoryData.Delete(item) < 0)
+            var item = new IKSIR.ECommerce.Model.CommonModel.EnumValue() { Id = itemId };
+            if (EnumValueData.Delete(item) < 0)
                 returnValue = true;
 
             return returnValue;
@@ -146,32 +148,32 @@ namespace IKSIR.ECommerce.Management.Product
         private void BindValues()
         {
             //Buralarda tüm kategoriler gelecek istediği kategorinin altına tanımlama yapabilecek.
-            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
-            ddlParentCategories.DataSource = itemList;
-            ddlParentCategories.DataTextField = "Title";
-            ddlParentCategories.DataValueField = "Id";
-            ddlParentCategories.DataBind();
+            List<IKSIR.ECommerce.Model.CommonModel.Enum> itemList = EnumData.GetEnumList();
+            ddlEnums.DataSource = itemList;
+            ddlEnums.DataTextField = "Name";
+            ddlEnums.DataValueField = "Id";
+            ddlEnums.DataBind();
 
-            ddlFilterParentCategories.DataSource = itemList;
-            ddlFilterParentCategories.DataTextField = "Title";
-            ddlFilterParentCategories.DataValueField = "Id";
-            ddlFilterParentCategories.DataBind();
+            ddlFilterEnums.DataSource = itemList;
+            ddlFilterEnums.DataTextField = "Name";
+            ddlFilterEnums.DataValueField = "Id";
+            ddlFilterEnums.DataBind();
         }
 
         private void GetList()
         {
             //TODO tayfun   linq kullanılan kısımlarda filtereleme yapılamıyor where kosulu calısmıyor
 
-            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
+            List<IKSIR.ECommerce.Model.CommonModel.EnumValue> itemList = EnumValueData.GetEnumValueList();
             //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
             //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
             //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            if (txtFilterCategoryName.Text != "")
-                itemList.Where(x => x.Title.Contains(txtFilterCategoryName.Text));
-            if (ddlFilterParentCategories.SelectedValue != "-1" && ddlFilterParentCategories.SelectedValue != "")
+            if (txtFilterEnumValueName.Text != "")
+                itemList.Where(x => x.Value.Contains(txtFilterEnumValueName.Text));
+            if (ddlFilterEnums.SelectedValue != "-1" && ddlFilterEnums.SelectedValue != "")
             {
-                var item = new ProductCategory() { Id = Convert.ToInt32(ddlFilterParentCategories.SelectedValue) };
-                itemList.Where(x => x.ParentCategory == item);
+                var item = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = Convert.ToInt32(ddlFilterEnums.SelectedValue) };
+                itemList.Where(x => Convert.ToInt32(ddlFilterEnums.SelectedValue) == item.Id);
             }
             gvList.DataSource = itemList;
             gvList.DataBind();
@@ -180,10 +182,10 @@ namespace IKSIR.ECommerce.Management.Product
         private bool InsertItem()
         {
             bool retValue = false;
-            var item = new ProductCategory();
+            var item = new IKSIR.ECommerce.Model.CommonModel.EnumValue();
 
             //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
-            if (item.Description != null)
+            if (item.Value != null)
             {
                 lblError.Visible = true;
                 lblError.ForeColor = System.Drawing.Color.Red;
@@ -193,10 +195,9 @@ namespace IKSIR.ECommerce.Management.Product
             else
             {
 
-                item.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedValue) };
-                item.Title = txtCategoryName.Text.Trim();
-                item.Description = txtDescription.Text.Trim();
-                if (ProductCategoryData.Insert(item) > 0)
+                item.EnumId = Convert.ToInt32(ddlEnums.SelectedValue);
+                item.Value = txtEnumValueName.Text.Trim();
+                if (EnumValueData.Insert(item) > 0)
                     retValue = true;
             }
             return retValue;
@@ -205,17 +206,16 @@ namespace IKSIR.ECommerce.Management.Product
         private bool UpdateItem(int itemId)
         {
             bool retValue = false;
-            var itemProduct = new ProductCategory();
+            var itemEnumValue = new IKSIR.ECommerce.Model.CommonModel.EnumValue();
 
             //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
             //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
             //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            itemProduct.Id = itemId;
-            itemProduct.Title = txtCategoryName.Text;
-            itemProduct.Description = txtDescription.Text;
-            if (ddlParentCategories.SelectedItem.Value != "")
-                itemProduct.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedItem.Value) };
-            if (ProductCategoryData.Update(itemProduct) < 0)
+            itemEnumValue.Id = itemId;
+            itemEnumValue.Value = txtEnumValueName.Text;
+            if (ddlEnums.SelectedItem.Value != "")
+                itemEnumValue.EnumId = Convert.ToInt32(ddlEnums.SelectedItem.Value);
+            if (EnumValueData.Update(itemEnumValue) < 0)
                 retValue = true;
 
             return retValue;
@@ -223,9 +223,8 @@ namespace IKSIR.ECommerce.Management.Product
 
         private void ClearForm()
         {
-            ddlParentCategories.SelectedIndex = -1;
-            txtCategoryName.Text = string.Empty;
-            txtDescription.Text = string.Empty;
+            ddlEnums.SelectedIndex = -1;
+            txtEnumValueName.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
         }
 

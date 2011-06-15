@@ -51,6 +51,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Common\Enums.aspx" />
+    <Content Include="Common\EnumValues.aspx" />
     <Content Include="Css\ManagementTopMenu.css" />
     <Content Include="Css\Management.css" />
     <Content Include="Default.aspx" />
@@ -84,6 +86,20 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Enums.aspx.cs">
+      <DependentUpon>Enums.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\Enums.aspx.designer.cs">
+      <DependentUpon>Enums.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\EnumValues.aspx.cs">
+      <DependentUpon>EnumValues.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\EnumValues.aspx.designer.cs">
+      <DependentUpon>EnumValues.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
