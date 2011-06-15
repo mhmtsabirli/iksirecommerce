@@ -16,8 +16,9 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             var returnValue = new ProductCategory();
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemProductCategory.Id));
-            parameters.Add(new SqlParameter("@ProductCategoryId	", itemProductCategory.ParentCategory.Id));
-            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProduct", parameters);
+            if (itemProductCategory.ParentCategory != null)
+                parameters.Add(new SqlParameter("@ProductCategoryId	", itemProductCategory.ParentCategory.Id));
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductCategory", parameters);
             dr.Read();
             //TODO => tayfun
             returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
@@ -28,6 +29,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
             returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
             returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
+            if (DBHelper.IntValue(dr["ParentId"].ToString()) != 0)
+                returnValue.ParentCategory = Get(new ProductCategory() { Id = DBHelper.IntValue(dr["ParentId"].ToString()) });
             //returnValue.ParentCategory. = GetProductCategoryById(DBHelper.IntValue(dr["ParentId"].ToString()));
 
             dr.Close();
@@ -42,23 +45,24 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemProductCategory.Title)));
             parameters.Add(new SqlParameter("@Description", DBHelper.StringValue(itemProductCategory.Description)));
             parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemProductCategory.CreateAdminId)));
-            //parameters.Add(new SqlParameter("@ParentId", DBHelper.IntValue(itemProductCategory.ParentId.Id)));
+            parameters.Add(new SqlParameter("@ParentId", DBHelper.IntValue(itemProductCategory.ParentCategory.Id)));
 
-            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertProduct", parameters));
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertProductCategory", parameters));
             return returnValue;
         }
 
         public static int Update(ProductCategory itemProductCategory)
         {
-            var returnValue = 0;
+            var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemProductCategory.Id));
             parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemProductCategory.Title)));
             parameters.Add(new SqlParameter("@Description", DBHelper.StringValue(itemProductCategory.Description)));
-            //parameters.Add(new SqlParameter("@ProductCategoryId", DBHelper.IntValue(itemProductCategory.ParentId.Id)));
+            if (itemProductCategory.ParentCategory != null)
+                parameters.Add(new SqlParameter("@ParentId", DBHelper.IntValue(itemProductCategory.ParentCategory.Id)));
             parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemProductCategory.EditAdminId)));
-
-            returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateProduct", parameters);
+            parameters.Add(new SqlParameter("@ErrorCode",ParameterDirection.Output));
+            returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateProductCategory", parameters);
             return returnValue;
         }
 
@@ -68,7 +72,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
 
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemProductCategory.Id));
-
+            parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "DeleteProductCategory", parameters);
             return returnValue;
         }
