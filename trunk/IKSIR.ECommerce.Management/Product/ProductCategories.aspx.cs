@@ -14,6 +14,7 @@ namespace IKSIR.ECommerce.Management.Product
         protected void Page_Load(object sender, EventArgs e)
         {
             GetCategoryList();
+            GetList();
         }
 
         private void GetCategoryList()
@@ -71,7 +72,9 @@ namespace IKSIR.ECommerce.Management.Product
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-
+            pnlForm.Visible = false;
+            pnlList.Visible = true;
+            pnlFilter.Visible = true;
         }
 
         protected void lbtnEdit_Click(object sender, EventArgs e)
@@ -112,7 +115,15 @@ namespace IKSIR.ECommerce.Management.Product
         private void GetList()
         {
             List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
-
+            if (txtFilterCategoryName.Text != "")
+                itemList.Where(x => x.Title.Contains(txtFilterCategoryName.Text));
+            if (ddlFilterParentCategories.SelectedValue != "-1" && ddlFilterParentCategories.SelectedValue != "" )
+            {
+                var item = new ProductCategory() { Id = Convert.ToInt32(ddlFilterParentCategories.SelectedValue) };
+                itemList.Where(x => x.ParentCategory == item);
+            }
+            gvList.DataSource = itemList;
+            gvList.DataBind();
         }
 
         private bool InsertItem()
@@ -155,7 +166,7 @@ namespace IKSIR.ECommerce.Management.Product
 
         protected void btnFilter_Click(object sender, EventArgs e)
         {
-
+            GetList();
         }
     }
 }

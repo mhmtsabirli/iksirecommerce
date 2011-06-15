@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
-    AutoEventWireup="true" CodeBehind="ProductCategories.aspx.cs" Inherits="IKSIR.ECommerce.Management.Product.ProductCategories" Theme ="ManagementGridView"%>
+    AutoEventWireup="true" CodeBehind="ProductCategories.aspx.cs" Inherits="IKSIR.ECommerce.Management.Product.ProductCategories"
+    Theme="ManagementGridView" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -106,7 +107,7 @@
                                 <strong>Kategori Filtreleme</strong>
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>
                                 Üst Kategori
                             </td>
@@ -119,7 +120,6 @@
                             </td>
                             <td rowspan="2">
                                 <asp:Button runat="server" ID="btnFilter" Text="Filtrele" OnClick="btnFilter_Click" />
-
                             </td>
                         </tr>
                         <tr>
@@ -136,7 +136,7 @@
                     </table>
                 </asp:Panel>
                 <br />
-                <asp:Panel runat="server" ID="Panel1" Visible="true">
+                <asp:Panel runat="server" ID="pnlList" Visible="true">
                     <table>
                         <tr>
                             <td colspan="4">
@@ -145,21 +145,20 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
-                                    ForeColor="#333333" GridLines="None" PageSize="15" EnableModelValidation="True">
+                                <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4" GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%">
                                     <Columns>
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("StationId")%>'>[Düzenle]</asp:LinkButton>
-                                                <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("StationId")%>'
+                                                <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
+                                                <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
                                                     OnClientClick="javascript:return confirm('Are you sure you want to delete this row?');"
                                                     CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Id" />
-                                        <asp:BoundField DataField="Name" HeaderText="Name" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="Name" />
+                                        <asp:BoundField DataField="Title" HeaderText="Title" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="Title" />
                                         <asp:BoundField DataField="Description" HeaderText="Description" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Description" />
                                         <asp:TemplateField HeaderText="Value" Visible="false">
@@ -167,13 +166,6 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
-                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                                    <EditRowStyle BackColor="#999999" />
-                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
                                 </asp:GridView>
                             </td>
                         </tr>
