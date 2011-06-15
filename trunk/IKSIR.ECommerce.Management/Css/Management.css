@@ -187,7 +187,7 @@ li ol, li ul
 #nav li:hover ul
 {
     display: block;
-    position: absolute;    
+    position: absolute;
 }
 #nav li:hover li
 {
@@ -388,11 +388,17 @@ div#slideshow
     color: #999;
 }
 
-
+#tblMngForm
+{
+    width: 100%;
+}
+.pnlForm
+{
+    background-color: #FFFFDD;
+}
 
 table
 {
-    width: 100%;
     text-align: left;
 }
 
@@ -404,12 +410,11 @@ th, td
 th
 {
     color: #fff;
-    background: #1FAABE none repeat-x scroll left top;
+    background: #3B5998 none repeat-x scroll left top;
 }
 
 td
 {
-    background: #fff;
     border-bottom: 1px solid #ccc;
 }
 
@@ -467,7 +472,6 @@ form input, form select, form textarea
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
 }
-
 form input.formbutton
 {
     border: none;
@@ -499,3 +503,12 @@ span.required
     clear: both;
 }
 
+form select
+{
+    width: 250px;
+}
+form textarea
+{
+    width: 250px;
+    height: 30px;
+}

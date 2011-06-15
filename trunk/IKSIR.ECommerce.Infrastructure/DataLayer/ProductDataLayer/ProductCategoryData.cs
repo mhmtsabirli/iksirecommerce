@@ -16,7 +16,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             var returnValue = new ProductCategory();
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemProductCategory.Id));
-            parameters.Add(new SqlParameter("@ProductCategoryId	", itemProductCategory.ParentId[0].Id));
+            parameters.Add(new SqlParameter("@ProductCategoryId	", itemProductCategory.ParentCategory.Id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProduct", parameters);
             dr.Read();
             //TODO => tayfun
@@ -28,7 +28,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
             returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
             returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
-            returnValue.ParentId = GetProductCategoryById(DBHelper.IntValue(dr["ParentId"].ToString()));
+            //returnValue.ParentCategory. = GetProductCategoryById(DBHelper.IntValue(dr["ParentId"].ToString()));
 
             dr.Close();
             return returnValue;
@@ -73,17 +73,18 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             return returnValue;
         }
 
-        public static List<ProductCategory> GetProductCategoryList(ProductCategory itemProductCategory)
+        public static List<ProductCategory> GetProductCategoryList(ProductCategory itemProductCategory = null)
         {
             List<ProductCategory> itemProductCategoryList = null;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemProductCategory.Id));
-            if(itemProductCategory.ParentId != null)
-            parameters.Add(new SqlParameter("@ProductCategoryId	", itemProductCategory.ParentId[0].Id));
+            //if (itemProductCategory != null)
+            //    parameters.Add(new SqlParameter("@Id", itemProductCategory.Id));
+            //if (itemProductCategory.ParentCategory != null)
+            //    parameters.Add(new SqlParameter("@ProductCategoryId", itemProductCategory.ParentCategory.Id));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductCategory", parameters);
             itemProductCategoryList = new List<ProductCategory>();
-            
+
             while (dr.Read())
             {
                 var item = new ProductCategory();
@@ -96,7 +97,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
-                item.ParentId = GetProductCategoryById(DBHelper.IntValue(dr["Id"].ToString()));
+                //item.ParentCategory = GetProductCategoryById(DBHelper.IntValue(dr["Id"].ToString())); =>ayhant
                 itemProductCategoryList.Add(item);
             }
 
@@ -112,7 +113,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@ParentId", productCategoryId));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductCategory", parameters);
 
-           
+
             while (dr.Read())
             {
                 var item = new ProductCategory();
@@ -125,7 +126,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
-                item.ParentId = GetProductCategoryById(DBHelper.IntValue(dr["Id"].ToString()));
+                //item.ParentId = GetProductCategoryById(DBHelper.IntValue(dr["Id"].ToString())); =>ayhant
                 itemProductCategoryList.Add(item);
             }
 
