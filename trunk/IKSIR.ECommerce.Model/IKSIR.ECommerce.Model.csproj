@@ -42,6 +42,7 @@
     <Compile Include="CommonModel\Address.cs" />
     <Compile Include="AdminModel\Admin.cs" />
     <Compile Include="AdminModel\AdminRights.cs" />
+    <Compile Include="CommonModel\SystemLog.cs" />
     <Compile Include="ShoppingModel\Bank.cs" />
     <Compile Include="ShoppingModel\BankAccounts.cs" />
     <Compile Include="CommonModel\ModelBase.cs" />
