@@ -5,7 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
+using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.ProductModel;
+using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Management.Product
 {
@@ -132,9 +134,25 @@ namespace IKSIR.ECommerce.Management.Product
         {
             bool returnValue = false;
             var item = new ProductCategory() { Id = itemId };
-            if (ProductCategoryData.Delete(item) < 0)
-                returnValue = true;
+            try
+            {
+                if (ProductCategoryData.Delete(item) < 0)
+                    returnValue = true;
 
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete ProductCategory";
+                itemSystemLog.Content = "Id=" + itemId;
+                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+            catch
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete ProductCategory";
+                itemSystemLog.Content = "Id=" + itemId;
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
             return returnValue;
         }
 
@@ -166,6 +184,7 @@ namespace IKSIR.ECommerce.Management.Product
             //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
             //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
             //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
+            //where kosullu kısım calısmıyor
             if (txtFilterCategoryName.Text != "")
                 itemList.Where(x => x.Title.Contains(txtFilterCategoryName.Text));
             if (ddlFilterParentCategories.SelectedValue != "-1" && ddlFilterParentCategories.SelectedValue != "")
@@ -183,6 +202,8 @@ namespace IKSIR.ECommerce.Management.Product
             var item = new ProductCategory();
 
             //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
+            // a nın altında b var dıyelım kosul olmadıgı ıcın ıkıncı bır b yı atıyor
+            // where kosullu kısı mcalıstırıldıgında burayada uygulanıp burasıda calıstırılacak
             if (item.Description != null)
             {
                 lblError.Visible = true;
@@ -196,8 +217,25 @@ namespace IKSIR.ECommerce.Management.Product
                 item.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedValue) };
                 item.Title = txtCategoryName.Text.Trim();
                 item.Description = txtDescription.Text.Trim();
-                if (ProductCategoryData.Insert(item) > 0)
-                    retValue = true;
+                try
+                {
+                    if (ProductCategoryData.Insert(item) > 0)
+                        retValue = true;
+
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Insert ProductCategory";
+                    itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
+                catch
+                {
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Insert ProductCategory";
+                    itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
+                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
             }
             return retValue;
         }
@@ -215,9 +253,26 @@ namespace IKSIR.ECommerce.Management.Product
             itemProduct.Description = txtDescription.Text;
             if (ddlParentCategories.SelectedItem.Value != "")
                 itemProduct.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedItem.Value) };
-            if (ProductCategoryData.Update(itemProduct) < 0)
-                retValue = true;
 
+            try
+            {
+                if (ProductCategoryData.Update(itemProduct) < 0)
+                    retValue = true;
+
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Insert ProductCategory";
+                itemSystemLog.Content = "Id=" + itemProduct.Id + "Title=" + itemProduct.Title + "Description =" + itemProduct.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
+                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+            catch
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Insert ProductCategory";
+                itemSystemLog.Content = "Id=" + itemProduct.Id + "Title=" + itemProduct.Title + "Description =" + itemProduct.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
             return retValue;
         }
 

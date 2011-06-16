@@ -98,6 +98,7 @@ namespace IKSIR.ECommerce.Management.Common
             //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
             //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
             //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
+            //where kosullu kısım calısmıyor
             txtEnumValueName.Text = itemEnumValue.Value.ToString();
             if (itemEnumValue.EnumId != null)
             {
@@ -148,6 +149,7 @@ namespace IKSIR.ECommerce.Management.Common
         private void BindValues()
         {
             //Buralarda tüm kategoriler gelecek istediği kategorinin altına tanımlama yapabilecek.
+            
             List<IKSIR.ECommerce.Model.CommonModel.Enum> itemList = EnumData.GetEnumList();
             ddlEnums.DataSource = itemList;
             ddlEnums.DataTextField = "Name";
@@ -185,6 +187,8 @@ namespace IKSIR.ECommerce.Management.Common
             var item = new IKSIR.ECommerce.Model.CommonModel.EnumValue();
 
             //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
+            // a nın altında b var dıyelım kosul olmadıgı ıcın ıkıncı bır b yı atıyor
+            //where kosullu kısım calıstıgında kontrol buraya koyulacak
             if (item.Value != null)
             {
                 lblError.Visible = true;

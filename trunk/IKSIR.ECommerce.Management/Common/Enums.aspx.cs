@@ -152,6 +152,7 @@ namespace IKSIR.ECommerce.Management.Common
             //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
             //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
             //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
+            // where kosulu calısmıyor
             if (txtFilterEnumName.Text != "")
                 itemList.Where(x => x.Name.Contains(txtFilterEnumName.Text));
           
@@ -165,6 +166,8 @@ namespace IKSIR.ECommerce.Management.Common
             var item = new IKSIR.ECommerce.Model.CommonModel.Enum();
 
             //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
+            //where kosullu kısım calıstıgında burasıdacalısacaktır
+            // a nın altında b var dıyelım kosul olmadıgı ıcın ıkıncı bır b yı atıyor
             if (item.Name != null)
             {
                 lblError.Visible = true;
