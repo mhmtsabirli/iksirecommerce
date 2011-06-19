@@ -7,17 +7,17 @@ using System.Data;
 using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
 using IKSIR.ECommerce.Model.CommonModel;
 
-
 namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
 {
-    public class EnumData
+   public class DistrictData
     {
-        public static IKSIR.ECommerce.Model.CommonModel.Enum Get(IKSIR.ECommerce.Model.CommonModel.Enum itemEnum)
+       public static District Get(District itemDistrict)
         {
-            var returnValue = new IKSIR.ECommerce.Model.CommonModel.Enum();
+            var returnValue = new District();
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemEnum.Id));
-            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetEnum", parameters);
+            parameters.Add(new SqlParameter("@Id", itemDistrict.Id));
+            parameters.Add(new SqlParameter("@Country", itemDistrict.City.Id));
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetDistrict", parameters);
             dr.Read();
             //TODO => tayfun
             returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
@@ -26,62 +26,64 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
             returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
             returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.EnumValue = EnumValueData.GetEnumValueListById(DBHelper.IntValue(dr["EnumId"].ToString()));
+            returnValue.City = CityData.Get(new City() { Id = DBHelper.IntValue(dr["CityId"].ToString()) });
 
             dr.Close();
             return returnValue;
         }
 
-        public static int Insert(IKSIR.ECommerce.Model.CommonModel.Enum itemEnum)
+       public static int Insert(District itemDistrict)
         {
             var returnValue = 0;
             List<SqlParameter> parameters = new List<SqlParameter>();
 
-            parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemEnum.Name)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemEnum.CreateAdminId)));
-          
-            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertEnum", parameters));
+            parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemDistrict.Name)));
+            parameters.Add(new SqlParameter("@CountryId", DBHelper.StringValue(itemDistrict.City.Id)));
+            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemDistrict.CreateAdminId)));
+
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertDistrict", parameters));
             return returnValue;
         }
 
-        public static int Update(IKSIR.ECommerce.Model.CommonModel.Enum itemEnum)
+       public static int Update(District itemDistrict)
         {
             var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemEnum.Id));
-            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemEnum.EditAdminId)));
-            parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemEnum.Name)));
+            parameters.Add(new SqlParameter("@Id", itemDistrict.Id));
+            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemDistrict.EditAdminId)));
+            parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemDistrict.Name)));
+            parameters.Add(new SqlParameter("@CountryId", DBHelper.StringValue(itemDistrict.City.Id)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
-            returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateEnum", parameters);
+            returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateDistrict", parameters);
             return returnValue;
         }
 
-        public static int Delete(IKSIR.ECommerce.Model.CommonModel.Enum itemEnum)
+       public static int Delete(District itemDistrict)
         {
             var returnValue = 0;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemEnum.Id));
+            parameters.Add(new SqlParameter("@Id", itemDistrict.Id));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
-            returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "DeleteEnum", parameters);
+            returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "DeleteDistrict", parameters);
             return returnValue;
         }
 
-        public static List<IKSIR.ECommerce.Model.CommonModel.Enum> GetEnumList(IKSIR.ECommerce.Model.CommonModel.Enum itemEnum = null)
+       public static List<District> GetDistrictList(District itemDistrict = null)
         {
-            List<IKSIR.ECommerce.Model.CommonModel.Enum> itemEnumList = null;
+            List<District> itemDistrictList = null;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
             //if (itemProductCategory != null)
             //    parameters.Add(new SqlParameter("@Id", itemProductCategory.Id));
             //if (itemProductCategory.ParentCategory != null)
             //    parameters.Add(new SqlParameter("@ProductCategoryId", itemProductCategory.ParentCategory.Id));
-            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetEnum", parameters);
-            itemEnumList = new List<IKSIR.ECommerce.Model.CommonModel.Enum>();
+            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetDistrict", parameters);
+            itemDistrictList = new List<District>();
 
             while (dr.Read())
             {
-                var item = new IKSIR.ECommerce.Model.CommonModel.Enum();
+                var item = new District();
                 //TODO => tayfun
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
@@ -89,13 +91,12 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
-                item.EnumValue = EnumValueData.GetEnumValueListById(DBHelper.IntValue(dr["EnumId"].ToString()));
-                itemEnumList.Add(item);
+                item.City = CityData.Get(new City() { Id = DBHelper.IntValue(dr["CityId"].ToString()) });
+                itemDistrictList.Add(item);
             }
 
             dr.Close();
-            return itemEnumList;
+            return itemDistrictList;
         }
-     
     }
 }

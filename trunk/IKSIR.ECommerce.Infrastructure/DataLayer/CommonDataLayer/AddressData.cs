@@ -6,8 +6,11 @@ using System.Data.SqlClient;
 using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
 using System.Data;
 using IKSIR.ECommerce.Model.CommonModel;
+using IKSIR.ECommerce.Model.MembershipModel;
+using IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer;
 
-namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonData
+
+namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
 {
     public class AddressData
     {
@@ -20,20 +23,22 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonData
             dr.Read();
             //TODO => ayhant
             //City,Countr,District, Type, User DB yazılınca city alnı direkt dbden çekilerek alınacak.
-            //returnValue.City = CityData.GetCity(DBHelper.IntValue(dr["CityId"].ToString()));
-            //returnValue.Country = CountryData.GetCity(DBHelper.IntValue(dr["CountryId"].ToString()));
+           
             returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
             returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
             returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
-            //item.District = DistrictData.GetDistrict(DBHelper.IntValue(dr["DistrictId"].ToString()));                
             returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
             returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
             returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
             returnValue.Phone = DBHelper.StringValue(dr["Phone"].ToString());
-            //item.PostalCode = DBHelper.StringValue(dr["Phone"].ToString());
             returnValue.PostalCode = DBHelper.StringValue(dr["PostalCode"].ToString());
-            //item.Type = 
-            //item.User = new Model.MembershipModel.User;
+            returnValue.PostalCode = DBHelper.StringValue(dr["PostalCode"].ToString());
+            returnValue.Type = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["Type"].ToString()) });
+            returnValue.City = CityData.Get(new City() { Id = DBHelper.IntValue(dr["CityId"].ToString()) });
+            returnValue.Country = CountryData.Get(new Country() { Id = DBHelper.IntValue(dr["CountryId"].ToString()) });
+            returnValue.District = DistrictData.Get(new District() { Id = DBHelper.IntValue(dr["DistrictId"].ToString()) });
+            returnValue.User = UserData.Get(new User() { Id = DBHelper.IntValue(dr["UserId"].ToString()) });
+            
             dr.Close();
             return returnValue;
         }
@@ -97,23 +102,23 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonData
             parameters.Add(new SqlParameter("@TypeId", addressTypeId));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetMembershipAddresses", parameters);
 
-            var item = new Address();
+          
             while (dr.Read())
             {
-                //item.City = CityData.GetCity(DBHelper.IntValue(dr["CityId"].ToString()));
-                //item.Country = CountryData.GetCity(DBHelper.IntValue(dr["CountryId"].ToString()));
+                var item = new Address();
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
-                //item.District = DistrictData.GetDistrict(DBHelper.IntValue(dr["DistrictId"].ToString()));                
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
                 item.Phone = DBHelper.StringValue(dr["Phone"].ToString());
-                //item.PostalCode = DBHelper.StringValue(dr["Phone"].ToString());
                 item.PostalCode = DBHelper.StringValue(dr["PostalCode"].ToString());
-                //item.Type = 
-                //item.User = new Model.MembershipModel.User;
+                item.Type = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["Type"].ToString()) });
+                item.City = CityData.Get(new City() { Id = DBHelper.IntValue(dr["CityId"].ToString()) });
+                item.Country = CountryData.Get(new Country() { Id = DBHelper.IntValue(dr["CountryId"].ToString()) });
+                item.District = DistrictData.Get(new District() { Id = DBHelper.IntValue(dr["DistrictId"].ToString()) });
+                item.User = UserData.Get(new User() { Id = DBHelper.IntValue(dr["UserId"].ToString()) });
                 itemAddressList.Add(item);
             }
 
