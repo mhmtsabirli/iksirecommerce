@@ -37,5 +37,8 @@ namespace IKSIR.ECommerce.Model.MembershipModel
             this.Site = site;
             this.Password = password;
         }
+        public User()
+        {
+        }
     }
 }
