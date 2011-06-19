@@ -7,14 +7,17 @@ namespace IKSIR.ECommerce.Model.CommonModel
 {
     public class PropertyValue : ModelBase
     {
-        public Property Property { get; set; }
+        public int PropertyId { get; set; }
         public string Value { get; set; }
 
-        public PropertyValue(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Property property, string value)
+        public PropertyValue(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int propertyId, string value)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
-            this.Property = property;
+            this.PropertyId = propertyId;
             this.Value = value;
+        }
+        public PropertyValue()
+        {
         }
     }
 }

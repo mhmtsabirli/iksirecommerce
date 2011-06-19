@@ -18,5 +18,8 @@ namespace IKSIR.ECommerce.Model.CommonModel
             this.Description = description;
             this.PropertyValue = propertyValue;
         }
+        public Property()
+        {
+        }
     }
 }

@@ -16,5 +16,8 @@ namespace IKSIR.ECommerce.Model.CommonModel
             this.Type = type;
             this.Value = value;
         }
+        public Multimedias()
+        {
+        }
     }
 }

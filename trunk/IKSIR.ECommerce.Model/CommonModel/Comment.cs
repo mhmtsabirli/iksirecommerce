@@ -21,5 +21,8 @@ namespace IKSIR.ECommerce.Model.CommonModel
             this.Ip = ip;
             this.WebSite = webSite;
         }
+        public Comment()
+        {
+        }
     }
 }
