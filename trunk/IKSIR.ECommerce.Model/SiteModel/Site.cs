@@ -15,5 +15,8 @@ namespace IKSIR.ECommerce.Model.SiteModel
         {
             this.Name = name;
         }
+        public Site()
+        {
+        }
     }
 }
