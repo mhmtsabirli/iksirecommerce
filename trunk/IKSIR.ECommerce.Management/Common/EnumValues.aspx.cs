@@ -93,7 +93,7 @@ namespace IKSIR.ECommerce.Management.Common
 
         private void GetItem(int itemId)
         {
-            var item = new IKSIR.ECommerce.Model.CommonModel.EnumValue  () { Id = Convert.ToInt32(itemId) };
+            var item = new IKSIR.ECommerce.Model.CommonModel.EnumValue() { Id = Convert.ToInt32(itemId) };
             IKSIR.ECommerce.Model.CommonModel.EnumValue itemEnumValue = EnumValueData.Get(item);
             //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
             //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
@@ -103,7 +103,7 @@ namespace IKSIR.ECommerce.Management.Common
             if (itemEnumValue.EnumId != null)
             {
                 ddlEnums.SelectedValue = (itemEnumValue.EnumId.ToString());
-                
+
             }
             else
                 ddlEnums.SelectedValue = "";
@@ -135,8 +135,25 @@ namespace IKSIR.ECommerce.Management.Common
         {
             bool returnValue = false;
             var item = new IKSIR.ECommerce.Model.CommonModel.EnumValue() { Id = itemId };
-            if (EnumValueData.Delete(item) < 0)
-                returnValue = true;
+            try
+            {
+                if (EnumValueData.Delete(item) < 0)
+                    returnValue = true;
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete EnumValue";
+                itemSystemLog.Content = "Id" + itemId;
+                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+
+            }
+            catch
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete EnumValue";
+                itemSystemLog.Content = "Id" + itemId;
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
 
             return returnValue;
         }
@@ -149,7 +166,7 @@ namespace IKSIR.ECommerce.Management.Common
         private void BindValues()
         {
             //Buralarda tüm kategoriler gelecek istediği kategorinin altına tanımlama yapabilecek.
-            
+
             List<IKSIR.ECommerce.Model.CommonModel.Enum> itemList = EnumData.GetEnumList();
             ddlEnums.DataSource = itemList;
             ddlEnums.DataTextField = "Name";
@@ -201,8 +218,26 @@ namespace IKSIR.ECommerce.Management.Common
 
                 item.EnumId = Convert.ToInt32(ddlEnums.SelectedValue);
                 item.Value = txtEnumValueName.Text.Trim();
-                if (EnumValueData.Insert(item) > 0)
-                    retValue = true;
+
+                try
+                {
+                    if (EnumValueData.Insert(item) > 0)
+                        retValue = true;
+
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Insert EnumValue";
+                    itemSystemLog.Content = "Value" + item.Value + "EnumId" + item.EnumId;
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
+                catch
+                {
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Insert EnumValue";
+                    itemSystemLog.Content = "Value" + item.Value + "EnumId" + item.EnumId;
+                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
             }
             return retValue;
         }
@@ -219,9 +254,26 @@ namespace IKSIR.ECommerce.Management.Common
             itemEnumValue.Value = txtEnumValueName.Text;
             if (ddlEnums.SelectedItem.Value != "")
                 itemEnumValue.EnumId = Convert.ToInt32(ddlEnums.SelectedItem.Value);
-            if (EnumValueData.Update(itemEnumValue) < 0)
-                retValue = true;
 
+            try
+            {
+                if (EnumValueData.Update(itemEnumValue) < 0)
+                    retValue = true;
+
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Insert EnumValue";
+                itemSystemLog.Content = "Id" + itemId + "Value" + itemEnumValue.Value + "EnumId" + itemEnumValue.EnumId;
+                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+            catch
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Insert EnumValue";
+                itemSystemLog.Content = "Id" + itemId + "Value" + itemEnumValue.Value + "EnumId" + itemEnumValue.EnumId;
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
             return retValue;
         }
 

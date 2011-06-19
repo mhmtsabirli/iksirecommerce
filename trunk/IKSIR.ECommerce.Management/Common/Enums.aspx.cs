@@ -126,9 +126,25 @@ namespace IKSIR.ECommerce.Management.Common
         {
             bool returnValue = false;
             var item = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = itemId };
-            if (EnumData.Delete(item) < 0)
-                returnValue = true;
+            try
+            {
+                if (EnumData.Delete(item) < 0)
+                    returnValue = true;
 
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete Enum";
+                itemSystemLog.Content = "Id=" + itemId;
+                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+            catch
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete Enum";
+                itemSystemLog.Content = "Id=" + itemId;
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
             return returnValue;
         }
 
@@ -179,8 +195,25 @@ namespace IKSIR.ECommerce.Management.Common
             {
 
                 item.Name = txtEnumName.Text.Trim();
-                if (EnumData.Insert(item) > 0)
-                    retValue = true;
+                try
+                {
+                    if (EnumData.Insert(item) > 0)
+                        retValue = true;
+
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Insert Enum";
+                    itemSystemLog.Content = "Name" + item.Name;
+                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
+                catch
+                {
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Insert Enum";
+                    itemSystemLog.Content = "Name" + item.Name;
+                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
             }
             return retValue;
         }
@@ -196,8 +229,25 @@ namespace IKSIR.ECommerce.Management.Common
             itemEnum.Id = itemId;
             itemEnum.Name = txtEnumName.Text;
 
-            if (EnumData.Update(itemEnum) < 0)
-                retValue = true;
+            try
+            {
+                if (EnumData.Update(itemEnum) < 0)
+                    retValue = true;
+
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Update Enum";
+                itemSystemLog.Content = "Id" + itemEnum.Id + "Name" + itemEnum.Name;
+                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+            catch
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Update Enum";
+                itemSystemLog.Content = "Id" + itemEnum.Id + "Name" + itemEnum.Name;
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
 
             return retValue;
         }
