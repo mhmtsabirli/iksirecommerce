@@ -1,14 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
-    AutoEventWireup="true" CodeBehind="Enums.aspx.cs" Inherits="IKSIR.ECommerce.Management.Common.Enums"
+    AutoEventWireup="true" CodeBehind="ProductProperties.aspx.cs" Inherits="IKSIR.ECommerce.Management.Common.ProductProperties"
     Theme="ManagementGridView" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
-        Enum Tanımları</h2>
+        Ürün Özellikleri</h2>
     <p>
-        Enum tanımlama güncelleme ekranı.
+        Ürünlere özellik verilebilmesi için özellik tanımlandığı ekran.
     </p>
     <table id="tblMngForm">
         <tr>
@@ -25,7 +25,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Enum Formu</strong>
+                                <strong>Form</strong>
                             </td>
                         </tr>
                         <tr>
@@ -43,18 +43,31 @@
                         </tr>
                         <tr>
                             <td>
-                                Enum Adı
+                                Özellik Adı
                             </td>
                             <td>
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtEnumName"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtPropertyName"></asp:TextBox>
                             </td>
                             <td>
-                                <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="txtEnumName"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Enum Adı Girmelisiniz"
+                                <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="txtPropertyName"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Özellik Adı Girmelisiniz"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Açıklama
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtDescription"></asp:TextBox>
+                            </td>
+                            <td>
                             </td>
                         </tr>
                         <tr>
@@ -74,20 +87,20 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Enum Filtreleme</strong>
+                                <strong>Filtre</strong>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Enum Adı
+                                Özellik Adı
                             </td>
                             <td>
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtFilterEnumName"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtFilterPropertyName"></asp:TextBox>
                             </td>
-                            <td>
+                             <td>
                                 <asp:Button ID="btnFilter" runat="server" OnClick="btnFilter_Click" Text="Filtrele" />
                             </td>
                         </tr>
@@ -98,7 +111,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Enum Listesi</strong>
+                                <strong>Liste</strong>
                             </td>
                         </tr>
                         <tr>
@@ -114,14 +127,12 @@
                                                     CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="Id" HeaderText="Değer" ApplyFormatInEditMode="false" ReadOnly="true"
+                                        <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Id" />
                                         <asp:BoundField DataField="Name" HeaderText="Name" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Name" />
-                                        <asp:TemplateField HeaderText="Id" Visible="false">
-                                            <ItemTemplate>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="Description" HeaderText="Açıklama" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="Description" />
                                     </Columns>
                                 </asp:GridView>
                             </td>

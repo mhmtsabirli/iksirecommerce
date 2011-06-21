@@ -1,11 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
     AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="IKSIR.ECommerce.Management.Product.Products" %>
 
+<%@ Register Assembly="RadTabStrip.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
+<%@ Register TagPrefix="telerik" Namespace="Telerik.WebControls" %>
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+<%@ Register TagPrefix="telerik1" Namespace="Telerik.Web.UI" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
-        Ürünler</h2>
+        Ürünler
+    </h2>
     <p>
         Ürün tanımlama güncelleme ekranı.
     </p>
@@ -97,7 +102,8 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtDescription" TextMode="MultiLine"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtDescription" TextMode="MultiLine" Width="250px"
+                                    Height="50px"></asp:TextBox>
                             </td>
                             <td>
                             </td>
@@ -134,15 +140,137 @@
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
+                    </table>
+                    <table>
                         <tr>
-                            <td colspan="4" align="center">
-                                <asp:ValidationSummary runat="server" ID="vsForm" ValidationGroup="VGForm" ForeColor="Red" />
+                            <td colspan="4">
+                                <strong>Ürün Fotoğrafları</strong>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center">
-                                <asp:Button runat="server" ID="btnSave" Text="Kaydet" ValidationGroup="VGForm" OnClick="btnSave_Click" />
-                                &nbsp;<asp:Button runat="server" ID="btnCancel" Text="Vazgeç" OnClick="btnCancel_Click" />
+                            <td>
+                                Id
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:Label ID="Label1" runat="server"></asp:Label>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Resim Adı
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtCategoryName"
+                                    ErrorMessage="Kategori Adı alanı zorunlu" ForeColor="Red" SetFocusOnError="true"
+                                    ValidationGroup="VGForm">*</asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Açıklama
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TextBox3" runat="server" TextMode="MultiLine" Width="250px" Height="50px"></asp:TextBox>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Resim
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:FileUpload runat="server" />
+                            </td>
+                            <td>
+                                &#160;
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan="4">
+                                <strong>Ürün Özellikler</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Özellik
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:DropDownList runat="server" ID="ddlProperties">
+                                </asp:DropDownList>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Değer
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtPropertyValue" Height="50px" Width="250px"></asp:TextBox>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <asp:GridView runat="server" ID="gvProductProperties" AutoGenerateColumns="False"
+                                    CellPadding="4" GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%">
+                                    <Columns>
+                                        <asp:TemplateField ShowHeader="False">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
+                                                <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
+                                                    OnClientClick="javascript:return confirm('Are you sure you want to delete this row?');"
+                                                    CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
+                                            SortExpression="Id" />
+                                        <asp:BoundField DataField="PropertyName" HeaderText="Özellik" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="PropertyName" />
+                                        <asp:BoundField DataField="PropertyValue" HeaderText="Değer" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="PropertyValue" />
+                                    </Columns>
+                                </asp:GridView>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td align="center" colspan="4">
+                                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" ValidationGroup="VGForm" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="4">
+                                <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Kaydet" ValidationGroup="VGForm" />&#160;<asp:Button
+                                    ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="Vazgeç" />
                             </td>
                         </tr>
                     </table>
@@ -180,6 +308,7 @@
                                 <asp:TextBox runat="server" ID="txtFilterCategoryName"></asp:TextBox>
                             </td>
                         </tr>
+                        >
                     </table>
                 </asp:Panel>
                 <br />
@@ -207,7 +336,7 @@
                                             SortExpression="Id" />
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>
-                                            <asp:Label runat="server" ID="lblCategoryName" Text='"<%# Eval("ProductCategory").Title%>"'></asp:Label>
+                                                <asp:Label runat="server" ID="lblCategoryName" Text='"<%# Eval("ProductCategory").Title%>"'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" ApplyFormatInEditMode="false"

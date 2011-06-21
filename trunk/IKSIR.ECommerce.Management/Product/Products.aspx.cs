@@ -15,8 +15,8 @@ namespace IKSIR.ECommerce.Management.Product
         {
             if (!Page.IsPostBack)
             {
-                BindValues();
-                GetList();
+                //BindValues();
+                //GetList();
             }
         }
 
@@ -117,6 +117,39 @@ namespace IKSIR.ECommerce.Management.Product
             GetList();
         }
 
+        private void GetItem(int itemId)
+        {
+            //var item = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = Convert.ToInt32(itemId) };
+            //IKSIR.ECommerce.Model.CommonModel.Enum itemEnum = EnumData.Get(item);
+
+            //txtCategoryName.Text = itemEnum.Name.ToString();
+
+
+            pnlForm.Visible = true;
+
+        }
+
+        private bool GetItemMain(int itemId)
+        {
+            //Ana özelliklerini getir sorun olursa false döndür.
+            bool retValue = false;
+            return retValue;
+        }
+
+        private bool GetImages(int itemId)
+        {
+            //Ürün resimlerini getir.
+            bool retValue = false;
+            return retValue;
+        }
+
+        private bool GetProperties(int itemId)
+        {
+            //Ürün özelliklerini getir.
+            bool retValue = false;
+            return retValue;
+        }
+
         private void BindValues()
         {
             //Buralarda tüm kategoriler gelecek istediği kategorinin altına tanımlama yapabilecek.
@@ -170,6 +203,27 @@ namespace IKSIR.ECommerce.Management.Product
                 if (ProductCategoryData.Insert(item) > 0)
                     retValue = true;
             }
+            return retValue;
+        }
+
+        private bool SaveProductMain()
+        {
+            //Eğer ürün ilk kez kaydediliyorsa yeni kayıt güncelleniyorsa update et.
+            bool retValue = false;
+            return retValue;
+        }
+
+        private bool SaveProductImages()
+        {
+            //Images diye bir table olması lazım cache'te.
+            bool retValue = false;
+            return retValue;
+        }
+
+        private bool SaveProductProperties()
+        {
+            //product properties diye bir table olması lazım cache'te. en son onun üzerindeki propertyler kaydedilecek dbdeki o ürüne ait varsa tüm properyler silinecek.
+            bool retValue = false;
             return retValue;
         }
 

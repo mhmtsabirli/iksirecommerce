@@ -10,7 +10,7 @@
 namespace IKSIR.ECommerce.Management.Common {
     
     
-    public partial class Enums {
+    public partial class ProductProperties {
         
         /// <summary>
         /// lblError control.
@@ -49,13 +49,13 @@ namespace IKSIR.ECommerce.Management.Common {
         protected global::System.Web.UI.WebControls.Label lblId;
         
         /// <summary>
-        /// txtEnumName control.
+        /// txtPropertyName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEnumName;
+        protected global::System.Web.UI.WebControls.TextBox txtPropertyName;
         
         /// <summary>
         /// rfv1 control.
@@ -65,6 +65,15 @@ namespace IKSIR.ECommerce.Management.Common {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv1;
+        
+        /// <summary>
+        /// txtDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDescription;
         
         /// <summary>
         /// vsForm control.
@@ -103,13 +112,13 @@ namespace IKSIR.ECommerce.Management.Common {
         protected global::System.Web.UI.WebControls.Panel pnlFilter;
         
         /// <summary>
-        /// txtFilterEnumName control.
+        /// txtFilterPropertyName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFilterEnumName;
+        protected global::System.Web.UI.WebControls.TextBox txtFilterPropertyName;
         
         /// <summary>
         /// btnFilter control.

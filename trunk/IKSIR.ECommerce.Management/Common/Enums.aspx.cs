@@ -254,10 +254,8 @@ namespace IKSIR.ECommerce.Management.Common
 
         private void ClearForm()
         {
-          
             txtEnumName.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
         }
-
     }
 }

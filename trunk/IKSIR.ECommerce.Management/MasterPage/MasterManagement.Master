@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterManagement.master.cs"
     Inherits="IKSIR.ECommerce.Management.MasterPage.MasterManagement" %>
+<%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,12 +17,12 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div id="container">
+    &nbsp;<div id="container">
         <div id="container-inner">
             <div id="header">
                 <h1>
                     <a href="#">
-                        <img src="http://www.eviniyenileturkiye.com/images/logolar/idevit.jpg" style="border: none" /></a></h1>
+                        <img src="http://www.eviniyenileturkiye.com/images/logolar/idevit.jpg" style="border: none; display:none;" /></a></h1>
                 <p>
                     Yönetim Paneli</p>
                 <div class="clear">
