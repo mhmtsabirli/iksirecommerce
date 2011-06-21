@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLayer\AdminDataLayer\AdminData.cs" />
+    <Compile Include="DataLayer\AdminDataLayer\AdminRightData.cs" />
+    <Compile Include="DataLayer\AdminDataLayer\RightData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\AddressData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\CityData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\CommentData.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="DataLayer\ProductDataLayer\ProductCategoryData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ProductData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ProductPropertyData.cs" />
+    <Compile Include="DataLayer\SiteDataLayer\ShowRoomData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\SiteData.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
