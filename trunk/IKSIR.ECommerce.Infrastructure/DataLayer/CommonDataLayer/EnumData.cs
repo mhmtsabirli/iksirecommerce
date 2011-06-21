@@ -26,7 +26,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
             returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
             returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.EnumValue = EnumValueData.GetEnumValueListById(DBHelper.IntValue(dr["EnumId"].ToString()));
+            returnValue.EnumValue = EnumValueData.GetEnumValueListForEnum(new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = DBHelper.IntValue(dr["Id"].ToString()) });
 
             dr.Close();
             return returnValue;
@@ -89,7 +89,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
-                item.EnumValue = EnumValueData.GetEnumValueListById(DBHelper.IntValue(dr["EnumId"].ToString()));
+                item.EnumValue = EnumValueData.GetEnumValueListForEnum(new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = DBHelper.IntValue(dr["Id"].ToString()) });
                 itemEnumList.Add(item);
             }
 
