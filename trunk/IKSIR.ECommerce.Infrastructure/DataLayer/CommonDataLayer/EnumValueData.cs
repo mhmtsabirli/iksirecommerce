@@ -94,12 +94,12 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             dr.Close();
             return itemEnumValueList;
         }
-        public static List<IKSIR.ECommerce.Model.CommonModel.EnumValue> GetEnumValueListById(int itemId)
+        public static List<IKSIR.ECommerce.Model.CommonModel.EnumValue> GetEnumValueListForEnum(IKSIR.ECommerce.Model.CommonModel.Enum EnumItem)
         {
             List<IKSIR.ECommerce.Model.CommonModel.EnumValue> itemEnumValueList = null;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemId));
+            parameters.Add(new SqlParameter("@EnumId", EnumItem.Id));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetEnumValue", parameters);
             itemEnumValueList = new List<IKSIR.ECommerce.Model.CommonModel.EnumValue>();
 
