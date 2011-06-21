@@ -70,7 +70,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             List<Site> itemEnumList = null;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetEnum", parameters);
+            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetSite", parameters);
             itemEnumList = new List<Site>();
 
             while (dr.Read())
