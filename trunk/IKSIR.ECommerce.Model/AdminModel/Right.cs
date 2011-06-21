@@ -17,5 +17,8 @@ namespace IKSIR.ECommerce.Model.AdminModel
             this.Title = title;
             this.Description = description;
         }
+        public Right()
+        {
+        }
     }
 }

@@ -26,5 +26,8 @@ namespace IKSIR.ECommerce.Model.AdminModel
             this.LastLoginDate = lastLoginDate;
             this.Site = site;
         }
+        public Admin()
+        {
+        }
     }
 }

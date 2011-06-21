@@ -18,5 +18,8 @@ namespace IKSIR.ECommerce.Model.SiteModel
             this.Item = item;
             this.EnumValue = enumValue;
         }
+        public ShowRoom()
+        {
+        }
     }
 }

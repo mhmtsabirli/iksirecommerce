@@ -17,5 +17,8 @@ namespace IKSIR.ECommerce.Model.AdminModel
             this.Admin = admin;
             this.Rights = rights;
         }
+        public AdminRights()
+        {
+        }
     }
 }
