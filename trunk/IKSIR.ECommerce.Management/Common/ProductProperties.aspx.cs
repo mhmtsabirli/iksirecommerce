@@ -25,7 +25,7 @@ namespace IKSIR.ECommerce.Management.Common
             ClearForm();
             lblId.Text = "Yeni Kayıt";
             pnlForm.Visible = true;
-            txtEnumName.Focus();
+           // txtEnumName.Focus();
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -96,7 +96,7 @@ namespace IKSIR.ECommerce.Management.Common
             var item = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = Convert.ToInt32(itemId) };
             IKSIR.ECommerce.Model.CommonModel.Enum itemEnum = EnumData.Get(item);
 
-            txtEnumName.Text = itemEnum.Name.ToString();
+            //txtEnumName.Text = itemEnum.Name.ToString();
 
 
             pnlForm.Visible = true;
