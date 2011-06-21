@@ -22,7 +22,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemUser.Id));
 
-            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetCountry", parameters);
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetUser", parameters);
             dr.Read();
             //TODO => tayfun
             returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
