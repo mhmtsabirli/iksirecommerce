@@ -25,7 +25,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Ürün Kategori Formu</strong>
+                                <strong>Form</strong>
                             </td>
                         </tr>
                         <tr>
@@ -104,7 +104,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Kategori Filtreleme</strong>
+                                <strong>Filtre</strong>
                             </td>
                         </tr>
                         <tr>
@@ -140,13 +140,16 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Kategori Listesi</strong>
+                                <strong>Liste</strong>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="4">
                                 <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
-                                    GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%">
+                                    GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" EmptyDataText="Kayıt Bulunamadı">
+                                    <EmptyDataTemplate>
+                                        Kayıt Bulunamadı
+                                    </EmptyDataTemplate>
                                     <Columns>
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>
