@@ -73,6 +73,8 @@
     <Reference Include="Telerik.Web.UI, Version=2009.3.1314.35, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Admin.aspx" />
+    <Content Include="Admin\Right.aspx" />
     <Content Include="Common\ProductProperties.aspx" />
     <Content Include="Common\Enums.aspx" />
     <Content Include="Common\EnumValues.aspx" />
@@ -100,6 +102,20 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Right.aspx.cs">
+      <DependentUpon>Right.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Right.aspx.designer.cs">
+      <DependentUpon>Right.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Common\ProductProperties.aspx.cs">
       <DependentUpon>ProductProperties.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
