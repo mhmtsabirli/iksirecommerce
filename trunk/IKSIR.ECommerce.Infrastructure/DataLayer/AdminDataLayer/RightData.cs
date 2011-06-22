@@ -22,7 +22,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             dr.Read();
             //TODO => tayfun
             returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateUserId"].ToString());
+            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
             returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
             returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
             returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
@@ -37,8 +37,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
 
 
-            parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemRight.Title)));
-            parameters.Add(new SqlParameter("@UserName", DBHelper.StringValue(itemRight.Description)));
+            parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemRight.Title)));
+            parameters.Add(new SqlParameter("@Description", DBHelper.StringValue(itemRight.Description)));
             parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemRight.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertRight", parameters));
@@ -84,7 +84,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
                 var item = new Right();
                 //TODO => tayfun
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-                item.CreateAdminId = DBHelper.IntValue(dr["CreateUserId"].ToString());
+                item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());

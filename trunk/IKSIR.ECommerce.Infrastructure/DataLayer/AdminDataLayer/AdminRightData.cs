@@ -42,7 +42,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             parameters.Add(new SqlParameter("@AdminId", DBHelper.StringValue(itemAdminRight.Admin.Id)));
             parameters.Add(new SqlParameter("@RightId", DBHelper.StringValue(itemAdminRight.Rights[0].Id)));
 
-            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemAdminRight.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemAdminRight.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertAdminRights", parameters));
             return returnValue;
