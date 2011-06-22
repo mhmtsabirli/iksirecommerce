@@ -153,9 +153,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\ProductImages\big\" />
-    <Folder Include="Images\ProductImages\icon\" />
-    <Folder Include="Images\ProductImages\small\" />
+    <Folder Include="Images\ProductImages\Big\" />
+    <Folder Include="Images\ProductImages\Icon\" />
+    <Folder Include="Images\ProductImages\OrginalImage\" />
+    <Folder Include="Images\ProductImages\Small\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MasterPage\MasterManagement.Master" />
