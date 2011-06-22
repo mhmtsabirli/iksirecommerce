@@ -1,10 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
     AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="IKSIR.ECommerce.Management.Product.Products" %>
 
-<%@ Register Assembly="RadTabStrip.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
-<%@ Register TagPrefix="telerik" Namespace="Telerik.WebControls" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
-<%@ Register TagPrefix="telerik1" Namespace="Telerik.Web.UI" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
@@ -29,7 +25,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Ürün Formu</strong>
+                                <strong>Ürün Formu</strong> (Ürünlerin genel bilgileri)
                             </td>
                         </tr>
                         <tr>
@@ -40,7 +36,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:Label runat="server" ID="lblId"></asp:Label>
+                                <asp:Label runat="server" ID="lblProductId"></asp:Label>
                             </td>
                             <td>
                             </td>
@@ -57,8 +53,8 @@
                                 </asp:DropDownList>
                             </td>
                             <td>
-                                <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="ddlParentCategories"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Üst kategorisi seçmelisiniz"
+                                <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="ddlCategories"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Kategori seçmelisiniz"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
@@ -144,7 +140,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Ürün Fotoğrafları</strong>
+                                <strong>Ürün Dökümanları</strong> (jpg, gif, png, pdf, doc, xls)
                             </td>
                         </tr>
                         <tr>
@@ -155,25 +151,23 @@
                                 :
                             </td>
                             <td>
-                                <asp:Label ID="Label1" runat="server"></asp:Label>
+                                <asp:Label ID="lblDocumentId" runat="server"></asp:Label>
                             </td>
                             <td>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Resim Adı
+                                Ad
                             </td>
                             <td>
                                 :
                             </td>
                             <td>
-                                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtImageName" runat="server"></asp:TextBox>
                             </td>
                             <td>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtCategoryName"
-                                    ErrorMessage="Kategori Adı alanı zorunlu" ForeColor="Red" SetFocusOnError="true"
-                                    ValidationGroup="VGForm">*</asp:RequiredFieldValidator>
+                                &nbsp;
                             </td>
                         </tr>
                         <tr>
@@ -184,30 +178,92 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox ID="TextBox3" runat="server" TextMode="MultiLine" Width="250px" Height="50px"></asp:TextBox>
+                                <asp:TextBox ID="txtImageDescription" runat="server" TextMode="MultiLine" Width="250px"
+                                    Height="50px"></asp:TextBox>
                             </td>
                             <td>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Resim
+                                Döküman Tipi
                             </td>
                             <td>
                                 :
                             </td>
                             <td>
-                                <asp:FileUpload runat="server" />
+                                <asp:DropDownList ID="ddlDocumntTypes" runat="server">
+                                </asp:DropDownList>
                             </td>
                             <td>
-                                &#160;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Dosya
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:FileUpload runat="server" ID="fuSelectedDocument" />
+                            </td>
+                            <td>
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="4">
+                                <asp:Label ID="lblDocumentAlert" runat="server" Visible="false"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="4">
+                                <asp:Button ID="btnAddDocument" runat="server" Text="Döküman Ekle" ValidationGroup="vgDocumentForm"
+                                    OnClick="btnAddDocument_Click" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <asp:GridView runat="server" ID="gvImageList" AutoGenerateColumns="False" CellPadding="4"
+                                    GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" Caption="Ürün Dökümanları"
+                                    CaptionAlign="Left">
+                                    <Columns>
+                                        <asp:TemplateField ShowHeader="False">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
+                                                <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
+                                                    OnClientClick="javascript:return confirm('Are you sure you want to delete this row?');"
+                                                    CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
+                                            SortExpression="Id" />
+                                        <asp:BoundField DataField="Name" HeaderText="Adı" ApplyFormatInEditMode="false" ReadOnly="true"
+                                            SortExpression="Name" />
+                                    </Columns>
+                                </asp:GridView>
                             </td>
                         </tr>
                     </table>
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Ürün Özellikler</strong>
+                                <strong>Ürün Özellikler</strong> (Ürünlere girilmesi gereken özellikler)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Id
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="lblPropertyId"></asp:Label>
+                            </td>
+                            <td>
+                                &nbsp;
                             </td>
                         </tr>
                         <tr>
@@ -218,7 +274,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" ID="ddlProperties">
+                                <asp:DropDownList ID="ddlProperties" runat="server">
                                 </asp:DropDownList>
                             </td>
                             <td>
@@ -238,9 +294,21 @@
                             </td>
                         </tr>
                         <tr>
+                            <td align="center" colspan="4">
+                                <asp:Label ID="lblPropertyAlert" runat="server" Visible="false"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="4">
+                                <asp:Button ID="btnAddProperty" runat="server" Text="Özellik Ekle" ValidationGroup="vgImageForm"
+                                    OnClick="btnAddProperty_Click" />
+                            </td>
+                        </tr>
+                        <tr>
                             <td colspan="4">
                                 <asp:GridView runat="server" ID="gvProductProperties" AutoGenerateColumns="False"
-                                    CellPadding="4" GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%">
+                                    CellPadding="4" GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%"
+                                    Caption="Ürün Özellikleri" CaptionAlign="Left">
                                     <Columns>
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Model.ProductModel;
+using System.IO;
 
 namespace IKSIR.ECommerce.Management.Product
 {
@@ -15,7 +16,7 @@ namespace IKSIR.ECommerce.Management.Product
         {
             if (!Page.IsPostBack)
             {
-                //BindValues();
+                BindValues();
                 //GetList();
             }
         }
@@ -23,7 +24,7 @@ namespace IKSIR.ECommerce.Management.Product
         protected void lbtnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
-            lblId.Text = "Yeni Kayıt";
+            lblProductId.Text = "Yeni Kayıt";
             pnlForm.Visible = true;
             txtCategoryName.Focus();
         }
@@ -163,6 +164,9 @@ namespace IKSIR.ECommerce.Management.Product
             ddlFilterParentCategories.DataTextField = "Title";
             ddlFilterParentCategories.DataValueField = "Id";
             ddlFilterParentCategories.DataBind();
+
+            //ddlDocumntTypes.DataSource = IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer.EnumValueData.GetEnumValueList
+
         }
 
         private void GetList()
@@ -239,6 +243,58 @@ namespace IKSIR.ECommerce.Management.Product
             txtCategoryName.Text = string.Empty;
             txtDescription.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
+        }
+        protected void btnAddDocument_Click(object sender, EventArgs e)
+        {
+            if ((fuSelectedDocument.PostedFile != null) && (fuSelectedDocument.PostedFile.ContentLength > 0))
+            {
+                try
+                {
+                    string fileExt=fuSelectedDocument.PostedFile.ContentType;
+                    if (fileExt == ".doc" || fileExt == ".pdf" || fileExt == ".jpg")
+                    {
+                        string fn = System.IO.Path.GetFileName(fuSelectedDocument.PostedFile.FileName);
+                        //var items = IKSIR.ECommerce.Toolkit.
+                         var SaveLocation = "";
+                        try
+                        {
+                            //System.IO.MemoryStream _MemoryStream = new MemoryStream(.CreateNewImage(SaveLocation, 25,25,fileExt));
+                            //System.Drawing.Image item = System.Drawing.Image.FromStream(_MemoryStream);
+
+                            fuSelectedDocument.PostedFile.SaveAs(SaveLocation);
+                            lblDocumentAlert.Text = "Dosya Yüklendi";
+                            lblDocumentAlert.Visible = true;
+                            lblDocumentAlert.ForeColor = System.Drawing.Color.Green;
+                        }
+                        catch (Exception ex)
+                        {
+                            Response.Write("Error: " + ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        lblDocumentAlert.Text = "Yüklemek istediğiniz dosya biçimi desteklenmiyor";
+                        lblDocumentAlert.Visible = true;
+                        lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+            else
+            {
+                lblDocumentAlert.Text = "Yüklemek için dosya seçininiz";
+                lblDocumentAlert.Visible = true;
+                lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+
+        protected void btnAddProperty_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
