@@ -13,10 +13,12 @@ namespace IKSIR.ECommerce.Model.AdminModel
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public int TryCount { get; set; }
+        public EnumValue Status { get; set; }
         public DateTime LastLoginDate { get; set; }
         public Site Site { get; set; }
 
-        public Admin(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string userName, string name, string email, string password, DateTime lastLoginDate, Site site)
+        public Admin(int id, int createUserId, DateTime createDate, int tryCount, EnumValue status, int editUserId, DateTime editDate, string userName, string name, string email, string password, DateTime lastLoginDate, Site site)
          : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.UserName = userName;
@@ -25,6 +27,8 @@ namespace IKSIR.ECommerce.Model.AdminModel
             this.Password = password;
             this.LastLoginDate = lastLoginDate;
             this.Site = site;
+            this.TryCount = tryCount;
+            this.Status = status;
         }
         public Admin()
         {
