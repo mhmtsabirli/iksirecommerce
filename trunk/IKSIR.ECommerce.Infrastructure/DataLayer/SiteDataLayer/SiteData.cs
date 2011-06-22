@@ -65,7 +65,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             return returnValue;
         }
 
-        public static List<Site> GetEnumList(Site itemSite = null)
+        public static List<Site> GetSiteList(Site itemSite = null)
         {
             List<Site> itemEnumList = null;
 
