@@ -17,8 +17,8 @@ namespace IKSIR.ECommerce.Management.Product
         {
             if (!Page.IsPostBack)
             {
-                //BindValues();
-                //GetList();
+                BindValues();
+                GetList();
             }
         }
 
@@ -95,17 +95,17 @@ namespace IKSIR.ECommerce.Management.Product
 
         private void GetItem(int itemId)
         {
-            var item = new ProductCategory() { Id = Convert.ToInt32(itemId) };
-            ProductCategory itemProduct = ProductCategoryData.Get(item);
+            ProductCategory itemProduct = ProductCategoryData.Get(new ProductCategory() { Id = itemId });
+
             //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
             //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
             //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
             txtCategoryName.Text = itemProduct.Title.ToString();
             txtDescription.Text = itemProduct.Description.ToString();
             if (itemProduct.ParentCategory != null)
-                ddlParentCategories.SelectedValue = (itemProduct.ParentCategory.Id.ToString());
+                ddlParentCategories.SelectedValue = itemProduct.ParentCategory.Id.ToString();
             else
-                ddlParentCategories.SelectedValue = "";
+                ddlParentCategories.SelectedValue = "-1";
 
             pnlForm.Visible = true;
 
@@ -174,6 +174,9 @@ namespace IKSIR.ECommerce.Management.Product
             ddlFilterParentCategories.DataTextField = "Title";
             ddlFilterParentCategories.DataValueField = "Id";
             ddlFilterParentCategories.DataBind();
+
+            ddlParentCategories.Items.Insert(0,new ListItem("Seçiniz","-1"));
+            ddlFilterParentCategories.Items.Insert(0, new ListItem("Seçiniz", "-1"));
         }
 
         private void GetList()
