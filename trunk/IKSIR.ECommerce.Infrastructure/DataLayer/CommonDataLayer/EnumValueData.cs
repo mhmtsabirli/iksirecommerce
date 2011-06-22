@@ -94,6 +94,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             dr.Close();
             return itemEnumValueList;
         }
+        
         public static List<IKSIR.ECommerce.Model.CommonModel.EnumValue> GetEnumValueListForEnum(IKSIR.ECommerce.Model.CommonModel.Enum EnumItem)
         {
             List<IKSIR.ECommerce.Model.CommonModel.EnumValue> itemEnumValueList = null;
