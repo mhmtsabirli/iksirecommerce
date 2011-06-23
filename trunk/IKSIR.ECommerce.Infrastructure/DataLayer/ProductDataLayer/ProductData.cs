@@ -83,16 +83,13 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             return returnValue;
         }
 
-        public  static List<Product> GetProductList(Product itemProduct)
+        public  static List<Product> GetList()
         {
             List<Product> itemProductList = new List<Product>();
            
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemProduct.Id));
-            parameters.Add(new SqlParameter("@ProductCategoryId	", itemProduct.ProductCategory.Id));
-            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProduct", parameters);
+            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductList", parameters);
 
-         
             while (dr.Read())
             {
                 var item = new Product();
