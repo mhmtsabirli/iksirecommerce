@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IKSIR.ECommerce.Management.Product {
+namespace IKSIR.ECommerce.Management.ProductManagement {
     
     
     public partial class ProductCategories {

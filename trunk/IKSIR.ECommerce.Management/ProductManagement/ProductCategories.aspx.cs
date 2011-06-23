@@ -9,7 +9,7 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.ProductModel;
 using IKSIR.ECommerce.Model.CommonModel;
 
-namespace IKSIR.ECommerce.Management.Product
+namespace IKSIR.ECommerce.Management.ProductManagement
 {
     public partial class ProductCategories : System.Web.UI.Page
     {

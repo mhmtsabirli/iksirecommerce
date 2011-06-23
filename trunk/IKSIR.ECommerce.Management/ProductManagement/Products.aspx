@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
-    AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="IKSIR.ECommerce.Management.Product.Products" %>
+    AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="IKSIR.ECommerce.Management.ProductManagement.Products" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
