@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>..\..\Output\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,37 +27,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>..\..\Output\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IKSIR.ECommerce.Toolkit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Output\Debug\IKSIR.ECommerce.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="RadAjax.Net2">
-      <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\RadAjax.Net2.dll</HintPath>
-    </Reference>
-    <Reference Include="RadCalendar.Net2">
-      <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\RadCalendar.Net2.dll</HintPath>
-    </Reference>
-    <Reference Include="RadComboBox.Net2">
-      <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\RadComboBox.Net2.dll</HintPath>
-    </Reference>
-    <Reference Include="RadEditor.Net2">
-      <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\RadEditor.Net2.dll</HintPath>
-    </Reference>
-    <Reference Include="RadGrid.Net2">
-      <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\RadGrid.Net2.dll</HintPath>
-    </Reference>
-    <Reference Include="RadInput.Net2">
-      <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\RadInput.Net2.dll</HintPath>
-    </Reference>
-    <Reference Include="RadTabStrip.Net2, Version=3.6.2.0, Culture=neutral, PublicKeyToken=a87324b017ca21ce, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -75,7 +50,7 @@
   <ItemGroup>
     <Content Include="Admin\Admin.aspx" />
     <Content Include="Admin\Right.aspx" />
-    <Content Include="Common\ProductProperties.aspx" />
+    <Content Include="Common\Properties.aspx" />
     <Content Include="Common\Enums.aspx" />
     <Content Include="Common\EnumValues.aspx" />
     <Content Include="Css\ManagementTopMenu.css" />
@@ -116,12 +91,12 @@
     <Compile Include="Admin\Right.aspx.designer.cs">
       <DependentUpon>Right.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Common\ProductProperties.aspx.cs">
-      <DependentUpon>ProductProperties.aspx</DependentUpon>
+    <Compile Include="Common\Properties.aspx.cs">
+      <DependentUpon>Properties.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Common\ProductProperties.aspx.designer.cs">
-      <DependentUpon>ProductProperties.aspx</DependentUpon>
+    <Compile Include="Common\Properties.aspx.designer.cs">
+      <DependentUpon>Properties.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\Enums.aspx.cs">
       <DependentUpon>Enums.aspx</DependentUpon>

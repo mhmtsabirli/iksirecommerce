@@ -9,7 +9,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Management.Common
 {
-    public partial class ProductProperties : System.Web.UI.Page
+    public partial class Properties : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

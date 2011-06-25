@@ -85,13 +85,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// txtCategoryName control.
+        /// txtProductName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCategoryName;
+        protected global::System.Web.UI.WebControls.TextBox txtProductName;
         
         /// <summary>
         /// rfv23 control.
@@ -157,31 +157,31 @@ namespace IKSIR.ECommerce.Management.ProductManagement {
         protected global::System.Web.UI.WebControls.Label lblDocumentId;
         
         /// <summary>
-        /// txtImageName control.
+        /// txtDocumentName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtImageName;
+        protected global::System.Web.UI.WebControls.TextBox txtDocumentName;
         
         /// <summary>
-        /// txtImageDescription control.
+        /// txtDocumentDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtImageDescription;
+        protected global::System.Web.UI.WebControls.TextBox txtDocumentDescription;
         
         /// <summary>
-        /// ddlDocumntTypes control.
+        /// ddlDocumentTypes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDocumntTypes;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDocumentTypes;
         
         /// <summary>
         /// fuSelectedDocument control.
@@ -211,13 +211,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement {
         protected global::System.Web.UI.WebControls.Button btnAddDocument;
         
         /// <summary>
-        /// gvImageList control.
+        /// gvDocumentList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvImageList;
+        protected global::System.Web.UI.WebControls.GridView gvDocumentList;
         
         /// <summary>
         /// lblPropertyId control.
@@ -328,13 +328,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement {
         protected global::System.Web.UI.WebControls.Button btnFilter;
         
         /// <summary>
-        /// txtFilterCategoryName control.
+        /// txtFilterProductCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFilterCategoryName;
+        protected global::System.Web.UI.WebControls.TextBox txtFilterProductCode;
         
         /// <summary>
         /// pnlList control.

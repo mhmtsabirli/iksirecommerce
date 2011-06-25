@@ -12,8 +12,6 @@ using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Model.AdminModel;
 using IKSIR.ECommerce.Model.SiteModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer;
-
-
 namespace IKSIR.ECommerce.Management.Admin
 {
     public partial class Admin : System.Web.UI.Page
@@ -177,7 +175,7 @@ namespace IKSIR.ECommerce.Management.Admin
         {
             //Buralarda tüm kategoriler gelecek istediği kategorinin altına tanımlama yapabilecek.
             List<Site> itemListSite = SiteData.GetSiteList();
-            List<EnumValue> itemListStatus = EnumValueData.GetEnumValueListForEnum(new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = 4 });//status alanııcın olan durumlar
+            List<EnumValue> itemListStatus = EnumValueData.GetEnumValues(4);//status alanııcın olan durumlar
 
             ddlSites.DataSource = itemListSite;
             ddlSites.DataTextField = "Name";

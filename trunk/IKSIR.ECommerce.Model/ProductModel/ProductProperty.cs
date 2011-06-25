@@ -10,12 +10,13 @@ namespace IKSIR.ECommerce.Model.ProductModel
     {
         public Property Property { get; set; }
         public int ProductId { get; set; }
-
-        public ProductProperty(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Property property, int productid)
+        public string Value { get; set; }
+        public ProductProperty(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Property property, int productid, string value)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.Property = property;
             this.ProductId = productid;
+            this.Value = value;
         }
         public ProductProperty()
         {

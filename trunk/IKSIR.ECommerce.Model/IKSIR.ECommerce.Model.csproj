@@ -55,7 +55,7 @@
     <Compile Include="ShoppingModel\Invoice.cs" />
     <Compile Include="CommonModel\ItemComments.cs" />
     <Compile Include="CommonModel\ItemMultimedias.cs" />
-    <Compile Include="CommonModel\Multimedias.cs" />
+    <Compile Include="CommonModel\Multimedia.cs" />
     <Compile Include="ShoppingModel\Order.cs" />
     <Compile Include="ShoppingModel\OrderItems.cs" />
     <Compile Include="ShoppingModel\PaymentOption.cs" />

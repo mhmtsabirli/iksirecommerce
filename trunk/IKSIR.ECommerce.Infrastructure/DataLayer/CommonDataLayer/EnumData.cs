@@ -26,7 +26,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
             returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
             returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.EnumValue = EnumValueData.GetEnumValueListForEnum(new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = DBHelper.IntValue(dr["Id"].ToString()) });
+            returnValue.EnumValues = EnumValueData.GetEnumValues(DBHelper.IntValue(dr["Id"].ToString()));
 
             dr.Close();
             return returnValue;
@@ -39,7 +39,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
 
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemEnum.Name)));
             parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemEnum.CreateAdminId)));
-          
+
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertEnum", parameters));
             return returnValue;
         }
@@ -88,14 +88,14 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 item.Name = DBHelper.StringValue(dr["Name"].ToString());
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-                item.Id = DBHelper.IntValue(dr["Id"].ToString());
-                item.EnumValue = EnumValueData.GetEnumValueListForEnum(new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = DBHelper.IntValue(dr["Id"].ToString()) });
+                item.Id = DBHelper.IntValue(dr["Id"].ToString());                
+                item.EnumValues = EnumValueData.GetEnumValues(DBHelper.IntValue(dr["Id"].ToString()));
                 itemEnumList.Add(item);
             }
 
             dr.Close();
             return itemEnumList;
         }
-     
+
     }
 }

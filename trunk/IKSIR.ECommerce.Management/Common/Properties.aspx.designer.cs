@@ -10,7 +10,7 @@
 namespace IKSIR.ECommerce.Management.Common {
     
     
-    public partial class ProductProperties {
+    public partial class Properties {
         
         /// <summary>
         /// lblError control.

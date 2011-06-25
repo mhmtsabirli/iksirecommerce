@@ -7,6 +7,10 @@ using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Model.ProductModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
+using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
+using IKSIR.ECommerce.Management.Common;
+using IKSIR.ECommerce.Model.CommonModel;
+//using IKSIR.ECommerce.Toolkit;
 
 namespace IKSIR.ECommerce.Management.ProductManagement
 {
@@ -26,7 +30,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             ClearForm();
             lblProductId.Text = "Yeni Kayıt";
             pnlForm.Visible = true;
-            txtCategoryName.Focus();
+            txtProductName.Focus();
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -173,47 +177,37 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
         private void GetItem(int itemId)
         {
-            //var item = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = Convert.ToInt32(itemId) };
-            //IKSIR.ECommerce.Model.CommonModel.Enum itemEnum = EnumData.Get(item);
-
-            //txtCategoryName.Text = itemEnum.Name.ToString();
-
-
             pnlForm.Visible = true;
-
         }
 
         private void BindValues()
         {
             //Buralarda tüm kategoriler gelecek istediği kategorinin altına tanımlama yapabilecek.
             List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
-            ddlCategories.DataSource = itemList;
-            ddlCategories.DataTextField = "Title";
-            ddlCategories.DataValueField = "Id";
-            ddlCategories.DataBind();
+            //Utility.BindDropDownList(ddlCategories, itemList, "Title", "Id");
+            //Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
 
-            ddlFilterParentCategories.DataSource = itemList;
-            ddlFilterParentCategories.DataTextField = "Title";
-            ddlFilterParentCategories.DataValueField = "Id";
-            ddlFilterParentCategories.DataBind();
+            //List<Property> ProductPropertyList = PropertyData.GetList();
+            //Utility.BindDropDownList(ddlProperties, ProductPropertyList, "Title", "Id");
 
-            //ddlDocumntTypes.DataSource = IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer.EnumValueData.GetEnumValueList
-
+            //List<EnumValue> enumValueList = EnumValueData.GetEnumValues(1);
+            //Utility.BindDropDownList(ddlDocumentTypes, enumValueList, "Value", "Id");
         }
 
         private void GetList()
         {
             List<Product> itemList = ProductData.GetList();
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            if (txtFilterCategoryName.Text != "")
-                itemList.Where(x => x.Title.Contains(txtFilterCategoryName.Text));
             if (ddlFilterParentCategories.SelectedValue != "-1" && ddlFilterParentCategories.SelectedValue != "")
             {
-                var item = new ProductCategory() { Id = Convert.ToInt32(ddlFilterParentCategories.SelectedValue) };
-                //itemList.Where(x => x.ParentCategory == item);
+                int parentCategoryId = DBHelper.IntValue(ddlFilterParentCategories.SelectedValue);
+                itemList = itemList.Where(x => x.ProductCategory.Id == parentCategoryId).ToList();
             }
+            if (txtFilterProductCode.Text != "")
+            {
+                string productCode = txtFilterProductCode.Text;
+                itemList = itemList.Where(x => x.ProductCode == productCode).ToList();
+            }
+
             gvList.DataSource = itemList;
             gvList.DataBind();
         }
@@ -221,37 +215,23 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private bool InsertItem()
         {
             bool retValue = false;
-            var item = new ProductCategory();
-
-            //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
-            if (item != null)
-            {
-                lblError.Visible = true;
-                lblError.ForeColor = System.Drawing.Color.Red;
-                lblError.Text = "Bu item zaten kayıtlıdır. Filtreleryerek kayda erişebilirsiniz.";
-                retValue = false;
-            }
-            else
-            {
-                item.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlCategories.SelectedValue) };
-                item.Title = txtCategoryName.Text.Trim();
-                item.Description = txtDescription.Text.Trim();
-                if (ProductCategoryData.Insert(item) > 0)
-                    retValue = true;
-            }
+            if (InsertPruductMain())
+                retValue = true;
             return retValue;
         }
 
         private bool UpdateItem(int itemId)
         {
             bool retValue = false;
+            if (UpdatePruductMain(itemId))
+                retValue = true;
             return retValue;
         }
 
         private void ClearForm()
         {
             ddlCategories.SelectedIndex = -1;
-            txtCategoryName.Text = string.Empty;
+            txtPropertyValue.Text = string.Empty;
             txtDescription.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
         }
@@ -320,12 +300,77 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private bool InsertPruductMain()
         {
             bool retValue = false;
+            string productCode = txtProductCode.Text;
+            var itemProduct = ProductData.GetList().Where(x => x.ProductCode == productCode).FirstOrDefault();
+
+            //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyoruz.
+            if (itemProduct != null)
+            {
+                lblError.Visible = true;
+                lblError.ForeColor = System.Drawing.Color.Red;
+                lblError.Text = "Bu ürün koduna sahip item zaten kayıtlıdır. Filtreleryerek kayda erişebilirsiniz.";
+            }
+            else
+            {
+                itemProduct.AlertDate = Convert.ToDateTime(txtAlertDate.Text);
+                itemProduct.CreateAdminId = 1;
+                itemProduct.CreateDate = DateTime.Now;
+                itemProduct.Description = txtDescription.Text;
+                itemProduct.MinStock = DBHelper.IntValue(txtMinStock.Text);
+                itemProduct.ProductCategory = new ProductCategory() { Id = DBHelper.IntValue(ddlCategories.SelectedValue) };
+                itemProduct.ProductCode = txtProductCode.Text;
+                itemProduct.Title = txtProductName.Text;
+                int result = ProductData.Insert(itemProduct);
+                if (result > 0)
+                {
+                    retValue = true;
+                    if (Session["PRODUCT_DOCUMENT_LIST"] != null)
+                    {
+                        //ayhant => yeni kayıt olduğundan önce product'tı sonra product'ın dökümanlarını kaydediyoruz.
+                        List<Multimedia> productDocumentList = (List<Multimedia>)Session["PRODUCT_DOCUMENT_LIST"];
+                        foreach (var item in productDocumentList)
+                        {
+                            if (MultimediasData.Insert(item) > 0)
+                            {
+                                retValue = true;
+                            }
+                        }
+                    }
+                    if (Session["PRODUCT_PROPERTY_LIST"] != null)
+                    {
+                        //ayhant => yeni kayıt olduğundan önce product'tı sonra product'ın propertylerini kaydediyoruz.
+                        List<ProductProperty> productDocumentList = (List<ProductProperty>)Session["PRODUCT_PROPERTY_LIST"];
+                        foreach (var item in productDocumentList)
+                        {
+                            if (ProductPropertyData.Insert(item) > 0)
+                            {
+                                retValue = true;
+                            }
+                        }
+                    }
+                }
+            }
             return retValue;
         }
 
         private bool UpdatePruductMain(int productId)
         {
             bool retValue = false;
+            var itemProduct = ProductData.GetList().Where(x => x.Id == productId).FirstOrDefault();
+            if (itemProduct != null)
+            {
+                itemProduct.AlertDate = Convert.ToDateTime(txtAlertDate.Text);
+                itemProduct.CreateAdminId = 1;
+                itemProduct.CreateDate = DateTime.Now;
+                itemProduct.Description = txtDescription.Text;
+                itemProduct.MinStock = DBHelper.IntValue(txtMinStock.Text);
+                itemProduct.ProductCategory = new ProductCategory() { Id = DBHelper.IntValue(ddlCategories.SelectedValue) };
+                itemProduct.ProductCode = txtProductCode.Text;
+                itemProduct.Title = txtProductName.Text;
+                int result = ProductData.Update(itemProduct);
+                if (result > 0)
+                    retValue = true;
+            }
             return retValue;
         }
         #endregion
@@ -334,18 +379,37 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private bool GetProductDocuments(int productId)
         {
             bool retValue = false;
+            try
+            {
+                var productDocumentList = MultimediasData.GetItemMultimedias(3, productId); //3 Product EnumValueId ayhant
+                gvDocumentList.DataSource = productDocumentList;
+                gvDocumentList.DataBind();
+                retValue = true;
+            }
+            catch (Exception exception)
+            {
+
+            }
             return retValue;
         }
 
         private bool GetProductDocument(int documentId)
         {
             bool retValue = false;
+            var itemProductDocument = MultimediasData.Get(documentId);
+            if (itemProductDocument != null)
+            {
+                txtDocumentName.Text = itemProductDocument.Title;
+                txtDocumentDescription.Text = itemProductDocument.Description;
+                ddlDocumentTypes.SelectedValue = itemProductDocument.Type.Id.ToString();
+                retValue = true;
+            }
             return retValue;
         }
 
         private bool SaveDocument()
         {
-            //Images diye bir table olması lazım cache'te.
+            //Documents diye bir table olması lazım cache'te.
             bool retValue = false;
             try
             {
@@ -403,12 +467,61 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private bool InsertDocument()
         {
             bool retValue = false;
+            try
+            {
+                List<Multimedia> productDocumentList;
+                if (Session["PRODUCT_DOCUMENT_LIST"] != null)
+                {
+                    productDocumentList = (List<Multimedia>)Session["PRODUCT_DOCUMENT_LIST"];
+                }
+                else
+                {
+                    productDocumentList = new List<Multimedia>();
+                    Session.Add("PRODUCT_DOCUMENT_LIST", productDocumentList);
+                }
+                productDocumentList = (List<Multimedia>)Session["PRODUCT_DOCUMENT_LIST"];
+                var item = new Multimedia();
+                item.Description = txtDocumentDescription.Text;
+                item.FilePath = fuSelectedDocument.FileName;
+                item.Title = txtDocumentName.Text;
+                item.Type = new EnumValue() { Id = DBHelper.IntValue(ddlDocumentTypes.SelectedValue) };
+                productDocumentList.Add(item);
+                Session.Add("PRODUCT_DOCUMENT_LIST", productDocumentList);
+                retValue = true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             return retValue;
         }
 
         private bool UpdateDocument(int documentId)
         {
             bool retValue = false;
+            try
+            {
+                List<Multimedia> productDocumentList;
+                if (Session["PRODUCT_DOCUMENT_LIST"] != null)
+                {
+                    productDocumentList = (List<Multimedia>)Session["PRODUCT_DOCUMENT_LIST"];
+                    var item = productDocumentList.Where(x => x.Id == documentId).SingleOrDefault();
+                    //ayhant=> Kaydedip tekrar item'ı listeye ekleyeceğimizden listedekini önce siliyoruz.
+                    productDocumentList.Remove(item);
+                    item.Id = documentId;
+                    item.Description = txtDocumentDescription.Text;
+                    item.FilePath = fuSelectedDocument.FileName;
+                    item.Title = txtDocumentName.Text;
+                    item.Type = new EnumValue() { Id = DBHelper.IntValue(ddlDocumentTypes.SelectedValue) };
+                    productDocumentList.Add(item);
+                    Session.Add("PRODUCT_DOCUMENT_LIST", productDocumentList);
+                    retValue = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             return retValue;
         }
         #endregion
@@ -417,14 +530,20 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private bool GetProductProperties(int productId)
         {
             bool retValue = false;
+            var itemProductPropertyList = ProductPropertyData.GetProductProperties(productId);
+            gvProductProperties.DataSource = itemProductPropertyList;
+            gvProductProperties.DataBind();
             return retValue;
         }
         private bool GetProductProperty(int propertyId)
         {
             bool retValue = false;
+            var itemProductProperty = ProductPropertyData.Get(propertyId);
+            txtPropertyValue.Text = itemProductProperty.Property.PropertyValue.ToString();
+            ddlProperties.SelectedValue = itemProductProperty.Property.Id.ToString();
             return retValue;
         }
-        private bool SaveProductPropertym()
+        private bool SaveProductProperty(int productId)
         {
             bool retValue = false;
             try
@@ -451,7 +570,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 else
                 {
                     //yeni kayıt
-                    if (InsertProperty())
+                    if (InsertProperty(productId))
                     {
                         lblPropertyAlert.Visible = true;
                         lblPropertyAlert.ForeColor = System.Drawing.Color.Green;
@@ -477,16 +596,64 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
             return retValue;
         }
-
+        private bool InsertProperty(int productId)
+        {
+            bool retValue = false;
+            try
+            {
+                List<ProductProperty> productPropertyList;
+                if (Session["PRODUCT_PROPERTY_LIST"] != null)
+                {
+                    productPropertyList = (List<ProductProperty>)Session["PRODUCT_PROPERTY_LIST"];
+                }
+                else
+                {
+                    productPropertyList = new List<ProductProperty>();
+                    Session.Add("PRODUCT_PROPERTY_LIST", productPropertyList);
+                }
+                productPropertyList = (List<ProductProperty>)Session["PRODUCT_PROPERTY_LIST"];
+                var item = new ProductProperty();
+                item.ProductId = productId;
+                item.Property = new Property() { Id = DBHelper.IntValue(ddlProperties.SelectedValue) };
+                productPropertyList.Add(item);
+                Session.Add("PRODUCT_PROPERTY_LIST", productPropertyList);
+                retValue = true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return retValue;
+        }
         private bool UpdateProperty(int propertyId)
         {
             bool retValue = false;
-            return retValue;
-        }
-
-        private bool InsertProperty()
-        {
-            bool retValue = false;
+            try
+            {
+                List<ProductProperty> productPropertyList;
+                if (Session["PRODUCT_PROPERTY_LIST"] != null)
+                {
+                    productPropertyList = (List<ProductProperty>)Session["PRODUCT_PROPERTY_LIST"];
+                }
+                else
+                {
+                    productPropertyList = new List<ProductProperty>();
+                    Session.Add("PRODUCT_PROPERTY_LIST", productPropertyList);
+                }
+                productPropertyList = (List<ProductProperty>)Session["PRODUCT_PROPERTY_LIST"];
+                var item = productPropertyList.Where(x => x.Id == propertyId).SingleOrDefault();
+                productPropertyList.Remove(item);
+                //Sessiondaki item'ı güncellemek için listeden silip tekrar ekliyoruz.
+                item.Id = propertyId;
+                item.Property = new Property() { Id = DBHelper.IntValue(ddlProperties.SelectedValue) };
+                productPropertyList.Add(item);
+                Session.Add("PRODUCT_PROPERTY_LIST", productPropertyList);
+                retValue = true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             return retValue;
         }
         #endregion

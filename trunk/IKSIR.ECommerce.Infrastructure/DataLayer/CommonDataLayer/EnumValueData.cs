@@ -95,18 +95,18 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return itemEnumValueList;
         }
         
-        public static List<IKSIR.ECommerce.Model.CommonModel.EnumValue> GetEnumValueListForEnum(IKSIR.ECommerce.Model.CommonModel.Enum EnumItem)
+        public static List<EnumValue> GetEnumValues(int enumId)
         {
             List<IKSIR.ECommerce.Model.CommonModel.EnumValue> itemEnumValueList = null;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@EnumId", EnumItem.Id));
+            parameters.Add(new SqlParameter("@EnumId", enumId));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetEnumValue", parameters);
-            itemEnumValueList = new List<IKSIR.ECommerce.Model.CommonModel.EnumValue>();
+            itemEnumValueList = new List<EnumValue>();
 
             while (dr.Read())
             {
-                var item = new IKSIR.ECommerce.Model.CommonModel.EnumValue();
+                var item = new EnumValue();
                 //TODO => tayfun
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());

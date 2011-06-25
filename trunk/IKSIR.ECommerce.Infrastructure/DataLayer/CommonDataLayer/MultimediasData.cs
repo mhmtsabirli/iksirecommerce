@@ -11,11 +11,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
 {
     public class MultimediasData
     {
-        public static Multimedias Get(Multimedias itemMultimedia)
+        public static Multimedia Get(int id)
         {
-            var returnValue = new Multimedias();
+            var returnValue = new Multimedia();
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemMultimedia.Id));
+            parameters.Add(new SqlParameter("@Id", id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetMultimedia", parameters);
             dr.Read();
             //TODO => tayfun
@@ -26,12 +26,15 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
             returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
             returnValue.Type = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["TypeId"].ToString()) });
+            returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
+            returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
+            returnValue.FilePath = DBHelper.StringValue(dr["FilePath"].ToString());
 
             dr.Close();
             return returnValue;
         }
 
-        public static int Insert(Multimedias itemMultimedia)
+        public static int Insert(Multimedia itemMultimedia)
         {
             var returnValue = 0;
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -44,7 +47,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
-        public static int Update(Multimedias itemMultimedia)
+        public static int Update(Multimedia itemMultimedia)
         {
             var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -57,7 +60,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
-        public static int Delete(Multimedias itemMultimedia)
+        public static int Delete(Multimedia itemMultimedia)
         {
             var returnValue = 0;
 
@@ -68,18 +71,19 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
-        public static List<Multimedias> GetMultimediaList(Multimedias itemMultimedia = null)
+        public static List<Multimedia> GetItemMultimedias(int itemTypeId, int itemId)
         {
-            List<Multimedias> itemMultimediaList = null;
+            List<Multimedia> itemMultimediaList = null;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-
-            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetMultimedia", parameters);
-            itemMultimediaList = new List<Multimedias>();
+            parameters.Add(new SqlParameter("@TypeId", itemTypeId));
+            parameters.Add(new SqlParameter("@ItemId", itemId));
+            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetMultimedias", parameters);
+            itemMultimediaList = new List<Multimedia>();
 
             while (dr.Read())
             {
-                var item = new Multimedias();
+                var item = new Multimedia();
                 //TODO => tayfun
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());

@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
-    AutoEventWireup="true" CodeBehind="ProductProperties.aspx.cs" Inherits="IKSIR.ECommerce.Management.Common.ProductProperties"
+    AutoEventWireup="true" CodeBehind="Properties.aspx.cs" Inherits="IKSIR.ECommerce.Management.Common.Properties"
     Theme="ManagementGridView" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
-        Ürün Özellikleri</h2>
+        Özellikleri</h2>
     <p>
         Ürünlere özellik verilebilmesi için özellik tanımlandığı ekran.
     </p>

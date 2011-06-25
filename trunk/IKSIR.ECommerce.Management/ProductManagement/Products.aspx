@@ -82,11 +82,11 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtCategoryName"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtProductName"></asp:TextBox>
                             </td>
                             <td>
-                                <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtCategoryName"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Kategori Adı alanı zorunlu"
+                                <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtProductName"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Ürün Adı alanı zorunlu"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
@@ -164,7 +164,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox ID="txtImageName" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtDocumentName" runat="server" Height="29px"></asp:TextBox>
                             </td>
                             <td>
                                 &nbsp;
@@ -178,7 +178,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox ID="txtImageDescription" runat="server" TextMode="MultiLine" Width="250px"
+                                <asp:TextBox ID="txtDocumentDescription" runat="server" TextMode="MultiLine" Width="250px"
                                     Height="50px"></asp:TextBox>
                             </td>
                             <td>
@@ -192,7 +192,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:DropDownList ID="ddlDocumntTypes" runat="server">
+                                <asp:DropDownList ID="ddlDocumentTypes" runat="server">
                                 </asp:DropDownList>
                             </td>
                             <td>
@@ -225,7 +225,7 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <asp:GridView runat="server" ID="gvImageList" AutoGenerateColumns="False" CellPadding="4"
+                                <asp:GridView runat="server" ID="gvDocumentList" AutoGenerateColumns="False" CellPadding="4"
                                     GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" Caption="Ürün Dökümanları"
                                     CaptionAlign="Left">
                                     <Columns>
@@ -367,16 +367,18 @@
                         </tr>
                         <tr>
                             <td>
-                                Kategori Adı
+                                Ürün Kodu
                             </td>
                             <td>
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtFilterCategoryName"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtFilterProductCode"></asp:TextBox>
                             </td>
                         </tr>
-                        >
+                        <caption>
+                            &gt;
+                        </caption>
                     </table>
                 </asp:Panel>
                 <br />

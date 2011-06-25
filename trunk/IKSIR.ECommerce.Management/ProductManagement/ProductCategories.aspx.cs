@@ -8,6 +8,7 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.ProductModel;
 using IKSIR.ECommerce.Model.CommonModel;
+//using IKSIR.ECommerce.Toolkit;
 
 namespace IKSIR.ECommerce.Management.ProductManagement
 {
@@ -163,20 +164,9 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
         private void BindValues()
         {
-            //Buralarda tüm kategoriler gelecek istediği kategorinin altına tanımlama yapabilecek.
             List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
-            ddlParentCategories.DataSource = itemList;
-            ddlParentCategories.DataTextField = "Title";
-            ddlParentCategories.DataValueField = "Id";
-            ddlParentCategories.DataBind();
-
-            ddlFilterParentCategories.DataSource = itemList;
-            ddlFilterParentCategories.DataTextField = "Title";
-            ddlFilterParentCategories.DataValueField = "Id";
-            ddlFilterParentCategories.DataBind();
-
-            ddlParentCategories.Items.Insert(0,new ListItem("Seçiniz","-1"));
-            ddlFilterParentCategories.Items.Insert(0, new ListItem("Seçiniz", "-1"));
+            //Utility.BindDropDownList(ddlParentCategories, itemList, "Title", "Id");
+            //Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
         }
 
         private void GetList()

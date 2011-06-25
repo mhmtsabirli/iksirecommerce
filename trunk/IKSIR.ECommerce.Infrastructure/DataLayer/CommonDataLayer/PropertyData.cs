@@ -9,13 +9,13 @@ using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
 {
-    public class PorpertyData
+    public class PropertyData
     {
-        public static Property Get(Property itemProperty)
+        public static Property Get(int id)
         {
             var returnValue = new Property();
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemProperty.Id));
+            parameters.Add(new SqlParameter("@Id", id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProperty", parameters);
             dr.Read();
             //TODO => tayfun
@@ -70,7 +70,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
-        public static List<Property> GetPropertyList(Property itemProperty = null)
+        public static List<Property> GetList()
         {
             List<Property> itemPropertyList = null;
 
@@ -97,6 +97,6 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             dr.Close();
             return itemPropertyList;
         }
-     
+
     }
 }
