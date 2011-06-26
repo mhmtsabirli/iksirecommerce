@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKSIR.ECommerce.Infrastructure", "IKSIR.ECommerce.Infrastructure\IKSIR.ECommerce.Infrastructure\IKSIR.ECommerce.Infrastructure.csproj", "{815B64C7-A938-46A9-B1E0-288579B3B391}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKSIR.ECommerce.Model", "IKSIR.ECommerce.Model\IKSIR.ECommerce.Model.csproj", "{65AE3246-AEEF-4074-AD01-A84D1C67B011}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKSIR.ECommerce.Toolkit", "IKSIR.ECommerce.Toolkit\IKSIR.ECommerce.Toolkit.csproj", "{F710ED4B-34DA-47D5-BEAB-86F1062A123E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKSIR.ECommerce.Management", "IKSIR.ECommerce.Management\IKSIR.ECommerce.Management.csproj", "{93D8C78C-C5C2-4FF1-9269-9A7D02CFF58E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKSIR.ECommerce.UI", "IKSIR.ECommerce.UI\IKSIR.ECommerce.UI.csproj", "{A576D16B-78E2-4A49-8CE5-827C3796FBEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{815B64C7-A938-46A9-B1E0-288579B3B391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815B64C7-A938-46A9-B1E0-288579B3B391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815B64C7-A938-46A9-B1E0-288579B3B391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815B64C7-A938-46A9-B1E0-288579B3B391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65AE3246-AEEF-4074-AD01-A84D1C67B011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65AE3246-AEEF-4074-AD01-A84D1C67B011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65AE3246-AEEF-4074-AD01-A84D1C67B011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65AE3246-AEEF-4074-AD01-A84D1C67B011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F710ED4B-34DA-47D5-BEAB-86F1062A123E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F710ED4B-34DA-47D5-BEAB-86F1062A123E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F710ED4B-34DA-47D5-BEAB-86F1062A123E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F710ED4B-34DA-47D5-BEAB-86F1062A123E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93D8C78C-C5C2-4FF1-9269-9A7D02CFF58E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93D8C78C-C5C2-4FF1-9269-9A7D02CFF58E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93D8C78C-C5C2-4FF1-9269-9A7D02CFF58E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93D8C78C-C5C2-4FF1-9269-9A7D02CFF58E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A576D16B-78E2-4A49-8CE5-827C3796FBEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A576D16B-78E2-4A49-8CE5-827C3796FBEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A576D16B-78E2-4A49-8CE5-827C3796FBEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A576D16B-78E2-4A49-8CE5-827C3796FBEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
