@@ -41,6 +41,15 @@
     <Reference Include="IKSIR.ECommerce.Toolkit">
       <HintPath>..\..\..\Output\Debug\IKSIR.ECommerce.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="RadAjax.Net2">
+      <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\Dlls\RadAjax.Net2.dll</HintPath>
+    </Reference>
+    <Reference Include="RadInput.Net2">
+      <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\Dlls\RadInput.Net2.dll</HintPath>
+    </Reference>
+    <Reference Include="RadTabStrip.Net2">
+      <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\Dlls\RadTabStrip.Net2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -54,6 +63,9 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
+    <Reference Include="Telerik.Web.UI">
+      <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\Dlls\Telerik.Web.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Common\Enums.aspx" />

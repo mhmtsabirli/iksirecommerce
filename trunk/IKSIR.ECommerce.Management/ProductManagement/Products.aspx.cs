@@ -151,6 +151,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                             lblDocumentAlert.Text = "Dosya Yüklendi";
                             lblDocumentAlert.Visible = true;
                             lblDocumentAlert.ForeColor = System.Drawing.Color.Green;
+
+                            if (fileExt == "jpg" || fileExt == "png")
+                            { 
+                                //Resize image
+                            }
                         }
                         catch (Exception ex)
                         {
