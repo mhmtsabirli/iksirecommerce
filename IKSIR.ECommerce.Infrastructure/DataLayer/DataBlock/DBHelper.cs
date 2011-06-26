@@ -9,10 +9,17 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock
     {
         public static int IntValue(object value)
         {
+            int retValue;
             if (value == null || value == DBNull.Value || value == "")
-                return 0;
+                retValue = 0;
             else
-                return Convert.ToInt32(value);
+            {
+                if (Int32.TryParse(value.ToString(), out retValue))
+                    return retValue;
+                else
+                    retValue = 0;
+            }
+            return retValue;
         }
 
         public static string StringValue(object value)

@@ -33,35 +33,36 @@
                             <li><a href="">
                                 <img src="../Images/Stock.png" />&nbsp;Stok</a>
                                 <ul>
-                                    <li><a href="">Cozy Couch</a></li>
-                                    <li><a href="">Great Table</a></li>
-                                    <li><a href="">Small Chair</a></li>
-                                    <li><a href="">Shiny Shelf</a></li>
-                                    <li><a href="">Invisible Nothing</a></li>
+                                    <li><a href="">Stok Bilgisi</a></li>
+                                    <li><a href="">Stok Kontollü</a></li>
+                                    <li><a href="">Stok Güncelleme</a></li>
                                 </ul>
                             </li>
                             <li><a href="">
                                 <img src="../Images/Cart.png" />&nbsp;Satış</a>
                                 <ul>
-                                    <li><a href="">Online</a></li>
-                                    <li><a href="">Right Here</a></li>
-                                    <li><a href="">Somewhere Else</a></li>
+                                    <li><a href="">Bekleyen Siparişler</a></li>
+                                    <li><a href="">Onaylanan Siparişler</a></li>
+                                    <li><a href="">Tedarikçiler</a></li>
                                 </ul>
                             </li>
                             <li><a href="">
                                 <img src="../Images/Reports.png" />&nbsp;Raporlar</a>
                                 <ul>
-                                    <li><a href="">Online</a></li>
-                                    <li><a href="">Right Here</a></li>
-                                    <li><a href="">Somewhere Else</a></li>
+                                    <li><a href="">Satış Raporları</a></li>
+                                    <li><a href="">Ürün Raporları</a></li>
+                                    <li><a href="">Kullanıcı Raporları</a></li>
                                 </ul>
                             </li>
                             <li><a href="">
                                 <img src="../Images/Settings.png" />&nbsp;Ayarlar</a>
                                 <ul>
-                                    <li><a href="">Online</a></li>
-                                    <li><a href="">Right Here</a></li>
-                                    <li><a href="">Somewhere Else</a></li>
+                                    <li><a href="../Common/Properties.aspx">Özellikler</a></li>
+                                    <li><a href="">Kategoriler</a></li>
+                                    <li><a href="../Common/Enums.aspx">Sabitler</a></li>
+                                    <li><a href="../Common/EnumValues.aspx">Sabit Değerleri</a></li>
+                                    <li><a href="../ProductManagement/ProductCategories.aspx">Ürün Kategorileri</a></li>
+                                    <li><a href="../ProductManagement/Products.aspx">Ürünler</a></li>
                                 </ul>
                             </li>
                         </ul>
