@@ -49,13 +49,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement {
         protected global::System.Web.UI.WebControls.Label lblProductId;
         
         /// <summary>
-        /// ddlCategories control.
+        /// ddlProductCategories control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCategories;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProductCategories;
         
         /// <summary>
         /// rfv1 control.
@@ -103,13 +103,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv23;
         
         /// <summary>
-        /// txtDescription control.
+        /// txtProductDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescription;
+        protected global::System.Web.UI.WebControls.TextBox txtProductDescription;
         
         /// <summary>
         /// txtMinStock control.

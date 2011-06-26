@@ -92,9 +92,13 @@ namespace IKSIR.ECommerce.Management.Common
 
         private void GetItem(int itemId)
         {
-            var item = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = Convert.ToInt32(itemId) };
-            IKSIR.ECommerce.Model.CommonModel.Enum itemEnum = EnumData.Get(item);
-            txtPropertyName.Text = itemEnum.Name.ToString();
+            var item = PropertyData.Get(itemId);
+            if (item != null)
+            {
+                txtPropertyName.Text = item.Title;
+                txtDescription.Text = item.Description;
+                lblId.Text = item.Id.ToString();
+            }
             pnlForm.Visible = true;
         }
 
@@ -151,35 +155,21 @@ namespace IKSIR.ECommerce.Management.Common
         private void BindValues()
         {
             //Enum da buna gerek yok
-
-
         }
 
         private void GetList()
         {
-            //TODO tayfun   linq kullanılan kısımlarda filtereleme yapılamıyor where kosulu calısmıyor
-
-            //List<IKSIR.ECommerce.Model.CommonModel.Property> itemList = PropertData.GetList();
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            // where kosulu calısmıyor
-            //if (txtFilterPropertyName.Text != "")
-            //    itemList.Where(x => x.Name.Contains(txtFilterPropertyName.Text));
-
-            //gvList.DataSource = itemList;
-            //gvList.DataBind();
+            List<Property> itemList = PropertyData.GetList();
+            gvList.DataSource = itemList;
+            gvList.DataBind();
         }
 
         private bool InsertItem()
         {
             bool retValue = false;
-            var item = new IKSIR.ECommerce.Model.CommonModel.Enum();
+            var item = PropertyData.GetList().Where(x => x.Title == txtPropertyName.Text).SingleOrDefault();
 
-            //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
-            //where kosullu kısım calıstıgında burasıdacalısacaktır
-            // a nın altında b var dıyelım kosul olmadıgı ıcın ıkıncı bır b yı atıyor
-            if (item.Name != null)
+            if (item != null)
             {
                 lblError.Visible = true;
                 lblError.ForeColor = System.Drawing.Color.Red;
@@ -188,24 +178,26 @@ namespace IKSIR.ECommerce.Management.Common
             }
             else
             {
-
-                item.Name = txtPropertyName.Text.Trim();
+                item = new Property();
+                item.Title = txtPropertyName.Text;
+                item.Description = txtDescription.Text;
                 try
                 {
-                    if (EnumData.Insert(item) > 0)
+                    if (PropertyData.Insert(item) > 0)
                         retValue = true;
 
                     SystemLog itemSystemLog = new SystemLog();
                     itemSystemLog.Title = "Insert Property";
-                    itemSystemLog.Content = "Name" + item.Name;
+                    itemSystemLog.Content = "Name" + item.Title;
                     itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                     SystemLogData.Insert(itemSystemLog);
+                    retValue = true;
                 }
-                catch
+                catch (Exception exception)
                 {
                     SystemLog itemSystemLog = new SystemLog();
                     itemSystemLog.Title = "Insert Property";
-                    itemSystemLog.Content = "Name" + item.Name;
+                    itemSystemLog.Content = "Name" + item.Title;
                     itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                     SystemLogData.Insert(itemSystemLog);
                 }
@@ -216,34 +208,38 @@ namespace IKSIR.ECommerce.Management.Common
         private bool UpdateItem(int itemId)
         {
             bool retValue = false;
-            var itemEnum = new IKSIR.ECommerce.Model.CommonModel.Enum();
+            var item = PropertyData.GetList().Where(x => x.Id == itemId).SingleOrDefault();
 
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            itemEnum.Id = itemId;
-            itemEnum.Name = txtPropertyName.Text;
-
-            try
+            if (item != null)
             {
-                if (EnumData.Update(itemEnum) < 0)
+                //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
+                //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
+                //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
+                item.Id = itemId;
+                item.Title = txtPropertyName.Text;
+                item.Description = txtDescription.Text;
+
+                try
+                {
+                    if (PropertyData.Update(item) > 0)
+                        retValue = true;
+
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Update Property";
+                    itemSystemLog.Content = "Id" + item.Id + "Title" + item.Title;
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
                     retValue = true;
-
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Update Enum";
-                itemSystemLog.Content = "Id" + itemEnum.Id + "Name" + itemEnum.Name;
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
+                }
+                catch
+                {
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Update Property";
+                    itemSystemLog.Content = "Id" + item.Id + "Title" + item.Title;
+                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
             }
-            catch
-            {
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Update Enum";
-                itemSystemLog.Content = "Id" + itemEnum.Id + "Name" + itemEnum.Name;
-                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-
             return retValue;
         }
 

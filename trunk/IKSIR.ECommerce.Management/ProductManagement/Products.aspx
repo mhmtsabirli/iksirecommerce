@@ -36,7 +36,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:Label runat="server" ID="lblProductId"></asp:Label>
+                                <asp:Label runat="server" ID="lblProductId" Text="Yeni Kayıt"></asp:Label>
                             </td>
                             <td>
                             </td>
@@ -49,11 +49,11 @@
                                 :
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" ID="ddlCategories">
+                                <asp:DropDownList runat="server" ID="ddlProductCategories">
                                 </asp:DropDownList>
                             </td>
                             <td>
-                                <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="ddlCategories"
+                                <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="ddlProductCategories"
                                     ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Kategori seçmelisiniz"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
@@ -98,8 +98,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtDescription" TextMode="MultiLine" Width="250px"
-                                    Height="50px"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtProductDescription" TextMode="MultiLine" CssClass="descriptionTextBox"></asp:TextBox>
                             </td>
                             <td>
                             </td>
@@ -151,7 +150,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:Label ID="lblDocumentId" runat="server"></asp:Label>
+                                <asp:Label ID="lblDocumentId" runat="server" Text="Yeni Kayıt"></asp:Label>
                             </td>
                             <td>
                             </td>
@@ -164,7 +163,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox ID="txtDocumentName" runat="server" Height="29px"></asp:TextBox>
+                                <asp:TextBox ID="txtDocumentName" runat="server"></asp:TextBox>
                             </td>
                             <td>
                                 &nbsp;
@@ -260,7 +259,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:Label runat="server" ID="lblPropertyId"></asp:Label>
+                                <asp:Label runat="server" ID="lblPropertyId" Text="Yeni Kayıt"></asp:Label>
                             </td>
                             <td>
                                 &nbsp;
@@ -320,10 +319,13 @@
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Id" />
-                                        <asp:BoundField DataField="PropertyName" HeaderText="Özellik" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="PropertyName" />
-                                        <asp:BoundField DataField="PropertyValue" HeaderText="Değer" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="PropertyValue" />
+                                        <asp:TemplateField HeaderText="Özellik">
+                                            <ItemTemplate>
+                                                <asp:Label runat="server" ID="lblTitle" Text='<%# Eval("Property.Title")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="Value" HeaderText="Değer" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="Value" />
                                     </Columns>
                                 </asp:GridView>
                             </td>
@@ -376,9 +378,6 @@
                                 <asp:TextBox runat="server" ID="txtFilterProductCode"></asp:TextBox>
                             </td>
                         </tr>
-                        <caption>
-                            &gt;
-                        </caption>
                     </table>
                 </asp:Panel>
                 <br />

@@ -17,3 +17,5 @@ C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\ResolveAssemblyReference.cache
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\IKSIR.ECommerce.Management.dll
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\IKSIR.ECommerce.Management.pdb
+C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Infrastructure.dll
+C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Model.dll

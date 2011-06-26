@@ -11,12 +11,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
 {
     public class ProductData
     {
-        public static Product Get(Product itemProduct)
+        public static Product Get(int id)
         {
             var returnValue = new Product();
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemProduct.Id));
-            parameters.Add(new SqlParameter("@ProductCategoryId	", itemProduct.ProductCategory.Id));
+            parameters.Add(new SqlParameter("@Id", id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProduct", parameters);
             dr.Read();
             //TODO => tayfun

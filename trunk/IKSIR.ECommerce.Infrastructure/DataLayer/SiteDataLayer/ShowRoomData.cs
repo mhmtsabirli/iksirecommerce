@@ -20,14 +20,14 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ShowRoomDataLayer
         {
 
             var returnValue = new ShowRoom();
-            
+
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemShowRoom.Id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetShowRoom", parameters);
             dr.Read();
 
             returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.Item = ProductData.Get(new Product() { Id = DBHelper.IntValue(dr["ItemId"].ToString()) });
+            returnValue.Item = ProductData.Get(DBHelper.IntValue(dr["ItemId"].ToString()));
             returnValue.EnumValue = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["EnumValueId"].ToString()) });
             returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
             returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
@@ -81,7 +81,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ShowRoomDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemShowRoom.Id)));
             parameters.Add(new SqlParameter("@EnumValueId", DBHelper.IntValue(itemShowRoom.EnumValue.Id)));
-            
+
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetShowRoom", parameters);
             itemEnumList = new List<ShowRoom>();
 
@@ -90,7 +90,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ShowRoomDataLayer
                 var item = new ShowRoom();
                 //TODO => tayfun
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-                item.Item = ProductData.Get(new Product() { Id = DBHelper.IntValue(dr["ItemId"].ToString()) });
+                item.Item = ProductData.Get(DBHelper.IntValue(dr["ItemId"].ToString()));
                 item.EnumValue = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["EnumValueId"].ToString()) });
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());

@@ -65,7 +65,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtDescription"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtDescription" CssClass="descriptionTextBox"></asp:TextBox>
                             </td>
                             <td>
                             </td>
@@ -100,7 +100,7 @@
                             <td>
                                 <asp:TextBox runat="server" ID="txtFilterPropertyName"></asp:TextBox>
                             </td>
-                             <td>
+                            <td>
                                 <asp:Button ID="btnFilter" runat="server" OnClick="btnFilter_Click" Text="Filtrele" />
                             </td>
                         </tr>
@@ -129,8 +129,8 @@
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Id" />
-                                        <asp:BoundField DataField="Name" HeaderText="Name" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="Name" />
+                                        <asp:BoundField DataField="Title" HeaderText="Title" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="Title" />
                                         <asp:BoundField DataField="Description" HeaderText="Açıklama" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Description" />
                                     </Columns>
