@@ -1,0 +1,5 @@
+C:\Projects\IKSIR.ECommerce\Output\Debug\IKSIR.ECommerce.UI.dll
+C:\Projects\IKSIR.ECommerce\Output\Debug\IKSIR.ECommerce.UI.pdb
+C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\obj\Debug\IKSIR.ECommerce.UI.dll
+C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\obj\Debug\IKSIR.ECommerce.UI.pdb
