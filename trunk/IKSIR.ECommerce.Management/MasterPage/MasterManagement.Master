@@ -21,14 +21,14 @@
         <div id="container-inner">
             <div id="header">
                 <h1>
-                    <a href="#">
+                    <a href="/Default.aspx">
                         <img src="http://www.eviniyenileturkiye.com/images/logolar/idevit.jpg" style="border: none;" /></a></h1>
                 <p>
                     Yönetim Paneli</p>
                 <div class="clear">
                     <div id="nav">
                         <ul id="menu">
-                            <li><a href="">
+                            <li><a href="/Default.aspx">
                                 <img src="../Images/Home.png" />&nbsp;Ana Sayfa</a> </li>
                             <li><a href="">
                                 <img src="../Images/Stock.png" />&nbsp;Stok</a>
@@ -63,6 +63,8 @@
                                     <li><a href="../Common/EnumValues.aspx">Sabit Değerleri</a></li>
                                     <li><a href="../ProductManagement/ProductCategories.aspx">Ürün Kategorileri</a></li>
                                     <li><a href="../ProductManagement/Products.aspx">Ürünler</a></li>
+                                    <li><a href="../Admin/Admin.aspx">Yöneticiler</a></li>
+                                    <li><a href="../Admin/Right.aspx">Yönetici Hakları</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -81,23 +83,19 @@
                     <h4>
                         Sık Kullanılanlar</h4>
                     <ul>
-                        <li><a href="#">Curabitur convallis urna quis </a></li>
-                        <li><a href="#">Dui blandit et blandit justo </a></li>
-                        <li><a href="#">Rhoncus. Sed dui justo, </a></li>
-                        <li><a href="#">Ornare sit amet pharetra eu, </a></li>
-                        <li><a href="#">Volutpat vel eros. Vestibulum </a></li>
-                        <li><a href="#">Ante ipsum primis in faucibus </a></li>
+                        <li><a href="#">Test Deneme Bla Bla... </a></li>
+                        <li><a href="#">Buralar Dinamik Olacak</a></li>
+                        <li><a href="#">Dinamik Başlıklar Gelecek Buralara</a></li>
                     </ul>
                     <h4>
-                        Son Haberler</h4>
+                        Son Olaylar</h4>
                     <div class="news-item">
-                        <span class="date">08.03.2011</span> <a href="#">Lorem ipsum dolor sit</a> Proin
-                        vitae lorem vel tortor vestibulum fringilla vel ut turpis.
+                        <span class="date">08.03.2011</span> <a href="#">Şunlar bunlar oldu</a> Detayların
+                        yer verildiği sayfaya gitmek için tıklayınız.
                     </div>
                     <div class="news-item">
-                        <span class="date">05.03.2011</span> <a href="#">Consectetuer adipiscing elit</a>
-                        Proin vitae lorem vel tortor vestibulum fringilla vel ut turpis. Phasellus pulvinar
-                        hendrerit ligula
+                        <span class="date">05.03.2011</span> <a href="#">Yeni Ürün Eklendi</a> Yeni model
+                        ürünler eklendi
                     </div>
                 </div>
                 <!-- end sidebar -->
