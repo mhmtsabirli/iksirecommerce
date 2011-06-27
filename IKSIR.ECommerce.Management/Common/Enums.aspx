@@ -6,9 +6,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
-        Enum Tanımları</h2>
+        Sabit Tanımları</h2>
     <p>
-        Enum tanımlama güncelleme ekranı.
+        Sistemdeki sabit değerleri statik vermek yerine dinamik bir şekidle tanımlandığı ekranlar.
     </p>
     <table id="tblMngForm">
         <tr>
@@ -25,7 +25,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Enum Formu</strong>
+                                <strong>Form</strong>
                             </td>
                         </tr>
                         <tr>
@@ -53,7 +53,7 @@
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="txtEnumName"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Enum Adı Girmelisiniz"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Enum Adı Girmelisiniz"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
@@ -74,7 +74,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Enum Filtreleme</strong>
+                                <strong>Filtre</strong>
                             </td>
                         </tr>
                         <tr>
@@ -98,7 +98,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Enum Listesi</strong>
+                                <strong>Liste</strong>
                             </td>
                         </tr>
                         <tr>

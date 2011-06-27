@@ -6,9 +6,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
+        Ürün
         Özellikleri</h2>
     <p>
-        Ürünlere özellik verilebilmesi için özellik tanımlandığı ekran.
+        Ürünlere özellik verilebilmesi için özellik tanımlandığı ekranlar.
     </p>
     <table id="tblMngForm">
         <tr>
@@ -53,7 +54,7 @@
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="txtPropertyName"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Özellik Adı Girmelisiniz"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Özellik Adı Girmelisiniz"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
@@ -69,7 +70,7 @@
                             </td>
                             <td>
                                   <asp:RequiredFieldValidator runat="server" ID="rfv2" ControlToValidate="txtDescription"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Enum Adı Girmelisiniz"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Özellik açıklaması girmelisiniz."
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>

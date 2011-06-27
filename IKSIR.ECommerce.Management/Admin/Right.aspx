@@ -1,18 +1,20 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master" AutoEventWireup="true" CodeBehind="Right.aspx.cs" Inherits="IKSIR.ECommerce.Management.Admin.Right" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
+    AutoEventWireup="true" CodeBehind="Right.aspx.cs" Inherits="IKSIR.ECommerce.Management.Admin.Right" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
- <h2>
-        Yönetim Ekranı Hakları</h2>
+    <h2>
+        Sistem Hakları</h2>
     <p>
-        Yönetim Ekranı Hakları tanımlama güncelleme ekranı.
+        Yöneticiler hak verilebilmesi için hak tanımlarının yapıldığı ekranlar.
     </p>
     <table id="tblMngForm">
         <tr>
             <td align="left">
                 <asp:Label runat="server" ID="lblError" Visible="false"></asp:Label>
             </td>
-            <td style="text-align:right">
+            <td style="text-align: right">
                 <asp:LinkButton runat="server" ID="lbtnNew" Text="Yeni Kayıt" OnClick="lbtnNew_Click"></asp:LinkButton>
             </td>
         </tr>
@@ -89,7 +91,7 @@
                         </tr>
                         <tr>
                             <td>
-                       Başlık
+                                Başlık
                             </td>
                             <td>
                                 :

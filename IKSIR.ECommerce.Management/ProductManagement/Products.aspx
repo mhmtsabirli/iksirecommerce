@@ -364,8 +364,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Ürün Filtreleme</strong>
-                            </td>
+                                <strong>Filtre</strong></td>
                         </tr>
                         <tr>
                             <td>
@@ -400,7 +399,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Ürün Listesi</strong>
+                                <strong>Liste</strong>
                             </td>
                         </tr>
                         <tr>
