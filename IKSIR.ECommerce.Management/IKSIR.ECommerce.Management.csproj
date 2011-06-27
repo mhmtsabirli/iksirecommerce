@@ -68,6 +68,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Admin.aspx" />
+    <Content Include="Admin\Right.aspx" />
     <Content Include="Common\Enums.aspx" />
     <Content Include="Common\EnumValues.aspx" />
     <Content Include="Common\Properties.aspx" />
@@ -90,7 +92,9 @@
     <Content Include="Scripts\jquery.cycle.all.min.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Scripts\superfish.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -100,6 +104,20 @@
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Right.aspx.cs">
+      <DependentUpon>Right.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Right.aspx.designer.cs">
+      <DependentUpon>Right.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Common\Enums.aspx.cs">
       <DependentUpon>Enums.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
