@@ -37,6 +37,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock
             else
                 return Convert.ToDecimal(value);
         }
+
         public static DateTime DateValue(object value)
         {
             if (value == null || value == DBNull.Value || value == "")
