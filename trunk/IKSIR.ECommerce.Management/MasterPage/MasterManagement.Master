@@ -58,7 +58,7 @@
                                 <img src="../Images/Settings.png" />&nbsp;Ayarlar</a>
                                 <ul>
                                     <li><a href="../Common/Properties.aspx">Özellikler</a></li>
-                                    <li><a href="">Kategoriler</a></li>
+                                    <li><a href="../ProductManagement/ProductCategories.aspx">Kategoriler</a></li>
                                     <li><a href="../Common/Enums.aspx">Sabitler</a></li>
                                     <li><a href="../Common/EnumValues.aspx">Sabit Değerleri</a></li>
                                     <li><a href="../ProductManagement/ProductCategories.aspx">Ürün Kategorileri</a></li>
