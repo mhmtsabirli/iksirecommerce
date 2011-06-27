@@ -40,7 +40,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@EnumId", DBHelper.IntValue(itemEnumValue.EnumId)));
             parameters.Add(new SqlParameter("@Value", DBHelper.StringValue(itemEnumValue.Value)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemEnumValue.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemEnumValue.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertEnumValue", parameters));
             return returnValue;

@@ -45,7 +45,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ShowRoomDataLayer
 
             parameters.Add(new SqlParameter("@ItemId", DBHelper.StringValue(itemShowRoom.Item.Id)));
             parameters.Add(new SqlParameter("@EnumValueId", DBHelper.StringValue(itemShowRoom.EnumValue.Id)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemShowRoom.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemShowRoom.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertShowRoom", parameters));
             return returnValue;
@@ -58,7 +58,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ShowRoomDataLayer
             parameters.Add(new SqlParameter("@Id", itemShowRoom.Id));
             parameters.Add(new SqlParameter("@ItemId", DBHelper.StringValue(itemShowRoom.Item.Id)));
             parameters.Add(new SqlParameter("@EnumValueId", DBHelper.StringValue(itemShowRoom.EnumValue.Id)));
-            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemShowRoom.EditAdminId)));
+            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemShowRoom.EditAdminId)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateShowRoom", parameters);
             return returnValue;

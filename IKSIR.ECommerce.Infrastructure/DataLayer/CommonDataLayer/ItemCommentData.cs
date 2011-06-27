@@ -51,7 +51,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             parameters.Add(new SqlParameter("@ItemId", itemItemComment.ItemId));
             parameters.Add(new SqlParameter("@CommentId", itemItemComment.CommentId));
             parameters.Add(new SqlParameter("@IsActive", itemItemComment.IsActive));
-            parameters.Add(new SqlParameter("@CreateUserId", itemItemComment.CreateAdminId));
+            parameters.Add(new SqlParameter("@CreateAdminId", itemItemComment.CreateAdminId));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertItemComment", parameters));
             return returnValue;
@@ -68,7 +68,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             parameters.Add(new SqlParameter("@ItemId", itemItemComment.ItemId));
             parameters.Add(new SqlParameter("@CommentId", itemItemComment.CommentId));
             parameters.Add(new SqlParameter("@IsActive", itemItemComment.IsActive));
-            parameters.Add(new SqlParameter("@EditUserId", itemItemComment.EditAdminId));
+            parameters.Add(new SqlParameter("@EditAdminId", itemItemComment.EditAdminId));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
 
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateItemComment", parameters);

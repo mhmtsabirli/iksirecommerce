@@ -61,7 +61,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer
             parameters.Add(new SqlParameter("@SiteId", DBHelper.IntValue(itemUser.Site.Id)));
             parameters.Add(new SqlParameter("@Password", DBHelper.StringValue(itemUser.Password)));
             parameters.Add(new SqlParameter("@BirthDate", DBHelper.DecValue(itemUser.BirthDate)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemUser.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemUser.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertUser", parameters));
             return returnValue;
@@ -72,7 +72,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer
             var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemUser.Id));
-            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemUser.EditAdminId)));
+            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemUser.EditAdminId)));
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemUser.Name)));
             parameters.Add(new SqlParameter("@UserName", DBHelper.StringValue(itemUser.UserName)));
             parameters.Add(new SqlParameter("@SurName", DBHelper.StringValue(itemUser.SurName)));

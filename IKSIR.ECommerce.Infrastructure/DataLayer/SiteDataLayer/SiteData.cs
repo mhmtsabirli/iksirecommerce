@@ -17,15 +17,15 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemSite.Id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetSite", parameters);
-            dr.Read();
-        
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.Name = DBHelper.StringValue(dr["Name"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-
+            while (dr.Read())
+            {
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.Name = DBHelper.StringValue(dr["Name"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+            }
             dr.Close();
             return returnValue;
         }
@@ -36,7 +36,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
 
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemSite.Name)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemSite.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemSite.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertSite", parameters));
             return returnValue;
@@ -47,7 +47,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemSite.Id));
-            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemSite.EditAdminId)));
+            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemSite.EditAdminId)));
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemSite.Name)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateSite", parameters);

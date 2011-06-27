@@ -38,7 +38,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
 
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemEnum.Name)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemEnum.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemEnum.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertEnum", parameters));
             return returnValue;
@@ -49,7 +49,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemEnum.Id));
-            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemEnum.EditAdminId)));
+            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemEnum.EditAdminId)));
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemEnum.Name)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateEnum", parameters);

@@ -54,7 +54,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             parameters.Add(new SqlParameter("@DistrictId", itemAddress.District.Id));
             parameters.Add(new SqlParameter("@CityId", itemAddress.City.Id));
             parameters.Add(new SqlParameter("@CountryId", itemAddress.Country.Id));
-            parameters.Add(new SqlParameter("@CreateUserId", itemAddress.User.Id));
+            parameters.Add(new SqlParameter("@CreateAdminId", itemAddress.User.Id));
             parameters.Add(new SqlParameter("@PostalCode", itemAddress.PostalCode.ToString()));
             parameters.Add(new SqlParameter("@Phone", itemAddress.Phone));
 
@@ -74,7 +74,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             parameters.Add(new SqlParameter("@DistrictId", itemAddress.District.Id));
             parameters.Add(new SqlParameter("@CityId", itemAddress.City.Id));
             parameters.Add(new SqlParameter("@CountryId", itemAddress.Country.Id));
-            parameters.Add(new SqlParameter("@EditUserId", itemAddress.User.Id));
+            parameters.Add(new SqlParameter("@EditAdminId", itemAddress.User.Id));
             parameters.Add(new SqlParameter("@PostalCode", itemAddress.PostalCode.ToString()));
             parameters.Add(new SqlParameter("@Phone", itemAddress.Phone));
 

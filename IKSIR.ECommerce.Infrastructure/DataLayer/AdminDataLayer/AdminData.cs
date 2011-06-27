@@ -54,7 +54,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             parameters.Add(new SqlParameter("@SiteId", DBHelper.IntValue(itemAdmin.Site.Id)));
             parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemAdmin.Status.Id)));
             parameters.Add(new SqlParameter("@Password", DBHelper.StringValue(itemAdmin.Password)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemAdmin.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemAdmin.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertAdmin", parameters));
             return returnValue;
@@ -65,7 +65,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemAdmin.Id));
-            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemAdmin.EditAdminId)));
+            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemAdmin.EditAdminId)));
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemAdmin.Name)));
             parameters.Add(new SqlParameter("@UserName", DBHelper.StringValue(itemAdmin.UserName)));
             parameters.Add(new SqlParameter("@EMail", DBHelper.StringValue(itemAdmin.Email)));

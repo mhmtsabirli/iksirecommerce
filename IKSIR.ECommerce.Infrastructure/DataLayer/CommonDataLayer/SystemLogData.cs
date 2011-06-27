@@ -22,7 +22,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             parameters.Add(new SqlParameter("@Type", itemSystemLog.Type.Id));
             parameters.Add(new SqlParameter("@Content", DBHelper.StringValue(itemSystemLog.Content)));
             parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemSystemLog.Title)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.StringValue(itemSystemLog.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.StringValue(itemSystemLog.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertSystemLog", parameters));
             return returnValue;
