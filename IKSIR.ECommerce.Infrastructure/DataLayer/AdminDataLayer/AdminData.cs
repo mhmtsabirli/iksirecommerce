@@ -63,6 +63,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
         public static int Update(Admin itemAdmin)
         {
             var returnValue = 1;
+           
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemAdmin.Id));
             parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemAdmin.EditAdminId)));
