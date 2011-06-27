@@ -19,7 +19,7 @@ namespace IKSIR.ECommerce.Infrastructure.StaticData
         public const string SiteTitle = "Idevit E-Ticaret";
         public const string cssPatht = "C:idevit.css";
 
-        public static string ConnectionString = System.Configuration.ConfigurationSettings.AppSettings["IdevitTestConnectionString"].ToString();
+        public static string ConnectionString = System.Configuration.ConfigurationSettings.AppSettings["IdevitProdConnectionString"].ToString();
 
     }
 
