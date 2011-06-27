@@ -8,6 +8,7 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.ProductModel;
 using IKSIR.ECommerce.Model.CommonModel;
+using IKSIR.ECommerce.Toolkit;
 //using IKSIR.ECommerce.Toolkit;
 
 namespace IKSIR.ECommerce.Management.ProductManagement
@@ -165,8 +166,10 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private void BindValues()
         {
             List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
-            //Utility.BindDropDownList(ddlParentCategories, itemList, "Title", "Id");
-            //Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
+            Utility.BindDropDownList(ddlParentCategories, itemList, "Title", "Id");
+            Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
+
+           
         }
 
         private void GetList()
