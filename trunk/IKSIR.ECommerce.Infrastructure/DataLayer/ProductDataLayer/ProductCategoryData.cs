@@ -44,7 +44,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
 
             parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemProductCategory.Title)));
             parameters.Add(new SqlParameter("@Description", DBHelper.StringValue(itemProductCategory.Description)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemProductCategory.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemProductCategory.CreateAdminId)));
             parameters.Add(new SqlParameter("@ParentId", DBHelper.IntValue(itemProductCategory.ParentCategory.Id)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertProductCategory", parameters));
@@ -60,7 +60,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@Description", DBHelper.StringValue(itemProductCategory.Description)));
             if (itemProductCategory.ParentCategory != null)
                 parameters.Add(new SqlParameter("@ParentId", DBHelper.IntValue(itemProductCategory.ParentCategory.Id)));
-            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemProductCategory.EditAdminId)));
+            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemProductCategory.EditAdminId)));
             parameters.Add(new SqlParameter("@ErrorCode",ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateProductCategory", parameters);
             return returnValue;

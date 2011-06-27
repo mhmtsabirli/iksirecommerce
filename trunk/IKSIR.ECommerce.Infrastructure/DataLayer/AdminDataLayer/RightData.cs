@@ -39,7 +39,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
 
             parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemRight.Title)));
             parameters.Add(new SqlParameter("@Description", DBHelper.StringValue(itemRight.Description)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemRight.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemRight.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertRight", parameters));
             return returnValue;
@@ -50,7 +50,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemRight.Id));
-            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemRight.EditAdminId)));
+            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemRight.EditAdminId)));
             parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemRight.Title)));
             parameters.Add(new SqlParameter("@Description", DBHelper.StringValue(itemRight.Description)));
 

@@ -44,7 +44,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@Description", DBHelper.StringValue(itemProduct.Description)));
             parameters.Add(new SqlParameter("@ProductCode", DBHelper.StringValue(itemProduct.ProductCode)));
             parameters.Add(new SqlParameter("@MinStock", DBHelper.IntValue(itemProduct.MinStock)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemProduct.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemProduct.CreateAdminId)));
             parameters.Add(new SqlParameter("@AlertDate", DBHelper.DateValue(itemProduct.AlertDate)));
             parameters.Add(new SqlParameter("@ProductCategoryId", DBHelper.IntValue(itemProduct.ProductCategory.Id)));
 
@@ -64,7 +64,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@MinStock", DBHelper.IntValue(itemProduct.MinStock)));
             parameters.Add(new SqlParameter("@AlertDate", DBHelper.DateValue(itemProduct.AlertDate)));
             parameters.Add(new SqlParameter("@ProductCategoryId", DBHelper.IntValue(itemProduct.ProductCategory.Id)));
-            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemProduct.EditAdminId)));
+            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemProduct.EditAdminId)));
 
 
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateProduct", parameters);

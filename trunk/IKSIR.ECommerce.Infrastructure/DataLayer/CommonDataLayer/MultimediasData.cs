@@ -41,7 +41,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
 
             parameters.Add(new SqlParameter("@TypeId", DBHelper.StringValue(itemMultimedia.Type.Id)));
             parameters.Add(new SqlParameter("@Value", DBHelper.StringValue(itemMultimedia.Value)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemMultimedia.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemMultimedia.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertMultimedia", parameters));
             return returnValue;
@@ -54,7 +54,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             parameters.Add(new SqlParameter("@Id", itemMultimedia.Id));
             parameters.Add(new SqlParameter("@TypeId", DBHelper.StringValue(itemMultimedia.Type.Id)));
             parameters.Add(new SqlParameter("@Value", DBHelper.StringValue(itemMultimedia.Value)));
-            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemMultimedia.EditAdminId)));
+            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemMultimedia.EditAdminId)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateMultimedia", parameters);
             return returnValue;

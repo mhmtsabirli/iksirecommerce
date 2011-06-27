@@ -39,7 +39,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
 
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemCity.Name)));
             parameters.Add(new SqlParameter("@CountryId", DBHelper.StringValue(itemCity.Country.Id)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemCity.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemCity.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertCity", parameters));
             return returnValue;
@@ -50,7 +50,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemCity.Id));
-            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemCity.EditAdminId)));
+            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemCity.EditAdminId)));
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemCity.Name)));
             parameters.Add(new SqlParameter("@CountryId", DBHelper.StringValue(itemCity.Country.Id)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));

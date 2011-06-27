@@ -37,7 +37,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
 
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemCountry.Name)));
-            parameters.Add(new SqlParameter("@CreateUserId", DBHelper.IntValue(itemCountry.CreateAdminId)));
+            parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemCountry.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertCountry", parameters));
             return returnValue;
@@ -48,7 +48,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemCountry.Id));
-            parameters.Add(new SqlParameter("@EditUserId", DBHelper.IntValue(itemCountry.EditAdminId)));
+            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemCountry.EditAdminId)));
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemCountry.Name)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateCountry", parameters);
