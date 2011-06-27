@@ -124,14 +124,14 @@ namespace IKSIR.ECommerce.Management.Common
         private bool DeleteItem(int itemId)
         {
             bool returnValue = false;
-            var item = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = itemId };
+            var item = new Property() { Id = itemId };
             try
             {
-                if (EnumData.Delete(item) < 0)
+                if (PropertyData.Delete(item) < 0)
                     returnValue = true;
 
                 SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete Enum";
+                itemSystemLog.Title = "Delete Property";
                 itemSystemLog.Content = "Id=" + itemId;
                 itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
@@ -139,7 +139,7 @@ namespace IKSIR.ECommerce.Management.Common
             catch
             {
                 SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete Enum";
+                itemSystemLog.Title = "Delete Property";
                 itemSystemLog.Content = "Id=" + itemId;
                 itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);

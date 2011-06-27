@@ -68,6 +68,9 @@
                                 <asp:TextBox runat="server" ID="txtDescription" CssClass="descriptionTextBox"></asp:TextBox>
                             </td>
                             <td>
+                                  <asp:RequiredFieldValidator runat="server" ID="rfv2" ControlToValidate="txtDescription"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Enum Adı Girmelisiniz"
+                                    ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
                         <tr>
@@ -77,7 +80,7 @@
                         </tr>
                         <tr>
                             <td colspan="4" align="center">
-                                <asp:Button runat="server" ID="btnSave" Text="Kaydet" ValidationGroup="VGForm" OnClick="btnSave_Click" />
+                              <asp:Button runat="server" ID="btnSave" Text="Kaydet" ValidationGroup="VGForm" OnClick="btnSave_Click" />
                                 &nbsp;<asp:Button runat="server" ID="btnCancel" Text="Vazgeç" OnClick="btnCancel_Click" />
                             </td>
                         </tr>
