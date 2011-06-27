@@ -26,16 +26,19 @@
                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                 </asp:ScriptManager>
                 <asp:Panel runat="server" ID="pnlForm" Visible="true" CssClass="pnlForm">
-                    <telerik:RadTabStrip ID="TabStrip1" runat="server" TabIndex="0">
+                    <telerik:RadTabStrip ID="RadTabStrip1" runat="server" Skin="Web20" MultiPageID="RadMultiPage1"
+                        SelectedIndex="1" Width="100%">
                         <Tabs>
-                            <telerik:RadTab Text="Tab1" PageViewID="RadPageView1">
+                            <telerik:RadTab Text="Ürün" Selected="true" PageViewID="RadPageView1">
                             </telerik:RadTab>
-                            <telerik:RadTab Text="Tab2" PageViewID="RadPageView2">
+                            <telerik:RadTab Text="Dökümanlar" PageViewID="RadPageView2">
+                            </telerik:RadTab>
+                            <telerik:RadTab Text="Özellikler" PageViewID="RadPageView3">
                             </telerik:RadTab>
                         </Tabs>
                     </telerik:RadTabStrip>
-                    <telerik:RadMultiPage ID="RadMultiPage1" runat="server">                    
-                        <telerik:RadPageView ID="RadPageView1" runat="server">                        
+                    <telerik:RadMultiPage ID="RadMultiPage1" runat="server">
+                        <telerik:RadPageView ID="RadPageView1" runat="server" Selected="true">
                             <table>
                                 <tr>
                                     <td colspan="4">
@@ -262,93 +265,95 @@
                                 </tr>
                             </table>
                         </telerik:RadPageView>
+                        <telerik:RadPageView ID="RadPageView3" runat="server">
+                            <table>
+                                <tr>
+                                    <td colspan="4">
+                                        <strong>Ürün Özellikler</strong> (Ürünlere girilmesi gereken özellikler)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Id
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblPropertyId" Text="Yeni Kayıt"></asp:Label>
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Özellik
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlProperties" runat="server">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Değer
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" ID="txtPropertyValue" Height="50px" Width="250px"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" colspan="4">
+                                        <asp:Label ID="lblPropertyAlert" runat="server" Visible="false"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" colspan="4">
+                                        <asp:Button ID="btnAddProperty" runat="server" Text="Özellik Ekle" ValidationGroup="vgImageForm"
+                                            OnClick="btnAddProperty_Click" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <asp:GridView runat="server" ID="gvProductProperties" AutoGenerateColumns="False"
+                                            CellPadding="4" GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%"
+                                            Caption="Ürün Özellikleri" CaptionAlign="Left">
+                                            <Columns>
+                                                <asp:TemplateField ShowHeader="False">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
+                                                        <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
+                                                            OnClientClick="javascript:return confirm('Are you sure you want to delete this row?');"
+                                                            CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
+                                                    SortExpression="Id" />
+                                                <asp:TemplateField HeaderText="Özellik">
+                                                    <ItemTemplate>
+                                                        <asp:Label runat="server" ID="lblTitle" Text='<%# Eval("Property.Title")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:BoundField DataField="Value" HeaderText="Değer" ApplyFormatInEditMode="false"
+                                                    ReadOnly="true" SortExpression="Value" />
+                                            </Columns>
+                                        </asp:GridView>
+                                    </td>
+                                </tr>
+                            </table>
+                        </telerik:RadPageView>
                     </telerik:RadMultiPage>
-                    <table>
-                        <tr>
-                            <td colspan="4">
-                                <strong>Ürün Özellikler</strong> (Ürünlere girilmesi gereken özellikler)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Id
-                            </td>
-                            <td>
-                                :
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblPropertyId" Text="Yeni Kayıt"></asp:Label>
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Özellik
-                            </td>
-                            <td>
-                                :
-                            </td>
-                            <td>
-                                <asp:DropDownList ID="ddlProperties" runat="server">
-                                </asp:DropDownList>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Değer
-                            </td>
-                            <td>
-                                :
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtPropertyValue" Height="50px" Width="250px"></asp:TextBox>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" colspan="4">
-                                <asp:Label ID="lblPropertyAlert" runat="server" Visible="false"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" colspan="4">
-                                <asp:Button ID="btnAddProperty" runat="server" Text="Özellik Ekle" ValidationGroup="vgImageForm"
-                                    OnClick="btnAddProperty_Click" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <asp:GridView runat="server" ID="gvProductProperties" AutoGenerateColumns="False"
-                                    CellPadding="4" GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%"
-                                    Caption="Ürün Özellikleri" CaptionAlign="Left">
-                                    <Columns>
-                                        <asp:TemplateField ShowHeader="False">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
-                                                <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
-                                                    OnClientClick="javascript:return confirm('Are you sure you want to delete this row?');"
-                                                    CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
-                                            SortExpression="Id" />
-                                        <asp:TemplateField HeaderText="Özellik">
-                                            <ItemTemplate>
-                                                <asp:Label runat="server" ID="lblTitle" Text='<%# Eval("Property.Title")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:BoundField DataField="Value" HeaderText="Değer" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="Value" />
-                                    </Columns>
-                                </asp:GridView>
-                            </td>
-                        </tr>
-                    </table>
                     <table>
                         <tr>
                             <td align="center" colspan="4">
