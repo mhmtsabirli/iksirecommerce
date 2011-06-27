@@ -17,7 +17,7 @@
             <td align="left">
                 <asp:Label runat="server" ID="lblError" Visible="false"></asp:Label>
             </td>
-            <td align="right">
+            <td style="text-align:right">
                 <asp:LinkButton runat="server" ID="lbtnNew" Text="Yeni Kayıt" OnClick="lbtnNew_Click"></asp:LinkButton>
             </td>
         </tr>
@@ -27,7 +27,7 @@
                 </asp:ScriptManager>
                 <asp:Panel runat="server" ID="pnlForm" Visible="true" CssClass="pnlForm">
                     <telerik:RadTabStrip ID="RadTabStrip1" runat="server" Skin="Web20" MultiPageID="RadMultiPage1"
-                        SelectedIndex="1" Width="100%">
+                        SelectedIndex="1" Width="400px">
                         <Tabs>
                             <telerik:RadTab Text="Ürün" Selected="true" PageViewID="RadPageView1">
                             </telerik:RadTab>
@@ -241,29 +241,25 @@
                                             OnClick="btnAddDocument_Click" />
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td colspan="4">
-                                        <asp:GridView runat="server" ID="gvDocumentList" AutoGenerateColumns="False" CellPadding="4"
-                                            GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" Caption="Ürün Dökümanları"
-                                            CaptionAlign="Left">
-                                            <Columns>
-                                                <asp:TemplateField ShowHeader="False">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
-                                                        <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
-                                                            OnClientClick="javascript:return confirm('Are you sure you want to delete this row?');"
-                                                            CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
-                                                    SortExpression="Id" />
-                                                <asp:BoundField DataField="Name" HeaderText="Adı" ApplyFormatInEditMode="false" ReadOnly="true"
-                                                    SortExpression="Name" />
-                                            </Columns>
-                                        </asp:GridView>
-                                    </td>
-                                </tr>
                             </table>
+                            <asp:GridView runat="server" ID="gvDocumentList" AutoGenerateColumns="False" CellPadding="4"
+                                GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" Caption="Ürün Dökümanları"
+                                CaptionAlign="Left">
+                                <Columns>
+                                    <asp:TemplateField ShowHeader="False">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
+                                            <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
+                                                OnClientClick="javascript:return confirm('Are you sure you want to delete this row?');"
+                                                CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
+                                        SortExpression="Id" />
+                                    <asp:BoundField DataField="Name" HeaderText="Adı" ApplyFormatInEditMode="false" ReadOnly="true"
+                                        SortExpression="Name" />
+                                </Columns>
+                            </asp:GridView>
                         </telerik:RadPageView>
                         <telerik:RadPageView ID="RadPageView3" runat="server">
                             <table>
@@ -324,34 +320,30 @@
                                             OnClick="btnAddProperty_Click" />
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td colspan="4">
-                                        <asp:GridView runat="server" ID="gvProductProperties" AutoGenerateColumns="False"
-                                            CellPadding="4" GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%"
-                                            Caption="Ürün Özellikleri" CaptionAlign="Left">
-                                            <Columns>
-                                                <asp:TemplateField ShowHeader="False">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
-                                                        <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
-                                                            OnClientClick="javascript:return confirm('Are you sure you want to delete this row?');"
-                                                            CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
-                                                    SortExpression="Id" />
-                                                <asp:TemplateField HeaderText="Özellik">
-                                                    <ItemTemplate>
-                                                        <asp:Label runat="server" ID="lblTitle" Text='<%# Eval("Property.Title")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:BoundField DataField="Value" HeaderText="Değer" ApplyFormatInEditMode="false"
-                                                    ReadOnly="true" SortExpression="Value" />
-                                            </Columns>
-                                        </asp:GridView>
-                                    </td>
-                                </tr>
                             </table>
+                            <asp:GridView runat="server" ID="gvProductProperties" AutoGenerateColumns="False"
+                                CellPadding="4" GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%"
+                                Caption="Ürün Özellikleri" CaptionAlign="Left">
+                                <Columns>
+                                    <asp:TemplateField ShowHeader="False">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
+                                            <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
+                                                OnClientClick="javascript:return confirm('Are you sure you want to delete this row?');"
+                                                CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
+                                        SortExpression="Id" />
+                                    <asp:TemplateField HeaderText="Özellik">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblTitle" Text='<%# Eval("Property.Title")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="Value" HeaderText="Değer" ApplyFormatInEditMode="false"
+                                        ReadOnly="true" SortExpression="Value" />
+                                </Columns>
+                            </asp:GridView>
                         </telerik:RadPageView>
                     </telerik:RadMultiPage>
                     <table>

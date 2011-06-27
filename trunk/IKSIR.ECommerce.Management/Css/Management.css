@@ -400,10 +400,12 @@ div#slideshow
 table
 {
     text-align: left;
+    width:100%;
 }
 
 th, td
 {
+    text-align: left;
     padding: 10px 10px;
 }
 

@@ -15,7 +15,7 @@
             <td align="left">
                 <asp:Label runat="server" ID="lblError" Visible="false"></asp:Label>
             </td>
-            <td align="right">
+            <td style="text-align:right">
                 <asp:LinkButton runat="server" ID="lbtnNew" Text="Yeni Kayıt" OnClick="lbtnNew_Click"></asp:LinkButton>
             </td>
         </tr>
