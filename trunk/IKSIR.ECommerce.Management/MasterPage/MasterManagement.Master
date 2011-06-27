@@ -61,10 +61,9 @@
                                     <li><a href="../ProductManagement/ProductCategories.aspx">Kategoriler</a></li>
                                     <li><a href="../Common/Enums.aspx">Sabitler</a></li>
                                     <li><a href="../Common/EnumValues.aspx">Sabit Değerleri</a></li>
-                                    <li><a href="../ProductManagement/ProductCategories.aspx">Ürün Kategorileri</a></li>
                                     <li><a href="../ProductManagement/Products.aspx">Ürünler</a></li>
                                     <li><a href="../Admin/Admin.aspx">Yöneticiler</a></li>
-                                    <li><a href="../Admin/Right.aspx">Yönetici Hakları</a></li>
+                                    <li><a href="../Admin/Right.aspx">Haklar</a></li>
                                 </ul>
                             </li>
                         </ul>

@@ -6,9 +6,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
-        Enum Value Değerleri</h2>
+        Sabit Değerleri</h2>
     <p>
-        Enum Value tanımlama güncelleme ekranı.
+        Sistemdeki sabitlerin değerlerini tanımlamamayı sağlayan ekranlardır.
     </p>
     <table id="tblMngForm">
         <tr>
@@ -25,8 +25,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Enum Value Formu</strong>
-                            </td>
+                                <strong>Form</strong></td>
                         </tr>
                         <tr>
                             <td>
@@ -91,7 +90,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>EnumValue Filtreleme</strong>
+                                <strong>Filtre</strong>
                             </td>
                         </tr>
                         <tr>
@@ -127,8 +126,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Enum Value Listesi</strong>
-                            </td>
+                                <strong>Liste</strong></td>
                         </tr>
                         <tr>
                             <td colspan="4">

@@ -1,18 +1,20 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="IKSIR.ECommerce.Management.Admin.Admin" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
+    AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="IKSIR.ECommerce.Management.Admin.Admin" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
- <h2>
-       Admin Panel Kullanıcıları</h2>
+    <h2>
+        Yönetici Düzenleme</h2>
     <p>
-        Admin Panel Kullanıcıları için kategori tanımlama güncelleme ekranı.
+        Sisteme yönetici tanımlama mevcut yöneticileri düzenleme ekranları.
     </p>
     <table id="tblMngForm">
         <tr>
             <td align="left">
                 <asp:Label runat="server" ID="lblError" Visible="false"></asp:Label>
             </td>
-            <td style="text-align:right">
+            <td style="text-align: right">
                 <asp:LinkButton runat="server" ID="lbtnNew" Text="Yeni Kayıt" OnClick="lbtnNew_Click"></asp:LinkButton>
             </td>
         </tr>
@@ -40,7 +42,7 @@
                         </tr>
                         <tr>
                             <td>
-                               Adı
+                                Adı
                             </td>
                             <td>
                                 :
@@ -49,7 +51,7 @@
                                 <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
                             </td>
                             <td>
-                                   <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtName"
+                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtName"
                                     ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Adı alanı zorunlu"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
@@ -70,9 +72,9 @@
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>
-                               Email
+                                Email
                             </td>
                             <td>
                                 :
@@ -97,19 +99,19 @@
                                 <asp:TextBox runat="server" ID="txtPassword" TextMode="Password"></asp:TextBox>
                             </td>
                             <td>
-                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtPassword"
+                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtPassword"
                                     ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Şifre alanı zorunlu"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>
                                 Durum
                             </td>
                             <td>
                                 :
                             </td>
-                              <td>
+                            <td>
                                 <asp:DropDownList runat="server" ID="ddlStatus">
                                 </asp:DropDownList>
                             </td>
@@ -119,7 +121,7 @@
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>
                                 Deneme Sayısı
                             </td>
@@ -127,22 +129,22 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtTryCount" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtTryCount"></asp:TextBox>
                             </td>
                             <td>
-                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtPassword"
+                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtPassword"
                                     ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Şifre alanı zorunlu"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>
                                 Site
                             </td>
                             <td>
                                 :
                             </td>
-                             <td>
+                            <td>
                                 <asp:DropDownList runat="server" ID="ddlSites">
                                 </asp:DropDownList>
                             </td>
@@ -159,10 +161,9 @@
                         </tr>
                         <tr>
                             <td colspan="4" align="center">
-                               
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td colspan="4" align="center">
                                 <asp:Button runat="server" ID="btnSave" Text="Kaydet" ValidationGroup="VGForm" OnClick="btnSave_Click" />
                                 &nbsp;<asp:Button runat="server" ID="btnCancel" Text="Vazgeç" OnClick="btnCancel_Click" />
@@ -235,7 +236,7 @@
                                             ReadOnly="true" SortExpression="UserName" />
                                         <asp:BoundField DataField="Email" HeaderText="Email" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Email" />
-                                            <asp:BoundField DataField="LastLoginDate" HeaderText="Son Giriş Tarihi" ApplyFormatInEditMode="false"
+                                        <asp:BoundField DataField="LastLoginDate" HeaderText="Son Giriş Tarihi" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Email" />
                                         <asp:TemplateField HeaderText="Id" Visible="false">
                                             <ItemTemplate>
