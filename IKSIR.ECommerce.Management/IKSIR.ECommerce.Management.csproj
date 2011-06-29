@@ -171,10 +171,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_Themes\ManagementGridView\" />
-    <Folder Include="Images\ProductImages\Big\" />
-    <Folder Include="Images\ProductImages\Icon\" />
-    <Folder Include="Images\ProductImages\OrginalImage\" />
-    <Folder Include="Images\ProductImages\Small\" />
+    <Folder Include="ProductDocuments\Images\Big\" />
+    <Folder Include="ProductDocuments\Images\Icon\" />
+    <Folder Include="ProductDocuments\Images\Small\" />
+    <Folder Include="ProductDocuments\OrginalDocument\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MasterPage\MasterManagement.Master" />

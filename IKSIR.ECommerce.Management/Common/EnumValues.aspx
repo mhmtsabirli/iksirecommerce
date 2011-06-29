@@ -74,12 +74,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center">
+                            <td colspan="4" style="text-align:center">
                                 <asp:ValidationSummary runat="server" ID="vsForm" ValidationGroup="VGForm" ForeColor="Red" />
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center">
+                            <td colspan="4" style="text-align:center">
                                 <asp:Button runat="server" ID="btnSave" Text="Kaydet" ValidationGroup="VGForm" OnClick="btnSave_Click" />
                                 &nbsp;<asp:Button runat="server" ID="btnCancel" Text="Vazgeç" OnClick="btnCancel_Click" />
                             </td>
@@ -131,7 +131,7 @@
                         <tr>
                             <td colspan="4">
                                 <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
-                                    GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%">
+                                    GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" EmptyDataText="Listede gösterilecek kayıt bulunamadı">
                                     <Columns>
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>
