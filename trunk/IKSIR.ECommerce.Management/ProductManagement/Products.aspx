@@ -16,8 +16,10 @@
         <tr>
             <td align="left">
                 <asp:Label runat="server" ID="lblError" Visible="false"></asp:Label>
+                <div id="divAlert" runat="server">
+                </div>
             </td>
-            <td style="text-align:right">
+            <td style="text-align: right">
                 <asp:LinkButton runat="server" ID="lbtnNew" Text="Yeni Kayıt" OnClick="lbtnNew_Click"></asp:LinkButton>
             </td>
         </tr>
@@ -217,28 +219,26 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Dosya
+                                    <td valign="top">
+                                        Döküman
                                     </td>
-                                    <td>
+                                    <td valign="top">
                                         :
                                     </td>
                                     <td>
-                                        <asp:FileUpload runat="server" ID="fuSelectedDocument" />
+                                        <telerik:RadUpload ID="ruProductDocuments" runat="server" InitialFileInputsCount="2" MaxFileInputsCount="10"
+                                            AllowedFileExtensions=".jpg,.jpeg,.pdf,.doc,.gif,.png" TargetFolder="~/ProductDocuments/Orginal"
+                                            Localization-Add="Ekle" Localization-Clear="Temizle" Localization-Delete="Sil"
+                                            Localization-Remove="Kaldır" Localization-Select="Seç" />
+                                        <%--<telerik:RadProgressArea ID="progressArea1" runat="server" />--%>
                                     </td>
                                     <td>
                                         &nbsp;
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="center" colspan="4">
+                                    <td style="text-align: center" colspan="4">
                                         <asp:Label ID="lblDocumentAlert" runat="server" Visible="false"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="center" colspan="4">
-                                        <asp:Button ID="btnAddDocument" runat="server" Text="Döküman Ekle" ValidationGroup="vgDocumentForm"
-                                            OnClick="btnAddDocument_Click" />
                                     </td>
                                 </tr>
                             </table>
@@ -265,7 +265,7 @@
                             <table>
                                 <tr>
                                     <td colspan="4">
-                                        <strong>Ürün Özellikler</strong> (Ürünlere girilmesi gereken özellikler)
+                                        <strong>Ürün Özellikleri</strong> (Ürünlere girilmesi gereken özellikler)
                                     </td>
                                 </tr>
                                 <tr>
@@ -294,6 +294,9 @@
                                         </asp:DropDownList>
                                     </td>
                                     <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="ddlProperties"
+                                            ValidationGroup="vgProductProperties" SetFocusOnError="true" InitialValue="-1"
+                                            ErrorMessage="Özellik seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
@@ -307,16 +310,21 @@
                                         <asp:TextBox runat="server" ID="txtPropertyValue" Height="50px" Width="250px"></asp:TextBox>
                                     </td>
                                     <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtPropertyValue"
+                                            ValidationGroup="vgProductProperties" SetFocusOnError="true" ErrorMessage="Değer alanı zorunlu"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="center" colspan="4">
+                                    <td style="text-align: center" colspan="4">
                                         <asp:Label ID="lblPropertyAlert" runat="server" Visible="false"></asp:Label>
+                                        <asp:ValidationSummary runat="server" ID="vsProductProperties" ValidationGroup="vgProductProperties"
+                                            ForeColor="Red" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="center" colspan="4">
-                                        <asp:Button ID="btnAddProperty" runat="server" Text="Özellik Ekle" ValidationGroup="vgImageForm"
+                                    <td style="text-align: center" colspan="4">
+                                        <asp:Button ID="btnAddProperty" runat="server" Text="Özellik Ekle" ValidationGroup="vgProductProperties"
                                             OnClick="btnAddProperty_Click" />
                                     </td>
                                 </tr>
@@ -348,12 +356,12 @@
                     </telerik:RadMultiPage>
                     <table>
                         <tr>
-                            <td align="center" colspan="4">
+                            <td colspan="4" style="text-align: center">
                                 <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" ValidationGroup="VGForm" />
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="4">
+                            <td colspan="4" style="text-align: center">
                                 <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Kaydet" ValidationGroup="VGForm" />&#160;<asp:Button
                                     ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="Vazgeç" />
                             </td>
@@ -364,7 +372,8 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Filtre</strong></td>
+                                <strong>Filtre</strong>
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -405,7 +414,8 @@
                         <tr>
                             <td colspan="4">
                                 <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
-                                    GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%">
+                                    EmptyDataText="Listede gösterilecek kayıt bulunamadı" GridLines="None" PageSize="15"
+                                    EnableModelValidation="True" Width="100%">
                                     <Columns>
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>

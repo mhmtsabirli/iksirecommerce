@@ -38,23 +38,23 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            SaveDocuments();
             if (btnSave.CommandArgument != "") //Kayıt güncelleme.
             {
                 if (UpdateItem())
                 {
                     lblError.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.Green;
-                    lblError.Text = "Item başarıyla güncellendi.";
+                    lblError.Text = "Ürün başarıyla güncellendi.";
                     ClearForm();
                     pnlForm.Visible = false;
-                    int count = 0;
                     GetList();
                 }
                 else
                 {
                     lblError.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.Red;
-                    lblError.Text = "Item güncellenirken bir hata oluştu.";
+                    lblError.Text = "Ürün güncellenirken bir hata oluştu.";
                 }
             }
             else //Yeni kayıt
@@ -63,7 +63,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 {
                     lblError.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.Green;
-                    lblError.Text = "Item başarıyla kaydedildi.";
+                    lblError.Text = "Ürün başarıyla kaydedildi.";
                     ClearForm();
                     pnlForm.Visible = false;
                     GetList();
@@ -72,7 +72,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 {
                     lblError.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.Red;
-                    lblError.Text = "Item kaydedilirken bir hata oluştu.";
+                    lblError.Text = "Ürün kaydedilirken bir hata oluştu.";
                 }
             }
         }
@@ -125,63 +125,111 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             GetList();
         }
 
-        protected void btnAddDocument_Click(object sender, EventArgs e)
+        private bool SaveDocuments()
         {
-            if ((fuSelectedDocument.PostedFile != null) && (fuSelectedDocument.PostedFile.ContentLength > 0))
+            bool retValue = true;
+            bool isOK = false;
+            foreach (Telerik.Web.UI.UploadedFile uploadedFile in ruProductDocuments.UploadedFiles)
             {
-                try
+                string fileName = DateTime.Now.ToString().Replace(".", "").Replace(":", "").Replace("/", "").Replace("-", "");
+                fileName += "_" + productId.ToString();
+                //Dökümanı kaydet.
+                string targetFolderImage = Server.MapPath(ruProductDocuments.TargetFolder);
+                string targetFileNameImage = System.IO.Path.Combine(targetFolderImage, fileName + uploadedFile.GetExtension());
+                uploadedFile.SaveAs(targetFileNameImage, isOK);
+
+                //Eğer resim ise 3 farklı boyutta resize et.
+                string fileExtension = uploadedFile.GetExtension();
+                if (fileExtension == ".png" || fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".gif")
                 {
-                    //string fileExt = fuSelectedDocument.PostedFile.ContentType;
-                    string fileName = fuSelectedDocument.PostedFile.FileName;
-                    char[] tripChars = new char[] { '.' };
-                    int count = fileName.Split(tripChars).Length;
-                    string fileExt = fileName.Split(tripChars)[count - 1];
-
-                    if (fileExt == "doc" || fileExt == "pdf" || fileExt == "jpg" || fileExt == "png")
-                    {
-                        string fn = System.IO.Path.GetFileName(fuSelectedDocument.PostedFile.FileName);
-                        //var items = IKSIR.ECommerce.Toolkit.                        
-                        var SaveLocation = Server.MapPath("..\\Images\\ProductImages\\OrginalImage");
-                        try
-                        {
-                            //System.IO.MemoryStream _MemoryStream = new MemoryStream(.CreateNewImage(SaveLocation, 25,25,fileExt));
-                            //System.Drawing.Image item = System.Drawing.Image.FromStream(_MemoryStream);
-
-                            fuSelectedDocument.PostedFile.SaveAs(SaveLocation);
-                            lblDocumentAlert.Text = "Dosya Yüklendi";
-                            lblDocumentAlert.Visible = true;
-                            lblDocumentAlert.ForeColor = System.Drawing.Color.Green;
-
-                            if (fileExt == "jpg" || fileExt == "png")
-                            { 
-                                //Resize image
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Response.Write("Error: " + ex.Message);
-                        }
-                    }
-                    else
-                    {
-                        lblDocumentAlert.Text = "Yüklemek istediğiniz dosya biçimi desteklenmiyor";
-                        lblDocumentAlert.Visible = true;
-                        lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
-                    }
-                }
-                catch (Exception)
-                {
-
-                    throw;
+                    Utility.ResizeImage(targetFileNameImage, Server.MapPath("~/ProductDocuments/Images/Big/big_" + fileName + fileExtension), 500, 500, true);
+                    Utility.ResizeImage(targetFileNameImage, Server.MapPath("~/ProductDocuments/Images/Small/small_" + fileName + fileExtension), 250, 250, true);
+                    Utility.ResizeImage(targetFileNameImage, Server.MapPath("~/ProductDocuments/Images/Icon/icon_" + fileName + fileExtension), 50, 50, true);
+                    //Toolkit.ImageProcesses.CreateNewImage(Server.MapPath("~/ProductDocuments/Images/Big"), 500, 500, fileExtension);
+                    //Toolkit.ImageProcesses.CreateNewImage(Server.MapPath("~/ProductDocuments/Images/Small"), 250, 250, fileExtension);
+                    //Toolkit.ImageProcesses.CreateNewImage(Server.MapPath("~/ProductDocuments/Images/Icon"), 100, 100, fileExtension);
                 }
             }
-            else
-            {
-                lblDocumentAlert.Text = "Yüklemek için dosya seçininiz";
-                lblDocumentAlert.Visible = true;
-                lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
-            }
+
+            //if (ruProductDocuments.UploadedFiles.Count > 0)
+            //{
+            //    Telerik.Web.UI.UploadedFile imagefile = RadUpload1.UploadedFiles[0];
+
+            //    string targetFolderImage = Server.MapPath(RadUpload1.TargetFolder);
+
+            //    string targetFileNameImage = System.IO.Path.Combine(targetFolderImage, imagefile.GetNameWithoutExtension() + imagefile.GetExtension());
+
+            //    imagefile.SaveAs(targetFileNameImage, isOK);
+            //}
+            //string strFileName = "";
+            //for (int i = 0; i < RadUpload1.UploadedFiles.Count; i++)
+            //{
+            //    strFileName = RadUpload1.UploadedFiles[i].GetName();
+            //}
+            return retValue;
         }
+
+        //protected void btnAddDocument_Click(object sender, EventArgs e)
+        //{
+        //    UploadFiles(3);
+        //    if ((fuSelectedDocument.PostedFile != null) && (fuSelectedDocument.PostedFile.ContentLength > 0))
+        //    {
+        //        try
+        //        {
+        //            //string fileExt = fuSelectedDocument.PostedFile.ContentType;
+        //            string fileName = fuSelectedDocument.PostedFile.FileName;
+        //            char[] tripChars = new char[] { '.' };
+        //            int count = fileName.Split(tripChars).Length;
+        //            string fileExt = fileName.Split(tripChars)[count - 1];
+
+        //            if (fileExt == "doc" || fileExt == "pdf" || fileExt == "jpg" || fileExt == "png")
+        //            {
+        //                string fn = System.IO.Path.GetFileName(fuSelectedDocument.PostedFile.FileName);
+        //                //var items = IKSIR.ECommerce.Toolkit.                        
+        //                var SaveLocation = Server.MapPath("..\\Images\\ProductImages\\OrginalImage");
+        //                try
+        //                {
+        //                    //System.IO.MemoryStream _MemoryStream = new MemoryStream(.CreateNewImage(SaveLocation, 25,25,fileExt));
+        //                    //System.Drawing.Image item = System.Drawing.Image.FromStream(_MemoryStream);
+
+        //                    fuSelectedDocument.PostedFile.SaveAs(SaveLocation);
+        //                    lblDocumentAlert.Text = "Dosya Yüklendi";
+        //                    lblDocumentAlert.Visible = true;
+        //                    lblDocumentAlert.ForeColor = System.Drawing.Color.Green;
+
+        //                    if (fileExt == "jpg" || fileExt == "png")
+        //                    { 
+        //                        //Resize image
+        //                    }
+        //                }
+        //                catch (Exception ex)
+        //                {
+        //                    //Response.Write("Error: " + ex.Message);
+        //                    lblDocumentAlert.Text = "Dosya yüklenemedi yazma yetkisi yok";
+        //                    lblDocumentAlert.Visible = true;
+        //                    lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                lblDocumentAlert.Text = "Yüklemek istediğiniz dosya biçimi desteklenmiyor";
+        //                lblDocumentAlert.Visible = true;
+        //                lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
+        //            }
+        //        }
+        //        catch (Exception)
+        //        {
+
+        //            throw;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        lblDocumentAlert.Text = "Yüklemek için dosya seçininiz";
+        //        lblDocumentAlert.Visible = true;
+        //        lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
+        //    }
+        //}
 
         protected void btnAddProperty_Click(object sender, EventArgs e)
         {
@@ -230,7 +278,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             bool retValue = false;
             if (InsertPruductMain())
+            {
+                divAlert.InnerHtml += "<span style=\"color:Green\">Ürün başarıyla kaydedildi.</span>";
+                if (SaveDocuments())
+                { }
                 retValue = true;
+            }
+
             return retValue;
         }
 
@@ -347,30 +401,20 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 if (result > 0)
                 {
                     retValue = true;
-                    if (Session["PRODUCT_DOCUMENT_LIST"] != null)
-                    {
-                        //ayhant => yeni kayıt olduğundan önce product'tı sonra product'ın dökümanlarını kaydediyoruz.
-                        List<Multimedia> productDocumentList = (List<Multimedia>)Session["PRODUCT_DOCUMENT_LIST"];
-                        foreach (var item in productDocumentList)
-                        {
-                            if (MultimediasData.Insert(item) > 0)
-                            {
-                                retValue = true;
-                            }
-                        }
-                    }
-                    if (Session["PRODUCT_PROPERTY_LIST"] != null)
-                    {
-                        //ayhant => yeni kayıt olduğundan önce product'tı sonra product'ın propertylerini kaydediyoruz.
-                        List<ProductProperty> productDocumentList = (List<ProductProperty>)Session["PRODUCT_PROPERTY_LIST"];
-                        foreach (var item in productDocumentList)
-                        {
-                            if (ProductPropertyData.Insert(item) > 0)
-                            {
-                                retValue = true;
-                            }
-                        }
-                    }
+                    productId = result;
+
+                    //if (Session["PRODUCT_PROPERTY_LIST"] != null)
+                    //{
+                    //    //ayhant => yeni kayıt olduğundan önce product'tı sonra product'ın propertylerini kaydediyoruz.
+                    //    List<ProductProperty> productDocumentList = (List<ProductProperty>)Session["PRODUCT_PROPERTY_LIST"];
+                    //    foreach (var item in productDocumentList)
+                    //    {
+                    //        if (ProductPropertyData.Insert(item) > 0)
+                    //        {
+                    //            retValue = true;
+                    //        }
+                    //    }
+                    //}
                 }
             }
             return retValue;
@@ -430,62 +474,62 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             return retValue;
         }
 
-        private bool SaveDocument()
-        {
-            //Documents diye bir table olması lazım cache'te.
-            bool retValue = false;
-            try
-            {
-                if (btnAddDocument.CommandArgument != "")
-                {
-                    //güncelle
-                    int documentId = DBHelper.IntValue(btnAddDocument.CommandArgument);
-                    if (UpdateDocument(documentId))
-                    {
-                        lblDocumentAlert.Visible = true;
-                        lblDocumentAlert.ForeColor = System.Drawing.Color.Green;
-                        lblDocumentAlert.Text = "Döküman güncelleme başarılı.";
-                        retValue = false;
-                    }
-                    else
-                    {
-                        lblDocumentAlert.Visible = true;
-                        lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
-                        lblDocumentAlert.Text = "Döküman güncellenirken hata oluştu.";
-                        retValue = false;
-                    }
-                }
-                else
-                {
-                    //yeni kayıt
-                    if (InsertDocument())
-                    {
-                        lblDocumentAlert.Visible = true;
-                        lblDocumentAlert.ForeColor = System.Drawing.Color.Green;
-                        lblDocumentAlert.Text = "Yeni ürün kaydı başarılı.";
-                        retValue = false;
-                    }
-                    else
-                    {
-                        lblDocumentAlert.Visible = true;
-                        lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
-                        lblDocumentAlert.Text = "Yeni Ürün kaydedilirken hata oluştu.";
-                        retValue = false;
-                    }
-                }
+        //private bool SaveDocument()
+        //{
+        //    //Documents diye bir table olması lazım cache'te.
+        //    bool retValue = false;
+        //    try
+        //    {
+        //        if (btnAddDocument.CommandArgument != "")
+        //        {
+        //            //güncelle
+        //            int documentId = DBHelper.IntValue(btnAddDocument.CommandArgument);
+        //            if (UpdateDocument(documentId))
+        //            {
+        //                lblDocumentAlert.Visible = true;
+        //                lblDocumentAlert.ForeColor = System.Drawing.Color.Green;
+        //                lblDocumentAlert.Text = "Döküman güncelleme başarılı.";
+        //                retValue = false;
+        //            }
+        //            else
+        //            {
+        //                lblDocumentAlert.Visible = true;
+        //                lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
+        //                lblDocumentAlert.Text = "Döküman güncellenirken hata oluştu.";
+        //                retValue = false;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            //yeni kayıt
+        //            if (InsertDocument())
+        //            {
+        //                lblDocumentAlert.Visible = true;
+        //                lblDocumentAlert.ForeColor = System.Drawing.Color.Green;
+        //                lblDocumentAlert.Text = "Yeni ürün kaydı başarılı.";
+        //                retValue = false;
+        //            }
+        //            else
+        //            {
+        //                lblDocumentAlert.Visible = true;
+        //                lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
+        //                lblDocumentAlert.Text = "Yeni Ürün kaydedilirken hata oluştu.";
+        //                retValue = false;
+        //            }
+        //        }
 
-            }
-            catch (Exception)
-            {
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-            finally
-            {
+        //        throw;
+        //    }
+        //    finally
+        //    {
 
-            }
-            return retValue;
-        }
+        //    }
+        //    return retValue;
+        //}
 
         private bool InsertDocument()
         {
@@ -493,23 +537,12 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             try
             {
                 List<Multimedia> productDocumentList;
-                if (Session["PRODUCT_DOCUMENT_LIST"] != null)
-                {
-                    productDocumentList = (List<Multimedia>)Session["PRODUCT_DOCUMENT_LIST"];
-                }
-                else
-                {
-                    productDocumentList = new List<Multimedia>();
-                    Session.Add("PRODUCT_DOCUMENT_LIST", productDocumentList);
-                }
-                productDocumentList = (List<Multimedia>)Session["PRODUCT_DOCUMENT_LIST"];
                 var item = new Multimedia();
                 item.Description = txtDocumentDescription.Text;
-                item.FilePath = fuSelectedDocument.FileName;
+                //item.FilePath = fuSelectedDocument.FileName;
                 item.Title = txtDocumentName.Text;
                 item.Type = new EnumValue() { Id = DBHelper.IntValue(ddlDocumentTypes.SelectedValue) };
-                productDocumentList.Add(item);
-                Session.Add("PRODUCT_DOCUMENT_LIST", productDocumentList);
+                //productDocumentList.Add(item);
                 retValue = true;
             }
             catch (Exception)
@@ -533,7 +566,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     productDocumentList.Remove(item);
                     item.Id = documentId;
                     item.Description = txtDocumentDescription.Text;
-                    item.FilePath = fuSelectedDocument.FileName;
+                    //item.FilePath = fuSelectedDocument.FileName;
                     item.Title = txtDocumentName.Text;
                     item.Type = new EnumValue() { Id = DBHelper.IntValue(ddlDocumentTypes.SelectedValue) };
                     productDocumentList.Add(item);
