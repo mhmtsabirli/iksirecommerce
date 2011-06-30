@@ -55,6 +55,17 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
+        public static int Save(Country itemCountry)
+        {
+            var returnValue = 0;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemCountry.Id)));
+            parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemCountry.CreateAdminId)));
+            parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemCountry.Name)));
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveCountry", parameters));
+            return returnValue;
+        }
+
         public static int Delete(Country itemCountry)
         {
             var returnValue = 0;

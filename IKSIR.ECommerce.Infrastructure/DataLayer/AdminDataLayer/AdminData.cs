@@ -78,6 +78,26 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             return returnValue;
         }
 
+        public static int Save(Admin itemAdmin)
+        {
+            var returnValue = 0;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemAdmin.Id)));
+            parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemAdmin.Name)));
+            parameters.Add(new SqlParameter("@UserName", DBHelper.StringValue(itemAdmin.UserName)));
+            parameters.Add(new SqlParameter("@EMail", DBHelper.StringValue(itemAdmin.Email)));
+            parameters.Add(new SqlParameter("@SiteId", DBHelper.IntValue(itemAdmin.Site.Id)));
+            parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemAdmin.Status.Id)));
+            parameters.Add(new SqlParameter("@Password", DBHelper.StringValue(itemAdmin.Password)));
+            parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemAdmin.CreateAdminId)));
+
+
+
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveAdmin", parameters));
+            return returnValue;
+        }
+
         public static int Delete(Admin itemAdmin)
         {
             var returnValue = 0;

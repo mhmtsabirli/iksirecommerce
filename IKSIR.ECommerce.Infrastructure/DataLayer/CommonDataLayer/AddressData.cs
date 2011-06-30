@@ -82,6 +82,26 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
+        public static int Save(Address itemAddress)
+        {
+            var returnValue = 0;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            parameters.Add(new SqlParameter("@Id", itemAddress.Id));
+            parameters.Add(new SqlParameter("@UserId", itemAddress.User.Id));
+            parameters.Add(new SqlParameter("@Type", itemAddress.Type.Id));
+            parameters.Add(new SqlParameter("@Description", itemAddress.Description.ToString()));
+            parameters.Add(new SqlParameter("@DistrictId", itemAddress.District.Id));
+            parameters.Add(new SqlParameter("@CityId", itemAddress.City.Id));
+            parameters.Add(new SqlParameter("@CountryId", itemAddress.Country.Id));
+            parameters.Add(new SqlParameter("@AdminId", itemAddress.CreateAdminId));
+            parameters.Add(new SqlParameter("@PostalCode", itemAddress.PostalCode.ToString()));
+            parameters.Add(new SqlParameter("@Phone", itemAddress.Phone));
+
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveAddress", parameters));
+            return returnValue;
+        }
+
         public int Delete(Address itemAddress)
         {
             var returnValue = 0;

@@ -75,6 +75,23 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
+        public static int Save(ItemComments itemItemComment)
+        {
+            var returnValue = 0;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemItemComment.Id)));
+            parameters.Add(new SqlParameter("@UserId", itemItemComment.User.Id));
+            parameters.Add(new SqlParameter("@ItemTypeId", itemItemComment.ItemType.Id));
+            parameters.Add(new SqlParameter("@ItemId", itemItemComment.ItemId));
+            parameters.Add(new SqlParameter("@CommentId", itemItemComment.CommentId));
+            parameters.Add(new SqlParameter("@IsActive", itemItemComment.IsActive));
+            parameters.Add(new SqlParameter("@AdminId", itemItemComment.CreateAdminId));
+
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveItemComment", parameters));
+            return returnValue;
+        }
+
         public int Delete(ItemComments itemItemComment)
         {
             var returnValue = 0;
