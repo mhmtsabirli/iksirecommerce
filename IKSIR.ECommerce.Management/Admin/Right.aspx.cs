@@ -12,6 +12,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Model.AdminModel;
 using IKSIR.ECommerce.Model.SiteModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer;
+using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
 
 namespace IKSIR.ECommerce.Management.Admin
 {
@@ -35,43 +36,23 @@ namespace IKSIR.ECommerce.Management.Admin
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (btnSave.CommandArgument != "") //Kayıt güncelleme.
+
+            if (SaveItem())
             {
-                if (UpdateItem(Convert.ToInt32(btnSave.CommandArgument)))
-                {
-                    lblError.Visible = true;
-                    lblError.ForeColor = System.Drawing.Color.Green;
-                    lblError.Text = "Item başarıyla güncellendi.";
-                    ClearForm();
-                    pnlForm.Visible = false;
-                    int count = 0;
-                    GetList();
-                }
-                else
-                {
-                    lblError.Visible = true;
-                    lblError.ForeColor = System.Drawing.Color.Red;
-                    lblError.Text = "Item güncellenirken bir hata oluştu.";
-                }
+                lblError.Visible = true;
+                lblError.ForeColor = System.Drawing.Color.Green;
+                lblError.Text = "Item başarıyla kaydedildi.";
+                ClearForm();
+                pnlForm.Visible = false;
+                GetList();
             }
-            else //Yeni kayıt
+            else
             {
-                if (InsertItem())
-                {
-                    lblError.Visible = true;
-                    lblError.ForeColor = System.Drawing.Color.Green;
-                    lblError.Text = "Item başarıyla kaydedildi.";
-                    ClearForm();
-                    pnlForm.Visible = false;
-                    GetList();
-                }
-                else
-                {
-                    lblError.Visible = true;
-                    lblError.ForeColor = System.Drawing.Color.Red;
-                    lblError.Text = "Item kaydedilirken bir hata oluştu.";
-                }
+                lblError.Visible = true;
+                lblError.ForeColor = System.Drawing.Color.Red;
+                lblError.Text = "Item kaydedilirken bir hata oluştu.";
             }
+
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -102,7 +83,7 @@ namespace IKSIR.ECommerce.Management.Admin
 
             txtTitle.Text = itemRight.Title.ToString();
             txtDescription.Text = itemRight.Description.ToString();
-            
+
 
             pnlForm.Visible = true;
 
@@ -163,90 +144,42 @@ namespace IKSIR.ECommerce.Management.Admin
             //TODO tayfun   linq kullanılan kısımlarda filtereleme yapılamıyor where kosulu calısmıyor
 
             List<IKSIR.ECommerce.Model.AdminModel.Right> itemList = RightData.GetRightList();
-            
+
             if (txtFilterTitle.Text != "")
                 itemList.Where(x => x.Title.Contains(txtFilterTitle.Text));
-          
+
             gvList.DataSource = itemList;
             gvList.DataBind();
         }
 
-        private bool InsertItem()
+        private bool SaveItem()
         {
             bool retValue = false;
             var item = new IKSIR.ECommerce.Model.AdminModel.Right();
 
-            //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
-            // a nın altında b var dıyelım kosul olmadıgı ıcın ıkıncı bır b yı atıyor
-            // where kosullu kısı mcalıstırıldıgında burayada uygulanıp burasıda calıstırılacak
-            if (item.Description != null)
-            {
-                lblError.Visible = true;
-                lblError.ForeColor = System.Drawing.Color.Red;
-                lblError.Text = "Bu item zaten kayıtlıdır. Filtreleryerek kayda erişebilirsiniz.";
-                retValue = false;
-            }
-            else
-            {
-
-              
-                item.Title = txtTitle.Text.Trim();
-                item.Description = txtDescription.Text.Trim();
-                try
-                {
-                    if (RightData.Insert(item) > 0)
-                        retValue = true;
-
-                    SystemLog itemSystemLog = new SystemLog();
-                    itemSystemLog.Title = "Insert Right";
-                    itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description;
-                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                    SystemLogData.Insert(itemSystemLog);
-                }
-                catch
-                {
-                    SystemLog itemSystemLog = new SystemLog();
-                    itemSystemLog.Title = "Insert Right";
-                    itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description;
-                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                    SystemLogData.Insert(itemSystemLog);
-                }
-            }
-            return retValue;
-        }
-
-        private bool UpdateItem(int itemId)
-        {
-            bool retValue = false;
-            var itemRight = new IKSIR.ECommerce.Model.AdminModel.Right();
-
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            itemRight.Id = itemId;
-            itemRight.Title = txtTitle.Text;
-            itemRight.Description = txtDescription.Text;
-           
-
+            item.Id = DBHelper.IntValue(lblId.Text);
+            item.Title = txtTitle.Text.Trim();
+            item.Description = txtDescription.Text.Trim();
             try
             {
-                if (RightData.Update(itemRight) < 0)
+                if (RightData.Save(item) > 0)
                     retValue = true;
 
                 SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Update Right";
-                itemSystemLog.Content = "Id=" + itemRight.Id + "Title=" + itemRight.Title + "Description =" + itemRight.Description;
+                itemSystemLog.Title = "Save Right";
+                itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description;
                 itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
             catch
             {
                 SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Update Right";
-                itemSystemLog.Content = "Id=" + itemRight.Id + "Title=" + itemRight.Title + "Description =" + itemRight.Description;
+                itemSystemLog.Title = "Save Right";
+                itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description;
                 itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
+
             return retValue;
         }
 
