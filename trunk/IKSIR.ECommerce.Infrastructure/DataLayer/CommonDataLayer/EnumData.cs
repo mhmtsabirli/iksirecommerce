@@ -56,6 +56,17 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
+        public static int Save(IKSIR.ECommerce.Model.CommonModel.Enum itemEnum)
+        {
+            var returnValue = 0;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemEnum.Id)));
+            parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemEnum.CreateAdminId)));
+            parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemEnum.Name)));
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveEnum", parameters));
+            return returnValue;
+        }
+
         public static int Delete(IKSIR.ECommerce.Model.CommonModel.Enum itemEnum)
         {
             var returnValue = 0;

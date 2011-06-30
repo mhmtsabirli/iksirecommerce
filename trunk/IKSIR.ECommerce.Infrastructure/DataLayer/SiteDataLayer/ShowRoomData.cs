@@ -64,6 +64,19 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ShowRoomDataLayer
             return returnValue;
         }
 
+        public static int Save(ShowRoom itemShowRoom)
+        {
+            var returnValue = 1;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemShowRoom.Id)));
+            parameters.Add(new SqlParameter("@ItemId", DBHelper.StringValue(itemShowRoom.Item.Id)));
+            parameters.Add(new SqlParameter("@EnumValueId", DBHelper.StringValue(itemShowRoom.EnumValue.Id)));
+            parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemShowRoom.CreateAdminId)));
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveShowRoom", parameters));
+            return returnValue;
+        }
+
+
         public static int Delete(ShowRoom itemShowRoom)
         {
             var returnValue = 0;

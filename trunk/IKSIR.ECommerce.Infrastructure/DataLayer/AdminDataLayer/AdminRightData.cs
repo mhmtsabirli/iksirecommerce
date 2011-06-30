@@ -62,6 +62,19 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             return returnValue;
         }
 
+        public static int Save(AdminRights itemAdminRight)
+        {
+            var returnValue = 0;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemAdminRight.Id)));
+            parameters.Add(new SqlParameter("@AdminsId", DBHelper.IntValue(itemAdminRight.CreateAdminId)));
+            parameters.Add(new SqlParameter("@AdminId", DBHelper.StringValue(itemAdminRight.Admin.Id)));
+            parameters.Add(new SqlParameter("@RightId", DBHelper.StringValue(itemAdminRight.Rights[0].Id)));
+
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveAdminRights", parameters));
+            return returnValue;
+        }
+
         public static int Delete(Admin itemAdmin)
         {
             var returnValue = 0;
