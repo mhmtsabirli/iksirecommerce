@@ -35,12 +35,14 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             var returnValue = 0;
             List<SqlParameter> parameters = new List<SqlParameter>();
 
+            parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemProductProperty.Id)));
             parameters.Add(new SqlParameter("@CreateAdminId", 1));
             parameters.Add(new SqlParameter("@PropertyId", DBHelper.IntValue(itemProductProperty.Property.Id)));
             parameters.Add(new SqlParameter("@ProductId", DBHelper.IntValue(itemProductProperty.ProductId)));
             parameters.Add(new SqlParameter("@Value", DBHelper.StringValue(itemProductProperty.Value)));
-
+            parameters[0].Direction = ParameterDirection.Output;
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertProductProperty", parameters));
+            returnValue = Convert.ToInt32(parameters[0].Value);
             return returnValue;
         }
 
@@ -83,8 +85,9 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
-                item.Property = new Model.CommonModel.Property() { Id = DBHelper.IntValue(dr["PropertyId"].ToString()) };
+                item.Property = PropertyData.Get(DBHelper.IntValue(dr["PropertyId"].ToString()));
                 item.ProductId = DBHelper.IntValue(dr["ProductId"].ToString());
+                item.Value = DBHelper.StringValue(dr["Value"].ToString());
                 itemProductList.Add(item);
             }
 

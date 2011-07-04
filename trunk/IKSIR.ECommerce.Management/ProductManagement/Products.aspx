@@ -14,10 +14,15 @@
     </p>
     <table id="tblMngForm">
         <tr>
+            <td colspan="2">
+                Blgi:<br />
+                <div id="divAlert" runat="server" class="scrolledDiv">
+                </div>
+            </td>
+        </tr>
+        <tr>
             <td align="left">
                 <asp:Label runat="server" ID="lblError" Visible="false"></asp:Label>
-                <div id="divAlert" runat="server">
-                </div>
             </td>
             <td style="text-align: right">
                 <asp:LinkButton runat="server" ID="lbtnNew" Text="Yeni Kayıt" OnClick="lbtnNew_Click"></asp:LinkButton>
@@ -27,15 +32,15 @@
             <td colspan="2">
                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                 </asp:ScriptManager>
-                <asp:Panel runat="server" ID="pnlForm" Visible="true" CssClass="pnlForm">
+                <asp:Panel runat="server" ID="pnlForm" Visible="false" CssClass="pnlForm">
                     <telerik:RadTabStrip ID="RadTabStrip1" runat="server" Skin="Web20" MultiPageID="RadMultiPage1"
                         SelectedIndex="1" Width="400px">
                         <Tabs>
                             <telerik:RadTab Text="Ürün" Selected="true" PageViewID="RadPageView1">
+                            </telerik:RadTab>                            
+                            <telerik:RadTab Text="Özellikler" PageViewID="RadPageView3">
                             </telerik:RadTab>
                             <telerik:RadTab Text="Dökümanlar" PageViewID="RadPageView2">
-                            </telerik:RadTab>
-                            <telerik:RadTab Text="Özellikler" PageViewID="RadPageView3">
                             </telerik:RadTab>
                         </Tabs>
                     </telerik:RadTabStrip>
@@ -176,7 +181,7 @@
                                     <td>
                                     </td>
                                 </tr>
-                                <tr>
+                                <%--<tr>
                                     <td>
                                         Ad
                                     </td>
@@ -203,8 +208,8 @@
                                     </td>
                                     <td>
                                     </td>
-                                </tr>
-                                <tr>
+                                </tr>--%>
+                                <%--<tr>
                                     <td>
                                         Döküman Tipi
                                     </td>
@@ -217,19 +222,21 @@
                                     </td>
                                     <td>
                                     </td>
-                                </tr>
+                                </tr>--%>
                                 <tr>
                                     <td valign="top">
-                                        Döküman
+                                        Dökümanlar
                                     </td>
                                     <td valign="top">
                                         :
                                     </td>
                                     <td>
-                                        <telerik:RadUpload ID="ruProductDocuments" runat="server" InitialFileInputsCount="2" MaxFileInputsCount="10"
-                                            AllowedFileExtensions=".jpg,.jpeg,.pdf,.doc,.gif,.png" TargetFolder="~/ProductDocuments/Orginal"
+                                        <telerik:RadUpload ID="ruProductDocuments" runat="server" InitialFileInputsCount="2"
+                                            MaxFileInputsCount="10" AllowedFileExtensions=".jpg,.jpeg,.pdf,.doc,.gif,.png"
                                             Localization-Add="Ekle" Localization-Clear="Temizle" Localization-Delete="Sil"
                                             Localization-Remove="Kaldır" Localization-Select="Seç" />
+                                        <div runat="server" id="divDocuments">
+                                        </div>
                                         <%--<telerik:RadProgressArea ID="progressArea1" runat="server" />--%>
                                     </td>
                                     <td>
@@ -248,23 +255,24 @@
                                 <Columns>
                                     <asp:TemplateField ShowHeader="False">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
-                                            <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
-                                                OnClientClick="javascript:return confirm('Are you sure you want to delete this row?');"
+                                            <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnDocumentEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Kontrol Et]</asp:LinkButton>
+                                            <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDocumentDelete_Click"
+                                                CommandArgument='<%# Eval("Id")%>' OnClientClick="javascript:return confirm('Are you sure you want to delete this row?');"
                                                 CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                         SortExpression="Id" />
-                                    <asp:BoundField DataField="Name" HeaderText="Adı" ApplyFormatInEditMode="false" ReadOnly="true"
+                                    <asp:BoundField DataField="FilePath" HeaderText="Adı" ApplyFormatInEditMode="false" ReadOnly="true"
                                         SortExpression="Name" />
+                                        
                                 </Columns>
                             </asp:GridView>
                         </telerik:RadPageView>
                         <telerik:RadPageView ID="RadPageView3" runat="server">
                             <table>
                                 <tr>
-                                    <td colspan="4">
+                                    <td colspan="4">                                                                        
                                         <strong>Ürün Özellikleri</strong> (Ürünlere girilmesi gereken özellikler)
                                     </td>
                                 </tr>

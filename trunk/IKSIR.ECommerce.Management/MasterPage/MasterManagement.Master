@@ -74,6 +74,8 @@
             <!-- end nav -->
             <div id="main">
                 <div id="content">
+                    <div id="divAlert" runat="server">
+                    </div>
                     <asp:ContentPlaceHolder ID="cphContent" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>

@@ -13,6 +13,21 @@ namespace IKSIR.ECommerce.Management.MasterPage
 {
     public partial class MasterManagement : System.Web.UI.MasterPage
     {
+        public string Alert
+        {
+            set
+            {
+                this.divAlert.InnerHtml += value;
+            }
+        }
+
+        public string ClearAlert
+        {
+            set
+            {
+                divAlert.InnerHtml = value;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
 
