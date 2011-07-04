@@ -9,14 +9,16 @@ namespace IKSIR.ECommerce.Model.CommonModel
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public List<PropertyValue> PropertyValue { get; set; }
+        public int ProductId { get; set; }
+        public string Value { get; set; }
 
-        public Property(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string title, string description,List<PropertyValue> propertyValue)
+        public Property(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string title, string description, string value, int productId)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.Title = title;
             this.Description = description;
-            this.PropertyValue = propertyValue;
+            this.Value = value;
+            this.ProductId = productId;
         }
         public Property()
         {

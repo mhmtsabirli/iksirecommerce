@@ -209,8 +209,9 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
             else
             {
+                if(ddlParentCategories.SelectedValue != "-1")
+                    item.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedValue) };
 
-                item.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedValue) };
                 item.Title = txtCategoryName.Text.Trim();
                 item.Description = txtDescription.Text.Trim();
                 try

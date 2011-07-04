@@ -53,9 +53,6 @@
                                 </asp:DropDownList>
                             </td>
                             <td>
-                                <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="ddlParentCategories"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Üst kategorisi seçmelisiniz"
-                                    ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
                         <tr>

@@ -30,7 +30,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             returnValue.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
             returnValue.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
             returnValue.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
-            //returnValue.ProductCategory = ProductCategoryData.GetProductCategoryById((DBHelper.IntValue(dr["ProductCategory"].ToString())));
+            returnValue.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
             dr.Close();
             return returnValue;
         }
@@ -39,7 +39,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
         {
             var returnValue = 0;
             List<SqlParameter> parameters = new List<SqlParameter>();
-
+            parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemProduct.Id)));
             parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemProduct.Title)));
             parameters.Add(new SqlParameter("@Description", DBHelper.StringValue(itemProduct.Description)));
             parameters.Add(new SqlParameter("@ProductCode", DBHelper.StringValue(itemProduct.ProductCode)));
@@ -47,8 +47,10 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemProduct.CreateAdminId)));
             parameters.Add(new SqlParameter("@AlertDate", DBHelper.DateValue(itemProduct.AlertDate)));
             parameters.Add(new SqlParameter("@ProductCategoryId", DBHelper.IntValue(itemProduct.ProductCategory.Id)));
+            parameters[0].Direction = ParameterDirection.Output;
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertProduct", parameters));
+            returnValue = Convert.ToInt32(parameters[0].Value);
             return returnValue;
         }
 
@@ -71,21 +73,22 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             return returnValue;
         }
 
-        public static int Delete(Product itemProduct)
+        public static int Delete(int productId)
         {
             var returnValue = 0;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemProduct.Id));
+            parameters.Add(new SqlParameter("@Id", productId));
 
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "DeleteProduct", parameters);
+            returnValue = 1; //TODO: ayhant=> düzeltilecek
             return returnValue;
         }
 
-        public  static List<Product> GetList()
+        public static List<Product> GetList()
         {
             List<Product> itemProductList = new List<Product>();
-           
+
             List<SqlParameter> parameters = new List<SqlParameter>();
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductList", parameters);
 

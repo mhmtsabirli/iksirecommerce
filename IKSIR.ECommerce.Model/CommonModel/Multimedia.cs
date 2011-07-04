@@ -12,8 +12,9 @@ namespace IKSIR.ECommerce.Model.CommonModel
         public string Title { get; set; }
         public string Description { get; set; }
         public string FilePath { get; set; }
+        public int ProductId { get; set; }
 
-        public Multimedia(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, EnumValue type, string value, string title, string description, string filePath)
+        public Multimedia(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, EnumValue type, string value, string title, string description, string filePath, int productId)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.Type = type;
@@ -21,6 +22,7 @@ namespace IKSIR.ECommerce.Model.CommonModel
             this.Title = title;
             this.Description = description;
             this.FilePath = filePath;
+            this.ProductId = productId;
         }
         public Multimedia()
         {

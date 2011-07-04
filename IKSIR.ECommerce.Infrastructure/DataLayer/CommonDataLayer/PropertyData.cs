@@ -27,7 +27,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
             returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
             returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            //returnValue.PropertyValue = PropertyValueData.GetPropertyValueListById(DBHelper.IntValue(dr["PropertyId"].ToString()));
+            returnValue.ProductId = DBHelper.IntValue(dr["ProductId"].ToString());
+            returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
 
             dr.Close();
             return returnValue;
@@ -98,5 +99,61 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return itemPropertyList;
         }
 
+        public static List<Property> GetList(int productId)
+        {
+            List<Property> itemPropertyList = null;
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@ProductId", productId));
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProperty", parameters);
+            itemPropertyList = new List<Property>();
+
+            while (dr.Read())
+            {
+                var item = new Property();
+                //TODO => tayfun
+                item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                item.Title = DBHelper.StringValue(dr["Title"].ToString());
+                item.Description = DBHelper.StringValue(dr["Description"].ToString());
+                item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                item.Id = DBHelper.IntValue(dr["Id"].ToString());
+                item.ProductId = DBHelper.IntValue(dr["ProductId"].ToString());
+                item.Value = DBHelper.StringValue(dr["Value"].ToString());
+                itemPropertyList.Add(item);
+            }
+
+            dr.Close();
+            return itemPropertyList;
+        }
+
+        public static List<Property> GetProductProperties(int productId)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@ProductId", productId));
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProperty", parameters);
+            List<Property> itemPropertyList = new List<Property>();
+
+            while (dr.Read())
+            {
+                var item = new Property();
+                //TODO => tayfun
+                item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                item.Title = DBHelper.StringValue(dr["Title"].ToString());
+                item.Description = DBHelper.StringValue(dr["Description"].ToString());
+                item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                item.Id = DBHelper.IntValue(dr["Id"].ToString());
+                item.ProductId = DBHelper.IntValue(dr["ProductId"].ToString());
+                //item.PropertyValue = PropertyValueData.GetPropertyValueListById(DBHelper.IntValue(dr["PropertyId"].ToString()));
+                item.Value = DBHelper.StringValue(dr["Value"].ToString());
+                itemPropertyList.Add(item);
+            }
+
+            dr.Close();
+            return itemPropertyList;
+        }
     }
 }
