@@ -44,9 +44,6 @@
     <Reference Include="RadAjax.Net2">
       <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\Dlls\RadAjax.Net2.dll</HintPath>
     </Reference>
-    <Reference Include="RadInput.Net2">
-      <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\Dlls\RadInput.Net2.dll</HintPath>
-    </Reference>
     <Reference Include="RadTabStrip.Net2">
       <HintPath>..\IKSIR.ECommerce.Toolkit\RadControls\Dlls\RadTabStrip.Net2.dll</HintPath>
     </Reference>
