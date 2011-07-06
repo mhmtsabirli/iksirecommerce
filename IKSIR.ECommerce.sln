@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKSIR.ECommerce.Toolkit", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKSIR.ECommerce.Management", "IKSIR.ECommerce.Management\IKSIR.ECommerce.Management.csproj", "{93D8C78C-C5C2-4FF1-9269-9A7D02CFF58E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKSIR.ECommerce.UI", "IKSIR.ECommerce.UI\IKSIR.ECommerce.UI.csproj", "{A576D16B-78E2-4A49-8CE5-827C3796FBEF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKSIR.ECommerce.Infrastructure", "IKSIR.ECommerce.Infrastructure\IKSIR.ECommerce.Infrastructure.csproj", "{815B64C7-A938-46A9-B1E0-288579B3B391}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKSIR.ECommerce.UI", "IKSIR.ECommerce.UI\IKSIR.ECommerce.UI.csproj", "{70A427DC-0C9D-4026-A880-E70E90D3EC9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,14 +29,14 @@ Global
 		{93D8C78C-C5C2-4FF1-9269-9A7D02CFF58E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93D8C78C-C5C2-4FF1-9269-9A7D02CFF58E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93D8C78C-C5C2-4FF1-9269-9A7D02CFF58E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A576D16B-78E2-4A49-8CE5-827C3796FBEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A576D16B-78E2-4A49-8CE5-827C3796FBEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A576D16B-78E2-4A49-8CE5-827C3796FBEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A576D16B-78E2-4A49-8CE5-827C3796FBEF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{815B64C7-A938-46A9-B1E0-288579B3B391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{815B64C7-A938-46A9-B1E0-288579B3B391}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{815B64C7-A938-46A9-B1E0-288579B3B391}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{815B64C7-A938-46A9-B1E0-288579B3B391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70A427DC-0C9D-4026-A880-E70E90D3EC9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70A427DC-0C9D-4026-A880-E70E90D3EC9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70A427DC-0C9D-4026-A880-E70E90D3EC9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70A427DC-0C9D-4026-A880-E70E90D3EC9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
