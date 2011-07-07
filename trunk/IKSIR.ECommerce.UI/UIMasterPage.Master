@@ -1,0 +1,309 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="UIMasterPage.master.cs"
+    Inherits="IKSIR.ECommerce.UI.UIMasterPage" %>
+
+<%@ Register Src="UserControls/UCMainCategories.ascx" TagName="UCMainCategories"
+    TagPrefix="uc1" %>
+<%@ Register Src="UserControls/UCBestSellingProducts.ascx" TagName="UCBestSellingProducts"
+    TagPrefix="uc2" %>
+<%@ Register Src="UserControls/UCMostVisitedProducts.ascx" TagName="UCMostVisitedProducts"
+    TagPrefix="uc3" %>
+<%@ Register Src="UserControls/UCCampaignProducts.ascx" TagName="UCCampaignProducts"
+    TagPrefix="uc4" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Suvit</title>
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/sprinkle.js"></script>    
+
+    <script src="js/functions.js" type="text/javascript"></script>
+    <script src="js/jquery-v1.4.4.js" type="text/javascript"></script>
+    <script src="js/jquery.maskedinput-1.2.2.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () {
+                // Slide
+                $('#menu1 > li > a.expanded + ul').slideToggle('medium');
+                $('#menu1 > li > a').click(function () {
+                    $(this).toggleClass('expanded').toggleClass('collapsed').parent().find('> ul').slideToggle('medium');
+                });
+                $('#example1 .expand_all').click(function () {
+                    $('#menu1 > li > a.collapsed').addClass('expanded').removeClass('collapsed').parent().find('> ul').slideDown('medium');
+                });
+                $('#example1 .collapse_all').click(function () {
+                    $('#menu1 > li > a.expanded').addClass('collapsed').removeClass('expanded').parent().find('> ul').slideUp('medium');
+                });
+                // Appear/Disappear
+                $('#menu4 > li > a.expanded + ul').show();
+                $('#menu4 > li > a').click(function () {
+                    $(this).toggleClass('expanded').toggleClass('collapsed').parent().find('> ul').toggle();
+                });
+                $('#example4 .expand_all').click(function () {
+                    $('#menu4 > li > a.collapsed').addClass('expanded').removeClass('collapsed').parent().find('> ul').show();
+                });
+                $('#example4 .collapse_all').click(function () {
+                    $('#menu4 > li > a.expanded').addClass('collapsed').removeClass('expanded').parent().find('> ul').hide();
+                });
+                // Accordion
+                $('#menu5 > li > a.expanded + ul').slideToggle('medium');
+                $('#menu5 > li > a').click(function () {
+                    $('#menu5 > li > a.expanded').not(this).toggleClass('expanded').toggleClass('collapsed').parent().find('> ul').slideToggle('medium');
+                    $(this).toggleClass('expanded').toggleClass('collapsed').parent().find('> ul').slideToggle('medium');
+                });
+            }, 250);
+        });
+    </script>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="header">
+        <div class="top_menu">
+            <ul>
+                <li style="border: 0;"><a href="/Pages/Content.aspx?contentid=1">Kurumsal</a></li>
+                <li><a href="/Pages/Content.aspx?contentid=1">Müşteri Hizmetleri</a></li>
+                <li><a href="/Pages/Content.aspx?contentid=1">Sipariş Takibi</a></li>
+                <li><a href="/Pages/Content.aspx?contentid=1">Sık Sorulan Sorular</a></li>
+                <li><a href="/Pages/Content.aspx?contentid=1">Yardım</a></li>
+            </ul>
+        </div>
+        <div class="logo">
+            <a href="#">
+                <img src="/images/logo.jpg" alt="" /></a></div>
+        <div class="search">
+        </div>
+        <input class="search_text" type="text" />
+        <input class="search_submit" type="submit" value="" />
+        <div class="clear">
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+    </div>
+    <div class="navbar">
+        <div class="nav_menu">
+            <ul>
+                <li><a style="background: none;" href="Default.aspx">Anasayfa</a></li>
+                <li><a href="/Pages/ProductList.aspx?catid=2">Yeni Ürünler</a></li>
+                <li><a href="/Pages/ProductList.aspx?catid=3">Kampanyalı Ürünler</a></li>
+                <li><a href="/Pages/ProductList.aspx?catid=4">İndirimli Ürünler</a></li>
+                <li><a href="/Pages/Register.aspx">Yeni Üyelik</a></li>
+                <li><a href="/UserPanel/MyAccount.aspx">Hesabım</a></li>
+                <li><a href="/Pages/Content.aspx?contentid=1">İletişim</a></li>
+            </ul>
+            <div class="clear">
+                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
+            </div>
+        </div>
+        <div class="nav_info">
+            <p>
+                <img src="/images/navbar_sepet.png" alt="" />Alışveriş Sepetim : 5 ürün (1500 TL)</p>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="main">
+        <div class="sidebar_left">
+            <div class="sidemenu">
+                <div class="sidemenu_top">
+                </div>
+                <div class="sidemenu_middle">
+                    <div id="tabvanilla" class="tabmenu">
+                        <ul class="tabnav">
+                            <li><a href="#siparistakip"><span>Sipariş Takip</span></a></li>
+                            <li><a href="#siparisyardim"><span>Sipariş Yardım</span></a></li>
+                        </ul>
+                        <div class="clear">
+                        </div>
+                        <div class="sidemenu_hr">
+                        </div>
+                        <div id="siparistakip" class="tabdiv">
+                            <p>
+                                Siparişinizin ne durumda olduğunu buradan öğrene bilirsiniz. Lütfen size verilen
+                                sipariş numarasını aşağıdaki kutucuğa girip takip ediniz</p>
+                            <input class="sidemenu_text" type="text" value="Sipariş no..." />
+                            <input class="sidemenu_submit" type="submit" value="Sipariş Durumu" />
+                        </div>
+                        <div id="siparisyardim" class="tabdiv">
+                            <p>
+                                Lorem ipsum dolor si Lorem sit amet dolor si dolor sit amet</p>
+                            asd
+                        </div>
+                    </div>
+                </div>
+                <div class="sidemenu_bottom">
+                </div>
+            </div>
+            <div class="sidemenu">
+                <div class="sidemenu_top">
+                </div>
+                <div class="sidemenu_middle">
+                    Ana Kategoriler
+                    <uc1:UCMainCategories ID="UCMainCategories1" runat="server" />
+                </div>
+                <div class="sidemenu_bottom">
+                </div>
+            </div>
+            <div class="sidemenu">
+                <div class="sidemenu_top">
+                </div>
+                <div class="sidemenu_middle">
+                    <h3>
+                        Bizden Haberler</h3>
+                    <div class="sidemenu_hr">
+                    </div>
+                    <ul>
+                        <li><span>10.03.2011</span> <a href="#">Suvit Seramik Sanayi Ticaret</a> </li>
+                        <li><span>10.03.2011</span> <a href="#">Suvit Seramik Sanayi Ticaret</a> </li>
+                        <li><span>10.03.2011</span> <a href="#">Suvit Seramik Sanayi Ticaret</a> </li>
+                    </ul>
+                </div>
+                <div class="sidemenu_bottom">
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div class="sidebar_right">
+            <div class="sidemenu">
+                <div class="sidemenu_top">
+                </div>
+                <div class="sidemenu_middle">
+                    <div id="Div1" class="tabmenu">
+                        <ul class="tabnav">
+                            <li><a href="#uyegirisi"><span>Üye Girişi</span></a></li>
+                            <li><a href="#yeniuyelik"><span>Yeni Üyelik</span></a></li>
+                        </ul>
+                        <div class="clear">
+                        </div>
+                        <div class="sidemenu_hr">
+                        </div>
+                        <div id="uyegirisi" class="tabdiv">
+                            <input class="sidemenu_kullanici_adi" type="text" value="Kullanıcı Adı..." />
+                            <input class="sidemenu_sifre" type="password" value="Parola..." />
+                            <input class="sidemenu_checkbox" type="checkbox" /><label class="sidemenu_label">Beni
+                                Hatırla</label>
+                            <input class="footer_module_submit" type="submit" value="" />
+                            <div class="clear">
+                            </div>
+                            <span class="sidemenu_link"><a href="#">
+                                <img src="//images/sidemenu_forgot.jpg" alt="" />Parolamı Unuttum?</a></span>
+                        </div>
+                        <div id="yeniuyelik" class="tabdiv">
+                            <p>
+                                Lorem ipsum dolor si Lorem sit amet dolor si dolor sit amet</p>
+                            asd
+                        </div>
+                    </div>
+                </div>
+                <div class="sidemenu_bottom">
+                </div>
+            </div>
+            <div class="sidemenu">
+                <div class="sidemenu_top">
+                </div>
+                <div class="sidemenu_middle">
+                    <uc2:UCBestSellingProducts ID="UCBestSellingProducts1" runat="server" />
+                </div>
+                <div class="sidemenu_bottom">
+                </div>
+            </div>
+            <div class="sidemenu">
+                <div class="sidemenu_top">
+                </div>
+                <div class="sidemenu_middle">
+                    <uc3:UCMostVisitedProducts ID="UCMostVisitedProducts1" runat="server" />
+                </div>
+                <div class="sidemenu_bottom">
+                </div>
+            </div>
+            <div class="sidemenu">
+                <div class="sidemenu_top">
+                </div>
+                <div class="sidemenu_middle">
+                    <uc4:UCCampaignProducts ID="UCCampaignProducts1" runat="server" />
+                </div>
+                <div class="sidemenu_bottom">
+                </div>
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    </form>
+    <div class="footer">
+        <h4>
+            <a href="#">
+                <img src="/images/footer_logo.jpg" alt="" /></a></h4>
+        <div class="footer_module">
+            <h3>
+                <a href="#">Anasayfa</a></h3>
+            <ul>
+                <li><a href="#">Müşteri Hizmetleri</a></li>
+                <li><a href="#">Kurumsal</a></li>
+                <li><a href="#">Sık Sorulan Sorular</a></li>
+                <li><a href="#">Yardım</a></li>
+            </ul>
+        </div>
+        <div class="footer_module">
+            <h3>
+                <a href="#">Sipariş İşlemleri</a></h3>
+            <ul>
+                <li><a href="#">Sipariş Takip</a></li>
+                <li><a href="#">Sipariş Yardım Formu</a></li>
+                <li><a href="#">Ödeme Bildirim Formu</a></li>
+            </ul>
+        </div>
+        <div class="footer_module">
+            <h3>
+                <a href="#">Alışveriş İşlemleri</a></h3>
+            <ul>
+                <li><a href="#">Alışveriş Sepeti</a></li>
+                <li><a href="#">Alışveriş Listesi</a></li>
+                <li><a href="#">Hesap Numaralarımız</a></li>
+            </ul>
+        </div>
+        <div class="footer_module">
+            <h3>
+                <a href="#">Üyelik İşlemleri</a></h3>
+            <ul>
+                <li><a href="#">Yeni Üyelik</a></li>
+                <li><a href="#">Üye Girişi</a></li>
+                <li><a href="#">Şifre Hatırlatma</a></li>
+            </ul>
+        </div>
+        <div class="footer_module">
+            <h3>
+                E-Bülten</h3>
+            <form action="">
+            <input class="footer_module_text" type="text" value="Mail Adresinizi Giriniz" />
+            <input class="footer_module_submit" type="submit" value="" />
+            </form>
+            <div class="clear">
+            </div>
+            <p>
+                Güncel gelişmelerden kolayca haberdar<br />
+                olmak için e-bültenimize üye olun</p>
+        </div>
+        <div class="footer_verisign">
+            <a href="#">
+                <img src="/images/footer_verisign.jpg" alt="" /></a></div>
+        <div class="clear">
+        </div>
+        <div class="footer_bottom">
+            <img src="/images/footer_bottom.jpg" alt="" />
+            <p>
+                suvit © Copyright 2011</p>
+        </div>
+    </div>
+    </form>
+</body>
+</html>
