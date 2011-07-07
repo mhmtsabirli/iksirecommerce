@@ -34,6 +34,15 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             dr.Close();
             return returnValue;
         }
+        public static int FindProductId(string ProductCode)
+        {
+            var returnValue = new Product();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@ProdCode", ProductCode));
+           
+            
+            return DBHelper.IntValue(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductforProductCode", parameters));
+        }
 
         public static int Insert(Product itemProduct)
         {

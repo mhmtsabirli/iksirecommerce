@@ -100,5 +100,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             dr.Close();
             return itemEnumList;
         }
+
+     
     }
 }

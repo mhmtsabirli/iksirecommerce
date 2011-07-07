@@ -12,7 +12,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Model.ProductModel;
 
 
-namespace IKSIR.ECommerce.Infrastructure.DataLayer.ShowRoomDataLayer
+namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
 {
     public class ShowRoomData
     {
