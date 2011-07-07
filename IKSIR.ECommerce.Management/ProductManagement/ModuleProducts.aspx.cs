@@ -4,23 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
-using IKSIR.ECommerce.Model.ProductModel;
 using IKSIR.ECommerce.Model.CommonModel;
+using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
+using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
+using IKSIR.ECommerce.Model.ProductModel;
 using IKSIR.ECommerce.Toolkit;
 using IKSIR.ECommerce.Model.SiteModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer;
-//using IKSIR.ECommerce.Toolkit;
 
 namespace IKSIR.ECommerce.Management.ProductManagement
 {
-    public partial class ProductCategories : System.Web.UI.Page
+    public partial class ModuleProducts : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
+                ddlModules.Enabled = false;
                 BindValues();
                 GetList();
             }
@@ -31,7 +32,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             ClearForm();
             lblId.Text = "Yeni Kayıt";
             pnlForm.Visible = true;
-            txtCategoryName.Focus();
+            txtProdCode.Focus();
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -43,6 +44,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     lblError.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.Green;
                     lblError.Text = "Item başarıyla güncellendi.";
+                    lblError2.Visible = false;
                     ClearForm();
                     pnlForm.Visible = false;
                     int count = 0;
@@ -62,6 +64,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     lblError.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.Green;
                     lblError.Text = "Item başarıyla kaydedildi.";
+                    lblError2.Visible = false;
                     ClearForm();
                     pnlForm.Visible = false;
                     GetList();
@@ -73,6 +76,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     lblError.Text = "Item kaydedilirken bir hata oluştu.";
                 }
             }
+
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -99,19 +103,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
         private void GetItem(int itemId)
         {
-            ProductCategory itemProduct = ProductCategoryData.Get(new ProductCategory() { Id = itemId });
+            var item = new ModuleProduct() { Id = Convert.ToInt32(itemId) };
+            ModuleProduct itemModuleProduct = ModuleProductData.GetById(item);
 
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            txtCategoryName.Text = itemProduct.Title.ToString();
-            txtDescription.Text = itemProduct.Description.ToString();
-            if (itemProduct.ParentCategory != null)
-                ddlParentCategories.SelectedValue = itemProduct.ParentCategory.Id.ToString();
-            else
-                ddlParentCategories.SelectedValue = "-1";
+            txtProdCode.Text = itemModuleProduct.Product.ProductCode.ToString();
+            ddlSites.SelectedValue = itemModuleProduct.Module.Site.Id.ToString();
+            ddlModules.SelectedValue = itemModuleProduct.Module.Id.ToString();
 
-            ddlSites.SelectedValue = itemProduct.Site.Id.ToString();
             pnlForm.Visible = true;
 
         }
@@ -138,26 +136,27 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private bool DeleteItem(int itemId)
         {
             bool returnValue = false;
-            var item = new ProductCategory() { Id = itemId };
+            var item = new ModuleProduct() { Id = itemId };
             try
             {
-                if (ProductCategoryData.Delete(item) < 0)
+                if (ModuleProductData.Delete(item) < 0)
                     returnValue = true;
-
                 SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete ProductCategory";
-                itemSystemLog.Content = "Id=" + itemId;
+                itemSystemLog.Title = "Delete ModuleProduct";
+                itemSystemLog.Content = "Id" + itemId;
                 itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
+
             }
             catch
             {
                 SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete ProductCategory";
-                itemSystemLog.Content = "Id=" + itemId;
+                itemSystemLog.Title = "Delete ModuleProduct";
+                itemSystemLog.Content = "Id" + itemId;
                 itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
+
             return returnValue;
         }
 
@@ -168,34 +167,30 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
         private void BindValues()
         {
-            List<ProductCategory> itemList = ProductCategoryData.GetParentProductCategoryList();
+            //Buralarda tüm kategoriler gelecek istediği kategorinin altına tanımlama yapabilecek.
+
             List<Site> itemListSite = SiteData.GetSiteList();
-
+            List<Module> itemList = ModuleData.GetModuleList();
             Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
-            Utility.BindDropDownList(ddlParentCategories, itemList, "Title", "Id");
-            Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
+            Utility.BindDropDownList(ddlModules, itemList, "Name", "Id");
+            Utility.BindDropDownList(ddlFilterModule, itemList, "Name", "Id");
 
-           
         }
 
         private void GetList()
         {
-            //TODO tayfun   linq kullanılan kısımlarda filtereleme yapılamıyor where kosulu calısmıyor
 
-            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            //where kosullu kısım calısmıyor
-            if (txtFilterCategoryName.Text != "")
-                itemList.Where(x => x.Title.Contains(txtFilterCategoryName.Text));
-            if (ddlFilterParentCategories.SelectedValue != "-1" && ddlFilterParentCategories.SelectedValue != "")
-            {
-                var item = new ProductCategory() { Id = Convert.ToInt32(ddlFilterParentCategories.SelectedValue) };
-                itemList.Where(x => x.ParentCategory == item);
-            }
-
+            List<ModuleProduct> itemList = ModuleProductData.GetModuleProductList();
+            object obj = new object();
+            obj = itemList[0].Product.ProductCode;
             
+            if (txtFilterProdCode.Text != "")
+                itemList.Where(x => x.Product.ProductCode.Contains(txtFilterProdCode.Text));
+            if (ddlFilterModule.SelectedValue != "-1" && ddlFilterModule.SelectedValue != "")
+            {
+                var item = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = Convert.ToInt32(ddlFilterModule.SelectedValue) };
+                itemList.Where(x => Convert.ToInt32(ddlFilterModule.SelectedValue) == item.Id);
+            }
             gvList.DataSource = itemList;
             gvList.DataBind();
         }
@@ -203,12 +198,12 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private bool InsertItem()
         {
             bool retValue = false;
-            var item = new ProductCategory();
-
+            var item = new ModuleProduct();
+            
             //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
+            //where kosullu kısım calıstıgında burasıdacalısacaktır
             // a nın altında b var dıyelım kosul olmadıgı ıcın ıkıncı bır b yı atıyor
-            // where kosullu kısı mcalıstırıldıgında burayada uygulanıp burasıda calıstırılacak
-            if (item.Description != null)
+            if (item.Product != null)
             {
                 lblError.Visible = true;
                 lblError.ForeColor = System.Drawing.Color.Red;
@@ -217,30 +212,34 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
             else
             {
-                if(ddlParentCategories.SelectedValue != "-1")
-                    item.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedValue) };
-
-                item.Title = txtCategoryName.Text.Trim();
-                item.Description = txtDescription.Text.Trim();
-                item.Site = new Site() { Id = Convert.ToInt32(ddlSites.SelectedValue) };
-                try
+                int ProductId = ProductData.FindProductId(txtProdCode.Text);
+                if (ProductId > 0)
                 {
-                    if (ProductCategoryData.Insert(item) > 0)
-                        retValue = true;
+                    try
+                    {
+                        if (ModuleProductData.Insert(ProductId, Convert.ToInt32(ddlModules.SelectedValue.ToString())) > 0)
+                            retValue = true;
 
-                    SystemLog itemSystemLog = new SystemLog();
-                    itemSystemLog.Title = "Insert ProductCategory";
-                    itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
-                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                    SystemLogData.Insert(itemSystemLog);
+                        SystemLog itemSystemLog = new SystemLog();
+                        itemSystemLog.Title = "Insert ModuleProduct";
+                        itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                        SystemLogData.Insert(itemSystemLog);
+                    }
+                    catch
+                    {
+                        SystemLog itemSystemLog = new SystemLog();
+                        itemSystemLog.Title = "Insert ModuleProduct";
+                        itemSystemLog.Content = "Name" + item.Product.ProductCode;
+                        itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                        SystemLogData.Insert(itemSystemLog);
+                    }
                 }
-                catch
+                else
                 {
-                    SystemLog itemSystemLog = new SystemLog();
-                    itemSystemLog.Title = "Insert ProductCategory";
-                    itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
-                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                    SystemLogData.Insert(itemSystemLog);
+                    lblError2.Visible = true;
+                    lblError2.ForeColor = System.Drawing.Color.Red;
+                    lblError2.Text = "Bu ürün koduna kayıtlı bir ürün bulunamamıştır. Lütfen Ürün kodunu kontrol edeiniz!";
+                    retValue = false;
                 }
             }
             return retValue;
@@ -249,46 +248,46 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private bool UpdateItem(int itemId)
         {
             bool retValue = false;
-            var itemProduct = new ProductCategory();
+            var itemModule = new Module();
 
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            itemProduct.Id = itemId;
-            itemProduct.Title = txtCategoryName.Text;
-            itemProduct.Description = txtDescription.Text;
-            itemProduct.Site = new Site() { Id = Convert.ToInt32(ddlSites.SelectedValue) };
-            if (ddlParentCategories.SelectedItem.Value != "")
-                itemProduct.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedItem.Value) };
 
             try
             {
-                if (ProductCategoryData.Update(itemProduct) < 0)
+                int ProductId = ProductData.FindProductId(txtProdCode.Text);
+                if (ModuleProductData.Update(ProductId, Convert.ToInt32(ddlModules.SelectedValue.ToString()),Convert.ToInt32(lblId.Text)) < 0)
                     retValue = true;
 
                 SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Insert ProductCategory";
-                itemSystemLog.Content = "Id=" + itemProduct.Id + "Title=" + itemProduct.Title + "Description =" + itemProduct.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
+                itemSystemLog.Title = "Update ModuleProduct";
+                itemSystemLog.Content = "Id" + itemModule.Id + "Name" + itemModule.Name;
                 itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
             catch
             {
                 SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Insert ProductCategory";
-                itemSystemLog.Content = "Id=" + itemProduct.Id + "Title=" + itemProduct.Title + "Description =" + itemProduct.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
+                itemSystemLog.Title = "Update ModuleProduct";
+                itemSystemLog.Content = "Id" + itemModule.Id + "Name" + itemModule.Name;
                 itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
+
             return retValue;
         }
 
         private void ClearForm()
         {
-            ddlParentCategories.SelectedIndex = -1;
-            txtCategoryName.Text = string.Empty;
-            txtDescription.Text = string.Empty;
+            
+            ddlModules.SelectedIndex = -1;
+            txtProdCode.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
+        }
+
+        protected void ddlSites_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Module> itemList = ModuleData.GetModuleListBySiteId(Convert.ToInt32(ddlSites.SelectedValue));
+            Utility.BindDropDownList(ddlModules, itemList, "Name", "Id");
+            ddlModules.Enabled = true;
         }
 
     }

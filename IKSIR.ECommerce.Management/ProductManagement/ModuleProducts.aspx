@@ -1,21 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
-    AutoEventWireup="true" CodeBehind="ProductCategories.aspx.cs" Inherits="IKSIR.ECommerce.Management.ProductManagement.ProductCategories"
+    AutoEventWireup="true" CodeBehind="ModuleProducts.aspx.cs" Inherits="IKSIR.ECommerce.Management.ProductManagement.ModuleProducts"
     Theme="ManagementGridView" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
-        Ürün Kategorileri</h2>
+        Sabit Değerleri</h2>
     <p>
-        Ürünler için kategori tanımlama güncelleme ekranı.
+        Sistemdeki sabitlerin değerlerini tanımlamamayı sağlayan ekranlardır.
     </p>
     <table id="tblMngForm">
         <tr>
             <td align="left">
                 <asp:Label runat="server" ID="lblError" Visible="false"></asp:Label>
+                 <asp:Label runat="server" ID="lblError2" Visible="false"></asp:Label>
+                
             </td>
-            <td style="text-align: right">
+            <td style="text-align:right">
                 <asp:LinkButton runat="server" ID="lbtnNew" Text="Yeni Kayıt" OnClick="lbtnNew_Click"></asp:LinkButton>
             </td>
         </tr>
@@ -25,8 +27,7 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Form</strong>
-                            </td>
+                                <strong>Form</strong></td>
                         </tr>
                         <tr>
                             <td>
@@ -43,71 +44,62 @@
                         </tr>
                         <tr>
                             <td>
-                                Üst Kategori
-                            </td>
-                            <td>
-                                :
-                            </td>
-                            <td>
-                                <asp:DropDownList runat="server" ID="ddlParentCategories">
-                                </asp:DropDownList>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Kategori Adı
-                            </td>
-                            <td>
-                                :
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtCategoryName"></asp:TextBox>
-                            </td>
-                            <td>
-                                <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtCategoryName"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Kategori Adı alanı zorunlu"
-                                    ForeColor="Red">*</asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Açıklama
-                            </td>
-                            <td>
-                                :
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtDescription" TextMode="MultiLine"></asp:TextBox>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
                                 Site
                             </td>
                             <td>
                                 :
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" ID="ddlSites">
+                                <asp:DropDownList runat="server" ID="ddlSites" AutoPostBack="true" 
+                                    onselectedindexchanged="ddlSites_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="ddlSites"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Site seçmelisiniz"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Enum seçmelisiniz"
+                                    ForeColor="Red">*</asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                           <tr>
+                            <td>
+                                Modul
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:DropDownList runat="server" ID="ddlModules" AutoPostBack="true">
+                                </asp:DropDownList>
+                            </td>
+                            <td>
+                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="ddlModules"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Enum seçmelisiniz"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align: center">
+                            <td>
+                               Ürün Kodu
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtProdCode"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtProdCode"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Ürün Kod alanı zorunludur"
+                                    ForeColor="Red">*</asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align:center">
                                 <asp:ValidationSummary runat="server" ID="vsForm" ValidationGroup="VGForm" ForeColor="Red" />
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align: center">
+                            <td colspan="4" style="text-align:center">
                                 <asp:Button runat="server" ID="btnSave" Text="Kaydet" ValidationGroup="VGForm" OnClick="btnSave_Click" />
                                 &nbsp;<asp:Button runat="server" ID="btnCancel" Text="Vazgeç" OnClick="btnCancel_Click" />
                             </td>
@@ -123,13 +115,13 @@
                         </tr>
                         <tr>
                             <td>
-                                Üst Kategori
+                                Modül
                             </td>
                             <td>
                                 :
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" ID="ddlFilterParentCategories">
+                                <asp:DropDownList runat="server" ID="ddlFilterModule">
                                 </asp:DropDownList>
                             </td>
                             <td rowspan="2">
@@ -138,13 +130,13 @@
                         </tr>
                         <tr>
                             <td>
-                                Kategori Adı
+                                Ürün Kodu
                             </td>
                             <td>
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtFilterCategoryName"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtFilterProdCode"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
@@ -154,16 +146,12 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Liste</strong>
-                            </td>
+                                <strong>Liste</strong></td>
                         </tr>
                         <tr>
                             <td colspan="4">
                                 <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
                                     GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" EmptyDataText="Listede gösterilecek kayıt bulunamadı">
-                                    <EmptyDataTemplate>
-                                        Kayıt Bulunamadı
-                                    </EmptyDataTemplate>
                                     <Columns>
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>
@@ -175,11 +163,11 @@
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Id" />
-                                        <asp:BoundField DataField="Title" HeaderText="Title" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="Title" />
-                                        <asp:BoundField DataField="Description" HeaderText="Description" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="Description" />
-                                        <asp:TemplateField HeaderText="Value" Visible="false">
+                                        <asp:BoundField DataField="ProductName" HeaderText="Ürün" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="ProductName" />
+                                       <asp:BoundField DataField="ModuleName" HeaderText="Modül" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="ModuleName" />
+                                        <asp:TemplateField HeaderText="Id" Visible="false">
                                             <ItemTemplate>
                                             </ItemTemplate>
                                         </asp:TemplateField>
