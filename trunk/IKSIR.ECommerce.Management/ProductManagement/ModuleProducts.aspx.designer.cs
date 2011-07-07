@@ -10,7 +10,7 @@
 namespace IKSIR.ECommerce.Management.ProductManagement {
     
     
-    public partial class ProductCategories {
+    public partial class ModuleProducts {
         
         /// <summary>
         /// lblError control.
@@ -20,6 +20,15 @@ namespace IKSIR.ECommerce.Management.ProductManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
+        
+        /// <summary>
+        /// lblError2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError2;
         
         /// <summary>
         /// lbtnNew control.
@@ -49,42 +58,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement {
         protected global::System.Web.UI.WebControls.Label lblId;
         
         /// <summary>
-        /// ddlParentCategories control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlParentCategories;
-        
-        /// <summary>
-        /// txtCategoryName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCategoryName;
-        
-        /// <summary>
-        /// rfv23 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv23;
-        
-        /// <summary>
-        /// txtDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescription;
-        
-        /// <summary>
         /// ddlSites control.
         /// </summary>
         /// <remarks>
@@ -101,6 +74,42 @@ namespace IKSIR.ECommerce.Management.ProductManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv1;
+        
+        /// <summary>
+        /// ddlModules control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlModules;
+        
+        /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        
+        /// <summary>
+        /// txtProdCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtProdCode;
+        
+        /// <summary>
+        /// rfv23 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv23;
         
         /// <summary>
         /// vsForm control.
@@ -139,13 +148,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement {
         protected global::System.Web.UI.WebControls.Panel pnlFilter;
         
         /// <summary>
-        /// ddlFilterParentCategories control.
+        /// ddlFilterModule control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFilterParentCategories;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFilterModule;
         
         /// <summary>
         /// btnFilter control.
@@ -157,13 +166,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement {
         protected global::System.Web.UI.WebControls.Button btnFilter;
         
         /// <summary>
-        /// txtFilterCategoryName control.
+        /// txtFilterProdCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFilterCategoryName;
+        protected global::System.Web.UI.WebControls.TextBox txtFilterProdCode;
         
         /// <summary>
         /// pnlList control.
