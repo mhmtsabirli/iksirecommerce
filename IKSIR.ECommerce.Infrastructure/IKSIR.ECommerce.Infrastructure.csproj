@@ -49,6 +49,7 @@
     <Compile Include="DataLayer\CommonDataLayer\AddressData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\CityData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\CommentData.cs" />
+    <Compile Include="DataLayer\CommonDataLayer\ModuleData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\CountryData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\DistrictData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\EnumData.cs" />
@@ -64,6 +65,10 @@
     <Compile Include="DataLayer\ProductDataLayer\ProductCategoryData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ProductData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ProductPropertyData.cs" />
+    <Compile Include="DataLayer\ProductDataLayer\ModuleProductData.cs" />
+    <Compile Include="DataLayer\SiteDataLayer\ContactFormData.cs" />
+    <Compile Include="DataLayer\SiteDataLayer\SiteModuleData.cs" />
+    <Compile Include="DataLayer\SiteDataLayer\SiteCategoryData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\ShowRoomData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\SiteData.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
