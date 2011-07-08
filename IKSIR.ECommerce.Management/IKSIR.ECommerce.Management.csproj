@@ -67,9 +67,12 @@
   <ItemGroup>
     <Content Include="Admin\Admin.aspx" />
     <Content Include="Admin\Right.aspx" />
+    <Content Include="Common\ContactForm.aspx" />
     <Content Include="Common\Enums.aspx" />
     <Content Include="Common\EnumValues.aspx" />
+    <Content Include="Common\Modules.aspx" />
     <Content Include="Common\Properties.aspx" />
+    <Content Include="Common\Sites.aspx" />
     <Content Include="Css\Management.css" />
     <Content Include="Css\ManagementTopMenu.css" />
     <Content Include="Default.aspx" />
@@ -80,6 +83,7 @@
     <Content Include="Images\Reports.png" />
     <Content Include="Images\Settings.png" />
     <Content Include="Images\Stock.png" />
+    <Content Include="ProductManagement\ModuleProducts.aspx" />
     <Content Include="ProductManagement\ProductCategories.aspx" />
     <Content Include="ProductManagement\Products.aspx" />
     <Content Include="Scripts\jquery-1.3.2.min.js" />
@@ -114,6 +118,12 @@
     <Compile Include="Admin\Right.aspx.designer.cs">
       <DependentUpon>Right.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Common\ContactForm.aspx.cs">
+      <DependentUpon>ContactForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ContactForm.aspx.designer.cs">
+      <DependentUpon>ContactForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Common\Enums.aspx.cs">
       <DependentUpon>Enums.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -128,12 +138,24 @@
     <Compile Include="Common\EnumValues.aspx.designer.cs">
       <DependentUpon>EnumValues.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Common\Modules.aspx.cs">
+      <DependentUpon>Modules.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Modules.aspx.designer.cs">
+      <DependentUpon>Modules.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Common\Properties.aspx.cs">
       <DependentUpon>Properties.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Common\Properties.aspx.designer.cs">
       <DependentUpon>Properties.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Sites.aspx.cs">
+      <DependentUpon>Sites.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Sites.aspx.designer.cs">
+      <DependentUpon>Sites.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -148,6 +170,12 @@
     </Compile>
     <Compile Include="MasterPage\MasterManagement.Master.designer.cs">
       <DependentUpon>MasterManagement.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ProductManagement\ModuleProducts.aspx.cs">
+      <DependentUpon>ModuleProducts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductManagement\ModuleProducts.aspx.designer.cs">
+      <DependentUpon>ModuleProducts.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductManagement\ProductCategories.aspx.cs">
       <DependentUpon>ProductCategories.aspx</DependentUpon>
