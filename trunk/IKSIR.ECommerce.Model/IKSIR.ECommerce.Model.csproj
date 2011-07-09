@@ -45,6 +45,7 @@
     <Compile Include="CommonModel\Address.cs" />
     <Compile Include="CommonModel\City.cs" />
     <Compile Include="CommonModel\Comment.cs" />
+    <Compile Include="CommonModel\StaticPage.cs" />
     <Compile Include="CommonModel\Module.cs" />
     <Compile Include="CommonModel\Country.cs" />
     <Compile Include="CommonModel\District.cs" />
