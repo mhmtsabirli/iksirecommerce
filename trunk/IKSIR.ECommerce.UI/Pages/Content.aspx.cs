@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
+using IKSIR.ECommerce.Model.CommonModel;
+using IKSIR.ECommerce.Infrastructure.StaticData;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -28,7 +30,8 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             try
             {
-                var item = StaticPageData.Get(contentId);
+                var itemasd = System.Configuration.ConfigurationSettings.AppSettings["IdevitProdConnectionString"].ToString();
+                StaticPage item = StaticPageData.Get(contentId);
                 Page.Title += item.Title;
                 //lblTitle.Text = item.Title;
                 //lblDesciption.Text = item.D

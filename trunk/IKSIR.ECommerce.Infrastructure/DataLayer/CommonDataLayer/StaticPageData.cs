@@ -15,19 +15,26 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
         public static StaticPage Get(int id)
         {
             var returnValue = new StaticPage();
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", id));
-            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetStaticPage", parameters);
-            dr.Read();
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Site = SiteDataLayer.SiteData.Get(new Model.SiteModel.Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
-            returnValue.PageContent = DBHelper.StringValue(dr["PageContent"].ToString());
-            dr.Close();
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@Id", id));
+                SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetStaticPage", parameters);
+                dr.Read();
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Site = SiteDataLayer.SiteData.Get(new Model.SiteModel.Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
+                returnValue.PageContent = DBHelper.StringValue(dr["PageContent"].ToString());
+                dr.Close();
+            }
+            catch (Exception exception)
+            {
+                throw;
+            }
             return returnValue;
         }
 
