@@ -182,7 +182,7 @@
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
                                                 <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
-                                                    OnClientClick="javascript:return confirm('Are you sure you want to delete this row?');"
+                                                    OnClientClick="javascript:return confirm('Bu kaydı silmek istediğinize emin misiniz?');"
                                                     CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>

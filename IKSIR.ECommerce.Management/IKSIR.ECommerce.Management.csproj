@@ -68,13 +68,16 @@
     <Content Include="Admin\Admin.aspx" />
     <Content Include="Admin\Right.aspx" />
     <Content Include="Common\ContactForm.aspx" />
+    <Content Include="Common\StaticPages.aspx" />
     <Content Include="Common\Enums.aspx" />
     <Content Include="Common\EnumValues.aspx" />
     <Content Include="Common\Modules.aspx" />
     <Content Include="Common\Properties.aspx" />
     <Content Include="Common\Sites.aspx" />
+    <Content Include="Css\RadEditor.css" />
     <Content Include="Css\Management.css" />
     <Content Include="Css\ManagementTopMenu.css" />
+    <Content Include="Css\RadEditorToolsFile.xml" />
     <Content Include="Default.aspx" />
     <Content Include="Images\Cart.png" />
     <Content Include="Images\Comments.png" />
@@ -120,9 +123,17 @@
     </Compile>
     <Compile Include="Common\ContactForm.aspx.cs">
       <DependentUpon>ContactForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Common\ContactForm.aspx.designer.cs">
       <DependentUpon>ContactForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\StaticPages.aspx.cs">
+      <DependentUpon>StaticPages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\StaticPages.aspx.designer.cs">
+      <DependentUpon>StaticPages.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\Enums.aspx.cs">
       <DependentUpon>Enums.aspx</DependentUpon>
@@ -140,6 +151,7 @@
     </Compile>
     <Compile Include="Common\Modules.aspx.cs">
       <DependentUpon>Modules.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Common\Modules.aspx.designer.cs">
       <DependentUpon>Modules.aspx</DependentUpon>
@@ -153,6 +165,7 @@
     </Compile>
     <Compile Include="Common\Sites.aspx.cs">
       <DependentUpon>Sites.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Common\Sites.aspx.designer.cs">
       <DependentUpon>Sites.aspx</DependentUpon>
@@ -173,6 +186,7 @@
     </Compile>
     <Compile Include="ProductManagement\ModuleProducts.aspx.cs">
       <DependentUpon>ModuleProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ProductManagement\ModuleProducts.aspx.designer.cs">
       <DependentUpon>ModuleProducts.aspx</DependentUpon>
