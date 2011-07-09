@@ -63,6 +63,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                              ? 0
                              : Convert.ToInt32((sender as LinkButton).CommandArgument);
 
+            btnSave.CommandArgument = itemId.ToString();
             GetItem(itemId);
         }
         protected void lbtnDocumentEdit_Click(object sender, EventArgs e)
@@ -75,6 +76,20 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                              ? 0
                              : Convert.ToInt32((sender as LinkButton).CommandArgument);
             if (!GetProductDocument(documentId))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya bilgilerini getirirken hata oluştu!</span><br />";
+            }
+        }
+
+        protected void lbtnPropertyEdit_Click(object sender, EventArgs e)
+        {
+            ClearForm();
+            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
+            gvList.SelectedIndex = index;
+            var PropertyId = (sender as LinkButton).CommandArgument == ""
+                             ? 0
+                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
+            if (!GetProductProperty(PropertyId))
             {
                 divAlert.InnerHtml += "<span style=\"color:Red\">Dosya bilgilerini getirirken hata oluştu!</span><br />";
             }
@@ -453,7 +468,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 itemProduct.ProductCode = txtProductCode.Text;
                 itemProduct.Title = txtProductName.Text;
                 int result = ProductData.Update(itemProduct);
-                if (result > 0)
+                if (result != 1)
                     retValue = true;
             }
             return retValue;
