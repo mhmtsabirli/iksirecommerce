@@ -49,6 +49,7 @@
     <Compile Include="DataLayer\CommonDataLayer\AddressData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\CityData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\CommentData.cs" />
+    <Compile Include="DataLayer\CommonDataLayer\StaticPageData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\ModuleData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\CountryData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\DistrictData.cs" />

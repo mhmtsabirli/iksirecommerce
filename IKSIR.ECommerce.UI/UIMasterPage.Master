@@ -65,11 +65,11 @@
     <div class="header">
         <div class="top_menu">
             <ul>
-                <li style="border: 0;"><a href="/Pages/Content.aspx?contentid=1">Kurumsal</a></li>
-                <li><a href="/Pages/Content.aspx?contentid=1">Müşteri Hizmetleri</a></li>
-                <li><a href="/Pages/Content.aspx?contentid=1">Sipariş Takibi</a></li>
-                <li><a href="/Pages/Content.aspx?contentid=1">Sık Sorulan Sorular</a></li>
-                <li><a href="/Pages/Content.aspx?contentid=1">Yardım</a></li>
+                <li style="border: 0;"><a href="/Pages/Content.aspx?cid=2">Kurumsal</a></li>
+                <li><a href="/Pages/Content.aspx?cid=3">Müşteri Hizmetleri</a></li>
+                <li><a href="/Pages/Content.aspx?cid=5">Sipariş Takibi</a></li>
+                <li><a href="/Pages/Content.aspx?cid=6">Sık Sorulan Sorular</a></li>
+                <li><a href="/Pages/Content.aspx?cid=7">Yardım</a></li>
             </ul>
         </div>
         <div class="logo">
@@ -88,7 +88,7 @@
     <div class="navbar">
         <div class="nav_menu">
             <ul>
-                <li><a style="background: none;" href="Default.aspx">Anasayfa</a></li>
+                <li><a style="background: none;" href="/Default.aspx">Anasayfa</a></li>
                 <li><a href="/Pages/ProductList.aspx?catid=2">Yeni Ürünler</a></li>
                 <li><a href="/Pages/ProductList.aspx?catid=3">Kampanyalı Ürünler</a></li>
                 <li><a href="/Pages/ProductList.aspx?catid=4">İndirimli Ürünler</a></li>
