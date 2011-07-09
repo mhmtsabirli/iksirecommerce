@@ -151,6 +151,7 @@
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="UserControls\UCNewsFromUs.ascx" />
     <Content Include="UserControls\UCCampaignProducts.ascx" />
     <Content Include="UserControls\UCMostVisitedProducts.ascx" />
     <Content Include="UserControls\UCBestSellingProducts.ascx" />
@@ -228,6 +229,13 @@
     </Compile>
     <Compile Include="UIMasterPage.Master.designer.cs">
       <DependentUpon>UIMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCNewsFromUs.ascx.cs">
+      <DependentUpon>UCNewsFromUs.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCNewsFromUs.ascx.designer.cs">
+      <DependentUpon>UCNewsFromUs.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCCampaignProducts.ascx.cs">
       <DependentUpon>UCCampaignProducts.ascx</DependentUpon>

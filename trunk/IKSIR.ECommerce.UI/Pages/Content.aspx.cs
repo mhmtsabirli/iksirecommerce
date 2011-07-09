@@ -23,6 +23,12 @@ namespace IKSIR.ECommerce.UI.Pages
                     if (int.TryParse(Request.QueryString["cid"].ToString(), out contentId))
                         GetContent(contentId);
                 }
+                else if (Request.QueryString["newsid"] != null && Request.QueryString["newsid"].ToString() != "")
+                {
+                    int newsid;
+                    if (int.TryParse(Request.QueryString["newsid"].ToString(), out newsid))
+                        GetNews(newsid);
+                }
             }
         }
 
@@ -30,11 +36,21 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             try
             {
-                var itemasd = System.Configuration.ConfigurationSettings.AppSettings["IdevitProdConnectionString"].ToString();
                 StaticPage item = StaticPageData.Get(contentId);
                 Page.Title += item.Title;
-                //lblTitle.Text = item.Title;
-                //lblDesciption.Text = item.D
+                divContent.InnerHtml = item.PageContent;
+            }
+            catch (Exception exception)
+            {
+                throw;
+            }
+        }
+        private void GetNews(int newsid)
+        {
+            try
+            {
+                News item = NewsData.Get(newsid);
+                Page.Title += item.Title;
                 divContent.InnerHtml = item.PageContent;
             }
             catch (Exception exception)

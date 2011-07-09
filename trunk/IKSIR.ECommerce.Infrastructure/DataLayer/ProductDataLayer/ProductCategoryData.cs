@@ -93,7 +93,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateProductCategory", parameters);
             returnValue = SiteCategoryData.Update(itemProductCategory.Site.Id, itemProductCategory.Id);
-            
+
             return returnValue;
         }
 
@@ -130,11 +130,12 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
+                if (DBHelper.IntValue(dr["ParentId"].ToString()) != 0)
+                    item.ParentCategory = Get(DBHelper.IntValue(dr["ParentId"].ToString()));
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
                 SiteCategory siteCategory = SiteCategoryData.Get(DBHelper.IntValue(dr["Id"].ToString()));
                 item.Site = siteCategory.Site;
-                //item.ParentCategory = GetProductCategoryById(DBHelper.IntValue(dr["Id"].ToString())); =>ayhant
                 itemProductCategoryList.Add(item);
             }
 
@@ -147,10 +148,6 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             List<ProductCategory> itemProductCategoryList = null;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-            //if (itemProductCategory != null)
-            //    parameters.Add(new SqlParameter("@Id", itemProductCategory.Id));
-            //if (itemProductCategory.ParentCategory != null)
-            //    parameters.Add(new SqlParameter("@ProductCategoryId", itemProductCategory.ParentCategory.Id));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetParentProductCategory", parameters);
             itemProductCategoryList = new List<ProductCategory>();
 
@@ -164,9 +161,10 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
+                if (DBHelper.IntValue(dr["ParentId"].ToString()) != 0)
+                    item.ParentCategory = Get(DBHelper.IntValue(dr["ParentId"].ToString()));
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
-                //item.ParentCategory = GetProductCategoryById(DBHelper.IntValue(dr["Id"].ToString())); =>ayhant
                 SiteCategory siteCategory = SiteCategoryData.Get(DBHelper.IntValue(dr["Id"].ToString()));
                 item.Site = siteCategory.Site;
                 itemProductCategoryList.Add(item);
@@ -175,7 +173,6 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             dr.Close();
             return itemProductCategoryList;
         }
-
 
         public static List<ProductCategory> GetProductCategoryById(int productCategoryId)
         {

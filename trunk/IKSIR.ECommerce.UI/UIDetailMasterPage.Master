@@ -87,13 +87,13 @@
     <div class="navbar">
         <div class="nav_menu">
             <ul>
-                <li><a style="background: none;" href="#">Anasayfa</a></li>
-                <li><a href="#">Yeni Ürünler</a></li>
-                <li><a href="#">Kampanyalı Ürünler</a></li>
-                <li><a href="#">İndirimli Ürünler</a></li>
-                <li><a href="#">Yeni Üyelik</a></li>
-                <li><a href="#">Hesabım</a></li>
-                <li><a href="#">İletişim</a></li>
+                <li><a style="background: none;" href="/Default.aspx">Anasayfa</a></li>
+                <li><a href="/Pages/ProductList.aspx?modid=4">Yeni Ürünler</a></li>
+                <li><a href="/Pages/ProductList.aspx?modid=5">Kampanyalı Ürünler</a></li>
+                <li><a href="/Pages/ProductList.aspx?modid=6">İndirimli Ürünler</a></li>
+                <li><a href="/Pages/Register.aspx">Yeni Üyelik</a></li>
+                <li><a href="/UserPanel/MyAccount.aspx">Hesabım</a></li>
+                <li><a href="/Pages/Content.aspx?contentid=1">İletişim</a></li>
             </ul>
             <div class="clear">
             </div>
@@ -213,7 +213,7 @@
                 <a href="#">
                     <img src="images/sidebar_advertisement.jpg" alt="" /></a></div>
         </div>
-        asd
+        &nbsp;
         <div class="clear">
         </div>
     </div>

@@ -95,7 +95,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             return returnValue;
         }
 
-        public static int Update(int ProductId, int ModuleId,int Id)
+        public static int Update(int ProductId, int ModuleId, int Id)
         {
             var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -149,6 +149,5 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             dr.Close();
             return itemModuleProductList;
         }
-
     }
 }
