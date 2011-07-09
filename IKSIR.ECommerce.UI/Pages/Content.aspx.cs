@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -25,10 +26,18 @@ namespace IKSIR.ECommerce.UI.Pages
 
         private void GetContent(int contentId)
         {
-            Page.Title += "Title";
-            lblTitle.Text = "Title";
-            lblDesciption.Text = "txtDescripiton";
-            divContent.InnerHtml = "GetContent" + contentId;
+            try
+            {
+                var item = StaticPageData.Get(contentId);
+                Page.Title += item.Title;
+                //lblTitle.Text = item.Title;
+                //lblDesciption.Text = item.D
+                divContent.InnerHtml = item.PageContent;
+            }
+            catch (Exception exception)
+            {
+                throw;
+            }
         }
     }
 }
