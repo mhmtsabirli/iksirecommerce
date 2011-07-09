@@ -7,3 +7,7 @@ C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerc
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Model.dll
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Infrastructure.pdb
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Model.pdb
+C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Management.dll
+C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Toolkit.dll
+C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Management.pdb
+C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Toolkit.pdb

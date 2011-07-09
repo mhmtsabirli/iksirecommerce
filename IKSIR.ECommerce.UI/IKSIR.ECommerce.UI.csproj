@@ -279,9 +279,17 @@
       <Project>{815B64C7-A938-46A9-B1E0-288579B3B391}</Project>
       <Name>IKSIR.ECommerce.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IKSIR.ECommerce.Management\IKSIR.ECommerce.Management.csproj">
+      <Project>{93D8C78C-C5C2-4FF1-9269-9A7D02CFF58E}</Project>
+      <Name>IKSIR.ECommerce.Management</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IKSIR.ECommerce.Model\IKSIR.ECommerce.Model.csproj">
       <Project>{65AE3246-AEEF-4074-AD01-A84D1C67B011}</Project>
       <Name>IKSIR.ECommerce.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IKSIR.ECommerce.Toolkit\IKSIR.ECommerce.Toolkit.csproj">
+      <Project>{F710ED4B-34DA-47D5-BEAB-86F1062A123E}</Project>
+      <Name>IKSIR.ECommerce.Toolkit</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
