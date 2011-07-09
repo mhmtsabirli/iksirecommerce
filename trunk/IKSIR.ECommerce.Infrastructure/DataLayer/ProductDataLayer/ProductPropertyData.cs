@@ -17,7 +17,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             var returnValue = new ProductProperty();
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", id));
-            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProduct", parameters);
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductProperties", parameters);
             dr.Read();
             returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
             returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
@@ -54,6 +54,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@PropertyId", DBHelper.IntValue(itemProductProperty.Property.Id)));
             parameters.Add(new SqlParameter("@ProductId", DBHelper.IntValue(itemProductProperty.ProductId)));
             parameters.Add(new SqlParameter("@Value", DBHelper.StringValue(itemProductProperty.Value)));
+            parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateProductProperty", parameters);
             return returnValue;
         }

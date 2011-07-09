@@ -59,7 +59,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters[0].Direction = ParameterDirection.Output;
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertProduct", parameters));
-            returnValue = Convert.ToInt32(parameters[0].Value);
+            //returnValue = Convert.ToInt32(parameters[0].Value);
             return returnValue;
         }
 
@@ -76,7 +76,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@AlertDate", DBHelper.DateValue(itemProduct.AlertDate)));
             parameters.Add(new SqlParameter("@ProductCategoryId", DBHelper.IntValue(itemProduct.ProductCategory.Id)));
             parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemProduct.EditAdminId)));
-
+            parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
 
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateProduct", parameters);
             return returnValue;
