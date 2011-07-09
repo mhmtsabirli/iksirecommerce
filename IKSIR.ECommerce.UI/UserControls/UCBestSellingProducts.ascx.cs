@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
-
+using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
+using IKSIR.ECommerce.Model.ProductModel;
 namespace IKSIR.ECommerce.UI.UserControls
 {
     public partial class UCBestSellingProducts : System.Web.UI.UserControl
@@ -21,11 +22,17 @@ namespace IKSIR.ECommerce.UI.UserControls
         private void GetItems()
         {
             StringBuilder sbMenuItems = new StringBuilder();
+            ModuleProduct itemModuleProduct = new ModuleProduct() { Module = new Model.CommonModel.Module() { Id = 1 } };
+            var itemModuleProductList = ModuleProductData.GetModuleProductList(itemModuleProduct);
+
             sbMenuItems.AppendLine("<ul>");
-            sbMenuItems.AppendLine("<li><a href=\"#\">Ürün 1</a></li>");
-            sbMenuItems.AppendLine("<li><a href=\"#\">Ürün 2</a></li>");
-            sbMenuItems.AppendLine("<li><a href=\"#\">Ürün 3</a></li>");
+
+            foreach (var item in itemModuleProductList)
+            {
+                sbMenuItems.AppendLine("<li><a href=\"../Pages/ProductDetails.aspx?pid=" + item.Product.Id.ToString() + "\">" + item.ProductName + "</a></li>");
+            }
             sbMenuItems.AppendLine("</ul>");
+
             divMenuItems.InnerHtml = sbMenuItems.ToString();
         }
     }

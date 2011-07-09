@@ -44,20 +44,19 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             parameters.Add(new SqlParameter("@CategoryId", CategoryId));
 
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetSiteCategory", parameters);
-            dr.Read();
-            //TODO => tayfun
-
-            returnValue.Site = SiteData.Get(new Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["CategoryId"].ToString()));
-
+            while (dr.Read())
+            {
+                returnValue.Site = SiteData.Get(new Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["CategoryId"].ToString()));
+            }
             dr.Close();
             return returnValue;
         }
-        public static int Insert(int SiteId,int CategoryId)
+        public static int Insert(int SiteId, int CategoryId)
         {
             var returnValue = 0;
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -65,7 +64,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             parameters.Add(new SqlParameter("@SiteId", SiteId));
             parameters.Add(new SqlParameter("@CategoryId", CategoryId));
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(0)));
-          
+
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertSiteCategory", parameters));
             return returnValue;

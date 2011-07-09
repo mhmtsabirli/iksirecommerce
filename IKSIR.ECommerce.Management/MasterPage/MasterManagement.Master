@@ -68,6 +68,7 @@
                                     <li><a href="../Common/Modules.aspx">Modüller</a></li>
                                     <li><a href="../ProductManagement/ModuleProducts.aspx">Modüle Ürün Atama</a></li>
                                     <li><a href="../Common/StaticPages.aspx">Statik Sayfalar</a></li>
+                                    <li><a href="../Common/NewsFromUs.aspx">Bizden Haberler</a></li>
                                 </ul>
                             </li>
                         </ul>

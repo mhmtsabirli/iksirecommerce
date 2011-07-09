@@ -5,12 +5,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
-using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
-using IKSIR.ECommerce.Model.ProductModel;
+using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
+using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.UI.UserControls
 {
-    public partial class UCCampaignProducts : System.Web.UI.UserControl
+    public partial class UCNewsFromUs : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,14 +23,17 @@ namespace IKSIR.ECommerce.UI.UserControls
         private void GetItems()
         {
             StringBuilder sbMenuItems = new StringBuilder();
-            ModuleProduct itemModuleProduct = new ModuleProduct() { Module = new Model.CommonModel.Module() { Id = 3 } };
-            var itemModuleProductList = ModuleProductData.GetModuleProductList(itemModuleProduct);
+            var itemList = NewsData.GetList();
 
             sbMenuItems.AppendLine("<ul>");
 
-            foreach (var item in itemModuleProductList)
+            int i = 0;
+            foreach (var item in itemList)
             {
-                sbMenuItems.AppendLine("<li><a href=\"../Pages/ProductDetails.aspx?pid=" + item.Product.Id.ToString() + "\">" + item.ProductName + "</a></li>");
+                i++;                
+                sbMenuItems.AppendLine("<li><span>" + item.CreateDate.ToString("dd/MM/yyyy") + "</span> <a href=\"../Pages/Content.aspx?newsid=" + item.Id.ToString() + "\">" + item.Title + "</a></li>");
+                if (i > 5)
+                    break;
             }
             sbMenuItems.AppendLine("</ul>");
 

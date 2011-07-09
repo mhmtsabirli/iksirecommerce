@@ -68,6 +68,7 @@
     <Content Include="Admin\Admin.aspx" />
     <Content Include="Admin\Right.aspx" />
     <Content Include="Common\ContactForm.aspx" />
+    <Content Include="Common\NewsFromUs.aspx" />
     <Content Include="Common\StaticPages.aspx" />
     <Content Include="Common\Enums.aspx" />
     <Content Include="Common\EnumValues.aspx" />
@@ -127,6 +128,13 @@
     </Compile>
     <Compile Include="Common\ContactForm.aspx.designer.cs">
       <DependentUpon>ContactForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\NewsFromUs.aspx.cs">
+      <DependentUpon>NewsFromUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\NewsFromUs.aspx.designer.cs">
+      <DependentUpon>NewsFromUs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\StaticPages.aspx.cs">
       <DependentUpon>StaticPages.aspx</DependentUpon>
