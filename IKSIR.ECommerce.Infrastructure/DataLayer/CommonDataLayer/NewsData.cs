@@ -18,15 +18,17 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetNews", parameters);
-            dr.Read();
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Site = SiteDataLayer.SiteData.Get(new Model.SiteModel.Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
-            returnValue.PageContent = DBHelper.StringValue(dr["PageContent"].ToString());
+            while (dr.Read())
+            {
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Site = SiteDataLayer.SiteData.Get(new Model.SiteModel.Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
+                returnValue.PageContent = DBHelper.StringValue(dr["PageContent"].ToString());
+            }
             dr.Close();
             return returnValue;
         }

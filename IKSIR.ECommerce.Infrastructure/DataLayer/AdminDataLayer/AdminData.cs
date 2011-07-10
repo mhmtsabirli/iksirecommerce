@@ -22,22 +22,23 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             parameters.Add(new SqlParameter("@Id", itemAdmin.Id));
 
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetAdmin", parameters);
-            dr.Read();
-            //TODO => tayfun
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.Name = DBHelper.StringValue(dr["Name"].ToString());
-            returnValue.Email = DBHelper.StringValue(dr["Email"].ToString());
-            returnValue.Password = DBHelper.StringValue(dr["Password"].ToString());
-            returnValue.LastLoginDate = DBHelper.DateValue(dr["LastLoginDate"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.UserName = DBHelper.StringValue(dr["UserName"].ToString());
-            returnValue.TryCount = DBHelper.IntValue(dr["TryCount"].ToString());
-            returnValue.Status = EnumValueData.Get(new EnumValue(){Id = DBHelper.IntValue(dr["Status"].ToString())});
-            returnValue.Site = SiteData.Get(new Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
-
+            while (dr.Read())
+            {
+                //TODO => tayfun
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.Name = DBHelper.StringValue(dr["Name"].ToString());
+                returnValue.Email = DBHelper.StringValue(dr["Email"].ToString());
+                returnValue.Password = DBHelper.StringValue(dr["Password"].ToString());
+                returnValue.LastLoginDate = DBHelper.DateValue(dr["LastLoginDate"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.UserName = DBHelper.StringValue(dr["UserName"].ToString());
+                returnValue.TryCount = DBHelper.IntValue(dr["TryCount"].ToString());
+                returnValue.Status = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["Status"].ToString()) });
+                returnValue.Site = SiteData.Get(new Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
+            }
             dr.Close();
             return returnValue;
         }

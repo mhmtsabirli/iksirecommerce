@@ -19,14 +19,15 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             parameters.Add(new SqlParameter("@Id", itemRight.Id));
 
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetRight", parameters);
-            dr.Read();
-            //TODO => tayfun
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
-            returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            
+            while (dr.Read())
+            {
+                //TODO => tayfun
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
+                returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+            }
             dr.Close();
             return returnValue;
         }

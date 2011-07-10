@@ -17,20 +17,22 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProduct", parameters);
-            dr.Read();
-            //TODO => tayfun
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
-            returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
-            returnValue.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
-            returnValue.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
-            returnValue.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
-            returnValue.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
+            while (dr.Read())
+            {
+                //TODO => tayfun
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
+                returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
+                returnValue.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
+                returnValue.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
+                returnValue.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
+                returnValue.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
+            }
             dr.Close();
             return returnValue;
         }

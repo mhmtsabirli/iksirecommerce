@@ -19,16 +19,17 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             parameters.Add(new SqlParameter("@Id", itemAdminRight.Id));
 
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetAdminRight", parameters);
-            dr.Read();
-            //TODO => tayfun
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.Admin = AdminData.Get(new Admin() { Id = DBHelper.IntValue(dr["AdminId"].ToString()) });
-            returnValue.Rights = RightData.GetRightList(new Right() { Id = DBHelper.IntValue(dr["RightId"].ToString()) });
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-
+            while (dr.Read())
+            {
+                //TODO => tayfun
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.Admin = AdminData.Get(new Admin() { Id = DBHelper.IntValue(dr["AdminId"].ToString()) });
+                returnValue.Rights = RightData.GetRightList(new Right() { Id = DBHelper.IntValue(dr["RightId"].ToString()) });
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+            }
             dr.Close();
             return returnValue;
         }

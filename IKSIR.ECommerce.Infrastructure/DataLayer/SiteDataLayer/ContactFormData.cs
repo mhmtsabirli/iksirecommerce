@@ -24,22 +24,22 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemContactForm.Id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetContactForm", parameters);
-            dr.Read();
-
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.FirstLastName = DBHelper.StringValue(dr["FirstLastName"].ToString());
-            returnValue.Email = DBHelper.StringValue(dr["Email"].ToString());
-            returnValue.Ip = DBHelper.StringValue(dr["Ip"].ToString());
-            returnValue.Message = DBHelper.StringValue(dr["Message"].ToString());
-            returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
-            returnValue.Solution = DBHelper.StringValue(dr["Solution"].ToString());
-            returnValue.Status = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["Status"].ToString()) });
-            returnValue.StatusName = returnValue.Status.Value;
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-
+            while (dr.Read())
+            {
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.FirstLastName = DBHelper.StringValue(dr["FirstLastName"].ToString());
+                returnValue.Email = DBHelper.StringValue(dr["Email"].ToString());
+                returnValue.Ip = DBHelper.StringValue(dr["Ip"].ToString());
+                returnValue.Message = DBHelper.StringValue(dr["Message"].ToString());
+                returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
+                returnValue.Solution = DBHelper.StringValue(dr["Solution"].ToString());
+                returnValue.Status = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["Status"].ToString()) });
+                returnValue.StatusName = returnValue.Status.Value;
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+            }
             dr.Close();
             return returnValue;
         }

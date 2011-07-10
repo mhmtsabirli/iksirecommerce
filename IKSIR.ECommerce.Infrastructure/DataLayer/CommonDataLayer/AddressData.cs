@@ -20,32 +20,34 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetAddress", parameters);
-            dr.Read();
+            while (dr.Read())
+            {
 
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
-            returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
-            returnValue.Type = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["TypeId"].ToString()) });
-            returnValue.FirstName = DBHelper.StringValue(dr["FirstName"].ToString());
-            returnValue.LastName = DBHelper.StringValue(dr["LastName"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
+                returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
+                returnValue.Type = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["TypeId"].ToString()) });
+                returnValue.FirstName = DBHelper.StringValue(dr["FirstName"].ToString());
+                returnValue.LastName = DBHelper.StringValue(dr["LastName"].ToString());
 
-            if (dr["CountryId"] != null && dr["CountryId"].ToString() != "0")
-                returnValue.Country = CountryData.Get(new Country() { Id = DBHelper.IntValue(dr["CountryId"].ToString()) });
-            if (dr["CityId"] != null && dr["CityId"].ToString() != "0")
-                returnValue.City = CityData.Get(DBHelper.IntValue(dr["CityId"].ToString()));
-            if (dr["DistrictId"] != null && dr["DistrictId"].ToString() != "0")
-                returnValue.District = DistrictData.Get(new District() { Id = DBHelper.IntValue(dr["DistrictId"].ToString()) });
+                if (dr["CountryId"] != null && dr["CountryId"].ToString() != "0")
+                    returnValue.Country = CountryData.Get(new Country() { Id = DBHelper.IntValue(dr["CountryId"].ToString()) });
+                if (dr["CityId"] != null && dr["CityId"].ToString() != "0")
+                    returnValue.City = CityData.Get(DBHelper.IntValue(dr["CityId"].ToString()));
+                if (dr["DistrictId"] != null && dr["DistrictId"].ToString() != "0")
+                    returnValue.District = DistrictData.Get(new District() { Id = DBHelper.IntValue(dr["DistrictId"].ToString()) });
 
-            returnValue.CityName = DBHelper.StringValue(dr["CityName"].ToString());
-            returnValue.DistrictName = DBHelper.StringValue(dr["DistrictName"].ToString());
-            returnValue.AddressDetail = DBHelper.StringValue(dr["AddressDetail"].ToString());
-            returnValue.PostalCode = DBHelper.StringValue(dr["PostalCode"].ToString());
-            returnValue.Phone = DBHelper.StringValue(dr["Phone"].ToString());
-            returnValue.GSMPhone = DBHelper.StringValue(dr["GSMPhone"].ToString());
+                returnValue.CityName = DBHelper.StringValue(dr["CityName"].ToString());
+                returnValue.DistrictName = DBHelper.StringValue(dr["DistrictName"].ToString());
+                returnValue.AddressDetail = DBHelper.StringValue(dr["AddressDetail"].ToString());
+                returnValue.PostalCode = DBHelper.StringValue(dr["PostalCode"].ToString());
+                returnValue.Phone = DBHelper.StringValue(dr["Phone"].ToString());
+                returnValue.GSMPhone = DBHelper.StringValue(dr["GSMPhone"].ToString());
+            }
             dr.Close();
             return returnValue;
         }

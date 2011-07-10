@@ -20,20 +20,21 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             parameters.Add(new SqlParameter("@Id", itemComment.Id));
             parameters.Add(new SqlParameter("@UserId", itemComment.User.Id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetComment", parameters);
-            dr.Read();
-            //TODO => ayhant
-            //City,Countr,District, Type, User DB yazılınca city alnı direkt dbden çekilerek alınacak.
+            while (dr.Read())
+            {
+                //TODO => ayhant
+                //City,Countr,District, Type, User DB yazılınca city alnı direkt dbden çekilerek alınacak.
 
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
-            returnValue.Ip = DBHelper.StringValue(dr["Ip"].ToString());
-            returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
-            returnValue.WebSite = DBHelper.IntValue(dr["WebSite"].ToString());
-
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
+                returnValue.Ip = DBHelper.StringValue(dr["Ip"].ToString());
+                returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
+                returnValue.WebSite = DBHelper.IntValue(dr["WebSite"].ToString());
+            }
             dr.Close();
             return returnValue;
         }
