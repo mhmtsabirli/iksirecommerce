@@ -103,6 +103,17 @@
                         <span class="date">05.03.2011</span> <a href="#">Yeni Ürün Eklendi</a> Yeni model
                         ürünler eklendi
                     </div>
+                    <% if (itemContactFormList.Count > 0)
+                       { %>
+                    <h4>
+                        Yeni Mesaj</h4>
+                        <%foreach (IKSIR.ECommerce.Model.SiteModel.ContactForm contactForm in itemContactFormList)
+                          { %>
+                    <div class="news-item">
+                        <span class="date"><%=contactForm.CreateDate.ToShortDateString() %></span> Başlık :  <%=contactForm.Title.ToString() %> Mesaja Ulaşmak için <a href="ContactForm.aspx?FormId=<%=contactForm.Id.ToString() %>">Tıklayın</a>
+                    </div>
+                  <%} %>
+                    <%} %>
                 </div>
                 <!-- end sidebar -->
                 <div class="clear">
