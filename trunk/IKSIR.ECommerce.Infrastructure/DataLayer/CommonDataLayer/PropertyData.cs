@@ -17,19 +17,20 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProperty", parameters);
-            dr.Read();
-            //TODO => tayfun
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
-            returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
-            returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.ProductId = DBHelper.IntValue(dr["ProductId"].ToString());
-            returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
-
+            while (dr.Read())
+            {
+                //TODO => tayfun
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
+                returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
+                returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.ProductId = DBHelper.IntValue(dr["ProductId"].ToString());
+                returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
+            }
             dr.Close();
             return returnValue;
         }

@@ -17,19 +17,20 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetMultimedia", parameters);
-            dr.Read();
-            //TODO => tayfun
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.Type = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["TypeId"].ToString()) });
-            returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
-            returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
-            returnValue.FilePath = DBHelper.StringValue(dr["FilePath"].ToString());
-
+            while (dr.Read())
+            {
+                //TODO => tayfun
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.Type = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["TypeId"].ToString()) });
+                returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
+                returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
+                returnValue.FilePath = DBHelper.StringValue(dr["FilePath"].ToString());
+            }
             dr.Close();
             return returnValue;
         }

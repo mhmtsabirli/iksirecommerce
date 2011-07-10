@@ -18,15 +18,17 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductProperties", parameters);
-            dr.Read();
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
-            returnValue.ProductId = DBHelper.IntValue(dr["ProductId"].ToString());
-            returnValue.Property = PropertyData.Get(DBHelper.IntValue(dr["PropertyId"].ToString()));
+            while (dr.Read())
+            {
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
+                returnValue.ProductId = DBHelper.IntValue(dr["ProductId"].ToString());
+                returnValue.Property = PropertyData.Get(DBHelper.IntValue(dr["PropertyId"].ToString()));
+            }
             dr.Close();
             return returnValue;
         }

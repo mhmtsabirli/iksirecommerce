@@ -22,16 +22,17 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             parameters.Add(new SqlParameter("@CategoryId", itemSiteCategory.ProductCategory.Id));
 
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetSiteCategory", parameters);
-            dr.Read();
-            //TODO => tayfun
+            while (dr.Read())
+            {
+                //TODO => tayfun
 
-            returnValue.Site = SiteData.Get(new Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["CategoryId"].ToString()));
-
+                returnValue.Site = SiteData.Get(new Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["CategoryId"].ToString()));
+            }
             dr.Close();
             return returnValue;
         }

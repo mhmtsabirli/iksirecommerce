@@ -24,16 +24,17 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@ProductId", itemModuleProduct.Product.Id));
 
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetModuleProduct", parameters);
-            dr.Read();
-            //TODO => tayfun
+            while (dr.Read())
+            {
+                //TODO => tayfun
 
-            returnValue.Module = ModuleData.Get(new Module() { Id = DBHelper.IntValue(dr["ModuleId"].ToString()) });
-            returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-
+                returnValue.Module = ModuleData.Get(new Module() { Id = DBHelper.IntValue(dr["ModuleId"].ToString()) });
+                returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+            }
             dr.Close();
             return returnValue;
         }
@@ -45,16 +46,17 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@Id", itemModuleProduct.Id));
 
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetModuleProduct", parameters);
-            dr.Read();
-            //TODO => tayfun
+            while (dr.Read())
+            {
+                //TODO => tayfun
 
-            returnValue.Module = ModuleData.Get(new Module() { Id = DBHelper.IntValue(dr["ModuleId"].ToString()) });
-            returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-
+                returnValue.Module = ModuleData.Get(new Module() { Id = DBHelper.IntValue(dr["ModuleId"].ToString()) });
+                returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+            }
             dr.Close();
             return returnValue;
         }
@@ -67,16 +69,17 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@ModuleId", ModuleId));
 
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetModuleProduct", parameters);
-            dr.Read();
-            //TODO => tayfun
+            while (dr.Read())
+            {
+                //TODO => tayfun
 
-            returnValue.Module = ModuleData.Get(new Module() { Id = DBHelper.IntValue(dr["ModuleId"].ToString()) });
-            returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-
+                returnValue.Module = ModuleData.Get(new Module() { Id = DBHelper.IntValue(dr["ModuleId"].ToString()) });
+                returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+            }
             dr.Close();
             return returnValue;
         }

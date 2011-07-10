@@ -23,25 +23,26 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer
             parameters.Add(new SqlParameter("@Id", id));
 
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetUser", parameters);
-            dr.Read();
-            //TODO => tayfun
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.Name = DBHelper.StringValue(dr["Name"].ToString());
-            returnValue.UserName = DBHelper.StringValue(dr["UserName"].ToString());
-            returnValue.SurName = DBHelper.StringValue(dr["SurName"].ToString());
-            returnValue.Email = DBHelper.StringValue(dr["Email"].ToString());
-            returnValue.MobilePhone = DBHelper.StringValue(dr["MobilePhone"].ToString());
-            returnValue.TcId = DBHelper.StringValue(dr["TcId"].ToString());
-            returnValue.Password =DBHelper.StringValue(dr["TcId"].ToString());
-            returnValue.Status = DBHelper.IntValue(dr["Password"].ToString());
-            returnValue.LastLoginDate=DBHelper.DateValue(dr["LastLoginDate"].ToString());
-            returnValue.Site = SiteData.Get(new Site(){Id = DBHelper.IntValue(dr["SiteId"].ToString())});
-            returnValue.BirthDate=DBHelper.DateValue(dr["BirthDate"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-
+            while (dr.Read())
+            {
+                //TODO => tayfun
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.Name = DBHelper.StringValue(dr["Name"].ToString());
+                returnValue.UserName = DBHelper.StringValue(dr["UserName"].ToString());
+                returnValue.SurName = DBHelper.StringValue(dr["SurName"].ToString());
+                returnValue.Email = DBHelper.StringValue(dr["Email"].ToString());
+                returnValue.MobilePhone = DBHelper.StringValue(dr["MobilePhone"].ToString());
+                returnValue.TcId = DBHelper.StringValue(dr["TcId"].ToString());
+                returnValue.Password = DBHelper.StringValue(dr["TcId"].ToString());
+                returnValue.Status = DBHelper.IntValue(dr["Password"].ToString());
+                returnValue.LastLoginDate = DBHelper.DateValue(dr["LastLoginDate"].ToString());
+                returnValue.Site = SiteData.Get(new Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
+                returnValue.BirthDate = DBHelper.DateValue(dr["BirthDate"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+            }
             dr.Close();
             return returnValue;
         }
