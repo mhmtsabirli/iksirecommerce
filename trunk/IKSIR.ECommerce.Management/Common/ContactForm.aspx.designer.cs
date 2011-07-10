@@ -85,6 +85,15 @@ namespace IKSIR.ECommerce.Management.Common {
         protected global::System.Web.UI.WebControls.TextBox txtMessage;
         
         /// <summary>
+        /// txtSolution control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSolution;
+        
+        /// <summary>
         /// vsForm control.
         /// </summary>
         /// <remarks>
