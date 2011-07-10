@@ -350,7 +350,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
         private void ClearForm()
         {
+            ruProductDocuments.Visible = true;
+            divDocuments.InnerHtml = "";
             ddlProductCategories.SelectedIndex = -1;
+            ddlParentProductCategories.Items.Clear();
+            ddlProductCategories.Items.Clear();
+            ddlProductCategories.Enabled = false;
+            ddlParentProductCategories.Enabled = false;
             txtProductCode.Text = string.Empty;
             Session["PRODUCT_PROPERTY_LIST"] = null;
             txtProductName.Text = string.Empty;
