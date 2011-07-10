@@ -11,6 +11,8 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Management.Common;
 using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Toolkit;
+using IKSIR.ECommerce.Model.SiteModel;
+using IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer;
 
 namespace IKSIR.ECommerce.Management.ProductManagement
 {
@@ -70,7 +72,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         protected void lbtnDocumentEdit_Click(object sender, EventArgs e)
         {
             ruProductDocuments.Visible = false;
-            ClearForm();
             var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
             gvList.SelectedIndex = index;
             var documentId = (sender as LinkButton).CommandArgument == ""
@@ -96,6 +97,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             {
                 divAlert.InnerHtml += "<span style=\"color:Red\">Dosya bilgilerini getirirken hata oluştu!</span><br />";
             }
+            RadTabStrip1.SelectedIndex = 1;
+            RadPageView3.Selected = true;
         }
         protected void lbtnDelete_Click(object sender, EventArgs e)
         {
@@ -220,32 +223,32 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
             if (GetProductMain(itemId))
             {
-                divAlert.InnerHtml += "<span style=\"color:Green\">Ürün Genel bilgileri başarıyla yüklendi.</span><br />";
+                divAlert.InnerHtml = "<span style=\"color:Green\">Ürün Genel bilgileri başarıyla yüklendi.</span><br />";
                 retValue = true;
             }
             else
             {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Ürün Genel bilgileri yüklenirken hata oluştu.</span><br />";
+                divAlert.InnerHtml = "<span style=\"color:Red\">Ürün Genel bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
             }
 
             if (GetProductDocuments(itemId))
             {
-                divAlert.InnerHtml += "<span style=\"color:Green\">Ürün dökümanları başarıyla yüklendi.</span><br />";
+                divAlert.InnerHtml = "<span style=\"color:Green\">Ürün dökümanları başarıyla yüklendi.</span><br />" + divAlert.InnerHtml;
                 retValue = true;
             }
             else
             {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Ürün dökümanları yüklenirken hata oluştu.</span><br />";
+                divAlert.InnerHtml = "<span style=\"color:Red\">Ürün dökümanları yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
             }
 
             if (GetProductProperties(itemId))
             {
-                divAlert.InnerHtml += "<span style=\"color:Green\">Ürün özellikleri başarıyla yüklendi.</span><br />";
+                divAlert.InnerHtml = "<span style=\"color:Green\">Ürün özellikleri başarıyla yüklendi.</span><br />" + divAlert.InnerHtml;
                 retValue = true;
             }
             else
             {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Ürün özellikleri yüklenirken hata oluştu.</span><br />";
+                divAlert.InnerHtml = "<span style=\"color:Red\">Ürün özellikleri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
             }
             return retValue;
         }
@@ -253,8 +256,12 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private void BindValues()
         {
             //Buralarda tüm kategoriler gelecek istediği kategorinin altına tanımlama yapabilecek.
+            List<Site> itemListSite = SiteData.GetSiteList();
+            Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
             List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
-            Utility.BindDropDownList(ddlProductCategories, itemList, "Title", "Id");
+            ddlParentProductCategories.Enabled = false;
+            ddlProductCategories.Enabled = false;
+            //Utility.BindDropDownList(ddlProductCategories, itemList, "Title", "Id");
             Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
 
             List<Property> ProductPropertyList = PropertyData.GetList();
@@ -262,6 +269,25 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
             //List<EnumValue> enumValueList = EnumValueData.GetEnumValues(1);
             //Utility.BindDropDownList(ddlDocumentTypes, enumValueList, "Value", "Id");
+        }
+
+        protected void ddlSites_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlParentProductCategories.Items.Clear();
+            ddlProductCategories.Items.Clear();
+            List<ProductCategory> itemList = ProductCategoryData.GetGetParentProductCategoryListBySiteId(Convert.ToInt32(ddlSites.SelectedValue));
+
+            Utility.BindDropDownList(ddlParentProductCategories, itemList, "Title", "Id");
+            ddlParentProductCategories.Enabled = true;
+            ddlProductCategories.Enabled = false;
+        }
+        protected void ddlParentProductCategories_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlProductCategories.Items.Clear();
+            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryById(Convert.ToInt32(ddlParentProductCategories.SelectedValue));
+
+            Utility.BindDropDownList(ddlProductCategories, itemList, "Title", "Id");
+            ddlProductCategories.Enabled = true;
         }
 
         private void GetList()
@@ -277,9 +303,12 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 string productCode = txtFilterProductCode.Text;
                 itemList = itemList.Where(x => x.ProductCode == productCode).ToList();
             }
-
             gvList.DataSource = itemList;
             gvList.DataBind();
+            ClearForm();
+            divAlert.InnerHtml = "";
+            pnlForm.Visible = false;
+
         }
 
         private bool InsertItem()
@@ -327,7 +356,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             txtProductName.Text = string.Empty;
             txtProductDescription.Text = string.Empty;
             txtMinStock.Text = string.Empty;
-            txtAlertDate.Text = string.Empty;
+            txtAlertDate.DbSelectedDate = string.Empty;
             ddlProperties.SelectedIndex = -1;
             txtPropertyValue.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
@@ -335,6 +364,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             gvDocumentList.DataBind();
             gvProductProperties.DataSource = null;
             gvProductProperties.DataBind();
+            RadTabStrip1.SelectedIndex = 0;
+            RadPageView1.Selected = true;
             //RadTabStrip1.Tabs[0].Selected = true;
             //RadTabStrip1.Tabs[1].Selected = false;
             //RadTabStrip1.Tabs[2].Selected = false;
@@ -352,14 +383,23 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             bool retValue = false;
             try
             {
+                ddlParentProductCategories.Enabled = true;
+                ddlProductCategories.Enabled = true;
                 var item = ProductData.Get(productId);
                 lblProductId.Text = item.Id.ToString();
+                ddlSites.SelectedValue = item.ProductCategory.ParentCategory.Site.Id.ToString();
+                List<ProductCategory> itemList = ProductCategoryData.GetGetParentProductCategoryListBySiteId(Convert.ToInt32(ddlSites.SelectedValue));
+                Utility.BindDropDownList(ddlParentProductCategories, itemList, "Title", "Id");
+                ddlParentProductCategories.SelectedValue = item.ProductCategory.ParentCategory.Id.ToString();
+                List<ProductCategory> itemCategory = ProductCategoryData.GetProductCategoryById(Convert.ToInt32(ddlParentProductCategories.SelectedValue));
+                Utility.BindDropDownList(ddlProductCategories, itemCategory, "Title", "Id");
                 ddlProductCategories.SelectedValue = item.ProductCategory.Id.ToString();
                 txtProductCode.Text = item.ProductCode;
                 txtProductName.Text = item.Title;
+                txtVideo.Text = item.Video.ToString();
                 txtProductDescription.Text = item.Description;
                 txtMinStock.Text = item.MinStock.ToString();
-                txtAlertDate.Text = item.AlertDate.ToShortDateString();
+                txtAlertDate.SelectedDate = Convert.ToDateTime(item.AlertDate.ToShortDateString());
                 retValue = true;
             }
             catch (Exception exception)
@@ -442,13 +482,14 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             else
             {
                 itemProduct = new Product();
-                itemProduct.AlertDate = Convert.ToDateTime(txtAlertDate.Text);
+                itemProduct.AlertDate = Convert.ToDateTime(txtAlertDate.SelectedDate);
                 itemProduct.CreateAdminId = 1;
                 itemProduct.CreateDate = DateTime.Now;
                 itemProduct.Description = txtProductDescription.Text;
                 itemProduct.MinStock = DBHelper.IntValue(txtMinStock.Text);
                 itemProduct.ProductCategory = new ProductCategory() { Id = DBHelper.IntValue(ddlProductCategories.SelectedValue) };
                 itemProduct.ProductCode = txtProductCode.Text;
+                itemProduct.Video = txtVideo.Text;
                 itemProduct.Title = txtProductName.Text;
                 int result = ProductData.Insert(itemProduct);
                 if (result > 0)
@@ -478,13 +519,14 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             var itemProduct = ProductData.GetList().Where(x => x.Id == productId).FirstOrDefault();
             if (itemProduct != null)
             {
-                itemProduct.AlertDate = Convert.ToDateTime(txtAlertDate.Text);
+                itemProduct.AlertDate = Convert.ToDateTime(txtAlertDate.SelectedDate);
                 itemProduct.CreateAdminId = 1;
                 itemProduct.CreateDate = DateTime.Now;
                 itemProduct.Description = txtProductDescription.Text;
                 itemProduct.MinStock = DBHelper.IntValue(txtMinStock.Text);
                 itemProduct.ProductCategory = new ProductCategory() { Id = DBHelper.IntValue(ddlProductCategories.SelectedValue) };
                 itemProduct.ProductCode = txtProductCode.Text;
+                itemProduct.Video = txtVideo.Text;
                 itemProduct.Title = txtProductName.Text;
                 int result = ProductData.Update(itemProduct);
                 if (result != 1)
@@ -708,11 +750,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
             return productPropertyList;
         }
-        
+
         private bool GetProductProperties(int productId)
         {
             bool retValue = false;
-            
+
             try
             {
                 var productPropertyList = ProductPropertyData.GetProductProperties(productId);
@@ -840,7 +882,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     {
                         //güncelle
                         int propertyId = DBHelper.IntValue(btnAddProperty.CommandArgument);
-                        
+
                         if (ProductPropertyData.Update(itemProductProperty) < 0)
                         {
                             divAlert.InnerHtml += "<span style=\"color:Green\">Özellik güncelleme başarılı.</span><br />";
@@ -935,5 +977,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             return retValue;
         }
         #endregion
+
+        protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvList.PageIndex = e.NewPageIndex;
+            GetList();
+        }
     }
 }

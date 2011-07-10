@@ -6,9 +6,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
-        Sabit Değerleri</h2>
+        Modüllere Ürün Atama</h2>
     <p>
-        Sistemdeki sabitlerin değerlerini tanımlamamayı sağlayan ekranlardır.
+       Sistemde tanımlanmış modüllere ürün atamak için kullanılan ekran
     </p>
     <table id="tblMngForm">
         <tr>
@@ -56,7 +56,7 @@
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="ddlSites"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Enum seçmelisiniz"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Site seçmelisiniz"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
@@ -73,7 +73,7 @@
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="ddlModules"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Enum seçmelisiniz"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Modül seçmelisiniz"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
