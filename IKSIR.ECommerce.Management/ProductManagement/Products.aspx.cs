@@ -362,6 +362,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             txtProductName.Text = string.Empty;
             txtProductDescription.Text = string.Empty;
             txtMinStock.Text = string.Empty;
+            txtVideo.Text = string.Empty;
             txtAlertDate.DbSelectedDate = string.Empty;
             ddlProperties.SelectedIndex = -1;
             txtPropertyValue.Text = string.Empty;
