@@ -29,6 +29,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             ClearForm();
             lblProductId.Text = "Yeni Kayıt";
+            lblPropertyId.Text = "Yeni Kayıt";
             pnlForm.Visible = true;
             ddlProductCategories.Focus();
         }
@@ -89,6 +90,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             var PropertyId = (sender as LinkButton).CommandArgument == ""
                              ? 0
                              : Convert.ToInt32((sender as LinkButton).CommandArgument);
+
+            btnSave.CommandArgument = lblProductId.Text.ToString();
             if (!GetProductProperty(PropertyId))
             {
                 divAlert.InnerHtml += "<span style=\"color:Red\">Dosya bilgilerini getirirken hata oluştu!</span><br />";
@@ -113,7 +116,20 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             if (DeleteDocument(itemId))
             {
                 divAlert.InnerHtml += "<span style=\"color:Green\">Dosya başarıyla silindi</span><br />";
-                GetList();
+                GetItem(Convert.ToInt32(lblProductId.Text));
+            }
+            else
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya silinirken hata oluştu!</span><br />";
+            }
+        }
+        protected void lbtnPropertyDelete_Click(object sender, EventArgs e)
+        {
+            var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
+            if (DeletePorperty(itemId))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Green\">Dosya başarıyla silindi</span><br />";
+                GetItem(Convert.ToInt32(lblProductId.Text));
             }
             else
             {
@@ -188,10 +204,12 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         //}
 
         protected void btnAddProperty_Click(object sender, EventArgs e)
-        {            
+        {
             SaveProductPropertyToList();
             ddlProperties.SelectedIndex = -1;
             txtPropertyValue.Text = string.Empty;
+            btnAddProperty.CommandArgument = "";
+            lblPropertyId.Text = "Yeni Kayıt";
         }
 
         private bool GetItem(int itemId)
@@ -305,6 +323,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             ddlProductCategories.SelectedIndex = -1;
             txtProductCode.Text = string.Empty;
+            Session["PRODUCT_PROPERTY_LIST"] = null;
             txtProductName.Text = string.Empty;
             txtProductDescription.Text = string.Empty;
             txtMinStock.Text = string.Empty;
@@ -347,9 +366,9 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             {
                 SystemLog itemSystemLog = new SystemLog();
                 itemSystemLog.Title = "GetProductMain";
-                itemSystemLog.Content = "Id=" + productId.ToString() + " ile alanlar doldurulamadı. Hata: "+ exception.ToString();
+                itemSystemLog.Content = "Id=" + productId.ToString() + " ile alanlar doldurulamadı. Hata: " + exception.ToString();
                 itemSystemLog.Type = new EnumValue() { Id = 0 };
-                SystemLogData.Insert(itemSystemLog); 
+                SystemLogData.Insert(itemSystemLog);
             }
 
             return retValue;
@@ -655,7 +674,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             bool retValue = false;
             try
             {
-                if (MultimediasData.Delete(documentId) > 0)
+                if (MultimediasData.Delete(documentId) < 0)
                 {
                     retValue = true;
                 }
@@ -689,13 +708,16 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
             return productPropertyList;
         }
-
+        
         private bool GetProductProperties(int productId)
         {
             bool retValue = false;
+            
             try
             {
                 var productPropertyList = ProductPropertyData.GetProductProperties(productId);
+
+                Session.Add("PRODUCT_PROPERTY_LIST", productPropertyList);
                 gvProductProperties.DataSource = productPropertyList;
                 gvProductProperties.DataBind();
                 retValue = true;
@@ -724,8 +746,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             bool retValue = false;
             var itemProductProperty = ProductPropertyData.Get(propertyId);
-            txtPropertyValue.Text = itemProductProperty.Property.Value.ToString();
+            lblPropertyId.Text = itemProductProperty.Id.ToString();
+            txtPropertyValue.Text = itemProductProperty.Value.ToString();
             ddlProperties.SelectedValue = itemProductProperty.Property.Id.ToString();
+            btnAddProperty.CommandArgument = lblPropertyId.Text.ToString();
+            GetItem(Convert.ToInt32(lblProductId.Text));
             return retValue;
         }
         private bool SaveProductPropertyToList()
@@ -815,7 +840,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     {
                         //güncelle
                         int propertyId = DBHelper.IntValue(btnAddProperty.CommandArgument);
-                        if (ProductPropertyData.Update(itemProductProperty) > 0)
+                        
+                        if (ProductPropertyData.Update(itemProductProperty) < 0)
                         {
                             divAlert.InnerHtml += "<span style=\"color:Green\">Özellik güncelleme başarılı.</span><br />";
                             retValue = true;
@@ -888,7 +914,26 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
             return retValue;
         }
-
+        private bool DeletePorperty(int PropertyId)
+        {
+            bool retValue = false;
+            try
+            {
+                if (ProductPropertyData.Delete(PropertyId) < 0)
+                {
+                    retValue = true;
+                }
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete Document";
+                itemSystemLog.Content = "Id=" + PropertyId.ToString() + " ile Doküman silinemedi. Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return retValue;
+        }
         #endregion
     }
 }
