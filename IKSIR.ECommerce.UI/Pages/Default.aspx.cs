@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace IKSIR.ECommerce.UI
+namespace IKSIR.ECommerce.UI.Pages
 {
-    public partial class UIMasterPage : System.Web.UI.MasterPage
+    public partial class Default : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

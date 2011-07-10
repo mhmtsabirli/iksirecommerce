@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -18,7 +19,7 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             if (SendForm())
             {
-                lblAlert.Text = "Mesajınız elimize ulaşmıştır.";
+                lblAlert.Text = "Mesajınız gönderilmiştir.";
                 lblAlert.ForeColor = System.Drawing.Color.Green;
             }
             else
@@ -31,7 +32,26 @@ namespace IKSIR.ECommerce.UI.Pages
         private bool SendForm()
         {
             bool retValue = false;
+            var itemContactForm = new IKSIR.ECommerce.Model.SiteModel.ContactForm();
+            itemContactForm.FirstLastName = txtName.Text;
+            itemContactForm.Email = txtEmail.Text;
+            itemContactForm.Title = txtTitle.Text;
+            itemContactForm.Message = txtContent.Text;
+            itemContactForm.Status = new Model.CommonModel.EnumValue() { Id = 1 };
+            if (ContactFormData.Insert(itemContactForm) > 0)
+            {
+                ClearFrom();
+                retValue = true;
+            }
             return retValue;
+        }
+
+        private void ClearFrom()
+        {
+            txtName.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtTitle.Text = string.Empty;
+            txtContent.Text = string.Empty;
         }
     }
 }
