@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
     AutoEventWireup="true" CodeBehind="StaticPages.aspx.cs" Inherits="IKSIR.ECommerce.Management.Common.StaticPages"
-    Theme="ManagementGridView" %>
+     %>
 
 <%@ Register Assembly="RadAjax.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
