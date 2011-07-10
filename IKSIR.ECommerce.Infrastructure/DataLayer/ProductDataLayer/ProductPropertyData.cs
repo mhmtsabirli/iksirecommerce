@@ -24,6 +24,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
             returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
             returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+            returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
             returnValue.ProductId = DBHelper.IntValue(dr["ProductId"].ToString());
             returnValue.Property = PropertyData.Get(DBHelper.IntValue(dr["PropertyId"].ToString()));
             dr.Close();
@@ -52,6 +53,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@EditAdminId", 1));
             parameters.Add(new SqlParameter("@PropertyId", DBHelper.IntValue(itemProductProperty.Property.Id)));
+            parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemProductProperty.Id)));
             parameters.Add(new SqlParameter("@ProductId", DBHelper.IntValue(itemProductProperty.ProductId)));
             parameters.Add(new SqlParameter("@Value", DBHelper.StringValue(itemProductProperty.Value)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
@@ -70,6 +72,16 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             return returnValue;
         }
 
+        public static int Delete(int id)
+        {
+            var returnValue = 0;
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Id", id));
+
+            returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "DeleteProductProperties", parameters);
+            return returnValue;
+        }
         public static List<ProductProperty> GetProductProperties(int productId)
         {
             List<ProductProperty> itemProductList = new List<ProductProperty>();
