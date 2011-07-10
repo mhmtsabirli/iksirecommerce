@@ -184,8 +184,8 @@ namespace IKSIR.ECommerce.Management.Common
             bool retValue = false;
             var item = new IKSIR.ECommerce.Model.CommonModel.EnumValue();
 
-
-            item.Id = DBHelper.IntValue(lblId.Text);
+            if(lblId.Text != "Yeni Kayıt")
+                item.Id = DBHelper.IntValue(lblId.Text);
             item.EnumId = Convert.ToInt32(ddlEnums.SelectedValue);
             item.Value = txtEnumValueName.Text.Trim();
 

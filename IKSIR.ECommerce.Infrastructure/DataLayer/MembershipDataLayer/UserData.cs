@@ -16,11 +16,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer
 {
     public class UserData
     {
-        public static User Get(User itemUser)
+        public static User Get(int id)
         {
             var returnValue = new User();
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemUser.Id));
+            parameters.Add(new SqlParameter("@Id", id));
 
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetUser", parameters);
             dr.Read();
