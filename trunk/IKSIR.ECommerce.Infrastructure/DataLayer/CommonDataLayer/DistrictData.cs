@@ -9,30 +9,31 @@ using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
 {
-   public class DistrictData
+    public class DistrictData
     {
-       public static District Get(District itemDistrict)
+        public static District Get(District itemDistrict)
         {
             var returnValue = new District();
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemDistrict.Id));
-            parameters.Add(new SqlParameter("@Country", itemDistrict.City.Id));
+            if (itemDistrict.City != null)
+                parameters.Add(new SqlParameter("@CityId", itemDistrict.City.Id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetDistrict", parameters);
-            dr.Read();
-            //TODO => tayfun
-            returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
-            returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
-            returnValue.Name = DBHelper.StringValue(dr["Name"].ToString());
-            returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
-            returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-            returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.City = CityData.Get(new City() { Id = DBHelper.IntValue(dr["CityId"].ToString()) });
-
+            while (dr.Read())
+            {
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.Name = DBHelper.StringValue(dr["Name"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.City = CityData.Get(DBHelper.IntValue(dr["CityId"].ToString()));
+            }
             dr.Close();
             return returnValue;
         }
 
-       public static int Insert(District itemDistrict)
+        public static int Insert(District itemDistrict)
         {
             var returnValue = 0;
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -45,7 +46,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
-       public static int Update(District itemDistrict)
+        public static int Update(District itemDistrict)
         {
             var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -59,20 +60,20 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
         }
 
 
-       public static int Save(District itemDistrict)
-       {
-           var returnValue = 0;
-           List<SqlParameter> parameters = new List<SqlParameter>();
-           parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemDistrict.Id)));
-           parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemDistrict.CreateAdminId)));
-           parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemDistrict.Name)));
-           parameters.Add(new SqlParameter("@CountryId", DBHelper.StringValue(itemDistrict.City.Id)));
-         
-           returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveDistrict", parameters));
-           return returnValue;
-       }
+        public static int Save(District itemDistrict)
+        {
+            var returnValue = 0;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemDistrict.Id)));
+            parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemDistrict.CreateAdminId)));
+            parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemDistrict.Name)));
+            parameters.Add(new SqlParameter("@CountryId", DBHelper.StringValue(itemDistrict.City.Id)));
 
-       public static int Delete(District itemDistrict)
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveDistrict", parameters));
+            return returnValue;
+        }
+
+        public static int Delete(District itemDistrict)
         {
             var returnValue = 0;
 
@@ -83,15 +84,13 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
-       public static List<District> GetDistrictList(District itemDistrict = null)
+        public static List<District> GetDistrictList(int cityId = 0)
         {
             List<District> itemDistrictList = null;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-            //if (itemProductCategory != null)
-            //    parameters.Add(new SqlParameter("@Id", itemProductCategory.Id));
-            //if (itemProductCategory.ParentCategory != null)
-            //    parameters.Add(new SqlParameter("@ProductCategoryId", itemProductCategory.ParentCategory.Id));
+            if (cityId != 0)
+                parameters.Add(new SqlParameter("@CityId", cityId));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetDistrict", parameters);
             itemDistrictList = new List<District>();
 
@@ -105,7 +104,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
-                item.City = CityData.Get(new City() { Id = DBHelper.IntValue(dr["CityId"].ToString()) });
+                item.City = CityData.Get(DBHelper.IntValue(dr["CityId"].ToString()));
                 itemDistrictList.Add(item);
             }
 

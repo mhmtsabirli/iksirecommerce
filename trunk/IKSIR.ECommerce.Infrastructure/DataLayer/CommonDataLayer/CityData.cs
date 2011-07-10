@@ -11,12 +11,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
 {
     public class CityData
     {
-        public static City Get(City itemCity)
+        public static City Get(int id)
         {
             var returnValue = new City();
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemCity.Id));
-            parameters.Add(new SqlParameter("@Country", itemCity.Country.Id));
+            parameters.Add(new SqlParameter("@Id", id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetCity", parameters);
             dr.Read();
             //TODO => tayfun
@@ -70,10 +69,9 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
-        public static int Delete(City  itemCity)
+        public static int Delete(City itemCity)
         {
             var returnValue = 0;
-
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemCity.Id));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
@@ -81,15 +79,12 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
-        public static List<City> GetCityList(City itemCity = null)
+        public static List<City> GetCityList(int countryId = 0)
         {
             List<City> itemCityList = null;
-
             List<SqlParameter> parameters = new List<SqlParameter>();
-            //if (itemProductCategory != null)
-            //    parameters.Add(new SqlParameter("@Id", itemProductCategory.Id));
-            //if (itemProductCategory.ParentCategory != null)
-            //    parameters.Add(new SqlParameter("@ProductCategoryId", itemProductCategory.ParentCategory.Id));
+            if (countryId != 0)
+                parameters.Add(new SqlParameter("@CountryId", countryId));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetCity", parameters);
             itemCityList = new List<City>();
 

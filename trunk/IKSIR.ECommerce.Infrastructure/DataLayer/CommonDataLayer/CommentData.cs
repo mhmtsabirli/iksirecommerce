@@ -29,7 +29,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
             returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
             returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-            returnValue.User = UserData.Get(new User() { Id = DBHelper.IntValue(dr["UserId"].ToString()) });
+            returnValue.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
             returnValue.Ip = DBHelper.StringValue(dr["Ip"].ToString());
             returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
             returnValue.WebSite = DBHelper.IntValue(dr["WebSite"].ToString());
@@ -113,7 +113,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
-                item.User = UserData.Get(new User() { Id = DBHelper.IntValue(dr["UserId"].ToString()) });
+                item.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
                 item.Ip = DBHelper.StringValue(dr["Ip"].ToString());
                 item.Value = DBHelper.StringValue(dr["Value"].ToString());
                 item.WebSite = DBHelper.IntValue(dr["WebSite"].ToString());
