@@ -281,6 +281,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             ddlParentProductCategories.Enabled = true;
             ddlProductCategories.Enabled = false;
         }
+
         protected void ddlParentProductCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlProductCategories.Items.Clear();
@@ -306,7 +307,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             gvList.DataSource = itemList;
             gvList.DataBind();
             ClearForm();
-            divAlert.InnerHtml = "";
             pnlForm.Visible = false;
 
         }
