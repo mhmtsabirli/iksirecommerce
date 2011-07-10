@@ -31,6 +31,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
                 SiteModule siteCategory = SiteModuleData.GetSiteId(DBHelper.IntValue(dr["Id"].ToString()));
                 returnValue.Site = siteCategory.Site;
+                returnValue.SiteName = returnValue.Site.Name;
             }
             dr.Close();
             return returnValue;
@@ -105,6 +106,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
                 SiteModule siteCategory = SiteModuleData.Get(DBHelper.IntValue(dr["Id"].ToString()));
                 item.Site = siteCategory.Site;
+                item.SiteName = item.Site.Name;
                 itemModuleList.Add(item);
             }
 
@@ -134,6 +136,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
                 SiteModule siteCategory = SiteModuleData.Get(DBHelper.IntValue(dr["Id"].ToString()));
                 item.Site = siteCategory.Site;
+                item.SiteName = item.Site.Name;
                 itemModuleList.Add(item);
             }
 

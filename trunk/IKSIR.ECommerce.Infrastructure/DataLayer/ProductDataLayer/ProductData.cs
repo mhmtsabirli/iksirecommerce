@@ -27,6 +27,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
                 returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
+                returnValue.Video = DBHelper.StringValue(dr["Video"].ToString());
                 returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
                 returnValue.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 returnValue.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
@@ -73,6 +74,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@Id", itemProduct.Id));
             parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemProduct.Title)));
             parameters.Add(new SqlParameter("@Description", DBHelper.StringValue(itemProduct.Description)));
+            parameters.Add(new SqlParameter("@Video", DBHelper.StringValue(itemProduct.Video)));
             parameters.Add(new SqlParameter("@ProductCode", DBHelper.StringValue(itemProduct.ProductCode)));
             parameters.Add(new SqlParameter("@MinStock", DBHelper.IntValue(itemProduct.MinStock)));
             parameters.Add(new SqlParameter("@AlertDate", DBHelper.DateValue(itemProduct.AlertDate)));
@@ -113,6 +115,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
+                item.Video = DBHelper.StringValue(dr["Video"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
                 item.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());

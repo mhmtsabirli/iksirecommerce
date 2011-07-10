@@ -151,6 +151,39 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             List<ProductCategory> itemProductCategoryList = null;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
+           
+            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetParentProductCategory", parameters);
+            itemProductCategoryList = new List<ProductCategory>();
+
+            while (dr.Read())
+            {
+                var item = new ProductCategory();
+                //TODO => tayfun
+                item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                item.Description = DBHelper.StringValue(dr["Description"].ToString());
+                item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                item.Id = DBHelper.IntValue(dr["Id"].ToString());
+                if (DBHelper.IntValue(dr["ParentId"].ToString()) != 0)
+                    item.ParentCategory = Get(DBHelper.IntValue(dr["ParentId"].ToString()));
+                item.Title = DBHelper.StringValue(dr["Title"].ToString());
+                item.Description = DBHelper.StringValue(dr["Description"].ToString());
+                SiteCategory siteCategory = SiteCategoryData.Get(DBHelper.IntValue(dr["Id"].ToString()));
+                item.Site = siteCategory.Site;
+                itemProductCategoryList.Add(item);
+            }
+
+            dr.Close();
+            return itemProductCategoryList;
+        }
+        
+        public static List<ProductCategory> GetGetParentProductCategoryListBySiteId(int SiteId)
+        {
+            List<ProductCategory> itemProductCategoryList = null;
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@SiteId", SiteId));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetParentProductCategory", parameters);
             itemProductCategoryList = new List<ProductCategory>();
 
