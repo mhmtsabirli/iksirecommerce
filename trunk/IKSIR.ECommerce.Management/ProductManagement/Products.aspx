@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
-    AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="IKSIR.ECommerce.Management.ProductManagement.Products" %>
+    AutoEventWireup="true" ValidateRequest="false" CodeBehind="Products.aspx.cs" Inherits="IKSIR.ECommerce.Management.ProductManagement.Products" %>
 
 <%@ Register Assembly="RadAjax.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
@@ -37,10 +37,12 @@
                         SelectedIndex="1" Width="400px">
                         <Tabs>
                             <telerik:RadTab Text="Ürün" Selected="true" PageViewID="RadPageView1">
-                            </telerik:RadTab>                            
+                            </telerik:RadTab>
                             <telerik:RadTab Text="Özellikler" PageViewID="RadPageView3">
                             </telerik:RadTab>
-                            <telerik:RadTab Text="Dökümanlar" PageViewID="RadPageView2">
+                            <telerik:RadTab Text="Resimler" PageViewID="RadPageView2">
+                            </telerik:RadTab>
+                            <telerik:RadTab Text="Video" PageViewID="RadPageView4">
                             </telerik:RadTab>
                         </Tabs>
                     </telerik:RadTabStrip>
@@ -67,7 +69,42 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Kategori
+                                        Site
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList runat="server" ID="ddlSites" AutoPostBack="true" OnSelectedIndexChanged="ddlSites_SelectedIndexChanged">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="ddlSites"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Site seçmelisiniz"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Ana Kategori
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList runat="server" ID="ddlParentProductCategories" AutoPostBack="true"
+                                            OnSelectedIndexChanged="ddlParentProductCategories_SelectedIndexChanged">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator7" ControlToValidate="ddlParentProductCategories"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Kategori seçmelisiniz"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Alt Kategori
                                     </td>
                                     <td>
                                         :
@@ -106,7 +143,7 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" ID="txtProductName"></asp:TextBox>
+                                        <asp:TextBox runat="server" Width="100%" ID="txtProductName"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtProductName"
@@ -122,7 +159,8 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" ID="txtProductDescription" TextMode="MultiLine" CssClass="descriptionTextBox"></asp:TextBox>
+                                        <asp:TextBox runat="server" Width="100%" ID="txtProductDescription" TextMode="MultiLine"
+                                            CssClass="descriptionTextBox"></asp:TextBox>
                                     </td>
                                     <td>
                                     </td>
@@ -151,7 +189,9 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" ID="txtAlertDate"></asp:TextBox>
+                                        <telerik:RadDatePicker ID="txtAlertDate" runat="server">
+                                        </telerik:RadDatePicker>
+                                        <%--<asp:TextBox runat="server" ID="" ></asp:TextBox>--%>
                                     </td>
                                     <td>
                                         <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtMinStock"
@@ -165,7 +205,7 @@
                             <table>
                                 <tr>
                                     <td colspan="4">
-                                        <strong>Ürün Dökümanları</strong> (jpg, gif, png, pdf, doc, xls)
+                                        <strong>Ürün Resimleri</strong> (jpg, gif, png, pdf, doc, xls)
                                     </td>
                                 </tr>
                                 <tr>
@@ -225,7 +265,7 @@
                                 </tr>--%>
                                 <tr>
                                     <td valign="top">
-                                        Dökümanlar
+                                        Resimler
                                     </td>
                                     <td valign="top">
                                         :
@@ -250,7 +290,7 @@
                                 </tr>
                             </table>
                             <asp:GridView runat="server" ID="gvDocumentList" AutoGenerateColumns="False" CellPadding="4"
-                                GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" Caption="Ürün Dökümanları"
+                                GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" Caption="Ürün Resimleri"
                                 CaptionAlign="Left">
                                 <Columns>
                                     <asp:TemplateField ShowHeader="False">
@@ -263,16 +303,15 @@
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                         SortExpression="Id" />
-                                    <asp:BoundField DataField="FilePath" HeaderText="Adı" ApplyFormatInEditMode="false" ReadOnly="true"
-                                        SortExpression="Name" />
-                                        
+                                    <asp:BoundField DataField="FilePath" HeaderText="Adı" ApplyFormatInEditMode="false"
+                                        ReadOnly="true" SortExpression="Name" />
                                 </Columns>
                             </asp:GridView>
                         </telerik:RadPageView>
                         <telerik:RadPageView ID="RadPageView3" runat="server">
                             <table>
                                 <tr>
-                                    <td colspan="4">                                                                        
+                                    <td colspan="4">
                                         <strong>Ürün Özellikleri</strong> (Ürünlere girilmesi gereken özellikler)
                                     </td>
                                 </tr>
@@ -332,7 +371,7 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align: center" colspan="4">
-                                        <asp:Button ID="btnAddProperty" runat="server" Text="Özellik Ekle" ValidationGroup="vgProductProperties"
+                                        <asp:Button ID="btnAddProperty" runat="server" Text="Özelliği Kaydet" ValidationGroup="vgProductProperties"
                                             OnClick="btnAddProperty_Click" />
                                     </td>
                                 </tr>
@@ -344,8 +383,8 @@
                                     <asp:TemplateField ShowHeader="False">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnPropertyEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
-                                            <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnPropertyDelete_Click" CommandArgument='<%# Eval("Id")%>'
-                                                OnClientClick="javascript:return confirm('Bu kaydı silmek istediğinize emin misiniz?');"
+                                            <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnPropertyDelete_Click"
+                                                CommandArgument='<%# Eval("Id")%>' OnClientClick="javascript:return confirm('Bu kaydı silmek istediğinize emin misiniz?');"
                                                 CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -360,6 +399,28 @@
                                         ReadOnly="true" SortExpression="Value" />
                                 </Columns>
                             </asp:GridView>
+                        </telerik:RadPageView>
+                        <telerik:RadPageView ID="RadPageView4" runat="server" Selected="true">
+                            <table>
+                                <tr>
+                                    <td colspan="4">
+                                        <strong>Ürün Videoları</strong> (Ürünlerin Video Scriptleri)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Viedo Script
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" Width="100%" Height="100px" ID="txtVideo" TextMode="MultiLine" CssClass="descriptionTextBox"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
                         </telerik:RadPageView>
                     </telerik:RadMultiPage>
                     <table>
@@ -422,8 +483,8 @@
                         <tr>
                             <td colspan="4">
                                 <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
-                                    EmptyDataText="Listede gösterilecek kayıt bulunamadı" GridLines="None" PageSize="15"
-                                    EnableModelValidation="True" Width="100%">
+                                    EmptyDataText="Listede gösterilecek kayıt bulunamadı" GridLines="None" PageSize="10"
+                                    EnableModelValidation="True" Width="100%" AllowPaging="True" OnPageIndexChanging="gvList_PageIndexChanging">
                                     <Columns>
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>
@@ -435,15 +496,10 @@
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Id" />
-                                        <asp:TemplateField ShowHeader="False">
-                                            <ItemTemplate>
-                                                <asp:Label runat="server" ID="lblCategoryName" Text='"<%# Eval("ProductCategory").Title%>"'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
                                         <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="ProductCode" />
-                                        <asp:BoundField DataField="AlertDate" HeaderText="AlertDate" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="AlertDate" />
+                                        <asp:BoundField DataField="AlertDate" DataFormatString="{0:dd/MM/yyyy}" HeaderText="AlertDate"
+                                            ApplyFormatInEditMode="false" ReadOnly="true" SortExpression="AlertDate" />
                                         <asp:BoundField DataField="MinStock" HeaderText="MinStock" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="MinStock" />
                                         <asp:TemplateField HeaderText="Value" Visible="false">

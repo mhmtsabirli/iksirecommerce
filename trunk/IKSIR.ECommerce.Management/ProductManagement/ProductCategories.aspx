@@ -63,7 +63,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtCategoryName"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtCategoryName" Width="100%"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtCategoryName"
@@ -79,7 +79,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtDescription" TextMode="MultiLine"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtDescription"  Width="100%" TextMode="MultiLine"></asp:TextBox>
                             </td>
                             <td>
                             </td>
@@ -160,8 +160,9 @@
                         <tr>
                             <td colspan="4">
                                 <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
-                                    GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" 
-                                    EmptyDataText="Listede gösterilecek kayıt bulunamadı">
+                                    GridLines="None" PageSize="10" EnableModelValidation="True" Width="100%" 
+                                    EmptyDataText="Listede gösterilecek kayıt bulunamadı" AllowPaging="True" 
+                                    onpageindexchanging="gvList_PageIndexChanging">
                                     <EmptyDataTemplate>
                                         Kayıt Bulunamadı
                                     </EmptyDataTemplate>

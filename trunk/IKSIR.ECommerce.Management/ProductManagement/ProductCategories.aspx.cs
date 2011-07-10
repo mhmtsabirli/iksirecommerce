@@ -17,6 +17,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 {
     public partial class ProductCategories : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -175,7 +176,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             Utility.BindDropDownList(ddlParentCategories, itemList, "Title", "Id");
             Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
 
-           
+
         }
 
         private void GetList()
@@ -195,7 +196,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 itemList.Where(x => x.ParentCategory == item);
             }
 
-            
+
             gvList.DataSource = itemList;
             gvList.DataBind();
         }
@@ -217,7 +218,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
             else
             {
-                if(ddlParentCategories.SelectedValue != "-1")
+                if (ddlParentCategories.SelectedValue != "-1")
                     item.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedValue) };
 
                 item.Title = txtCategoryName.Text.Trim();
@@ -289,6 +290,12 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             txtCategoryName.Text = string.Empty;
             txtDescription.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
+        }
+
+        protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvList.PageIndex = e.NewPageIndex;
+            GetList();
         }
 
     }
