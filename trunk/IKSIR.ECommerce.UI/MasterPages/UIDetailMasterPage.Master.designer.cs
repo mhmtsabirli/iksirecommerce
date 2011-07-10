@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IKSIR.ECommerce.UI {
+namespace IKSIR.ECommerce.UI.MasterPages {
     
     
     public partial class UIDetailMasterPage {

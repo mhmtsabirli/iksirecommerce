@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UIMasterPage.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="IKSIR.ECommerce.UI.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/UIMasterPage.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.Default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -6,7 +6,7 @@
       
          <h3>Lavabo Yarım Ayak</h3>
          
-         <div class="section_image"><img src="images/section_image_1.jpg" alt="" /></div>
+         <div class="section_image"><img src="../images/section_image_1.jpg" alt="" /></div>
          
          <div class="section_info">
          
@@ -31,8 +31,8 @@
          </div>
          
          <div class="section_links">
-            <a href="#"><img src="images/section_incele.jpg" alt="" /></a>
-            <a href="#"><img src="images/section_sepete_ekle.jpg" alt="" /></a>
+            <a href="#"><img src="../images/section_incele.jpg" alt="" /></a>
+            <a href="#"><img src="../images/section_sepete_ekle.jpg" alt="" /></a>
          </div>
       
       </div>
@@ -41,7 +41,7 @@
       
          <h3>Lavabo Yarım Ayak</h3>
          
-         <div class="section_image"><img src="images/section_image_1.jpg" alt="" /></div>
+         <div class="section_image"><img src="../images/section_image_1.jpg" alt="" /></div>
          
          <div class="section_info">
          
@@ -66,8 +66,8 @@
          </div>
          
          <div class="section_links">
-            <a href="#"><img src="images/section_incele.jpg" alt="" /></a>
-            <a href="#"><img src="images/section_sepete_ekle.jpg" alt="" /></a>
+            <a href="#"><img src="../images/section_incele.jpg" alt="" /></a>
+            <a href="#"><img src="../images/section_sepete_ekle.jpg" alt="" /></a>
          </div>
       
       </div>
@@ -76,7 +76,7 @@
       
          <h3>Lavabo Yarım Ayak</h3>
          
-         <div class="section_image"><img src="images/section_image_1.jpg" alt="" /></div>
+         <div class="section_image"><img src="../images/section_image_1.jpg" alt="" /></div>
          
          <div class="section_info">
          
@@ -101,8 +101,8 @@
          </div>
          
          <div class="section_links">
-            <a href="#"><img src="images/section_incele.jpg" alt="" /></a>
-            <a href="#"><img src="images/section_sepete_ekle.jpg" alt="" /></a>
+            <a href="#"><img src="../images/section_incele.jpg" alt="" /></a>
+            <a href="#"><img src="../images/section_sepete_ekle.jpg" alt="" /></a>
          </div>
       
       </div>
@@ -111,7 +111,7 @@
       
          <h3>Lavabo Yarım Ayak</h3>
          
-         <div class="section_image"><img src="images/section_image_1.jpg" alt="" /></div>
+         <div class="section_image"><img src="../images/section_image_1.jpg" alt="" /></div>
          
          <div class="section_info">
          
@@ -136,8 +136,8 @@
          </div>
          
          <div class="section_links">
-            <a href="#"><img src="images/section_incele.jpg" alt="" /></a>
-            <a href="#"><img src="images/section_sepete_ekle.jpg" alt="" /></a>
+            <a href="#"><img src="../images/section_incele.jpg" alt="" /></a>
+            <a href="#"><img src="../images/section_sepete_ekle.jpg" alt="" /></a>
          </div>
       
       </div>
@@ -146,7 +146,7 @@
       
          <h3>Lavabo Yarım Ayak</h3>
          
-         <div class="section_image"><img src="images/section_image_1.jpg" alt="" /></div>
+         <div class="section_image"><img src="../images/section_image_1.jpg" alt="" /></div>
          
          <div class="section_info">
          
@@ -171,8 +171,8 @@
          </div>
          
          <div class="section_links">
-            <a href="#"><img src="images/section_incele.jpg" alt="" /></a>
-            <a href="#"><img src="images/section_sepete_ekle.jpg" alt="" /></a>
+            <a href="#"><img src="../images/section_incele.jpg" alt="" /></a>
+            <a href="#"><img src="../images/section_sepete_ekle.jpg" alt="" /></a>
          </div>
       
       </div>
@@ -181,7 +181,7 @@
       
          <h3>Lavabo Yarım Ayak</h3>
          
-         <div class="section_image"><img src="images/section_image_1.jpg" alt="" /></div>
+         <div class="section_image"><img src="../images/section_image_1.jpg" alt="" /></div>
          
          <div class="section_info">
          
@@ -206,8 +206,8 @@
          </div>
          
          <div class="section_links">
-            <a href="#"><img src="images/section_incele.jpg" alt="" /></a>
-            <a href="#"><img src="images/section_sepete_ekle.jpg" alt="" /></a>
+            <a href="#"><img src="../images/section_incele.jpg" alt="" /></a>
+            <a href="#"><img src="../images/section_sepete_ekle.jpg" alt="" /></a>
          </div>
       
       </div>

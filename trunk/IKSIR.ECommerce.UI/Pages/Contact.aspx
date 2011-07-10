@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UIMasterPage.Master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/UIMasterPage.Master" AutoEventWireup="true"
     CodeBehind="Contact.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.Contact" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\style.css" />
-    <Content Include="Default.aspx" />
     <Content Include="images\carousel_bg.jpg" />
     <Content Include="images\carousel_image.jpg" />
     <Content Include="images\carousel_left.jpg" />
@@ -144,6 +143,7 @@
     <Content Include="js\validate_profile.js" />
     <Content Include="Pages\Contact.aspx" />
     <Content Include="Pages\Content.aspx" />
+    <Content Include="Pages\Default.aspx" />
     <Content Include="Pages\Login.aspx" />
     <Content Include="Pages\ProductDetails.aspx" />
     <Content Include="Pages\ProductList.aspx" />
@@ -166,19 +166,19 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UIDetailMasterPage.Master.cs">
-      <DependentUpon>UIDetailMasterPage.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UIDetailMasterPage.Master.designer.cs">
-      <DependentUpon>UIDetailMasterPage.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Default.aspx.cs">
+    <Compile Include="Pages\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
+    <Compile Include="Pages\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPages\UIDetailMasterPage.Master.cs">
+      <DependentUpon>UIDetailMasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPages\UIDetailMasterPage.Master.designer.cs">
+      <DependentUpon>UIDetailMasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Pages\Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -223,11 +223,11 @@
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UIMasterPage.Master.cs">
+    <Compile Include="MasterPages\UIMasterPage.Master.cs">
       <DependentUpon>UIMasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UIMasterPage.Master.designer.cs">
+    <Compile Include="MasterPages\UIMasterPage.Master.designer.cs">
       <DependentUpon>UIMasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCNewsFromUs.ascx.cs">
@@ -277,10 +277,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UIMasterPage.Master" />
+    <Content Include="MasterPages\UIMasterPage.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UIDetailMasterPage.Master" />
+    <Content Include="MasterPages\UIDetailMasterPage.Master" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IKSIR.ECommerce.Infrastructure\IKSIR.ECommerce.Infrastructure.csproj">
