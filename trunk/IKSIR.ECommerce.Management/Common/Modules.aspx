@@ -54,7 +54,7 @@
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="txtModuleName"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Enum Adı Girmelisiniz"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Modül Adı Girmelisiniz"
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
@@ -132,10 +132,12 @@
                                                     CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="Id" HeaderText="Değer" ApplyFormatInEditMode="false" ReadOnly="true"
+                                        <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Id" />
-                                        <asp:BoundField DataField="Name" HeaderText="Name" ApplyFormatInEditMode="false"
+                                        <asp:BoundField DataField="Name" HeaderText="Ad" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Name" />
+                                             <asp:BoundField DataField="SiteName" HeaderText="Site" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="SiteName" />
                                         <asp:TemplateField HeaderText="Id" Visible="false">
                                             <ItemTemplate>
                                             </ItemTemplate>
