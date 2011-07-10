@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
     AutoEventWireup="true" CodeBehind="EnumValues.aspx.cs" Inherits="IKSIR.ECommerce.Management.Common.EnumValues"
-    Theme="ManagementGridView" %>
+    %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
