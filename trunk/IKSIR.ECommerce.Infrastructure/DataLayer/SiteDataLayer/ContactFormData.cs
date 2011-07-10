@@ -32,7 +32,9 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             returnValue.Ip = DBHelper.StringValue(dr["Ip"].ToString());
             returnValue.Message = DBHelper.StringValue(dr["Message"].ToString());
             returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
+            returnValue.Solution = DBHelper.StringValue(dr["Solution"].ToString());
             returnValue.Status = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["Status"].ToString()) });
+            returnValue.StatusName = returnValue.Status.Value;
             returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
             returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
             returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
@@ -58,17 +60,13 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             return returnValue;
         }
 
-        public static int Update(ContactForm itemContactForm)
+        public static int Update(int FormId, string Solution)
         {
             var returnValue = 1;
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", itemContactForm.Id));
-            parameters.Add(new SqlParameter("@FirstLastName", DBHelper.StringValue(itemContactForm.FirstLastName)));
-            parameters.Add(new SqlParameter("@Email", DBHelper.StringValue(itemContactForm.Email)));
-            parameters.Add(new SqlParameter("@Ip", DBHelper.StringValue(itemContactForm.Ip)));
-            parameters.Add(new SqlParameter("@Message", DBHelper.StringValue(itemContactForm.Message)));
-            parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemContactForm.Title)));
-            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemContactForm.EditAdminId)));
+            parameters.Add(new SqlParameter("@Id", FormId));
+            parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(0)));
+            parameters.Add(new SqlParameter("@Solution", DBHelper.StringValue(Solution)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateContactForm", parameters);
             return returnValue;
@@ -102,13 +100,50 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             return returnValue;
         }
 
-        public static List<ContactForm> GetContactFormist(ContactForm itemContactForm = null)
+        public static List<ContactForm> GetContactFormList(ContactForm itemContactForm = null)
         {
             List<ContactForm> itemContactFormList = null;
             List<SqlParameter> parameters = new List<SqlParameter>();
 
-            parameters.Add(new SqlParameter("@Title", DBHelper.IntValue(itemContactForm.Title)));
-            parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemContactForm.Status.Id)));
+            if (itemContactForm != null)
+            {
+                parameters.Add(new SqlParameter("@Title", DBHelper.IntValue(itemContactForm.Title)));
+                parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemContactForm.Status.Id)));
+            }
+            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetContactForm", parameters);
+            itemContactFormList = new List<ContactForm>();
+
+            while (dr.Read())
+            {
+                var item = new ContactForm();
+                //TODO => tayfun
+                item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                item.FirstLastName = DBHelper.StringValue(dr["FirstLastName"].ToString());
+                item.Email = DBHelper.StringValue(dr["Email"].ToString());
+                item.Ip = DBHelper.StringValue(dr["Ip"].ToString());
+                item.Message = DBHelper.StringValue(dr["Message"].ToString());
+                item.Solution = DBHelper.StringValue(dr["Solution"].ToString());
+                item.Title = DBHelper.StringValue(dr["Title"].ToString());
+                item.Status = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["Status"].ToString()) });
+                item.StatusName = item.Status.Value;
+                item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                item.Id = DBHelper.IntValue(dr["Id"].ToString());
+                itemContactFormList.Add(item);
+            }
+
+            dr.Close();
+            return itemContactFormList;
+        }
+
+        public static List<ContactForm> GetContactFormList(int Status)
+        {
+            List<ContactForm> itemContactFormList = null;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+
+            parameters.Add(new SqlParameter("@Status", Status));
 
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetContactForm", parameters);
             itemContactFormList = new List<ContactForm>();
@@ -122,12 +157,15 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
                 item.Email = DBHelper.StringValue(dr["Email"].ToString());
                 item.Ip = DBHelper.StringValue(dr["Ip"].ToString());
                 item.Message = DBHelper.StringValue(dr["Message"].ToString());
+                item.Solution = DBHelper.StringValue(dr["Solution"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Status = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["Status"].ToString()) });
+                item.StatusName = item.Status.Value;
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
+                itemContactFormList.Add(item);
             }
 
             dr.Close();

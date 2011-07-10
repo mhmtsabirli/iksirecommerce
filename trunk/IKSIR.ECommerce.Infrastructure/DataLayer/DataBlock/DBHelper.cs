@@ -10,7 +10,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock
         public static int IntValue(object value)
         {
             int retValue;
-            if (value == null || value == DBNull.Value || value == "" || Convert.ToInt32(value) == -1)
+            if (value == null || value == DBNull.Value || value == "")
                 retValue = 0;
             else
             {
