@@ -344,7 +344,7 @@
                                     <asp:TemplateField ShowHeader="False">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnPropertyEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
-                                            <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
+                                            <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnPropertyDelete_Click" CommandArgument='<%# Eval("Id")%>'
                                                 OnClientClick="javascript:return confirm('Bu kaydı silmek istediğinize emin misiniz?');"
                                                 CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
                                         </ItemTemplate>

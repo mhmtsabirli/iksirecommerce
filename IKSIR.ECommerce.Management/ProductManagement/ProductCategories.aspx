@@ -161,7 +161,7 @@
                             <td colspan="4">
                                 <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
                                     GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" 
-                                    EmptyDataText="Listede gösterilecek kayıt bulunamadı" AllowPaging="True">
+                                    EmptyDataText="Listede gösterilecek kayıt bulunamadı">
                                     <EmptyDataTemplate>
                                         Kayıt Bulunamadı
                                     </EmptyDataTemplate>
