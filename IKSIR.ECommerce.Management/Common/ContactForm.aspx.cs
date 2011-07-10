@@ -25,6 +25,12 @@ namespace IKSIR.ECommerce.Management.Common
         {
             if (!Page.IsPostBack)
             {
+                if (Request["FormId"] != null)
+                {
+                    btnSave.CommandArgument = Request["FormId"].ToString();
+                    lblId.Text = Request["FormId"].ToString();
+                    GetItem(Convert.ToInt32(Request["FormId"].ToString()));
+                }
                 BindValues();
                 GetList();
             }
@@ -80,7 +86,7 @@ namespace IKSIR.ECommerce.Management.Common
         {
             IKSIR.ECommerce.Model.SiteModel.ContactForm itemContactForm = ContactFormData.Get(new IKSIR.ECommerce.Model.SiteModel.ContactForm() { Id = itemId });
 
-
+            lblId.Text = itemContactForm.Id.ToString();
             txtName.Text = itemContactForm.FirstLastName.ToString();
             txtEmail.Text = itemContactForm.Email.ToString();
             txtIp.Text = itemContactForm.Ip.ToString();
@@ -148,31 +154,21 @@ namespace IKSIR.ECommerce.Management.Common
         private bool UpdateItem(int itemId)
         {
             bool retValue = false;
-            var itemContactForm = new IKSIR.ECommerce.Model.SiteModel.ContactForm();
-
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            itemContactForm.FirstLastName = txtFilterUserName.Text;
-            itemContactForm.Email = txtEmail.Text;
-            itemContactForm.Ip = txtIp.Text;
-            itemContactForm.Message = txtMessage.Text;
-            itemContactForm.Title = txtTitle.Text;
 
             try
             {
-                if (ContactFormData.Update(itemContactForm) < 0)
+                if (ContactFormData.Update(itemId, txtSolution.Text) < 0)
                     retValue = true;
 
                 SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Insert ProductCategory";
+                itemSystemLog.Title = "Insert ContactFormData";
                 itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
             catch
             {
                 SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Insert ProductCategory";
+                itemSystemLog.Title = "Insert ContactFormData";
                 itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
@@ -181,7 +177,11 @@ namespace IKSIR.ECommerce.Management.Common
         private void GetList()
         {
 
-           
+
+            List<IKSIR.ECommerce.Model.SiteModel.ContactForm> itemContactFormList = ContactFormData.GetContactFormList();
+
+            gvList.DataSource = itemContactFormList;
+            gvList.DataBind();
         }
 
     

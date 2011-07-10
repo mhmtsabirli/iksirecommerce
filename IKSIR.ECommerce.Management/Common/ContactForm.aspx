@@ -15,7 +15,6 @@
                 <asp:Label runat="server" ID="lblError" Visible="false"></asp:Label>
             </td>
             <td style="text-align: right">
-             
             </td>
         </tr>
         <tr>
@@ -51,7 +50,6 @@
                                 <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
                             </td>
                             <td>
-                              
                             </td>
                         </tr>
                         <tr>
@@ -65,7 +63,6 @@
                                 <asp:TextBox runat="server" ID="txtTitle"></asp:TextBox>
                             </td>
                             <td>
-                               
                             </td>
                         </tr>
                         <tr>
@@ -79,7 +76,6 @@
                                 <asp:TextBox runat="server" ID="txtEmail"></asp:TextBox>
                             </td>
                             <td>
-                              
                             </td>
                         </tr>
                         <tr>
@@ -90,15 +86,14 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtIp" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtIp"></asp:TextBox>
                             </td>
                             <td>
-                               
                             </td>
                         </tr>
                         <tr>
                             <td>
-                               Mesaj
+                                Mesaj
                             </td>
                             <td>
                                 :
@@ -107,21 +102,33 @@
                                 <asp:TextBox runat="server" ID="txtMessage" TextMode="MultiLine"></asp:TextBox>
                             </td>
                             <td>
-                               
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align:center">
+                            <td>
+                                Çözüm
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtSolution" TextMode="MultiLine"></asp:TextBox>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align: center">
                                 <asp:ValidationSummary runat="server" ID="vsForm" ValidationGroup="VGForm" ForeColor="Red" />
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align:center">
+                            <td colspan="4" style="text-align: center">
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align:center">
-                                <asp:Button runat="server" ID="btnSave" Text="Kaydet" ValidationGroup="VGForm" OnClick="btnSave_Click" />
+                            <td colspan="4" style="text-align: center">
+                                <asp:Button runat="server" ID="btnSave" Text="Okundu" ValidationGroup="VGForm" OnClick="btnSave_Click" />
                                 &nbsp;<asp:Button runat="server" ID="btnCancel" Text="Vazgeç" OnClick="btnCancel_Click" />
                             </td>
                         </tr>
@@ -190,8 +197,10 @@
                                             SortExpression="Id" />
                                         <asp:BoundField DataField="Title" HeaderText="Başlık" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Title" />
-                                        <asp:BoundField DataField="Ip" HeaderText="Ip" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="Ip" />
+                                        <asp:BoundField DataField="Ip" HeaderText="Ip" ApplyFormatInEditMode="false" ReadOnly="true"
+                                            SortExpression="Ip" />
+                                        <asp:BoundField DataField="StatusName" HeaderText="Durum" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="StatusName" />
                                         <asp:TemplateField HeaderText="Id" Visible="false">
                                             <ItemTemplate>
                                             </ItemTemplate>
