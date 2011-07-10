@@ -47,7 +47,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
+                              <asp:Label runat="server" ID="txtName"></asp:Label>
                             </td>
                             <td>
                             </td>
@@ -60,7 +60,8 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtTitle"></asp:TextBox>
+                            <asp:Label runat="server" ID="txtTitle"></asp:Label>
+                               
                             </td>
                             <td>
                             </td>
@@ -73,7 +74,8 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtEmail"></asp:TextBox>
+                              <asp:Label runat="server" ID="txtEmail"></asp:Label>
+                              
                             </td>
                             <td>
                             </td>
@@ -86,7 +88,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtIp"></asp:TextBox>
+                               <asp:Label runat="server" ID="txtIp"></asp:Label>
                             </td>
                             <td>
                             </td>
@@ -99,7 +101,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtMessage" TextMode="MultiLine"></asp:TextBox>
+                               <asp:Label runat="server" ID="txtMessage"></asp:Label>
                             </td>
                             <td>
                             </td>

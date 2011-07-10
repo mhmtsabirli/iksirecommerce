@@ -46,7 +46,7 @@ namespace IKSIR.ECommerce.Management.Common {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtName;
+        protected global::System.Web.UI.WebControls.Label txtName;
         
         /// <summary>
         /// txtTitle control.
@@ -55,7 +55,7 @@ namespace IKSIR.ECommerce.Management.Common {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTitle;
+        protected global::System.Web.UI.WebControls.Label txtTitle;
         
         /// <summary>
         /// txtEmail control.
@@ -64,7 +64,7 @@ namespace IKSIR.ECommerce.Management.Common {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        protected global::System.Web.UI.WebControls.Label txtEmail;
         
         /// <summary>
         /// txtIp control.
@@ -73,7 +73,7 @@ namespace IKSIR.ECommerce.Management.Common {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIp;
+        protected global::System.Web.UI.WebControls.Label txtIp;
         
         /// <summary>
         /// txtMessage control.
@@ -82,7 +82,7 @@ namespace IKSIR.ECommerce.Management.Common {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMessage;
+        protected global::System.Web.UI.WebControls.Label txtMessage;
         
         /// <summary>
         /// txtSolution control.

@@ -131,7 +131,9 @@
                         <tr>
                             <td colspan="4">
                                 <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
-                                    GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" EmptyDataText="Listede gösterilecek kayıt bulunamadı">
+                                    GridLines="None" PageSize="10" EnableModelValidation="True" Width="100%" 
+                                    EmptyDataText="Listede gösterilecek kayıt bulunamadı" AllowPaging="True" onpageindexchanging="gvList_PageIndexChanging" 
+                                   >
                                     <Columns>
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>
@@ -145,6 +147,8 @@
                                             SortExpression="Id" />
                                         <asp:BoundField DataField="Value" HeaderText="Değer" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Value" />
+                                         <asp:BoundField DataField="EnumName" HeaderText="Sabit" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="EnumName" />
                                        
                                         <asp:TemplateField HeaderText="Id" Visible="false">
                                             <ItemTemplate>

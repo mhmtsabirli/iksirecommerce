@@ -218,5 +218,11 @@ namespace IKSIR.ECommerce.Management.Common
             btnSave.CommandArgument = string.Empty;
         }
 
+        protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvList.PageIndex = e.NewPageIndex;
+            GetList();
+        }
+
     }
 }
