@@ -8,11 +8,14 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Model.ProductModel;
 using System.IO;
 using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
+using IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer;
+using IKSIR.ECommerce.Model.SiteModel;
 
 namespace IKSIR.ECommerce.Management.MasterPage
 {
     public partial class MasterManagement : System.Web.UI.MasterPage
     {
+        public List<IKSIR.ECommerce.Model.SiteModel.ContactForm> itemContactFormList = null;
         public string Alert
         {
             set
@@ -31,6 +34,7 @@ namespace IKSIR.ECommerce.Management.MasterPage
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            itemContactFormList = ContactFormData.GetContactFormList(10);
         }
     }
 }
