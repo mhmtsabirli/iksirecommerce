@@ -10,12 +10,14 @@ namespace IKSIR.ECommerce.Model.CommonModel
     {
         public string Name { get; set; }
         public Site Site { get; set; }
+        public string SiteName { get; set; }
 
-        public Module(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string name,Site site )
+        public Module(int id, int createUserId, DateTime createDate, int editUserId,string siteName, DateTime editDate, string name,Site site )
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.Name = name;
             this.Site = site;
+            this.SiteName = siteName;
         }
 
         public Module()
