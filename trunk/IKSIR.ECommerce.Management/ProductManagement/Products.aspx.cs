@@ -26,7 +26,12 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 GetList();
             }
         }
-
+        protected void btnCancelShowDocuments_Click(object sender, EventArgs e)
+        {
+            ruProductDocuments.Visible = true;
+            divDocuments.InnerHtml = "";
+            btnCancelShowDocuments.Visible = false;
+        }
         protected void lbtnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
@@ -72,6 +77,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         protected void lbtnDocumentEdit_Click(object sender, EventArgs e)
         {
             ruProductDocuments.Visible = false;
+            btnCancelShowDocuments.Visible = true;
             var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
             gvList.SelectedIndex = index;
             var documentId = (sender as LinkButton).CommandArgument == ""
@@ -352,7 +358,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             ruProductDocuments.Visible = true;
             divDocuments.InnerHtml = "";
-            ddlProductCategories.SelectedIndex = -1;
+            btnCancelShowDocuments.Visible = false;
+
             ddlParentProductCategories.Items.Clear();
             ddlProductCategories.Items.Clear();
             ddlProductCategories.Enabled = false;
@@ -363,6 +370,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             txtProductDescription.Text = string.Empty;
             txtMinStock.Text = string.Empty;
             txtVideo.Text = string.Empty;
+
             txtAlertDate.DbSelectedDate = string.Empty;
             ddlProperties.SelectedIndex = -1;
             txtPropertyValue.Text = string.Empty;

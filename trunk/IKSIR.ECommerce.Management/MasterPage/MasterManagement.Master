@@ -57,18 +57,18 @@
                             <li><a href="">
                                 <img src="../Images/Settings.png" />&nbsp;Ayarlar</a>
                                 <ul>
-                                    <li><a href="../Common/Properties.aspx">Özellikler</a></li>
-                                    <li><a href="../ProductManagement/ProductCategories.aspx">Kategoriler</a></li>
-                                    <li><a href="../Common/Enums.aspx">Sabitler</a></li>
-                                    <li><a href="../Common/EnumValues.aspx">Sabit Değerleri</a></li>
-                                    <li><a href="../ProductManagement/Products.aspx">Ürünler</a></li>
-                                    <li><a href="../Admin/Admin.aspx">Yöneticiler</a></li>
-                                    <li><a href="../Admin/Right.aspx">Haklar</a></li>
-                                    <li><a href="../Common/Sites.aspx">Siteler</a></li>
-                                    <li><a href="../Common/Modules.aspx">Modüller</a></li>
-                                    <li><a href="../ProductManagement/ModuleProducts.aspx">Modüle Ürün Atama</a></li>
-                                    <li><a href="../Common/StaticPages.aspx">Statik Sayfalar</a></li>
-                                    <li><a href="../Common/NewsFromUs.aspx">Bizden Haberler</a></li>
+                                    <li><a href="/Common/Properties.aspx">Özellikler</a></li>
+                                    <li><a href="/ProductManagement/ProductCategories.aspx">Kategoriler</a></li>
+                                    <li><a href="/Common/Enums.aspx">Sabitler</a></li>
+                                    <li><a href="/Common/EnumValues.aspx">Sabit Değerleri</a></li>
+                                    <li><a href="/ProductManagement/Products.aspx">Ürünler</a></li>
+                                    <li><a href="/Admin/Admin.aspx">Yöneticiler</a></li>
+                                    <li><a href="/Admin/Right.aspx">Haklar</a></li>
+                                    <li><a href="/Common/Sites.aspx">Siteler</a></li>
+                                    <li><a href="/Common/Modules.aspx">Modüller</a></li>
+                                    <li><a href="/ProductManagement/ModuleProducts.aspx">Modüle Ürün Atama</a></li>
+                                    <li><a href="/Common/StaticPages.aspx">Statik Sayfalar</a></li>
+                                    <li><a href="/Common/NewsFromUs.aspx">Bizden Haberler</a></li>
                                 </ul>
                             </li>
                         </ul>
