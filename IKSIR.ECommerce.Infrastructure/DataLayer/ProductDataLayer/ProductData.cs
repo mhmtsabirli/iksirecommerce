@@ -129,5 +129,37 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             dr.Close();
             return itemProductList;
         }
+
+        public static List<Product> GetProductCategoryList(int CategoryId)
+        {
+            List<Product> itemProductList = new List<Product>();
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@ProductCategoryId", CategoryId));
+            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductList", parameters);
+
+            while (dr.Read())
+            {
+                var item = new Product();
+                //TODO => tayfun
+                item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                item.Description = DBHelper.StringValue(dr["Description"].ToString());
+                item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                item.Id = DBHelper.IntValue(dr["Id"].ToString());
+                item.Video = DBHelper.StringValue(dr["Video"].ToString());
+                item.Title = DBHelper.StringValue(dr["Title"].ToString());
+                item.Description = DBHelper.StringValue(dr["Description"].ToString());
+                item.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
+                item.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
+                item.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
+                item.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
+                itemProductList.Add(item);
+            }
+
+            dr.Close();
+            return itemProductList;
+        }
     }
 }
