@@ -122,7 +122,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 item.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
                 item.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
-                //returnValue.ProductCategory =ProductCategory.Get(DBHelper.IntValue(dr["ProductCategory"].ToString()));
+                item.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
                 itemProductList.Add(item);
             }
 
