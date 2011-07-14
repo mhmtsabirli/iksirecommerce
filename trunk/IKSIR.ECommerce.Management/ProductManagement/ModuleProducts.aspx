@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
-    AutoEventWireup="true" CodeBehind="ModuleProducts.aspx.cs" Inherits="IKSIR.ECommerce.Management.ProductManagement.ModuleProducts"
-    %>
+    AutoEventWireup="true" CodeBehind="ModuleProducts.aspx.cs" Inherits="IKSIR.ECommerce.Management.ProductManagement.ModuleProducts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -8,16 +7,15 @@
     <h2>
         Modüllere Ürün Atama</h2>
     <p>
-       Sistemde tanımlanmış modüllere ürün atamak için kullanılan ekran
+        Sistemde tanımlanmış modüllere ürün atamak için kullanılan ekran
     </p>
     <table id="tblMngForm">
         <tr>
             <td align="left">
                 <asp:Label runat="server" ID="lblError" Visible="false"></asp:Label>
-                 <asp:Label runat="server" ID="lblError2" Visible="false"></asp:Label>
-                
+                <asp:Label runat="server" ID="lblError2" Visible="false"></asp:Label>
             </td>
-            <td style="text-align:right">
+            <td style="text-align: right">
                 <asp:LinkButton runat="server" ID="lbtnNew" Text="Yeni Kayıt" OnClick="lbtnNew_Click"></asp:LinkButton>
             </td>
         </tr>
@@ -27,7 +25,8 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Form</strong></td>
+                                <strong>Form</strong>
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -50,8 +49,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" ID="ddlSites" AutoPostBack="true" 
-                                    onselectedindexchanged="ddlSites_SelectedIndexChanged">
+                                <asp:DropDownList runat="server" ID="ddlSites" AutoPostBack="true" OnSelectedIndexChanged="ddlSites_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </td>
                             <td>
@@ -60,7 +58,7 @@
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
-                           <tr>
+                        <tr>
                             <td>
                                 Modul
                             </td>
@@ -79,7 +77,7 @@
                         </tr>
                         <tr>
                             <td>
-                               Ürün Kodu
+                                Ürün Kodu
                             </td>
                             <td>
                                 :
@@ -94,12 +92,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align:center">
+                            <td colspan="4" style="text-align: center">
                                 <asp:ValidationSummary runat="server" ID="vsForm" ValidationGroup="VGForm" ForeColor="Red" />
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align:center">
+                            <td colspan="4" style="text-align: center">
                                 <asp:Button runat="server" ID="btnSave" Text="Kaydet" ValidationGroup="VGForm" OnClick="btnSave_Click" />
                                 &nbsp;<asp:Button runat="server" ID="btnCancel" Text="Vazgeç" OnClick="btnCancel_Click" />
                             </td>
@@ -146,7 +144,8 @@
                     <table>
                         <tr>
                             <td colspan="4">
-                                <strong>Liste</strong></td>
+                                <strong>Liste</strong>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="4">
@@ -163,12 +162,14 @@
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Id" />
-                                        <asp:BoundField DataField="ProductName" HeaderText="Ürün" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="ProductName" />
-                                       <asp:BoundField DataField="ModuleName" HeaderText="Modül" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="ModuleName" />
-                                        <asp:TemplateField HeaderText="Id" Visible="false">
+                                        <asp:TemplateField HeaderText="Ürün">
                                             <ItemTemplate>
+                                                <asp:Label runat="server" ID="lblProductCode" Text='<%# Eval("Product.Title")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Modül">
+                                            <ItemTemplate>
+                                                <asp:Label runat="server" ID="lblProductCode" Text='<%# Eval("Module.Name")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
