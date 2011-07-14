@@ -152,5 +152,28 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             dr.Close();
             return itemModuleProductList;
         }
+
+        public static List<Product> GetModuleProductList(int ModuleId)
+        {
+            List<Product> itemModuleProductList = null;
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            parameters.Add(new SqlParameter("@ModuleId", ModuleId));
+            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetModuleProduct", parameters);
+            itemModuleProductList = new List<Product>();
+
+            while (dr.Read())
+            {
+                var item = new Product();
+                //TODO => tayfun,
+                item = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
+
+                itemModuleProductList.Add(item);
+            }
+
+            dr.Close();
+            return itemModuleProductList;
+        }
     }
 }
