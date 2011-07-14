@@ -164,12 +164,12 @@
                                             SortExpression="Id" />
                                         <asp:TemplateField HeaderText="Ürün">
                                             <ItemTemplate>
-                                                <asp:Label runat="server" ID="lblProductCode" Text='<%# Eval("Product.Title")%>'></asp:Label>
+                                                <asp:Label runat="server" ID="lblProductName" Text='<%# Eval("Product.Title")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Modül">
                                             <ItemTemplate>
-                                                <asp:Label runat="server" ID="lblProductCode" Text='<%# Eval("Module.Name")%>'></asp:Label>
+                                                <asp:Label runat="server" ID="lblModuleName" Text='<%# Eval("Module.Name")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
