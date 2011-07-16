@@ -26,200 +26,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 GetList();
             }
         }
-        protected void btnCancelShowDocuments_Click(object sender, EventArgs e)
-        {
-            ruProductDocuments.Visible = true;
-            divDocuments.InnerHtml = "";
-            btnCancelShowDocuments.Visible = false;
-        }
-        protected void lbtnNew_Click(object sender, EventArgs e)
-        {
-            ClearForm();
-            lblProductId.Text = "Yeni Kayıt";
-            lblPropertyId.Text = "Yeni Kayıt";
-            pnlForm.Visible = true;
-            ddlProductCategories.Focus();
-        }
-        protected void btnSave_Click(object sender, EventArgs e)
-        {
-            int productId = 0;
-            if (btnSave.CommandArgument != "") //Kayıt güncelleme.
-            {
-                productId = Convert.ToInt32(btnSave.CommandArgument);
-                SaveProductMain(productId);
-            }
-            else
-            {
-                productId = InsertPruductMain();
-            }
-            SaveDocuments(productId);
-            SaveProductProperties(productId);
-            GetList();
-        }
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            pnlForm.Visible = false;
-            pnlList.Visible = true;
-            pnlFilter.Visible = true;
-        }
-        protected void lbtnEdit_Click(object sender, EventArgs e)
-        {
-            ClearForm();
-            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
-            gvList.SelectedIndex = index;
-            var itemId = (sender as LinkButton).CommandArgument == ""
-                             ? 0
-                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
-
-            btnSave.CommandArgument = itemId.ToString();
-            GetItem(itemId);
-        }
-        protected void lbtnDocumentEdit_Click(object sender, EventArgs e)
-        {
-            ruProductDocuments.Visible = false;
-            btnCancelShowDocuments.Visible = true;
-            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
-            gvList.SelectedIndex = index;
-            var documentId = (sender as LinkButton).CommandArgument == ""
-                             ? 0
-                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
-            if (!GetProductDocument(documentId))
-            {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya bilgilerini getirirken hata oluştu!</span><br />";
-            }
-        }
-
-        protected void lbtnPropertyEdit_Click(object sender, EventArgs e)
-        {
-            ClearForm();
-            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
-            gvList.SelectedIndex = index;
-            var PropertyId = (sender as LinkButton).CommandArgument == ""
-                             ? 0
-                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
-
-            btnSave.CommandArgument = lblProductId.Text.ToString();
-            if (!GetProductProperty(PropertyId))
-            {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya bilgilerini getirirken hata oluştu!</span><br />";
-            }
-            RadTabStrip1.SelectedIndex = 1;
-            RadPageView3.Selected = true;
-        }
-        protected void lbtnDelete_Click(object sender, EventArgs e)
-        {
-            var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
-            if (DeleteProductMain(itemId))
-            {
-                divAlert.InnerHtml += "<span style=\"color:Green\">Ürün başarıyla silindi <i>Ürün Id: " + itemId.ToString() + "</i></span><br />";
-                GetList();
-            }
-            else
-            {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Ürün silinirken hata oluştu! <i>Ürün Id: " + itemId.ToString() + "</i></span><br />";
-            }
-        }
-        protected void lbtnDocumentDelete_Click(object sender, EventArgs e)
-        {
-            var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
-            if (DeleteDocument(itemId))
-            {
-                divAlert.InnerHtml += "<span style=\"color:Green\">Dosya başarıyla silindi</span><br />";
-                GetItem(Convert.ToInt32(lblProductId.Text));
-            }
-            else
-            {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya silinirken hata oluştu!</span><br />";
-            }
-        }
-        protected void lbtnPropertyDelete_Click(object sender, EventArgs e)
-        {
-            var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
-            if (DeletePorperty(itemId))
-            {
-                divAlert.InnerHtml += "<span style=\"color:Green\">Dosya başarıyla silindi</span><br />";
-                GetItem(Convert.ToInt32(lblProductId.Text));
-            }
-            else
-            {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya silinirken hata oluştu!</span><br />";
-            }
-        }
-        protected void btnFilter_Click(object sender, EventArgs e)
-        {
-            GetList();
-        }
-
-        //protected void btnAddDocument_Click(object sender, EventArgs e)
-        //{
-        //    UploadFiles(3);
-        //    if ((fuSelectedDocument.PostedFile != null) && (fuSelectedDocument.PostedFile.ContentLength > 0))
-        //    {
-        //        try
-        //        {
-        //            //string fileExt = fuSelectedDocument.PostedFile.ContentType;
-        //            string fileName = fuSelectedDocument.PostedFile.FileName;
-        //            char[] tripChars = new char[] { '.' };
-        //            int count = fileName.Split(tripChars).Length;
-        //            string fileExt = fileName.Split(tripChars)[count - 1];
-
-        //            if (fileExt == "doc" || fileExt == "pdf" || fileExt == "jpg" || fileExt == "png")
-        //            {
-        //                string fn = System.IO.Path.GetFileName(fuSelectedDocument.PostedFile.FileName);
-        //                //var items = IKSIR.ECommerce.Toolkit.                        
-        //                var SaveLocation = Server.MapPath("..\\Images\\ProductImages\\OrginalImage");
-        //                try
-        //                {
-        //                    //System.IO.MemoryStream _MemoryStream = new MemoryStream(.CreateNewImage(SaveLocation, 25,25,fileExt));
-        //                    //System.Drawing.Image item = System.Drawing.Image.FromStream(_MemoryStream);
-
-        //                    fuSelectedDocument.PostedFile.SaveAs(SaveLocation);
-        //                    lblDocumentAlert.Text = "Dosya Yüklendi";
-        //                    lblDocumentAlert.Visible = true;
-        //                    lblDocumentAlert.ForeColor = System.Drawing.Color.Green;
-
-        //                    if (fileExt == "jpg" || fileExt == "png")
-        //                    { 
-        //                        //Resize image
-        //                    }
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    //Response.Write("Error: " + ex.Message);
-        //                    lblDocumentAlert.Text = "Dosya yüklenemedi yazma yetkisi yok";
-        //                    lblDocumentAlert.Visible = true;
-        //                    lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                lblDocumentAlert.Text = "Yüklemek istediğiniz dosya biçimi desteklenmiyor";
-        //                lblDocumentAlert.Visible = true;
-        //                lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
-        //            }
-        //        }
-        //        catch (Exception)
-        //        {
-
-        //            throw;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        lblDocumentAlert.Text = "Yüklemek için dosya seçininiz";
-        //        lblDocumentAlert.Visible = true;
-        //        lblDocumentAlert.ForeColor = System.Drawing.Color.Red;
-        //    }
-        //}
-
-        protected void btnAddProperty_Click(object sender, EventArgs e)
-        {
-            SaveProductPropertyToList();
-            ddlProperties.SelectedIndex = -1;
-            txtPropertyValue.Text = string.Empty;
-            btnAddProperty.CommandArgument = "";
-            lblPropertyId.Text = "Yeni Kayıt";
-        }
 
         private bool GetItem(int itemId)
         {
@@ -258,52 +64,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
             return retValue;
         }
-
-        private void BindValues()
-        {
-            //Buralarda tüm kategoriler gelecek istediği kategorinin altına tanımlama yapabilecek.
-            List<Site> itemListSite = SiteData.GetSiteList();
-            Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
-            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
-            ddlParentProductCategories.Enabled = false;
-            ddlProductCategories.Enabled = false;
-            //Utility.BindDropDownList(ddlProductCategories, itemList, "Title", "Id");
-            Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
-
-            List<Property> ProductPropertyList = PropertyData.GetList();
-            Utility.BindDropDownList(ddlProperties, ProductPropertyList, "Title", "Id");
-
-            //List<EnumValue> enumValueList = EnumValueData.GetEnumValues(1);
-            //Utility.BindDropDownList(ddlDocumentTypes, enumValueList, "Value", "Id");
-        }
-
-        protected void ddlSites_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ddlParentProductCategories.Items.Clear();
-            ddlProductCategories.Items.Clear();
-            List<ProductCategory> itemList = ProductCategoryData.GetGetParentProductCategoryListBySiteId(Convert.ToInt32(ddlSites.SelectedValue));
-
-            Utility.BindDropDownList(ddlParentProductCategories, itemList, "Title", "Id");
-            ddlParentProductCategories.Enabled = true;
-            ddlProductCategories.Enabled = false;
-        }
-
-        protected void ddlParentProductCategories_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ddlProductCategories.Items.Clear();
-            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryById(Convert.ToInt32(ddlParentProductCategories.SelectedValue));
-
-            Utility.BindDropDownList(ddlProductCategories, itemList, "Title", "Id");
-            ddlProductCategories.Enabled = true;
-        }
-
         private void GetList()
         {
             List<Product> itemList = ProductData.GetList();
             if (ddlFilterParentCategories.SelectedValue != "-1" && ddlFilterParentCategories.SelectedValue != "")
             {
                 int parentCategoryId = DBHelper.IntValue(ddlFilterParentCategories.SelectedValue);
-                itemList = itemList.Where(x => x.ProductCategory.Id == parentCategoryId).ToList();
+                itemList = itemList.Where(x => x.ProductCategory.ParentCategory.Id == parentCategoryId).ToList();
             }
             if (txtFilterProductCode.Text != "")
             {
@@ -345,7 +112,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
             return retValue;
         }
-
         private bool UpdateItem(int productId)
         {
             bool retValue = false;
@@ -354,42 +120,113 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             return retValue;
         }
 
-        private void ClearForm()
+        private void BindValues()
         {
-            ruProductDocuments.Visible = true;
-            divDocuments.InnerHtml = "";
-            btnCancelShowDocuments.Visible = false;
 
+            List<Site> itemListSite = SiteData.GetSiteList();
+            Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
+            Utility.BindDropDownList(ddlFilterSite, itemListSite, "Name", "Id");
+            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
+            ddlParentProductCategories.Enabled = false;
+            ddlFilterParentCategories.Enabled = false;
+            ddlProductCategories.Enabled = false;
+
+            Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
+
+            List<Property> ProductPropertyList = PropertyData.GetList();
+            Utility.BindDropDownList(ddlProperties, ProductPropertyList, "Title", "Id");
+
+
+        }
+        protected void ddlSites_SelectedIndexChanged(object sender, EventArgs e)
+        {
             ddlParentProductCategories.Items.Clear();
             ddlProductCategories.Items.Clear();
-            ddlProductCategories.Enabled = false;
-            ddlParentProductCategories.Enabled = false;
-            txtProductCode.Text = string.Empty;
-            Session["PRODUCT_PROPERTY_LIST"] = null;
-            txtProductName.Text = string.Empty;
-            txtProductDescription.Text = string.Empty;
-            txtMinStock.Text = string.Empty;
-            txtVideo.Text = string.Empty;
+            List<ProductCategory> itemList = ProductCategoryData.GetGetParentProductCategoryListBySiteId(Convert.ToInt32(ddlSites.SelectedValue));
 
-            txtAlertDate.DbSelectedDate = string.Empty;
-            ddlProperties.SelectedIndex = -1;
-            txtPropertyValue.Text = string.Empty;
-            btnSave.CommandArgument = string.Empty;
-            gvDocumentList.DataSource = null;
-            gvDocumentList.DataBind();
-            gvProductProperties.DataSource = null;
-            gvProductProperties.DataBind();
-            RadTabStrip1.SelectedIndex = 0;
-            RadPageView1.Selected = true;
-            //RadTabStrip1.Tabs[0].Selected = true;
-            //RadTabStrip1.Tabs[1].Selected = false;
-            //RadTabStrip1.Tabs[2].Selected = false;
-            //RadMultiPage1.PageViews[0].Selected = true;
-            //RadMultiPage1.PageViews[1].Selected = false;
-            //RadMultiPage1.PageViews[2].Selected = false;
-            //RadPageView1.Selected = true;
-            //RadPageView2.Selected = false;
-            //RadPageView3.Selected = false;
+            Utility.BindDropDownList(ddlParentProductCategories, itemList, "Title", "Id");
+            ddlParentProductCategories.Enabled = true;
+            ddlProductCategories.Enabled = false;
+        }
+        protected void ddlFilterSites_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            ddlFilterParentCategories.Items.Clear();
+            ddlFilterParentCategories.Items.Clear();
+            List<ProductCategory> itemList = ProductCategoryData.GetGetParentProductCategoryListBySiteId(Convert.ToInt32(ddlFilterSite.SelectedValue));
+
+            Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
+            ddlFilterParentCategories.Enabled = true;
+        }
+        protected void ddlParentProductCategories_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlProductCategories.Items.Clear();
+            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryById(Convert.ToInt32(ddlParentProductCategories.SelectedValue));
+
+            Utility.BindDropDownList(ddlProductCategories, itemList, "Title", "Id");
+            ddlProductCategories.Enabled = true;
+        }
+
+        protected void lbtnNew_Click(object sender, EventArgs e)
+        {
+            ClearForm();
+            lblProductId.Text = "Yeni Kayıt";
+            lblPropertyId.Text = "Yeni Kayıt";
+            pnlForm.Visible = true;
+            ddlProductCategories.Focus();
+        }
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            int productId = 0;
+            if (btnSave.CommandArgument != "") //Kayıt güncelleme.
+            {
+                productId = Convert.ToInt32(btnSave.CommandArgument);
+                SaveProductMain(productId);
+            }
+            else
+            {
+                productId = InsertPruductMain();
+            }
+            SaveDocuments(productId);
+            SaveProductProperties(productId);
+            GetList();
+        }
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            pnlForm.Visible = false;
+            pnlList.Visible = true;
+            pnlFilter.Visible = true;
+        }
+
+        protected void lbtnEdit_Click(object sender, EventArgs e)
+        {
+            ClearForm();
+            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
+            gvList.SelectedIndex = index;
+            var itemId = (sender as LinkButton).CommandArgument == ""
+                             ? 0
+                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
+
+            btnSave.CommandArgument = itemId.ToString();
+            GetItem(itemId);
+        }
+        protected void lbtnDelete_Click(object sender, EventArgs e)
+        {
+            var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
+            if (DeleteProductMain(itemId))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Green\">Ürün başarıyla silindi <i>Ürün Id: " + itemId.ToString() + "</i></span><br />";
+                GetList();
+            }
+            else
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Ürün silinirken hata oluştu! <i>Ürün Id: " + itemId.ToString() + "</i></span><br />";
+            }
+        }
+
+        protected void btnFilter_Click(object sender, EventArgs e)
+        {
+            GetList();
         }
 
         #region ProductMain
@@ -562,6 +399,34 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         #endregion
 
         #region Document
+
+        protected void lbtnDocumentEdit_Click(object sender, EventArgs e)
+        {
+            ruProductDocuments.Visible = false;
+            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
+            gvList.SelectedIndex = index;
+            var documentId = (sender as LinkButton).CommandArgument == ""
+                             ? 0
+                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
+            if (!GetProductDocument(documentId))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya bilgilerini getirirken hata oluştu!</span><br />";
+            }
+        }
+        protected void lbtnDocumentDelete_Click(object sender, EventArgs e)
+        {
+            var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
+            if (DeleteDocument(itemId))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Green\">Dosya başarıyla silindi</span><br />";
+                GetItem(Convert.ToInt32(lblProductId.Text));
+            }
+            else
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya silinirken hata oluştu!</span><br />";
+            }
+        }
+
         private bool GetProductDocuments(int productId)
         {
             bool retValue = false;
@@ -749,6 +614,46 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         #endregion
 
         #region Property
+
+        protected void btnAddProperty_Click(object sender, EventArgs e)
+        {
+            SaveProductPropertyToList();
+            ddlProperties.SelectedIndex = -1;
+            txtPropertyValue.Text = string.Empty;
+            btnAddProperty.CommandArgument = "";
+            lblPropertyId.Text = "Yeni Kayıt";
+        }
+        protected void lbtnPropertyEdit_Click(object sender, EventArgs e)
+        {
+            ClearForm();
+            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
+            gvList.SelectedIndex = index;
+            var PropertyId = (sender as LinkButton).CommandArgument == ""
+                             ? 0
+                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
+
+            btnSave.CommandArgument = lblProductId.Text.ToString();
+            if (!GetProductProperty(PropertyId))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya bilgilerini getirirken hata oluştu!</span><br />";
+            }
+            RadTabStrip1.SelectedIndex = 1;
+            RadPageView3.Selected = true;
+        }
+        protected void lbtnPropertyDelete_Click(object sender, EventArgs e)
+        {
+            var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
+            if (DeletePorperty(itemId))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Green\">Dosya başarıyla silindi</span><br />";
+                GetItem(Convert.ToInt32(lblProductId.Text));
+            }
+            else
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya silinirken hata oluştu!</span><br />";
+            }
+        }
+
         private List<ProductProperty> GetProductPropertyList()
         {
             List<ProductProperty> productPropertyList;
@@ -997,6 +902,42 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             gvList.PageIndex = e.NewPageIndex;
             GetList();
+        }
+
+        private void ClearForm()
+        {
+            ruProductDocuments.Visible = true;
+            divDocuments.InnerHtml = "";
+            ddlProductCategories.SelectedIndex = -1;
+            ddlParentProductCategories.Items.Clear();
+            ddlProductCategories.Items.Clear();
+            ddlProductCategories.Enabled = false;
+            ddlParentProductCategories.Enabled = false;
+            txtProductCode.Text = string.Empty;
+            Session["PRODUCT_PROPERTY_LIST"] = null;
+            txtProductName.Text = string.Empty;
+            txtProductDescription.Text = string.Empty;
+            txtMinStock.Text = string.Empty;
+            txtVideo.Text = string.Empty;
+            txtAlertDate.DbSelectedDate = string.Empty;
+            ddlProperties.SelectedIndex = -1;
+            txtPropertyValue.Text = string.Empty;
+            btnSave.CommandArgument = string.Empty;
+            gvDocumentList.DataSource = null;
+            gvDocumentList.DataBind();
+            gvProductProperties.DataSource = null;
+            gvProductProperties.DataBind();
+            RadTabStrip1.SelectedIndex = 0;
+            RadPageView1.Selected = true;
+            //RadTabStrip1.Tabs[0].Selected = true;
+            //RadTabStrip1.Tabs[1].Selected = false;
+            //RadTabStrip1.Tabs[2].Selected = false;
+            //RadMultiPage1.PageViews[0].Selected = true;
+            //RadMultiPage1.PageViews[1].Selected = false;
+            //RadMultiPage1.PageViews[2].Selected = false;
+            //RadPageView1.Selected = true;
+            //RadPageView2.Selected = false;
+            //RadPageView3.Selected = false;
         }
     }
 }

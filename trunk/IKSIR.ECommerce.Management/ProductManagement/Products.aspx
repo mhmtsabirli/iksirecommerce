@@ -445,6 +445,23 @@
                                 <strong>Filtre</strong>
                             </td>
                         </tr>
+                         <tr>
+                                    <td>
+                                        Site
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList runat="server" ID="ddlFilterSite" AutoPostBack="true" OnSelectedIndexChanged="ddlFilterSites_SelectedIndexChanged">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="ddlSites"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Site seçmelisiniz"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
                         <tr>
                             <td>
                                 Üst Kategori
@@ -483,7 +500,7 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
+                                <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4" Font-Size="Small"
                                     EmptyDataText="Listede gösterilecek kayıt bulunamadı" GridLines="None" PageSize="10"
                                     EnableModelValidation="True" Width="100%" AllowPaging="True" OnPageIndexChanging="gvList_PageIndexChanging">
                                     <Columns>
@@ -497,11 +514,11 @@
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Id" />
-                                        <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" ApplyFormatInEditMode="false"
+                                        <asp:BoundField DataField="ProductCode" HeaderText="Ürün KOdu" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="ProductCode" />
-                                        <asp:BoundField DataField="AlertDate" DataFormatString="{0:dd/MM/yyyy}" HeaderText="AlertDate"
-                                            ApplyFormatInEditMode="false" ReadOnly="true" SortExpression="AlertDate" />
-                                        <asp:BoundField DataField="MinStock" HeaderText="MinStock" ApplyFormatInEditMode="false"
+                                            <asp:BoundField DataField="Title" HeaderText="Başlık" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="Title" />
+                                        <asp:BoundField DataField="MinStock" HeaderText="Stok" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="MinStock" />
                                         <asp:TemplateField HeaderText="Value" Visible="false">
                                             <ItemTemplate>
