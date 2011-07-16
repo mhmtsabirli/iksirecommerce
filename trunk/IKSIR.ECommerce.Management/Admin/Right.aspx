@@ -131,9 +131,9 @@
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Id" />
-                                        <asp:BoundField DataField="Title" HeaderText="Title" ApplyFormatInEditMode="false"
+                                        <asp:BoundField DataField="Title" HeaderText="Başlık" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Title" />
-                                        <asp:BoundField DataField="Description" HeaderText="Description" ApplyFormatInEditMode="false"
+                                        <asp:BoundField DataField="Description" HeaderText="Açıklama" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Description" />
                                         <asp:TemplateField HeaderText="Value" Visible="false">
                                             <ItemTemplate>
