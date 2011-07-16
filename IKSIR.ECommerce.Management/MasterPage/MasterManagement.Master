@@ -54,8 +54,9 @@
                                     <li><a href="../Common/Properties.aspx">Ürün Özellikleri</a></li>
                                     <li><a href="../Common/Modules.aspx">Modül Tanımlama</a></li>
                                     <li><a href="../ProductManagement/ModuleProducts.aspx">Modüle Ürün Atama</a></li>
-                                    <li><a href="">Ürün - Fiyat Güncelleme</a></li>
-                                    <li><a href="">Ürün Kargo Bilgisi</a></li>
+                                    <li><a href="../ProductManagement/ProductPrices.aspx">Ürün - Fiyat Güncelleme</a></li>
+                                    <li><a href="../Common/Shipment.aspx">KargoFirması Tanımlama</a></li>
+                                   
                                 </ul>
                             </li>
                              <li><a href="">
