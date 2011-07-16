@@ -14,6 +14,7 @@ using IKSIR.ECommerce.Model.SiteModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
+using IKSIR.ECommerce.Toolkit;
 
 
 namespace IKSIR.ECommerce.Management.Common
@@ -34,6 +35,40 @@ namespace IKSIR.ECommerce.Management.Common
                 BindValues();
                 GetList();
             }
+        }
+
+        private void GetItem(int itemId)
+        {
+            IKSIR.ECommerce.Model.SiteModel.ContactForm itemContactForm = ContactFormData.Get(new IKSIR.ECommerce.Model.SiteModel.ContactForm() { Id = itemId });
+
+            lblId.Text = itemContactForm.Id.ToString();
+            txtName.Text = itemContactForm.FirstLastName.ToString();
+            txtEmail.Text = itemContactForm.Email.ToString();
+            txtIp.Text = itemContactForm.Ip.ToString();
+            txtMessage.Text = itemContactForm.Message.ToString();
+            txtTitle.Text = itemContactForm.Title.ToString();
+
+            pnlForm.Visible = true;
+
+        }
+
+        private void GetList()
+        {
+
+
+            List<IKSIR.ECommerce.Model.SiteModel.ContactForm> itemList = ContactFormData.GetContactFormList();
+            if (ddlFilterStatus.SelectedValue != "-1" && ddlFilterStatus.SelectedValue != "")
+            {
+                int Status = DBHelper.IntValue(ddlFilterStatus.SelectedValue);
+                itemList = itemList.Where(x => x.Status.Id == Status).ToList();
+            }
+            if (txtFilterTitle.Text != "")
+            {
+                string Title = txtFilterTitle.Text;
+                itemList = itemList.Where(x => x.Title == Title).ToList();
+            }
+            gvList.DataSource = itemList;
+            gvList.DataBind();
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -82,21 +117,6 @@ namespace IKSIR.ECommerce.Management.Common
 
         }
 
-        private void GetItem(int itemId)
-        {
-            IKSIR.ECommerce.Model.SiteModel.ContactForm itemContactForm = ContactFormData.Get(new IKSIR.ECommerce.Model.SiteModel.ContactForm() { Id = itemId });
-
-            lblId.Text = itemContactForm.Id.ToString();
-            txtName.Text = itemContactForm.FirstLastName.ToString();
-            txtEmail.Text = itemContactForm.Email.ToString();
-            txtIp.Text = itemContactForm.Ip.ToString();
-            txtMessage.Text = itemContactForm.Message.ToString();
-            txtTitle.Text = itemContactForm.Title.ToString();
-
-            pnlForm.Visible = true;
-
-        }
-
         protected void lbtnDelete_Click(object sender, EventArgs e)
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
@@ -116,32 +136,6 @@ namespace IKSIR.ECommerce.Management.Common
             }
         }
 
-        private bool DeleteItem(int itemId)
-        {
-            bool returnValue = false;
-            var item = new IKSIR.ECommerce.Model.SiteModel.ContactForm() { Id = itemId };
-            try
-            {
-                if (ContactFormData.Delete(item) < 0)
-                    returnValue = true;
-
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete ContactForm";
-                itemSystemLog.Content = "Id=" + itemId;
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-            catch
-            {
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete ContactForm";
-                itemSystemLog.Content = "Id=" + itemId;
-                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-            return returnValue;
-        }
-
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             GetList();
@@ -149,8 +143,10 @@ namespace IKSIR.ECommerce.Management.Common
 
         private void BindValues()
         {
-
+            List<EnumValue> itemListSite = EnumValueData.GetEnumValues(11);
+            Utility.BindDropDownList(ddlFilterStatus, itemListSite, "Value", "Id");
         }
+
         private bool UpdateItem(int itemId)
         {
             bool retValue = false;
@@ -158,33 +154,55 @@ namespace IKSIR.ECommerce.Management.Common
             try
             {
                 if (ContactFormData.Update(itemId, txtSolution.Text) < 0)
+                {
                     retValue = true;
 
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Insert ContactFormData";
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Update ContactForm";
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    itemSystemLog.Content = "itemId =" + itemId + " Solution= " + txtSolution;
+                    SystemLogData.Insert(itemSystemLog);
+                }
             }
-            catch
+            catch(Exception ex)
             {
                 SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Insert ContactFormData";
+                itemSystemLog.Title = "Update ContactForm";
                 itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                itemSystemLog.Content = "itemId =" + itemId + " Solution= " + txtSolution + " " + ex.Message.ToString();
                 SystemLogData.Insert(itemSystemLog);
+
             }
             return retValue;
         }
-        private void GetList()
+
+        private bool DeleteItem(int itemId)
         {
+            bool returnValue = false;
+            var item = new IKSIR.ECommerce.Model.SiteModel.ContactForm() { Id = itemId };
+            try
+            {
+                if (ContactFormData.Delete(item) < 0)
+                {
+                    returnValue = true;
 
-
-            List<IKSIR.ECommerce.Model.SiteModel.ContactForm> itemContactFormList = ContactFormData.GetContactFormList();
-
-            gvList.DataSource = itemContactFormList;
-            gvList.DataBind();
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Delete ContactForm";
+                    itemSystemLog.Content = "Id=" + itemId;
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
+            }
+            catch(Exception ex)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete ContactForm";
+                itemSystemLog.Content = "Id=" + itemId + " " + ex.Message.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return returnValue;
         }
-
-    
 
         private void ClearForm()
         {

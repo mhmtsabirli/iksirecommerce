@@ -24,6 +24,33 @@ namespace IKSIR.ECommerce.Management.Common
             }
         }
 
+        private void GetItem(int itemId)
+        {
+            var item = new Module() { Id = Convert.ToInt32(itemId) };
+            Module itemModule = ModuleData.Get(item);
+
+            txtModuleName.Text = itemModule.Name.ToString();
+            ddlSites.SelectedValue = itemModule.Site.Id.ToString();
+
+            pnlForm.Visible = true;
+
+        }
+
+        private void GetList()
+        {
+            //TODO tayfun   linq kullanılan kısımlarda filtereleme yapılamıyor where kosulu calısmıyor
+            List<Site> itemListSite = SiteData.GetSiteList();
+
+            Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
+            List<Module> itemList = ModuleData.GetModuleList();
+
+            if (txtFilterModuleName.Text != "")
+                itemList = itemList.Where(x => x.Name == txtFilterModuleName.Text).ToList();
+
+            gvList.DataSource = itemList;
+            gvList.DataBind();
+        }
+
         protected void lbtnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
@@ -95,18 +122,6 @@ namespace IKSIR.ECommerce.Management.Common
 
         }
 
-        private void GetItem(int itemId)
-        {
-            var item = new Module() { Id = Convert.ToInt32(itemId) };
-            Module itemModule = ModuleData.Get(item);
-
-            txtModuleName.Text = itemModule.Name.ToString();
-            ddlSites.SelectedValue = itemModule.Site.Id.ToString();
-
-            pnlForm.Visible = true;
-
-        }
-
         protected void lbtnDelete_Click(object sender, EventArgs e)
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
@@ -126,34 +141,6 @@ namespace IKSIR.ECommerce.Management.Common
             }
         }
 
-        private bool DeleteItem(int itemId)
-        {
-            bool returnValue = false;
-
-
-            var itemEnum = new Module() { Id = itemId };
-            try
-            {
-                if (ModuleData.Delete(itemEnum) < 0)
-                    returnValue = true;
-
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete Enum";
-                itemSystemLog.Content = "Id=" + itemId;
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-            catch (Exception exception)
-            {
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete Enum";
-                itemSystemLog.Content = "Id=" + itemId;
-                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-            return returnValue;
-        }
-
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             GetList();
@@ -164,24 +151,6 @@ namespace IKSIR.ECommerce.Management.Common
             //Enum da buna gerek yok
 
 
-        }
-
-        private void GetList()
-        {
-            //TODO tayfun   linq kullanılan kısımlarda filtereleme yapılamıyor where kosulu calısmıyor
-            List<Site> itemListSite = SiteData.GetSiteList();
-
-            Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
-            List<Module> itemList = ModuleData.GetModuleList();
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            // where kosulu calısmıyor
-            if (txtFilterModuleName.Text != "")
-                itemList.Where(x => x.Name.Contains(txtFilterModuleName.Text));
-
-            gvList.DataSource = itemList;
-            gvList.DataBind();
         }
 
         private bool InsertItem()
@@ -207,19 +176,21 @@ namespace IKSIR.ECommerce.Management.Common
                 try
                 {
                     if (ModuleData.Insert(item) > 0)
+                    {
                         retValue = true;
 
-                    SystemLog itemSystemLog = new SystemLog();
-                    itemSystemLog.Title = "Insert Module";
-                    itemSystemLog.Content = "Name" + item.Name;
-                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                    SystemLogData.Insert(itemSystemLog);
+                        SystemLog itemSystemLog = new SystemLog();
+                        itemSystemLog.Title = "Insert Module";
+                        itemSystemLog.Content = "Name" + item.Name;
+                        itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                        SystemLogData.Insert(itemSystemLog);
+                    }
                 }
-                catch
+                catch(Exception ex)
                 {
                     SystemLog itemSystemLog = new SystemLog();
                     itemSystemLog.Title = "Insert Module";
-                    itemSystemLog.Content = "Name" + item.Name;
+                    itemSystemLog.Content = "Name" + item.Name + " " + ex.Message.ToString();
                     itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                     SystemLogData.Insert(itemSystemLog);
                 }
@@ -242,24 +213,56 @@ namespace IKSIR.ECommerce.Management.Common
             try
             {
                 if (ModuleData.Update(itemModule) < 0)
+                {
                     retValue = true;
 
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Update Module";
-                itemSystemLog.Content = "Id" + itemModule.Id + "Name" + itemModule.Name;
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Update Module";
+                    itemSystemLog.Content = "Id" + itemModule.Id + "Name" + itemModule.Name;
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
             }
-            catch
+            catch(Exception ex)
             {
                 SystemLog itemSystemLog = new SystemLog();
                 itemSystemLog.Title = "Update Module";
-                itemSystemLog.Content = "Id" + itemModule.Id + "Name" + itemModule.Name;
+                itemSystemLog.Content = "Id" + itemModule.Id + "Name" + itemModule.Name + " " + ex.Message.ToString();
                 itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
 
             return retValue;
+        }
+
+        private bool DeleteItem(int itemId)
+        {
+            bool returnValue = false;
+
+
+            var itemEnum = new Module() { Id = itemId };
+            try
+            {
+                if (ModuleData.Delete(itemEnum) < 0)
+                {
+                    returnValue = true;
+
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Delete Enum";
+                    itemSystemLog.Content = "Id=" + itemId;
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
+            }
+            catch (Exception ex)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete Enum";
+                itemSystemLog.Content = "Id=" + itemId + " " + ex.Message.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return returnValue;
         }
 
         private void ClearForm()

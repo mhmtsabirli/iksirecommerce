@@ -21,6 +21,31 @@ namespace IKSIR.ECommerce.Management.Common
             }
         }
 
+        private void GetItem(int itemId)
+        {
+            var item = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = Convert.ToInt32(itemId) };
+            IKSIR.ECommerce.Model.CommonModel.Enum itemEnum = EnumData.Get(item);
+
+            txtEnumName.Text = itemEnum.Name.ToString();
+
+
+            pnlForm.Visible = true;
+
+        }
+
+        private void GetList()
+        {
+            //TODO tayfun   linq kullanılan kısımlarda filtereleme yapılamıyor where kosulu calısmıyor
+
+            List<IKSIR.ECommerce.Model.CommonModel.Enum> itemList = EnumData.GetEnumList();
+
+            if (txtFilterEnumName.Text != "")
+                itemList = itemList.Where(x => x.Name == txtFilterEnumName.Text).ToList();
+
+            gvList.DataSource = itemList;
+            gvList.DataBind();
+        }
+
         protected void lbtnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
@@ -92,18 +117,6 @@ namespace IKSIR.ECommerce.Management.Common
 
         }
 
-        private void GetItem(int itemId)
-        {
-            var item = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = Convert.ToInt32(itemId) };
-            IKSIR.ECommerce.Model.CommonModel.Enum itemEnum = EnumData.Get(item);
-
-            txtEnumName.Text = itemEnum.Name.ToString();
-
-
-            pnlForm.Visible = true;
-
-        }
-
         protected void lbtnDelete_Click(object sender, EventArgs e)
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
@@ -123,41 +136,6 @@ namespace IKSIR.ECommerce.Management.Common
             }
         }
 
-        private bool DeleteItem(int itemId)
-        {
-            bool returnValue = false;
-
-            var enumValueList = EnumValueData.GetEnumValues(itemId);
-            if (enumValueList.Count > 0)
-            {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Bu sabite tanımlanmış sabit değerler bulunmaktadır. Önce onları silemelisiniz.</span></br>";
-            }
-            else
-            {
-                var itemEnum = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = itemId };
-                try
-                {
-                    if (EnumData.Delete(itemEnum) < 0)
-                        returnValue = true;
-
-                    SystemLog itemSystemLog = new SystemLog();
-                    itemSystemLog.Title = "Delete Enum";
-                    itemSystemLog.Content = "Id=" + itemId;
-                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                    SystemLogData.Insert(itemSystemLog);
-                }
-                catch (Exception exception)
-                {
-                    SystemLog itemSystemLog = new SystemLog();
-                    itemSystemLog.Title = "Delete Enum";
-                    itemSystemLog.Content = "Id=" + itemId;
-                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                    SystemLogData.Insert(itemSystemLog);
-                }
-            }
-            return returnValue;
-        }
-
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             GetList();
@@ -168,22 +146,6 @@ namespace IKSIR.ECommerce.Management.Common
             //Enum da buna gerek yok
 
 
-        }
-
-        private void GetList()
-        {
-            //TODO tayfun   linq kullanılan kısımlarda filtereleme yapılamıyor where kosulu calısmıyor
-
-            List<IKSIR.ECommerce.Model.CommonModel.Enum> itemList = EnumData.GetEnumList();
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            // where kosulu calısmıyor
-            if (txtFilterEnumName.Text != "")
-                itemList.Where(x => x.Name.Contains(txtFilterEnumName.Text));
-
-            gvList.DataSource = itemList;
-            gvList.DataBind();
         }
 
         private bool InsertItem()
@@ -208,19 +170,21 @@ namespace IKSIR.ECommerce.Management.Common
                 try
                 {
                     if (EnumData.Insert(item) > 0)
+                    {
                         retValue = true;
 
-                    SystemLog itemSystemLog = new SystemLog();
-                    itemSystemLog.Title = "Insert Enum";
-                    itemSystemLog.Content = "Name" + item.Name;
-                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                    SystemLogData.Insert(itemSystemLog);
+                        SystemLog itemSystemLog = new SystemLog();
+                        itemSystemLog.Title = "Insert Enum";
+                        itemSystemLog.Content = "Name" + item.Name;
+                        itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                        SystemLogData.Insert(itemSystemLog);
+                    }
                 }
-                catch
+                catch(Exception ex)
                 {
                     SystemLog itemSystemLog = new SystemLog();
                     itemSystemLog.Title = "Insert Enum";
-                    itemSystemLog.Content = "Name" + item.Name;
+                    itemSystemLog.Content = "Name" + item.Name + " " + ex.Message.ToString();
                     itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                     SystemLogData.Insert(itemSystemLog);
                 }
@@ -242,24 +206,63 @@ namespace IKSIR.ECommerce.Management.Common
             try
             {
                 if (EnumData.Update(itemEnum) < 0)
+                {
                     retValue = true;
 
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Update Enum";
-                itemSystemLog.Content = "Id" + itemEnum.Id + "Name" + itemEnum.Name;
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Update Enum";
+                    itemSystemLog.Content = "Id" + itemEnum.Id + "Name" + itemEnum.Name;
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
             }
-            catch
+            catch(Exception ex)
             {
                 SystemLog itemSystemLog = new SystemLog();
                 itemSystemLog.Title = "Update Enum";
-                itemSystemLog.Content = "Id" + itemEnum.Id + "Name" + itemEnum.Name;
+                itemSystemLog.Content = "Id" + itemEnum.Id + "Name" + itemEnum.Name + " " + ex.Message.ToString();
                 itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
 
             return retValue;
+        }
+
+        private bool DeleteItem(int itemId)
+        {
+            bool returnValue = false;
+
+            var enumValueList = EnumValueData.GetEnumValues(itemId);
+            if (enumValueList.Count > 0)
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Bu sabite tanımlanmış sabit değerler bulunmaktadır. Önce onları silemelisiniz.</span></br>";
+            }
+            else
+            {
+                var itemEnum = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = itemId };
+                try
+                {
+                    if (EnumData.Delete(itemEnum) < 0)
+                    {
+                        returnValue = true;
+
+                        SystemLog itemSystemLog = new SystemLog();
+                        itemSystemLog.Title = "Delete Enum";
+                        itemSystemLog.Content = "Id=" + itemId;
+                        itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                        SystemLogData.Insert(itemSystemLog);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Delete Enum";
+                    itemSystemLog.Content = "Id=" + itemId + " " + ex.Message.ToString();
+                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
+            }
+            return returnValue;
         }
 
         private void ClearForm()

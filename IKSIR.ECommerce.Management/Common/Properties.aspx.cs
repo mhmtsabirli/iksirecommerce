@@ -20,6 +20,28 @@ namespace IKSIR.ECommerce.Management.Common
             }
         }
 
+        private void GetList()
+        {
+            List<Property> itemList = PropertyData.GetList();
+
+            if (txtFilterPropertyName.Text != "")
+                itemList = itemList.Where(x => x.Title == txtFilterPropertyName.Text).ToList();
+            gvList.DataSource = itemList;
+            gvList.DataBind();
+        }
+
+        private void GetItem(int itemId)
+        {
+            var item = PropertyData.Get(itemId);
+            if (item != null)
+            {
+                txtPropertyName.Text = item.Title;
+                txtDescription.Text = item.Description;
+                lblId.Text = item.Id.ToString();
+            }
+            pnlForm.Visible = true;
+        }
+
         protected void lbtnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
@@ -90,18 +112,6 @@ namespace IKSIR.ECommerce.Management.Common
             GetItem(itemId);
         }
 
-        private void GetItem(int itemId)
-        {
-            var item = PropertyData.Get(itemId);
-            if (item != null)
-            {
-                txtPropertyName.Text = item.Title;
-                txtDescription.Text = item.Description;
-                lblId.Text = item.Id.ToString();
-            }
-            pnlForm.Visible = true;
-        }
-
         protected void lbtnDelete_Click(object sender, EventArgs e)
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
@@ -121,32 +131,6 @@ namespace IKSIR.ECommerce.Management.Common
             }
         }
 
-        private bool DeleteItem(int itemId)
-        {
-            bool returnValue = false;
-            var item = new Property() { Id = itemId };
-            try
-            {
-                if (PropertyData.Delete(item) < 0)
-                    returnValue = true;
-
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete Property";
-                itemSystemLog.Content = "Id=" + itemId;
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-            catch
-            {
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete Property";
-                itemSystemLog.Content = "Id=" + itemId;
-                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-            return returnValue;
-        }
-
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             GetList();
@@ -155,13 +139,6 @@ namespace IKSIR.ECommerce.Management.Common
         private void BindValues()
         {
             //Enum da buna gerek yok
-        }
-
-        private void GetList()
-        {
-            List<Property> itemList = PropertyData.GetList();
-            gvList.DataSource = itemList;
-            gvList.DataBind();
         }
 
         private bool InsertItem()
@@ -184,20 +161,22 @@ namespace IKSIR.ECommerce.Management.Common
                 try
                 {
                     if (PropertyData.Insert(item) > 0)
+                    {
                         retValue = true;
 
-                    SystemLog itemSystemLog = new SystemLog();
-                    itemSystemLog.Title = "Insert Property";
-                    itemSystemLog.Content = "Name" + item.Title;
-                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                    SystemLogData.Insert(itemSystemLog);
-                    retValue = true;
+                        SystemLog itemSystemLog = new SystemLog();
+                        itemSystemLog.Title = "Insert Property";
+                        itemSystemLog.Content = "Name" + item.Title;
+                        itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                        SystemLogData.Insert(itemSystemLog);
+                        retValue = true;
+                    }
                 }
-                catch (Exception exception)
+                catch (Exception ex)
                 {
                     SystemLog itemSystemLog = new SystemLog();
                     itemSystemLog.Title = "Insert Property";
-                    itemSystemLog.Content = "Name" + item.Title;
+                    itemSystemLog.Content = "Name" + item.Title + " " + ex.Message.ToString();
                     itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                     SystemLogData.Insert(itemSystemLog);
                 }
@@ -222,25 +201,55 @@ namespace IKSIR.ECommerce.Management.Common
                 try
                 {
                     if (PropertyData.Update(item) > 0)
+                    {
                         retValue = true;
 
-                    SystemLog itemSystemLog = new SystemLog();
-                    itemSystemLog.Title = "Update Property";
-                    itemSystemLog.Content = "Id" + item.Id + "Title" + item.Title;
-                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                    SystemLogData.Insert(itemSystemLog);
-                    retValue = true;
+                        SystemLog itemSystemLog = new SystemLog();
+                        itemSystemLog.Title = "Update Property";
+                        itemSystemLog.Content = "Id" + item.Id + "Title" + item.Title;
+                        itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                        SystemLogData.Insert(itemSystemLog);
+                        retValue = true;
+                    }
                 }
-                catch
+                catch(Exception ex)
                 {
                     SystemLog itemSystemLog = new SystemLog();
                     itemSystemLog.Title = "Update Property";
-                    itemSystemLog.Content = "Id" + item.Id + "Title" + item.Title;
+                    itemSystemLog.Content = "Id" + item.Id + "Title" + item.Title + " " + ex.Message.ToString();
                     itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                     SystemLogData.Insert(itemSystemLog);
                 }
             }
             return retValue;
+        }
+
+        private bool DeleteItem(int itemId)
+        {
+            bool returnValue = false;
+            var item = new Property() { Id = itemId };
+            try
+            {
+                if (PropertyData.Delete(item) < 0)
+                {
+                    returnValue = true;
+
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Delete Property";
+                    itemSystemLog.Content = "Id=" + itemId;
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
+            }
+            catch(Exception ex)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete Property";
+                itemSystemLog.Content = "Id=" + itemId + " " + ex.Message.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return returnValue;
         }
 
         private void ClearForm()
