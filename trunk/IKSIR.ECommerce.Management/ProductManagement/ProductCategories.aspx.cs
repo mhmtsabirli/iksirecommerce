@@ -27,12 +27,71 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
         }
 
+        private void GetItem(int itemId)
+        {
+            ProductCategory itemProduct = ProductCategoryData.Get(new ProductCategory() { Id = itemId });
+
+            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
+            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
+            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
+            txtCategoryName.Text = itemProduct.Title.ToString();
+            txtDescription.Text = itemProduct.Description.ToString();
+            if (itemProduct.ParentCategory != null)
+                ddlParentCategories.SelectedValue = itemProduct.ParentCategory.Id.ToString();
+            else
+                ddlParentCategories.SelectedValue = "-1";
+
+            ddlSites.SelectedValue = itemProduct.Site.Id.ToString();
+            pnlForm.Visible = true;
+
+        }
+
+        private void BindValues()
+        {
+            List<ProductCategory> itemList = ProductCategoryData.GetParentProductCategoryList();
+            List<Site> itemListSite = SiteData.GetSiteList();
+
+            Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
+            Utility.BindDropDownList(ddlParentCategories, itemList, "Title", "Id");
+            Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
+
+
+        }
+
+        private void GetList()
+        {
+
+            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
+
+            string CategoryName = txtFilterCategoryName.Text;
+            if (txtFilterCategoryName.Text != "")
+                itemList = itemList.Where(x => x.Title == CategoryName).ToList();
+
+            gvList.DataSource = itemList;
+            gvList.DataBind();
+        }
+
         protected void lbtnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
             lblId.Text = "Yeni Kayıt";
             pnlForm.Visible = true;
             txtCategoryName.Focus();
+        }
+
+        protected void lbtnEdit_Click(object sender, EventArgs e)
+        {
+            ClearForm();
+            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
+            gvList.SelectedIndex = index;
+            var itemId = (sender as LinkButton).CommandArgument == ""
+                             ? 0
+                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
+
+            btnSave.CommandArgument = itemId.ToString();
+            lblId.Text = itemId.ToString();
+            GetItem(itemId);
+
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -83,40 +142,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             pnlFilter.Visible = true;
         }
 
-        protected void lbtnEdit_Click(object sender, EventArgs e)
-        {
-            ClearForm();
-            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
-            gvList.SelectedIndex = index;
-            var itemId = (sender as LinkButton).CommandArgument == ""
-                             ? 0
-                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
-
-            btnSave.CommandArgument = itemId.ToString();
-            lblId.Text = itemId.ToString();
-            GetItem(itemId);
-
-        }
-
-        private void GetItem(int itemId)
-        {
-            ProductCategory itemProduct = ProductCategoryData.Get(new ProductCategory() { Id = itemId });
-
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            txtCategoryName.Text = itemProduct.Title.ToString();
-            txtDescription.Text = itemProduct.Description.ToString();
-            if (itemProduct.ParentCategory != null)
-                ddlParentCategories.SelectedValue = itemProduct.ParentCategory.Id.ToString();
-            else
-                ddlParentCategories.SelectedValue = "-1";
-
-            ddlSites.SelectedValue = itemProduct.Site.Id.ToString();
-            pnlForm.Visible = true;
-
-        }
-
         protected void lbtnDelete_Click(object sender, EventArgs e)
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
@@ -136,71 +161,17 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
         }
 
-        private bool DeleteItem(int itemId)
-        {
-            bool returnValue = false;
-            var item = new ProductCategory() { Id = itemId };
-            try
-            {
-                if (ProductCategoryData.Delete(item) < 0)
-                    returnValue = true;
-
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete ProductCategory";
-                itemSystemLog.Content = "Id=" + itemId;
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-            catch
-            {
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete ProductCategory";
-                itemSystemLog.Content = "Id=" + itemId;
-                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-            return returnValue;
-        }
-
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             GetList();
         }
 
-        private void BindValues()
+        protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            List<ProductCategory> itemList = ProductCategoryData.GetParentProductCategoryList();
-            List<Site> itemListSite = SiteData.GetSiteList();
-
-            Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
-            Utility.BindDropDownList(ddlParentCategories, itemList, "Title", "Id");
-            Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
-
-
+            gvList.PageIndex = e.NewPageIndex;
+            GetList();
         }
-
-        private void GetList()
-        {
-            //TODO tayfun   linq kullanılan kısımlarda filtereleme yapılamıyor where kosulu calısmıyor
-
-            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
-            //where kosullu kısım calısmıyor
-            if (txtFilterCategoryName.Text != "")
-                itemList.Where(x => x.Title.Contains(txtFilterCategoryName.Text));
-            if (ddlFilterParentCategories.SelectedValue != "-1" && ddlFilterParentCategories.SelectedValue != "")
-            {
-                var item = new ProductCategory() { Id = Convert.ToInt32(ddlFilterParentCategories.SelectedValue) };
-                itemList.Where(x => x.ParentCategory == item);
-            }
-
-
-            gvList.DataSource = itemList;
-            gvList.DataBind();
-        }
-
+       
         private bool InsertItem()
         {
             bool retValue = false;
@@ -227,19 +198,21 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 try
                 {
                     if (ProductCategoryData.Insert(item) > 0)
+                    {
                         retValue = true;
 
-                    SystemLog itemSystemLog = new SystemLog();
-                    itemSystemLog.Title = "Insert ProductCategory";
-                    itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
-                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                    SystemLogData.Insert(itemSystemLog);
+                        SystemLog itemSystemLog = new SystemLog();
+                        itemSystemLog.Title = "Insert ProductCategory";
+                        itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
+                        itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                        SystemLogData.Insert(itemSystemLog);
+                    }
                 }
-                catch
+                catch(Exception ex)
                 {
                     SystemLog itemSystemLog = new SystemLog();
                     itemSystemLog.Title = "Insert ProductCategory";
-                    itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
+                    itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue) + " " + ex.Message.ToString();
                     itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                     SystemLogData.Insert(itemSystemLog);
                 }
@@ -265,23 +238,53 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             try
             {
                 if (ProductCategoryData.Update(itemProduct) < 0)
+                {
                     retValue = true;
 
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Insert ProductCategory";
-                itemSystemLog.Content = "Id=" + itemProduct.Id + "Title=" + itemProduct.Title + "Description =" + itemProduct.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Insert ProductCategory";
+                    itemSystemLog.Content = "Id=" + itemProduct.Id + "Title=" + itemProduct.Title + "Description =" + itemProduct.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
             }
-            catch
+            catch(Exception ex)
             {
                 SystemLog itemSystemLog = new SystemLog();
                 itemSystemLog.Title = "Insert ProductCategory";
-                itemSystemLog.Content = "Id=" + itemProduct.Id + "Title=" + itemProduct.Title + "Description =" + itemProduct.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue);
+                itemSystemLog.Content = "Id=" + itemProduct.Id + "Title=" + itemProduct.Title + "Description =" + itemProduct.Description + "ParentCategoryId=" + Convert.ToInt32(ddlParentCategories.SelectedValue) + " " + ex.Message.ToString();
                 itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
             return retValue;
+        }
+
+        private bool DeleteItem(int itemId)
+        {
+            bool returnValue = false;
+            var item = new ProductCategory() { Id = itemId };
+            try
+            {
+                if (ProductCategoryData.Delete(item) < 0)
+                {
+                    returnValue = true;
+
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Delete ProductCategory";
+                    itemSystemLog.Content = "Id=" + itemId;
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
+            }
+            catch(Exception ex)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete ProductCategory";
+                itemSystemLog.Content = "Id=" + itemId + " " + ex.Message.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return returnValue;
         }
 
         private void ClearForm()
@@ -292,11 +295,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             btnSave.CommandArgument = string.Empty;
         }
 
-        protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvList.PageIndex = e.NewPageIndex;
-            GetList();
-        }
+      
 
     }
 }
