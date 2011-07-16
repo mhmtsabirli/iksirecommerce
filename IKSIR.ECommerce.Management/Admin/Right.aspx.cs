@@ -26,6 +26,30 @@ namespace IKSIR.ECommerce.Management.Admin
             }
         }
 
+        private void GetItem(int itemId)
+        {
+            IKSIR.ECommerce.Model.AdminModel.Right itemRight = RightData.Get(new IKSIR.ECommerce.Model.AdminModel.Right() { Id = itemId });
+
+            txtTitle.Text = itemRight.Title.ToString();
+            txtDescription.Text = itemRight.Description.ToString();
+
+
+            pnlForm.Visible = true;
+
+        }
+
+        private void GetList()
+        {
+
+            List<IKSIR.ECommerce.Model.AdminModel.Right> itemList = RightData.GetRightList();
+
+            if (txtFilterTitle.Text != "")
+                itemList = itemList.Where(x => x.Title == txtFilterTitle.Text).ToList();
+
+            gvList.DataSource = itemList;
+            gvList.DataBind();
+        }
+
         protected void lbtnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
@@ -77,18 +101,6 @@ namespace IKSIR.ECommerce.Management.Admin
 
         }
 
-        private void GetItem(int itemId)
-        {
-            IKSIR.ECommerce.Model.AdminModel.Right itemRight = RightData.Get(new IKSIR.ECommerce.Model.AdminModel.Right() { Id = itemId });
-
-            txtTitle.Text = itemRight.Title.ToString();
-            txtDescription.Text = itemRight.Description.ToString();
-
-
-            pnlForm.Visible = true;
-
-        }
-
         protected void lbtnDelete_Click(object sender, EventArgs e)
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
@@ -106,6 +118,44 @@ namespace IKSIR.ECommerce.Management.Admin
                 lblError.ForeColor = System.Drawing.Color.Red;
                 lblError.Text = "Item silerken bir hata oluştu.";
             }
+        }
+
+        protected void btnFilter_Click(object sender, EventArgs e)
+        {
+            GetList();
+        }
+
+        private bool SaveItem()
+        {
+            bool retValue = false;
+            var item = new IKSIR.ECommerce.Model.AdminModel.Right();
+
+            item.Id = DBHelper.IntValue(lblId.Text);
+            item.Title = txtTitle.Text.Trim();
+            item.Description = txtDescription.Text.Trim();
+            try
+            {
+                if (RightData.Save(item) > 0)
+                {
+                    retValue = true;
+
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Save Right";
+                    itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description;
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
+            }
+            catch(Exception ex)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Save Right";
+                itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description + " " + ex.Message.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+
+            return retValue;
         }
 
         private bool DeleteItem(int itemId)
@@ -132,55 +182,6 @@ namespace IKSIR.ECommerce.Management.Admin
                 SystemLogData.Insert(itemSystemLog);
             }
             return returnValue;
-        }
-
-        protected void btnFilter_Click(object sender, EventArgs e)
-        {
-            GetList();
-        }
-
-        private void GetList()
-        {
-            //TODO tayfun   linq kullanılan kısımlarda filtereleme yapılamıyor where kosulu calısmıyor
-
-            List<IKSIR.ECommerce.Model.AdminModel.Right> itemList = RightData.GetRightList();
-
-            if (txtFilterTitle.Text != "")
-                itemList.Where(x => x.Title.Contains(txtFilterTitle.Text));
-
-            gvList.DataSource = itemList;
-            gvList.DataBind();
-        }
-
-        private bool SaveItem()
-        {
-            bool retValue = false;
-            var item = new IKSIR.ECommerce.Model.AdminModel.Right();
-
-            item.Id = DBHelper.IntValue(lblId.Text);
-            item.Title = txtTitle.Text.Trim();
-            item.Description = txtDescription.Text.Trim();
-            try
-            {
-                if (RightData.Save(item) > 0)
-                    retValue = true;
-
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Save Right";
-                itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description;
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-            catch
-            {
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Save Right";
-                itemSystemLog.Content = "Title=" + item.Title + "Description =" + item.Description;
-                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-
-            return retValue;
         }
 
         private void ClearForm()
