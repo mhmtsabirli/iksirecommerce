@@ -143,8 +143,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
-                item.ProductName = item.Product.Title;
-                item.ModuleName = item.Module.Name;
+                //item.ProductName = item.Product.Title;
+                //item.ModuleName = item.Module.Name;
 
                 itemModuleProductList.Add(item);
             }
@@ -168,7 +168,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 var item = new Product();
                 //TODO => tayfun,
                 item = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
-
+                
                 itemModuleProductList.Add(item);
             }
 

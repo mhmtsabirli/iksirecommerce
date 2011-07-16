@@ -34,7 +34,6 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
                 returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
                 returnValue.Solution = DBHelper.StringValue(dr["Solution"].ToString());
                 returnValue.Status = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["Status"].ToString()) });
-                returnValue.StatusName = returnValue.Status.Value;
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
@@ -125,7 +124,6 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
                 item.Solution = DBHelper.StringValue(dr["Solution"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Status = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["Status"].ToString()) });
-                item.StatusName = item.Status.Value;
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
@@ -160,7 +158,6 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
                 item.Solution = DBHelper.StringValue(dr["Solution"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Status = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["Status"].ToString()) });
-                item.StatusName = item.Status.Value;
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
