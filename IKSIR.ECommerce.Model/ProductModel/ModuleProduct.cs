@@ -12,16 +12,13 @@ namespace IKSIR.ECommerce.Model.ProductModel
     {
         public Product Product { get; set; }
         public Module Module { get; set; }
-        public string ProductName { get; set; }
-        public string ModuleName { get; set; }
+
         public ModuleProduct(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate,
             Product product, Module module)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.Product = product;
             this.Module = module;
-            this.ProductName = product.Title;
-            this.ModuleName = module.Name;
         }
 
         public ModuleProduct()
