@@ -27,6 +27,35 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
         }
 
+        private void GetItem(int itemId)
+        {
+            var item = new ModuleProduct() { Id = Convert.ToInt32(itemId) };
+            ModuleProduct itemModuleProduct = ModuleProductData.GetById(item);
+
+            txtProdCode.Text = itemModuleProduct.Product.ProductCode.ToString();
+            ddlSites.SelectedValue = itemModuleProduct.Module.Site.Id.ToString();
+            ddlModules.SelectedValue = itemModuleProduct.Module.Id.ToString();
+
+            pnlForm.Visible = true;
+
+        }
+
+        private void GetList()
+        {
+
+            List<ModuleProduct> itemList = ModuleProductData.GetModuleProductList();
+
+            if (txtFilterProdCode.Text != "")
+                itemList = itemList.Where(x => x.Product.ProductCode == txtFilterProdCode.Text).ToList();
+            if (ddlFilterModule.SelectedValue != "-1" && ddlFilterModule.SelectedValue != "")
+            {
+                var item = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = Convert.ToInt32(ddlFilterModule.SelectedValue) };
+                itemList = itemList.Where(x => x.Module.Id == item.Id).ToList();
+            }
+            gvList.DataSource = itemList;
+            gvList.DataBind();
+        }
+
         protected void lbtnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
@@ -101,19 +130,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
         }
 
-        private void GetItem(int itemId)
-        {
-            var item = new ModuleProduct() { Id = Convert.ToInt32(itemId) };
-            ModuleProduct itemModuleProduct = ModuleProductData.GetById(item);
-
-            txtProdCode.Text = itemModuleProduct.Product.ProductCode.ToString();
-            ddlSites.SelectedValue = itemModuleProduct.Module.Site.Id.ToString();
-            ddlModules.SelectedValue = itemModuleProduct.Module.Id.ToString();
-
-            pnlForm.Visible = true;
-
-        }
-
         protected void lbtnDelete_Click(object sender, EventArgs e)
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
@@ -133,33 +149,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
         }
 
-        private bool DeleteItem(int itemId)
+        protected void ddlSites_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool returnValue = false;
-            var item = new ModuleProduct() { Id = itemId };
-            try
-            {
-                if (ModuleProductData.Delete(item) < 0)
-                    returnValue = true;
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete ModuleProduct";
-                itemSystemLog.Content = "Id" + itemId;
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-
-            }
-            catch
-            {
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete ModuleProduct";
-                itemSystemLog.Content = "Id" + itemId;
-                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-
-            return returnValue;
+            List<Module> itemList = ModuleData.GetModuleListBySiteId(Convert.ToInt32(ddlSites.SelectedValue));
+            Utility.BindDropDownList(ddlModules, itemList, "Name", "Id");
+            ddlModules.Enabled = true;
         }
-
+        
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             GetList();
@@ -175,24 +171,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             Utility.BindDropDownList(ddlModules, itemList, "Name", "Id");
             Utility.BindDropDownList(ddlFilterModule, itemList, "Name", "Id");
 
-        }
-
-        private void GetList()
-        {
-
-            List<ModuleProduct> itemList = ModuleProductData.GetModuleProductList();
-            object obj = new object();
-            obj = itemList[0].Product.ProductCode;
-            
-            if (txtFilterProdCode.Text != "")
-                itemList.Where(x => x.Product.ProductCode.Contains(txtFilterProdCode.Text));
-            if (ddlFilterModule.SelectedValue != "-1" && ddlFilterModule.SelectedValue != "")
-            {
-                var item = new IKSIR.ECommerce.Model.CommonModel.Enum() { Id = Convert.ToInt32(ddlFilterModule.SelectedValue) };
-                itemList.Where(x => Convert.ToInt32(ddlFilterModule.SelectedValue) == item.Id);
-            }
-            gvList.DataSource = itemList;
-            gvList.DataBind();
         }
 
         private bool InsertItem()
@@ -218,18 +196,21 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     try
                     {
                         if (ModuleProductData.Insert(ProductId, Convert.ToInt32(ddlModules.SelectedValue.ToString())) > 0)
+                        {
                             retValue = true;
 
-                        SystemLog itemSystemLog = new SystemLog();
-                        itemSystemLog.Title = "Insert ModuleProduct";
-                        itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                        SystemLogData.Insert(itemSystemLog);
+                            SystemLog itemSystemLog = new SystemLog();
+                            itemSystemLog.Title = "Insert ModuleProduct";
+                            itemSystemLog.Content = "ProductCode" + item.Product.ProductCode + "Module Id =  " + item.Module.Id + ex.Message.ToString();
+                            itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                            SystemLogData.Insert(itemSystemLog);
+                        }
                     }
-                    catch
+                    catch(Exception ex)
                     {
                         SystemLog itemSystemLog = new SystemLog();
                         itemSystemLog.Title = "Insert ModuleProduct";
-                        itemSystemLog.Content = "Name" + item.Product.ProductCode;
+                        itemSystemLog.Content = "ProductCode" + item.Product.ProductCode + "Module Id =  "+item.Module.Id + ex.Message.ToString();
                         itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                         SystemLogData.Insert(itemSystemLog);
                     }
@@ -249,30 +230,59 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             bool retValue = false;
             var itemModule = new Module();
-
+             int ProductId=0;
 
             try
             {
-                int ProductId = ProductData.FindProductId(txtProdCode.Text);
-                if (ModuleProductData.Update(ProductId, Convert.ToInt32(ddlModules.SelectedValue.ToString()),Convert.ToInt32(lblId.Text)) < 0)
+                ProductId = ProductData.FindProductId(txtProdCode.Text);
+                if (ModuleProductData.Update(ProductId, Convert.ToInt32(ddlModules.SelectedValue.ToString()), Convert.ToInt32(lblId.Text)) < 0)
+                {
                     retValue = true;
 
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Update ModuleProduct";
-                itemSystemLog.Content = "Id" + itemModule.Id + "Name" + itemModule.Name;
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Update ModuleProduct";
+                    itemSystemLog.Content = "Product" + ProductId + "NoduleId" + Convert.ToInt32(ddlModules.SelectedValue.ToString());
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
             }
-            catch
+            catch(Exception ex)
             {
                 SystemLog itemSystemLog = new SystemLog();
                 itemSystemLog.Title = "Update ModuleProduct";
-                itemSystemLog.Content = "Id" + itemModule.Id + "Name" + itemModule.Name;
+                itemSystemLog.Content = "Product" + ProductId + "NoduleId" + Convert.ToInt32(ddlModules.SelectedValue.ToString())+" " + ex.Message.ToString();
                 itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
 
             return retValue;
+        }
+
+        private bool DeleteItem(int itemId)
+        {
+            bool returnValue = false;
+            var item = new ModuleProduct() { Id = itemId };
+            try
+            {
+                if (ModuleProductData.Delete(item) < 0)
+                    returnValue = true;
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete ModuleProduct";
+                itemSystemLog.Content = "Id" + itemId;
+                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+
+            }
+            catch(Exception ex)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete ModuleProduct";
+                itemSystemLog.Content = "Id" + itemId+" " + ex.Message.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+
+            return returnValue;
         }
 
         private void ClearForm()
@@ -283,12 +293,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             btnSave.CommandArgument = string.Empty;
         }
 
-        protected void ddlSites_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            List<Module> itemList = ModuleData.GetModuleListBySiteId(Convert.ToInt32(ddlSites.SelectedValue));
-            Utility.BindDropDownList(ddlModules, itemList, "Name", "Id");
-            ddlModules.Enabled = true;
-        }
 
     }
 }
