@@ -8,10 +8,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
-        Ürünler
+        Ürün Fiyat Tanımlama
     </h2>
     <p>
-        Ürün tanımlama güncelleme ekranı.
+        Ürün Fiyat Kargo bilgileri güncelleme ve tanımlama ekranı
     </p>
     <table id="tblMngForm">
         <tr>
@@ -39,7 +39,7 @@
                         <Tabs>
                             <telerik:RadTab Text="Ürün Fiyat" Selected="true" PageViewID="RadPageView1">
                             </telerik:RadTab>
-                            <telerik:RadTab Text="Kargo Fİyat" PageViewID="RadPageView2">
+                            <telerik:RadTab Text="Kargo Fiyat" PageViewID="RadPageView2">
                             </telerik:RadTab>
                         </Tabs>
                     </telerik:RadTabStrip>
@@ -185,7 +185,7 @@
                             <table>
                                 <tr>
                                     <td colspan="4">
-                                        <strong>Ürün Kargo Bilgisi</strong> (Ürünlerin Kargo Bilgileri)
+                                        <strong>Ürün Kargo Bilgisi</strong> (Ürünlerin Kargo Bilgilerini tanımlama
                                     </td>
                                 </tr>
                                 <tr>
