@@ -155,7 +155,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             Utility.BindDropDownList(ddlModules, itemList, "Name", "Id");
             ddlModules.Enabled = true;
         }
-        
+
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             GetList();
@@ -177,7 +177,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             bool retValue = false;
             var item = new ModuleProduct();
-            
+
             //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
             //where kosullu kısım calıstıgında burasıdacalısacaktır
             // a nın altında b var dıyelım kosul olmadıgı ıcın ıkıncı bır b yı atıyor
@@ -201,16 +201,16 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
                             SystemLog itemSystemLog = new SystemLog();
                             itemSystemLog.Title = "Insert ModuleProduct";
-                            itemSystemLog.Content = "ProductCode" + item.Product.ProductCode + "Module Id =  " + item.Module.Id + ex.Message.ToString();
+                            itemSystemLog.Content = "ProductCode" + item.Product.ProductCode + "Module Id =  " + item.Module.Id;
                             itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                             SystemLogData.Insert(itemSystemLog);
                         }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         SystemLog itemSystemLog = new SystemLog();
                         itemSystemLog.Title = "Insert ModuleProduct";
-                        itemSystemLog.Content = "ProductCode" + item.Product.ProductCode + "Module Id =  "+item.Module.Id + ex.Message.ToString();
+                        itemSystemLog.Content = "ProductCode" + item.Product.ProductCode + "Module Id =  " + item.Module.Id + ex.Message.ToString();
                         itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                         SystemLogData.Insert(itemSystemLog);
                     }
@@ -230,7 +230,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             bool retValue = false;
             var itemModule = new Module();
-             int ProductId=0;
+            int ProductId = 0;
 
             try
             {
@@ -246,11 +246,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     SystemLogData.Insert(itemSystemLog);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SystemLog itemSystemLog = new SystemLog();
                 itemSystemLog.Title = "Update ModuleProduct";
-                itemSystemLog.Content = "Product" + ProductId + "NoduleId" + Convert.ToInt32(ddlModules.SelectedValue.ToString())+" " + ex.Message.ToString();
+                itemSystemLog.Content = "Product" + ProductId + "NoduleId" + Convert.ToInt32(ddlModules.SelectedValue.ToString()) + " " + ex.Message.ToString();
                 itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
@@ -273,11 +273,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 SystemLogData.Insert(itemSystemLog);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SystemLog itemSystemLog = new SystemLog();
                 itemSystemLog.Title = "Delete ModuleProduct";
-                itemSystemLog.Content = "Id" + itemId+" " + ex.Message.ToString();
+                itemSystemLog.Content = "Id" + itemId + " " + ex.Message.ToString();
                 itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                 SystemLogData.Insert(itemSystemLog);
             }
@@ -287,7 +287,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
         private void ClearForm()
         {
-            
+
             ddlModules.SelectedIndex = -1;
             txtProdCode.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;

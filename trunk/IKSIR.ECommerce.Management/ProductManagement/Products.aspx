@@ -277,7 +277,7 @@
                                             Localization-Remove="Kaldır" Localization-Select="Seç" />
                                         <div runat="server" id="divDocuments">
                                         </div>
-                                        <asp:Button runat="server" ID="btnCancelShowDocuments" Text="Vazgeç" OnClick="btnCancelShowDocuments_Click" Visible="false" />
+                                       <%-- <asp:Button runat="server" ID="btnCancelShowDocuments" Text="Vazgeç" OnClick="btnCancelShowDocuments_Click" Visible="false" />--%>
                                         <%--<telerik:RadProgressArea ID="progressArea1" runat="server" />--%>
                                     </td>
                                     <td>
