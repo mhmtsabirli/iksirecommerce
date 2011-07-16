@@ -413,6 +413,21 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 divAlert.InnerHtml += "<span style=\"color:Red\">Dosya bilgilerini getirirken hata oluştu!</span><br />";
             }
         }
+
+
+        protected void lbtnDocumentUsed_Click(object sender, EventArgs e)
+        {
+            var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
+            if (UsedDocument(itemId))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Green\">Dosya başarıyla varsayılan yapıldı</span><br />";
+                GetItem(Convert.ToInt32(lblProductId.Text));
+            }
+            else
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya varsayılan yapılırken hata oluştu!</span><br />";
+            }
+        }
         protected void lbtnDocumentDelete_Click(object sender, EventArgs e)
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
@@ -611,6 +626,27 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
             return retValue;
         }
+        private bool UsedDocument(int documentId)
+        {
+            bool retValue = false;
+            try
+            {
+                if (MultimediasData.IsDefault(documentId) < 0)
+                {
+                    retValue = true;
+                }
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Used Document";
+                itemSystemLog.Content = "Id=" + documentId.ToString() + " ile Doküman silinemedi. Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return retValue;
+        }
+        
         #endregion
 
         #region Property
