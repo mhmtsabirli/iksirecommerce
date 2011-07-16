@@ -508,7 +508,7 @@
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lbtnEdit" runat="server" OnClick="lbtnEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Düzenle]</asp:LinkButton>
                                                 <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDelete_Click" CommandArgument='<%# Eval("Id")%>'
-                                                    OnClientClick="javascript:return confirm('Bu kaydı silmek istediğinize emin misiniz?');"
+                                                    OnClientClick="javascript:return confirm('Bu kayıd sistemden tüm bilgileri ile beaber silinecektir. Emin misiniz?');"
                                                     CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
