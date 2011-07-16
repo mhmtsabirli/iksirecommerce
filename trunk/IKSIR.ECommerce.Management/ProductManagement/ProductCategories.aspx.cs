@@ -146,19 +146,31 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
 
-            if (DeleteItem(itemId))
-            {
-                lblError.Visible = true;
-                lblError.ForeColor = System.Drawing.Color.Green;
-                lblError.Text = "Item başarıyla silindi.";
-                GetList();
-            }
-            else
-            {
-                lblError.Visible = true;
-                lblError.ForeColor = System.Drawing.Color.Red;
-                lblError.Text = "Item silerken bir hata oluştu.";
-            }
+           List<IKSIR.ECommerce.Model.ProductModel.Product> productList = ProductData.GetProductCategoryList(itemId);
+
+           if (productList.Count == 0)
+           {
+               if (DeleteItem(itemId))
+               {
+                   lblError.Visible = true;
+                   lblError.ForeColor = System.Drawing.Color.Green;
+                   lblError.Text = "Item başarıyla silindi.";
+                   GetList();
+               }
+               else
+               {
+                   lblError.Visible = true;
+                   lblError.ForeColor = System.Drawing.Color.Red;
+                   lblError.Text = "Item silerken bir hata oluştu.";
+               }
+           }
+           else
+           {
+               lblError.Visible = true;
+               lblError.ForeColor = System.Drawing.Color.Red;
+               lblError.Text = "Bu kategori'ye bağlı bir çok ürün bulunmakta. Önce o ürünlerin kategorilerini değiştiriniz";
+           }
+
         }
 
         protected void btnFilter_Click(object sender, EventArgs e)
