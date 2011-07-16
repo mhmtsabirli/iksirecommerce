@@ -30,6 +30,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
                 returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
                 returnValue.FilePath = DBHelper.StringValue(dr["FilePath"].ToString());
+                returnValue.IsDefault = Convert.ToBoolean(dr["IsDefault"].ToString());
             }
             dr.Close();
             return returnValue;
@@ -61,6 +62,16 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemMultimedia.EditAdminId)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateMultimedia", parameters);
+            return returnValue;
+        }
+
+        public static int IsDefault(int MultimediaId)
+        {
+            var returnValue = 1;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Id", MultimediaId));
+            parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
+            returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateMultimediaIsDefault", parameters);
             return returnValue;
         }
 
@@ -100,6 +111,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
                 item.Type = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["TypeId"].ToString()) });
+                item.IsDefault = Convert.ToBoolean(dr["IsDefault"].ToString());
                 itemMultimediaList.Add(item);
             }
 
