@@ -47,6 +47,27 @@
                                 </ul>
                             </li>
                             <li><a href="">
+                                <img src="../Images/Stock.png" />&nbsp;Ürün</a>
+                                <ul>
+                                    <li><a href="../ProductManagement/Products.aspx">Ürün Tanımlama</a></li>
+                                    <li><a href="../ProductManagement/ProductCategories.aspx">Kategori Tanımlama</a></li>
+                                    <li><a href="../Common/Properties.aspx">Ürün Özellikleri</a></li>
+                                    <li><a href="../Common/Modules.aspx">Modül Tanımlama</a></li>
+                                    <li><a href="../ProductManagement/ModuleProducts.aspx">Modüle Ürün Atama</a></li>
+                                    <li><a href="">Ürün - Fiyat Güncelleme</a></li>
+                                    <li><a href="">Ürün Kargo Bilgisi</a></li>
+                                </ul>
+                            </li>
+                             <li><a href="">
+                                <img src="../Images/Reports.png" />&nbsp;Site</a>
+                                <ul>
+                                    <li><a href="../Common/Sites.aspx">Site Tanımlama</a></li>
+                                     <li><a href="../Common/ContactForm.aspx">İletişim Formu</a></li>
+                                    <li><a href="../Common/StaticPages.aspx">Statik Sayfalar</a></li>
+                                    <li><a href="../Common/NewsFromUs.aspx">Bizden Haberler</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="">
                                 <img src="../Images/Reports.png" />&nbsp;Raporlar</a>
                                 <ul>
                                     <li><a href="">Satış Raporları</a></li>
@@ -57,18 +78,12 @@
                             <li><a href="">
                                 <img src="../Images/Settings.png" />&nbsp;Ayarlar</a>
                                 <ul>
-                                    <li><a href="/Common/Properties.aspx">Özellikler</a></li>
-                                    <li><a href="/ProductManagement/ProductCategories.aspx">Kategoriler</a></li>
-                                    <li><a href="/Common/Enums.aspx">Sabitler</a></li>
-                                    <li><a href="/Common/EnumValues.aspx">Sabit Değerleri</a></li>
-                                    <li><a href="/ProductManagement/Products.aspx">Ürünler</a></li>
-                                    <li><a href="/Admin/Admin.aspx">Yöneticiler</a></li>
-                                    <li><a href="/Admin/Right.aspx">Haklar</a></li>
-                                    <li><a href="/Common/Sites.aspx">Siteler</a></li>
-                                    <li><a href="/Common/Modules.aspx">Modüller</a></li>
-                                    <li><a href="/ProductManagement/ModuleProducts.aspx">Modüle Ürün Atama</a></li>
-                                    <li><a href="/Common/StaticPages.aspx">Statik Sayfalar</a></li>
-                                    <li><a href="/Common/NewsFromUs.aspx">Bizden Haberler</a></li>
+
+                                    <li><a href="../Common/Enums.aspx">Sabitler</a></li>
+                                    <li><a href="../Common/EnumValues.aspx">Sabit Değerleri</a></li>
+                                    <li><a href="../Admin/Admin.aspx">Yöneticiler</a></li>
+                                    <li><a href="../Admin/Right.aspx">Yönetici Hakları</a></li>
+                                   
                                 </ul>
                             </li>
                         </ul>
@@ -107,12 +122,16 @@
                        { %>
                     <h4>
                         Yeni Mesaj</h4>
-                        <%foreach (IKSIR.ECommerce.Model.SiteModel.ContactForm contactForm in itemContactFormList)
-                          { %>
+                    <%foreach (IKSIR.ECommerce.Model.SiteModel.ContactForm contactForm in itemContactFormList)
+                      { %>
                     <div class="news-item">
-                        <span class="date"><%=contactForm.CreateDate.ToShortDateString() %></span> Başlık :  <%=contactForm.Title.ToString() %> Mesaja Ulaşmak için <a href="ContactForm.aspx?FormId=<%=contactForm.Id.ToString() %>">Tıklayın</a>
+                        <span class="date">
+                            <%=contactForm.CreateDate.ToShortDateString() %></span> Başlık :
+                        <%=contactForm.Title.ToString() %>
+                        Mesaja Ulaşmak için <a href="ContactForm.aspx?FormId=<%=contactForm.Id.ToString() %>">
+                            Tıklayın</a>
                     </div>
-                  <%} %>
+                    <%} %>
                     <%} %>
                 </div>
                 <!-- end sidebar -->
