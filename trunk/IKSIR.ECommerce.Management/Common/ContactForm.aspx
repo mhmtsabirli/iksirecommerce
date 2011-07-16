@@ -5,9 +5,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
-        Yönetici Düzenleme</h2>
+       İletişim Formu</h2>
     <p>
-        Sisteme yönetici tanımlama mevcut yöneticileri düzenleme ekranları.
+        Müşterilerin doldurduğu iletişim formlarının görüntülendiği ekran
     </p>
     <table id="tblMngForm">
         <tr>
@@ -145,13 +145,13 @@
                         </tr>
                         <tr>
                             <td>
-                                Site
+                                Durum
                             </td>
                             <td>
                                 :
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" ID="ddlFilterSite">
+                                <asp:DropDownList runat="server" ID="ddlFilterStatus">
                                 </asp:DropDownList>
                             </td>
                             <td rowspan="2">
@@ -160,13 +160,13 @@
                         </tr>
                         <tr>
                             <td>
-                                Kullanıcı Adı
+                                Başlık
                             </td>
                             <td>
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtFilterUserName"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtFilterTitle"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
@@ -201,8 +201,11 @@
                                             ReadOnly="true" SortExpression="Title" />
                                         <asp:BoundField DataField="Ip" HeaderText="Ip" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Ip" />
-                                        <asp:BoundField DataField="StatusName" HeaderText="Durum" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="StatusName" />
+                                               <asp:TemplateField HeaderText="Durum">
+                                            <ItemTemplate>
+                                                <asp:Label runat="server" ID="lblStatusName" Text='<%# Eval("Status.Value")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Id" Visible="false">
                                             <ItemTemplate>
                                             </ItemTemplate>

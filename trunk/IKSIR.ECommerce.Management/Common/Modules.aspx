@@ -136,8 +136,11 @@
                                             SortExpression="Id" />
                                         <asp:BoundField DataField="Name" HeaderText="Ad" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Name" />
-                                             <asp:BoundField DataField="SiteName" HeaderText="Site" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="SiteName" />
+                                            <asp:TemplateField HeaderText="Site">
+                                            <ItemTemplate>
+                                                <asp:Label runat="server" ID="lblSiteName" Text='<%# Eval("Site.Name")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Id" Visible="false">
                                             <ItemTemplate>
                                             </ItemTemplate>

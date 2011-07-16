@@ -130,13 +130,13 @@ namespace IKSIR.ECommerce.Management.Common {
         protected global::System.Web.UI.WebControls.Panel pnlFilter;
         
         /// <summary>
-        /// ddlFilterSite control.
+        /// ddlFilterStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFilterSite;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFilterStatus;
         
         /// <summary>
         /// btnFilter control.
@@ -148,13 +148,13 @@ namespace IKSIR.ECommerce.Management.Common {
         protected global::System.Web.UI.WebControls.Button btnFilter;
         
         /// <summary>
-        /// txtFilterUserName control.
+        /// txtFilterTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFilterUserName;
+        protected global::System.Web.UI.WebControls.TextBox txtFilterTitle;
         
         /// <summary>
         /// pnlList control.

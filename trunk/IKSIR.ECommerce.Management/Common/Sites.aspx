@@ -115,7 +115,7 @@
                                                     CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="Id" HeaderText="Değer" ApplyFormatInEditMode="false" ReadOnly="true"
+                                        <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
                                             SortExpression="Id" />
                                         <asp:BoundField DataField="Name" HeaderText="Name" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Name" />

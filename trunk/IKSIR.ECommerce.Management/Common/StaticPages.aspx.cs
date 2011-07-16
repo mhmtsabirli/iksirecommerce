@@ -24,6 +24,34 @@ namespace IKSIR.ECommerce.Management.Common
             }
         }
 
+        private void GetItem(int itemId)
+        {
+            var item = StaticPageData.Get(itemId);
+            if (item != null)
+            {
+                ddlSites.SelectedValue = item.Site.Id.ToString();
+                txtTitle.Text = item.Title;
+                RadEditorPageContent.Content = item.PageContent;
+                pnlForm.Visible = true;
+            }
+            else
+            {
+                lblError.Visible = true;
+                lblError.ForeColor = System.Drawing.Color.Red;
+                lblError.Text = "Item getirilirken bir hata oluştu.";
+            }
+        }
+
+        private void GetList()
+        {
+            List<StaticPage> itemList = StaticPageData.GetList();
+            if (txtFilterTitle.Text != "")
+                itemList = itemList.Where(x => x.Title == txtFilterTitle.Text).ToList();
+
+            gvList.DataSource = itemList;
+            gvList.DataBind();
+        }
+
         protected void lbtnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
@@ -93,7 +121,6 @@ namespace IKSIR.ECommerce.Management.Common
             GetItem(itemId);
         }
 
-
         protected void lbtnDelete_Click(object sender, EventArgs e)
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
@@ -113,31 +140,6 @@ namespace IKSIR.ECommerce.Management.Common
             }
         }
 
-        private bool DeleteItem(int itemId)
-        {
-            bool returnValue = false;
-            try
-            {
-                if (StaticPageData.Delete(itemId) < 0)
-                    returnValue = true;
-
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Statik sayfa silindi.";
-                itemSystemLog.Content = "Id=" + itemId;
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-            catch (Exception exception)
-            {
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Statik sayfa silerken hata oluştu!";
-                itemSystemLog.Content = "Id=" + itemId + "Hata: " + exception.ToString();
-                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
-            }
-            return returnValue;
-        }
-
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             GetList();
@@ -148,35 +150,7 @@ namespace IKSIR.ECommerce.Management.Common
             List<Site> itemListSite = SiteData.GetSiteList();
             Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
         }
-
-        private void GetItem(int itemId)
-        {
-            var item = StaticPageData.Get(itemId);
-            if (item != null)
-            {
-                ddlSites.SelectedValue = item.Site.Id.ToString();
-                txtTitle.Text = item.Title;
-                RadEditorPageContent.Content = item.PageContent;
-                pnlForm.Visible = true;
-            }
-            else
-            {
-                lblError.Visible = true;
-                lblError.ForeColor = System.Drawing.Color.Red;
-                lblError.Text = "Item getirilirken bir hata oluştu.";
-            }
-        }
-
-        private void GetList()
-        {
-            List<StaticPage> itemList = StaticPageData.GetList();
-            if (txtFilterTitle.Text != "")
-                itemList.Where(x => x.Title.Contains(txtFilterTitle.Text));
-
-            gvList.DataSource = itemList;
-            gvList.DataBind();
-        }
-
+    
         private bool InsertItem()
         {
             bool retValue = false;
@@ -199,13 +173,15 @@ namespace IKSIR.ECommerce.Management.Common
                 try
                 {
                     if (StaticPageData.Insert(item) > 0)
+                    {
                         retValue = true;
 
-                    SystemLog itemSystemLog = new SystemLog();
-                    itemSystemLog.Title = "Yeni statik sayfa kaydedildi.";
-                    itemSystemLog.Content = "Title: " + item.Title;
-                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                    SystemLogData.Insert(itemSystemLog);
+                        SystemLog itemSystemLog = new SystemLog();
+                        itemSystemLog.Title = "Yeni statik sayfa kaydedildi.";
+                        itemSystemLog.Content = "Title: " + item.Title;
+                        itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                        SystemLogData.Insert(itemSystemLog);
+                    }
                 }
                 catch (Exception exception)
                 {
@@ -231,13 +207,15 @@ namespace IKSIR.ECommerce.Management.Common
             try
             {
                 if (StaticPageData.Update(item) < 0)
+                {
                     retValue = true;
 
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Statik sayfa güncellendir.";
-                itemSystemLog.Content = "Id: " + item.Id + "Title: " + item.Title;
-                itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Statik sayfa güncellendir.";
+                    itemSystemLog.Content = "Id: " + item.Id + "Title: " + item.Title;
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
             }
             catch (Exception exception)
             {
@@ -249,6 +227,33 @@ namespace IKSIR.ECommerce.Management.Common
             }
 
             return retValue;
+        }
+
+        private bool DeleteItem(int itemId)
+        {
+            bool returnValue = false;
+            try
+            {
+                if (StaticPageData.Delete(itemId) < 0)
+                {
+                    returnValue = true;
+
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Statik sayfa silindi.";
+                    itemSystemLog.Content = "Id=" + itemId;
+                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    SystemLogData.Insert(itemSystemLog);
+                }
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Statik sayfa silerken hata oluştu!";
+                itemSystemLog.Content = "Id=" + itemId + "Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return returnValue;
         }
 
         private void ClearForm()
