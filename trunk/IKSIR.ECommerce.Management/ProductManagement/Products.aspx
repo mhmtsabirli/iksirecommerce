@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterManagement.Master"
-    AutoEventWireup="true" ValidateRequest="false" CodeBehind="Products.aspx.cs" Inherits="IKSIR.ECommerce.Management.ProductManagement.Products" %>
+    AutoEventWireup="true" ValidateRequest="false" CodeBehind="Products.aspx.cs"
+    Inherits="IKSIR.ECommerce.Management.ProductManagement.Products" %>
 
 <%@ Register Assembly="RadAjax.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
@@ -277,7 +278,7 @@
                                             Localization-Remove="Kaldır" Localization-Select="Seç" />
                                         <div runat="server" id="divDocuments">
                                         </div>
-                                       <%-- <asp:Button runat="server" ID="btnCancelShowDocuments" Text="Vazgeç" OnClick="btnCancelShowDocuments_Click" Visible="false" />--%>
+                                        <%-- <asp:Button runat="server" ID="btnCancelShowDocuments" Text="Vazgeç" OnClick="btnCancelShowDocuments_Click" Visible="false" />--%>
                                         <%--<telerik:RadProgressArea ID="progressArea1" runat="server" />--%>
                                     </td>
                                     <td>
@@ -300,6 +301,9 @@
                                             <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDocumentDelete_Click"
                                                 CommandArgument='<%# Eval("Id")%>' OnClientClick="javascript:return confirm('Bu kaydı silmek istediğinize emin misiniz?');"
                                                 CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
+                                            <asp:LinkButton ID="lbtnUsed" runat="server" OnClick="lbtnDocumentUsed_Click"
+                                                CommandArgument='<%# Eval("Id")%>' OnClientClick="javascript:return confirm('Bu kaydı varsayılan yapmak istediğinize emin misiniz?');"
+                                                CausesValidation="false" ForeColor="Blue">[Varsayılan]</asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
@@ -416,7 +420,8 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" Width="100%" Height="100px" ID="txtVideo" TextMode="MultiLine" CssClass="descriptionTextBox"></asp:TextBox>
+                                        <asp:TextBox runat="server" Width="100%" Height="100px" ID="txtVideo" TextMode="MultiLine"
+                                            CssClass="descriptionTextBox"></asp:TextBox>
                                     </td>
                                     <td>
                                     </td>
@@ -445,23 +450,23 @@
                                 <strong>Filtre</strong>
                             </td>
                         </tr>
-                         <tr>
-                                    <td>
-                                        Site
-                                    </td>
-                                    <td>
-                                        :
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList runat="server" ID="ddlFilterSite" AutoPostBack="true" OnSelectedIndexChanged="ddlFilterSites_SelectedIndexChanged">
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td>
-                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="ddlSites"
-                                            ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Site seçmelisiniz"
-                                            ForeColor="Red">*</asp:RequiredFieldValidator>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <td>
+                                Site
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:DropDownList runat="server" ID="ddlFilterSite" AutoPostBack="true" OnSelectedIndexChanged="ddlFilterSites_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </td>
+                            <td>
+                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="ddlSites"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Site seçmelisiniz"
+                                    ForeColor="Red">*</asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 Üst Kategori
@@ -500,9 +505,9 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4" Font-Size="Small"
-                                    EmptyDataText="Listede gösterilecek kayıt bulunamadı" GridLines="None" PageSize="10"
-                                    EnableModelValidation="True" Width="100%" AllowPaging="True" OnPageIndexChanging="gvList_PageIndexChanging">
+                                <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
+                                    Font-Size="Small" EmptyDataText="Listede gösterilecek kayıt bulunamadı" GridLines="None"
+                                    PageSize="10" EnableModelValidation="True" Width="100%" AllowPaging="True" OnPageIndexChanging="gvList_PageIndexChanging">
                                     <Columns>
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>
@@ -516,7 +521,7 @@
                                             SortExpression="Id" />
                                         <asp:BoundField DataField="ProductCode" HeaderText="Ürün KOdu" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="ProductCode" />
-                                            <asp:BoundField DataField="Title" HeaderText="Başlık" ApplyFormatInEditMode="false"
+                                        <asp:BoundField DataField="Title" HeaderText="Başlık" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Title" />
                                         <asp:BoundField DataField="MinStock" HeaderText="Stok" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="MinStock" />
