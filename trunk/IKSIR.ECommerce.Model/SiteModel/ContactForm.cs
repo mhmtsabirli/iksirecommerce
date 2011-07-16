@@ -15,11 +15,10 @@ namespace IKSIR.ECommerce.Model.SiteModel
         public string Title { get; set; }
         public string Message { get; set; }
         public string Solution { get; set; }
-        public string StatusName { get; set; }
         public string Ip { get; set; }
         public EnumValue Status { get; set; }
 
-        public ContactForm(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate,string statusName,string firstLastName,string email,string title,string solution,string message,string ip,EnumValue status)
+        public ContactForm(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate,string firstLastName,string email,string title,string solution,string message,string ip,EnumValue status)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.Email = email;
@@ -29,7 +28,6 @@ namespace IKSIR.ECommerce.Model.SiteModel
             this.Status = status;
             this.Title = title;
             this.Solution = solution;
-            this.StatusName = statusName;
         }
         public ContactForm()
         {
