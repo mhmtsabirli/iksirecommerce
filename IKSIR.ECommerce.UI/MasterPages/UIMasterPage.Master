@@ -3,13 +3,11 @@
 
 <%@ Register Src="../UserControls/UCMainCategories.ascx" TagName="UCMainCategories"
     TagPrefix="uc1" %>
-<%@ Register Src="../UserControls/UCBestSellingProducts.ascx" TagName="UCBestSellingProducts"
-    TagPrefix="uc2" %>
-<%@ Register Src="../UserControls/UCMostVisitedProducts.ascx" TagName="UCMostVisitedProducts"
-    TagPrefix="uc3" %>
-<%@ Register Src="../UserControls/UCCampaignProducts.ascx" TagName="UCCampaignProducts"
-    TagPrefix="uc4" %>
 <%@ Register Src="../UserControls/UCNewsFromUs.ascx" TagName="UCNewsFromUs" TagPrefix="uc5" %>
+<%@ Register Src="../UserControls/UCHeader.ascx" TagName="Header" TagPrefix="uc6" %>
+<%@ Register Src="../UserControls/UCFooter.ascx" TagName="Footer" TagPrefix="uc7" %>
+<%@ Register Src="../UserControls/UCModuleProducts.ascx" TagName="UCModuleProducts"
+    TagPrefix="uc8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -27,50 +25,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div class="header">
-        <div class="top_menu">
-            <ul>
-                <li style="border: 0;"><a href="/Pages/Content.aspx?cid=2">Kurumsal</a></li>
-                <li><a href="/Pages/Content.aspx?cid=3">Müşteri Hizmetleri</a></li>
-                <li><a href="/Pages/Content.aspx?cid=5">Sipariş Takibi</a></li>
-                <li><a href="/Pages/Content.aspx?cid=6">Sık Sorulan Sorular</a></li>
-                <li><a href="/Pages/Content.aspx?cid=7">Yardım</a></li>
-            </ul>
-        </div>
-        <div class="logo">
-            <a href="../Default.aspx">
-                <img src="../images/logo.jpg" alt="" /></a></div>
-        <div class="search">
-        </div>
-        <input class="search_text" type="text" />
-        <input class="search_submit" type="submit" value="" />
-        <div class="clear">
-        </div>
-    </div>
+    <uc6:Header ID="Header1" runat="server"></uc6:Header>
     <div class="clear">
-    </div>
-    <div class="navbar">
-        <div class="nav_menu">
-            <ul>
-                <li><a style="background: none;" href="/Pages/Default.aspx">Anasayfa</a></li>
-                <li><a href="../Pages/ProductList.aspx?modid=4">Yeni Ürünler</a></li>
-                <li><a href="../Pages/ProductList.aspx?modid=5">Kampanyalı Ürünler</a></li>
-                <li><a href="../Pages/ProductList.aspx?modid=6">İndirimli Ürünler</a></li>
-                <li><a href="../Pages/Register.aspx">Yeni Üyelik</a></li>
-                <li><a href="../UserPanel/MyAccount.aspx">Hesabım</a></li>
-                <li><a href="../Pages/Contact.aspx">İletişim</a></li>
-            </ul>
-            <div class="clear">
-                <asp:ScriptManager ID="ScriptManager1" runat="server">
-                </asp:ScriptManager>
-            </div>
-        </div>
-        <div class="nav_info">
-            <p>
-                <img src="../images/navbar_sepet.png" alt="" />Alışveriş Sepetim : 5 ürün (1500 TL)</p>
-        </div>
-        <div class="clear">
-        </div>
     </div>
     <div class="main">
         <div class="sidebar_left">
@@ -166,7 +122,7 @@
                 <div class="sidemenu_top">
                 </div>
                 <div class="sidemenu_middle">
-                    <uc2:UCBestSellingProducts ID="UCBestSellingProducts1" runat="server" />
+                    <uc8:UCModuleProducts ID="UCModuleBestSellingProducts" runat="server" />
                 </div>
                 <div class="sidemenu_bottom">
                 </div>
@@ -175,7 +131,7 @@
                 <div class="sidemenu_top">
                 </div>
                 <div class="sidemenu_middle">
-                    <uc3:UCMostVisitedProducts ID="UCMostVisitedProducts1" runat="server" />
+                    <uc8:UCModuleProducts ID="UCModuleMostVisitedProducts" runat="server" />
                 </div>
                 <div class="sidemenu_bottom">
                 </div>
@@ -184,7 +140,7 @@
                 <div class="sidemenu_top">
                 </div>
                 <div class="sidemenu_middle">
-                    <uc4:UCCampaignProducts ID="UCCampaignProducts1" runat="server" />
+                    <uc8:UCModuleProducts ID="UCModuleCampaignProducts" runat="server" />
                 </div>
                 <div class="sidemenu_bottom">
                 </div>
@@ -193,72 +149,8 @@
         <div class="clear">
         </div>
     </div>
+    <uc7:Footer ID="Footer1" runat="server" />
     </form>
-    <div class="footer">
-        <h4>
-            <a href="#">
-                <img src="../images/footer_logo.jpg" alt="" /></a></h4>
-        <div class="footer_module">
-            <h3>
-                <a href="#">Anasayfa</a></h3>
-            <ul>
-                <li><a href="#">Müşteri Hizmetleri</a></li>
-                <li><a href="#">Kurumsal</a></li>
-                <li><a href="#">Sık Sorulan Sorular</a></li>
-                <li><a href="#">Yardım</a></li>
-            </ul>
-        </div>
-        <div class="footer_module">
-            <h3>
-                <a href="#">Sipariş İşlemleri</a></h3>
-            <ul>
-                <li><a href="#">Sipariş Takip</a></li>
-                <li><a href="#">Sipariş Yardım Formu</a></li>
-                <li><a href="#">Ödeme Bildirim Formu</a></li>
-            </ul>
-        </div>
-        <div class="footer_module">
-            <h3>
-                <a href="#">Alışveriş İşlemleri</a></h3>
-            <ul>
-                <li><a href="#">Alışveriş Sepeti</a></li>
-                <li><a href="#">Alışveriş Listesi</a></li>
-                <li><a href="#">Hesap Numaralarımız</a></li>
-            </ul>
-        </div>
-        <div class="footer_module">
-            <h3>
-                <a href="#">Üyelik İşlemleri</a></h3>
-            <ul>
-                <li><a href="#">Yeni Üyelik</a></li>
-                <li><a href="#">Üye Girişi</a></li>
-                <li><a href="#">Şifre Hatırlatma</a></li>
-            </ul>
-        </div>
-        <div class="footer_module">
-            <h3>
-                E-Bülten</h3>
-            <form action="">
-            <input class="footer_module_text" type="text" value="Mail Adresinizi Giriniz" />
-            <input class="footer_module_submit" type="submit" value="" />
-            </form>
-            <div class="clear">
-            </div>
-            <p>
-                Güncel gelişmelerden kolayca haberdar<br />
-                olmak için e-bültenimize üye olun</p>
-        </div>
-        <div class="footer_verisign">
-            <a href="#">
-                <img src="../images/footer_verisign.jpg" alt="" /></a></div>
-        <div class="clear">
-        </div>
-        <div class="footer_bottom">
-            <img src="../images/footer_bottom.jpg" alt="" />
-            <p>
-                suvit © Copyright 2011</p>
-        </div>
-    </div>
     </form>
 </body>
 </html>

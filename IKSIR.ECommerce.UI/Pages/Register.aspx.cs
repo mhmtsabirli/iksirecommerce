@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using IKSIR.ECommerce.Toolkit;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -34,19 +35,26 @@ namespace IKSIR.ECommerce.UI.Pages
                 ddlBirthDateYear.Items.Add(new ListItem(i.ToString(), i.ToString()));
             }
             ddlBirthDateYear.Items.Insert(0, new ListItem("Yıl", "-1"));
+            
+            KeyGenerator item = new KeyGenerator();
+            string key = item.GetUniqueKey(6, true, true, false);
+            Session.Add("REGISTER_SECURITYCODE", key);
         }
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
-            if (SaveForm())
+            if (CheckForm())
             {
-                lblAlert.Text = "Üye kaydınız başarıyla gerçekleşmiştir.";
-                lblAlert.ForeColor = System.Drawing.Color.Green;
-            }
-            else
-            {
-                lblAlert.Text = "Üye kaydınız gerçekleşirken hata oluştu! Lütfen daha sonra tekrar deneyiniz.";
-                lblAlert.ForeColor = System.Drawing.Color.Red;
+                if (SaveForm())
+                {
+                    lblAlert.Text = "Üye kaydınız başarıyla gerçekleşmiştir.";
+                    lblAlert.ForeColor = System.Drawing.Color.Green;
+                }
+                else
+                {
+                    lblAlert.Text = "Üye kaydınız gerçekleşirken hata oluştu! Lütfen daha sonra tekrar deneyiniz.";
+                    lblAlert.ForeColor = System.Drawing.Color.Red;
+                }
             }
         }
 
@@ -56,6 +64,37 @@ namespace IKSIR.ECommerce.UI.Pages
 
             bool retValue = false;
             return retValue;
+        }
+
+        private bool CheckForm()
+        {
+            //Mail adresini kontrol et bu adresle kayıtlı bir üye varsa hata döndür.
+            //Güvenlik kodunu kontrol et
+            bool retValue = true;
+
+            if (Session["REGISTER_SECURITYCODE"] != null && Session["REGISTER_SECURITYCODE"].ToString() == txtCode.Text)
+            {
+                //Diğer alanları kontrol et
+            }
+            else
+            {
+                retValue = false;
+                lblAlert.Text = "Güvenlik kodu hatalı.";
+                txtCode.Focus();
+                lblAlert.ForeColor = System.Drawing.Color.Red;
+            }
+            return retValue;
+
+        }
+
+        protected void lbtnChangeCode_Click(object sender, EventArgs e)
+        {
+            KeyGenerator item = new KeyGenerator();
+            string key = item.GetUniqueKey(6, true, true, false);
+            Session.Add("REGISTER_SECURITYCODE", key);
+
+            DynamicPicture itemasd = new DynamicPicture();
+            
         }
     }
 }

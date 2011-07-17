@@ -31,13 +31,13 @@ namespace IKSIR.ECommerce.UI.MasterPages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// ScriptManager1 control.
+        /// Header1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::IKSIR.ECommerce.UI.UserControls.UCHeader Header1;
         
         /// <summary>
         /// UCMainCategories1 control.
@@ -67,30 +67,39 @@ namespace IKSIR.ECommerce.UI.MasterPages {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
         
         /// <summary>
-        /// UCBestSellingProducts1 control.
+        /// UCModuleBestSellingProducts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IKSIR.ECommerce.UI.UserControls.UCBestSellingProducts UCBestSellingProducts1;
+        protected global::IKSIR.ECommerce.UI.UserControls.UCModuleProducts UCModuleBestSellingProducts;
         
         /// <summary>
-        /// UCMostVisitedProducts1 control.
+        /// UCModuleMostVisitedProducts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IKSIR.ECommerce.UI.UserControls.UCMostVisitedProducts UCMostVisitedProducts1;
+        protected global::IKSIR.ECommerce.UI.UserControls.UCModuleProducts UCModuleMostVisitedProducts;
         
         /// <summary>
-        /// UCCampaignProducts1 control.
+        /// UCModuleCampaignProducts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IKSIR.ECommerce.UI.UserControls.UCCampaignProducts UCCampaignProducts1;
+        protected global::IKSIR.ECommerce.UI.UserControls.UCModuleProducts UCModuleCampaignProducts;
+        
+        /// <summary>
+        /// Footer1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IKSIR.ECommerce.UI.UserControls.UCFooter Footer1;
     }
 }

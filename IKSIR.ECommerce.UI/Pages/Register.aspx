@@ -1,5 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/UIMasterPage.Master" AutoEventWireup="true"
-    CodeBehind="Register.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.Register" UICulture="tr" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/UIMasterPage.Master"
+    AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.Register"
+    UICulture="tr" %>
 
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -156,6 +157,30 @@
                     SetFocusOnError="true">*</asp:RequiredFieldValidator>
                 <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="ddlBirthDateYear"
                     InitialValue="-1" ErrorMessage="Doğum Tarihi yıl alanı zorunlu" ValidationGroup="vgForm"
+                    SetFocusOnError="true">*</asp:RequiredFieldValidator>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                Güvenlik Kodu
+            </td>
+            <td valign="top">
+                :
+            </td>
+            <td valign="top">
+                *
+            </td>
+            <td valign="top">
+                <asp:Image ID="imgSecurity" CssClass="CaptchaImage" ImageUrl="CaptchaCode.aspx" runat="server"
+                    AlternateText="Güvenlik Kodu" />
+                <asp:LinkButton runat="server" ID="lbtnChangeCode" Text="Değiştir" 
+                    onclick="lbtnChangeCode_Click" Visible="false"></asp:LinkButton>
+                <br />
+                <asp:TextBox runat="server" CssClass="CaptchaValue" ID="txtCode"></asp:TextBox>
+            </td>
+            <td valign="top">
+                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator9" ControlToValidate="txtCode"
+                    ErrorMessage="Güvenlik Kodu alanı zorunlu" ValidationGroup="vgForm"
                     SetFocusOnError="true">*</asp:RequiredFieldValidator>
             </td>
         </tr>

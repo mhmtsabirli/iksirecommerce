@@ -11,7 +11,9 @@ namespace IKSIR.ECommerce.UI.MasterPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            UCModuleBestSellingProducts.ModuleId = 1;
+            UCModuleMostVisitedProducts.ModuleId = 2;
+            UCModuleCampaignProducts.ModuleId = 3;
         }
     }
 }
