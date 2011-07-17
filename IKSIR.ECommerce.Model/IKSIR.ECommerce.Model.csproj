@@ -52,7 +52,6 @@
     <Compile Include="CommonModel\District.cs" />
     <Compile Include="CommonModel\Enum.cs" />
     <Compile Include="CommonModel\EnumValue.cs" />
-    <Compile Include="CommonModel\ItemComments.cs" />
     <Compile Include="CommonModel\ItemMultimedias.cs" />
     <Compile Include="CommonModel\ModelBase.cs" />
     <Compile Include="CommonModel\Multimedia.cs" />

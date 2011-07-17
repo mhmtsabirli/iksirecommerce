@@ -158,11 +158,11 @@
     <Content Include="UserControls\UCProductDetailsRelatedProducts.ascx" />
     <Content Include="UserControls\UCProductDetailsSimilarProducts.ascx" />
     <Content Include="UserControls\UCProductDetailsComments.ascx" />
-    <Content Include="UserControls\UCProductCreditCardAdvantages.ascx" />
+    <Content Include="UserControls\UCProductDetailsCreditCardAdvantages.ascx" />
     <Content Include="UserControls\UCProductDetailDocuments.ascx" />
     <Content Include="UserControls\UCFooter.ascx" />
     <Content Include="UserControls\UCHeader.ascx" />
-    <Content Include="UserControls\UCProductDetailProductInfos.ascx" />
+    <Content Include="UserControls\UCProductDetailsProductInfos.ascx" />
     <Content Include="UserControls\UCNewsFromUs.ascx" />
     <Content Include="UserControls\UCMainCategories.ascx" />
     <Content Include="UserPanel\MyAccount.aspx" />
@@ -285,12 +285,12 @@
     <Compile Include="UserControls\UCProductDetailsComments.ascx.designer.cs">
       <DependentUpon>UCProductDetailsComments.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UCProductCreditCardAdvantages.ascx.cs">
-      <DependentUpon>UCProductCreditCardAdvantages.ascx</DependentUpon>
+    <Compile Include="UserControls\UCProductDetailsCreditCardAdvantages.ascx.cs">
+      <DependentUpon>UCProductDetailsCreditCardAdvantages.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\UCProductCreditCardAdvantages.ascx.designer.cs">
-      <DependentUpon>UCProductCreditCardAdvantages.ascx</DependentUpon>
+    <Compile Include="UserControls\UCProductDetailsCreditCardAdvantages.ascx.designer.cs">
+      <DependentUpon>UCProductDetailsCreditCardAdvantages.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCProductDetailDocuments.ascx.cs">
       <DependentUpon>UCProductDetailDocuments.ascx</DependentUpon>
@@ -313,12 +313,12 @@
     <Compile Include="UserControls\UCHeader.ascx.designer.cs">
       <DependentUpon>UCHeader.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UCProductDetailProductInfos.ascx.cs">
-      <DependentUpon>UCProductDetailProductInfos.ascx</DependentUpon>
+    <Compile Include="UserControls\UCProductDetailsProductInfos.ascx.cs">
+      <DependentUpon>UCProductDetailsProductInfos.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\UCProductDetailProductInfos.ascx.designer.cs">
-      <DependentUpon>UCProductDetailProductInfos.ascx</DependentUpon>
+    <Compile Include="UserControls\UCProductDetailsProductInfos.ascx.designer.cs">
+      <DependentUpon>UCProductDetailsProductInfos.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCNewsFromUs.ascx.cs">
       <DependentUpon>UCNewsFromUs.ascx</DependentUpon>

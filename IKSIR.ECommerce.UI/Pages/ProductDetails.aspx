@@ -2,11 +2,11 @@
     AutoEventWireup="true" CodeBehind="ProductDetails.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.ProductDetails" %>
 
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
-<%@ Register Src="../UserControls/UCProductDetailProductInfos.ascx" TagName="UCProductDetailProductInfos"
+<%@ Register Src="../UserControls/UCProductDetailsProductInfos.ascx" TagName="UCProductDetailsProductInfos"
     TagPrefix="uc1" %>
 <%@ Register Src="../UserControls/UCProductDetailsComments.ascx" TagName="UCProductDetailsComments"
     TagPrefix="uc2" %>
-<%@ Register Src="../UserControls/UCProductCreditCardAdvantages.ascx" TagName="UCProductCreditCardAdvantages"
+<%@ Register Src="../UserControls/UCProductDetailsCreditCardAdvantages.ascx" TagName="UCProductDetailsCreditCardAdvantages"
     TagPrefix="uc3" %>
 <%@ Register Src="../UserControls/UCProductDetailDocuments.ascx" TagName="UCProductDetailDocuments"
     TagPrefix="uc4" %>
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="urun_content">
-            <uc7:UCProductDetailsMain ID="UCProductDetailsMain1" runat="server"/>
+            <uc7:UCProductDetailsMain ID="UCProductDetailsMain1" runat="server" />
             <div class="clear">
             </div>
             <div class="urun_diger">
@@ -63,13 +63,14 @@
                 </telerik:RadTabStrip>
                 <telerik:RadMultiPage ID="RadMultiPage1" runat="server">
                     <telerik:RadPageView ID="pvProductInfo" runat="server" Selected="true">
-                        <uc1:UCProductDetailProductInfos ID="UCProductDetailProductInfos1" runat="server" />
+                        <uc1:UCProductDetailsProductInfos ID="UCProductDetailsProductInfos1" runat="server" />
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="pvProductDocuments" runat="server" Selected="true">
                         <uc4:UCProductDetailDocuments ID="UCProductDetailDocuments1" runat="server" />
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="pvCreditCardAdvantages" runat="server" Selected="true">
-                        <uc3:UCProductCreditCardAdvantages ID="UCProductCreditCardAdvantages1" runat="server" />
+                        <uc3:UCProductDetailsCreditCardAdvantages ID="UCProductDetailsCreditCardAdvantages1"
+                            runat="server" />
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="pvProductComments" runat="server" Selected="true">
                         <uc2:UCProductDetailsComments ID="UCProductDetailsComments1" runat="server" />
