@@ -63,6 +63,7 @@
     <Compile Include="DataLayer\DataBlock\DBHelper.cs" />
     <Compile Include="DataLayer\DataBlock\SqlDataBlock.cs" />
     <Compile Include="DataLayer\MembershipDataLayer\UserData.cs" />
+    <Compile Include="DataLayer\ProductDataLayer\RelatedProductData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ProductShipmentPriceData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ShipmentData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ProductPriceData.cs" />
