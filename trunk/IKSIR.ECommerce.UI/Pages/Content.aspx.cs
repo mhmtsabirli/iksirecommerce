@@ -42,7 +42,11 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             catch (Exception exception)
             {
-                throw;
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "UI Contet.aspx GetCotet(int contentId)";
+                itemSystemLog.Content = exception.Message.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
             }
         }
         private void GetNews(int newsid)
@@ -55,7 +59,11 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             catch (Exception exception)
             {
-                throw;
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "UI Contet.aspx GetNews(int newsid)";
+                itemSystemLog.Content = exception.Message.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
             }
         }
     }

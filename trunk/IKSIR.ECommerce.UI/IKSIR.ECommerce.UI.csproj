@@ -141,6 +141,7 @@
     <Content Include="js\sprinkle.js" />
     <Content Include="js\urchin.js" />
     <Content Include="js\validate_profile.js" />
+    <Content Include="Pages\CaptchaCode.aspx" />
     <Content Include="Pages\Contact.aspx" />
     <Content Include="Pages\Content.aspx" />
     <Content Include="Pages\Default.aspx" />
@@ -151,10 +152,18 @@
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="UserControls\UCModuleProducts.ascx" />
+    <Content Include="UserControls\UCProductDetailsMain.ascx" />
+    <Content Include="UserControls\UCProductDetailsMaster.ascx" />
+    <Content Include="UserControls\UCProductDetailsRelatedProducts.ascx" />
+    <Content Include="UserControls\UCProductDetailsSimilarProducts.ascx" />
+    <Content Include="UserControls\UCProductDetailsComments.ascx" />
+    <Content Include="UserControls\UCProductCreditCardAdvantages.ascx" />
+    <Content Include="UserControls\UCProductDetailDocuments.ascx" />
+    <Content Include="UserControls\UCFooter.ascx" />
+    <Content Include="UserControls\UCHeader.ascx" />
+    <Content Include="UserControls\UCProductDetailProductInfos.ascx" />
     <Content Include="UserControls\UCNewsFromUs.ascx" />
-    <Content Include="UserControls\UCCampaignProducts.ascx" />
-    <Content Include="UserControls\UCMostVisitedProducts.ascx" />
-    <Content Include="UserControls\UCBestSellingProducts.ascx" />
     <Content Include="UserControls\UCMainCategories.ascx" />
     <Content Include="UserPanel\MyAccount.aspx" />
     <Content Include="Web.config" />
@@ -166,6 +175,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\CaptchaCode.aspx.cs">
+      <DependentUpon>CaptchaCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -230,33 +243,89 @@
     <Compile Include="MasterPages\UIMasterPage.Master.designer.cs">
       <DependentUpon>UIMasterPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCModuleProducts.ascx.cs">
+      <DependentUpon>UCModuleProducts.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCModuleProducts.ascx.designer.cs">
+      <DependentUpon>UCModuleProducts.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailsMain.ascx.cs">
+      <DependentUpon>UCProductDetailsMain.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailsMain.ascx.designer.cs">
+      <DependentUpon>UCProductDetailsMain.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailsMaster.ascx.cs">
+      <DependentUpon>UCProductDetailsMaster.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailsMaster.ascx.designer.cs">
+      <DependentUpon>UCProductDetailsMaster.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailsRelatedProducts.ascx.cs">
+      <DependentUpon>UCProductDetailsRelatedProducts.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailsRelatedProducts.ascx.designer.cs">
+      <DependentUpon>UCProductDetailsRelatedProducts.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailsSimilarProducts.ascx.cs">
+      <DependentUpon>UCProductDetailsSimilarProducts.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailsSimilarProducts.ascx.designer.cs">
+      <DependentUpon>UCProductDetailsSimilarProducts.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailsComments.ascx.cs">
+      <DependentUpon>UCProductDetailsComments.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailsComments.ascx.designer.cs">
+      <DependentUpon>UCProductDetailsComments.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProductCreditCardAdvantages.ascx.cs">
+      <DependentUpon>UCProductCreditCardAdvantages.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProductCreditCardAdvantages.ascx.designer.cs">
+      <DependentUpon>UCProductCreditCardAdvantages.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailDocuments.ascx.cs">
+      <DependentUpon>UCProductDetailDocuments.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailDocuments.ascx.designer.cs">
+      <DependentUpon>UCProductDetailDocuments.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCFooter.ascx.cs">
+      <DependentUpon>UCFooter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCFooter.ascx.designer.cs">
+      <DependentUpon>UCFooter.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCHeader.ascx.cs">
+      <DependentUpon>UCHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCHeader.ascx.designer.cs">
+      <DependentUpon>UCHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailProductInfos.ascx.cs">
+      <DependentUpon>UCProductDetailProductInfos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailProductInfos.ascx.designer.cs">
+      <DependentUpon>UCProductDetailProductInfos.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCNewsFromUs.ascx.cs">
       <DependentUpon>UCNewsFromUs.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\UCNewsFromUs.ascx.designer.cs">
       <DependentUpon>UCNewsFromUs.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCCampaignProducts.ascx.cs">
-      <DependentUpon>UCCampaignProducts.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControls\UCCampaignProducts.ascx.designer.cs">
-      <DependentUpon>UCCampaignProducts.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCMostVisitedProducts.ascx.cs">
-      <DependentUpon>UCMostVisitedProducts.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControls\UCMostVisitedProducts.ascx.designer.cs">
-      <DependentUpon>UCMostVisitedProducts.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCBestSellingProducts.ascx.cs">
-      <DependentUpon>UCBestSellingProducts.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControls\UCBestSellingProducts.ascx.designer.cs">
-      <DependentUpon>UCBestSellingProducts.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCMainCategories.ascx.cs">
       <DependentUpon>UCMainCategories.ascx</DependentUpon>

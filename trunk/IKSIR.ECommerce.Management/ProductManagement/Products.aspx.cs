@@ -522,9 +522,9 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     try
                     {
                         uploadedFile.SaveAs(targetFileNameImage, isOK);
-                        Utility.ResizeImage(targetFileNameImage, Server.MapPath("~/ProductDocuments/Images/Big/big_" + fileName + fileExtension), 500, 500, true);
-                        Utility.ResizeImage(targetFileNameImage, Server.MapPath("~/ProductDocuments/Images/Small/small_" + fileName + fileExtension), 250, 250, true);
-                        Utility.ResizeImage(targetFileNameImage, Server.MapPath("~/ProductDocuments/Images/Icon/icon_" + fileName + fileExtension), 50, 50, true);
+                        Utility.ResizeImage(targetFileNameImage, Server.MapPath("~/ProductDocuments/Images/Big/big_" + fileName + fileExtension), 350, 250, true);
+                        Utility.ResizeImage(targetFileNameImage, Server.MapPath("~/ProductDocuments/Images/Small/small_" + fileName + fileExtension), 75, 50, true);
+                        Utility.ResizeImage(targetFileNameImage, Server.MapPath("~/ProductDocuments/Images/Icon/icon_" + fileName + fileExtension), 38, 25, true);
                         divAlert.InnerHtml += "<span style=\"color:Green\">Dosya başarıyla yüklendi. Dosya Adı: <i>" + uploadedFile.FileName + "</i></span><br />";
                     }
                     catch (Exception exception)

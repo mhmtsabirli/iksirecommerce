@@ -105,7 +105,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     lblError.Text = "Item başarıyla güncellendi.";
                     ClearForm();
                     pnlForm.Visible = false;
-                    int count = 0;
                     GetList();
                 }
                 else

@@ -70,7 +70,6 @@ namespace IKSIR.ECommerce.Management.Common
                     lblError.Text = "Item başarıyla güncellendi.";
                     ClearForm();
                     pnlForm.Visible = false;
-                    int count = 0;
                     GetList();
                 }
                 else

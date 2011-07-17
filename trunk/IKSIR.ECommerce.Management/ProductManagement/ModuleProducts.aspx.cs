@@ -76,7 +76,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     lblError2.Visible = false;
                     ClearForm();
                     pnlForm.Visible = false;
-                    int count = 0;
                     GetList();
                 }
                 else
