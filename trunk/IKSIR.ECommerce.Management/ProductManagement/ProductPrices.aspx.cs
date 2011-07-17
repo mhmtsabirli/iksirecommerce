@@ -58,7 +58,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             pnlForm.Visible = false;
 
         }
-
         private bool InsertItem()
         {
             bool retValue = false;
@@ -93,7 +92,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 retValue = true;
             return retValue;
         }
-
         private void BindValues()
         {
 
@@ -102,7 +100,32 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
 
         }
+        private void ClearForm()
+        {
+            txtDesi.Text = string.Empty;
+            txtFilterProductCode.Text = string.Empty;
+            txtPriceOne.Text = string.Empty;
+            txtPriceTwo.Text = string.Empty;
+            txtProductCode.Text = string.Empty;
+            txtProductName.Text = string.Empty;
+            txtShpriceOne.Text = string.Empty;
+            txtShpriceTwo.Text = string.Empty;
+            txtShUnitPrice.Text = string.Empty;
+            txtTax.Text = string.Empty;
+            txtUnitPriceOne.Text = string.Empty;
+            txtUnitPriceTwo.Text = string.Empty;
+            lblProductId.Text = string.Empty;
+            ddlShipment.SelectedIndex = -1;
+            chBaz.Enabled = false;
 
+            Session["PRODUCT_PROPERTY_LIST"] = null;
+            btnSave.CommandArgument = string.Empty;
+            gvProductShipment.DataSource = null;
+            gvProductShipment.DataBind();
+
+            RadTabStrip1.SelectedIndex = 0;
+            RadPageView1.Selected = true;
+        }
         protected void lbtnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
@@ -126,14 +149,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             int productId = Convert.ToInt32(lblProductId.Text);
             SaveProductPriceShipmnent(productId);
             GetList();
-        }
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            pnlForm.Visible = false;
-            pnlList.Visible = true;
-            pnlFilter.Visible = true;
-        }
-
+        }        
         protected void lbtnEdit_Click(object sender, EventArgs e)
         {
             ClearForm();
@@ -158,13 +174,17 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             {
                 divAlert.InnerHtml += "<span style=\"color:Red\">Ürün silinirken hata oluştu! <i>Ürün Id: " + itemId.ToString() + "</i></span><br />";
             }
-        }
-
+        }        
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             GetList();
         }
-
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            pnlForm.Visible = false;
+            pnlList.Visible = true;
+            pnlFilter.Visible = true;
+        }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             if (txtProductCode.Text != "")
@@ -201,14 +221,12 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
 
         }
-
         protected void ddlShipment_SelectedIndexChanged(object sender, EventArgs e)
         {
             IKSIR.ECommerce.Model.ProductModel.Shipment itemSh = ShipmentData.Get(Convert.ToInt32(ddlShipment.SelectedValue));
             txtShUnitPrice.Text = Convert.ToString(itemSh.UnitPrice);
             chBaz.Enabled = true;
         }
-
         protected void chBaz_CheckedChanged(object sender, EventArgs e)
         {
             if (chBaz.Checked == true)
@@ -224,7 +242,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 txtShpriceTwo.Enabled = true;
             }
         }
-
         #region ProductPrices
         private bool GetProductPricesMain(int productPriceId)
         {
@@ -385,7 +402,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         #endregion
 
         #region productShipmentPrice
-
         protected void btnAddShipmentPrice_Click(object sender, EventArgs e)
         {
             SaveProductPriceShipmnentToList();
@@ -428,7 +444,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 divAlert.InnerHtml += "<span style=\"color:Red\">Kargo Fiyatı  silinirken hata oluştu!</span><br />";
             }
         }
-
         private List<ProductShipmentPrice> GetProductShipmentPriceList()
         {
             List<ProductShipmentPrice> productShipmentList;
@@ -445,7 +460,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
             return productShipmentList;
         }
-
         private bool GetProductShipment(int productId)
         {
             bool retValue = false;
@@ -479,7 +493,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             gvProductShipment.DataBind();
             return retValue;
         }
-
         private bool GetProductShipments(int ShipmentPriceId)
         {
             bool retValue = false;
@@ -496,7 +509,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             GetItem(Convert.ToInt32(lblProductPriceId.Text));
             return retValue;
         }
-
         private bool SaveProductPriceShipmnentToList()
         {
             bool retValue = false;
@@ -569,7 +581,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
             return retValue;
         }
-
         private bool SaveProductPriceShipmnent(int productId)
         {
             bool retValue = false;
@@ -624,7 +635,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
             return retValue;
         }
-
         private bool InsertProductShipmentToList(ProductShipmentPrice itemProductShipmentPrice)
         {
             bool retValue = false;
@@ -680,32 +690,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             GetList();
         }
 
-        private void ClearForm()
-        {
-            txtDesi.Text = string.Empty;
-            txtFilterProductCode.Text = string.Empty;
-            txtPriceOne.Text = string.Empty;
-            txtPriceTwo.Text = string.Empty;
-            txtProductCode.Text = string.Empty;
-            txtProductName.Text = string.Empty;
-            txtShpriceOne.Text = string.Empty;
-            txtShpriceTwo.Text = string.Empty;
-            txtShUnitPrice.Text = string.Empty;
-            txtTax.Text = string.Empty;
-            txtUnitPriceOne.Text = string.Empty;
-            txtUnitPriceTwo.Text = string.Empty;
-            lblProductId.Text = string.Empty;
-            ddlShipment.SelectedIndex = -1;
-            chBaz.Enabled = false;
-           
-            Session["PRODUCT_PROPERTY_LIST"] = null;
-            btnSave.CommandArgument = string.Empty;
-            gvProductShipment.DataSource = null;
-            gvProductShipment.DataBind();
-          
-            RadTabStrip1.SelectedIndex = 0;
-            RadPageView1.Selected = true;
-        }
+        
 
     }
 }

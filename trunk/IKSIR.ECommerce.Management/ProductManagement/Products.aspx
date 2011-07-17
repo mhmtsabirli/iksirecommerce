@@ -35,7 +35,7 @@
                 </asp:ScriptManager>
                 <asp:Panel runat="server" ID="pnlForm" Visible="false" CssClass="pnlForm">
                     <telerik:RadTabStrip ID="RadTabStrip1" runat="server" Skin="Web20" MultiPageID="RadMultiPage1"
-                        SelectedIndex="1" Width="400px">
+                        SelectedIndex="1" Width="500px">
                         <Tabs>
                             <telerik:RadTab Text="Ürün" Selected="true" PageViewID="RadPageView1">
                             </telerik:RadTab>
