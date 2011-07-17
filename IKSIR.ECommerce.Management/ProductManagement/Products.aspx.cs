@@ -62,6 +62,16 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             {
                 divAlert.InnerHtml = "<span style=\"color:Red\">Ürün özellikleri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
             }
+
+            if (GetProductRelated(itemId))
+            {
+                divAlert.InnerHtml = "<span style=\"color:Green\">Ürün ilişkili ürünleri başarıyla yüklendi.</span><br />" + divAlert.InnerHtml;
+                retValue = true;
+            }
+            else
+            {
+                divAlert.InnerHtml = "<span style=\"color:Red\">Ürün ilişkili ürünleriyüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
+            }
             return retValue;
         }
         private void GetList()
@@ -189,6 +199,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
             SaveDocuments(productId);
             SaveProductProperties(productId);
+            SaveProductRelated(productId);
             GetList();
         }
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -646,7 +657,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
             return retValue;
         }
-        
+
         #endregion
 
         #region Property
@@ -689,7 +700,17 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 divAlert.InnerHtml += "<span style=\"color:Red\">Dosya silinirken hata oluştu!</span><br />";
             }
         }
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
 
+            if (txtRProductCode.Text != "")
+            {
+                var itemProduct = ProductData.Get(ProductData.FindProductId(txtRProductCode.Text));
+
+                txtRProductName.Text = itemProduct.Title.ToString();
+                lblhRelatedProductId.Text = itemProduct.Id.ToString();
+            }
+        }
         private List<ProductProperty> GetProductPropertyList()
         {
             List<ProductProperty> productPropertyList;
@@ -934,6 +955,218 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         }
         #endregion
 
+        #region RelatedProduct
+
+        protected void btnAddRelatedProduct_Click(object sender, EventArgs e)
+        {
+            SaveProductRelatedToList();
+
+            txtPropertyValue.Text = string.Empty;
+            btnAddRelatedProduct.CommandArgument = "";
+            txtRProductCode.Text = "";
+            lblRelatedProductId.Text = "Yeni Kayıt";
+            txtRProductName.Text = "";
+        }
+        protected void lbtnRelatedProductDelete_Click(object sender, EventArgs e)
+        {
+            var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
+            if (DeleteProductRelated(itemId))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Green\">Dosya başarıyla silindi</span><br />";
+                GetItem(Convert.ToInt32(lblProductId.Text));
+            }
+            else
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya silinirken hata oluştu!</span><br />";
+            }
+        }
+
+        private List<Product> GetProductRelatedList()
+        {
+            List<Product> productRelatedList;
+            if (Session["PRODUCT_RELATED_LIST"] != null)
+            {
+                productRelatedList = (List<Product>)Session["PRODUCT_RELATED_LIST"];
+            }
+            else
+            {
+                productRelatedList = new List<Product>();
+                Session.Add("PRODUCT_RELATED_LIST", productRelatedList);
+            }
+            productRelatedList = (List<Product>)Session["PRODUCT_RELATED_LIST"];
+
+            return productRelatedList;
+        }
+
+        private bool GetProductRelated(int productId)
+        {
+            bool retValue = false;
+
+            try
+            {
+
+                var productRelatedList = RelatedProductData.Get(productId);
+
+                Session.Add("PRODUCT_RELATED_LIST", productRelatedList);
+                grvRelatedProduct.DataSource = productRelatedList;
+                grvRelatedProduct.DataBind();
+                retValue = true;
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "SaveProductProperty";
+                itemSystemLog.Content = "Ürün özelliği kaydedilirken hata oluştu. Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+                retValue = false;
+            }
+            return retValue;
+        }
+        private bool GetProductRelated()
+        {
+            bool retValue = false;
+            var productRelatedList = GetProductRelatedList();
+            grvRelatedProduct.DataSource = productRelatedList;
+            grvRelatedProduct.DataBind();
+            return retValue;
+        }
+
+        private bool SaveProductRelatedToList()
+        {
+            bool retValue = false;
+            try
+            {
+                var productRelatedList = GetProductRelatedList();
+                if (btnAddRelatedProduct.CommandArgument != "")
+                {
+
+                }
+                else
+                {
+                    try
+                    {
+                        var item = new Product();
+                        item.Id = Convert.ToInt32(lblhRelatedProductId.Text);
+                        item.Title = txtRProductName.Text;
+                        item.ProductCode = txtRProductCode.Text;
+                        productRelatedList.Add(item);
+                        divAlert.InnerHtml += "<span style=\"color:Green\">Yeni ilişkili ürün kaydı başarılı.</span><br />";
+                        retValue = true;
+                    }
+                    catch (Exception)
+                    {
+                        divAlert.InnerHtml += "<span style=\"color:Red\">Yeni ilişkili ürün hata oluştu.</span><br />";
+                        retValue = false;
+                    }
+                }
+                GetProductRelated();
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "SaveProductProperty";
+                itemSystemLog.Content = "Ürün özelliği kaydedilirken hata oluştu. Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            finally
+            {
+
+            }
+            return retValue;
+        }
+
+        private bool SaveProductRelated(int productId)
+        {
+            bool retValue = false;
+            try
+            {
+                var productRelatedList = GetProductRelatedList();
+
+                var productList = RelatedProductData.Get(productId);
+
+                foreach (Product itemProductRelated in productRelatedList)
+                {
+                    //yeni kayıt
+
+                    if (RelatedProductData.Insert(productId, itemProductRelated.Id) > 0)
+                    {
+                        divAlert.InnerHtml += "<span style=\"color:Green\">Yeni ilişkili ürün kaydı başarılı.</span><br />";
+                        retValue = true;
+                    }
+                    else
+                    {
+                        divAlert.InnerHtml += "<span style=\"color:Red\">Yeni ilişkili ürün kaydedilirken hata oluştu.</span><br />";
+                        retValue = false;
+                    }
+                }
+                GetProductProperties();
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "SaveProductProperties";
+                itemSystemLog.Content = productId.ToString() + " Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            finally
+            {
+
+            }
+            return retValue;
+        }
+        private bool InsertProductRelatedToList(Product itemRelateProduct)
+        {
+            bool retValue = false;
+            try
+            {
+                var productRelatedList = GetProductRelatedList();
+                productRelatedList = (List<Product>)Session["PRODUCT_RELATED_LIST"];
+                Product item = new Product();
+                item.Id = 0;//Yeni kayıt.
+                item.Title = itemRelateProduct.Title;
+                item.ProductCode = itemRelateProduct.ProductCode;
+
+                productRelatedList.Add(item);
+                retValue = true;
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "InsertProperty";
+                itemSystemLog.Content = "Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return retValue;
+        }
+        private bool DeleteProductRelated(int ProductRelatedId)
+        {
+            bool retValue = false;
+            try
+            {
+                if (lblProductId.Text != "")
+                {
+                    if (RelatedProductData.Delete(Convert.ToInt32(lblProductId.Text), ProductRelatedId) < 0)
+                    {
+                        retValue = true;
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete Document";
+                itemSystemLog.Content = "Id=" + ProductRelatedId.ToString() + " ile Doküman silinemedi. Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return retValue;
+        }
+        #endregion
+
         protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvList.PageIndex = e.NewPageIndex;
@@ -951,6 +1184,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             ddlParentProductCategories.Enabled = false;
             txtProductCode.Text = string.Empty;
             Session["PRODUCT_PROPERTY_LIST"] = null;
+            Session["PRODUCT_RELATED_LIST"] = null;
             txtProductName.Text = string.Empty;
             txtProductDescription.Text = string.Empty;
             txtMinStock.Text = string.Empty;
@@ -959,6 +1193,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             ddlProperties.SelectedIndex = -1;
             txtPropertyValue.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
+            grvRelatedProduct.DataSource = null;
+            grvRelatedProduct.DataBind();
             gvDocumentList.DataSource = null;
             gvDocumentList.DataBind();
             gvProductProperties.DataSource = null;
