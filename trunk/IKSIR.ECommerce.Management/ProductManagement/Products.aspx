@@ -45,6 +45,8 @@
                             </telerik:RadTab>
                             <telerik:RadTab Text="Video" PageViewID="RadPageView4">
                             </telerik:RadTab>
+                            <telerik:RadTab Text="İlişkili Ürünler" PageViewID="RadPageView5">
+                            </telerik:RadTab>
                         </Tabs>
                     </telerik:RadTabStrip>
                     <telerik:RadMultiPage ID="RadMultiPage1" runat="server">
@@ -427,6 +429,97 @@
                                     </td>
                                 </tr>
                             </table>
+                        </telerik:RadPageView>
+                        <telerik:RadPageView ID="RadPageView5" runat="server">
+                            <table>
+                                <tr>
+                                    <td colspan="4">
+                                        <strong>İlişkili Ürünler</strong> (Ürünlere ilişkili olacak başka ürünlerin girilmesi)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Id
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblRelatedProductId" Text="Yeni Kayıt"></asp:Label>
+                                        <asp:Label runat="server" Visible="false" ID="lblhRelatedProductId" Text=""></asp:Label>
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Ürün Kodu
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" Width="100%" ID="txtRProductCode"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:Button runat="server" ID="btnSearch" Text="Ürün Bul" OnClick="btnSearch_Click" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       Ürün Adı
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" Width="100%" Enabled="false" ID="txtRProductName"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                       <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator9" ControlToValidate="txtRProductName"
+                                            ValidationGroup="vgProductRelated" SetFocusOnError="true" ErrorMessage="Ürün Bulunuz" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center" colspan="4">
+                                        <asp:Label ID="Label2" runat="server" Visible="false"></asp:Label>
+                                        <asp:ValidationSummary runat="server" ID="ValidationSummary2" ValidationGroup="vgProductRelated"
+                                            ForeColor="Red" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center" colspan="4">
+                                        <asp:Button ID="btnAddRelatedProduct" runat="server" Text="Kaydet" ValidationGroup="vgProductRelated"
+                                            OnClick="btnAddRelatedProduct_Click" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <asp:GridView runat="server" ID="grvRelatedProduct" AutoGenerateColumns="False"
+                                CellPadding="4" GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%"
+                                Caption="İlişkili Ürünler" CaptionAlign="Left">
+                                <Columns>
+                                    <asp:TemplateField ShowHeader="False">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnRelatedProductDelete_Click"
+                                                CommandArgument='<%# Eval("Id")%>' OnClientClick="javascript:return confirm('Bu kaydı silmek istediğinize emin misiniz?');"
+                                                CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
+                                        SortExpression="Id" />
+                                    <asp:TemplateField HeaderText="Ürün Adı">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblRTitle" Text='<%# Eval("Title")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Ürün Kodu">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblRProductCode" Text='<%# Eval("ProductCode")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
                         </telerik:RadPageView>
                     </telerik:RadMultiPage>
                     <table>
