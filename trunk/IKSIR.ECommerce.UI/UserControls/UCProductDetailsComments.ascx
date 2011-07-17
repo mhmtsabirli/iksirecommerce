@@ -20,18 +20,33 @@
         </td>
     </tr>
     <tr>
-        <td>
-            Yorumunuz
+        <td valign="top">
+            Adınız
         </td>
-        <td>
+        <td valign="top">
             :
         </td>
-        <td>
-            <asp:TextBox runat="server" ID="txtComment" TextMode="MultiLine" Width="250px" Height="30px"></asp:TextBox>
+        <td valign="top">
+            <asp:TextBox runat="server" ID="txtUserName"></asp:TextBox>
         </td>
-        <td>
+        <td valign="top">
+            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ValidationGroup="vgCommentForm"
+                ControlToValidate="txtUserName" SetFocusOnError="true" ErrorMessage="Adınızı giriniz">*</asp:RequiredFieldValidator>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top">
+            Yorumunuz
+        </td>
+        <td valign="top">
+            :
+        </td>
+        <td valign="top">
+            <asp:TextBox runat="server" ID="txtComment" TextMode="MultiLine" Width="250px" Height="60px"></asp:TextBox>
+        </td>
+        <td valign="top">
             <asp:RequiredFieldValidator runat="server" ID="rfv1" ValidationGroup="vgCommentForm"
-                ControlToValidate="txtComment" SetFocusOnError="true">*</asp:RequiredFieldValidator>
+                ControlToValidate="txtComment" SetFocusOnError="true" ErrorMessage="Yorumunuzu giriniz">*</asp:RequiredFieldValidator>
         </td>
     </tr>
     <tr>

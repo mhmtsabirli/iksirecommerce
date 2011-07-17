@@ -17,11 +17,33 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             var returnValue = new IKSIR.ECommerce.Model.CommonModel.EnumValue();
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemEnumValue.Id));
+
             parameters.Add(new SqlParameter("@EnumId", itemEnumValue.EnumId));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetEnumValue", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EnumId = DBHelper.IntValue(dr["EnumId"].ToString());
+                returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
+                returnValue.EnumName = DBHelper.StringValue(dr["Name"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+            }
+
+            dr.Close();
+            return returnValue;
+        }
+
+        public static IKSIR.ECommerce.Model.CommonModel.EnumValue Get(int enumId)
+        {
+            var returnValue = new IKSIR.ECommerce.Model.CommonModel.EnumValue();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Id", enumId));
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetEnumValue", parameters);
+            while (dr.Read())
+            {
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.EnumId = DBHelper.IntValue(dr["EnumId"].ToString());
@@ -94,7 +116,6 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             while (dr.Read())
             {
                 var item = new IKSIR.ECommerce.Model.CommonModel.EnumValue();
-                //TODO => tayfun
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Value = DBHelper.StringValue(dr["Value"].ToString());
@@ -122,7 +143,6 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             while (dr.Read())
             {
                 var item = new EnumValue();
-                //TODO => tayfun
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Value = DBHelper.StringValue(dr["Value"].ToString());

@@ -58,13 +58,13 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::Telerik.Web.UI.RadPageView pvProductInfo;
         
         /// <summary>
-        /// UCProductDetailProductInfos1 control.
+        /// UCProductDetailsProductInfos1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IKSIR.ECommerce.UI.UserControls.UCProductDetailProductInfos UCProductDetailProductInfos1;
+        protected global::IKSIR.ECommerce.UI.UserControls.UCProductDetailsProductInfos UCProductDetailsProductInfos1;
         
         /// <summary>
         /// pvProductDocuments control.
@@ -94,13 +94,13 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::Telerik.Web.UI.RadPageView pvCreditCardAdvantages;
         
         /// <summary>
-        /// UCProductCreditCardAdvantages1 control.
+        /// UCProductDetailsCreditCardAdvantages1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IKSIR.ECommerce.UI.UserControls.UCProductCreditCardAdvantages UCProductCreditCardAdvantages1;
+        protected global::IKSIR.ECommerce.UI.UserControls.UCProductDetailsCreditCardAdvantages UCProductDetailsCreditCardAdvantages1;
         
         /// <summary>
         /// pvProductComments control.

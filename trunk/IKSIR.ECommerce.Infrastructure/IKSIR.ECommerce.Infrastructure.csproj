@@ -56,7 +56,6 @@
     <Compile Include="DataLayer\CommonDataLayer\DistrictData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\EnumData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\EnumValueData.cs" />
-    <Compile Include="DataLayer\CommonDataLayer\ItemCommentData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\MultimediasData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\PropertyData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\PropertyValueData.cs" />
