@@ -305,8 +305,5 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             txtDescription.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
         }
-
-      
-
     }
 }
