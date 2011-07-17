@@ -312,6 +312,7 @@ namespace IKSIR.ECommerce.UI.UserPanel
 
         private void ClearForm()
         {
+            lblError.Text = "";
             txtAddressTitle.Text = string.Empty;
             ddlAddressType.SelectedIndex = -1;
             txtFirstName.Text = string.Empty;

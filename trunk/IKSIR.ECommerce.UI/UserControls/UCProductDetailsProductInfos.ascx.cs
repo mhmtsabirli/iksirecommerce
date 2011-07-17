@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 
 namespace IKSIR.ECommerce.UI.UserControls
 {
@@ -13,14 +14,18 @@ namespace IKSIR.ECommerce.UI.UserControls
         {
             if (!Page.IsPostBack && productId != 0)
             {
-                GetProductInfos(productId);
+                GetProductInfos();
             }
         }
 
-        private void GetProductInfos(int productId)
+        private void GetProductInfos()
         {
             try
-            { }
+            {
+                var productPropertyList = ProductPropertyData.GetProductProperties(productId);
+                gvProductProperties.DataSource = productPropertyList;
+                gvProductProperties.DataBind();                
+            }
             catch (Exception exception)
             {
             }

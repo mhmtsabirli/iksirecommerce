@@ -13,13 +13,22 @@ namespace IKSIR.ECommerce.UI.Pages {
     public partial class ProductDetails {
         
         /// <summary>
-        /// ScriptManager1 control.
+        /// hplPreviousProduct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.WebControls.HyperLink hplPreviousProduct;
+        
+        /// <summary>
+        /// hplNextProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hplNextProduct;
         
         /// <summary>
         /// UCProductDetailsMain1 control.
@@ -119,6 +128,15 @@ namespace IKSIR.ECommerce.UI.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IKSIR.ECommerce.UI.UserControls.UCProductDetailsComments UCProductDetailsComments1;
+        
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
         /// pvSimilarProducts control.
