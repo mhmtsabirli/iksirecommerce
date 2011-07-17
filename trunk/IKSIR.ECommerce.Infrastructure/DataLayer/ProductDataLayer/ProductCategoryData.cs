@@ -284,6 +284,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 item.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
                 item.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
+                item.OnSale = Convert.ToBoolean(dr["OnSale"].ToString());
                 item.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
                 item.ProductPrice = ProductPriceData.GetByProduct(DBHelper.IntValue(dr["ProductId"].ToString()));
                 itemProductList.Add(item);

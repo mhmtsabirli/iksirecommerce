@@ -32,8 +32,10 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 returnValue.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 returnValue.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
                 returnValue.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
+                returnValue.OnSale = Convert.ToBoolean(dr["OnSale"].ToString());
                 returnValue.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
                 returnValue.ProductPrice = ProductPriceData.GetByProduct(DBHelper.IntValue(dr["Id"].ToString()));
+                returnValue.RelatedProduct = RelatedProductData.Get(DBHelper.IntValue(dr["Id"].ToString()));
             }
             dr.Close();
             return returnValue;
@@ -123,6 +125,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 item.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
                 item.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
+                item.OnSale = Convert.ToBoolean(dr["OnSale"].ToString());
                 item.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
                 item.ProductPrice = ProductPriceData.GetByProduct(DBHelper.IntValue(dr["Id"].ToString()));
                 itemProductList.Add(item);
@@ -156,6 +159,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 item.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
                 item.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
+                item.OnSale = Convert.ToBoolean(dr["OnSale"].ToString());
                 item.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
                 item.ProductPrice = ProductPriceData.GetByProduct(DBHelper.IntValue(dr["Id"].ToString()));
                 itemProductList.Add(item);
