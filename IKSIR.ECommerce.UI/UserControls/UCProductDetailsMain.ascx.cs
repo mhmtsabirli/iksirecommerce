@@ -32,9 +32,17 @@ namespace IKSIR.ECommerce.UI.UserControls
                 }
 
                 string otherImages = "";
+                int imageCount = 0;
                 foreach (var item in productMultimedias)
                 {
+                    imageCount += 1;
                     otherImages += "<a href=\"#\"><img src=\"http://212.58.8.103/documents/Images/Small/small_" + item.FilePath + "\" alt=\"\" /></a>";
+                    if (imageCount == 3)
+                        break;                    
+                }
+                if (product.Video != null && product.Video != "")
+                {
+                    otherImages += "<a href=\"#\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
                 }
                 divOtherImages.InnerHtml = otherImages;
                 lblProductCode.Text = product.ProductCode;

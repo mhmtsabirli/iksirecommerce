@@ -23,17 +23,18 @@
         <div class="sepet_content_top">
             <div class="top_left">
                 <a href="#">
-                    <asp:ScriptManager ID="ScriptManager1" runat="server">
-                    </asp:ScriptManager>
                     <img src="../images/sepet_content_top_home.jpg" alt="" />Anasayfa</a> <a href="#">Ürünler</a>
                 <a href="#">Seramik Sağlık Gereçleri</a> <a href="#">Vega</a>
                 <div class="clear">
                 </div>
             </div>
             <div class="top_right">
-                <a href="#">
-                    <img src="../images/sepet_content_top_onceki.jpg" alt="" /></a> <a href="#">
-                        <img src="../images/sepet_content_top_sonraki.jpg" alt="" /></a>
+                <asp:HyperLink runat="server" ID="hplPreviousProduct">
+                    <img src="../images/sepet_content_top_onceki.jpg" style="border:none" alt="Önceki Ürün" />
+                </asp:HyperLink>
+                <asp:HyperLink runat="server" ID="hplNextProduct">
+                    <img src="../images/sepet_content_top_sonraki.jpg" style="border:none" alt="Sonraki Ürün" />
+                </asp:HyperLink>
             </div>
             <div class="clear">
             </div>
@@ -65,20 +66,22 @@
                     <telerik:RadPageView ID="pvProductInfo" runat="server" Selected="true">
                         <uc1:UCProductDetailsProductInfos ID="UCProductDetailsProductInfos1" runat="server" />
                     </telerik:RadPageView>
-                    <telerik:RadPageView ID="pvProductDocuments" runat="server" Selected="true">
+                    <telerik:RadPageView ID="pvProductDocuments" runat="server">
                         <uc4:UCProductDetailDocuments ID="UCProductDetailDocuments1" runat="server" />
                     </telerik:RadPageView>
-                    <telerik:RadPageView ID="pvCreditCardAdvantages" runat="server" Selected="true">
+                    <telerik:RadPageView ID="pvCreditCardAdvantages" runat="server">
                         <uc3:UCProductDetailsCreditCardAdvantages ID="UCProductDetailsCreditCardAdvantages1"
                             runat="server" />
                     </telerik:RadPageView>
-                    <telerik:RadPageView ID="pvProductComments" runat="server" Selected="true">
+                    <telerik:RadPageView ID="pvProductComments" runat="server">
                         <uc2:UCProductDetailsComments ID="UCProductDetailsComments1" runat="server" />
+                        <br />
+                        <asp:Button runat="server" ID="btnSave" Text="Save" OnClick="btnSave_Click" />
                     </telerik:RadPageView>
-                    <telerik:RadPageView ID="pvSimilarProducts" runat="server" Selected="true">
+                    <telerik:RadPageView ID="pvSimilarProducts" runat="server">
                         <uc6:UCProductDetailsSimilarProducts ID="UCProductDetailsSimilarProducts1" runat="server" />
                     </telerik:RadPageView>
-                    <telerik:RadPageView ID="pvRelatedProducts" runat="server" Selected="true">
+                    <telerik:RadPageView ID="pvRelatedProducts" runat="server">
                         <uc5:UCProductDetailsRelatedProducts ID="UCProductDetailsRelatedProducts1" runat="server" />
                     </telerik:RadPageView>
                 </telerik:RadMultiPage>

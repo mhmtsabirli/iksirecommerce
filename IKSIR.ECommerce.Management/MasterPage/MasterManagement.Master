@@ -17,7 +17,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    &nbsp;<div id="container">
+    <div id="container">
         <div id="container-inner">
             <div id="header">
                 <h1>
@@ -56,14 +56,13 @@
                                     <li><a href="../ProductManagement/ModuleProducts.aspx">Modüle Ürün Atama</a></li>
                                     <li><a href="../ProductManagement/ProductPrices.aspx">Ürün - Fiyat Güncelleme</a></li>
                                     <li><a href="../Common/Shipment.aspx">KargoFirması Tanımlama</a></li>
-                                   
                                 </ul>
                             </li>
-                             <li><a href="">
+                            <li><a href="">
                                 <img src="../Images/Reports.png" />&nbsp;Site</a>
                                 <ul>
                                     <li><a href="../Common/Sites.aspx">Site Tanımlama</a></li>
-                                     <li><a href="../Common/ContactForm.aspx">İletişim Formu</a></li>
+                                    <li><a href="../Common/ContactForm.aspx">İletişim Formu</a></li>
                                     <li><a href="../Common/StaticPages.aspx">Statik Sayfalar</a></li>
                                     <li><a href="../Common/NewsFromUs.aspx">Bizden Haberler</a></li>
                                 </ul>
@@ -79,12 +78,10 @@
                             <li><a href="">
                                 <img src="../Images/Settings.png" />&nbsp;Ayarlar</a>
                                 <ul>
-
                                     <li><a href="../Common/Enums.aspx">Sabitler</a></li>
                                     <li><a href="../Common/EnumValues.aspx">Sabit Değerleri</a></li>
                                     <li><a href="../Admin/Admin.aspx">Yöneticiler</a></li>
                                     <li><a href="../Admin/Right.aspx">Yönetici Hakları</a></li>
-                                   
                                 </ul>
                             </li>
                         </ul>

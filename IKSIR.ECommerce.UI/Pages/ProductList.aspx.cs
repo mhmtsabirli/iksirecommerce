@@ -71,7 +71,7 @@ namespace IKSIR.ECommerce.UI.Pages
 
         private void GetProductsForCategory(int categoryId)
         {
-            List<Product> list = ModuleProductData.GetModuleProductList(categoryId);
+            List<Product> list = ProductCategoryData.GetProductCategoryList(categoryId);
             BindGrid(list);
         }
 

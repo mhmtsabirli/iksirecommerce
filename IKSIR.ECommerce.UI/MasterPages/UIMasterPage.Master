@@ -1,6 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="UIMasterPage.master.cs"
     Inherits="IKSIR.ECommerce.UI.MasterPages.UIMasterPage" %>
-
+<%@ Register Assembly="RadAjax.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
 <%@ Register Src="../UserControls/UCMainCategories.ascx" TagName="UCMainCategories"
     TagPrefix="uc1" %>
 <%@ Register Src="../UserControls/UCNewsFromUs.ascx" TagName="UCNewsFromUs" TagPrefix="uc5" %>
@@ -25,6 +25,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
     <uc6:Header ID="Header1" runat="server"></uc6:Header>
     <div class="clear">
     </div>
