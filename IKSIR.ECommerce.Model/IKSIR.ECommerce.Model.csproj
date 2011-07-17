@@ -59,6 +59,7 @@
     <Compile Include="CommonModel\PropertyValue.cs" />
     <Compile Include="CommonModel\SystemLog.cs" />
     <Compile Include="MembershipModel\User.cs" />
+    <Compile Include="ProductModel\RelatedProducts.cs" />
     <Compile Include="ProductModel\Shipment.cs" />
     <Compile Include="ProductModel\ProductShipmentPrice.cs" />
     <Compile Include="ProductModel\ProductPrice.cs" />
