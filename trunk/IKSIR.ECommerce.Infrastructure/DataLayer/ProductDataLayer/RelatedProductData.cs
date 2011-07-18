@@ -16,7 +16,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
 {
     public class RelatedProductData
     {
-        public static List<Product> Get(int ProductId)
+        public static List<Product> GetRelatedProductList(int ProductId)
         {
             var itemList = new List<Product>();
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -38,9 +38,14 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 returnValue.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 returnValue.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
                 returnValue.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
-                returnValue.OnSale = Convert.ToBoolean(dr["OnSale"].ToString());
+                returnValue.ProductStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["ProductStatus"].ToString()) });
+                returnValue.Guarantee = DBHelper.IntValue(dr["Guarantee"].ToString());
+                returnValue.Stok = DBHelper.IntValue(dr["Stok"].ToString());
+                returnValue.MaxQuantity = DBHelper.IntValue(dr["MaxQuantity"].ToString());
+                returnValue.StokStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["StokStatus"].ToString()) });
                 returnValue.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
                 returnValue.ProductPrice = ProductPriceData.GetByProduct(DBHelper.IntValue(dr["Id"].ToString()));
+                returnValue.Multimedias = MultimediasData.GetItemMultimedias(3, DBHelper.IntValue(dr["Id"].ToString()));
                 itemList.Add(returnValue);
             }
             dr.Close();
