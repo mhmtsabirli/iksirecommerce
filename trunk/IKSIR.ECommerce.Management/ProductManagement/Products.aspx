@@ -184,6 +184,71 @@
                                             ForeColor="Red">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
+                                  <tr>
+                                    <td>
+                                        Mevcut Stok
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" ID="txtStok"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator11" ControlToValidate="txtStok"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Mevcut Stok alanı zorunlu"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                  <tr>
+                                    <td>
+                                        Maksimum Satış Adedi
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" ID="txtMaxQuantity"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator12" ControlToValidate="txtMinStock"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Maksimum satış adati alanı zorunlu"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                        Garanti Süresi (Yıl)
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" ID="txtguarantee"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator10" ControlToValidate="txtguarantee"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Garanti alanı zorunlu"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Stok Durumu
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList runat="server" ID="ddlStokStatus">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator13" ControlToValidate="ddlStokStatus"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Stok Durumu seçmelisiniz"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         Alert Date
@@ -199,6 +264,23 @@
                                     <td>
                                         <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtMinStock"
                                             ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Alert Date alanı zorunlu"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                  <tr>
+                                    <td>
+                                        Ürün Durumu
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList runat="server" ID="ddlProductStatus">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator14" ControlToValidate="ddlProductStatus"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Ürün Durumu seçmelisiniz"
                                             ForeColor="Red">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
@@ -303,8 +385,8 @@
                                             <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnDocumentDelete_Click"
                                                 CommandArgument='<%# Eval("Id")%>' OnClientClick="javascript:return confirm('Bu kaydı silmek istediğinize emin misiniz?');"
                                                 CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
-                                            <asp:LinkButton ID="lbtnUsed" runat="server" OnClick="lbtnDocumentUsed_Click"
-                                                CommandArgument='<%# Eval("Id")%>' OnClientClick="javascript:return confirm('Bu kaydı varsayılan yapmak istediğinize emin misiniz?');"
+                                            <asp:LinkButton ID="lbtnUsed" runat="server" OnClick="lbtnDocumentUsed_Click" CommandArgument='<%# Eval("Id")%>'
+                                                OnClientClick="javascript:return confirm('Bu kaydı varsayılan yapmak istediğinize emin misiniz?');"
                                                 CausesValidation="false" ForeColor="Blue">[Varsayılan]</asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -312,6 +394,8 @@
                                         SortExpression="Id" />
                                     <asp:BoundField DataField="FilePath" HeaderText="Adı" ApplyFormatInEditMode="false"
                                         ReadOnly="true" SortExpression="Name" />
+                                    <asp:BoundField DataField="IsDefault" HeaderText="Varsayılan" ApplyFormatInEditMode="false"
+                                        ReadOnly="true" SortExpression="IsDefault" />
                                 </Columns>
                             </asp:GridView>
                         </telerik:RadPageView>
@@ -468,7 +552,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                       Ürün Adı
+                                        Ürün Adı
                                     </td>
                                     <td>
                                         :
@@ -477,8 +561,9 @@
                                         <asp:TextBox runat="server" Width="100%" Enabled="false" ID="txtRProductName"></asp:TextBox>
                                     </td>
                                     <td>
-                                       <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator9" ControlToValidate="txtRProductName"
-                                            ValidationGroup="vgProductRelated" SetFocusOnError="true" ErrorMessage="Ürün Bulunuz" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator9" ControlToValidate="txtRProductName"
+                                            ValidationGroup="vgProductRelated" SetFocusOnError="true" ErrorMessage="Ürün Bulunuz"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
@@ -495,9 +580,9 @@
                                     </td>
                                 </tr>
                             </table>
-                            <asp:GridView runat="server" ID="grvRelatedProduct" AutoGenerateColumns="False"
-                                CellPadding="4" GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%"
-                                Caption="İlişkili Ürünler" CaptionAlign="Left">
+                            <asp:GridView runat="server" ID="grvRelatedProduct" AutoGenerateColumns="False" CellPadding="4"
+                                GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" Caption="İlişkili Ürünler"
+                                CaptionAlign="Left">
                                 <Columns>
                                     <asp:TemplateField ShowHeader="False">
                                         <ItemTemplate>
@@ -616,8 +701,13 @@
                                             ReadOnly="true" SortExpression="ProductCode" />
                                         <asp:BoundField DataField="Title" HeaderText="Başlık" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Title" />
-                                        <asp:BoundField DataField="MinStock" HeaderText="Stok" ApplyFormatInEditMode="false"
-                                            ReadOnly="true" SortExpression="MinStock" />
+                                        <asp:BoundField DataField="Stok" HeaderText="Stok" ApplyFormatInEditMode="false"
+                                            ReadOnly="true" SortExpression="Stok" />
+                                               <asp:TemplateField HeaderText="Stok Durumu">
+                                            <ItemTemplate>
+                                                <asp:Label runat="server" ID="lblProductStatus" Text='<%# Eval("ProductStatus.Value")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Value" Visible="false">
                                             <ItemTemplate>
                                             </ItemTemplate>

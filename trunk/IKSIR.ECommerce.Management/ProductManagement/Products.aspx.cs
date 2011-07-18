@@ -146,7 +146,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             List<Property> ProductPropertyList = PropertyData.GetList();
             Utility.BindDropDownList(ddlProperties, ProductPropertyList, "Title", "Id");
 
+            List<EnumValue> itemStokStatus = EnumValueData.GetEnumValues(12);
+            Utility.BindDropDownList(ddlStokStatus, itemStokStatus, "Value", "Id");
 
+            List<EnumValue> itemProductStatus = EnumValueData.GetEnumValues(13);//ürün durumu
+            Utility.BindDropDownList(ddlProductStatus, itemProductStatus, "Value", "Id");
         }
         protected void ddlSites_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -256,12 +260,24 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 ddlParentProductCategories.SelectedValue = item.ProductCategory.ParentCategory.Id.ToString();
                 List<ProductCategory> itemCategory = ProductCategoryData.GetProductCategoryById(Convert.ToInt32(ddlParentProductCategories.SelectedValue));
                 Utility.BindDropDownList(ddlProductCategories, itemCategory, "Title", "Id");
+
                 ddlProductCategories.SelectedValue = item.ProductCategory.Id.ToString();
                 txtProductCode.Text = item.ProductCode;
                 txtProductName.Text = item.Title;
                 txtVideo.Text = item.Video.ToString();
+                List<EnumValue> itemStokStatus = EnumValueData.GetEnumValues(12);//stok durumu
+                Utility.BindDropDownList(ddlStokStatus, itemStokStatus, "Value", "Id");
+                
+                List<EnumValue> itemProductStatus = EnumValueData.GetEnumValues(13);//ürün durumu
+                Utility.BindDropDownList(ddlProductStatus, itemProductStatus, "Value", "Id");
+
+                ddlProductStatus.SelectedValue = item.ProductStatus.Id.ToString();
+                txtStok.Text = item.Stok.ToString();
+                txtMaxQuantity.Text = item.MaxQuantity.ToString();
+                ddlStokStatus.SelectedValue = item.StokStatus.Id.ToString();
                 txtProductDescription.Text = item.Description;
                 txtMinStock.Text = item.MinStock.ToString();
+                txtguarantee.Text = item.Guarantee.ToString();
                 txtAlertDate.SelectedDate = Convert.ToDateTime(item.AlertDate.ToShortDateString());
                 retValue = true;
             }
@@ -353,6 +369,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 itemProduct.ProductCategory = new ProductCategory() { Id = DBHelper.IntValue(ddlProductCategories.SelectedValue) };
                 itemProduct.ProductCode = txtProductCode.Text;
                 itemProduct.Video = txtVideo.Text;
+                itemProduct.Stok = Convert.ToInt32(txtStok.Text);
+                itemProduct.MaxQuantity = Convert.ToInt32(txtMaxQuantity.Text);
+                itemProduct.StokStatus = new EnumValue() { Id = Convert.ToInt32(ddlStokStatus.SelectedValue) };
+                itemProduct.ProductStatus = new EnumValue() { Id = Convert.ToInt32(ddlProductStatus.SelectedValue) };
+                itemProduct.Guarantee = Convert.ToInt32(txtguarantee.Text);
                 itemProduct.Title = txtProductName.Text;
                 int result = ProductData.Insert(itemProduct);
                 if (result > 0)
@@ -391,6 +412,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 itemProduct.ProductCode = txtProductCode.Text;
                 itemProduct.Video = txtVideo.Text;
                 itemProduct.Title = txtProductName.Text;
+
+                itemProduct.Stok = Convert.ToInt32(txtStok.Text);
+                itemProduct.MaxQuantity = Convert.ToInt32(txtMaxQuantity.Text);
+                itemProduct.StokStatus = new EnumValue() { Id = Convert.ToInt32(ddlStokStatus.SelectedValue) };
+                itemProduct.ProductStatus = new EnumValue() { Id = Convert.ToInt32(ddlProductStatus.SelectedValue) };
+                
+                itemProduct.Guarantee = Convert.ToInt32(txtguarantee.Text);
                 int result = ProductData.Update(itemProduct);
                 if (result != 1)
                     retValue = true;
@@ -461,6 +489,20 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 var productDocumentList = MultimediasData.GetItemMultimedias(3, productId); //3 Product EnumValueId ayhant
                 gvDocumentList.DataSource = productDocumentList;
                 gvDocumentList.DataBind();
+                foreach (GridViewRow r in gvDocumentList.Rows)
+                {
+                    if (r.Cells[3].Text == "True")
+                    {
+                        r.Cells[3].Text = "Evet";
+                        r.FindControl("lbtnUsed").Visible = false;
+                    }
+                    else
+                    {
+                        r.Cells[3].Text = "Hayır";
+                    }
+
+                }
+
                 retValue = true;
             }
             catch (Exception exception)
@@ -489,10 +531,10 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     string fileExtension = item.Title;
                     if (fileExtension == ".png" || fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".gif")
                     {
-                        divDocuments.InnerHtml += "Orjinal Boyut: <a taget=\"_blank\" href=\"../ProductDocuments/Orginal/Images/" + item.FilePath + "\">Orjinal Boyutlardaki resmi görmek için tıklayınız.</a><br />";
-                        divDocuments.InnerHtml += "Büyük: <a taget=\"_blank\" href=\"../ProductDocuments/Images/Big/big_" + item.FilePath + "\">Büyük boyutlardaki resmi görmek için tıklayınız.</a><br />";
-                        divDocuments.InnerHtml += "Küçük: <a taget=\"_blank\" href=\"../ProductDocuments/Images/Small/small_" + item.FilePath + "\">Küçük Boyutlardaki resmi görmek için tıklayınız.</a><br />";
-                        divDocuments.InnerHtml += "İkon: <a taget=\"_blank\" href=\"../ProductDocuments/Images/Icon/icon_" + item.FilePath + "\">İkon Boyutlarında resmi görmek için tıklayınız.</a><br />";
+                        divDocuments.InnerHtml += "Orjinal Boyut: <a target=\"_blank\" href=\"../ProductDocuments/Orginal/Images/" + item.FilePath + "\">Orjinal Boyutlardaki resmi görmek için tıklayınız.</a><br />";
+                        divDocuments.InnerHtml += "Büyük: <a target=\"_blank\" href=\"../ProductDocuments/Images/Big/big_" + item.FilePath + "\">Büyük boyutlardaki resmi görmek için tıklayınız.</a><br />";
+                        divDocuments.InnerHtml += "Küçük: <a target=\"_blank\" href=\"../ProductDocuments/Images/Small/small_" + item.FilePath + "\">Küçük Boyutlardaki resmi görmek için tıklayınız.</a><br />";
+                        divDocuments.InnerHtml += "İkon: <a target=\"_blank\" href=\"../ProductDocuments/Images/Icon/icon_" + item.FilePath + "\">İkon Boyutlarında resmi görmek için tıklayınız.</a><br />";
                     }
                     else
                     {
@@ -516,6 +558,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             bool retValue = true;
             bool isOK = false;
+            int i = 0;
+            bool isDefault = false;
             foreach (Telerik.Web.UI.UploadedFile uploadedFile in ruProductDocuments.UploadedFiles)
             {
                 string fileName = DateTime.Now.ToString().Replace(".", "").Replace(":", "").Replace("/", "").Replace("-", "").Replace(" ", "");
@@ -553,7 +597,12 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 {
                     uploadedFile.SaveAs(targetFolderOther, isOK);
                 }
-                if (InsertDocument(productId, fileName + fileExtension, fileExtension))
+                if (i < 1)
+                    isDefault = true;
+                else
+                    isDefault = false;
+
+                if (InsertDocument(productId, fileName + fileExtension, fileExtension, isDefault))
                 {
                     divAlert.InnerHtml += "<span style=\"color:Green\">Dosya veritabanına başarıyla kaydedildi. Dosya Adı: <i>" + uploadedFile.FileName + "</i></span><br />";
                 }
@@ -561,11 +610,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 {
                     divAlert.InnerHtml += "<span style=\"color:Red\">Dosya veritabanına kaydedilerken hata oluştu! Dosya Adı: <i>" + uploadedFile.FileName + "</i></span><br />";
                 }
+
+
             }
             return retValue;
         }
 
-        private bool InsertDocument(int productId, string fileName, string fileExtension)
+        private bool InsertDocument(int productId, string fileName, string fileExtension, bool isDefault)
         {
             bool retValue = false;
             try
@@ -575,6 +626,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 item.FilePath = fileName;
                 item.Title = fileExtension;
                 item.ProductId = productId;
+                item.IsDefault = isDefault;
                 if (MultimediasData.Insert(item) > 0)
                 {
                     retValue = true;
@@ -1005,7 +1057,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             try
             {
 
-                var productRelatedList = RelatedProductData.Get(productId);
+                var productRelatedList = RelatedProductData.GetRelatedProductList(productId);
 
                 Session.Add("PRODUCT_RELATED_LIST", productRelatedList);
                 grvRelatedProduct.DataSource = productRelatedList;
@@ -1084,7 +1136,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             {
                 var productRelatedList = GetProductRelatedList();
 
-                var productList = RelatedProductData.Get(productId);
+                var productList = RelatedProductData.GetRelatedProductList(productId);
 
                 foreach (Product itemProductRelated in productRelatedList)
                 {
@@ -1181,6 +1233,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             ddlParentProductCategories.Items.Clear();
             ddlProductCategories.Items.Clear();
             ddlProductCategories.Enabled = false;
+            ddlStokStatus.Items.Clear();
+            ddlProductStatus.Items.Clear();
             ddlParentProductCategories.Enabled = false;
             txtProductCode.Text = string.Empty;
             Session["PRODUCT_PROPERTY_LIST"] = null;
@@ -1189,9 +1243,12 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             txtProductDescription.Text = string.Empty;
             txtMinStock.Text = string.Empty;
             txtVideo.Text = string.Empty;
+            txtguarantee.Text = string.Empty;
             txtAlertDate.DbSelectedDate = string.Empty;
             ddlProperties.SelectedIndex = -1;
             txtPropertyValue.Text = string.Empty;
+            txtStok.Text = string.Empty;
+            txtMaxQuantity.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
             grvRelatedProduct.DataSource = null;
             grvRelatedProduct.DataBind();
