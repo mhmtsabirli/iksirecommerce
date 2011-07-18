@@ -44,6 +44,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             parameters.Add(new SqlParameter("@ProductId", DBHelper.IntValue(itemMultimedia.ProductId)));
             parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemMultimedia.Title)));
             parameters.Add(new SqlParameter("@FilePath", DBHelper.StringValue(itemMultimedia.FilePath)));
+            parameters.Add(new SqlParameter("@IsDefault", Convert.ToBoolean(itemMultimedia.IsDefault)));
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemMultimedia.CreateAdminId)));
             parameters[0].Direction = ParameterDirection.Output;
 

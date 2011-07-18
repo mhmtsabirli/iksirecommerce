@@ -5,7 +5,9 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
+using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.ProductModel;
+using IKSIR.ECommerce.Model.CommonModel;
 
 namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
 {
@@ -32,10 +34,15 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 returnValue.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 returnValue.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
                 returnValue.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
-                returnValue.OnSale = Convert.ToBoolean(dr["OnSale"].ToString());
+                returnValue.ProductStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["ProductStatus"].ToString()) });
+                returnValue.Guarantee = DBHelper.IntValue(dr["Guarantee"].ToString());
+                returnValue.Stok = DBHelper.IntValue(dr["Stok"].ToString());
+                returnValue.MaxQuantity = DBHelper.IntValue(dr["MaxQuantity"].ToString());
+                returnValue.StokStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["StokStatus"].ToString()) });
                 returnValue.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
                 returnValue.ProductPrice = ProductPriceData.GetByProduct(DBHelper.IntValue(dr["Id"].ToString()));
-                returnValue.RelatedProduct = RelatedProductData.Get(DBHelper.IntValue(dr["Id"].ToString()));
+                returnValue.Multimedias = MultimediasData.GetItemMultimedias(3, DBHelper.IntValue(dr["Id"].ToString()));
+               // returnValue.RelatedProduct = RelatedProductData.Get(DBHelper.IntValue(dr["Id"].ToString()));
             }
             dr.Close();
             return returnValue;
@@ -53,6 +60,9 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
         public static int Insert(Product itemProduct)
         {
             var returnValue = 0;
+  
+
+
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemProduct.Id)));
             parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemProduct.Title)));
@@ -62,9 +72,14 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@Video", DBHelper.StringValue(itemProduct.Video)));
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemProduct.CreateAdminId)));
             parameters.Add(new SqlParameter("@AlertDate", DBHelper.DateValue(itemProduct.AlertDate)));
+            parameters.Add(new SqlParameter("@Guarantee", DBHelper.IntValue(itemProduct.Guarantee)));
+            parameters.Add(new SqlParameter("@Stok", DBHelper.IntValue(itemProduct.Stok)));
+            parameters.Add(new SqlParameter("@MaxQuantity", DBHelper.IntValue(itemProduct.MaxQuantity)));
+            parameters.Add(new SqlParameter("@StokStatus", DBHelper.IntValue(itemProduct.StokStatus.Id)));
+            parameters.Add(new SqlParameter("@ProductStatus", DBHelper.IntValue(itemProduct.ProductStatus.Id)));
             parameters.Add(new SqlParameter("@ProductCategoryId", DBHelper.IntValue(itemProduct.ProductCategory.Id)));
             parameters[0].Direction = ParameterDirection.Output;
-
+        
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertProduct", parameters));
             //returnValue = Convert.ToInt32(parameters[0].Value);
             return returnValue;
@@ -84,6 +99,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@AlertDate", DBHelper.DateValue(itemProduct.AlertDate)));
             parameters.Add(new SqlParameter("@ProductCategoryId", DBHelper.IntValue(itemProduct.ProductCategory.Id)));
             parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemProduct.EditAdminId)));
+            parameters.Add(new SqlParameter("@Guarantee", DBHelper.IntValue(itemProduct.Guarantee)));
+            parameters.Add(new SqlParameter("@Stok", DBHelper.IntValue(itemProduct.Stok)));
+            parameters.Add(new SqlParameter("@MaxQuantity", DBHelper.IntValue(itemProduct.MaxQuantity)));
+            parameters.Add(new SqlParameter("@StokStatus", DBHelper.IntValue(itemProduct.StokStatus.Id)));
+            parameters.Add(new SqlParameter("@ProductStatus", DBHelper.IntValue(itemProduct.ProductStatus.Id)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
 
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateProduct", parameters);
@@ -125,9 +145,14 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 item.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
                 item.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
-                item.OnSale = Convert.ToBoolean(dr["OnSale"].ToString());
+                item.ProductStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["ProductStatus"].ToString()) });
+                item.Guarantee = DBHelper.IntValue(dr["Guarantee"].ToString());
+                item.Stok = DBHelper.IntValue(dr["Stok"].ToString());
+                item.MaxQuantity = DBHelper.IntValue(dr["MaxQuantity"].ToString());
+                item.StokStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["StokStatus"].ToString()) });
                 item.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
                 item.ProductPrice = ProductPriceData.GetByProduct(DBHelper.IntValue(dr["Id"].ToString()));
+                item.Multimedias = MultimediasData.GetItemMultimedias(3, DBHelper.IntValue(dr["Id"].ToString()));
                 itemProductList.Add(item);
             }
 
@@ -159,9 +184,14 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 item.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
                 item.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
-                item.OnSale = Convert.ToBoolean(dr["OnSale"].ToString());
+                item.ProductStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["ProductStatus"].ToString()) });
+                item.Guarantee = DBHelper.IntValue(dr["Guarantee"].ToString());
+                item.Stok = DBHelper.IntValue(dr["Stok"].ToString());
+                item.MaxQuantity = DBHelper.IntValue(dr["MaxQuantity"].ToString());
+                item.StokStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["StokStatus"].ToString()) });
                 item.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
                 item.ProductPrice = ProductPriceData.GetByProduct(DBHelper.IntValue(dr["Id"].ToString()));
+                item.Multimedias = MultimediasData.GetItemMultimedias(3, DBHelper.IntValue(dr["Id"].ToString()));
                 itemProductList.Add(item);
             }
 
