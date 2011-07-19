@@ -3,6 +3,7 @@
      %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
@@ -63,7 +64,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtCategoryName" Width="100%"></asp:TextBox>
+                                <asp:TextBox runat="server" MaxLength="250" ID="txtCategoryName" Width="100%"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtCategoryName"
@@ -79,9 +80,10 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtDescription"  Width="100%" TextMode="MultiLine"></asp:TextBox>
+                                <asp:TextBox runat="server" MaxLength="500" ID="txtDescription" onkeyUp="checkTextAreaMaxLength(this,event,'500','Llbldescription');"  Width="100%" TextMode="MultiLine"></asp:TextBox>
                             </td>
                             <td>
+                             <div id="Llbldescription">500</div>
                             </td>
                         </tr>
                         <tr>
