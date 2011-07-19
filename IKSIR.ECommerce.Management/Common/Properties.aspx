@@ -3,6 +3,8 @@
      %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+       
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
@@ -50,7 +52,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtPropertyName"></asp:TextBox>
+                                <asp:TextBox runat="server"  MaxLength="250" ID="txtPropertyName"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="txtPropertyName"
@@ -66,12 +68,13 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtDescription" CssClass="descriptionTextBox"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtDescription" MaxLength='250'  onkeyUp="checkTextAreaMaxLength(this,event,'250','Llbldescription');"  CssClass="descriptionTextBox"></asp:TextBox>
                             </td>
                             <td>
                                   <asp:RequiredFieldValidator runat="server" ID="rfv2" ControlToValidate="txtDescription"
                                     ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Özellik açıklaması girmelisiniz."
                                     ForeColor="Red">*</asp:RequiredFieldValidator>
+                                     <div id="Llbldescription">250</div>
                             </td>
                         </tr>
                         <tr>
