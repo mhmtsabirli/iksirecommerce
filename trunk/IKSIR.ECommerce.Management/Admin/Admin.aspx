@@ -48,7 +48,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
+                                <asp:TextBox runat="server" MaxLength="250"  Width="100%" ID="txtName"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtName"
@@ -64,7 +64,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtUserName"></asp:TextBox>
+                                <asp:TextBox runat="server"  MaxLength="250"  Width="100%"  ID="txtUserName"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtUserName"
@@ -80,7 +80,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtEmail"></asp:TextBox>
+                                <asp:TextBox runat="server"  MaxLength="250"  Width="100%"  ID="txtEmail"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtEmail"
@@ -96,7 +96,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtPassword" TextMode="Password"></asp:TextBox>
+                                <asp:TextBox runat="server"  MaxLength="50"  Width="100%"  ID="txtPassword" TextMode="Password"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtPassword"
@@ -129,7 +129,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtTryCount"></asp:TextBox>
+                                <asp:TextBox runat="server" Width="50px" ID="txtTryCount"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtPassword"
