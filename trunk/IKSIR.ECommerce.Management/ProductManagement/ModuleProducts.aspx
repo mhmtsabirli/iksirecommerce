@@ -83,7 +83,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtProdCode"></asp:TextBox>
+                                <asp:TextBox runat="server" MaxLength="100" Width="100%" ID="txtProdCode"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtProdCode"
