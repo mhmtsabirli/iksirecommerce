@@ -114,9 +114,10 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtSolution" TextMode="MultiLine"></asp:TextBox>
+                                <asp:TextBox runat="server" Width="100%" MaxLength='500'  onkeyUp="checkTextAreaMaxLength(this,event,'500','Llbldescription');"   ID="txtSolution" TextMode="MultiLine"></asp:TextBox>
                             </td>
                             <td>
+                              <div id="Llbldescription">500</div>
                             </td>
                         </tr>
                         <tr>

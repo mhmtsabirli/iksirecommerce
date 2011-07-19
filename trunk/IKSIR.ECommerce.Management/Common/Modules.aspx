@@ -50,7 +50,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtModuleName"></asp:TextBox>
+                                <asp:TextBox runat="server"  Width="100%" MaxLength="100" ID="txtModuleName"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="txtModuleName"
@@ -103,7 +103,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtFilterModuleName"></asp:TextBox>
+                                <asp:TextBox runat="server"  ID="txtFilterModuleName"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:Button ID="btnFilter" runat="server" OnClick="btnFilter_Click" Text="Filtrele" />

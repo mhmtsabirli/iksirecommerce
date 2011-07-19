@@ -65,7 +65,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtEnumValueName"></asp:TextBox>
+                                <asp:TextBox runat="server" Width="100%" MaxLength="100" ID="txtEnumValueName"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtEnumValueName"
