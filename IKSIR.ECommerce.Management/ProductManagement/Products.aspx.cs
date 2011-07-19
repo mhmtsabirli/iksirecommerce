@@ -72,6 +72,15 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             {
                 divAlert.InnerHtml = "<span style=\"color:Red\">Ürün ilişkili ürünleriyüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
             }
+            if (GetProductSimilar(itemId))
+            {
+                divAlert.InnerHtml = "<span style=\"color:Green\">Ürün Benzer ürünleri başarıyla yüklendi.</span><br />" + divAlert.InnerHtml;
+                retValue = true;
+            }
+            else
+            {
+                divAlert.InnerHtml = "<span style=\"color:Red\">Ürün Benzer ürünleriyüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
+            }
             return retValue;
         }
         private void GetList()
@@ -188,6 +197,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             lblPropertyId.Text = "Yeni Kayıt";
             pnlForm.Visible = true;
             ddlProductCategories.Focus();
+            List<EnumValue> itemStokStatus = EnumValueData.GetEnumValues(12);
+            Utility.BindDropDownList(ddlStokStatus, itemStokStatus, "Value", "Id");
+
+            List<EnumValue> itemProductStatus = EnumValueData.GetEnumValues(13);//ürün durumu
+            Utility.BindDropDownList(ddlProductStatus, itemProductStatus, "Value", "Id");
         }
         protected void btnSave_Click(object sender, EventArgs e)
         {
@@ -204,6 +218,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             SaveDocuments(productId);
             SaveProductProperties(productId);
             SaveProductRelated(productId);
+            SaveProductSimilar(productId);
             GetList();
         }
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -260,7 +275,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 ddlParentProductCategories.SelectedValue = item.ProductCategory.ParentCategory.Id.ToString();
                 List<ProductCategory> itemCategory = ProductCategoryData.GetProductCategoryById(Convert.ToInt32(ddlParentProductCategories.SelectedValue));
                 Utility.BindDropDownList(ddlProductCategories, itemCategory, "Title", "Id");
-
+                
                 ddlProductCategories.SelectedValue = item.ProductCategory.Id.ToString();
                 txtProductCode.Text = item.ProductCode;
                 txtProductName.Text = item.Title;
@@ -763,6 +778,17 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 lblhRelatedProductId.Text = itemProduct.Id.ToString();
             }
         }
+        protected void btnSSearch_Click(object sender, EventArgs e)
+        {
+
+            if (txtSProductCode.Text != "")
+            {
+                var itemProduct = ProductData.Get(ProductData.FindProductId(txtSProductCode.Text));
+
+                txtSProductName.Text = itemProduct.Title.ToString();
+                lblhSimilarProductId.Text = itemProduct.Id.ToString();
+            }
+        }
         private List<ProductProperty> GetProductPropertyList()
         {
             List<ProductProperty> productPropertyList;
@@ -1219,6 +1245,218 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         }
         #endregion
 
+        #region SimilarProduct
+
+        protected void btnAddSimilarProduct_Click(object sender, EventArgs e)
+        {
+            SaveProductSimilarToList();
+
+            txtPropertyValue.Text = string.Empty;
+            btnAddRelatedProduct.CommandArgument = "";
+            txtSProductCode.Text = "";
+            lblSimilarProductId.Text = "Yeni Kayıt";
+            txtSProductName.Text = "";
+        }
+        protected void lbtnSimilarProductDelete_Click(object sender, EventArgs e)
+        {
+            var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
+            if (DeleteProductSimilar(itemId))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Green\">Dosya başarıyla silindi</span><br />";
+                GetItem(Convert.ToInt32(lblProductId.Text));
+            }
+            else
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya silinirken hata oluştu!</span><br />";
+            }
+        }
+
+        private List<Product> GetProductSimilarList()
+        {
+            List<Product> productSimilarList;
+            if (Session["PRODUCT_SIMILAR_LIST"] != null)
+            {
+                productSimilarList = (List<Product>)Session["PRODUCT_SIMILAR_LIST"];
+            }
+            else
+            {
+                productSimilarList = new List<Product>();
+                Session.Add("PRODUCT_SIMILAR_LIST", productSimilarList);
+            }
+            productSimilarList = (List<Product>)Session["PRODUCT_SIMILAR_LIST"];
+
+            return productSimilarList;
+        }
+
+        private bool GetProductSimilar(int productId)
+        {
+            bool retValue = false;
+
+            try
+            {
+
+                var productSimilarList = SimilarProductData.GetSimilarProductList(productId);
+
+                Session.Add("PRODUCT_SIMILAR_LIST", productSimilarList);
+                grvSimilarProduct.DataSource = productSimilarList;
+                grvSimilarProduct.DataBind();
+                retValue = true;
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "SaveProductProperty";
+                itemSystemLog.Content = "Ürün özelliği kaydedilirken hata oluştu. Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+                retValue = false;
+            }
+            return retValue;
+        }
+        private bool GetProductSimilars()
+        {
+            bool retValue = false;
+            var productSimilarList = GetProductSimilarList();
+            grvSimilarProduct.DataSource = productSimilarList;
+            grvSimilarProduct.DataBind();
+            return retValue;
+        }
+
+        private bool SaveProductSimilarToList()
+        {
+            bool retValue = false;
+            try
+            {
+                var productSimilarList = GetProductSimilarList();
+                if (btnAddSimilarProduct.CommandArgument != "")
+                {
+
+                }
+                else
+                {
+                    try
+                    {
+                        var item = new Product();
+                        item.Id = Convert.ToInt32(lblhSimilarProductId.Text);
+                        item.Title = txtSProductName.Text;
+                        item.ProductCode = txtSProductCode.Text;
+                        productSimilarList.Add(item);
+                        divAlert.InnerHtml += "<span style=\"color:Green\">Yeni ilişkili ürün kaydı başarılı.</span><br />";
+                        retValue = true;
+                    }
+                    catch (Exception)
+                    {
+                        divAlert.InnerHtml += "<span style=\"color:Red\">Yeni ilişkili ürün hata oluştu.</span><br />";
+                        retValue = false;
+                    }
+                }
+                GetProductSimilars();
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "SaveProductProperty";
+                itemSystemLog.Content = "Ürün özelliği kaydedilirken hata oluştu. Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            finally
+            {
+
+            }
+            return retValue;
+        }
+
+        private bool SaveProductSimilar(int productId)
+        {
+            bool retValue = false;
+            try
+            {
+                var productSimilarList = GetProductSimilarList();
+
+                var productList = SimilarProductData.GetSimilarProductList(productId);
+
+                foreach (Product itemProductSimilar in productSimilarList)
+                {
+                    //yeni kayıt
+
+                    if (SimilarProductData.Insert(productId, itemProductSimilar.Id) > 0)
+                    {
+                        divAlert.InnerHtml += "<span style=\"color:Green\">Yeni Benzer ürün kaydı başarılı.</span><br />";
+                        retValue = true;
+                    }
+                    else
+                    {
+                        divAlert.InnerHtml += "<span style=\"color:Red\">Yeni Benzer ürün kaydedilirken hata oluştu.</span><br />";
+                        retValue = false;
+                    }
+                }
+                GetProductSimilars();
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "SaveProductProperties";
+                itemSystemLog.Content = productId.ToString() + " Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            finally
+            {
+
+            }
+            return retValue;
+        }
+        private bool InsertProductSimilarToList(Product itemSimilarProduct)
+        {
+            bool retValue = false;
+            try
+            {
+                var productSimilarList = GetProductSimilarList();
+                productSimilarList = (List<Product>)Session["PRODUCT_SIMILAR_LIST"];
+                Product item = new Product();
+                item.Id = 0;//Yeni kayıt.
+                item.Title = itemSimilarProduct.Title;
+                item.ProductCode = itemSimilarProduct.ProductCode;
+
+                productSimilarList.Add(item);
+                retValue = true;
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "InsertProperty";
+                itemSystemLog.Content = "Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return retValue;
+        }
+        private bool DeleteProductSimilar(int ProductSimilarId)
+        {
+            bool retValue = false;
+            try
+            {
+                if (lblProductId.Text != "")
+                {
+                    if (SimilarProductData.Delete(Convert.ToInt32(lblProductId.Text), ProductSimilarId) < 0)
+                    {
+                        retValue = true;
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete Document";
+                itemSystemLog.Content = "Id=" + ProductSimilarId.ToString() + " ile Doküman silinemedi. Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return retValue;
+        }
+        #endregion
+
         protected void gvList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvList.PageIndex = e.NewPageIndex;
@@ -1239,10 +1477,15 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             txtProductCode.Text = string.Empty;
             Session["PRODUCT_PROPERTY_LIST"] = null;
             Session["PRODUCT_RELATED_LIST"] = null;
+            Session["PRODUCT_SIMILAR_LIST"] = null;
             txtProductName.Text = string.Empty;
             txtProductDescription.Text = string.Empty;
             txtMinStock.Text = string.Empty;
             txtVideo.Text = string.Empty;
+            txtRProductCode.Text = string.Empty;
+            txtRProductName.Text = string.Empty;
+            txtSProductCode.Text = string.Empty;
+            txtSProductName.Text = string.Empty;
             txtguarantee.Text = string.Empty;
             txtAlertDate.DbSelectedDate = string.Empty;
             ddlProperties.SelectedIndex = -1;

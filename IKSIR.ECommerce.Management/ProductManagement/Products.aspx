@@ -5,6 +5,7 @@
 <%@ Register Assembly="RadAjax.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
@@ -35,7 +36,7 @@
                 </asp:ScriptManager>
                 <asp:Panel runat="server" ID="pnlForm" Visible="false" CssClass="pnlForm">
                     <telerik:RadTabStrip ID="RadTabStrip1" runat="server" Skin="Web20" MultiPageID="RadMultiPage1"
-                        SelectedIndex="1" Width="500px">
+                        SelectedIndex="1" Width="600px">
                         <Tabs>
                             <telerik:RadTab Text="Ürün" Selected="true" PageViewID="RadPageView1">
                             </telerik:RadTab>
@@ -46,6 +47,8 @@
                             <telerik:RadTab Text="Video" PageViewID="RadPageView4">
                             </telerik:RadTab>
                             <telerik:RadTab Text="İlişkili Ürünler" PageViewID="RadPageView5">
+                            </telerik:RadTab>
+                            <telerik:RadTab Text="Benzer Ürünler" PageViewID="RadPageView6">
                             </telerik:RadTab>
                         </Tabs>
                     </telerik:RadTabStrip>
@@ -130,7 +133,7 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" Width="100%" ID="txtProductCode"></asp:TextBox>
+                                        <asp:TextBox runat="server" MaxLength="100" Width="100%" ID="txtProductCode"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtProductCode"
@@ -146,7 +149,7 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" Width="100%" ID="txtProductName"></asp:TextBox>
+                                        <asp:TextBox runat="server" MaxLength="250" Width="100%" ID="txtProductName"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtProductName"
@@ -162,10 +165,15 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" Width="100%" ID="txtProductDescription" TextMode="MultiLine"
+                                        <asp:TextBox runat="server"  MaxLength='500'  onkeyUp="checkTextAreaMaxLength(this,event,'500','Llbldescription');"   Width="100%" ID="txtProductDescription" TextMode="MultiLine"
                                             CssClass="descriptionTextBox"></asp:TextBox>
+                                              
+                                           
                                     </td>
                                     <td>
+                                    
+                                    <div id="Llbldescription">500</div>
+                                     
                                     </td>
                                 </tr>
                                 <tr>
@@ -176,7 +184,7 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" ID="txtMinStock"></asp:TextBox>
+                                        <asp:TextBox runat="server" Width="50px" ID="txtMinStock"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtMinStock"
@@ -184,7 +192,7 @@
                                             ForeColor="Red">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
-                                  <tr>
+                                <tr>
                                     <td>
                                         Mevcut Stok
                                     </td>
@@ -192,7 +200,7 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" ID="txtStok"></asp:TextBox>
+                                        <asp:TextBox runat="server" Width="50px" ID="txtStok"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator11" ControlToValidate="txtStok"
@@ -200,7 +208,7 @@
                                             ForeColor="Red">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
-                                  <tr>
+                                <tr>
                                     <td>
                                         Maksimum Satış Adedi
                                     </td>
@@ -208,7 +216,7 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" ID="txtMaxQuantity"></asp:TextBox>
+                                        <asp:TextBox runat="server" Width="50px" ID="txtMaxQuantity"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator12" ControlToValidate="txtMinStock"
@@ -216,7 +224,7 @@
                                             ForeColor="Red">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
-                                 <tr>
+                                <tr>
                                     <td>
                                         Garanti Süresi (Yıl)
                                     </td>
@@ -224,7 +232,7 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" ID="txtguarantee"></asp:TextBox>
+                                        <asp:TextBox runat="server" Width="50px" ID="txtguarantee"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator10" ControlToValidate="txtguarantee"
@@ -267,7 +275,7 @@
                                             ForeColor="Red">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
-                                  <tr>
+                                <tr>
                                     <td>
                                         Ürün Durumu
                                     </td>
@@ -445,7 +453,7 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" ID="txtPropertyValue" Height="50px" Width="250px"></asp:TextBox>
+                                        <asp:TextBox runat="server" MaxLength="20" ID="txtPropertyValue" Width="250px"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtPropertyValue"
@@ -506,10 +514,14 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" Width="100%" Height="100px" ID="txtVideo" TextMode="MultiLine"
+                                        <asp:TextBox runat="server" Width="100%" onkeyUp="checkTextAreaMaxLength(this,event,'4000','lblvideo');" Height="100px" ID="txtVideo" TextMode="MultiLine"
                                             CssClass="descriptionTextBox"></asp:TextBox>
                                     </td>
                                     <td>
+                                  
+                                    <div id="lblvideo">4000</div>
+
+
                                     </td>
                                 </tr>
                             </table>
@@ -544,7 +556,7 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" Width="100%" ID="txtRProductCode"></asp:TextBox>
+                                        <asp:TextBox runat="server"  MaxLength="100" Width="100%" ID="txtRProductCode"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:Button runat="server" ID="btnSearch" Text="Ürün Bul" OnClick="btnSearch_Click" />
@@ -558,7 +570,7 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" Width="100%" Enabled="false" ID="txtRProductName"></asp:TextBox>
+                                        <asp:TextBox runat="server" MaxLength="250" Width="100%" Enabled="false" ID="txtRProductName"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator9" ControlToValidate="txtRProductName"
@@ -601,6 +613,98 @@
                                     <asp:TemplateField HeaderText="Ürün Kodu">
                                         <ItemTemplate>
                                             <asp:Label runat="server" ID="lblRProductCode" Text='<%# Eval("ProductCode")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </telerik:RadPageView>
+                        <telerik:RadPageView ID="RadPageView6" runat="server">
+                            <table>
+                                <tr>
+                                    <td colspan="4">
+                                        <strong>Benzer Ürünler</strong> (Ürünlere Benzer olacak başka ürünlerin girilmesi)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Id
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblSimilarProductId" Text="Yeni Kayıt"></asp:Label>
+                                        <asp:Label runat="server" Visible="false" ID="lblhSimilarProductId" Text=""></asp:Label>
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Ürün Kodu
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" MaxLength="100" Width="100%" ID="txtSProductCode"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:Button runat="server" ID="btnSSearch" Text="Ürün Bul" OnClick="btnSSearch_Click" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Ürün Adı
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" MaxLength="250" Width="100%" Enabled="false" ID="txtSProductName"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator15" ControlToValidate="txtSProductName"
+                                            ValidationGroup="vgProductSimilar" SetFocusOnError="true" ErrorMessage="Ürün Bulunuz"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center" colspan="4">
+                                        <asp:Label ID="Label4" runat="server" Visible="false"></asp:Label>
+                                        <asp:ValidationSummary runat="server" ID="ValidationSummary3" ValidationGroup="vgProductSimilar"
+                                            ForeColor="Red" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center" colspan="4">
+                                        <asp:Button ID="btnAddSimilarProduct" runat="server" Text="Kaydet" ValidationGroup="vgProductSimilar"
+                                            OnClick="btnAddSimilarProduct_Click" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <asp:GridView runat="server" ID="grvSimilarProduct" AutoGenerateColumns="False" CellPadding="4"
+                                GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" Caption="Benzer Ürünler"
+                                CaptionAlign="Left">
+                                <Columns>
+                                    <asp:TemplateField ShowHeader="False">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="lbtnDelete" runat="server" OnClick="lbtnSimilarProductDelete_Click"
+                                                CommandArgument='<%# Eval("Id")%>' OnClientClick="javascript:return confirm('Bu kaydı silmek istediğinize emin misiniz?');"
+                                                CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
+                                        SortExpression="Id" />
+                                    <asp:TemplateField HeaderText="Ürün Adı">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblSTitle" Text='<%# Eval("Title")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Ürün Kodu">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblSProductCode" Text='<%# Eval("ProductCode")%>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -668,7 +772,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtFilterProductCode"></asp:TextBox>
+                                <asp:TextBox runat="server" MaxLength="100" ID="txtFilterProductCode"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
@@ -701,13 +805,19 @@
                                             ReadOnly="true" SortExpression="ProductCode" />
                                         <asp:BoundField DataField="Title" HeaderText="Başlık" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Title" />
+                                              <asp:TemplateField HeaderText="Kategori">
+                                            <ItemTemplate>
+                                                <asp:Label runat="server" ID="lblCategory" Text='<%# Eval("ProductCategory.Title")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:BoundField DataField="Stok" HeaderText="Stok" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Stok" />
-                                               <asp:TemplateField HeaderText="Stok Durumu">
+                                        <asp:TemplateField HeaderText="Stok Durumu">
                                             <ItemTemplate>
                                                 <asp:Label runat="server" ID="lblProductStatus" Text='<%# Eval("ProductStatus.Value")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
+                                      
                                         <asp:TemplateField HeaderText="Value" Visible="false">
                                             <ItemTemplate>
                                             </ItemTemplate>
