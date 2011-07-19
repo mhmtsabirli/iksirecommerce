@@ -48,7 +48,7 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtTitle"></asp:TextBox>
+                                <asp:TextBox runat="server" Width="100%" MaxLength="250"  ID="txtTitle"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:RequiredFieldValidator runat="server" ID="rfv23" ControlToValidate="txtTitle"
@@ -64,9 +64,10 @@
                                 :
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtDescription" TextMode="MultiLine"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtDescription" MaxLength='500'  onkeyUp="checkTextAreaMaxLength(this,event,'500','Llbldescription');"   Width="100%"  TextMode="MultiLine"></asp:TextBox>
                             </td>
                             <td>
+                              <div id="Llbldescription">500</div>
                             </td>
                         </tr>
                         <tr>
