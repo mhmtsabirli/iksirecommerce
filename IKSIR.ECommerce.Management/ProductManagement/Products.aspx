@@ -757,13 +757,29 @@
                                 :
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" ID="ddlFilterParentCategories">
+                                <asp:DropDownList runat="server"  AutoPostBack="true" ID="ddlFilterParentCategories" 
+                                    onselectedindexchanged="ddlFilterParentCategories_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </td>
                             <td rowspan="2">
                                 <asp:Button runat="server" ID="btnFilter" Text="Filtrele" OnClick="btnFilter_Click" />
                             </td>
                         </tr>
+                           <tr>
+                                    <td>
+                                        Alt Kategori
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList runat="server" ID="ddlFilterCategories">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                       
+                                    </td>
+                                </tr>
                         <tr>
                             <td>
                                 Ürün Kodu

@@ -11,6 +11,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Toolkit;
 using IKSIR.ECommerce.Model.SiteModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer;
+using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
 //using IKSIR.ECommerce.Toolkit;
 
 namespace IKSIR.ECommerce.Management.ProductManagement
@@ -67,6 +68,14 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             if (txtFilterCategoryName.Text != "")
                 itemList = itemList.Where(x => x.Title == CategoryName).ToList();
 
+            if (ddlFilterParentCategories.SelectedValue != "-1" && ddlFilterParentCategories.SelectedValue != "")
+            {
+                int parentCategoryId = DBHelper.IntValue(ddlFilterParentCategories.SelectedValue);
+                itemList = itemList.Where(x => x.ParentCategory != null).ToList();
+                itemList = itemList.Where(x => x.ParentCategory.Id == parentCategoryId).ToList();
+
+            }
+
             gvList.DataSource = itemList;
             gvList.DataBind();
         }
@@ -105,6 +114,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     lblError.Text = "Item başarıyla güncellendi.";
                     ClearForm();
                     pnlForm.Visible = false;
+                    int count = 0;
                     GetList();
                 }
                 else
@@ -129,7 +139,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 {
                     lblError.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.Red;
-                    lblError.Text = "Item kaydedilirken bir hata oluştu.";
+                    lblError.Text += " Item kaydedilirken bir hata oluştu.";
                 }
             }
         }
@@ -145,30 +155,30 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
 
-           List<IKSIR.ECommerce.Model.ProductModel.Product> productList = ProductData.GetProductCategoryList(itemId);
+            List<IKSIR.ECommerce.Model.ProductModel.Product> productList = ProductData.GetProductCategoryList(itemId);
 
-           if (productList.Count == 0)
-           {
-               if (DeleteItem(itemId))
-               {
-                   lblError.Visible = true;
-                   lblError.ForeColor = System.Drawing.Color.Green;
-                   lblError.Text = "Item başarıyla silindi.";
-                   GetList();
-               }
-               else
-               {
-                   lblError.Visible = true;
-                   lblError.ForeColor = System.Drawing.Color.Red;
-                   lblError.Text = "Item silerken bir hata oluştu.";
-               }
-           }
-           else
-           {
-               lblError.Visible = true;
-               lblError.ForeColor = System.Drawing.Color.Red;
-               lblError.Text = "Bu kategori'ye bağlı bir çok ürün bulunmakta. Önce o ürünlerin kategorilerini değiştiriniz";
-           }
+            if (productList.Count == 0)
+            {
+                if (DeleteItem(itemId))
+                {
+                    lblError.Visible = true;
+                    lblError.ForeColor = System.Drawing.Color.Green;
+                    lblError.Text = "Item başarıyla silindi.";
+                    GetList();
+                }
+                else
+                {
+                    lblError.Visible = true;
+                    lblError.ForeColor = System.Drawing.Color.Red;
+                    lblError.Text = "Item silerken bir hata oluştu.";
+                }
+            }
+            else
+            {
+                lblError.Visible = true;
+                lblError.ForeColor = System.Drawing.Color.Red;
+                lblError.Text = "Bu kategori'ye bağlı bir çok ürün bulunmakta. Önce o ürünlerin kategorilerini değiştiriniz";
+            }
 
         }
 
@@ -182,7 +192,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             gvList.PageIndex = e.NewPageIndex;
             GetList();
         }
-       
+
         private bool InsertItem()
         {
             bool retValue = false;
@@ -191,7 +201,21 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
             // a nın altında b var dıyelım kosul olmadıgı ıcın ıkıncı bır b yı atıyor
             // where kosullu kısı mcalıstırıldıgında burayada uygulanıp burasıda calıstırılacak
-            if (item.Description != null)
+
+            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
+
+            string CategoryName = txtCategoryName.Text;
+
+
+            if (ddlParentCategories.SelectedValue != "-1" && ddlParentCategories.SelectedValue != "")
+            {
+                int parentCategoryId = DBHelper.IntValue(ddlParentCategories.SelectedValue);
+                itemList = itemList.Where(x => x.ParentCategory != null).ToList();
+                itemList = itemList.Where(x => x.ParentCategory.Id == parentCategoryId).ToList();
+                itemList = itemList.Where(x => x.Title == CategoryName).ToList();
+
+            }
+            if (itemList.Count > 0)
             {
                 lblError.Visible = true;
                 lblError.ForeColor = System.Drawing.Color.Red;
@@ -219,7 +243,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                         SystemLogData.Insert(itemSystemLog);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     SystemLog itemSystemLog = new SystemLog();
                     itemSystemLog.Title = "Insert ProductCategory";
@@ -259,7 +283,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     SystemLogData.Insert(itemSystemLog);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SystemLog itemSystemLog = new SystemLog();
                 itemSystemLog.Title = "Insert ProductCategory";
@@ -287,7 +311,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     SystemLogData.Insert(itemSystemLog);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SystemLog itemSystemLog = new SystemLog();
                 itemSystemLog.Title = "Delete ProductCategory";
@@ -305,5 +329,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             txtDescription.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
         }
+
+
+
     }
 }

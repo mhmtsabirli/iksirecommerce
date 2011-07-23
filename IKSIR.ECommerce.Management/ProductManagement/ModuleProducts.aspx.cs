@@ -150,6 +150,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
         protected void ddlSites_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             List<Module> itemList = ModuleData.GetModuleListBySiteId(Convert.ToInt32(ddlSites.SelectedValue));
             Utility.BindDropDownList(ddlModules, itemList, "Name", "Id");
             ddlModules.Enabled = true;
@@ -180,6 +181,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
             //where kosullu kısım calıstıgında burasıdacalısacaktır
             // a nın altında b var dıyelım kosul olmadıgı ıcın ıkıncı bır b yı atıyor
+           
+
             if (item.Product != null)
             {
                 lblError.Visible = true;
@@ -200,7 +203,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
                             SystemLog itemSystemLog = new SystemLog();
                             itemSystemLog.Title = "Insert ModuleProduct";
-                            itemSystemLog.Content = "ProductCode" + item.Product.ProductCode + "Module Id =  " + item.Module.Id;
+                            itemSystemLog.Content = "ProductId" + ProductId + "Module Id =  " + ddlModules.SelectedValue.ToString();
                             itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                             SystemLogData.Insert(itemSystemLog);
                         }
@@ -209,7 +212,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                     {
                         SystemLog itemSystemLog = new SystemLog();
                         itemSystemLog.Title = "Insert ModuleProduct";
-                        itemSystemLog.Content = "ProductCode" + item.Product.ProductCode + "Module Id =  " + item.Module.Id + ex.Message.ToString();
+                        itemSystemLog.Content = "ProductId" + ProductId + "Module Id =  " + ddlModules.SelectedValue.ToString();
                         itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                         SystemLogData.Insert(itemSystemLog);
                     }
@@ -288,6 +291,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
 
             ddlModules.SelectedIndex = -1;
+            ddlSites.SelectedIndex = -1;
+            ddlModules.Enabled = false;
             txtProdCode.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
         }
