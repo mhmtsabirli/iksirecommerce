@@ -38,7 +38,7 @@ namespace IKSIR.ECommerce.Management.Common
 
         private void GetList()
         {
-            //TODO tayfun   linq kullanılan kısımlarda filtereleme yapılamıyor where kosulu calısmıyor
+            
             List<Site> itemListSite = SiteData.GetSiteList();
 
             Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
@@ -76,7 +76,7 @@ namespace IKSIR.ECommerce.Management.Common
                 {
                     lblError.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.Red;
-                    lblError.Text = "Item güncellenirken bir hata oluştu.";
+                    lblError.Text += "Item güncellenirken bir hata oluştu.";
                 }
             }
             else //Yeni kayıt
@@ -94,7 +94,7 @@ namespace IKSIR.ECommerce.Management.Common
                 {
                     lblError.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.Red;
-                    lblError.Text = "Item kaydedilirken bir hata oluştu.";
+                    lblError.Text += "Item kaydedilirken bir hata oluştu.";
                 }
             }
         }
@@ -160,7 +160,12 @@ namespace IKSIR.ECommerce.Management.Common
             //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
             //where kosullu kısım calıstıgında burasıdacalısacaktır
             // a nın altında b var dıyelım kosul olmadıgı ıcın ıkıncı bır b yı atıyor
-            if (item.Name != null)
+
+            List<Module> itemList = ModuleData.GetModuleList();
+
+            itemList = itemList.Where(x => x.Name == txtModuleName.Text).ToList();
+
+            if (itemList.Count > 0)
             {
                 lblError.Visible = true;
                 lblError.ForeColor = System.Drawing.Color.Red;
@@ -267,6 +272,7 @@ namespace IKSIR.ECommerce.Management.Common
         private void ClearForm()
         {
             txtModuleName.Text = string.Empty;
+            ddlSites.SelectedIndex = -1;
             btnSave.CommandArgument = string.Empty;
         }
     }
