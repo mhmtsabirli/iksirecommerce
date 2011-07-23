@@ -91,6 +91,12 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 int parentCategoryId = DBHelper.IntValue(ddlFilterParentCategories.SelectedValue);
                 itemList = itemList.Where(x => x.ProductCategory.ParentCategory.Id == parentCategoryId).ToList();
             }
+
+            if (ddlFilterCategories.SelectedValue != "-1" && ddlFilterCategories.SelectedValue != "")
+            {
+                int CategoryId = DBHelper.IntValue(ddlFilterCategories.SelectedValue);
+                itemList = itemList.Where(x => x.ProductCategory.Id == CategoryId).ToList();
+            }
             if (txtFilterProductCode.Text != "")
             {
                 string productCode = txtFilterProductCode.Text;
@@ -149,7 +155,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             ddlParentProductCategories.Enabled = false;
             ddlFilterParentCategories.Enabled = false;
             ddlProductCategories.Enabled = false;
-
+            ddlFilterCategories.Enabled = false;
             Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
 
             List<Property> ProductPropertyList = PropertyData.GetList();
@@ -577,6 +583,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             bool isDefault = false;
             foreach (Telerik.Web.UI.UploadedFile uploadedFile in ruProductDocuments.UploadedFiles)
             {
+                System.Threading.Thread.Sleep(1000);
                 string fileName = DateTime.Now.ToString().Replace(".", "").Replace(":", "").Replace("/", "").Replace("-", "").Replace(" ", "");
                 fileName += "_" + productId.ToString();
                 //Dökümanı kaydet.
@@ -1489,6 +1496,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             txtguarantee.Text = string.Empty;
             txtAlertDate.DbSelectedDate = string.Empty;
             ddlProperties.SelectedIndex = -1;
+            ddlSites.SelectedIndex = -1;
             txtPropertyValue.Text = string.Empty;
             txtStok.Text = string.Empty;
             txtMaxQuantity.Text = string.Empty;
@@ -1510,6 +1518,16 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             //RadPageView1.Selected = true;
             //RadPageView2.Selected = false;
             //RadPageView3.Selected = false;
+        }
+
+        protected void ddlFilterParentCategories_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //ddlFilterCategories
+            ddlFilterCategories.Items.Clear();
+            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryById(Convert.ToInt32(ddlFilterParentCategories.SelectedValue));
+
+            Utility.BindDropDownList(ddlFilterCategories, itemList, "Title", "Id");
+            ddlFilterCategories.Enabled = true;
         }
     }
 }

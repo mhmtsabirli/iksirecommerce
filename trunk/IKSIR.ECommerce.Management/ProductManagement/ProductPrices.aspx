@@ -374,6 +374,9 @@
                             <td>
                                 <asp:TextBox runat="server" ID="txtFilterProductCode"></asp:TextBox>
                             </td>
+                            <td>
+                                <asp:Button ID="btnFilter" runat="server" OnClick="btnFilter_Click" Text="Filtrele" />
+                            </td>
                         </tr>
                     </table>
                 </asp:Panel>
