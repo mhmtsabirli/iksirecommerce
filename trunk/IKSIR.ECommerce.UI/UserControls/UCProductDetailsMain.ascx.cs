@@ -36,9 +36,9 @@ namespace IKSIR.ECommerce.UI.UserControls
                 foreach (var item in productMultimedias)
                 {
                     imageCount += 1;
-                    otherImages += "<a href=\"#\"><img src=\"http://212.58.8.103/documents/Images/Small/small_" + item.FilePath + "\" alt=\"\" /></a>";
+                    otherImages += "<a href=\"#\"><img src=\"http://212.58.8.103/documents/Images/Icon/icon_" + item.FilePath + "\" alt=\"\" /></a>";
                     if (imageCount == 3)
-                        break;                    
+                        break;
                 }
                 if (product.Video != null && product.Video != "")
                 {
@@ -47,11 +47,11 @@ namespace IKSIR.ECommerce.UI.UserControls
                 divOtherImages.InnerHtml = otherImages;
                 lblProductCode.Text = product.ProductCode;
                 lblProductName.Text = product.Title;
-                //lblProductWarranty.Text = product.
-                //lblProductStock.Text = product.
-                //lblProductPrice.Text = product.
-                //lblBigProductPrice.Text = product.
-                //lblProductPriceWithKDV.Text = product.
+                lblProductWarranty.Text = product.Guarantee.ToString() + " Yıl";
+                lblProductStock.Text = product.Stok.ToString();
+                lblProductPrice.Text = product.ProductPrice.UnitPrice.ToString();
+                lblProductPriceWithKDV.Text = product.ProductPrice.Price.ToString();
+                lblBigProductPrice.Text = product.ProductPrice.Price.ToString();
             }
             catch (Exception exception)
             {

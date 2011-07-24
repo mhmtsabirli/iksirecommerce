@@ -61,6 +61,6 @@
     <div class="footer_bottom">
         <img src="../images/footer_bottom.jpg" alt="" />
         <p>
-            suvit © Copyright 2011</p>
+            İdevit © Copyright 2011</p>
     </div>
 </div>
