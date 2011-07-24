@@ -11,6 +11,7 @@ namespace IKSIR.ECommerce.UI.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            UCShowCaseProducts1.ModuleId = 8;
 
         }
     }

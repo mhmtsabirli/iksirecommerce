@@ -4,25 +4,47 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
+using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 
 namespace IKSIR.ECommerce.UI.UserControls
 {
     public partial class UCProductDetailsSimilarProducts : UCProductDetailsMaster
     {
+        private int productId = 0;
+        public int ProductId
+        {
+            set { productId = value; }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack && productId != 0)
+            if (!Page.IsPostBack)
             {
-                GetSimilarProducts(productId);
+                GetItems();
             }
         }
 
-        private void GetSimilarProducts(int productId)
+        private void GetItems()
         {
-            try
-            { }
-            catch (Exception exception)
+            var itemModuleProductList = SimilarProductData.GetSimilarProductList(productId);
+            dlShowCaseProducts.DataSource = itemModuleProductList;
+            dlShowCaseProducts.DataBind();
+
+            foreach (DataListItem item in dlShowCaseProducts.Items)
             {
+                if (item.FindControl("imgProduct") != null)
+                {
+                    Image imgProduct = (Image)item.FindControl("imgProduct");
+                    HiddenField hdnProductId = (HiddenField)item.FindControl("hdnProductId");
+
+                    imgProduct.ImageUrl = "";
+                    var itemProduct = itemModuleProductList.Where(x => x.Id == productId).FirstOrDefault();
+                    if (itemProduct != null && itemProduct.Multimedias != null && itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault() != null)
+                    {
+                        var image = itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault();
+                        imgProduct.ImageUrl = "http://212.58.8.103/documents/Images/Icon/icon_" + image.FilePath;
+                    }
+                }
             }
         }
     }

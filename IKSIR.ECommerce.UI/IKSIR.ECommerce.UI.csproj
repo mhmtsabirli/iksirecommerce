@@ -152,6 +152,7 @@
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="UserControls\UCShowCaseProducts.ascx" />
     <Content Include="UserControls\UCModuleProducts.ascx" />
     <Content Include="UserControls\UCProductDetailsMain.ascx" />
     <Content Include="UserControls\UCProductDetailsMaster.ascx" />
@@ -244,6 +245,13 @@
     </Compile>
     <Compile Include="MasterPages\UIMasterPage.Master.designer.cs">
       <DependentUpon>UIMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCShowCaseProducts.ascx.cs">
+      <DependentUpon>UCShowCaseProducts.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCShowCaseProducts.ascx.designer.cs">
+      <DependentUpon>UCShowCaseProducts.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCModuleProducts.ascx.cs">
       <DependentUpon>UCModuleProducts.ascx</DependentUpon>

@@ -11,5 +11,14 @@ namespace IKSIR.ECommerce.UI.UserControls {
     
     
     public partial class UCProductDetailsRelatedProducts {
+        
+        /// <summary>
+        /// dlShowCaseProducts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList dlShowCaseProducts;
     }
 }

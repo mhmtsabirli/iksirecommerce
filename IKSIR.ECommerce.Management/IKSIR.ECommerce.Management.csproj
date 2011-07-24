@@ -68,7 +68,6 @@
     <Content Include="Admin\Admin.aspx" />
     <Content Include="Admin\Right.aspx" />
     <Content Include="Common\ContactForm.aspx" />
-    <Content Include="Common\Shipment.aspx" />
     <Content Include="Common\NewsFromUs.aspx" />
     <Content Include="Common\Shipment.aspx" />
     <Content Include="Common\StaticPages.aspx" />
@@ -89,7 +88,6 @@
     <Content Include="Images\Reports.png" />
     <Content Include="Images\Settings.png" />
     <Content Include="Images\Stock.png" />
-    <Content Include="ProductManagement\ProductPrices.aspx" />
     <Content Include="ProductManagement\ModuleProducts.aspx" />
     <Content Include="ProductManagement\ProductCategories.aspx" />
     <Content Include="ProductManagement\ProductPrices.aspx" />
@@ -133,13 +131,6 @@
     <Compile Include="Common\ContactForm.aspx.designer.cs">
       <DependentUpon>ContactForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Common\Shipment.aspx.cs">
-      <DependentUpon>Shipment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Common\Shipment.aspx.designer.cs">
-      <DependentUpon>Shipment.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Common\NewsFromUs.aspx.cs">
       <DependentUpon>NewsFromUs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -149,7 +140,6 @@
     </Compile>
     <Compile Include="Common\Shipment.aspx.cs">
       <DependentUpon>Shipment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Common\Shipment.aspx.designer.cs">
       <DependentUpon>Shipment.aspx</DependentUpon>
@@ -210,13 +200,6 @@
     <Compile Include="MasterPage\MasterManagement.Master.designer.cs">
       <DependentUpon>MasterManagement.Master</DependentUpon>
     </Compile>
-    <Compile Include="ProductManagement\ProductPrices.aspx.cs">
-      <DependentUpon>ProductPrices.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ProductManagement\ProductPrices.aspx.designer.cs">
-      <DependentUpon>ProductPrices.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ProductManagement\ModuleProducts.aspx.cs">
       <DependentUpon>ModuleProducts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -233,7 +216,6 @@
     </Compile>
     <Compile Include="ProductManagement\ProductPrices.aspx.cs">
       <DependentUpon>ProductPrices.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ProductManagement\ProductPrices.aspx.designer.cs">
       <DependentUpon>ProductPrices.aspx</DependentUpon>
