@@ -200,9 +200,9 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             if (txtUnitPriceOne.Text != "" && txtUnitPriceTwo.Text != "" && txtTax.Text != "")
             {
-                decimal UnitPrice = Convert.ToDecimal(txtUnitPriceOne.Text + "," + txtUnitPriceTwo.Text);
-                decimal UnitPriceWithTax = Convert.ToDecimal(UnitPrice * Convert.ToDecimal(1 + "," + txtTax.Text));
-                string[] Price = Convert.ToString(UnitPriceWithTax).Split(',');
+                decimal UnitPrice = Convert.ToDecimal(txtUnitPriceOne.Text + "." + txtUnitPriceTwo.Text);
+                decimal UnitPriceWithTax = Convert.ToDecimal(UnitPrice * Convert.ToDecimal(1 + "." + txtTax.Text));
+                string[] Price = Convert.ToString(UnitPriceWithTax).Split('.');
                 txtPriceOne.Text = Price[0].ToString();
                 
                 txtPriceTwo.Text = Price[1].ToString().Substring(0,2);
@@ -259,11 +259,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 txtProductName.Text = itemProduct.Title.ToString();
                 txtTax.Text = item.Tax.ToString();
 
-                string[] UnitPrice = item.UnitPrice.ToString().Split(',');
+                string[] UnitPrice = item.UnitPrice.ToString().Split('.');
                 txtUnitPriceOne.Text = UnitPrice[0].ToString();
                 txtUnitPriceTwo.Text = UnitPrice[1].ToString();
 
-                string[] Price = item.Price.ToString().Split(',');
+                string[] Price = item.Price.ToString().Split('.');
                 txtPriceOne.Text = Price[0].ToString();
                 txtPriceTwo.Text = Price[1].ToString();
 
@@ -354,10 +354,10 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             else
             {
                 itemProductPrice = new ProductPrice();
-                itemProductPrice.Price = Convert.ToDecimal(txtPriceOne.Text + "," + txtPriceTwo.Text);
+                itemProductPrice.Price = Convert.ToDecimal(txtPriceOne.Text + "." + txtPriceTwo.Text);
                 itemProductPrice.Product = new Product() { Id = ProductId };
                 itemProductPrice.Tax = Convert.ToInt32(txtTax.Text);
-                itemProductPrice.UnitPrice = Convert.ToDecimal(txtUnitPriceOne.Text + "," + txtUnitPriceTwo.Text);
+                itemProductPrice.UnitPrice = Convert.ToDecimal(txtUnitPriceOne.Text + "." + txtUnitPriceTwo.Text);
                 itemProductPrice.CreateAdminId = 1;
 
                 int result = ProductPriceData.Insert(itemProductPrice);
@@ -376,10 +376,10 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             if (itemProduct != null)
             {
                 itemProduct.Id = Convert.ToInt32(lblProductPriceId.Text);
-                itemProduct.Price = Convert.ToDecimal(txtPriceOne.Text + "," + txtPriceTwo.Text);
+                itemProduct.Price = Convert.ToDecimal(txtPriceOne.Text + "." + txtPriceTwo.Text);
                 itemProduct.Product =  new Product(){Id = Convert.ToInt32(lblProductId.Text)};
                 itemProduct.Tax = Convert.ToInt32(txtTax.Text);
-                itemProduct.UnitPrice = Convert.ToDecimal(txtUnitPriceOne.Text + "," + txtUnitPriceTwo.Text);
+                itemProduct.UnitPrice = Convert.ToDecimal(txtUnitPriceOne.Text + "." + txtUnitPriceTwo.Text);
                 itemProduct.EditAdminId = 1;
                 itemProduct.EditDate = DateTime.Now;
 
@@ -500,7 +500,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             var itemProductShipmentPrice = ProductShipmentPriceData.Get(ShipmentPriceId);
             lblProductShipmentPriceId.Text = itemProductShipmentPrice.Id.ToString();
             txtShUnitPrice.Text = itemProductShipmentPrice.Shipment.UnitPrice.ToString();
-            string[] ShPrice = itemProductShipmentPrice.Price.ToString().Split(',');
+            string[] ShPrice = itemProductShipmentPrice.Price.ToString().Split('.');
             txtShpriceOne.Text = ShPrice[0].ToString();
             txtShpriceTwo.Text = ShPrice[1].ToString();
             ddlShipment.SelectedValue = itemProductShipmentPrice.Shipment.Id.ToString();
@@ -528,7 +528,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                         var newItem = new ProductShipmentPrice();
                         newItem.Id = item.Id;
 
-                        newItem.Price = Convert.ToDecimal(txtShpriceOne.Text.ToString() + "," + txtShpriceTwo.Text.ToString());
+                        newItem.Price = Convert.ToDecimal(txtShpriceOne.Text.ToString() + "." + txtShpriceTwo.Text.ToString());
 
                         newItem.Shipment = new IKSIR.ECommerce.Model.ProductModel.Shipment() { Id = Convert.ToInt32(ddlShipment.SelectedValue.ToString()),Title=ddlShipment.SelectedItem.Text.ToString() };
                         newItem.Product = new Product() { Id = Convert.ToInt32(lblProductId.Text) };
@@ -550,7 +550,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
                         var item = new ProductShipmentPrice();
 
-                        item.Price = Convert.ToDecimal(txtShpriceOne.Text.ToString() + "," + txtShpriceTwo.Text.ToString());
+                        item.Price = Convert.ToDecimal(txtShpriceOne.Text.ToString() + "." + txtShpriceTwo.Text.ToString());
 
                         item.Shipment = new IKSIR.ECommerce.Model.ProductModel.Shipment() { Id = Convert.ToInt32(ddlShipment.SelectedValue.ToString()), Title = Convert.ToString(ddlShipment.SelectedItem.Text) };
                         item.Product = new Product() { Id = Convert.ToInt32(lblProductId.Text) };
