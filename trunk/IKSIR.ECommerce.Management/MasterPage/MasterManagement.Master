@@ -69,23 +69,23 @@
                             <li><a href="">
                                 <img src="http://212.58.8.103/management/Images/Stock.png" />&nbsp;Ürün</a>
                                 <ul>
-                                    <li><a href="../ProductManagement/Products.aspx">Ürün Tanımlama</a></li>
-                                    <li><a href="../ProductManagement/ProductCategories.aspx">Kategori Tanımlama</a></li>
-                                    <li><a href="../Common/Properties.aspx">Ürün Özellikleri</a></li>
-                                    <li><a href="../Common/Modules.aspx">Modül Tanımlama</a></li>
-                                    <li><a href="../ProductManagement/ModuleProducts.aspx">Modüle Ürün Atama</a></li>
-                                    <li><a href="../ProductManagement/ProductPrices.aspx">Ürün Fiyatları</a></li>
-                                    <li><a href="../Common/Shipment.aspx">Kargo Firmalar</a></li>
+                                    <li><a href="http://212.58.8.103/management/ProductManagement/Products.aspx">Ürün Tanımlama</a></li>
+                                    <li><a href="http://212.58.8.103/management/ProductManagement/ProductCategories.aspx">Kategori Tanımlama</a></li>
+                                    <li><a href="http://212.58.8.103/management/Common/Properties.aspx">Ürün Özellikleri</a></li>
+                                    <li><a href="http://212.58.8.103/management/Common/Modules.aspx">Modül Tanımlama</a></li>
+                                    <li><a href="http://212.58.8.103/management/ProductManagement/ModuleProducts.aspx">Modüle Ürün Atama</a></li>
+                                    <li><a href="http://212.58.8.103/management/ProductManagement/ProductPrices.aspx">Ürün Fiyatları</a></li>
+                                    <li><a href="http://212.58.8.103/management/Common/Shipment.aspx">Kargo Firmalar</a></li>
                                    
                                 </ul>
                             </li>
                              <li><a href="">
                                 <img src="http://212.58.8.103/management/Images/Reports.png" />&nbsp;Site</a>
                                 <ul>
-                                    <li><a href="../Common/Sites.aspx">Site Tanımlama</a></li>
-                                     <li><a href="../Common/ContactForm.aspx">İletişim Formu</a></li>
-                                    <li><a href="..Common/StaticPages.aspx">Statik Sayfalar</a></li>
-                                    <li><a href="../Common/NewsFromUs.aspx">Bizden Haberler</a></li>
+                                    <li><a href="http://212.58.8.103/management/Common/Sites.aspx">Site Tanımlama</a></li>
+                                     <li><a href="http://212.58.8.103/management/Common/ContactForm.aspx">İletişim Formu</a></li>
+                                    <li><a href="http://212.58.8.103/management/Common/StaticPages.aspx">Statik Sayfalar</a></li>
+                                    <li><a href="http://212.58.8.103/management/Common/NewsFromUs.aspx">Bizden Haberler</a></li>
                                 </ul>
                             </li>
                             <li><a href="">
@@ -100,10 +100,10 @@
                                 <img src="http://212.58.8.103/management/Images/Settings.png" />&nbsp;Ayarlar</a>
                                 <ul>
 
-                                    <li><a href="../Common/Enums.aspx">Sabitler</a></li>
-                                    <li><a href="../Common/EnumValues.aspx">Sabit Değerleri</a></li>
-                                    <li><a href="../Admin/Admin.aspx">Yöneticiler</a></li>
-                                    <li><a href="../Admin/Right.aspx">Yönetici Hakları</a></li>
+                                    <li><a href="http://212.58.8.103/management/Common/Enums.aspx">Sabitler</a></li>
+                                    <li><a href="http://212.58.8.103/management/Common/EnumValues.aspx">Sabit Değerleri</a></li>
+                                    <li><a href="http://212.58.8.103/management/Admin/Admin.aspx">Yöneticiler</a></li>
+                                    <li><a href="http://212.58.8.103/management/Admin/Right.aspx">Yönetici Hakları</a></li>
                                    
                                 </ul>
                             </li>
@@ -149,7 +149,7 @@
                         <span class="date">
                             <%=contactForm.CreateDate.ToShortDateString() %></span> Başlık :
                         <%=contactForm.Title.ToString() %>
-                        Mesaja Ulaşmak için <a href="../Common/ContactForm.aspx?FormId=<%=contactForm.Id.ToString() %>">
+                        Mesaja Ulaşmak için <a href="http://212.58.8.103/management/Common/ContactForm.aspx?FormId=<%=contactForm.Id.ToString() %>">
                             Tıklayın</a>
                     </div>
                     <%} %>
