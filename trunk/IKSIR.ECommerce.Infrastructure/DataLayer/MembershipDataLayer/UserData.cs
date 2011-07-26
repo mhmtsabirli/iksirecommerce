@@ -18,14 +18,77 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer
     {
         public static User Get(int id)
         {
-            var returnValue = new User();
+            User returnValue = null;
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", id));
 
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetUser", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                returnValue = new User();
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.Name = DBHelper.StringValue(dr["Name"].ToString());
+                returnValue.UserName = DBHelper.StringValue(dr["UserName"].ToString());
+                returnValue.SurName = DBHelper.StringValue(dr["SurName"].ToString());
+                returnValue.Email = DBHelper.StringValue(dr["Email"].ToString());
+                returnValue.MobilePhone = DBHelper.StringValue(dr["MobilePhone"].ToString());
+                returnValue.TcId = DBHelper.StringValue(dr["TcId"].ToString());
+                returnValue.Password = DBHelper.StringValue(dr["TcId"].ToString());
+                returnValue.Status = DBHelper.IntValue(dr["Password"].ToString());
+                returnValue.LastLoginDate = DBHelper.DateValue(dr["LastLoginDate"].ToString());
+                returnValue.Site = SiteData.Get(new Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
+                returnValue.BirthDate = DBHelper.DateValue(dr["BirthDate"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+            }
+            dr.Close();
+            return returnValue;
+        }
+
+        public static User Get(string email)
+        {
+            User returnValue = null;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Email", DBHelper.StringValue(email)));
+
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetUser", parameters);
+            while (dr.Read())
+            {
+                returnValue = new User();
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.Name = DBHelper.StringValue(dr["Name"].ToString());
+                returnValue.UserName = DBHelper.StringValue(dr["UserName"].ToString());
+                returnValue.SurName = DBHelper.StringValue(dr["SurName"].ToString());
+                returnValue.Email = DBHelper.StringValue(dr["Email"].ToString());
+                returnValue.MobilePhone = DBHelper.StringValue(dr["MobilePhone"].ToString());
+                returnValue.TcId = DBHelper.StringValue(dr["TcId"].ToString());
+                returnValue.Password = DBHelper.StringValue(dr["TcId"].ToString());
+                returnValue.Status = DBHelper.IntValue(dr["Password"].ToString());
+                returnValue.LastLoginDate = DBHelper.DateValue(dr["LastLoginDate"].ToString());
+                returnValue.Site = SiteData.Get(new Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
+                returnValue.BirthDate = DBHelper.DateValue(dr["BirthDate"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+            }
+            dr.Close();
+            return returnValue;
+        }
+
+        public static User CheckUser(string email, string password)
+        {
+            User returnValue = null;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Email", DBHelper.StringValue(email)));
+            parameters.Add(new SqlParameter("@Password", DBHelper.StringValue(password)));
+
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "CheckUser", parameters);
+            while (dr.Read())
+            {
+                returnValue = new User();
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.Name = DBHelper.StringValue(dr["Name"].ToString());
@@ -61,7 +124,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer
             parameters.Add(new SqlParameter("@Status", DBHelper.StringValue(itemUser.Status)));
             parameters.Add(new SqlParameter("@SiteId", DBHelper.IntValue(itemUser.Site.Id)));
             parameters.Add(new SqlParameter("@Password", DBHelper.StringValue(itemUser.Password)));
-            parameters.Add(new SqlParameter("@BirthDate", DBHelper.DecValue(itemUser.BirthDate)));
+            parameters.Add(new SqlParameter("@BirthDate", DBHelper.DateValue(itemUser.BirthDate)));
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemUser.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertUser", parameters));
@@ -120,22 +183,18 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer
             return returnValue;
         }
 
-        public static List<User> GetUserList(User itemUser = null)
+        public static List<User> GetUserList()
         {
             List<User> itemUserList = null;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-            //if (itemProductCategory != null)
-            //    parameters.Add(new SqlParameter("@Id", itemProductCategory.Id));
-            //if (itemProductCategory.ParentCategory != null)
-            //    parameters.Add(new SqlParameter("@ProductCategoryId", itemProductCategory.ParentCategory.Id));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetUser", parameters);
             itemUserList = new List<User>();
 
             while (dr.Read())
             {
                 var item = new User();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Name = DBHelper.StringValue(dr["Name"].ToString());

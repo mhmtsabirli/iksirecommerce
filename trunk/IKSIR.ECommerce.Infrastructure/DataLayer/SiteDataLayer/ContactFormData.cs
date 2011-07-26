@@ -115,7 +115,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             while (dr.Read())
             {
                 var item = new ContactForm();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.FirstLastName = DBHelper.StringValue(dr["FirstLastName"].ToString());
                 item.Email = DBHelper.StringValue(dr["Email"].ToString());
@@ -149,7 +149,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             while (dr.Read())
             {
                 var item = new ContactForm();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.FirstLastName = DBHelper.StringValue(dr["FirstLastName"].ToString());
                 item.Email = DBHelper.StringValue(dr["Email"].ToString());

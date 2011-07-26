@@ -140,6 +140,7 @@
     </Compile>
     <Compile Include="Common\Shipment.aspx.cs">
       <DependentUpon>Shipment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Common\Shipment.aspx.designer.cs">
       <DependentUpon>Shipment.aspx</DependentUpon>
@@ -216,6 +217,7 @@
     </Compile>
     <Compile Include="ProductManagement\ProductPrices.aspx.cs">
       <DependentUpon>ProductPrices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ProductManagement\ProductPrices.aspx.designer.cs">
       <DependentUpon>ProductPrices.aspx</DependentUpon>

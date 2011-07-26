@@ -21,7 +21,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetAdminRight", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.Admin = AdminData.Get(new Admin() { Id = DBHelper.IntValue(dr["AdminId"].ToString()) });
@@ -99,7 +99,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             while (dr.Read())
             {
                 var item = new AdminRights();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Admin = AdminData.Get(new Admin() { Id = DBHelper.IntValue(dr["AdminId"].ToString()) });
@@ -131,7 +131,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             while (dr.Read())
             {
                 var item = new AdminRights();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Admin = AdminData.Get(new Admin() { Id = DBHelper.IntValue(dr["AdminId"].ToString()) });

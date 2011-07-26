@@ -25,7 +25,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductPrice", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
 
                 returnValue.Price = DBHelper.DecValue(dr["Price"].ToString());
                 returnValue.UnitPrice = DBHelper.DecValue(dr["UnitPrice"].ToString());
@@ -53,7 +53,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             {
                 while (dr.Read())
                 {
-                    //TODO => tayfun
+                    
 
                     returnValue.Price = DBHelper.DecValue(dr["Price"].ToString());
                     returnValue.UnitPrice = DBHelper.DecValue(dr["UnitPrice"].ToString());

@@ -25,7 +25,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductShipmentPrice", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
 
                 returnValue.Shipment = ShipmentData.Get(DBHelper.IntValue(dr["ShipmentId"].ToString()));
                 returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));

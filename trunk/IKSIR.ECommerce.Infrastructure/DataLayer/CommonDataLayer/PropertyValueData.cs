@@ -20,7 +20,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetPropertyValue", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.PropertyId = DBHelper.IntValue(dr["PropertyId"].ToString());
@@ -80,7 +80,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             while (dr.Read())
             {
                 var item = new PropertyValue();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Value = DBHelper.StringValue(dr["Value"].ToString());
@@ -106,7 +106,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             while (dr.Read())
             {
                 var item = new PropertyValue();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Value = DBHelper.StringValue(dr["Value"].ToString());

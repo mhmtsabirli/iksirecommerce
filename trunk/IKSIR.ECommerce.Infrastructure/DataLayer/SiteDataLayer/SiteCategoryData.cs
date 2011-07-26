@@ -24,7 +24,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetSiteCategory", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
 
                 returnValue.Site = SiteData.Get(new Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
@@ -106,7 +106,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             while (dr.Read())
             {
                 var item = new SiteCategory();
-                //TODO => tayfun
+                
                 item.Site = SiteData.Get(new Site() { Id = DBHelper.IntValue(dr["SiteId"].ToString()) });
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());

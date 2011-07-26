@@ -20,7 +20,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetEnum", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.Name = DBHelper.StringValue(dr["Name"].ToString());
@@ -94,7 +94,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             while (dr.Read())
             {
                 var item = new IKSIR.ECommerce.Model.CommonModel.Enum();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Name = DBHelper.StringValue(dr["Name"].ToString());

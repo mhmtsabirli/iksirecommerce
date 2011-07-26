@@ -21,7 +21,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetRight", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
@@ -96,7 +96,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.AdminDataLayer
             while (dr.Read())
             {
                 var item = new Right();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());

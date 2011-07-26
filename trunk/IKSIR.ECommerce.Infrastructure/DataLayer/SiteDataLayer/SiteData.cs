@@ -87,7 +87,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             while (dr.Read())
             {
                 var item = new Site();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Name = DBHelper.StringValue(dr["Name"].ToString());

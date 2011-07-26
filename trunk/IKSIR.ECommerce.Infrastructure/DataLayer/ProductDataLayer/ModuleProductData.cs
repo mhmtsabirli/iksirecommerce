@@ -26,7 +26,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetModuleProduct", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
 
                 returnValue.Module = ModuleData.Get(new Module() { Id = DBHelper.IntValue(dr["ModuleId"].ToString()) });
                 returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
@@ -48,7 +48,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetModuleProduct", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
 
                 returnValue.Module = ModuleData.Get(new Module() { Id = DBHelper.IntValue(dr["ModuleId"].ToString()) });
                 returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
@@ -71,7 +71,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetModuleProduct", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
 
                 returnValue.Module = ModuleData.Get(new Module() { Id = DBHelper.IntValue(dr["ModuleId"].ToString()) });
                 returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
@@ -135,8 +135,6 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             while (dr.Read())
             {
                 var item = new ModuleProduct();
-                //TODO => tayfun,
-
                 item.Module = ModuleData.Get(new Module() { Id = DBHelper.IntValue(dr["ModuleId"].ToString()) });
                 item.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
@@ -166,9 +164,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             while (dr.Read())
             {
                 var item = new Product();
-                //TODO => tayfun,
                 item = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
-                
                 itemModuleProductList.Add(item);
             }
 

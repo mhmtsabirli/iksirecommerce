@@ -94,7 +94,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             while (dr.Read())
             {
                 var item = new ProductProperty();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
