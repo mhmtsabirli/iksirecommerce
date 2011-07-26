@@ -102,7 +102,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer
             while (dr.Read())
             {
                 var item = new ShowRoom();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.Item = ProductData.Get(DBHelper.IntValue(dr["ItemId"].ToString()));
                 item.EnumValue = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["EnumValueId"].ToString()) });

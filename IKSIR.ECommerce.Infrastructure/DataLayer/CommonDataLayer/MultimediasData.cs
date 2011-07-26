@@ -19,7 +19,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetMultimedia", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.Value = DBHelper.StringValue(dr["Value"].ToString());
@@ -100,7 +100,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             while (dr.Read())
             {
                 var item = new Multimedia();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Value = DBHelper.StringValue(dr["Value"].ToString());

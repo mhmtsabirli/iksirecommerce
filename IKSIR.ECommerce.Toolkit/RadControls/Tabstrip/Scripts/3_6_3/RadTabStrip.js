@@ -1554,7 +1554,7 @@ if((this.Element.offsetWidth==0&&!this.IsVertical)||(this.Element.offsetHeight==
 return false;
 }
 this.Initialized=true;
-this.ScrollAmount=2;
+this.ScrollAMonth=2;
 this.Direction=0;
 if(this.WrapNeeded){
 var _7=this.CreateScrollWrap();
@@ -1688,22 +1688,22 @@ _11.onmousedown=function(){
 if(this.disabled){
 return false;
 }
-_12.ScrollAmount=3;
+_12.ScrollAMonth=3;
 return true;
 };
 _11.onmouseup=function(){
-_12.ScrollAmount=1;
+_12.ScrollAMonth=1;
 };
 _11.onmouseover=function(){
 if(this.disabled){
 return false;
 }
-_12.ScrollAmount=1;
+_12.ScrollAMonth=1;
 _12.Scroll(this.ScrollDirection);
 return true;
 };
 _11.onmouseout=function(){
-_12.scrollAmount=0;
+_12.scrollAMonth=0;
 _12.Stop();
 return false;
 };
@@ -1837,7 +1837,7 @@ this.Stop();
 this.Direction=_21;
 var _22=this;
 var _23=function(){
-_22.ScrollBy(_22.Direction*_22.ScrollAmount);
+_22.ScrollBy(_22.Direction*_22.ScrollAMonth);
 };
 _23();
 this.scrollInterval=setInterval(_23,10);

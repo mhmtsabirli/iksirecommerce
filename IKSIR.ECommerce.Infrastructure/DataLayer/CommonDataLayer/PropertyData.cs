@@ -19,7 +19,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProperty", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
@@ -84,7 +84,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             while (dr.Read())
             {
                 var item = new Property();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
@@ -112,7 +112,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             while (dr.Read())
             {
                 var item = new Property();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
@@ -139,7 +139,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             while (dr.Read())
             {
                 var item = new Property();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());

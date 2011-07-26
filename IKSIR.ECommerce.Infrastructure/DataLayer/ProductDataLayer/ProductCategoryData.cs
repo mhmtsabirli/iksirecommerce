@@ -25,7 +25,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductCategory", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
@@ -52,7 +52,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductCategory", parameters);
             while (dr.Read())
             {
-                //TODO => tayfun
+                
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
@@ -128,7 +128,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             while (dr.Read())
             {
                 var item = new ProductCategory();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
@@ -160,7 +160,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             while (dr.Read())
             {
                 var item = new ProductCategory();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
@@ -192,7 +192,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             while (dr.Read())
             {
                 var item = new ProductCategory();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
@@ -224,7 +224,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             while (dr.Read())
             {
                 var item = new ProductCategory();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
@@ -273,7 +273,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             while (dr.Read())
             {
                 var item = new Product();
-                //TODO => tayfun
+                
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());

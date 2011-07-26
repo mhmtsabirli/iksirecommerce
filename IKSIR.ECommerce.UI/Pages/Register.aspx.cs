@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Toolkit;
+using IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer;
+using IKSIR.ECommerce.Model.MembershipModel;
+using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
+using IKSIR.ECommerce.Model.SiteModel;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -20,22 +24,22 @@ namespace IKSIR.ECommerce.UI.Pages
 
         private void BindValues()
         {
-            for (int i = 0; i <= 31; i++)
+            for (int i = 1; i <= 31; i++)
             {
                 ddlBirthDateDay.Items.Add(new ListItem(i.ToString(), i.ToString()));
             }
             ddlBirthDateDay.Items.Insert(0, new ListItem("Gün", "-1"));
-            for (int i = 0; i <= 12; i++)
+            for (int i = 1; i <= 12; i++)
             {
-                ddlBirthDateMount.Items.Add(new ListItem(i.ToString(), i.ToString()));
+                ddlBirthDateMonth.Items.Add(new ListItem(i.ToString(), i.ToString()));
             }
-            ddlBirthDateMount.Items.Insert(0, new ListItem("Ay", "-1"));
+            ddlBirthDateMonth.Items.Insert(0, new ListItem("Ay", "-1"));
             for (int i = 2005; i > 1930; i--)
             {
                 ddlBirthDateYear.Items.Add(new ListItem(i.ToString(), i.ToString()));
             }
             ddlBirthDateYear.Items.Insert(0, new ListItem("Yıl", "-1"));
-            
+
             KeyGenerator item = new KeyGenerator();
             string key = item.GetUniqueKey(6, true, true, false);
             Session.Add("REGISTER_SECURITYCODE", key);
@@ -60,41 +64,51 @@ namespace IKSIR.ECommerce.UI.Pages
 
         private bool SaveForm()
         {
-            //Mail adresini kontrol et bu adresle kayıtlı bir üye varsa hata döndür.
-
             bool retValue = false;
+            try
+            {
+                var itemUser = new User();
+                itemUser.BirthDate = new DateTime(DBHelper.IntValue(ddlBirthDateYear.SelectedValue), DBHelper.IntValue(ddlBirthDateMonth.SelectedValue), DBHelper.IntValue(ddlBirthDateDay.SelectedValue));
+                itemUser.Email = txtEmail.Text;
+                itemUser.Name = txtFirstName.Text;
+                itemUser.SurName = txtLastName.Text;
+                itemUser.Site = new Site() { Id = 1 };
+                itemUser.Password = txtPassword.Text;
+                int ret = UserData.Insert(itemUser);
+                if (ret > 0)
+                    retValue = true;
+                else
+                    retValue = false;
+            }
+            catch (Exception exception)
+            {
+                throw;
+            }
             return retValue;
         }
 
         private bool CheckForm()
         {
-            //Mail adresini kontrol et bu adresle kayıtlı bir üye varsa hata döndür.
-            //Güvenlik kodunu kontrol et
             bool retValue = true;
-
-            if (Session["REGISTER_SECURITYCODE"] != null && Session["REGISTER_SECURITYCODE"].ToString() == txtCode.Text)
+            var item = UserData.Get(txtEmail.Text);
+            if (item != null)
             {
-                //Diğer alanları kontrol et
-            }
-            else
-            {
-                retValue = false;
-                lblAlert.Text = "Güvenlik kodu hatalı.";
-                txtCode.Focus();
+                lblAlert.Text = "Bu email adresi kullanılıyor. Lütfen başka bir mail adresi giriniz.";
+                txtEmail.Focus();
                 lblAlert.ForeColor = System.Drawing.Color.Red;
+                return false;
             }
             return retValue;
-
         }
 
-        protected void lbtnChangeCode_Click(object sender, EventArgs e)
-        {
-            KeyGenerator item = new KeyGenerator();
-            string key = item.GetUniqueKey(6, true, true, false);
-            Session.Add("REGISTER_SECURITYCODE", key);
+        //protected void lbtnChangeCode_Click(object sender, EventArgs e)
+        //{
+        //    KeyGenerator item = new KeyGenerator();
+        //    string key = item.GetUniqueKey(6, true, true, false);
+        //    Session.Add("REGISTER_SECURITYCODE", key);
 
-            DynamicPicture itemasd = new DynamicPicture();
-            
-        }
+        //    DynamicPicture itemasd = new DynamicPicture();
+
+        //}
     }
 }

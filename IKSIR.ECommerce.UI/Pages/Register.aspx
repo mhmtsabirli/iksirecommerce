@@ -111,25 +111,6 @@
         </tr>
         <tr>
             <td>
-                Cinsiyet
-            </td>
-            <td>
-                :
-            </td>
-            <td>
-            </td>
-            <td>
-                <asp:DropDownList runat="server" ID="ddlGender">
-                    <asp:ListItem Text="Seçiniz" Value="-1"></asp:ListItem>
-                    <asp:ListItem Text="Bayan" Value="Bayan"></asp:ListItem>
-                    <asp:ListItem Text="Bay" Value="Bay"></asp:ListItem>
-                </asp:DropDownList>
-            </td>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 Doğum Tarihi
             </td>
             <td>
@@ -142,7 +123,7 @@
                 <asp:DropDownList runat="server" ID="ddlBirthDateDay">
                 </asp:DropDownList>
                 /
-                <asp:DropDownList runat="server" ID="ddlBirthDateMount">
+                <asp:DropDownList runat="server" ID="ddlBirthDateMonth">
                 </asp:DropDownList>
                 /
                 <asp:DropDownList runat="server" ID="ddlBirthDateYear">
@@ -152,7 +133,7 @@
                 <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator7" ControlToValidate="ddlBirthDateDay"
                     InitialValue="-1" ErrorMessage="Doğum Tarihi gün alanı zorunlu" ValidationGroup="vgForm"
                     SetFocusOnError="true">*</asp:RequiredFieldValidator>
-                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="ddlBirthDateMount"
+                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="ddlBirthDateMonth"
                     InitialValue="-1" ErrorMessage="Doğum Tarihi ay alanı zorunlu" ValidationGroup="vgForm"
                     SetFocusOnError="true">*</asp:RequiredFieldValidator>
                 <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="ddlBirthDateYear"
@@ -160,7 +141,7 @@
                     SetFocusOnError="true">*</asp:RequiredFieldValidator>
             </td>
         </tr>
-        <tr>
+        <%--<tr>
             <td valign="top">
                 Güvenlik Kodu
             </td>
@@ -183,7 +164,7 @@
                     ErrorMessage="Güvenlik Kodu alanı zorunlu" ValidationGroup="vgForm"
                     SetFocusOnError="true">*</asp:RequiredFieldValidator>
             </td>
-        </tr>
+        </tr>--%>
         <tr>
             <td colspan="5" align="center">
                 <asp:Label runat="server" ID="lblAlert"></asp:Label>

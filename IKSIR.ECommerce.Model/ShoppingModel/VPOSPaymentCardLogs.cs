@@ -16,14 +16,14 @@ namespace IKSIR.ECommerce.Model.ShoppingModel
         public string PaymentCardBonusMultiplier { get; set; }
         public string CurrentProductCode { get; set; }
         public string CurrentProductName { get; set; }
-        public decimal Amount { get; set; }
-        public decimal BonusAmount { get; set; }
+        public decimal AMonth { get; set; }
+        public decimal BonusAMonth { get; set; }
         public int TransactionId { get; set; }
         public string RawData { get; set; }
 
         public VPOSPaymentCardLogs(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string bankName, string creditCardCode,
             string creditCardName, string creditCardProductCode, string creditCardProductName, string paymentCardBonusMultiplier,
-            string currentProductCode, string currentProductName, decimal amount, decimal bonusAmaunt, int transactionId, string rawData)
+            string currentProductCode, string currentProductName, decimal aMonth, decimal bonusAmaunt, int transactionId, string rawData)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.BankName = bankName;
@@ -34,8 +34,8 @@ namespace IKSIR.ECommerce.Model.ShoppingModel
             this.PaymentCardBonusMultiplier = paymentCardBonusMultiplier;
             this.CurrentProductCode = currentProductCode;
             this.CurrentProductName = currentProductName;
-            this.Amount = amount;
-            this.BonusAmount = bonusAmaunt;
+            this.AMonth = aMonth;
+            this.BonusAMonth = bonusAmaunt;
             this.TransactionId = transactionId;
             this.RawData = rawData;
         }
