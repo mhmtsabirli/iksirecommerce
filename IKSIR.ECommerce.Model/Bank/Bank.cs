@@ -15,7 +15,7 @@ namespace IKSIR.ECommerce.Model.Bank
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.Name = name;
-            this.Status = Status;
+            this.Status = status;
         }
         public Bank()
         {

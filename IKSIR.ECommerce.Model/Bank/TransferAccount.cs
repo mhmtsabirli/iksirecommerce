@@ -19,7 +19,7 @@ namespace IKSIR.ECommerce.Model.Bank
             this.Bank = bank;
             this.Iban = iban;
             this.Description = description;
-            this.Status = Status;
+            this.Status = status;
         }
         public TransferAccount()
         {
