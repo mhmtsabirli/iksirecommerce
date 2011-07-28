@@ -19,7 +19,7 @@ namespace IKSIR.ECommerce.Model.Bank
             this.CreditCard = creditCard;
             this.Month = month;
             this.Rate = rate;
-            this.Status = Status;
+            this.Status = status;
         }
         public PaymetTermRate()
         {

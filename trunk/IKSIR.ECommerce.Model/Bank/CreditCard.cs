@@ -19,12 +19,10 @@ namespace IKSIR.ECommerce.Model.Bank
             this.Bank = bank;
             this.Image = image;
             this.Name = name;
-            this.Status = Status;
+            this.Status = status;
         }
         public CreditCard()
         {
         }
     }
-
-
 }

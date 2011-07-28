@@ -18,7 +18,7 @@ namespace IKSIR.ECommerce.Model.Bank
         {
             this.Bank = bank;
             this.Number = number;
-            this.Status = Status;
+            this.Status = status;
         }
         public BinNumber()
         {
