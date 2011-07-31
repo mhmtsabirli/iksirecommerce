@@ -76,6 +76,15 @@ namespace IKSIR.ECommerce.UI.MasterPages {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
         
         /// <summary>
+        /// UCLogin1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IKSIR.ECommerce.UI.UserControls.UCLogin UCLogin1;
+        
+        /// <summary>
         /// UCModuleBestSellingProducts control.
         /// </summary>
         /// <remarks>

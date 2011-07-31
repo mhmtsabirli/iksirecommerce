@@ -7,6 +7,7 @@
 <%@ Register Src="../UserControls/UCFooter.ascx" TagName="Footer" TagPrefix="uc7" %>
 <%@ Register Src="../UserControls/UCModuleProducts.ascx" TagName="UCModuleProducts"
     TagPrefix="uc8" %>
+<%@ Register src="../UserControls/UCLogin.ascx" tagname="UCLogin" tagprefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -89,32 +90,7 @@
                 <div class="sidemenu_top">
                 </div>
                 <div class="sidemenu_middle">
-                    <div id="Div1" class="tabmenu">
-                        <ul class="tabnav">
-                            <li><a href="#uyegirisi"><span>Üye Girişi</span></a></li>
-                            <li><a href="#yeniuyelik"><span>Yeni Üyelik</span></a></li>
-                        </ul>
-                        <div class="clear">
-                        </div>
-                        <div class="sidemenu_hr">
-                        </div>
-                        <div id="uyegirisi" class="tabdiv">
-                            <input class="sidemenu_kullanici_adi" type="text" value="Kullanıcı Adı..." />
-                            <input class="sidemenu_sifre" type="password" value="Parola..." />
-                            <input class="sidemenu_checkbox" type="checkbox" /><label class="sidemenu_label">Beni
-                                Hatırla</label>
-                            <input class="footer_module_submit" type="submit" value="" />
-                            <div class="clear">
-                            </div>
-                            <span class="sidemenu_link"><a href="#">
-                                <img src="../images/sidemenu_forgot.jpg" alt="" />Parolamı Unuttum?</a></span>
-                        </div>
-                        <div id="yeniuyelik" class="tabdiv">
-                            <p>
-                                Lorem ipsum dolor si Lorem sit amet dolor si dolor sit amet</p>
-                            &nbsp;
-                        </div>
-                    </div>
+                    <uc2:UCLogin ID="UCLogin1" runat="server" />
                 </div>
                 <div class="sidemenu_bottom">
                 </div>
@@ -151,7 +127,6 @@
         </div>
     </div>
     <uc7:Footer ID="Footer1" runat="server" />
-    </form>
     </form>
 </body>
 </html>

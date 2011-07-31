@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -13,7 +14,6 @@ namespace IKSIR.ECommerce.UI.Pages
         {
 
         }
-
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             if (LoginUser())
@@ -22,6 +22,10 @@ namespace IKSIR.ECommerce.UI.Pages
                 if (Request.QueryString["returl"] != null && Request.QueryString["returl"].ToString() != "")
                 {
                     Response.Redirect(Request.QueryString["returl"].ToString());
+                }
+                else
+                {
+                    Response.Redirect("Default.aspx");
                 }
             }
             else
@@ -33,9 +37,14 @@ namespace IKSIR.ECommerce.UI.Pages
 
         private bool LoginUser()
         {
-            bool retValu = false;
-
-            return retValu;
+            bool retValue = false;
+            var user = UserData.Get(txtEmail.Text, txtPassword.Text);
+            if (user != null)
+            {
+                Session.Add("LOGIN_USER", user);
+                retValue = true;
+            }
+            return retValue;
         }
     }
 }

@@ -8,5 +8,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <uc1:UCShowCaseProducts ID="UCShowCaseProducts1" runat="server" />
     <div class="clear">
+
     </div>
+<asp:Button runat="server" ID="btnasd" Text="asdasd" onclick="btnasd_Click" />
+
 </asp:Content>

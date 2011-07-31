@@ -57,10 +57,22 @@ namespace IKSIR.ECommerce.UI.UserControls
                         {
                             var image = itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault();
                             imgProduct.ImageUrl = "http://212.58.8.103/documents/Images/Small/small_" + image.FilePath;
-
                         }
-
                     }
+                }
+            }
+        }
+
+        protected void btnAddtoBasket_Click(object sender, ImageMapEventArgs e)
+        {
+            if (Session["LOGIN_USER"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+            else
+            {
+                if (Session["LOGIN_USER"] == null)
+                {
                 }
             }
         }

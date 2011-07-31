@@ -72,6 +72,9 @@
     <Compile Include="DataLayer\ProductDataLayer\ProductData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ProductPropertyData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ModuleProductData.cs" />
+    <Compile Include="DataLayer\ShoppingDataLayer\BasketItemData.cs" />
+    <Compile Include="DataLayer\ShoppingDataLayer\BasketData.cs" />
+    <Compile Include="DataLayer\ShoppingDataLayer\BasketItemAddressData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\ContactFormData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\SiteModuleData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\SiteCategoryData.cs" />
@@ -87,7 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
-    <Folder Include="DataLayer\ShoppingDataLayer\" />
     <Folder Include="Logging\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
