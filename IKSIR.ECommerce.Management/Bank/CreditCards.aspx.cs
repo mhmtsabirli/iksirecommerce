@@ -361,7 +361,7 @@ namespace IKSIR.ECommerce.Management.Bank
                 fileName = DateTime.Now.ToString().Replace(".", "").Replace(":", "").Replace("/", "").Replace("-", "").Replace(" ", "");
 
                 //IMaj kaydet.
-                string targetFolderImage = Server.MapPath("~/CreditCardImages");
+                string targetFolderImage = Server.MapPath("~/CreditCardImages/");
 
                 targetFileNameImage = System.IO.Path.Combine(targetFolderImage, fileName + uploadedFile.GetExtension());
 
