@@ -67,6 +67,9 @@
   <ItemGroup>
     <Content Include="Admin\Admin.aspx" />
     <Content Include="Admin\Right.aspx" />
+    <Content Include="Bank\Banks.aspx" />
+    <Content Include="Bank\BinNumbers.aspx" />
+    <Content Include="Bank\CreditCards.aspx" />
     <Content Include="Common\ContactForm.aspx" />
     <Content Include="Common\NewsFromUs.aspx" />
     <Content Include="Common\Shipment.aspx" />
@@ -123,6 +126,27 @@
     </Compile>
     <Compile Include="Admin\Right.aspx.designer.cs">
       <DependentUpon>Right.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bank\Banks.aspx.cs">
+      <DependentUpon>Banks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bank\Banks.aspx.designer.cs">
+      <DependentUpon>Banks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bank\BinNumbers.aspx.cs">
+      <DependentUpon>BinNumbers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bank\BinNumbers.aspx.designer.cs">
+      <DependentUpon>BinNumbers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bank\CreditCards.aspx.cs">
+      <DependentUpon>CreditCards.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bank\CreditCards.aspx.designer.cs">
+      <DependentUpon>CreditCards.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\ContactForm.aspx.cs">
       <DependentUpon>ContactForm.aspx</DependentUpon>
@@ -234,6 +258,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_Themes\ManagementGridView\" />
+    <Folder Include="CreditCardImages\" />
     <Folder Include="ProductDocuments\Images\Big\" />
     <Folder Include="ProductDocuments\Images\Icon\" />
     <Folder Include="ProductDocuments\Images\Small\" />
