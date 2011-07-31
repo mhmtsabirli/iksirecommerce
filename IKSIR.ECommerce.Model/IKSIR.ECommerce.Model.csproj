@@ -44,6 +44,7 @@
     <Compile Include="AdminModel\Right.cs" />
     <Compile Include="Bank\Bank.cs" />
     <Compile Include="Bank\BinNumber.cs" />
+    <Compile Include="Bank\CreditCardRates.cs" />
     <Compile Include="Order\Basket.cs" />
     <Compile Include="Bank\PaymetInfo.cs" />
     <Compile Include="Bank\TransferAccount.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Order\BasketItemProductPrice.cs" />
     <Compile Include="Order\BasketItemProductProperty.cs" />
     <Compile Include="Order\Order.cs" />
+    <Compile Include="Bank\Rates.cs" />
     <Compile Include="ProductModel\Shipment.cs" />
     <Compile Include="ProductModel\ProductShipmentPrice.cs" />
     <Compile Include="ProductModel\ProductPrice.cs" />
