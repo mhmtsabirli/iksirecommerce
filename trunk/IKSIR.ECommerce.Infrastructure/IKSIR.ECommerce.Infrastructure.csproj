@@ -46,6 +46,12 @@
     <Compile Include="DataLayer\AdminDataLayer\AdminData.cs" />
     <Compile Include="DataLayer\AdminDataLayer\AdminRightData.cs" />
     <Compile Include="DataLayer\AdminDataLayer\RightData.cs" />
+    <Compile Include="DataLayer\BankDataLayer\BankData.cs" />
+    <Compile Include="DataLayer\BankDataLayer\BinNumberData.cs" />
+    <Compile Include="DataLayer\BankDataLayer\PaymetInfoData.cs" />
+    <Compile Include="DataLayer\BankDataLayer\PaymetTermRateData.cs" />
+    <Compile Include="DataLayer\BankDataLayer\TransferAccountData.cs" />
+    <Compile Include="DataLayer\BankDataLayer\CreditCardData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\AddressData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\CityData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\CommentData.cs" />
