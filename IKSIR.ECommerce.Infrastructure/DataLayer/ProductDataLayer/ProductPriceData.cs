@@ -7,8 +7,10 @@ using System.Data;
 using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
 using IKSIR.ECommerce.Model.ProductModel;
 using IKSIR.ECommerce.Model.SiteModel;
+using IKSIR.ECommerce.Model.Bank;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
+using IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer;
 using IKSIR.ECommerce.Model.CommonModel;
 
 
@@ -25,7 +27,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductPrice", parameters);
             while (dr.Read())
             {
-                
+
 
                 returnValue.Price = DBHelper.DecValue(dr["Price"].ToString());
                 returnValue.UnitPrice = DBHelper.DecValue(dr["UnitPrice"].ToString());
@@ -53,7 +55,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             {
                 while (dr.Read())
                 {
-                    
+
 
                     returnValue.Price = DBHelper.DecValue(dr["Price"].ToString());
                     returnValue.UnitPrice = DBHelper.DecValue(dr["UnitPrice"].ToString());
@@ -125,7 +127,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             List<ProductPrice> itemProductPrice = null;
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-           
+
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductPrice", parameters);
             itemProductPrice = new List<ProductPrice>();
 
@@ -148,5 +150,36 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             return itemProductPrice;
         }
 
+        public static List<CreditCardRates> GetCalculatedPriceList(decimal Price)
+        {
+            List<CreditCardRates> creditCardRatesList = new List<CreditCardRates>();
+            List<CreditCard> creditCardList = null;
+            List<PaymetTermRate> paymentTermRateList = null;
+            creditCardList = CreditCardData.GetAktiveCreditCardList();
+
+            foreach (CreditCard creditCard in creditCardList)
+            {
+                var creditCardRates = new CreditCardRates();
+                var RateList = new List<Rates>();
+                creditCardRates.CreditCardImage = creditCard.Image;
+                creditCardRates.CreditCardName = creditCard.Name;
+                creditCardRates.BankName = creditCard.Bank.Name;
+                paymentTermRateList = PaymetTermRateData.GetAktivePaymetTermRateList(creditCard.Id);
+
+                foreach (PaymetTermRate paymentTermRate in paymentTermRateList)
+                {
+                    var rate = new Rates();
+                    rate.Month = paymentTermRate.Month;
+                    rate.Price = DBHelper.DecValue((paymentTermRate.Rate * Price));
+                    RateList.Add(rate);
+                }
+                creditCardRates.Rates = RateList;
+
+                creditCardRatesList.Add(creditCardRates);
+            }
+
+
+            return creditCardRatesList;
+        }
     }
 }
