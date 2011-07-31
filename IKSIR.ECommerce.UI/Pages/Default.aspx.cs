@@ -14,5 +14,9 @@ namespace IKSIR.ECommerce.UI.Pages
             UCShowCaseProducts1.ModuleId = 8;
 
         }
+        protected void btnasd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx");
+        }
     }
 }

@@ -20,5 +20,14 @@ namespace IKSIR.ECommerce.UI.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IKSIR.ECommerce.UI.UserControls.UCShowCaseProducts UCShowCaseProducts1;
+        
+        /// <summary>
+        /// btnasd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnasd;
     }
 }

@@ -10,8 +10,8 @@ namespace IKSIR.ECommerce.Model.MembershipModel
     public class User : ModelBase
     {
         public string UserName { get; set; }
-        public string Name { get; set; }
-        public string SurName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public DateTime BirthDate { get; set; }
         public string MobilePhone { get; set; }
@@ -21,13 +21,13 @@ namespace IKSIR.ECommerce.Model.MembershipModel
         public Site Site { get; set; }
         public string Password { get; set; }
 
-        public User(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string userName, string name,
-            string surName, string eMail, DateTime birthDate, string mobilePhone, string tcId, int status, DateTime lastLoginDate, Site site, string password)
+        public User(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string userName, string firstName,
+            string lastName, string eMail, DateTime birthDate, string mobilePhone, string tcId, int status, DateTime lastLoginDate, Site site, string password)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.UserName = userName;
-            this.Name = name;
-            this.SurName = surName;
+            this.FirstName = firstName;
+            this.LastName = lastName;
             this.Email = eMail;
             this.BirthDate = birthDate;
             this.MobilePhone = mobilePhone;

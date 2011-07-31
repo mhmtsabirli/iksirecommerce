@@ -42,6 +42,13 @@
     <Compile Include="AdminModel\Admin.cs" />
     <Compile Include="AdminModel\AdminRights.cs" />
     <Compile Include="AdminModel\Right.cs" />
+    <Compile Include="Bank\Bank.cs" />
+    <Compile Include="Bank\BinNumber.cs" />
+    <Compile Include="Order\Basket.cs" />
+    <Compile Include="Bank\PaymetInfo.cs" />
+    <Compile Include="Bank\TransferAccount.cs" />
+    <Compile Include="Bank\CreditCard.cs" />
+    <Compile Include="Bank\PaymetTermRate.cs" />
     <Compile Include="CommonModel\Address.cs" />
     <Compile Include="CommonModel\City.cs" />
     <Compile Include="CommonModel\Comment.cs" />
@@ -59,6 +66,12 @@
     <Compile Include="CommonModel\PropertyValue.cs" />
     <Compile Include="CommonModel\SystemLog.cs" />
     <Compile Include="MembershipModel\User.cs" />
+    <Compile Include="Order\BasketItemAddres.cs" />
+    <Compile Include="Order\BasketItem.cs" />
+    <Compile Include="Order\BasketItemProduct.cs" />
+    <Compile Include="Order\BasketItemProductPrice.cs" />
+    <Compile Include="Order\BasketItemProductProperty.cs" />
+    <Compile Include="Order\Order.cs" />
     <Compile Include="ProductModel\Shipment.cs" />
     <Compile Include="ProductModel\ProductShipmentPrice.cs" />
     <Compile Include="ProductModel\ProductPrice.cs" />

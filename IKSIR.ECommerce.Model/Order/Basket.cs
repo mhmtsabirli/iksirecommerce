@@ -9,10 +9,10 @@ namespace IKSIR.ECommerce.Model.Order
 {
     public class Basket : ModelBase
     {
-        public BasketItemAddres BillingAddress { get; set; }
+        public Address BillingAddress { get; set; }
         public EnumValue Status { get; set; }
 
-        public Basket(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, BasketItemAddres billingAddress,  EnumValue status)
+        public Basket(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Address billingAddress, EnumValue status)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.BillingAddress = billingAddress;

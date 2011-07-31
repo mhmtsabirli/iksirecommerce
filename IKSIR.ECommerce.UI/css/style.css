@@ -267,3 +267,7 @@ body
 			   .c_../images img { margin-left:12px; }
 			
 			.c_right { float:right; padding-top:15px; }
+.ValidationSummaryClass
+{
+    color: Red !important;
+    }

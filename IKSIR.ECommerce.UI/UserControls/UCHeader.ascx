@@ -13,9 +13,22 @@
         <a href="../Pages/Default.aspx">
             <img src="../images/logo.jpg" alt="" /></a></div>
     <div class="search">
+        <input class="search_text" type="text" />
+        <input class="search_submit" type="submit" value="" />
+        <div class="clear">
+        </div>
+        <div>
+            <asp:Panel runat="server" ID="pnlLoginUser" Visible="false">
+                <asp:Label runat="server" ID="lblUserTitle" Text="lblUserTitle"></asp:Label>
+                <a href="../UserPanel/MyAccount.aspx">[Hesabım]</a>
+                &nbsp;
+                <a href="../UserPanel/MyAccount.aspx">[Alışverişlerim]</a>
+                &nbsp;
+                <asp:LinkButton runat="server" ID="lbtnLogout" style="color:Red" Text="[Çıkış]" 
+                    onclick="lbtnLogout_Click"></asp:LinkButton>
+            </asp:Panel>
+        </div>
     </div>
-    <input class="search_text" type="text" />
-    <input class="search_submit" type="submit" value="" />
     <div class="clear">
     </div>
 </div>
@@ -27,7 +40,6 @@
             <li><a href="../Pages/ProductList.aspx?modid=5">Kampanyalı Ürünler</a></li>
             <li><a href="../Pages/ProductList.aspx?modid=6">İndirimli Ürünler</a></li>
             <li><a href="../Pages/Register.aspx">Yeni Üyelik</a></li>
-            <li><a href="../UserPanel/MyAccount.aspx">Hesabım</a></li>
             <li><a href="../Pages/Contact.aspx">İletişim</a></li>
         </ul>
         <div class="clear">
@@ -35,8 +47,11 @@
     </div>
     <div class="nav_info">
         <p>
-            <img src="../images/navbar_sepet.png" alt="" />Alışveriş Sepetim : 5 ürün (1500
-            TL)</p>
+            <a href="../Pages/Basket.aspx" style="color:White">
+                <img src="../images/navbar_sepet.png" alt="" style="border: none" />
+                <asp:Label runat="server" ID="lblBasketProductCount" Text="Sepetinizde Ürün Yok"></asp:Label>
+            </a>
+        </p>
     </div>
     <div class="clear">
     </div>

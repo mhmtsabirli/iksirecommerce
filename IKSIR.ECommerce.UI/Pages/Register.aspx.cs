@@ -70,11 +70,11 @@ namespace IKSIR.ECommerce.UI.Pages
                 var itemUser = new User();
                 itemUser.BirthDate = new DateTime(DBHelper.IntValue(ddlBirthDateYear.SelectedValue), DBHelper.IntValue(ddlBirthDateMonth.SelectedValue), DBHelper.IntValue(ddlBirthDateDay.SelectedValue));
                 itemUser.Email = txtEmail.Text;
-                itemUser.Name = txtFirstName.Text;
-                itemUser.SurName = txtLastName.Text;
+                itemUser.FirstName = txtFirstName.Text;
+                itemUser.LastName = txtLastName.Text;
                 itemUser.Site = new Site() { Id = 1 };
                 itemUser.Password = txtPassword.Text;
-                int ret = UserData.Insert(itemUser);
+                int ret = UserData.Save(itemUser);
                 if (ret > 0)
                     retValue = true;
                 else

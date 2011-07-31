@@ -18,9 +18,11 @@ namespace IKSIR.ECommerce.Model.CommonModel
         public Country Country { get; set; }
         public City City { get; set; }
         public District District { get; set; }
-        public string CityName { get; set; }
-        public string DistrictName { get; set; }
         public string AddressDetail { get; set; }
+        //Türkiye dışında bir ülke seçilirse string olarak alınacağından City bu şekilde tanımlandı
+        public string CityName { get; set; }
+        //Türkiye dışında bir ülke seçilirse string olarak alınacağından District bu şekilde tanımlandı
+        public string DistrictName { get; set; }
         public string PostalCode { get; set; }
         public string Phone { get; set; }
         public string GSMPhone { get; set; }
@@ -28,7 +30,7 @@ namespace IKSIR.ECommerce.Model.CommonModel
         #endregion
 
         #region Constructors
-        public Address(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, User user, string title, EnumValue type, string firstName, string lastName, Country country, City city, District district, string cityName, string districtName, string addressDetail, string postalCode, string phone, string gsmPhone)
+        public Address(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, User user, string title, EnumValue type, string firstName, string lastName, Country country, City city, District district, string addressDetail, string postalCode, string phone, string gsmPhone)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.User = user;
@@ -39,8 +41,6 @@ namespace IKSIR.ECommerce.Model.CommonModel
             this.Country = country;
             this.City = city;
             this.District = district;
-            this.CityName = cityName;
-            this.DistrictName = districtName;
             this.AddressDetail = addressDetail;
             this.PostalCode = postalCode;
             this.Phone = phone;
