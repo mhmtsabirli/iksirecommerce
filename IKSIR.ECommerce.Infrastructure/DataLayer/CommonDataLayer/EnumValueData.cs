@@ -36,11 +36,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
-        public static IKSIR.ECommerce.Model.CommonModel.EnumValue Get(int enumId)
+        public static IKSIR.ECommerce.Model.CommonModel.EnumValue Get(int enumValueId)
         {
             var returnValue = new IKSIR.ECommerce.Model.CommonModel.EnumValue();
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", enumId));
+            parameters.Add(new SqlParameter("@Id", enumValueId));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetEnumValue", parameters);
             while (dr.Read())
             {

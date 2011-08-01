@@ -69,6 +69,9 @@
     <Compile Include="DataLayer\DataBlock\DBHelper.cs" />
     <Compile Include="DataLayer\DataBlock\SqlDataBlock.cs" />
     <Compile Include="DataLayer\MembershipDataLayer\UserData.cs" />
+    <Compile Include="DataLayer\OrderDataLayer\BasketItemProductData.cs" />
+    <Compile Include="DataLayer\OrderDataLayer\BasketItemProductPriceData.cs" />
+    <Compile Include="DataLayer\OrderDataLayer\OrderData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\SimilarProductData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\RelatedProductData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ProductShipmentPriceData.cs" />
@@ -78,9 +81,9 @@
     <Compile Include="DataLayer\ProductDataLayer\ProductData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ProductPropertyData.cs" />
     <Compile Include="DataLayer\ProductDataLayer\ModuleProductData.cs" />
-    <Compile Include="DataLayer\ShoppingDataLayer\BasketItemData.cs" />
-    <Compile Include="DataLayer\ShoppingDataLayer\BasketData.cs" />
-    <Compile Include="DataLayer\ShoppingDataLayer\BasketItemAddressData.cs" />
+    <Compile Include="DataLayer\OrderDataLayer\BasketItemData.cs" />
+    <Compile Include="DataLayer\OrderDataLayer\BasketData.cs" />
+    <Compile Include="DataLayer\OrderDataLayer\BasketItemAddressData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\ContactFormData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\SiteModuleData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\SiteCategoryData.cs" />

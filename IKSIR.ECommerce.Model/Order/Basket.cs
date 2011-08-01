@@ -11,12 +11,13 @@ namespace IKSIR.ECommerce.Model.Order
     {
         public Address BillingAddress { get; set; }
         public EnumValue Status { get; set; }
-
-        public Basket(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Address billingAddress, EnumValue status)
+        public List<BasketItem> BasketItems { get; set; }
+        public Basket(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Address billingAddress, EnumValue status, List<BasketItem> basketItems)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.BillingAddress = billingAddress;
             this.Status = Status;
+            this.BasketItems = basketItems;
         }
         public Basket()
         {

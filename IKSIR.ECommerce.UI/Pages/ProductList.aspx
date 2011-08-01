@@ -53,8 +53,11 @@
             </div>
             <div class="section_links">
                 <a href='<%# "../Pages/ProductDetails.aspx?pid="+ Eval("Id")%>'>
-                    <img src="../images/section_incele.jpg" alt="" /></a> <a href="#">
-                        <img src="../images/section_sepete_ekle.jpg" alt="" /></a>
+                    <img src="../images/section_incele.jpg" alt="" /></a>
+                    <asp:ImageButton runat="server" ID="imgbtnAddtoBasket" ImageUrl="../images/section_sepete_ekle.jpg"
+                    AlternateText="Sepete Ekle" 
+    CommandArgument='<%# Eval("Id")%>' onclick="imgbtnAddtoBasket_Click">
+                </asp:ImageButton>
             </div>
         </div>
         </ItemTemplate>

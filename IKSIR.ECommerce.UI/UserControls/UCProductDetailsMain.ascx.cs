@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
+using IKSIR.ECommerce.UI.ClassLibrary;
 
 namespace IKSIR.ECommerce.UI.UserControls
 {
@@ -52,10 +53,22 @@ namespace IKSIR.ECommerce.UI.UserControls
                 lblProductPrice.Text = product.ProductPrice.UnitPrice.ToString();
                 lblProductPriceWithKDV.Text = product.ProductPrice.Price.ToString();
                 lblBigProductPrice.Text = product.ProductPrice.Price.ToString();
+                lbtnAddToBasket.CommandArgument = product.Id.ToString();
             }
             catch (Exception exception)
             {
             }
+        }
+
+        protected void lbtnAddToBasket_Click(object sender, EventArgs e)
+        {
+            int productId = 0;
+            int count = 0;
+
+            string strproductId = ((LinkButton)sender).CommandArgument;
+
+            if (int.TryParse(strproductId, out productId) && int.TryParse(txtCount.Text, out count))
+                Shopping.AddToBasket(productId, count);
         }
     }
 }

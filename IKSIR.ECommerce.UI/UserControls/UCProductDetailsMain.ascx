@@ -97,8 +97,13 @@
         <span>Hemen Al</span>
         <form action="">
         <label class="satis_label">
-            Adet</label><input class="satis_text" type="text" />
-        <input class="satis_sepet" type="submit" value="Sepete At" />
+            Adet</label>
+        <asp:TextBox runat="server" ID="txtCount" CssClass="satis_text"></asp:TextBox>
+        <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="txtCount"
+            SetFocusOnError="true" ErrorMessage="Adet girmelisiniz." ValidationGroup="vgAddtoBasket">*</asp:RequiredFieldValidator>
+        <asp:ValidationSummary runat="server" ID="vs1" ValidationGroup="vgAddtoBasket" DisplayMode="List" ShowMessageBox="true" />
+        <asp:LinkButton runat="server" ID="lbtnAddToBasket" CssClass="satis_sepet" Text="Sepete At"
+            OnClick="lbtnAddToBasket_Click" ValidationGroup="vgAddtoBasket"></asp:LinkButton>
         </form>
         <div class="clear">
         </div>
