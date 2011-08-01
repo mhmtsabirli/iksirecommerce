@@ -292,7 +292,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.MaxQuantity = DBHelper.IntValue(dr["MaxQuantity"].ToString());
                 item.StokStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["StokStatus"].ToString()) });
                 item.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
-                item.ProductPrice = ProductPriceData.GetByProduct(DBHelper.IntValue(dr["ProductId"].ToString()));
+                item.ProductPrice = ProductPriceData.GetByProduct(DBHelper.IntValue(dr["Id"].ToString()));
                 item.Multimedias = MultimediasData.GetItemMultimedias(3, DBHelper.IntValue(dr["Id"].ToString()));
                 itemProductList.Add(item);
             }

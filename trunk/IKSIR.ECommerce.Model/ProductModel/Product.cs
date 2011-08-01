@@ -22,9 +22,12 @@ namespace IKSIR.ECommerce.Model.ProductModel
         public EnumValue StokStatus { get; set; }
         public int Stok { get; set; }
         public int MaxQuantity { get; set; }
-
+        public string MainImage
+        {
+            get { return Multimedias.Where(x => x.IsDefault == true).FirstOrDefault() != null ? Multimedias.Where(x => x.IsDefault == true).FirstOrDefault().FilePath : ""; }
+        }
         public Product(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string title,
-            string description, string video, string productCode, EnumValue productStatus, EnumValue stokStatus, int stok, int maxQuantity, int guarantee, int minStock, DateTime alertdate, List<Multimedia> multimedias, ProductCategory productCategory, ProductPrice productPrice) 
+            string description, string video, string productCode, EnumValue productStatus, EnumValue stokStatus, int stok, int maxQuantity, int guarantee, int minStock, DateTime alertdate, List<Multimedia> multimedias, ProductCategory productCategory, ProductPrice productPrice)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.Video = video;
@@ -47,5 +50,5 @@ namespace IKSIR.ECommerce.Model.ProductModel
             // TODO: Complete member initialization
         }
     }
-       
+
 }

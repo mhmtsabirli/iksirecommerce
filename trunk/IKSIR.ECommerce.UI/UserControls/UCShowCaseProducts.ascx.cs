@@ -8,6 +8,7 @@ using System.Text;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
+using IKSIR.ECommerce.UI.ClassLibrary;
 
 namespace IKSIR.ECommerce.UI.UserControls
 {
@@ -63,18 +64,13 @@ namespace IKSIR.ECommerce.UI.UserControls
             }
         }
 
-        protected void btnAddtoBasket_Click(object sender, ImageMapEventArgs e)
+        protected void imgbtnAddtoBasket_Click(object sender, ImageClickEventArgs e)
         {
-            if (Session["LOGIN_USER"] == null)
-            {
-                Response.Redirect("Login.aspx");
-            }
-            else
-            {
-                if (Session["LOGIN_USER"] == null)
-                {
-                }
-            }
+            int productId = 0;
+            string strproductId = ((ImageButton)sender).CommandArgument;
+
+            if (int.TryParse(strproductId, out productId))
+                Shopping.AddToBasket(productId);
         }
     }
 }

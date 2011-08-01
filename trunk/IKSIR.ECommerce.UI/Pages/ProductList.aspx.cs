@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Model.ProductModel;
+using IKSIR.ECommerce.UI.ClassLibrary;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -79,11 +80,11 @@ namespace IKSIR.ECommerce.UI.Pages
 
             foreach (DataListItem item in dlProductList.Items)
             {
-                if (item.FindControl("imgProduct") != null && item.FindControl("hdnProductId") != null)
-                {
-                    Image imgProduct = (Image)item.FindControl("imgProduct");
-                    HiddenField hdnProductId = (HiddenField)item.FindControl("hdnProductId");
+                Image imgProduct = (Image)item.FindControl("imgProduct");
+                HiddenField hdnProductId = (HiddenField)item.FindControl("hdnProductId");
 
+                if (imgProduct != null && hdnProductId != null)
+                {
                     int productId = 0;
                     if (hdnProductId.Value != "" && int.TryParse(hdnProductId.Value, out productId))
                     {
@@ -112,6 +113,15 @@ namespace IKSIR.ECommerce.UI.Pages
                     hplPageNo.CssClass = "selectedpage";
                 }
             }
+        }
+
+        protected void imgbtnAddtoBasket_Click(object sender, ImageClickEventArgs e)
+        {
+            int productId = 0;
+            string strproductId = ((ImageButton)sender).CommandArgument;
+
+            if (int.TryParse(strproductId, out productId))
+                Shopping.AddToBasket(productId);
         }
     }
 }
