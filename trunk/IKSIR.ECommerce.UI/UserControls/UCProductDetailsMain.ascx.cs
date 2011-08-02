@@ -54,6 +54,10 @@ namespace IKSIR.ECommerce.UI.UserControls
                 lblProductPriceWithKDV.Text = product.ProductPrice.Price.ToString();
                 lblBigProductPrice.Text = product.ProductPrice.Price.ToString();
                 lbtnAddToBasket.CommandArgument = product.Id.ToString();
+                for (int i = 1; i <= product.MaxQuantity; i++)
+                {
+                    ddlProductCount.Items.Add(new ListItem(i.ToString(), i.ToString()));
+                }
             }
             catch (Exception exception)
             {
@@ -67,7 +71,7 @@ namespace IKSIR.ECommerce.UI.UserControls
 
             string strproductId = ((LinkButton)sender).CommandArgument;
 
-            if (int.TryParse(strproductId, out productId) && int.TryParse(txtCount.Text, out count))
+            if (int.TryParse(strproductId, out productId) && int.TryParse(ddlProductCount.SelectedValue, out count))
                 Shopping.AddToBasket(productId, count);
         }
     }
