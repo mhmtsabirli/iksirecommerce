@@ -11,3 +11,16 @@ C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerc
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Toolkit.dll
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Management.pdb
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Toolkit.pdb
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.UI.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.UI.pdb
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Infrastructure.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Management.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Model.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Toolkit.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Infrastructure.pdb
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Management.pdb
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Model.pdb
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\IKSIR.ECommerce.Toolkit.pdb
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\obj\Debug\ResolveAssemblyReference.cache
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\obj\Debug\IKSIR.ECommerce.UI.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\obj\Debug\IKSIR.ECommerce.UI.pdb

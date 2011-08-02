@@ -22,3 +22,16 @@ C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\IKSIR.ECommerce.Management.dll
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\IKSIR.ECommerce.Management.pdb
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Toolkit.pdb
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Management.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Management.pdb
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Infrastructure.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Model.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\RadAjax.Net2.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\RadTabStrip.Net2.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\Telerik.Web.UI.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Infrastructure.pdb
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Model.pdb
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Toolkit.pdb
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\ResolveAssemblyReference.cache
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\IKSIR.ECommerce.Management.dll
+D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\IKSIR.ECommerce.Management.pdb
