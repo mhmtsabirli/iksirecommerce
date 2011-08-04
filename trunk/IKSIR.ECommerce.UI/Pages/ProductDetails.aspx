@@ -17,6 +17,7 @@
 <%@ Register Src="../UserControls/UCProductDetailsMain.ascx" TagName="UCProductDetailsMain"
     TagPrefix="uc7" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+   
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="sepet_content">
