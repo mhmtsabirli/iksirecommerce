@@ -67,7 +67,7 @@
     .clearfix
     {
         display: block;
-        zoom: 1;
+        zoom: 2;
     }
     ul#thumblist
     {
@@ -86,7 +86,7 @@
     }
     ul#thumblist li a.zoomThumbActive
     {
-        border: 1px solid red;
+        border: 1px solid #094073;
     }
     .jqzoom
     {
@@ -108,20 +108,20 @@
 </script>
 <div class="urun_resimleri">
     <div class="urun_buyuk_resim">
-        <div class="clearfix" id="content" style="text-align: center">
-            <div class="clearfix" style="height: 225px; text-align: center; text-align:center; vertical-align:middle;">
+        <div class="clearfix" id="content" style="text-align: center; height: 250px; width:350px; vertical-align:middle;">
+            <div class="clearfix" style="height: 250px; width:350px; text-align:center; vertical-align:middle;float:left;">
                 <a runat="server" id="anchorBigImage" class="jqzoom" rel="gal1" title="Büyük Resim">
-                    <img runat="server" src="" id="imgMainImage" title="triumph" style="border: 1px solid #666;" alt="" />
+                    <img runat="server" src="" id="imgMainImage" title="triumph" style="border: 1px solid #094073;" alt="" />
                 </a>
             </div>
             <br />
-            <div class="clearfix" id="divOtherImages" runat="server">
+            <div class="clearfix" id="divOtherImages" runat="server" style="float:left; padding-top:5px;">
             </div>
         </div>
     </div>
-    <div class="urun_kucuk_resimler" runat="server">
+    <div class="urun_kucuk_resimler" runat="server" style="float:left; padding-top:5px;">
     </div>
-    <div class="urun_paylas">
+    <div class="urun_paylas" style="float:left; padding-top:5px;">
         <ul>
             <li><a href="#">
                 <img src="../images/urun_paylas_1.png" alt="" /></a></li>

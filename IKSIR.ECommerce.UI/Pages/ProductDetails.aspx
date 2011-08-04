@@ -76,8 +76,6 @@
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="pvProductComments" runat="server">
                         <uc2:UCProductDetailsComments ID="UCProductDetailsComments1" runat="server" />
-                        <br />
-                        <asp:Button runat="server" ID="btnSave" Text="Save" OnClick="btnSave_Click" />
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="pvSimilarProducts" runat="server">
                         <uc6:UCProductDetailsSimilarProducts ID="UCProductDetailsSimilarProducts1" runat="server" />

@@ -2,6 +2,7 @@
     Inherits="IKSIR.ECommerce.UI.MasterPages.UIDetailMasterPage" %>
 <%@ Register Src="../UserControls/UCHeader.ascx" TagName="Header" TagPrefix="uc5" %>
 <%@ Register Src="../UserControls/UCFooter.ascx" TagName="Footer" TagPrefix="uc6" %>
+<%@ Register src="../UserControls/UCMainCategories.ascx" tagname="UCMainCategories" tagprefix="uc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -28,67 +29,7 @@
                 <div class="sidemenu_top">
                 </div>
                 <div class="sidemenu_middle">
-                    <ul id="menu1" class="example_menu">
-                        <li><a class="collapsed">Tezgahaltı Lavabolar</a>
-                            <ul>
-                                <li><a href="#">Link A-A</a></li>
-                                <li><a href="#">Link A-C</a></li>
-                                <li><a href="#">Link A-D</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="collapsed">Tezgahaltı Lavabolar</a>
-                            <ul>
-                                <li><a href="#">Link B-A</a></li>
-                                <li><a href="#">Link B-B</a></li>
-                                <li><a href="#">Link B-C</a></li>
-                                <li><a href="#">Link B-D</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="collapsed">Tezgahüstü Etajerli Lavabolar</a>
-                            <ul>
-                                <li><a href="#">Link C-A</a></li>
-                                <li><a href="#">Link C-B</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="collapsed">Konsol Lavabolar</a>
-                            <ul>
-                                <li><a href="#">Link B-A</a></li>
-                                <li><a href="#">Link B-B</a></li>
-                                <li><a href="#">Link B-C</a></li>
-                                <li><a href="#">Link B-D</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="expanded">Dekorlu Ürünler</a>
-                            <ul>
-                                <li><a href="#">Bonus</a></li>
-                                <li class="active"><a href="#">Bonus Kampanyalar</a></li>
-                                <li><a href="#">Kredi Kartı Başvurusu</a></li>
-                                <li><a href="#">GeAS (3D Secure)</a></li>
-                                <li><a href="#">Taksitli Avans</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="collapsed">Tezgahaltı Lavabolar</a>
-                            <ul>
-                                <li><a href="#">Link A-A</a></li>
-                                <li><a href="#">Link A-C</a></li>
-                                <li><a href="#">Link A-D</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="collapsed">Tezgahaltı Lavabolar</a>
-                            <ul>
-                                <li><a href="#">Link B-A</a></li>
-                                <li><a href="#">Link B-B</a></li>
-                                <li><a href="#">Link B-C</a></li>
-                                <li><a href="#">Link B-D</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="collapsed">Tezgahüstü Etajerli Lavabolar</a>
-                            <ul>
-                                <li><a href="#">Link C-A</a></li>
-                                <li><a href="#">Link C-B</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <uc1:UCMainCategories ID="UCMainCategories1" runat="server" />
                 </div>
                 <div class="sidemenu_bottom">
                 </div>
