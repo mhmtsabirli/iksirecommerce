@@ -29,15 +29,25 @@ namespace IKSIR.ECommerce.UI.UserControls
                 var itemMainImage = productMultimedias.Where(x => x.IsDefault == true).First();
                 if (itemMainImage != null)
                 {
-                    imgMainImage.ImageUrl = "http://212.58.8.103/documents/Images/Big/big_" + itemMainImage.FilePath;
+                    imgMainImage.Src = "http://212.58.8.103/documents/Images/Big/big_" + itemMainImage.FilePath;
+                    anchorBigImage.HRef = "http://212.58.8.103/documents/Orginal/Images/" + itemMainImage.FilePath;
                 }
 
-                string otherImages = "";
+
+                //<li><a class="zoomThumbActive" href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: './imgProd/triumph_small1.jpg',largeimage: './imgProd/triumph_big1.jpg'}"><img src='imgProd/thumbs/triumph_thumb1.jpg'></a></li>
+
+
+                string otherImages = "<ul id=\"thumblist\" class=\"clearfix\">";
                 int imageCount = 0;
                 foreach (var item in productMultimedias)
                 {
                     imageCount += 1;
-                    otherImages += "<a href=\"#\"><img src=\"http://212.58.8.103/documents/Images/Icon/icon_" + item.FilePath + "\" alt=\"\" /></a>";
+                    //otherImages += "<a href=\"#\"><img src=\"http://212.58.8.103/documents/Images/Icon/icon_" + item.FilePath + "\" alt=\"\" /></a>";
+                    if(imageCount==1)
+                    otherImages += "<li><a class=\"zoomThumbActive\" href='javascript:void(0);' rel=\"{gallery: 'gal1', smallimage: 'http://212.58.8.103/documents/Images/Big/big_" + item.FilePath + "',largeimage: 'http://212.58.8.103/documents/Orginal/Images/" + item.FilePath + "'}\"><img src=\"http://212.58.8.103/documents/Images/Icon/icon_" + item.FilePath + "\" alt=\"\" /></a></li>";
+                    else
+                        otherImages += "<li><a href='javascript:void(0);' rel=\"{gallery: 'gal1', smallimage: 'http://212.58.8.103/documents/Images/Big/big_" + item.FilePath + "',largeimage: 'http://212.58.8.103/documents/Orginal/Images/" + item.FilePath + "'}\"><img src=\"http://212.58.8.103/documents/Images/Icon/icon_" + item.FilePath + "\" alt=\"\" /></a></li>";
+
                     if (imageCount == 3)
                         break;
                 }
@@ -45,6 +55,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                 {
                     otherImages += "<a href=\"#\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
                 }
+                otherImages += "</ul>";
                 divOtherImages.InnerHtml = otherImages;
                 lblProductCode.Text = product.ProductCode;
                 lblProductName.Text = product.Title;

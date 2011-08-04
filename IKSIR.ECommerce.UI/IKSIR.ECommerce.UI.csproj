@@ -50,7 +50,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\jquery.jqzoom.css" />
     <Content Include="css\style.css" />
+    <Content Include="images\advertise.jpg" />
     <Content Include="images\carousel_bg.jpg" />
     <Content Include="images\carousel_image.jpg" />
     <Content Include="images\carousel_left.jpg" />
@@ -132,10 +134,14 @@
     <Content Include="images\urun_thumb_2.jpg" />
     <Content Include="images\urun_video.jpg" />
     <Content Include="images\urun_yildiz.png" />
+    <Content Include="images\zoomloader.gif" />
     <Content Include="js\functions.js" />
     <Content Include="js\jquery-1.4.2.min.js" />
+    <Content Include="js\jquery-1.6.js" />
     <Content Include="js\jquery-ui.js" />
     <Content Include="js\jquery-v1.4.4.js" />
+    <Content Include="js\jquery.jqzoom-core-pack.js" />
+    <Content Include="js\jquery.jqzoom-core.js" />
     <Content Include="js\jquery.maskedinput-1.2.2.js" />
     <Content Include="js\jquery.swfobject.js" />
     <Content Include="js\sprinkle.js" />
