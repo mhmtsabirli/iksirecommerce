@@ -14,42 +14,21 @@
             <div class="section_image">
                 <asp:Image runat="server" ID="imgProduct" /></div>
             <div class="section_info">
-                <table>
-                    <tr>
-                        <td>
-                            Ürün Kodu
-                        </td>
-                        <td>
-                            :
-                        </td>
-                        <td style="color: #848484;">
-                            <%# Eval("ProductCode")%>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Ürün Adı
-                        </td>
-                        <td>
-                            :
-                        </td>
-                        <td style="color: #848484;">
-                            <%# Eval("Title")%>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Fiyatı
-                        </td>
-                        <td>
-                            :
-                        </td>
-                        <td style="color: #094073;">
+               <div id="divcontainer">
+                    <div id="divCode" style="padding-top:3px;">
+                        <span style="color: #848484;">
+                            <%# Eval("ProductCode")%></span>
+                    </div>
+                    <div id="divTitle" style="padding-top:3px;">
+                        <span style="color: #848484;">
+                            <%# Eval("Title")%></span>
+                    </div>
+                    <div id="divPrice" style="padding-top:5px;">
+                        <span style="color: #094073; font-weight: bold;">
                             <%# Eval("ProductPrice.UnitPrice")%>
-                            TL + KDV
-                        </td>
-                    </tr>
-                </table>
+                            TL + KDV</span>
+                    </div>
+                </div>
             </div>
             <div class="section_links">
                 <a href='<%# "../Pages/ProductDetails.aspx?pid="+ Eval("Id")%>'>

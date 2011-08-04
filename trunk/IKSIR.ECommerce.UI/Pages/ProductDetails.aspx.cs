@@ -84,10 +84,5 @@ namespace IKSIR.ECommerce.UI.Pages
                 }
             }
         }
-
-        protected void btnSave_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
