@@ -77,6 +77,30 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             returnValue = Update(itemBasketItem);
             return returnValue;
         }
+
+        public static List<BasketItem> GetList(int basketId)
+        {
+            List<BasketItem> returnValue = null;
+            var basketItem = new BasketItem();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@BasketId", basketId));
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetBasketItem", parameters);
+            while (dr.Read())
+            {
+                basketItem.Id = DBHelper.IntValue(dr["Id"].ToString());
+                basketItem.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                basketItem.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                basketItem.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                basketItem.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                basketItem.Basket = BasketData.Get(DBHelper.IntValue(dr["BasketId"].ToString()));
+                basketItem.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
+                basketItem.ShippingAddress = BasketItemAddressData.Get(DBHelper.IntValue(dr["ShippingAddressId"].ToString()));
+                basketItem.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
+                returnValue.Add(basketItem);
+            }
+            dr.Close();
+            return returnValue;
+        }
     }
 }
 
