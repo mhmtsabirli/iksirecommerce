@@ -13,9 +13,21 @@ namespace IKSIR.ECommerce.Model.Bank
         public string Image { get; set; }
         public string Name { get; set; }
         public EnumValue Status { get; set; }
-        public CreditCard(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Bank bank, string image, string name, EnumValue status)
+        public string VposId { get; set; }
+        public string VposName { get; set; }
+        public string VposPassword { get; set; }
+        public string VposHost { get; set; }
+        public string VposUser { get; set; }
+        public CreditCard(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, 
+            string vposId,string vposName,string vposPassword,string vposHost,string vposUser,
+            Bank bank, string image, string name, EnumValue status)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
+            this.VposHost = vposHost;
+            this.VposId = vposId;
+            this.VposName = vposName;
+            this.VposPassword = vposPassword;
+            this.VposUser = vposUser;
             this.Bank = bank;
             this.Image = image;
             this.Name = name;
