@@ -98,7 +98,10 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock
                 }
             }
             OpenConnection();
+            
             return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+           
+
         }
 
         public static DataTable ExecuteDataTable(string ConnectionString, CommandType CommandType, string CommandText)

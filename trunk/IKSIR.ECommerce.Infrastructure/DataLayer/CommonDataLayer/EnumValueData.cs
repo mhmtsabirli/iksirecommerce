@@ -53,7 +53,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
             }
-
+            
             dr.Close();
             return returnValue;
         }

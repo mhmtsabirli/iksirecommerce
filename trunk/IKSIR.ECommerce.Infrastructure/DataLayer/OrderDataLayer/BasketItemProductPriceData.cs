@@ -9,14 +9,15 @@ using IKSIR.ECommerce.Model.Order;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.CommonModel;
+using IKSIR.ECommerce.Model.ProductModel;
 
 namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
 {
     public class BasketItemProductPriceData
     {
-        public static BasketItemProductPrice Get(int id)
+        public static ProductPrice Get(int id)
         {
-            var returnValue = new BasketItemProductPrice();
+            var returnValue = new ProductPrice();
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetBasketItemProductPrice", parameters);
@@ -27,8 +28,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-                returnValue.BasketItemId = DBHelper.IntValue(dr["BasketItemId"].ToString());
-                returnValue.ProductId = DBHelper.IntValue(dr["ProductId"].ToString());
+                returnValue.Product = new Product() { Id = DBHelper.IntValue(dr["ProductId"].ToString()) };
                 returnValue.UnitPrice = DBHelper.DecValue(dr["UnitPrice"].ToString());
                 returnValue.Tax = DBHelper.IntValue(dr["Tax"].ToString());
                 returnValue.Price = DBHelper.DecValue(dr["Price"].ToString());
@@ -36,7 +36,27 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             dr.Close();
             return returnValue;
         }
-
+        public static ProductPrice GetByProductId(int ProductId)
+        {
+            var returnValue = new ProductPrice();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@ProductId", ProductId));
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetBasketItemProductPrice", parameters);
+            while (dr.Read())
+            {
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Product = new Product() { Id = DBHelper.IntValue(dr["ProductId"].ToString()) };
+                returnValue.UnitPrice = DBHelper.DecValue(dr["UnitPrice"].ToString());
+                returnValue.Tax = DBHelper.IntValue(dr["Tax"].ToString());
+                returnValue.Price = DBHelper.DecValue(dr["Price"].ToString());
+            }
+            dr.Close();
+            return returnValue;
+        }
         public static int Insert(BasketItemProductPrice itemBasketItemProductPrice)
         {
             var returnValue = 0;
@@ -83,4 +103,5 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
         //}
     }
 }
+
 
