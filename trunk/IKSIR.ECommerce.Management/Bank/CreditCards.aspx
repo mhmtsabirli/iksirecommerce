@@ -41,6 +41,8 @@
                             </telerik:RadTab>
                             <telerik:RadTab Text="Vade Oranları" PageViewID="RadPageView2">
                             </telerik:RadTab>
+                            <telerik:RadTab Text="VPos Bilgileri" PageViewID="RadPageView3">
+                            </telerik:RadTab>
                         </Tabs>
                     </telerik:RadTabStrip>
                     <telerik:RadMultiPage ID="RadMultiPage1" runat="server">
@@ -259,6 +261,95 @@
                                         ReadOnly="true" SortExpression="Rate" />
                                 </Columns>
                             </asp:GridView>
+                        </telerik:RadPageView>
+                        <telerik:RadPageView ID="RadPageView3" runat="server" Selected="true">
+                            <table>
+                                <tr>
+                                    <td colspan="4">
+                                        <strong>Vpos Formu</strong> (Kredi Kartı Vpos Bilgileri)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Vpos Id
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" Width="100%" ID="txtVposId"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtVposId"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Vpos Id Girmelisiniz"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Vpos Adı
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" Width="100%" ID="txtVposName"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtVposName"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Vpos Adı Girmelisiniz"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Vpos Şifresi
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" Width="100%" ID="txtVposPassword"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtVposPassword"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Vpos Şifresi Girmelisiniz"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Vpos Adresi
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" Width="100%" ID="txtVposHost"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator7" ControlToValidate="txtVposHost"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Vpos Adresi Girmelisiniz"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Vpos Kullanıcı
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" Width="100%" ID="txtVposUser"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator10" ControlToValidate="txtVposUser"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Vpos Kullanıcı Girmelisiniz"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                            </table>
                         </telerik:RadPageView>
                     </telerik:RadMultiPage>
                     <table>

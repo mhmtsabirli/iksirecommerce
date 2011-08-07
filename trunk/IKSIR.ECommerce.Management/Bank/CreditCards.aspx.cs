@@ -124,6 +124,11 @@ namespace IKSIR.ECommerce.Management.Bank
             txtName.Text = string.Empty;
             txtRateOne.Text = string.Empty;
             txtRateTwo.Text = string.Empty;
+            txtVposHost.Text = string.Empty;
+            txtVposId.Text = string.Empty;
+            txtVposName.Text = string.Empty;
+            txtVposPassword.Text = string.Empty;
+            txtVposUser.Text = string.Empty;
             ddlBanks.SelectedIndex = -1;
             ddlCreditCardStatus.SelectedIndex = -1;
             ddlRate.SelectedIndex = -1;
@@ -205,6 +210,13 @@ namespace IKSIR.ECommerce.Management.Bank
                 var item = CreditCardData.Get(CreditCardId);
                 lblCreditCardId.Text = item.Id.ToString();
                 txtName.Text = item.Name.ToString();
+
+
+                txtVposHost.Text = item.VposHost.ToString();
+                txtVposId.Text = item.VposId.ToString();
+                txtVposName.Text = item.VposName.ToString();
+                txtVposPassword.Text = item.VposPassword.ToString();
+                txtVposUser.Text = item.VposUser.ToString();
                 ddlBanks.SelectedValue = item.Bank.Id.ToString();
                 ddlCreditCardStatus.SelectedValue = item.Status.Id.ToString();
                 CardImage.ImageUrl = "../CreditCardImages/" + item.Image.ToString();
@@ -301,6 +313,11 @@ namespace IKSIR.ECommerce.Management.Bank
                 itemCreditCard.Bank = new IKSIR.ECommerce.Model.Bank.Bank() { Id = Convert.ToInt32(ddlBanks.SelectedValue) };
                 itemCreditCard.Image = SaveImage();
                 itemCreditCard.Name = txtName.Text;
+                itemCreditCard.VposHost = txtVposHost.Text;
+                itemCreditCard.VposId = txtVposId.Text;
+                itemCreditCard.VposName = txtVposName.Text;
+                itemCreditCard.VposPassword = txtVposPassword.Text;
+                itemCreditCard.VposUser = txtVposUser.Text;
                 itemCreditCard.Status = new EnumValue() { Id = Convert.ToInt32(ddlCreditCardStatus.SelectedValue) };
 
                 int result = CreditCardData.Insert(itemCreditCard);
@@ -330,7 +347,11 @@ namespace IKSIR.ECommerce.Management.Bank
 
                 itemCreditCard.Name = txtName.Text;
                 itemCreditCard.Status = new EnumValue() { Id = Convert.ToInt32(ddlCreditCardStatus.SelectedValue) };
-
+                itemCreditCard.VposHost = txtVposHost.Text;
+                itemCreditCard.VposId = txtVposId.Text;
+                itemCreditCard.VposName = txtVposName.Text;
+                itemCreditCard.VposPassword = txtVposPassword.Text;
+                itemCreditCard.VposUser = txtVposUser.Text;
                 int result = CreditCardData.Update(itemCreditCard);
                 if (result != 1)
                     retValue = true;
