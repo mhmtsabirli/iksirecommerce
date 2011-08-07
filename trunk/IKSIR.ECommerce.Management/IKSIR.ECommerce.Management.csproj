@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IKSIR.ECommerce.Infrastructure">
-      <HintPath>..\..\..\Output\Debug\IKSIR.ECommerce.Infrastructure.dll</HintPath>
+    <Reference Include="ePayment">
+      <HintPath>..\..\..\Hipernex\e-commerce\v3\ManagerHip3_1\bin\ePayment.dll</HintPath>
     </Reference>
     <Reference Include="IKSIR.ECommerce.Model">
       <HintPath>..\..\..\Output\Debug\IKSIR.ECommerce.Model.dll</HintPath>
@@ -91,6 +91,7 @@
     <Content Include="Images\Reports.png" />
     <Content Include="Images\Settings.png" />
     <Content Include="Images\Stock.png" />
+    <Content Include="Order\WaitingOrders.aspx" />
     <Content Include="ProductManagement\ModuleProducts.aspx" />
     <Content Include="ProductManagement\ProductCategories.aspx" />
     <Content Include="ProductManagement\ProductPrices.aspx" />
@@ -225,6 +226,13 @@
     <Compile Include="MasterPage\MasterManagement.Master.designer.cs">
       <DependentUpon>MasterManagement.Master</DependentUpon>
     </Compile>
+    <Compile Include="Order\WaitingOrders.aspx.cs">
+      <DependentUpon>WaitingOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Order\WaitingOrders.aspx.designer.cs">
+      <DependentUpon>WaitingOrders.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProductManagement\ModuleProducts.aspx.cs">
       <DependentUpon>ModuleProducts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -266,6 +274,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MasterPage\MasterManagement.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IKSIR.ECommerce.Infrastructure\IKSIR.ECommerce.Infrastructure.csproj">
+      <Project>{815B64C7-A938-46A9-B1E0-288579B3B391}</Project>
+      <Name>IKSIR.ECommerce.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
