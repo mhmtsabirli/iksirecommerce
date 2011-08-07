@@ -14,14 +14,18 @@ namespace IKSIR.ECommerce.Model.Order
         public Basket Basket { get; set; }
         public PaymetInfo PaymetInfo { get; set; }
         public EnumValue Status { get; set; }
+        public decimal TotalRatedPrice { get; set; }
+        public decimal TotalPrice { get; set; }
 
-        public Order(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, User user, Basket basket, PaymetInfo paymetInfo, EnumValue status)
+        public Order(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, decimal totalRaedPrice,decimal totalPrice, User user, Basket basket, PaymetInfo paymetInfo, EnumValue status)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.User = user;
             this.Basket = basket;
             this.PaymetInfo = paymetInfo;
             this.Status = Status;
+            this.TotalPrice = totalPrice;
+            this.TotalRatedPrice = totalRaedPrice;
         }
         public Order()
         {
