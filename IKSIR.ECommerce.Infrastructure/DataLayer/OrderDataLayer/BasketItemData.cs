@@ -27,9 +27,10 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 returnValue.Basket = BasketData.Get(DBHelper.IntValue(dr["BasketId"].ToString()));
-                returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
+                returnValue.Product = BasketItemProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
                 returnValue.ShippingAddress = BasketItemAddressData.Get(DBHelper.IntValue(dr["ShippingAddressId"].ToString()));
                 returnValue.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
+                returnValue.ProductPrice = BasketItemProductPriceData.GetByProductId(DBHelper.IntValue(dr["ProductId"].ToString()));
             }
             dr.Close();
             return returnValue;

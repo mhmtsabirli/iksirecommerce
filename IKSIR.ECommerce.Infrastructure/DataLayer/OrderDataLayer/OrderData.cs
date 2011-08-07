@@ -34,6 +34,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 returnValue.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
+                returnValue.TotalRatedPrice = DBHelper.DecValue(dr["TotalRatedPrice"].ToString());
+                returnValue.TotalPrice = DBHelper.DecValue(dr["TotalPrice"].ToString());
             }
             dr.Close();
             return returnValue;
@@ -49,6 +51,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@BasketId", DBHelper.IntValue(itemOrder.Basket.Id)));
             parameters.Add(new SqlParameter("@PaymentInfoId", DBHelper.IntValue(itemOrder.PaymetInfo.Id)));
             parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemOrder.Status.Id)));
+            parameters.Add(new SqlParameter("@TotalRatedPrice", DBHelper.DecValue(itemOrder.TotalRatedPrice)));
+            parameters.Add(new SqlParameter("@TotalPrice", DBHelper.DecValue(itemOrder.TotalPrice)));
             parameters[0].Direction = ParameterDirection.Output;
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveOrder", parameters));
@@ -66,13 +70,39 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@BasketId", DBHelper.IntValue(itemOrder.Basket.Id)));
             parameters.Add(new SqlParameter("@PaymentInfoId", DBHelper.IntValue(itemOrder.PaymetInfo.Id)));
             parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemOrder.Status.Id)));
+            parameters.Add(new SqlParameter("@TotalRatedPrice", DBHelper.DecValue(itemOrder.TotalRatedPrice)));
+            parameters.Add(new SqlParameter("@TotalPrice", DBHelper.DecValue(itemOrder.TotalPrice)));
             parameters[0].Direction = ParameterDirection.Output;
 
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveOrder", parameters);
             int.TryParse(parameters[0].Value.ToString(), out returnValue);
             return returnValue;
         }
-
+        public static List<Order> GetList(int status)
+        {
+            var itemList = new List<Order>();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Status", status));
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetOrder", parameters);
+            while (dr.Read())
+            {
+                Order returnValue = new Order();
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
+                returnValue.Basket = BasketData.Get(DBHelper.IntValue(dr["BasketId"].ToString()));
+                //returnValue.PaymetInfo = DBHelper.IntValue(dr["BasketItemId"].ToString());
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
+                returnValue.TotalRatedPrice = DBHelper.DecValue(dr["TotalRatedPrice"].ToString());
+                returnValue.TotalPrice = DBHelper.DecValue(dr["TotalPrice"].ToString());
+                itemList.Add(returnValue);
+            }
+            dr.Close();
+            return itemList;
+        }
         ////DB'den silmek yerine statüsünü silindi olarak update etmeliyiz.
         //public static int Delete(BasketItemProduct itemBasketItemProduct)
         //{

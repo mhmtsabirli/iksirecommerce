@@ -31,6 +31,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer
                 returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
                 returnValue.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
                 returnValue.Bank = BankData.Get(DBHelper.IntValue(dr["BankId"].ToString()));
+                returnValue.VposHost = DBHelper.StringValue(dr["VposHost"].ToString());
+                returnValue.VposId = DBHelper.StringValue(dr["VposId"].ToString());
+                returnValue.VposName = DBHelper.StringValue(dr["VposName"].ToString());
+                returnValue.VposPassword = DBHelper.StringValue(dr["VposPassword"].ToString());
+                returnValue.VposUser = DBHelper.StringValue(dr["VposUser"].ToString());
             }
             dr.Close();
             return returnValue;
@@ -45,6 +50,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer
             parameters.Add(new SqlParameter("@Image", DBHelper.StringValue(itemCreditCard.Image)));
             parameters.Add(new SqlParameter("@BankId", DBHelper.StringValue(itemCreditCard.Bank.Id)));
             parameters.Add(new SqlParameter("@Status", DBHelper.StringValue(itemCreditCard.Status.Id)));
+            parameters.Add(new SqlParameter("@VposHost", DBHelper.StringValue(itemCreditCard.VposHost)));
+            parameters.Add(new SqlParameter("@VposId", DBHelper.StringValue(itemCreditCard.VposId)));
+            parameters.Add(new SqlParameter("@VposName", DBHelper.StringValue(itemCreditCard.VposName)));
+            parameters.Add(new SqlParameter("@VposPassword", DBHelper.StringValue(itemCreditCard.VposPassword)));
+            parameters.Add(new SqlParameter("@VposUser", DBHelper.StringValue(itemCreditCard.VposUser)));
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemCreditCard.CreateAdminId)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertCreditCard", parameters));
@@ -62,6 +72,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer
             parameters.Add(new SqlParameter("@BankId", DBHelper.StringValue(itemCreditCard.Bank.Id)));
             parameters.Add(new SqlParameter("@Status", DBHelper.StringValue(itemCreditCard.Status.Id)));
             parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemCreditCard.EditAdminId)));
+            parameters.Add(new SqlParameter("@VposHost", DBHelper.StringValue(itemCreditCard.VposHost)));
+            parameters.Add(new SqlParameter("@VposId", DBHelper.StringValue(itemCreditCard.VposId)));
+            parameters.Add(new SqlParameter("@VposName", DBHelper.StringValue(itemCreditCard.VposName)));
+            parameters.Add(new SqlParameter("@VposPassword", DBHelper.StringValue(itemCreditCard.VposPassword)));
+            parameters.Add(new SqlParameter("@VposUser", DBHelper.StringValue(itemCreditCard.VposUser)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateCreditCard", parameters);
             return returnValue;
@@ -99,6 +114,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
                 item.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
                 item.Bank = BankData.Get(DBHelper.IntValue(dr["BankId"].ToString()));
+                item.VposHost = DBHelper.StringValue(dr["VposHost"].ToString());
+                item.VposId = DBHelper.StringValue(dr["VposId"].ToString());
+                item.VposName = DBHelper.StringValue(dr["VposName"].ToString());
+                item.VposPassword = DBHelper.StringValue(dr["VposPassword"].ToString());
+                item.VposUser = DBHelper.StringValue(dr["VposUser"].ToString());
                 itemCreditCardList.Add(item);
             }
 

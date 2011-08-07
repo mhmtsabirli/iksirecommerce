@@ -9,34 +9,34 @@ using IKSIR.ECommerce.Model.Order;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.CommonModel;
+using IKSIR.ECommerce.Model.ProductModel;
 
 namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
 {
-    public class BasketItemProductProductData
+    public class BasketItemProductData
     {
-        public static BasketItemProduct Get(int id)
+        public static Product Get(int id)
         {
-            var returnValue = new BasketItemProduct();
+            var returnValue = new Product();
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", id));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetBasketItemProduct", parameters);
             while (dr.Read())
             {
                 returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-                returnValue.BasketItemId = DBHelper.IntValue(dr["BasketItemId"].ToString());
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-                returnValue.Product.Id = DBHelper.IntValue(dr["Id"].ToString());
-                returnValue.Product.Title = DBHelper.StringValue(dr["Title"].ToString());
-                returnValue.Product.Description = DBHelper.StringValue(dr["Description"].ToString());
-                returnValue.Product.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
-                returnValue.Product.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
-                returnValue.Product.Video = DBHelper.StringValue(dr["Video"].ToString());
-                returnValue.Product.Guarantee = DBHelper.IntValue(dr["Guarantee"].ToString());
-                returnValue.Product.StokStatus = EnumValueData.Get(DBHelper.IntValue(dr["StokStatus"].ToString()));
-                returnValue.Product.Stok = DBHelper.IntValue(dr["Stok"].ToString());
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
+                returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
+                returnValue.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
+                returnValue.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
+                returnValue.Video = DBHelper.StringValue(dr["Video"].ToString());
+                returnValue.Guarantee = DBHelper.IntValue(dr["Guarantee"].ToString());
+                returnValue.StokStatus = EnumValueData.Get(DBHelper.IntValue(dr["StokStatus"].ToString()));
+                returnValue.Stok = DBHelper.IntValue(dr["Stok"].ToString());
             }
             dr.Close();
             return returnValue;
