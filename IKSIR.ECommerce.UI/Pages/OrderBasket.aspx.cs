@@ -11,10 +11,10 @@ using IKSIR.ECommerce.UI.ClassLibrary;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
-    public partial class UserBasket : System.Web.UI.Page
+    public partial class OrderBasket : System.Web.UI.Page
     {
         public static User loginUser = null;
-        public static Basket userBasket = null;
+        public static Basket basket = null;
 
         public decimal BasketTotal = 0;
         public decimal TotalTax = 0;
@@ -28,19 +28,19 @@ namespace IKSIR.ECommerce.UI.Pages
                 if (!Page.IsPostBack)
                 {
                     loginUser = (User)Session["LOGIN_USER"];
-                    userBasket = (Basket)HttpContext.Current.Session["USER_BASKET"];
-                    GetUserBasket();
+                    basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
+                    GetOrderBasket();
                 }
             }
             else
             {
-                Response.Redirect("Login.aspx?returl=UserBasket.aspx");
+                Response.Redirect("Login.aspx?returl=OrderBasket.aspx");
             }
         }
 
-        private void GetUserBasket()
+        private void GetOrderBasket()
         {
-            rptBasketProducts.DataSource = userBasket.BasketItems;
+            rptBasketProducts.DataSource = basket.BasketItems;
             rptBasketProducts.DataBind();
 
             lblBasketTotal.Text = BasketTotal.ToString();
@@ -101,6 +101,17 @@ namespace IKSIR.ECommerce.UI.Pages
             }
         }
 
-
+        protected void imgbtnContinue_Click(object sender, ImageClickEventArgs e)
+        {
+            if (cbxComfirmation.Checked)
+            {
+                Response.Redirect("OrderAddress.aspx");
+            }
+            else
+            {
+                string textForMessage = @"<script language='javascript'> alert('Genel kurallar ve koşulları kabul ediniz!');</script>";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+            }
+        }
     }
 }

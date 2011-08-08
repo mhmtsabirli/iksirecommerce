@@ -10,7 +10,7 @@
 namespace IKSIR.ECommerce.UI.Pages {
     
     
-    public partial class UserBasket {
+    public partial class OrderBasket {
         
         /// <summary>
         /// rptBasketProducts control.
@@ -22,13 +22,22 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::System.Web.UI.WebControls.Repeater rptBasketProducts;
         
         /// <summary>
-        /// lblBasketTotal control.
+        /// cbxComfirmation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBasketTotal;
+        protected global::System.Web.UI.WebControls.CheckBox cbxComfirmation;
+        
+        /// <summary>
+        /// lblTotalPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalPrice;
         
         /// <summary>
         /// lblTotalTax control.
@@ -40,12 +49,21 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::System.Web.UI.WebControls.Label lblTotalTax;
         
         /// <summary>
-        /// lblTotalPrice control.
+        /// lblBasketTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalPrice;
+        protected global::System.Web.UI.WebControls.Label lblBasketTotal;
+        
+        /// <summary>
+        /// imgbtnContinue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgbtnContinue;
     }
 }

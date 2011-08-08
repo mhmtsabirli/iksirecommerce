@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/UIDetailMasterPage.Master"
-    AutoEventWireup="true" CodeBehind="UserBasket.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.UserBasket" %>
+    AutoEventWireup="true" CodeBehind="OrderBasket.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.OrderBasket" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -7,12 +7,12 @@
     <div class="sepet_content_middle">
         <div class="sepet_content_header">
             <img src="../images/sepet_sepet.jpg" alt="" />
-            <h4>
-            </h4>
             <h3>
                 Alışveriş Sepetiniz</h3>
-            <div class="clear">
-            </div>
+            <h4>
+                Sepetinizdeki ürünlerin yer aldığı sayfadır. Dilerseniz birden fazla ürünü aynı
+                anda alabilirsiniz.
+            </h4>
         </div>
         <table>
             <tr>
@@ -35,7 +35,7 @@
                 OnItemCommand="rptBasketProducts_ItemCommand">
                 <ItemTemplate>
                     <tr>
-                        <td class="table_first"> 
+                        <td class="table_first">
                             <asp:HiddenField runat="server" ID="hdnProductId" Value='<%# Eval("Product.Id")%>' />
                             <asp:Image runat="server" ID="imgProduct" ImageUrl='<%# Eval("Product.MainImage", "http://212.58.8.103/documents/Images/Small/small_{0:C}")%>' />
                             <h2>
@@ -59,8 +59,6 @@
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </table>
-                            <div class="clear">
-                            </div>
                         </td>
                         <td class="table_second">
                             <form action="">
@@ -87,6 +85,43 @@
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
+            <tr>
+                <td colspan="5">
+                    <asp:CheckBox runat="server" ID="cbxComfirmation" Text="" /><a href="#" id="anchorConfirmation">Genel
+                        Kurallar ve Koşullar'ı okudum ve kabul ediyorum.</a>
+                    <script type="text/javascript">
+                        $("#anchorConfirmation").click(function () {
+                            if ($(".divGeneralRules").is(':visible'))
+                                $(".divGeneralRules").slideUp('slow');
+                            else
+                                $(".divGeneralRules").slideDown('slow');
+                        });
+                    </script>
+                    <br />
+                    <div class="divGeneralRules" style="display: none; width: 100%; background: #F3F6F7;
+                        font: normal 12px tahoma; color: #3F5968; height: 150px; overflow: auto; border: 1px solid #666;
+                        padding: 8px;">
+                        <strong>Genel Kural ve Koşullar</strong>
+                        <p>
+                            <span style="color: Red;">Bu içerik geçici olarak konmuştur düzenlenecektir</span></p>
+                        <p>
+                            Bu siteye girmek ve kullanmak suretiyle aşağıda belirtilen kurallara ve koşullara
+                            bağlı kalmayı kabul etmiş bulunuyorsunuz. ATLASJET ULUSLARARASI HAVACILIK A.Ş.(Bundan
+                            böyle olarak anılacaktır) herhangi bir bildirim yapmaksızın veya sorumluluk kabul
+                            etmeksizin kurallar ve koşulları değiştirme hakkını saklı tutmaktadır. Kayıt anında
+                            size bildirilen bilet ücretinin tamamı(vergiler,harçlar ve hizmet bedeli dahil)
+                            kredi kartınızdan tahsil edilecektir.</p>
+                        <p>
+                            Ödeme yaptıktan sonra seyahatiniz kesinleşmiş kabul edilecek olup daha sonra rezervasyon
+                            kaydınızda ve uçak biletinizde yapacağınız iptal ve değişiklikler aşağıdaki kurallar
+                            doğrultusunda işlem görecektir. Yapılan rezervasyon bir başkasına devredilemez,
+                            isim değişikliği yapılamaz. Yolcu rezervasyon kaydındaki uçuşu gerçekleştirmediği
+                            taktirde hizmet bedeli ve ücret iadesi yapılmaz. Sefer iptali ve gecikme halinde
+                            bir başka havayolu ile devam uçuşu olan yolcuların sorumluluğu Atlasjet Havayollarına
+                            ait değildir. Yolcular devam uçuşları için yeni bilet talebinde bulunamazlar.</p>
+                    </div>
+                </td>
+            </tr>
         </table>
         <div class="sepet_content_footer">
             <div style="float: right!important; text-align: left;">
@@ -102,7 +137,9 @@
                             :
                         </td>
                         <td>
-                            <strong><asp:Label runat="server" ID="lblBasketTotal"></asp:Label> TL</strong>
+                            <strong>
+                                <asp:Label runat="server" ID="lblTotalPrice"></asp:Label>
+                                TL</strong>
                         </td>
                     </tr>
                     <tr>
@@ -113,7 +150,9 @@
                             :
                         </td>
                         <td>
-                            <strong><asp:Label runat="server" ID="lblTotalTax"></asp:Label> TL</strong>
+                            <strong>
+                                <asp:Label runat="server" ID="lblTotalTax"></asp:Label>
+                                TL</strong>
                         </td>
                     </tr>
                     <tr>
@@ -124,7 +163,9 @@
                             :
                         </td>
                         <td>
-                            <strong><asp:Label runat="server" ID="lblTotalPrice"></asp:Label>  TL</strong>
+                            <strong>
+                                <asp:Label runat="server" ID="lblBasketTotal"></asp:Label>
+                                TL</strong>
                         </td>
                     </tr>
                 </table>
@@ -132,10 +173,9 @@
         </div>
         <div class="sepet_content_end">
             <a href="#">
-                <img src="../images/sepet_end_iptal.jpg" alt="" /></a> <a href="#">
-                    <img src="../images/sepet_end_devam.jpg" alt="" /></a>
+                <img src="../images/sepet_end_iptal.jpg" alt="" /></a>
+            <asp:ImageButton runat="server" ID="imgbtnContinue" ImageUrl="../images/sepet_end_devam.jpg"
+                AlternateText="Devam Et" onclick="imgbtnContinue_Click" />
         </div>
-    </div>
-    <div class="sepet_content_bottom">
     </div>
 </asp:Content>
