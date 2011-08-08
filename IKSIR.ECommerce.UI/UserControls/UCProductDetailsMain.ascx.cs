@@ -35,7 +35,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                         IsDefault = true
                     });
                 }
-
+                
                 var itemMainImage = productMultimedias.Where(x => x.IsDefault == true).First();
                 string otherImages = "";
                 otherImages = "<div id=\"image\" style=\"height: 250px; width: 350px; background-color:Gray; border: 4px #666 solid; text-align:center;\">";
