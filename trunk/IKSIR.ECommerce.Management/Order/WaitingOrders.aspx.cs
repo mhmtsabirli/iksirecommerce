@@ -207,56 +207,57 @@ namespace IKSIR.ECommerce.Management.Order
         }
         private bool Payment(Model.Order.Order itemOrder)
         {
-            if (itemOrder.PaymetInfo.PaymentType.Id == 36)//havale
-            {
-                return true;
-            }
-            else
-            {
-                string term = "";
-                ePayment.cc5payment mycc5pay = new ePayment.cc5payment();
-                mycc5pay.clientid = itemOrder.PaymetInfo.CreditCard.VposId.ToString();
-                mycc5pay.name = itemOrder.PaymetInfo.CreditCard.VposName.ToString();
-                mycc5pay.password = itemOrder.PaymetInfo.CreditCard.VposPassword.ToString();
-                mycc5pay.oid = lblId.Text;
-                mycc5pay.host = itemOrder.PaymetInfo.CreditCard.VposHost.ToString();
-                mycc5pay.ip = HttpContext.Current.Request.ServerVariables["Remote_Addr"];//"127.0.0.7";// Request.UserHostAddress;
+            return false;
+            //if (itemOrder.PaymetInfo.PaymentType.Id == 36)//havale
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    string term = "";
+            //    ePayment.cc5payment mycc5pay = new ePayment.cc5payment();
+            //    mycc5pay.clientid = itemOrder.PaymetInfo.CreditCard.VposId.ToString();
+            //    mycc5pay.name = itemOrder.PaymetInfo.CreditCard.VposName.ToString();
+            //    mycc5pay.password = itemOrder.PaymetInfo.CreditCard.VposPassword.ToString();
+            //    mycc5pay.oid = lblId.Text;
+            //    mycc5pay.host = itemOrder.PaymetInfo.CreditCard.VposHost.ToString();
+            //    mycc5pay.ip = HttpContext.Current.Request.ServerVariables["Remote_Addr"];//"127.0.0.7";// Request.UserHostAddress;
 
-                mycc5pay.bname = lblId.Text;
-                divAlert.InnerHtml = NoTurkishChar(lblCardName.Text).ToLower() + "<br>";
-                mycc5pay.orderresult = 0;
-                mycc5pay.chargetype = "Auth";
-                mycc5pay.cardnumber = lblCardNumber.Text;
-                mycc5pay.expmonth = lblExDate.Text;
-                mycc5pay.expyear = "20" + lblExDate.Text;
-                mycc5pay.cv2 = lblCvv.Text;
-                mycc5pay.subtotal = lbltotalRatedPrice.Text;
-                mycc5pay.userid = itemOrder.PaymetInfo.CreditCard.VposUser.ToString();
-                mycc5pay.currency = "949";//TL
-                if (ddlMonth.SelectedValue == "1")
-                    term = "";
-                else
-                    term = ddlMonth.SelectedValue;
+            //    mycc5pay.bname = lblId.Text;
+            //    divAlert.InnerHtml = NoTurkishChar(lblCardName.Text).ToLower() + "<br>";
+            //    mycc5pay.orderresult = 0;
+            //    mycc5pay.chargetype = "Auth";
+            //    mycc5pay.cardnumber = lblCardNumber.Text;
+            //    mycc5pay.expmonth = lblExDate.Text;
+            //    mycc5pay.expyear = "20" + lblExDate.Text;
+            //    mycc5pay.cv2 = lblCvv.Text;
+            //    mycc5pay.subtotal = lbltotalRatedPrice.Text;
+            //    mycc5pay.userid = itemOrder.PaymetInfo.CreditCard.VposUser.ToString();
+            //    mycc5pay.currency = "949";//TL
+            //    if (ddlMonth.SelectedValue == "1")
+            //        term = "";
+            //    else
+            //        term = ddlMonth.SelectedValue;
 
-                mycc5pay.taksit = term;
-                divAlert.InnerHtml = mycc5pay.processorder();
+            //    mycc5pay.taksit = term;
+            //    divAlert.InnerHtml = mycc5pay.processorder();
 
-                if (mycc5pay.appr == "Approved")
-                {
-                    divAlert.InnerHtml += "Para çekildi.";
-                    return true;
-                }
+            //    if (mycc5pay.appr == "Approved")
+            //    {
+            //        divAlert.InnerHtml += "Para çekildi.";
+            //        return true;
+            //    }
 
-                else
-                {
-                    divAlert.InnerHtml += "<span style=\"color:Red\">";
-                    divAlert.InnerHtml += "<br>HataMesaji:" + mycc5pay.errmsg;
-                    divAlert.InnerHtml += "<br>OrderId:" + mycc5pay.oid;
-                    divAlert.InnerHtml += "<br>ApprovalKodu:" + mycc5pay.appr;
-                    divAlert.InnerHtml += "</span><br />";
-                    return false;
-                }
-            }
+            //    else
+            //    {
+            //        divAlert.InnerHtml += "<span style=\"color:Red\">";
+            //        divAlert.InnerHtml += "<br>HataMesaji:" + mycc5pay.errmsg;
+            //        divAlert.InnerHtml += "<br>OrderId:" + mycc5pay.oid;
+            //        divAlert.InnerHtml += "<br>ApprovalKodu:" + mycc5pay.appr;
+            //        divAlert.InnerHtml += "</span><br />";
+            //        return false;
+            //    }
+            //}
         }
         private string NoTurkishChar(string str)
         {

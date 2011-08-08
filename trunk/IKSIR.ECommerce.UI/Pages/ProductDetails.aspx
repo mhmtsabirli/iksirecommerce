@@ -86,7 +86,5 @@
                 </telerik:RadMultiPage>
             </div>
         </div>
-        <div class="detay_content_bottom">
-        </div>
     </div>
 </asp:Content>

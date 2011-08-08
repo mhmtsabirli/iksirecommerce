@@ -1,147 +1,44 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCProductDetailsMain.ascx.cs"
     Inherits="IKSIR.ECommerce.UI.UserControls.UCProductDetailsMain" %>
-<script src="../js/jquery-1.6.js" type="text/javascript"></script>
-<script src="../js/jquery.jqzoom-core.js" type="text/javascript"></script>
-<link rel="stylesheet" href="../css/jquery.jqzoom.css" type="text/css" />
-<style>
-    body
-    {
-        margin: 0px;
-        padding: 0px;
-        font-family: Arial;
-    }
-    a img, :link img, :visited img
-    {
-        border: none;
-    }
-    table
-    {
-        border-collapse: collapse;
-        border-spacing: 0;
-    }
-    :focus
-    {
-        outline: none;
-    }
-    *
-    {
-        margin: 0;
-        padding: 0;
-    }
-    p, blockquote, dd, dt
-    {
-        margin: 0 0 8px 0;
-        line-height: 1.5em;
-    }
-    fieldset
-    {
-        padding: 0px;
-        padding-left: 7px;
-        padding-right: 7px;
-        padding-bottom: 7px;
-    }
-    fieldset legend
-    {
-        margin-left: 15px;
-        padding-left: 3px;
-        padding-right: 3px;
-        color: #333;
-    }
-    dl dd
-    {
-        margin: 0px;
-    }
-    dl dt
-    {
-    }
-    .clearfix:after
-    {
-        clear: both;
-        content: ".";
-        display: block;
-        font-size: 0;
-        height: 0;
-        line-height: 0;
-        visibility: hidden;
-    }
-    .clearfix
-    {
-        display: block;
-        zoom: 2;
-    }
-    ul#thumblist
-    {
-        display: block;
-    }
-    ul#thumblist li
-    {
-        float: left;
-        margin-right: 2px;
-        list-style: none;
-    }
-    ul#thumblist li a
-    {
-        display: block;
-        border: 1px solid #CCC;
-    }
-    ul#thumblist li a.zoomThumbActive
-    {
-        border: 1px solid #094073;
-    }
-    .jqzoom
-    {
-        text-decoration: none;
-        float: left;
-    }
-</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
 <script type="text/javascript">
-
-    $(document).ready(function () {
-        $('.jqzoom').jqzoom({
-            zoomType: 'reverse',
-            lens: true,
-            preloadImages: false,
-            alwaysOn: false
+    $(function () {
+        $(".image").click(function () {
+            var image = $(this).attr("rel");
+            $('#image').hide();
+            $('#image').fadeIn('slow');
+            $('#image').html('<img src="' + image + '"/>');
+            return false;
         });
-        //$('.jqzoom').jqzoom();
     });
 </script>
+<style type="text/javascript">
+    #image
+    {
+        border: 4px #666 solid;
+        height: 250px;
+        width: 350px;
+    }
+    .thumb
+    {
+        float: left;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+</style>
 <div class="urun_resimleri">
-    <div class="urun_buyuk_resim">
-        <div class="clearfix" id="content" style="text-align: center; height: 250px; width:350px; vertical-align:middle;">
-            <div class="clearfix" style="height: 250px; width:350px; text-align:center; vertical-align:middle;float:left;">
-                <a runat="server" id="anchorBigImage" class="jqzoom" rel="gal1" title="Büyük Resim">
-                    <img runat="server" src="" id="imgMainImage" title="triumph" style="border: 1px solid #094073;" alt="" />
-                </a>
-            </div>
-            <br />
-            <div class="clearfix" id="divOtherImages" runat="server" style="float:left; padding-top:5px;">
-            </div>
+    <div class="urun_buyuk_resim" style="float: left;">
+        <div id="container" runat="server">
         </div>
-    </div>
-    <div class="urun_kucuk_resimler" runat="server" style="float:left; padding-top:5px;">
-    </div>
-    <div class="urun_paylas" style="float:left; padding-top:5px;">
-        <ul>
-            <li><a href="#">
-                <img src="../images/urun_paylas_1.png" alt="" /></a></li>
-            <li><a href="#">
-                <img src="../images/urun_paylas_2.png" alt="" /></a></li>
-            <li><a href="#">
-                <img src="../images/urun_paylas_3.png" alt="" /></a></li>
-            <li><a href="#">
-                <img src="../images/urun_paylas_4.png" alt="" /></a></li>
-            <li><a href="#">
-                <img src="../images/urun_paylas_5.png" alt="" /></a></li>
-            <li><a href="#">
-                <img src="../images/urun_paylas_6.png" alt="" /></a></li>
-            <li><a href="#">
-                <img src="../images/urun_paylas_7.png" alt="" /></a></li>
-        </ul>
-    </div>
-    <div class="urun_yildiz">
-    </div>
-    <div class="clear">
+        <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+        <script type="text/javascript">
+            try {
+                var pageTracker = _gat._getTracker("UA-7025232-1");
+                pageTracker._trackPageview();
+            } catch (err) { }</script>
     </div>
 </div>
 <div class="urun_ozellikleri">

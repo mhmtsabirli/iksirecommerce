@@ -84,6 +84,7 @@
     <Content Include="Css\ManagementTopMenu.css" />
     <Content Include="Css\RadEditorToolsFile.xml" />
     <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Images\Cart.png" />
     <Content Include="Images\Comments.png" />
     <Content Include="Images\Home.png" />
@@ -218,6 +219,9 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="MasterPage\MasterManagement.Master.cs">
       <DependentUpon>MasterManagement.Master</DependentUpon>

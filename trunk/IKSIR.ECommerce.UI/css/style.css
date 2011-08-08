@@ -170,7 +170,7 @@ body
       .top_right { float:right; width:200px; text-align:right; }
 	     .top_right img { border:0; margin:2px 0 0 4px; }
 
-   .sepet_content_middle { width:700px; background:url(../images/sepet_content_middle.jpg); padding:30px 40px 0 40px; }
+   .sepet_content_middle { width:96%; padding:30px 40px 0 40px; }
       .sepet_content_middle td { border-bottom:1px solid #DEDEDE; padding:10px 0; }
    
       .sepet_content_header { padding-bottom:10px; }
@@ -201,7 +201,7 @@ body
 	  .table_fifth { width:70px; text-align:right; }
 	     .table_fifth img { border:0; margin-top:3px; }
 
-      .sepet_content_footer { width:678px; background:#F3F6F7; border-bottom:1px solid #DEDEDE; margin:-1px 0 0 2px; text-align:center; }
+      .sepet_content_footer { width:100%; background:#F3F6F7; border-bottom:1px solid #DEDEDE; margin:-1px 0 0 2px; text-align:center; }
 	     .sepet_content_footer p { margin:0; font:bold 12px arial; color:#6F6F6F; padding:10px 0; }
 
       .sepet_content_end { text-align:center; padding-top:15px; }
@@ -211,13 +211,13 @@ body
 
 /* Ürün Detay */
 
-.urun_content { width:780px; background:url(../images/sepet_content_middle.jpg); padding:30px 0 0 0; }
+.urun_content { width:780px; padding:30px 0 0 0; }
 
 .detay_content_bottom { width:780px; height:10px; background:url(../images/detay_content_bottom.jpg); }
 
    .urun_resimleri { float:left; margin:0 0 0 20px; }
       
-	  .urun_buyuk_resim { width:370px; height:284px; padding:15px 0 0 0; text-align:center; }
+	  .urun_buyuk_resim { width:370px; height:284px; padding:5px 0 0 0; text-align:center; }
 	     .x { height:262px; }
 		 .favori { position:relative; bottom:0; text-align:left; padding:0 0 0 3px; }
 		    .favori a, .favori a:visited, .favori a:hover { font:normal 10px trebuchet ms; color:#555; text-decoration:none; }
