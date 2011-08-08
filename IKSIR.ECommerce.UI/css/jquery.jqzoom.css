@@ -44,6 +44,11 @@
   z-index:101;
   cursor:crosshair;
 }
+.zoomPup img
+{
+    width:350px;
+    height:250px;
+    }
 
 .zoomOverlay{
 	position:absolute;
@@ -103,6 +108,8 @@
   display:block;
   position:absolute;
   z-index:101;
+  width:450px;
+  height:250px;
 }
 
 .zoomIframe{

@@ -26,37 +26,54 @@ namespace IKSIR.ECommerce.UI.UserControls
             {
                 var product = ProductData.Get(productId);
                 var productMultimedias = MultimediasData.GetItemMultimedias(3, productId);
-                var itemMainImage = productMultimedias.Where(x => x.IsDefault == true).First();
-                if (itemMainImage != null)
+
+                if (productMultimedias == null || productMultimedias.Count == 0)
                 {
-                    imgMainImage.Src = "http://212.58.8.103/documents/Images/Big/big_" + itemMainImage.FilePath;
-                    anchorBigImage.HRef = "http://212.58.8.103/documents/Orginal/Images/" + itemMainImage.FilePath;
+                    productMultimedias.Add(new Model.CommonModel.Multimedia()
+                    {
+                        FilePath = "nopicture.jpg",
+                        IsDefault = true
+                    });
                 }
 
+                var itemMainImage = productMultimedias.Where(x => x.IsDefault == true).First();
+                string otherImages = "";
+                otherImages = "<div id=\"image\" style=\"height: 250px; width: 350px; background-color:Gray; border: 4px #666 solid; text-align:center;\">";
 
-                //<li><a class="zoomThumbActive" href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: './imgProd/triumph_small1.jpg',largeimage: './imgProd/triumph_big1.jpg'}"><img src='imgProd/thumbs/triumph_thumb1.jpg'></a></li>
+                if (itemMainImage != null)
+                {
+                    //imgMainImage.ImageUrl = 
+                    otherImages += "<img src=\"http://212.58.8.103/documents/Images/Big/big_" + itemMainImage.FilePath + "\" border=\"0\" /></div><br/>";
+                }
 
-
-                string otherImages = "<ul id=\"thumblist\" class=\"clearfix\">";
                 int imageCount = 0;
                 foreach (var item in productMultimedias)
                 {
                     imageCount += 1;
                     //otherImages += "<a href=\"#\"><img src=\"http://212.58.8.103/documents/Images/Icon/icon_" + item.FilePath + "\" alt=\"\" /></a>";
-                    if(imageCount==1)
-                    otherImages += "<li><a class=\"zoomThumbActive\" href='javascript:void(0);' rel=\"{gallery: 'gal1', smallimage: 'http://212.58.8.103/documents/Images/Big/big_" + item.FilePath + "',largeimage: 'http://212.58.8.103/documents/Orginal/Images/" + item.FilePath + "'}\"><img src=\"http://212.58.8.103/documents/Images/Icon/icon_" + item.FilePath + "\" alt=\"\" /></a></li>";
-                    else
-                        otherImages += "<li><a href='javascript:void(0);' rel=\"{gallery: 'gal1', smallimage: 'http://212.58.8.103/documents/Images/Big/big_" + item.FilePath + "',largeimage: 'http://212.58.8.103/documents/Orginal/Images/" + item.FilePath + "'}\"><img src=\"http://212.58.8.103/documents/Images/Icon/icon_" + item.FilePath + "\" alt=\"\" /></a></li>";
+
+                    otherImages += "<a href=\"#\" rel=\"http://212.58.8.103/documents/Images/Big/big_" + item.FilePath + "\" class=\"image\">";
+                    otherImages += "<img src=\"http://212.58.8.103/documents/Images/Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a>";
 
                     if (imageCount == 3)
                         break;
                 }
+                otherImages += " <div class=\"clear\"></div><div class='favori' style='float:left; width: 350px; padding-top:3px;'><a href='#'><img src='../images/urun_favorilere_ekle.jpg' alt='' />Favorilerime Ekle</a></div>";
+                otherImages += "<br/><br/><div class='urun_paylas' style='float:left; width: 225px;'><ul><li><a href='#'><img src='../images/urun_paylas_1.png' alt='' /></a></li>";
+                otherImages += "<li><a href='#'><img src='../images/urun_paylas_2.png' alt='' /></a></li>";
+                otherImages += "<li><a href='#'><img src='../images/urun_paylas_3.png' alt='' /></a></li>";
+                otherImages += "<li><a href='#'><img src='../images/urun_paylas_4.png' alt='' /></a></li>";
+                otherImages += "<li><a href='#'><img src='../images/urun_paylas_5.png' alt='' /></a></li>";
+                otherImages += "<li><a href='#'><img src='../images/urun_paylas_6.png' alt='' /></a></li>";
+                otherImages += "<li><a href='#'><img src='../images/urun_paylas_7.png' alt='' /></a></li></ul></div>";
+                otherImages += "<div class='urun_yildiz' style='float:left;'></div><div class='clear'></div>";
+                otherImages += "</div>";
+
                 if (product.Video != null && product.Video != "")
                 {
                     otherImages += "<a href=\"#\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
                 }
-                otherImages += "</ul>";
-                divOtherImages.InnerHtml = otherImages;
+                container.InnerHtml = otherImages;
                 lblProductCode.Text = product.ProductCode;
                 lblProductName.Text = product.Title;
                 lblProductWarranty.Text = product.Guarantee.ToString() + " Yıl";

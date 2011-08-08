@@ -42,8 +42,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
         private void GetList()
         {
-
-            List<ModuleProduct> itemList = ModuleProductData.GetModuleProductList();
+            List<ModuleProduct> itemList = ModuleProductData.GetModuleProductList(itemModuleProduct:null);
 
             if (txtFilterProdCode.Text != "")
                 itemList = itemList.Where(x => x.Product.ProductCode == txtFilterProdCode.Text).ToList();

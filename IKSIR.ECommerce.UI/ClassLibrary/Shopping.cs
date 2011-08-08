@@ -51,7 +51,7 @@ namespace IKSIR.ECommerce.UI.ClassLibrary
                     basket.BasketItems.Add(basketItem);
                     HttpContext.Current.Session.Add("USER_BASKET", basket);
                 }
-                HttpContext.Current.Response.Redirect("../Pages/UserBasket.aspx", false);
+                HttpContext.Current.Response.Redirect("../Pages/OrderBasket.aspx", false);
             }
         }
 
@@ -77,7 +77,7 @@ namespace IKSIR.ECommerce.UI.ClassLibrary
 
                     HttpContext.Current.Session.Add("USER_BASKET", basket);
                 }
-                HttpContext.Current.Response.Redirect("../Pages/UserBasket.aspx", false);
+                HttpContext.Current.Response.Redirect("../Pages/OrderBasket.aspx", false);
             }
         }
     }

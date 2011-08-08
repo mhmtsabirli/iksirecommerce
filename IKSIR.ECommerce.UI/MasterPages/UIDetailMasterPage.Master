@@ -59,6 +59,7 @@
                         <p>
                             Lorem ipsum dolor si Lorem sit amet dolor si dolor sit amet</p>
                     </div>
+                    &nbsp;
                 </div>
                  <div class="sidemenu_bottom">
                 </div>
@@ -72,6 +73,7 @@
         <div class="clear">
         </div>
     </div>
+    
     <uc6:Footer ID="Footer1" runat="server" />
     </form>
 </body>

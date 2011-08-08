@@ -17,17 +17,6 @@
         <input class="search_submit" type="submit" value="" />
         <div class="clear">
         </div>
-        <div>
-            <asp:Panel runat="server" ID="pnlLoginUser" Visible="false">
-                <asp:Label runat="server" ID="lblUserTitle" Text="lblUserTitle"></asp:Label>
-                <a href="../UserPanel/MyAccount.aspx">[Hesabım]</a>
-                &nbsp;
-                <a href="../UserPanel/MyAccount.aspx">[Alışverişlerim]</a>
-                &nbsp;
-                <asp:LinkButton runat="server" ID="lbtnLogout" style="color:Red" Text="[Çıkış]" 
-                    onclick="lbtnLogout_Click"></asp:LinkButton>
-            </asp:Panel>
-        </div>
     </div>
     <div class="clear">
     </div>

@@ -16,30 +16,54 @@ namespace IKSIR.ECommerce.UI.UserControls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            StringBuilder sbMainCategories = new StringBuilder();
-
-            var itemList = ProductCategoryData.GetProductCategoryList();
-            var parentCat = new ProductCategory() { Id = 0 };
-            var mainCategories = itemList.Where(x => x.ParentCategory == null).ToList();
-
-            sbMainCategories.AppendLine("<ul id=\"menu1\" class=\"example_menu\">");
-            foreach (var item in mainCategories)
+            if (!Page.IsPostBack)
             {
-                sbMainCategories.AppendLine("<li><a class=\"collapsed\">" + item.Title + "</a>");
-                var subCategories = itemList.Where(x => x.ParentCategory != null && x.ParentCategory.Id == item.Id).ToList();
-                if (subCategories.Count > 0)
-                {
-                    sbMainCategories.AppendLine("<ul>");
-                    foreach (var itemSub in subCategories)
-                    {
-                        sbMainCategories.AppendLine("<li><a href=\"../Pages/ProductList.aspx?catid=" + itemSub.Id.ToString() + "\">" + itemSub.Title + "</a>");
-                    }
-                    sbMainCategories.AppendLine("</ul>");
-                }
+                BindCategories();
             }
-            sbMainCategories.AppendLine("</ul>");
+        }
 
-            divMainCategories.InnerHtml = sbMainCategories.ToString();
+        private void BindCategories()
+        {
+            StringBuilder sbMainCategories = new StringBuilder();
+            List<ProductCategory> itemList = GetCategories();
+            var parentCat = new ProductCategory() { Id = 0 };
+            if (itemList != null && itemList.Count > 0)
+            {
+                var mainCategories = itemList.Where(x => x.ParentCategory == null).ToList();
+                sbMainCategories.AppendLine("<ul id=\"menu1\" class=\"example_menu\">");
+                foreach (var item in mainCategories)
+                {
+                    sbMainCategories.AppendLine("<li><a class=\"collapsed\">" + item.Title + "</a>");
+                    var subCategories = itemList.Where(x => x.ParentCategory != null && x.ParentCategory.Id == item.Id).ToList();
+                    if (subCategories.Count > 0)
+                    {
+                        sbMainCategories.AppendLine("<ul>");
+                        foreach (var itemSub in subCategories)
+                        {
+                            sbMainCategories.AppendLine("<li><a href=\"../Pages/ProductList.aspx?catid=" + itemSub.Id.ToString() + "\">" + itemSub.Title + "</a>");
+                        }
+                        sbMainCategories.AppendLine("</ul>");
+                    }
+                }
+                sbMainCategories.AppendLine("</ul>");
+
+                divMainCategories.InnerHtml = sbMainCategories.ToString();
+            }
+        }
+
+        private List<ProductCategory> GetCategories()
+        {
+            List<ProductCategory> itemList = new List<ProductCategory>();
+            if (Session["SITE_MAIN_CATEGORIES"] != null)
+            {
+                itemList = (List<ProductCategory>)Session["SITE_MAIN_CATEGORIES"];
+            }
+            else
+            {
+                itemList = ProductCategoryData.GetProductCategoryList();
+                Session.Add("SITE_MAIN_CATEGORIES", itemList);
+            }
+            return itemList;
         }
     }
 }

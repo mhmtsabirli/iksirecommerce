@@ -83,7 +83,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Adres Tanımı
+                                                    Adres Tipi
                                                 </td>
                                                 <td>
                                                     :

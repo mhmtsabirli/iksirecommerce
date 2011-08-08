@@ -52,6 +52,7 @@
   <ItemGroup>
     <Content Include="css\jquery.jqzoom.css" />
     <Content Include="css\style.css" />
+    <Content Include="Global.asax" />
     <Content Include="images\advertise.jpg" />
     <Content Include="images\carousel_bg.jpg" />
     <Content Include="images\carousel_image.jpg" />
@@ -68,6 +69,7 @@
     <Content Include="images\header_bg.png" />
     <Content Include="images\header_search_bg.png" />
     <Content Include="images\logo.jpg" />
+    <Content Include="images\maintence.jpg" />
     <Content Include="images\navbar_bg.png" />
     <Content Include="images\navbar_sepet.png" />
     <Content Include="images\nav_menu_link_bg.png" />
@@ -140,19 +142,23 @@
     <Content Include="js\jquery-1.6.js" />
     <Content Include="js\jquery-ui.js" />
     <Content Include="js\jquery-v1.4.4.js" />
-    <Content Include="js\jquery.jqzoom-core-pack.js" />
-    <Content Include="js\jquery.jqzoom-core.js" />
     <Content Include="js\jquery.maskedinput-1.2.2.js" />
     <Content Include="js\jquery.swfobject.js" />
     <Content Include="js\sprinkle.js" />
     <Content Include="js\urchin.js" />
     <Content Include="js\validate_profile.js" />
-    <Content Include="Pages\UserBasket.aspx" />
+    <Content Include="Pages\OrderPaymentResult.aspx" />
+    <Content Include="Pages\OrderPayment.aspx" />
+    <Content Include="Pages\Error.aspx" />
+    <Content Include="Pages\Maintenance.aspx" />
+    <Content Include="Pages\OrderAddress.aspx" />
+    <Content Include="Pages\OrderBasket.aspx" />
     <Content Include="Pages\CaptchaCode.aspx" />
     <Content Include="Pages\Contact.aspx" />
     <Content Include="Pages\Content.aspx" />
     <Content Include="Pages\Default.aspx" />
     <Content Include="Pages\Login.aspx" />
+    <Content Include="Pages\OrderShipping.aspx" />
     <Content Include="Pages\ProductDetails.aspx" />
     <Content Include="Pages\ProductList.aspx" />
     <Content Include="Pages\Register.aspx" />
@@ -187,12 +193,50 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassLibrary\Shopping.cs" />
-    <Compile Include="Pages\UserBasket.aspx.cs">
-      <DependentUpon>UserBasket.aspx</DependentUpon>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OrderPaymentResult.aspx.cs">
+      <DependentUpon>OrderPaymentResult.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\UserBasket.aspx.designer.cs">
-      <DependentUpon>UserBasket.aspx</DependentUpon>
+    <Compile Include="Pages\OrderPaymentResult.aspx.designer.cs">
+      <DependentUpon>OrderPaymentResult.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OrderPayment.aspx.cs">
+      <DependentUpon>OrderPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\OrderPayment.aspx.designer.cs">
+      <DependentUpon>OrderPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Maintenance.aspx.cs">
+      <DependentUpon>Maintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Maintenance.aspx.designer.cs">
+      <DependentUpon>Maintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OrderAddress.aspx.cs">
+      <DependentUpon>OrderAddress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\OrderAddress.aspx.designer.cs">
+      <DependentUpon>OrderAddress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OrderBasket.aspx.cs">
+      <DependentUpon>OrderBasket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\OrderBasket.aspx.designer.cs">
+      <DependentUpon>OrderBasket.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\CaptchaCode.aspx.cs">
       <DependentUpon>CaptchaCode.aspx</DependentUpon>
@@ -232,6 +276,13 @@
     </Compile>
     <Compile Include="Pages\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OrderShipping.aspx.cs">
+      <DependentUpon>OrderShipping.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\OrderShipping.aspx.designer.cs">
+      <DependentUpon>OrderShipping.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\ProductDetails.aspx.cs">
       <DependentUpon>ProductDetails.aspx</DependentUpon>

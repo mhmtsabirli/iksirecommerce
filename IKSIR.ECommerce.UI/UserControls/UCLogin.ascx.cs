@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer;
+using IKSIR.ECommerce.Model.MembershipModel;
 
 namespace IKSIR.ECommerce.UI.UserControls
 {
@@ -16,6 +17,9 @@ namespace IKSIR.ECommerce.UI.UserControls
             {
                 pnlLogin.Visible = false;
                 pnlLogout.Visible = true;
+
+                User loginUser = (User)Session["LOGIN_USER"];
+                lblUserTitle.Text = "Sayın " + loginUser.FirstName + " " + loginUser.LastName;
             }
         }
 
@@ -47,6 +51,7 @@ namespace IKSIR.ECommerce.UI.UserControls
         protected void lbtnLogout_Click(object sender, EventArgs e)
         {
             Session.Remove("LOGIN_USER");
+            Session.Remove("USER_BASKET");
             Response.Redirect("Default.aspx");
         }
     }

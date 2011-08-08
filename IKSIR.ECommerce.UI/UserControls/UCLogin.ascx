@@ -51,7 +51,32 @@
         </div>
     </asp:Panel>
     <asp:Panel runat="server" ID="pnlLogout" Visible="false">
-        <asp:LinkButton runat="server" ID="lbtnLogout" Style="color: Red" Text="[Çıkış]"
-            OnClick="lbtnLogout_Click"></asp:LinkButton>
+        <table cellpadding="0" cellspacing="0" border="0" width="190px">
+            <tr>
+                <td align="center">
+                    <img src="../images/default_user_picture.png" />
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <p>
+                        <asp:Label runat="server" ID="lblUserTitle" Text="lblUserTitle"></asp:Label>
+                    </p>
+                    <p>
+                        <a href="#">[Hesabım]</a>
+                    </p>
+                    <p>
+                        <a href="#">[Favorilerim]</a>
+                    </p>
+                    <p>
+                        <a href="#">[Sepetim]</a>
+                    </p>
+                    <p>
+                        <asp:LinkButton runat="server" ID="lbtnLogout" Style="color: Red" Text="[Oturumu Kapat]"
+                            OnClick="lbtnLogout_Click"></asp:LinkButton>
+                    </p>
+                </td>
+            </tr>
+        </table>
     </asp:Panel>
 </div>
