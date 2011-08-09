@@ -81,7 +81,8 @@ namespace IKSIR.ECommerce.UI.UserControls
                 lblProductPrice.Text = product.ProductPrice.UnitPrice.ToString();
                 lblProductPriceWithKDV.Text = product.ProductPrice.Price.ToString();
                 lblBigProductPrice.Text = product.ProductPrice.Price.ToString();
-                lbtnAddToBasket.CommandArgument = product.Id.ToString();
+                imgBtnAddToBasket.CommandArgument = product.Id.ToString();
+                imgBtnBuyNow.CommandArgument = product.Id.ToString();
                 for (int i = 1; i <= product.MaxQuantity; i++)
                 {
                     ddlProductCount.Items.Add(new ListItem(i.ToString(), i.ToString()));
@@ -92,12 +93,23 @@ namespace IKSIR.ECommerce.UI.UserControls
             }
         }
 
-        protected void lbtnAddToBasket_Click(object sender, EventArgs e)
+        protected void imgBtnAddToBasket_Click(object sender, ImageClickEventArgs e)
         {
             int productId = 0;
             int count = 0;
 
-            string strproductId = ((LinkButton)sender).CommandArgument;
+            string strproductId = ((ImageButton)sender).CommandArgument;
+
+            if (int.TryParse(strproductId, out productId) && int.TryParse(ddlProductCount.SelectedValue, out count))
+                Shopping.AddToBasket(productId, count);
+        }
+
+        protected void imgBtnBuyNow_Click(object sender, ImageClickEventArgs e)
+        {
+            int productId = 0;
+            int count = 0;
+
+            string strproductId = ((ImageButton)sender).CommandArgument;
 
             if (int.TryParse(strproductId, out productId) && int.TryParse(ddlProductCount.SelectedValue, out count))
                 Shopping.AddToBasket(productId, count);

@@ -36,18 +36,7 @@ namespace IKSIR.ECommerce.UI.Pages
 
         private void GetProductsForModul(int moduleId)
         {
-            List<Product> list = ModuleProductData.GetModuleProductList(moduleId);
-            BindGrid(list);
-        }
-
-        private void GetProductsForCategory(int categoryId)
-        {
-            List<Product> list = ProductCategoryData.GetProductCategoryList(categoryId);
-            BindGrid(list);
-        }
-
-        private void BindGrid(List<Product> productList)
-        {
+            List<Product> productList = ModuleProductData.GetModuleProductList(moduleId);
             int activePage = 0;
             if (Request.QueryString["p"] != null)
             {
@@ -66,7 +55,69 @@ namespace IKSIR.ECommerce.UI.Pages
 
                     for (int i = 1; i <= pageCount; i++)
                     {
-                        pages.Add(i.ToString(), "/Pages/ProductList.aspx?catid=1&p=" + i.ToString());
+                        pages.Add(i.ToString(), "ProductList.aspx?modId="+ moduleId.ToString() +"&p=" + i.ToString());
+                    }
+
+                    dlPaging.DataSource = pages;
+                    dlPaging.DataBind();
+                }
+                productList = productList.Skip(6 * activePage).Take(6).ToList();
+                dlProductList.DataSource = productList;
+                dlProductList.DataBind();
+
+                dlProductList.DataSource = productList;
+                dlProductList.DataBind();
+
+                foreach (DataListItem item in dlProductList.Items)
+                {
+                    Image imgProduct = (Image)item.FindControl("imgProduct");
+                    HiddenField hdnProductId = (HiddenField)item.FindControl("hdnProductId");
+
+                    if (imgProduct != null && hdnProductId != null)
+                    {
+                        int productId = 0;
+                        if (hdnProductId.Value != "" && int.TryParse(hdnProductId.Value, out productId))
+                        {
+                            imgProduct.ImageUrl = "";
+                            var itemProduct = productList.Where(x => x.Id == productId).FirstOrDefault();
+                            if (itemProduct != null && itemProduct.Multimedias != null && itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault() != null)
+                            {
+                                var image = itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault();
+                                imgProduct.ImageUrl = "http://212.58.8.103/documents/Images/Small/small_" + image.FilePath;
+                            }
+                            else
+                            {
+                                imgProduct.ImageUrl = "http://212.58.8.103/documents/Images/Small/small_nopicture.jpg";
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
+        private void GetProductsForCategory(int categoryId)
+        {
+            List<Product> productList = ProductCategoryData.GetProductCategoryList(categoryId);
+            int activePage = 0;
+            if (Request.QueryString["p"] != null)
+            {
+                activePage = Int32.Parse(Request.QueryString["p"].ToString());
+                activePage -= 1;
+            }
+            if (productList != null)
+            {
+                var pageCount = productList.Count / 6;
+                if (productList.Count % 6 != 0)
+                    pageCount += 1;
+
+                if (pageCount > 1)
+                {
+                    Dictionary<string, string> pages = new Dictionary<string, string>();
+
+                    for (int i = 1; i <= pageCount; i++)
+                    {
+                        pages.Add(i.ToString(), "ProductList.aspx?catid=?catId=" + categoryId.ToString() + "&p=" + i.ToString());
                     }
 
                     dlPaging.DataSource = pages;

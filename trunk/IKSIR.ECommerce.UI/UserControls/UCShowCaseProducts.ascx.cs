@@ -24,22 +24,22 @@ namespace IKSIR.ECommerce.UI.UserControls
             if (!Page.IsPostBack)
             {
                 GetItems();
-                if (dlShowCaseProducts.Items.Count > 6)
-                {
-                    anchorContinue.Visible = true;
-                    anchorContinue.HRef = "../Pages/ProductList.aspx?modid=" + moduleId.ToString();
-                }
-                else
-                {
-                    anchorContinue.Visible = false;
-                }
             }
         }
 
         private void GetItems()
         {
             var itemModuleProductList = ModuleProductData.GetModuleProductList(moduleId);
-            dlShowCaseProducts.DataSource = itemModuleProductList;
+            if (itemModuleProductList.Count > 6)
+            {
+                anchorContinue.Visible = true;
+                anchorContinue.HRef = "../Pages/ProductList.aspx?modid=" + moduleId.ToString() + "&p=2";
+            }
+            else
+            {
+                anchorContinue.Visible = false;
+            }
+            dlShowCaseProducts.DataSource = itemModuleProductList.Take(6);
             dlShowCaseProducts.DataBind();
 
             foreach (DataListItem item in dlShowCaseProducts.Items)

@@ -85,6 +85,15 @@ namespace IKSIR.ECommerce.UI.UserControls {
         protected global::System.Web.UI.WebControls.Label lblProductPriceWithKDV;
         
         /// <summary>
+        /// imgBtnBuyNow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgBtnBuyNow;
+        
+        /// <summary>
         /// ddlProductCount control.
         /// </summary>
         /// <remarks>
@@ -94,12 +103,12 @@ namespace IKSIR.ECommerce.UI.UserControls {
         protected global::System.Web.UI.WebControls.DropDownList ddlProductCount;
         
         /// <summary>
-        /// lbtnAddToBasket control.
+        /// imgBtnAddToBasket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnAddToBasket;
+        protected global::System.Web.UI.WebControls.ImageButton imgBtnAddToBasket;
     }
 }

@@ -24,12 +24,12 @@
             </tr>
             <tr>
                 <td valign="top" style="border-right: 1px solid #DEDEDE;" width="355px">
-                    <asp:RadioButtonList runat="server" ID="rblShippingAddresses" AutoPostBack="True"
+                    <asp:RadioButtonList runat="server" ID="rblShippingAddresses" 
                         OnSelectedIndexChanged="rblShippingAddresses_SelectedIndexChanged">
                     </asp:RadioButtonList>
                 </td>
                 <td valign="top" width="365px" style="padding-left:10px;">
-                    <asp:RadioButtonList runat="server" ID="rblBillingAddresses" AutoPostBack="True"
+                    <asp:RadioButtonList runat="server" ID="rblBillingAddresses"
                         OnSelectedIndexChanged="rblBillingAddresses_SelectedIndexChanged">
                     </asp:RadioButtonList>
                 </td>

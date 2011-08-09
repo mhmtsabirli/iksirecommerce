@@ -27,15 +27,33 @@ namespace IKSIR.ECommerce.UI.Pages
             {
                 User loginUser = (User)Session["LOGIN_USER"];
                 Basket basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
-                Order order = new Order();
+                basket.Status = new Model.CommonModel.EnumValue() { Id = 29 };
+                int retValue = 0;
+                int basketId = 0;
 
-                order.User = loginUser;
-                order.Basket = basket;
-                //order.TotalPrice =
-                //order.TotalRatedPrice =
-                //order.PaymetInfo
+                basketId = BasketData.Insert(basket);
+                if (basketId > 0)
+                    foreach (BasketItem basketItem in basket.BasketItems)
+                    {
+                        basketItem.Basket = new Basket() { Id = basketId };
+                        basketItem.Status = new Model.CommonModel.EnumValue() { Id = 39 };
+                        retValue = BasketItemData.Insert(basketItem);
+                        if (retValue <= 0)
+                        {
+                            break;
+                        }
+                    }
 
-                OrderData.Insert(order);
+                if (retValue > 0) //itemlar başarıyla kaydedildiyese
+                {
+                    Order order = new Order();
+                    order.User = loginUser;
+                    order.Basket = basket;
+                    order.TotalPrice = basket.TotalPrice;
+                    //order.TotalRatedPrice =
+                    order.PaymetInfo = new Model.Bank.PaymetInfo() { CreditCardNumber = "123123", Cvc = "345", Month = 12, Year = 2012 };
+                    retValue = OrderData.Insert(order);
+                }
             }
             else
             {
