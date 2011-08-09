@@ -8,7 +8,10 @@
                 <%# Eval("ProductCategory.Title")%>
             </h3>
             <div class="section_image">
-                <asp:Image runat="server" ID="imgProduct" /></div>
+            <a href='<%# "../Pages/ProductDetails.aspx?pid="+ Eval("Id")%>'>
+                <asp:Image runat="server" ID="imgProduct" BorderWidth="0" />
+                </a>
+                </div>
             <div class="section_info">
                 <div id="divcontainer">
                     <div id="divCode" style="padding-top:3px;">

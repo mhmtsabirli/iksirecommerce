@@ -8,6 +8,7 @@ using IKSIR.ECommerce.Model.MembershipModel;
 using IKSIR.ECommerce.Model.Order;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.UI.ClassLibrary;
+using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -34,7 +35,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                Response.Redirect("Login.aspx?returl=OrderBasket.aspx");
+                Response.Redirect("Login.aspx?returl=Default.aspx");
             }
         }
 
@@ -104,7 +105,7 @@ namespace IKSIR.ECommerce.UI.Pages
         protected void imgbtnContinue_Click(object sender, ImageClickEventArgs e)
         {
             if (cbxComfirmation.Checked)
-            {
+            {                
                 Response.Redirect("OrderAddress.aspx");
             }
             else

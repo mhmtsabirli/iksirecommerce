@@ -9,6 +9,7 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer;
 using IKSIR.ECommerce.Model.MembershipModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
 using IKSIR.ECommerce.Model.SiteModel;
+using System.IO;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -75,6 +76,25 @@ namespace IKSIR.ECommerce.UI.Pages
                 itemUser.Site = new Site() { Id = 1 };
                 itemUser.Password = txtPassword.Text;
                 int ret = UserData.Save(itemUser);
+                if (ret > 0)
+                {
+                    string MailBody = File.ReadAllText(HttpContext.Current.Request.MapPath("~") + "../MailTemplates/MembershipRegister.htm");
+                    //string ActivationLink = System.Configuration.ConfigurationManager.AppSettings["WebAddress"] + "Membership/Activation.aspx?ActivationCode=" + strActivationCode + "&Email=" + User.Email;
+                    MailBody = MailBody.Replace("%NameSurname%", txtFirstName.Text + " " + txtLastName.Text);
+                    MailBody = MailBody.Replace("%ActivationLink%", "http://www.idevit.com.tr/");
+                    MailBody = MailBody.Replace("%UserName%", txtEmail.Text);
+                    MailBody = MailBody.Replace("%Password%", txtPassword.Text);
+                    Mail.sendMail(txtEmail.Text, "helpdesk@idevit.com.tr", "İdevit A.Ş. | Üyelik Bilgileriniz", MailBody);
+                    
+                    string textForMessage = @"<script language='javascript'> alert('Üyelik işleminiz tamamlanmıştır. Üyelik esnasında belirtmiş olduğunuz e-mail adresinize siteye giriş bilgilerinizi yolladık.');</script>";
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                }
+                else
+                {
+                    string textForMessage = @"<script language='javascript'> alert('Üyeliğiniz kaydedilirken bir hata oluştu!');</script>";
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                }
+
                 if (ret > 0)
                     retValue = true;
                 else

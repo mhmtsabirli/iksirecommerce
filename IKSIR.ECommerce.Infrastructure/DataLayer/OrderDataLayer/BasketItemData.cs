@@ -28,7 +28,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 returnValue.Basket = BasketData.Get(DBHelper.IntValue(dr["BasketId"].ToString()));
                 returnValue.Product = BasketItemProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
-                returnValue.ShippingAddress = BasketItemAddressData.Get(DBHelper.IntValue(dr["ShippingAddressId"].ToString()));
+                returnValue.ShippingAddress = BasketAddressData.Get(DBHelper.IntValue(dr["ShippingAddressId"].ToString()));
                 returnValue.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
                 returnValue.ProductPrice = BasketItemProductPriceData.GetByProductId(DBHelper.IntValue(dr["ProductId"].ToString()));
             }
@@ -95,7 +95,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 basketItem.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 basketItem.Basket = BasketData.Get(DBHelper.IntValue(dr["BasketId"].ToString()));
                 basketItem.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
-                basketItem.ShippingAddress = BasketItemAddressData.Get(DBHelper.IntValue(dr["ShippingAddressId"].ToString()));
+                basketItem.ShippingAddress = BasketAddressData.Get(DBHelper.IntValue(dr["ShippingAddressId"].ToString()));
                 basketItem.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
                 returnValue.Add(basketItem);
             }

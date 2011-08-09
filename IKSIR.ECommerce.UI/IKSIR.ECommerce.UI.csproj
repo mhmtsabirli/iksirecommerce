@@ -147,6 +147,9 @@
     <Content Include="js\sprinkle.js" />
     <Content Include="js\urchin.js" />
     <Content Include="js\validate_profile.js" />
+    <Content Include="MailTemplates\MembershipRegister.htm" />
+    <Content Include="MailTemplates\OrderResultMail.htm" />
+    <Content Include="MailTemplates\SalesContract.htm" />
     <Content Include="Pages\OrderPaymentResult.aspx" />
     <Content Include="Pages\OrderPayment.aspx" />
     <Content Include="Pages\Error.aspx" />

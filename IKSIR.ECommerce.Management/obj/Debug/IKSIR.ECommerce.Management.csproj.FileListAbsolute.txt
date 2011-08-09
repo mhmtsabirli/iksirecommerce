@@ -34,3 +34,4 @@ D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Manageme
 D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\ResolveAssemblyReference.cache
 D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\IKSIR.ECommerce.Management.dll
 D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\IKSIR.ECommerce.Management.pdb
+C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Toolkit.pdb

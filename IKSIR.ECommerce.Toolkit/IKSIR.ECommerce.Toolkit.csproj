@@ -2742,6 +2742,12 @@
     <Folder Include="RadControls\Panelbar\Skins\WebBlue\Img\" />
     <Folder Include="RadControls\Panelbar\Skins\WindowsXP\Img\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IKSIR.ECommerce.Infrastructure\IKSIR.ECommerce.Infrastructure.csproj">
+      <Project>{815B64C7-A938-46A9-B1E0-288579B3B391}</Project>
+      <Name>IKSIR.ECommerce.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
