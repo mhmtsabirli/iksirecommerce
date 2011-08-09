@@ -84,7 +84,6 @@
     <Content Include="Css\ManagementTopMenu.css" />
     <Content Include="Css\RadEditorToolsFile.xml" />
     <Content Include="Default.aspx" />
-    <Content Include="Global.asax" />
     <Content Include="Images\Cart.png" />
     <Content Include="Images\Comments.png" />
     <Content Include="Images\Home.png" />
@@ -92,6 +91,8 @@
     <Content Include="Images\Reports.png" />
     <Content Include="Images\Settings.png" />
     <Content Include="Images\Stock.png" />
+    <Content Include="Login.aspx" />
+    <Content Include="Logs\Log.aspx" />
     <Content Include="Order\WaitingOrders.aspx" />
     <Content Include="ProductManagement\ModuleProducts.aspx" />
     <Content Include="ProductManagement\ProductCategories.aspx" />
@@ -220,8 +221,19 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logs\Log.aspx.cs">
+      <DependentUpon>Log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logs\Log.aspx.designer.cs">
+      <DependentUpon>Log.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterPage\MasterManagement.Master.cs">
       <DependentUpon>MasterManagement.Master</DependentUpon>
