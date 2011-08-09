@@ -32,10 +32,10 @@ namespace IKSIR.ECommerce.Toolkit
 
                 //Add the Creddentials
                 SmtpClient client = new SmtpClient();
-                client.Port = Convert.ToInt32(System.Configuration.ConfigurationSettings.AppSettings["MailPort"]);
-                client.Host = System.Configuration.ConfigurationSettings.AppSettings["MailHost"];
+                client.Port = Convert.ToInt32(IKSIR.ECommerce.Infrastructure.StaticData.Idevit.MailPort);
+                client.Host = IKSIR.ECommerce.Infrastructure.StaticData.Idevit.MailHost;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.Credentials = new System.Net.NetworkCredential(System.Configuration.ConfigurationSettings.AppSettings["MailUserName"], System.Configuration.ConfigurationSettings.AppSettings["MailPassword"]);
+                client.Credentials = new System.Net.NetworkCredential(IKSIR.ECommerce.Infrastructure.StaticData.Idevit.MailUserName, IKSIR.ECommerce.Infrastructure.StaticData.Idevit.MailPassword);
                 //client.Port = 25;
                 //client.EnableSsl = true;
                 client.Send(msg);
@@ -45,7 +45,6 @@ namespace IKSIR.ECommerce.Toolkit
             {
                 return false;
             }
-
         }
     }
 }

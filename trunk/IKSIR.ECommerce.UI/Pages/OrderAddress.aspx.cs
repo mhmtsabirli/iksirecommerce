@@ -25,20 +25,19 @@ namespace IKSIR.ECommerce.UI.Pages
                 GetUserAddresses();
             }
 
-
-            //if (Session["LOGIN_USER"] != null && Session["USER_BASKET"] != null)
-            //{
-            //    if (!Page.IsPostBack)
-            //    {
-            //        loginUser = (User)Session["LOGIN_USER"];
-            //        basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
-            //        GetUserAddresses();
-            //    }
-            //}
-            //else
-            //{
-            //    Response.Redirect("Login.aspx?returl=OrderBasket.aspx");
-            //}
+            if (Session["LOGIN_USER"] != null && Session["USER_BASKET"] != null)
+            {
+                if (!Page.IsPostBack)
+                {
+                    loginUser = (User)Session["LOGIN_USER"];
+                    basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
+                    GetUserAddresses();
+                }
+            }
+            else
+            {
+                Response.Redirect("Login.aspx?returl=OrderBasket.aspx");
+            }
         }
 
         private void BindValues()
@@ -187,11 +186,17 @@ namespace IKSIR.ECommerce.UI.Pages
                 string textForMessage = @"<script language='javascript'> alert('Teslimat adresi seçmelisiniz!');</script>";
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
             }
-
-            if (rblBillingAddresses.SelectedIndex == -1)
+            else if (rblBillingAddresses.SelectedIndex == -1)
             {
                 string textForMessage = @"<script language='javascript'> alert('Fatura adresi seçmelisiniz!');</script>";
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+            }
+            else
+            {
+                basket.BillingAddress = AddressData.Get(Convert.ToInt32(rblBillingAddresses.SelectedValue));
+                basket.ShippingAddress = AddressData.Get(Convert.ToInt32(rblShippingAddresses.SelectedValue));
+                Session.Add("USER_BASKET", basket);
+                Response.Redirect("OrderShipping.aspx");
             }
         }
     }

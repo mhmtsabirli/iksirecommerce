@@ -83,7 +83,7 @@
     <Compile Include="DataLayer\ProductDataLayer\ModuleProductData.cs" />
     <Compile Include="DataLayer\OrderDataLayer\BasketItemData.cs" />
     <Compile Include="DataLayer\OrderDataLayer\BasketData.cs" />
-    <Compile Include="DataLayer\OrderDataLayer\BasketItemAddressData.cs" />
+    <Compile Include="DataLayer\OrderDataLayer\BasketAddressData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\ContactFormData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\SiteModuleData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\SiteCategoryData.cs" />
