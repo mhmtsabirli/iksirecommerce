@@ -28,7 +28,7 @@ namespace IKSIR.ECommerce.Management.Common
 
 
             txtShipment.Text = itemShipment.Title.ToString();
-            string[] Price = itemShipment.UnitPrice.ToString().Split('.');
+            string[] Price = itemShipment.UnitPrice.ToString().Split(',');
             txtPriceOne.Text = Price[0].ToString();
             txtPriceTwo.Text = Price[1].ToString();
 
@@ -169,7 +169,7 @@ namespace IKSIR.ECommerce.Management.Common
             {
 
                 item.Title = txtShipment.Text.Trim();
-                item.UnitPrice = Convert.ToDecimal(txtPriceOne.Text + "." + txtPriceTwo.Text);
+                item.UnitPrice = Convert.ToDecimal(txtPriceOne.Text + "," + txtPriceTwo.Text);
                 try
                 {
                     if (ShipmentData.Insert(item) > 0)
@@ -205,7 +205,7 @@ namespace IKSIR.ECommerce.Management.Common
             //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
             item.Id = Convert.ToInt32(lblId.Text);
             item.Title = txtShipment.Text.Trim();
-            item.UnitPrice = Convert.ToDecimal(txtPriceOne.Text + "." + txtPriceTwo.Text);
+            item.UnitPrice = Convert.ToDecimal(txtPriceOne.Text + "," + txtPriceTwo.Text);
 
             try
             {
