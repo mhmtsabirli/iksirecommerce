@@ -62,7 +62,7 @@
                             <li><a href="">
                                 <img src="http://212.58.8.103/management/Images/Cart.png" />&nbsp;Satış</a>
                                 <ul>
-                                    <li><a href="http://212.58.8.103/Order/WaitingOrders.aspx">Bekleyen Siparişler</a></li>
+                                    <li><a href="http://212.58.8.103/management/Order/WaitingOrders.aspx">Bekleyen Siparişler</a></li>
                                     <li><a href="">Onaylanan Siparişler</a></li>
                                     <li><a href="">Tedarikçiler</a></li>
                                 </ul>
@@ -167,7 +167,7 @@
     <!-- end container -->
     <div id="footer">
         <p>
-            ECommerce 2011</p>
+            <a href = "http://212.58.8.103/management/Logs/Log.aspx"> ECommerce 2011</a></p>
     </div>
     <!-- end footer -->
     </form>
