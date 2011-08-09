@@ -62,7 +62,7 @@
                             <li><a href="">
                                 <img src="http://212.58.8.103/management/Images/Cart.png" />&nbsp;Satış</a>
                                 <ul>
-                                    <li><a href="">Bekleyen Siparişler</a></li>
+                                    <li><a href="http://212.58.8.103/Order/WaitingOrders.aspx">Bekleyen Siparişler</a></li>
                                     <li><a href="">Onaylanan Siparişler</a></li>
                                     <li><a href="">Tedarikçiler</a></li>
                                 </ul>
@@ -102,6 +102,7 @@
                                     <li><a href="http://212.58.8.103/management/Bank/Banks.aspx">Bankalar</a></li>
                                     <li><a href="http://212.58.8.103/management/Bank/BinNumbers.aspx">BIN Numaraları</a></li>
                                     <li><a href="http://212.58.8.103/management/Bank/CreditCards.aspx">Kredi Kartları</a></li>
+                                    <li><a href="http://212.58.8.103/management/Common/Enums.aspx">Sabitler</a></li>
                                     <li><a href="http://212.58.8.103/management/Common/EnumValues.aspx">Sabit Değerleri</a></li>
                                     <li><a href="http://212.58.8.103/management/Admin/Admin.aspx">Yöneticiler</a></li>
                                     <li><a href="http://212.58.8.103/management/Admin/Right.aspx">Yönetici Hakları</a></li>
