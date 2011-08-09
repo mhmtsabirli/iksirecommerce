@@ -44,7 +44,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemBasketItem.CreateAdminId)));
             parameters.Add(new SqlParameter("@BasketId", DBHelper.IntValue(itemBasketItem.Basket.Id)));
             parameters.Add(new SqlParameter("@ProductId", DBHelper.IntValue(itemBasketItem.Product.Id)));
-            parameters.Add(new SqlParameter("@ShippingAddressId", DBHelper.IntValue(itemBasketItem.ShippingAddress.Id)));
+            //parameters.Add(new SqlParameter("@ShippingAddressId", DBHelper.IntValue(itemBasketItem.ShippingAddress.Id))); 
+            //Basket Item Bazında kargolamayı şimdilik kaldırıyoruz. => Ayhant
             parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemBasketItem.Status.Id)));
             parameters[0].Direction = ParameterDirection.Output;
 

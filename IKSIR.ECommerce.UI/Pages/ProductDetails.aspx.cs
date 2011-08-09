@@ -14,24 +14,25 @@ namespace IKSIR.ECommerce.UI.Pages
         int productId = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+
+            if (Page.Request.QueryString["pid"] != null && Page.Request.QueryString["pid"].ToString() != "" && int.TryParse(Page.Request.QueryString["pid"].ToString(), out productId))
             {
-                if (Page.Request.QueryString["pid"] != null && Page.Request.QueryString["pid"].ToString() != "" && int.TryParse(Page.Request.QueryString["pid"].ToString(), out productId))
+                if (!Page.IsPostBack)
                 {
                     GetProductDetails();
-                    UCProductDetailsCreditCardAdvantages1.ProductId = productId;
-                    UCProductDetailDocuments1.ProductId = productId;
-                    UCProductDetailsProductInfos1.ProductId = productId;
-                    UCProductDetailsComments1.ProductId = productId;
-                    UCProductDetailsMain1.ProductId = productId;
-                    UCProductDetailsRelatedProducts1.ProductId = productId;
-                    UCProductDetailsSimilarProducts1.ProductId = productId;
-                }
-                else
-                {
-                    Response.Redirect("pages/Default.aspx");
                 }
             }
+            else
+            {
+                Response.Redirect("pages/Default.aspx");
+            }
+            UCProductDetailsCreditCardAdvantages1.ProductId = productId;
+            UCProductDetailDocuments1.ProductId = productId;
+            UCProductDetailsProductInfos1.ProductId = productId;
+            UCProductDetailsComments1.ProductId = productId;
+            UCProductDetailsMain1.ProductId = productId;
+            UCProductDetailsRelatedProducts1.ProductId = productId;
+            UCProductDetailsSimilarProducts1.ProductId = productId;
         }
 
         private void GetProductDetails()

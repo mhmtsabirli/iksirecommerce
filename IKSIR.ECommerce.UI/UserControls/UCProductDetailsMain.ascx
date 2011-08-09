@@ -33,7 +33,7 @@
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
+        </script>
         <script type="text/javascript">
             try {
                 var pageTracker = _gat._getTracker("UA-7025232-1");
@@ -46,8 +46,7 @@
         LAVABO YARIM AYAK 60X50</h2>
     <div class="urun_fiyat">
         Fiyatı : <span style="color: #333;">
-            <asp:Label runat="server" ID="lblBigProductPrice"></asp:Label>
-        </span>
+            <asp:Label runat="server" ID="lblBigProductPrice"></asp:Label>&nbsp;TL </span>
     </div>
     <div class="urun_table">
         <table>
@@ -88,7 +87,7 @@
                     Fiyatı :
                 </td>
                 <td style="text-align: right; color: #333">
-                    <asp:Label runat="server" ID="lblProductPrice"></asp:Label>
+                    <asp:Label runat="server" ID="lblProductPrice"></asp:Label>&nbsp;TL
                 </td>
             </tr>
             <tr>
@@ -96,20 +95,30 @@
                     KDV Dahil Fiyatı :
                 </td>
                 <td style="text-align: right; color: #333">
-                    <asp:Label runat="server" ID="lblProductPriceWithKDV"></asp:Label>
+                    <asp:Label runat="server" ID="lblProductPriceWithKDV"></asp:Label>&nbsp;TL
                 </td>
             </tr>
         </table>
     </div>
     <div class="urun_satis">
-        <span>Hemen Al</span>
-        <form action="">
-        <label class="satis_label">
-            Adet</label>
-        <asp:DropDownList runat="server" ID="ddlProductCount" Width="40px">
-        </asp:DropDownList>
-        <asp:LinkButton runat="server" ID="lbtnAddToBasket" CssClass="satis_sepet" Text="Sepete At"
-            OnClick="lbtnAddToBasket_Click"></asp:LinkButton>
+        <table width="292px">
+            <tr>
+                <td align="left">
+                    <asp:ImageButton runat="server" ID="imgBtnBuyNow" 
+                        ImageUrl="~/images/hemenal.png" onclick="imgBtnBuyNow_Click" />
+                    &nbsp;
+                </td>
+                <td align="center">
+                    <asp:DropDownList runat="server" ID="ddlProductCount" Width="40px" Font-Bold="true"
+                        Font-Size="14px">
+                    </asp:DropDownList>
+                </td>
+                <td align="right">
+                    &nbsp;<asp:ImageButton runat="server" ID="imgBtnAddToBasket" 
+                        ImageUrl="~/images/sepeteat.png" onclick="imgBtnAddToBasket_Click" />
+                </td>
+            </tr>
+        </table>
         </form>
         <div class="clear">
         </div>

@@ -239,7 +239,7 @@ body
 	  .urun_table { padding:0 0 0 30px; height:225px; }
 	     .urun_table td { width:120px; font:normal 13px trebuchet ms; color:#888; padding-top:7px; }
 		 .urun_table_right { text-align:right; color:#333333; }
-      .urun_satis { width:289px; height:43px; background:url(../images/urun_satis_bg.png); margin:0 0 0 12px; font:bold 10px arial; }
+      .urun_satis { width:289px; height:43px; margin:0 0 0 12px; font:bold 10px arial; }
 	     .urun_satis span { float:left; padding:14px 0 0 40px; color:#676D7B; }
 		 .satis_text { width:28px; height:15px; background:url(../images/satis_text.png); margin:9px 0 0 0; padding:3px 0;
 		 border:0; text-align:center; }

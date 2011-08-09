@@ -55,6 +55,9 @@ namespace IKSIR.ECommerce.UI.Pages
             {
                 Image imgProduct = e.Item.FindControl("imgProduct") as Image;
                 HiddenField hdnProductId = e.Item.FindControl("hdnProductId") as HiddenField;
+                TextBox txtItemCount = e.Item.FindControl("txtItemCount") as TextBox;
+                int count = Convert.ToInt32(txtItemCount.Text);
+                
                 Repeater rptProductProperties = e.Item.FindControl("rptProductProperties") as Repeater;
                 int productId;
 
@@ -66,9 +69,9 @@ namespace IKSIR.ECommerce.UI.Pages
                     var productPriceData = ProductPriceData.GetByProduct(productId);
                     if (productPriceData != null)
                     {
-                        BasketTotal += productPriceData.Price;
-                        TotalTax += productPriceData.Price * productPriceData.Tax / 100;
-                        TotalPrice += productPriceData.UnitPrice;
+                        BasketTotal += count * productPriceData.Price;
+                        TotalTax += count * productPriceData.Price * productPriceData.Tax / 100;
+                        TotalPrice += count * productPriceData.UnitPrice;
                     }
                 }
             }
@@ -99,13 +102,16 @@ namespace IKSIR.ECommerce.UI.Pages
                         Shopping.RemoveBasketItem(productId);
                     }
                 }
+                GetOrderBasket();
             }
         }
 
         protected void imgbtnContinue_Click(object sender, ImageClickEventArgs e)
         {
             if (cbxComfirmation.Checked)
-            {                
+            {
+                basket.TotalPrice = TotalPrice;
+                Session.Add("USER_BASKET", basket);
                 Response.Redirect("OrderAddress.aspx");
             }
             else

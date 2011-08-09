@@ -19,7 +19,7 @@ namespace IKSIR.ECommerce.Management
             if (txtUserName.Text == System.Configuration.ConfigurationSettings.AppSettings["UserName"].ToString() && txtPass.Text == System.Configuration.ConfigurationSettings.AppSettings["Password"].ToString())
             {
                 Session["Login"] = "idevit";
-                Response.Redirect("default.aspx");
+                Response.Redirect("Default.aspx");
             }
             else
             {

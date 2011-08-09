@@ -68,6 +68,7 @@
     <Content Include="images\footer_verisign.jpg" />
     <Content Include="images\header_bg.png" />
     <Content Include="images\header_search_bg.png" />
+    <Content Include="images\hemenal.png" />
     <Content Include="images\logo.jpg" />
     <Content Include="images\maintence.jpg" />
     <Content Include="images\navbar_bg.png" />
@@ -80,6 +81,7 @@
     <Content Include="images\section_incele.jpg" />
     <Content Include="images\section_sepete_ekle.jpg" />
     <Content Include="images\section_title_bg.jpg" />
+    <Content Include="images\sepeteat.png" />
     <Content Include="images\sepet_content_bottom.jpg" />
     <Content Include="images\sepet_content_middle.jpg" />
     <Content Include="images\sepet_content_top.jpg" />
