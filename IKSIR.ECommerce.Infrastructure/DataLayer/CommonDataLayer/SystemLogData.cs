@@ -38,10 +38,10 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             parameters.Add(new SqlParameter("@Title", itemSytemLog.Title));
             parameters.Add(new SqlParameter("@TypeId", itemSytemLog.Type.Id));
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetSystemLog", parameters);
-
-            var item = new SystemLog();
+          
             while (dr.Read())
             {
+                var item = new SystemLog();
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
@@ -49,7 +49,6 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Content = DBHelper.StringValue(dr["Content"].ToString());
-                item.Type = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["Type"].ToString()) });
                 itemSystemLogList.Add(item);
             }
 
