@@ -34,7 +34,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
                 returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
                 returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
-                if (DBHelper.IntValue(dr["ParentId"].ToString()) != 0)
+                if (DBHelper.IntValue(dr["ParentId"].ToString()) != 0 && DBHelper.IntValue(dr["ParentId"].ToString()) != -1)
                     returnValue.ParentCategory = Get(new ProductCategory() { Id = DBHelper.IntValue(dr["ParentId"].ToString()) });
                 //returnValue.ParentCategory. = GetProductCategoryById(DBHelper.IntValue(dr["ParentId"].ToString()));
                 SiteCategory siteCategory = SiteCategoryData.Get(DBHelper.IntValue(dr["Id"].ToString()));
