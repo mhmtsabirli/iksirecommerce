@@ -9,6 +9,8 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Management.MasterPage;
 using IKSIR.ECommerce.Model.SiteModel;
+using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
+using IKSIR.ECommerce.Model.ProductModel;
 
 namespace IKSIR.ECommerce.Management.Common
 {
@@ -137,7 +139,7 @@ namespace IKSIR.ECommerce.Management.Common
             {
                 lblError.Visible = true;
                 lblError.ForeColor = System.Drawing.Color.Red;
-                lblError.Text = "Item silerken bir hata oluştu.";
+                lblError.Text += "Item silerken bir hata oluştu.";
             }
         }
 
@@ -236,29 +238,38 @@ namespace IKSIR.ECommerce.Management.Common
         private bool DeleteItem(int itemId)
         {
             bool returnValue = false;
+          
+            List<ProductCategory> itemProduct = ProductCategoryData.GetGetParentProductCategoryListBySiteId(itemId);
 
-
-            var itemSite = new Site() { Id = itemId };
-            try
+            if (itemProduct.Count == 0)
             {
-                if (SiteData.Delete(itemSite) < 0)
+                var itemSite = new Site() { Id = itemId };
+                try
                 {
-                    returnValue = true;
+                    if (SiteData.Delete(itemSite) < 0)
+                    {
+                        returnValue = true;
 
+                        SystemLog itemSystemLog = new SystemLog();
+                        itemSystemLog.Title = "Delete Site";
+                        itemSystemLog.Content = "Id=" + itemId;
+                        itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                        SystemLogData.Insert(itemSystemLog);
+                    }
+                }
+                catch (Exception ex)
+                {
                     SystemLog itemSystemLog = new SystemLog();
                     itemSystemLog.Title = "Delete Site";
-                    itemSystemLog.Content = "Id=" + itemId;
-                    itemSystemLog.Type = new EnumValue() { Id = 1 };//olumsu sonuc 1 olumsuz 0
+                    itemSystemLog.Content = "Id=" + itemId + " " + ex.Message.ToString();
+                    itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
                     SystemLogData.Insert(itemSystemLog);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete Site";
-                itemSystemLog.Content = "Id=" + itemId + " " + ex.Message.ToString();
-                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
-                SystemLogData.Insert(itemSystemLog);
+                returnValue = false;
+                lblError.Text += "Bu siteye tanımlı bir çok kategori vardır. Önce kategorileri siliniz";
             }
             return returnValue;
         }
