@@ -42,11 +42,11 @@ namespace IKSIR.ECommerce.Management.MasterPage
                 }
                 else
                 {
-                    Response.Redirect("Login.aspx");
+                    Response.Redirect("../Login.aspx");
                 }
             }
             else
-                Response.Redirect("Login.aspx");
+                Response.Redirect("/Login.aspx");
         }
     }
 }

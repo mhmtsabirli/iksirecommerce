@@ -8,6 +8,8 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Model.Order;
 using IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer;
 using IKSIR.ECommerce.Model.MembershipModel;
+using IKSIR.ECommerce.Model.Bank;
+using IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -46,12 +48,18 @@ namespace IKSIR.ECommerce.UI.Pages
 
                 if (retValue > 0) //itemlar başarıyla kaydedildiyese
                 {
+                    PaymetInfo paymetInfo = new Model.Bank.PaymetInfo() { CreditCard = new CreditCard() { Id = 1 }, CreditCardNumber = "123123", Cvc = "345", Month = 12, Year = 2012, PaymentType = new Model.CommonModel.EnumValue() { Id = 37 } };
+                    retValue = PaymetInfoData.Insert(paymetInfo);
+                }
+
+                if (retValue > 0) //itemlar başarıyla kaydedildiyese
+                {
                     Order order = new Order();
                     order.User = loginUser;
                     order.Basket = basket;
                     order.TotalPrice = basket.TotalPrice;
-                    //order.TotalRatedPrice =
-                    order.PaymetInfo = new Model.Bank.PaymetInfo() { CreditCardNumber = "123123", Cvc = "345", Month = 12, Year = 2012 };
+                    order.Status = new Model.CommonModel.EnumValue() { Id = 29 };
+                    order.PaymetInfo = new PaymetInfo() { Id = retValue };
                     retValue = OrderData.Insert(order);
                 }
             }
