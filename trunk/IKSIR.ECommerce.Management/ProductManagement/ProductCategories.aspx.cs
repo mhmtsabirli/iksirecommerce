@@ -32,17 +32,19 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
             ProductCategory itemProduct = ProductCategoryData.Get(new ProductCategory() { Id = itemId });
 
-            //var itemXml = new IKSIR.ECommerce.Toolkit.Utility();
-            //var serializedObject = itemXml.XMLSerialization.ToXml(itemList);
-            //Yukarıdaki şekilde alabiliyor olmamız lazım ama hata veriyor. bakıacak => ayhant
             txtCategoryName.Text = itemProduct.Title.ToString();
             txtDescription.Text = itemProduct.Description.ToString();
-            if (itemProduct.ParentCategory != null)
+            if (itemProduct.ParentCategory.Id == 0)
+                ddlParentCategories.SelectedValue = "-1";
+            else if (itemProduct.ParentCategory != null)
                 ddlParentCategories.SelectedValue = itemProduct.ParentCategory.Id.ToString();
             else
                 ddlParentCategories.SelectedValue = "-1";
 
-            ddlSites.SelectedValue = itemProduct.Site.Id.ToString();
+            if (itemProduct.Site.Id != 0)
+                ddlSites.SelectedValue = itemProduct.Site.Id.ToString();
+            else
+                ddlSites.SelectedValue = "-1";
             pnlForm.Visible = true;
 
         }
@@ -202,20 +204,26 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             // a nın altında b var dıyelım kosul olmadıgı ıcın ıkıncı bır b yı atıyor
             // where kosullu kısı mcalıstırıldıgında burayada uygulanıp burasıda calıstırılacak
 
-            List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
+            List<ProductCategory> itemList = null;
 
             string CategoryName = txtCategoryName.Text;
 
 
-            if (ddlParentCategories.SelectedValue != "-1" && ddlParentCategories.SelectedValue != "")
+            if (ddlParentCategories.SelectedValue != "-1")
             {
+                itemList = ProductCategoryData.GetProductCategoryList();
                 int parentCategoryId = DBHelper.IntValue(ddlParentCategories.SelectedValue);
                 itemList = itemList.Where(x => x.ParentCategory != null).ToList();
                 itemList = itemList.Where(x => x.ParentCategory.Id == parentCategoryId).ToList();
                 itemList = itemList.Where(x => x.Title == CategoryName).ToList();
-
             }
-            if (itemList.Count > 0)
+            int Count = 0;
+            if (itemList == null)
+                Count = 0;
+            else
+                Count = itemList.Count;
+
+            if (Count > 0)
             {
                 lblError.Visible = true;
                 lblError.ForeColor = System.Drawing.Color.Red;
