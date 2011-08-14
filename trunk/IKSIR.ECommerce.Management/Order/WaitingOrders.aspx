@@ -131,7 +131,7 @@
                                 </tr>
                             </table>
                         </telerik:RadPageView>
-                        <telerik:RadPageView ID="RadPageView2" runat="server" Selected="true">
+                        <telerik:RadPageView ID="RadPageView2" runat="server" >
                             <div id="dvAdress" runat="server" visible="false">
                                 <table>
                                     <tr>
@@ -225,7 +225,7 @@
                                 </Columns>
                             </asp:GridView>
                         </telerik:RadPageView>
-                        <telerik:RadPageView ID="RadPageView3" runat="server" Selected="true">
+                        <telerik:RadPageView ID="RadPageView3" runat="server" >
                             <table>
                                 <tr>
                                     <td colspan="4">
@@ -469,6 +469,11 @@
                                         <asp:TemplateField HeaderText="Ödeme Tipi">
                                             <ItemTemplate>
                                                 <asp:Label runat="server" ID="lblPaymentType" Text='<%# Eval("PaymetInfo.PaymentType.Value")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                             <asp:TemplateField HeaderText="Durumu">
+                                            <ItemTemplate>
+                                                <asp:Label runat="server" ID="lblStatus" Text='<%# Eval("Status.Value")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
