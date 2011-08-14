@@ -95,6 +95,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Logs\Log.aspx" />
     <Content Include="Order\WaitingOrders.aspx" />
+    <Content Include="ProductManagement\SiteCategories.aspx" />
     <Content Include="ProductManagement\ModuleProducts.aspx" />
     <Content Include="ProductManagement\ProductCategories.aspx" />
     <Content Include="ProductManagement\ProductPrices.aspx" />
@@ -252,6 +253,13 @@
     </Compile>
     <Compile Include="Order\WaitingOrders.aspx.designer.cs">
       <DependentUpon>WaitingOrders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductManagement\SiteCategories.aspx.cs">
+      <DependentUpon>SiteCategories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductManagement\SiteCategories.aspx.designer.cs">
+      <DependentUpon>SiteCategories.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductManagement\ModuleProducts.aspx.cs">
       <DependentUpon>ModuleProducts.aspx</DependentUpon>
