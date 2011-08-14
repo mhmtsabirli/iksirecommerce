@@ -83,6 +83,7 @@
                                 <img src="http://212.58.8.103/management/Images/Reports.png" />&nbsp;Site</a>
                                 <ul>
                                     <li><a href="http://212.58.8.103/management/Common/Sites.aspx">Site Tanımlama</a></li>
+                                    <li><a href="http://212.58.8.103/management/ProductManagement/SiteCategories.aspx">Site Kategori Tanımlama</a></li>
                                     <li><a href="http://212.58.8.103/management/Common/ContactForm.aspx">İletişim Formu</a></li>
                                     <li><a href="http://212.58.8.103/management/Common/StaticPages.aspx">Statik Sayfalar</a></li>
                                     <li><a href="http://212.58.8.103/management/Common/NewsFromUs.aspx">Bizden Haberler</a></li>
