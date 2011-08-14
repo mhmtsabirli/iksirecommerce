@@ -87,23 +87,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                Site
-                            </td>
-                            <td>
-                                :
-                            </td>
-                            <td>
-                                <asp:DropDownList runat="server" ID="ddlSites">
-                                </asp:DropDownList>
-                            </td>
-                            <td>
-                                <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="ddlSites"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Site seçmelisiniz"
-                                    ForeColor="Red">*</asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                        <tr>
                             <td colspan="4" style="text-align: center">
                                 <asp:ValidationSummary runat="server" ID="vsForm" ValidationGroup="VGForm" ForeColor="Red" />
                             </td>

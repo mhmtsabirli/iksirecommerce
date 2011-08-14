@@ -75,23 +75,6 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Site
-                                    </td>
-                                    <td>
-                                        :
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList runat="server" ID="ddlSites" AutoPostBack="true" OnSelectedIndexChanged="ddlSites_SelectedIndexChanged">
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td>
-                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="ddlSites"
-                                            ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Site seçmelisiniz"
-                                            ForeColor="Red">*</asp:RequiredFieldValidator>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
                                         Ana Kategori
                                     </td>
                                     <td>
@@ -744,9 +727,7 @@
                                 </asp:DropDownList>
                             </td>
                             <td>
-                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="ddlSites"
-                                    ValidationGroup="VGForm" SetFocusOnError="true" InitialValue="-1" ErrorMessage="Site seçmelisiniz"
-                                    ForeColor="Red">*</asp:RequiredFieldValidator>
+                               
                             </td>
                         </tr>
                         <tr>
