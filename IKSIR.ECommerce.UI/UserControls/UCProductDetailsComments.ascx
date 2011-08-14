@@ -8,9 +8,9 @@
     </tr>
     <tr>
         <td colspan="4">
-            <asp:GridView runat="server" ID="gvProductComments" AutoGenerateColumns="False" 
-                Width="100%" ShowHeader="False" CellPadding="4" EnableModelValidation="True" 
-                ForeColor="#333333" GridLines="None">
+            <asp:GridView runat="server" ID="gvProductComments" AutoGenerateColumns="False" Width="100%"
+                ShowHeader="False" CellPadding="4" EnableModelValidation="True" ForeColor="#333333"
+                GridLines="None">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:TemplateField>
@@ -31,7 +31,9 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" align="right">
-                                        <asp:Label runat="server" ID="lblCommandator" Text='<%# Eval("User.Name")%>' Font-Italic="true"></asp:Label>
+                                        <span style="font-style: italic">
+                                            <%# Eval("User.FirstName")%>&nbsp;<%# Eval("User.LastName")%>
+                                        </span>
                                     </td>
                                 </tr>
                             </table>
@@ -104,6 +106,7 @@
     </tr>
     <tr>
         <td colspan="4">
+            <asp:HyperLink runat="server" ID="hplLogin" Text="Yorum eklemek için üye girişi yapmalısınız"></asp:HyperLink>
             <asp:Button runat="server" ID="btnAddComment" Text="Yorum Ekle" ValidationGroup="vgCommentForm"
                 OnClick="btnAddComment_Click" />
         </td>

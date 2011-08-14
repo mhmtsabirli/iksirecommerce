@@ -36,10 +36,8 @@
     </div>
     <div class="nav_info">
         <p>
-            <a href="../Pages/Basket.aspx" style="color:White">
-                <img src="../images/navbar_sepet.png" alt="" style="border: none" />
-                <asp:Label runat="server" ID="lblBasketProductCount" Text="Sepetinizde Ürün Yok"></asp:Label>
-            </a>
+            <img src="../images/navbar_sepet.png" alt="" style="border: none" />
+            <asp:HyperLink runat="server" ID="hplToBasket" ForeColor="White" Text="Sepetinizde Ürün Yok"></asp:HyperLink>
         </p>
     </div>
     <div class="clear">

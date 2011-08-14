@@ -13,45 +13,42 @@ namespace IKSIR.ECommerce.UI.ClassLibrary
         //UI tarfında sepete ürün eklemek için kullanılır.
         public static void AddToBasket(int productId, int count = 1)
         {
-            if (HttpContext.Current.Session["LOGIN_USER"] == null)
+            if (HttpContext.Current.Session["USER_BASKET"] == null)
             {
-                //Ürünü sepetine eklemek isterken login mi? Değilse login sayfasına yönlendir.
-                HttpContext.Current.Response.Redirect("../Pages/Login.aspx", false);
+                //Sessionda basket yoksa yeni basket oluştur.
+                Basket basket = new Basket();
+                BasketItem basketItem = new BasketItem();
+                basketItem.Product = ProductData.Get(productId);
+                basketItem.ProductPrice = ProductPriceData.GetByProduct(productId);
+                basketItem.Count = count;
+                basket.BasketItems = new List<BasketItem>();
+                basket.BasketItems.Add(basketItem);
+                HttpContext.Current.Session.Add("USER_BASKET", basket);
             }
             else
             {
-                if (HttpContext.Current.Session["USER_BASKET"] == null)
+                //Sessionda basket varsa.
+                Basket basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
+
+                BasketItem existBasketItem = basket.BasketItems.Where(x => x.Product.Id == productId).FirstOrDefault();
+
+                if (existBasketItem != null && existBasketItem.Count > 0)
                 {
-                    //Sessionda basket yoksa yeni basket oluştur.
-                    Basket basket = new Basket();
-                    BasketItem basketItem = new BasketItem();
-                    basketItem.Product = ProductData.Get(productId);
-                    basketItem.ProductPrice = ProductPriceData.GetByProduct(productId);
-                    basketItem.Count = count;
-                    basket.BasketItems = new List<BasketItem>();
-                    basket.BasketItems.Add(basketItem);
-                    HttpContext.Current.Session.Add("USER_BASKET", basket);
+                    basket.BasketItems.Remove(existBasketItem);
                 }
-                else
-                {
-                    //Sessionda basket varsa.
-                    Basket basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
 
-                    BasketItem existBasketItem = basket.BasketItems.Where(x => x.Product.Id == productId).FirstOrDefault();
-
-                    if (existBasketItem != null && existBasketItem.Count > 0)
-                    {
-                        basket.BasketItems.Remove(existBasketItem);
-                    }
-
-                    BasketItem basketItem = new BasketItem();
-                    basketItem.Product = ProductData.Get(productId);
-                    basketItem.ProductPrice = ProductPriceData.GetByProduct(productId);
-                    basketItem.Count = count;
-                    basket.BasketItems.Add(basketItem);
-                    HttpContext.Current.Session.Add("USER_BASKET", basket);
-                }
-                HttpContext.Current.Response.Redirect("../Pages/OrderBasket.aspx", false);
+                BasketItem basketItem = new BasketItem();
+                basketItem.Product = ProductData.Get(productId);
+                basketItem.ProductPrice = ProductPriceData.GetByProduct(productId);
+                basketItem.Count = count;
+                basket.BasketItems.Add(basketItem);
+                HttpContext.Current.Session.Add("USER_BASKET", basket);
+            }
+            HttpContext.Current.Response.Redirect("../Pages/OrderBasket.aspx", false);
+            if (HttpContext.Current.Session["LOGIN_USER"] == null)
+            {
+                //Ürünü sepetine eklemek isterken login mi? Değilse login sayfasına yönlendir.
+                HttpContext.Current.Response.Redirect("../Pages/Login.aspx?returl=OrderBasket.aspx", false);
             }
         }
 
@@ -78,6 +75,15 @@ namespace IKSIR.ECommerce.UI.ClassLibrary
                     HttpContext.Current.Session.Add("USER_BASKET", basket);
                 }
                 HttpContext.Current.Response.Redirect("../Pages/OrderBasket.aspx", false);
+            }
+        }
+
+        public static void GetBasket(ref int itemCount)
+        {
+            if (HttpContext.Current.Session["USER_BASKET"] != null)
+            {
+                Basket basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
+                itemCount = basket.BasketItems.Count;
             }
         }
     }

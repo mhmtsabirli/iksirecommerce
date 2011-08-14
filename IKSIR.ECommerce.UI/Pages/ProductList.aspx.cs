@@ -117,13 +117,13 @@ namespace IKSIR.ECommerce.UI.Pages
 
                     for (int i = 1; i <= pageCount; i++)
                     {
-                        pages.Add(i.ToString(), "ProductList.aspx?catid=?catId=" + categoryId.ToString() + "&p=" + i.ToString());
+                        pages.Add(i.ToString(), "ProductList.aspx?catid=" + categoryId.ToString() + "&p=" + i.ToString());
                     }
 
                     dlPaging.DataSource = pages;
                     dlPaging.DataBind();
                 }
-                productList = productList.Skip(5 * activePage).Take(5).ToList();
+                productList = productList.Skip(6 * activePage).Take(6).ToList();
                 dlProductList.DataSource = productList;
                 dlProductList.DataBind();
 

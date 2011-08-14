@@ -56,7 +56,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@TotalPrice", DBHelper.DecValue(itemOrder.TotalPrice)));
             parameters[0].Direction = ParameterDirection.Output;
 
-            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveOrder", parameters));
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InserOrder", parameters));
             int.TryParse(parameters[0].Value.ToString(), out returnValue);
             return returnValue;
         }
@@ -75,7 +75,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@TotalPrice", DBHelper.DecValue(itemOrder.TotalPrice)));
             parameters[0].Direction = ParameterDirection.Output;
 
-            returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveOrder", parameters);
+            returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateOrder", parameters);
             int.TryParse(parameters[0].Value.ToString(), out returnValue);
             return returnValue;
         }

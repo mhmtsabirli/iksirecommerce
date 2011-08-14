@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using IKSIR.ECommerce.Model.MembershipModel;
+using IKSIR.ECommerce.UI.ClassLibrary;
 
 namespace IKSIR.ECommerce.UI.UserControls
 {
@@ -12,7 +12,19 @@ namespace IKSIR.ECommerce.UI.UserControls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            int basketItemCount = 0;
+            Shopping.GetBasket(ref basketItemCount);
 
+            if (basketItemCount != 0)
+            {
+                hplToBasket.Text = "Sepetiniz (" + basketItemCount.ToString() + ")"; ;
+                hplToBasket.NavigateUrl = "../Pages/OrderBasket.aspx";
+            }
+            else
+            {
+                hplToBasket.Text = "Sepetinizde ürün bulunmamaktadır.";
+                hplToBasket.NavigateUrl = "";
+            }
         }
     }
 }
