@@ -94,7 +94,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 basketItem.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 basketItem.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 basketItem.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-                basketItem.Basket = new Basket(){Id=DBHelper.IntValue(dr["BasketId"].ToString()};
+                basketItem.Basket = new Basket(){Id=DBHelper.IntValue(dr["BasketId"].ToString())};
                 basketItem.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
                 basketItem.ShippingAddress = BasketAddressData.Get(DBHelper.IntValue(dr["ShippingAddressId"].ToString()));
                 basketItem.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
