@@ -87,6 +87,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@BasketId", basketId));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetBasketItem", parameters);
+            returnValue = new List<BasketItem>(); 
             while (dr.Read())
             {
                 basketItem.Id = DBHelper.IntValue(dr["Id"].ToString());
