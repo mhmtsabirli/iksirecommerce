@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ePayment">
-      <HintPath>..\..\..\Hipernex\e-commerce\v3\ManagerHip3_1\bin\ePayment.dll</HintPath>
+      <HintPath>bin\ePayment.dll</HintPath>
     </Reference>
     <Reference Include="IKSIR.ECommerce.Model">
       <HintPath>..\..\..\Output\Debug\IKSIR.ECommerce.Model.dll</HintPath>

@@ -24,3 +24,4 @@ D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\I
 D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\obj\Debug\ResolveAssemblyReference.cache
 D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\obj\Debug\IKSIR.ECommerce.UI.dll
 D:\AYHAN\IKSIR.ECommerce\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\obj\Debug\IKSIR.ECommerce.UI.pdb
+C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.UI\bin\ePayment.dll
