@@ -99,14 +99,14 @@ namespace IKSIR.ECommerce.Management.Order
 
                     ddlCreditCard.SelectedValue = paymetInfo.CreditCard.Id.ToString();
                     lblBank.Text = paymetInfo.CreditCard.Bank.Name.ToString();
-
+                    
                     List<PaymetTermRate> ListRates = PaymetTermRateData.GetPaymetTermRateList(paymetInfo.CreditCard.Id);
                     Utility.BindDropDownList(ddlMonth, ListRates, "Month", "Month");
-                    ddlMonth.SelectedValue = paymetInfo.Month.ToString();
+                    ddlMonth.SelectedValue = paymetInfo.SelectedTerm.ToString();
                     lblRate.Text = paymetInfo.Rate.ToString();
                     lblCardName.Text = paymetInfo.Name.ToString();
                     lblCardNumber.Text = paymetInfo.CreditCardNumber.ToString();
-                    lblExDate.Text = paymetInfo.Month.ToString() + " / " + paymetInfo.Year.ToString();
+                    lblExDate.Text = paymetInfo.Month.ToString() + "/" + paymetInfo.Year.ToString();
                     lblCvv.Text = paymetInfo.Cvc.ToString();
                 }
                 IsOk = true;
@@ -179,9 +179,15 @@ namespace IKSIR.ECommerce.Management.Order
 
                     //Stok Güncelleniyor
                     StokProcess(itemOrder.Basket.BasketItems);
+
+                    ClearForm();
+                    pnlForm.Visible = false;
+
+                    divAlert.InnerHtml += "<span style=\"color:Red\">Sipariş Ödeme Onayı alındı durumuna gelmiştir</span><br />";
                 }
 
             }
+            GetList();
         }
 
         private void StokProcess(List<BasketItem> list)
@@ -228,8 +234,9 @@ namespace IKSIR.ECommerce.Management.Order
                 mycc5pay.orderresult = 0;
                 mycc5pay.chargetype = "Auth";
                 mycc5pay.cardnumber = lblCardNumber.Text;
-                mycc5pay.expmonth = lblExDate.Text;
-                mycc5pay.expyear = "20" + lblExDate.Text;
+                string[] date = lblExDate.ToString().Split('/');
+                mycc5pay.expmonth = date[0].ToString();
+                mycc5pay.expyear = date[1].ToString();
                 mycc5pay.cv2 = lblCvv.Text;
                 mycc5pay.subtotal = lbltotalRatedPrice.Text;
                 mycc5pay.userid = itemOrder.PaymetInfo.CreditCard.VposUser.ToString();
@@ -299,6 +306,11 @@ namespace IKSIR.ECommerce.Management.Order
                 divAlert.InnerHtml += "<span style=\"color:Green\">Sipariş Silindi durumuna alınmıştır </span><br />";
             else
                 divAlert.InnerHtml += "<span style=\"color:Green\">Sipariş güncellemesi sırasında hata oluştu </span><br />";
+
+            ClearForm();
+            pnlForm.Visible = false;
+
+            GetList();
 
         }
 
