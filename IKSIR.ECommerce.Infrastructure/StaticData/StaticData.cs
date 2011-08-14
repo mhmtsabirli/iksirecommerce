@@ -20,7 +20,11 @@ namespace IKSIR.ECommerce.Infrastructure.StaticData
         public const string cssPatht = "C:idevit.css";
 
         public static string ConnectionString = System.Configuration.ConfigurationSettings.AppSettings["IdevitProdConnectionString"].ToString();
-       
+        public static string Agents = System.Configuration.ConfigurationSettings.AppSettings["Agents"].ToString();
+        public static string MailHost = System.Configuration.ConfigurationSettings.AppSettings["MailHost"].ToString();
+        public static string MailPort = System.Configuration.ConfigurationSettings.AppSettings["MailPort"].ToString();
+        public static string MailUserName = System.Configuration.ConfigurationSettings.AppSettings["MailUserName"].ToString();
+        public static string MailPassword = System.Configuration.ConfigurationSettings.AppSettings["MailPassword"].ToString();
     }
 }
 
