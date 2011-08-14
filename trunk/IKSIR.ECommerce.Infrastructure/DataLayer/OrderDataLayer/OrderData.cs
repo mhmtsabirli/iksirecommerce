@@ -7,6 +7,7 @@ using System.Data;
 using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
 using IKSIR.ECommerce.Model.Order;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
+using IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer;
@@ -28,7 +29,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
                 returnValue.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
                 returnValue.Basket = BasketData.Get(DBHelper.IntValue(dr["BasketId"].ToString()));
-                //returnValue.PaymetInfo = DBHelper.IntValue(dr["BasketItemId"].ToString());
+                returnValue.PaymetInfo = PaymetInfoData.Get(DBHelper.IntValue(dr["PaymentInfoId"].ToString()));
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
@@ -90,7 +91,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
                 returnValue.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
                 returnValue.Basket = BasketData.Get(DBHelper.IntValue(dr["BasketId"].ToString()));
-                //returnValue.PaymetInfo = DBHelper.IntValue(dr["BasketItemId"].ToString());
+                returnValue.PaymetInfo = PaymetInfoData.Get(DBHelper.IntValue(dr["PaymentInfoId"].ToString()));
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
