@@ -519,7 +519,7 @@ namespace IKSIR.ECommerce.Management.Bank
             lblPaymetTermRateId.Text = itemPaymentTermRate.Id.ToString();
             txtMonth.Text = itemPaymentTermRate.Month.ToString();
             ddlRate.SelectedValue = itemPaymentTermRate.Status.Id.ToString();
-            string[] Rates = itemPaymentTermRate.Rate.ToString().Split(',');
+            string[] Rates = itemPaymentTermRate.Rate.ToString().Split('.');
             txtRateOne.Text = Rates[0].ToString();
             txtRateTwo.Text = Rates[1].ToString();
             btnAddTermRate.CommandArgument = lblPaymetTermRateId.Text.ToString();
@@ -569,7 +569,7 @@ namespace IKSIR.ECommerce.Management.Bank
 
                         var item = new PaymetTermRate();
 
-                        item.Rate = Convert.ToDecimal(txtRateOne.Text.ToString() + "," + txtRateTwo.Text.ToString());
+                        item.Rate = Convert.ToDecimal(txtRateOne.Text.ToString() + "." + txtRateTwo.Text.ToString());
                         item.Month = Convert.ToInt32(txtMonth.Text);
                         item.Status = new EnumValue() { Id = Convert.ToInt32(ddlRate.SelectedValue) };
                         // item.CreditCard = new CreditCard() { Id = Convert.ToInt32(lblCreditCardId.Text) };
