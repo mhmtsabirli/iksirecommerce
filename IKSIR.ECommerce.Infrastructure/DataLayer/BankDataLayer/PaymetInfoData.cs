@@ -29,11 +29,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer
                 returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-                returnValue.PaymentType = EnumValueData.Get(DBHelper.IntValue(dr["PaymentType"].ToString()));
+                returnValue.PaymentType = EnumValueData.Get(DBHelper.IntValue(dr["PaymetType"].ToString()));
                 returnValue.CreditCardNumber = DBHelper.StringValue(dr["CreditCardNumber"].ToString());
                 returnValue.Cvc = DBHelper.StringValue(dr["CVC"].ToString());
-                returnValue.Month = DBHelper.IntValue(dr["Month"].ToString());
                 returnValue.Year = DBHelper.IntValue(dr["Year"].ToString());
+                returnValue.Month = DBHelper.IntValue(dr["Month"].ToString());
                 returnValue.Rate = DBHelper.DecValue(dr["Rate"].ToString());
             }
             dr.Close();
@@ -46,17 +46,14 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
 
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemPaymetInfo.Name)));
-            if (itemPaymetInfo.PaymentType != null)
-                parameters.Add(new SqlParameter("@PaymentType", DBHelper.IntValue(itemPaymetInfo.PaymentType.Id)));
+            parameters.Add(new SqlParameter("@PaymentType", DBHelper.IntValue(itemPaymetInfo.PaymentType.Id)));
             parameters.Add(new SqlParameter("@CVC", DBHelper.StringValue(itemPaymetInfo.Cvc)));
             parameters.Add(new SqlParameter("@CreditCardNumber", DBHelper.StringValue(itemPaymetInfo.CreditCardNumber)));
-            if (itemPaymetInfo.CreditCard != null)
-                parameters.Add(new SqlParameter("@CreditCard", DBHelper.IntValue(itemPaymetInfo.CreditCard.Id)));
-            if (itemPaymetInfo.TransferAccount != null)
-                parameters.Add(new SqlParameter("@TransferAccount", DBHelper.IntValue(itemPaymetInfo.TransferAccount.Id)));
+            parameters.Add(new SqlParameter("@Date", DBHelper.DateValue(itemPaymetInfo.Date)));
+            parameters.Add(new SqlParameter("@CreditCard", DBHelper.IntValue(itemPaymetInfo.CreditCard.Id)));
+            parameters.Add(new SqlParameter("@TransferAccount", DBHelper.IntValue(itemPaymetInfo.TransferAccount.Id)));
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemPaymetInfo.CreateAdminId)));
             parameters.Add(new SqlParameter("@Month", DBHelper.IntValue(itemPaymetInfo.Month)));
-            parameters.Add(new SqlParameter("@Year", DBHelper.IntValue(itemPaymetInfo.Year)));
             parameters.Add(new SqlParameter("@Rate", DBHelper.DecValue(itemPaymetInfo.Rate)));
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertPaymetInfo", parameters));
             return returnValue;
@@ -71,11 +68,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer
             parameters.Add(new SqlParameter("@PaymentType", DBHelper.IntValue(itemPaymetInfo.PaymentType.Id)));
             parameters.Add(new SqlParameter("@CVC", DBHelper.StringValue(itemPaymetInfo.Cvc)));
             parameters.Add(new SqlParameter("@CreditCardNumber", DBHelper.StringValue(itemPaymetInfo.CreditCardNumber)));
+            parameters.Add(new SqlParameter("@Date", DBHelper.DateValue(itemPaymetInfo.Date)));
             parameters.Add(new SqlParameter("@CreditCard", DBHelper.IntValue(itemPaymetInfo.CreditCard.Id)));
             parameters.Add(new SqlParameter("@TransferAccount", DBHelper.IntValue(itemPaymetInfo.TransferAccount.Id)));
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemPaymetInfo.CreateAdminId)));
             parameters.Add(new SqlParameter("@Month", DBHelper.IntValue(itemPaymetInfo.Month)));
-            parameters.Add(new SqlParameter("@Year", DBHelper.IntValue(itemPaymetInfo.Year)));
             parameters.Add(new SqlParameter("@Rate", DBHelper.DecValue(itemPaymetInfo.Rate)));
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdatePaymetInfo", parameters));
             return returnValue;
