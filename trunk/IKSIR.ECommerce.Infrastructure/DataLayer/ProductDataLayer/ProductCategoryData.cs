@@ -81,7 +81,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 parameters.Add(new SqlParameter("@ParentId", DBHelper.IntValue(itemProductCategory.ParentCategory.Id)));
 
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertProductCategory", parameters));
-            returnValue = SiteDataLayer.SiteCategoryData.Insert(itemProductCategory.Site.Id, returnValue);
+          //  returnValue = SiteDataLayer.SiteCategoryData.Insert(itemProductCategory.Site.Id, returnValue);
             return returnValue;
         }
 
@@ -97,7 +97,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@EditAdminId", DBHelper.IntValue(itemProductCategory.EditAdminId)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateProductCategory", parameters);
-            returnValue = SiteCategoryData.Update(itemProductCategory.Site.Id, itemProductCategory.Id);
+          //  returnValue = SiteCategoryData.Update(itemProductCategory.Site.Id, itemProductCategory.Id);
 
             return returnValue;
         }
@@ -139,8 +139,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                     item.ParentCategory = Get(DBHelper.IntValue(dr["ParentId"].ToString()));
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
-                SiteCategory siteCategory = SiteCategoryData.Get(DBHelper.IntValue(dr["Id"].ToString()));
-                item.Site = siteCategory.Site;
+                //SiteCategory siteCategory = SiteCategoryData.Get(DBHelper.IntValue(dr["Id"].ToString()));
+                //item.Site = siteCategory.Site;
                 itemProductCategoryList.Add(item);
             }
 
@@ -171,8 +171,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                     item.ParentCategory = Get(DBHelper.IntValue(dr["ParentId"].ToString()));
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
-                SiteCategory siteCategory = SiteCategoryData.Get(DBHelper.IntValue(dr["Id"].ToString()));
-                item.Site = siteCategory.Site;
+                //SiteCategory siteCategory = SiteCategoryData.Get(DBHelper.IntValue(dr["Id"].ToString()));
+                //item.Site = siteCategory.Site;
                 itemProductCategoryList.Add(item);
             }
 
@@ -203,8 +203,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                     item.ParentCategory = Get(DBHelper.IntValue(dr["ParentId"].ToString()));
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
-                SiteCategory siteCategory = SiteCategoryData.Get(DBHelper.IntValue(dr["Id"].ToString()));
-                item.Site = siteCategory.Site;
+                //SiteCategory siteCategory = SiteCategoryData.Get(DBHelper.IntValue(dr["Id"].ToString()));
+                //item.Site = siteCategory.Site;
                 itemProductCategoryList.Add(item);
             }
 
@@ -234,8 +234,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
                 //item.ParentId = GetProductCategoryById(DBHelper.IntValue(dr["Id"].ToString())); =>ayhant
-                SiteCategory siteCategory = SiteCategoryData.Get(DBHelper.IntValue(dr["Id"].ToString()));
-                item.Site = siteCategory.Site;
+                //SiteCategory siteCategory = SiteCategoryData.Get(DBHelper.IntValue(dr["Id"].ToString()));
+                //item.Site = siteCategory.Site;
                 itemProductCategoryList.Add(item);
             }
 
