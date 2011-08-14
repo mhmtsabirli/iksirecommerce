@@ -221,11 +221,7 @@
                                             <asp:Label runat="server" ID="lblCount" Text='<%# Eval("Count")%>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Toplam Fiyat">
-                                        <ItemTemplate>
-                                            <asp:Label runat="server" ID="lblTotalPrice" Text='<%# Eval("Count * ProductPrice.Price")%>'></asp:Label>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                   
                                 </Columns>
                             </asp:GridView>
                         </telerik:RadPageView>
@@ -462,17 +458,17 @@
                                             SortExpression="Id" />
                                         <asp:TemplateField HeaderText="Adı">
                                             <ItemTemplate>
-                                                <asp:Label runat="server" ID="lblFirstName" Text='<%# Eval("User.FirstName")%>'></asp:Label>
+                                                <asp:Label runat="server" ID="lblGvFirstName" Text='<%# Eval("User.FirstName")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Soyadı">
                                             <ItemTemplate>
-                                                <asp:Label runat="server" ID="lblLastName" Text='<%# Eval("User.LastName")%>'></asp:Label>
+                                                <asp:Label runat="server" ID="lblGvLastName" Text='<%# Eval("User.LastName")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Ödeme Tipi">
                                             <ItemTemplate>
-                                                <asp:Label runat="server" ID="lblFirstName" Text='<%# Eval("PaymetInfo.PaymentType.Value")%>'></asp:Label>
+                                                <asp:Label runat="server" ID="lblPaymentType" Text='<%# Eval("PaymetInfo.PaymentType.Value")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
