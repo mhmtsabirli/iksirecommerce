@@ -18,8 +18,9 @@ namespace IKSIR.ECommerce.Model.Bank
         public decimal Rate { get; set; }
         public int Month { get; set; }
         public int Year { get; set; }
+        public int SelectedTerm { get; set; }
 
-        public PaymetInfo(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, decimal rate, EnumValue paymentType, TransferAccount transferAccount, CreditCard creditCard, string name, string creditCardNumber, string cvc, int year, int month)
+        public PaymetInfo(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, int selectedTerm, decimal rate, EnumValue paymentType, TransferAccount transferAccount, CreditCard creditCard, string name, string creditCardNumber, string cvc, int year, int month)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.PaymentType = paymentType;
@@ -30,6 +31,7 @@ namespace IKSIR.ECommerce.Model.Bank
             this.Cvc = cvc;
             this.Rate = rate;
             this.Month = month;
+            this.SelectedTerm = selectedTerm;
             this.Year = year;
         }
         public PaymetInfo()
