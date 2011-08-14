@@ -34,17 +34,18 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
             txtCategoryName.Text = itemProduct.Title.ToString();
             txtDescription.Text = itemProduct.Description.ToString();
-            if (itemProduct.ParentCategory.Id == 0)
+            if (itemProduct.ParentCategory == null)
                 ddlParentCategories.SelectedValue = "-1";
-            else if (itemProduct.ParentCategory != null)
+            else if (itemProduct.ParentCategory.Id == 0)
+                ddlParentCategories.SelectedValue = "-1";
+            else
                 ddlParentCategories.SelectedValue = itemProduct.ParentCategory.Id.ToString();
-            else
-                ddlParentCategories.SelectedValue = "-1";
 
-            if (itemProduct.Site.Id != 0)
-                ddlSites.SelectedValue = itemProduct.Site.Id.ToString();
-            else
-                ddlSites.SelectedValue = "-1";
+
+            //if (itemProduct.Site.Id != 0)
+            //    ddlSites.SelectedValue = itemProduct.Site.Id.ToString();
+            //else
+            //    ddlSites.SelectedValue = "-1";
             pnlForm.Visible = true;
 
         }
@@ -52,9 +53,9 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private void BindValues()
         {
             List<ProductCategory> itemList = ProductCategoryData.GetParentProductCategoryList();
-            List<Site> itemListSite = SiteData.GetSiteList();
+            //List<Site> itemListSite = SiteData.GetSiteList();
 
-            Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
+            //Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
             Utility.BindDropDownList(ddlParentCategories, itemList, "Title", "Id");
             Utility.BindDropDownList(ddlFilterParentCategories, itemList, "Title", "Id");
 
@@ -200,10 +201,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             bool retValue = false;
             var item = new ProductCategory();
 
-            //item kaydedilmeden dbde olup olmadığına dair kontroller yapıyorumz.
-            // a nın altında b var dıyelım kosul olmadıgı ıcın ıkıncı bır b yı atıyor
-            // where kosullu kısı mcalıstırıldıgında burayada uygulanıp burasıda calıstırılacak
-
             List<ProductCategory> itemList = null;
 
             string CategoryName = txtCategoryName.Text;
@@ -234,10 +231,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             {
                 if (ddlParentCategories.SelectedValue != "-1")
                     item.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedValue) };
-
+                else
+                    item.ParentCategory = new ProductCategory() { Id = 0 };
                 item.Title = txtCategoryName.Text.Trim();
                 item.Description = txtDescription.Text.Trim();
-                item.Site = new Site() { Id = Convert.ToInt32(ddlSites.SelectedValue) };
+            //    item.Site = new Site() { Id = Convert.ToInt32(ddlSites.SelectedValue) };
                 try
                 {
                     if (ProductCategoryData.Insert(item) > 0)
@@ -274,9 +272,15 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             itemProduct.Id = itemId;
             itemProduct.Title = txtCategoryName.Text;
             itemProduct.Description = txtDescription.Text;
-            itemProduct.Site = new Site() { Id = Convert.ToInt32(ddlSites.SelectedValue) };
+          //  itemProduct.Site = new Site() { Id = Convert.ToInt32(ddlSites.SelectedValue) };
             if (ddlParentCategories.SelectedItem.Value != "")
-                itemProduct.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedItem.Value) };
+            {
+                if (ddlParentCategories.SelectedItem.Value != "-1")
+                     itemProduct.ParentCategory = new ProductCategory() { Id = Convert.ToInt32(ddlParentCategories.SelectedItem.Value) };
+                else
+                    itemProduct.ParentCategory = new ProductCategory() { Id = 0 };
+
+            }
 
             try
             {

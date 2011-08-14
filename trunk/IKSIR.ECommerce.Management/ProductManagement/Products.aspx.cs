@@ -149,10 +149,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         {
 
             List<Site> itemListSite = SiteData.GetSiteList();
-            Utility.BindDropDownList(ddlSites, itemListSite, "Name", "Id");
             Utility.BindDropDownList(ddlFilterSite, itemListSite, "Name", "Id");
             List<ProductCategory> itemList = ProductCategoryData.GetProductCategoryList();
-            ddlParentProductCategories.Enabled = false;
             ddlFilterParentCategories.Enabled = false;
             ddlProductCategories.Enabled = false;
             ddlFilterCategories.Enabled = false;
@@ -166,17 +164,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
             List<EnumValue> itemProductStatus = EnumValueData.GetEnumValues(13);//ürün durumu
             Utility.BindDropDownList(ddlProductStatus, itemProductStatus, "Value", "Id");
-        }
-        protected void ddlSites_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ddlParentProductCategories.Items.Clear();
-            ddlProductCategories.Items.Clear();
-            List<ProductCategory> itemList = ProductCategoryData.GetGetParentProductCategoryListBySiteId(Convert.ToInt32(ddlSites.SelectedValue));
 
-            Utility.BindDropDownList(ddlParentProductCategories, itemList, "Title", "Id");
-            ddlParentProductCategories.Enabled = true;
-            ddlProductCategories.Enabled = false;
+            List<ProductCategory> itemPList = ProductCategoryData.GetParentProductCategoryList();
+            Utility.BindDropDownList(ddlParentProductCategories, itemPList, "Title", "Id");
         }
+      
         protected void ddlFilterSites_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -208,6 +200,9 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
             List<EnumValue> itemProductStatus = EnumValueData.GetEnumValues(13);//ürün durumu
             Utility.BindDropDownList(ddlProductStatus, itemProductStatus, "Value", "Id");
+
+             List<ProductCategory> itemPList = ProductCategoryData.GetParentProductCategoryList();
+            Utility.BindDropDownList(ddlParentProductCategories, itemPList, "Title", "Id");
         }
         protected void btnSave_Click(object sender, EventArgs e)
         {
@@ -275,8 +270,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 ddlProductCategories.Enabled = true;
                 var item = ProductData.Get(productId);
                 lblProductId.Text = item.Id.ToString();
-                ddlSites.SelectedValue = item.ProductCategory.ParentCategory.Site.Id.ToString();
-                List<ProductCategory> itemList = ProductCategoryData.GetGetParentProductCategoryListBySiteId(Convert.ToInt32(ddlSites.SelectedValue));
+                List<ProductCategory> itemList = ProductCategoryData.GetParentProductCategoryList();
                 Utility.BindDropDownList(ddlParentProductCategories, itemList, "Title", "Id");
                 ddlParentProductCategories.SelectedValue = item.ProductCategory.ParentCategory.Id.ToString();
                 List<ProductCategory> itemCategory = ProductCategoryData.GetProductCategoryById(Convert.ToInt32(ddlParentProductCategories.SelectedValue));
@@ -1481,7 +1475,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             ddlProductCategories.Enabled = false;
             ddlStokStatus.Items.Clear();
             ddlProductStatus.Items.Clear();
-            ddlParentProductCategories.Enabled = false;
             txtProductCode.Text = string.Empty;
             Session["PRODUCT_PROPERTY_LIST"] = null;
             Session["PRODUCT_RELATED_LIST"] = null;
@@ -1497,7 +1490,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             txtguarantee.Text = string.Empty;
             txtAlertDate.DbSelectedDate = string.Empty;
             ddlProperties.SelectedIndex = -1;
-            ddlSites.SelectedIndex = -1;
             txtPropertyValue.Text = string.Empty;
             txtStok.Text = string.Empty;
             txtMaxQuantity.Text = string.Empty;
