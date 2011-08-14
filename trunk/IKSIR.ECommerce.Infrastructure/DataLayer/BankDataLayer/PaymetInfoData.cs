@@ -34,6 +34,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer
                 returnValue.Cvc = DBHelper.StringValue(dr["CVC"].ToString());
                 returnValue.Year = DBHelper.IntValue(dr["Year"].ToString());
                 returnValue.Month = DBHelper.IntValue(dr["Month"].ToString());
+                returnValue.SelectedTerm = DBHelper.IntValue(dr["SelectedTerm"].ToString());
                 returnValue.Rate = DBHelper.DecValue(dr["Rate"].ToString());
             }
             dr.Close();
@@ -54,6 +55,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemPaymetInfo.CreateAdminId)));
             parameters.Add(new SqlParameter("@Month", DBHelper.IntValue(itemPaymetInfo.Month)));
             parameters.Add(new SqlParameter("@Year", DBHelper.IntValue(itemPaymetInfo.Year)));
+            parameters.Add(new SqlParameter("@SelectedTerm", DBHelper.IntValue(itemPaymetInfo.SelectedTerm)));
             parameters.Add(new SqlParameter("@Rate", DBHelper.DecValue(itemPaymetInfo.Rate)));
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertPaymetInfo", parameters));
             return returnValue;
@@ -73,6 +75,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemPaymetInfo.CreateAdminId)));
             parameters.Add(new SqlParameter("@Month", DBHelper.IntValue(itemPaymetInfo.Month)));
             parameters.Add(new SqlParameter("@Year", DBHelper.IntValue(itemPaymetInfo.Year)));
+            parameters.Add(new SqlParameter("@SelectedTerm", DBHelper.IntValue(itemPaymetInfo.SelectedTerm)));
             parameters.Add(new SqlParameter("@Rate", DBHelper.DecValue(itemPaymetInfo.Rate)));
             returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdatePaymetInfo", parameters));
             return returnValue;
