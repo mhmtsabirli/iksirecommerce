@@ -22,9 +22,14 @@ namespace IKSIR.ECommerce.UI.UserControls
         {
             try
             {
+                var product = ProductData.Get(productId);
+                if (product != null && product.Description != null && product.Description != "")
+                {
+                    lblProductDetail.Text = "Açıklama: " + product.Description;
+                }
                 var productPropertyList = ProductPropertyData.GetProductProperties(productId);
                 gvProductProperties.DataSource = productPropertyList;
-                gvProductProperties.DataBind();                
+                gvProductProperties.DataBind();
             }
             catch (Exception exception)
             {

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Model.ProductModel;
+using IKSIR.ECommerce.Model.MembershipModel;
 
 namespace IKSIR.ECommerce.UI.UserControls
 {
@@ -17,6 +18,19 @@ namespace IKSIR.ECommerce.UI.UserControls
             if (!Page.IsPostBack && productId != 0)
             {
                 GetProductComments();
+                if (Session["LOGIN_USER"] == null)
+                {
+                    btnAddComment.Visible = false;
+                    hplLogin.Visible = true;
+                    hplLogin.NavigateUrl = "~/Pages/Login.aspx?returl=ProductDetails.aspx?pid=" + productId.ToString();
+                }
+                else
+                {
+                    User user = (User)Session["LOGIN_USER"];
+                    txtUserName.Text = user.FirstName + " " + user.LastName;
+                    txtUserName.Enabled = false;
+                    hplLogin.Visible = false;
+                }
             }
         }
 
@@ -35,9 +49,21 @@ namespace IKSIR.ECommerce.UI.UserControls
 
         protected void btnAddComment_Click(object sender, EventArgs e)
         {
+
             var item = new Comment();
             item.Title = txtTitle.Text;
             item.Content = txtContent.Text;
+            if (Session["LOGIN_USER"] != null)
+            {
+                User user = (User)Session["LOGIN_USER"];
+                item.User = new User() { Id = user.Id };
+            }
+            else
+            {
+                btnAddComment.Visible = false;
+                hplLogin.Visible = true;
+                return;
+            }
             item.Product = new Product() { Id = productId };
             int retValue = CommentData.Insert(item);
             if (retValue > 0)

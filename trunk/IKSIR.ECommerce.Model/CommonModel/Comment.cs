@@ -16,7 +16,7 @@ namespace IKSIR.ECommerce.Model.CommonModel
         public string Content { get; set; }
         public string Ip { get; set; }
         public Site Site { get; set; }
-        public EnumValue Status { get; set; }
+        public EnumValue Status { get; set; }        
 
         public Comment(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate,
             Product product, User user, string title, string content, string ip, Site site, EnumValue status)

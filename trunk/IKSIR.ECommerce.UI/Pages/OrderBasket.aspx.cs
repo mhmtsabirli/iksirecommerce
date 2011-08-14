@@ -30,7 +30,28 @@ namespace IKSIR.ECommerce.UI.Pages
                 {
                     loginUser = (User)Session["LOGIN_USER"];
                     basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
-                    GetOrderBasket();
+                    if (basket.BasketItems.Count == 0)
+                    {
+                        cbxComfirmation.Visible = false;
+                        rptBasketProducts.Visible = false;
+                        hplNoItem.Visible = true;
+                        divBasketTotal.Visible = false;
+                        anchorConfirmation.Visible = false;
+                        divBasketButtons.Visible = false;
+                    }
+                    else
+                    {
+                        cbxComfirmation.Visible = true;
+                        rptBasketProducts.Visible = true;
+                        hplNoItem.Visible = false;
+                        divBasketTotal.Visible = true;
+                        anchorConfirmation.Visible = true;
+                        divBasketButtons.Visible = true;
+                        GetOrderBasket();
+                    }
+                    var item = StaticPageData.Get(10);
+                    if (item != null)
+                        divRules.InnerHtml = item.PageContent;
                 }
             }
             else
@@ -57,7 +78,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 HiddenField hdnProductId = e.Item.FindControl("hdnProductId") as HiddenField;
                 TextBox txtItemCount = e.Item.FindControl("txtItemCount") as TextBox;
                 int count = Convert.ToInt32(txtItemCount.Text);
-                
+
                 Repeater rptProductProperties = e.Item.FindControl("rptProductProperties") as Repeater;
                 int productId;
 
@@ -81,7 +102,7 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                if (e.CommandName == "Refresh")
+                if (e.CommandName == "Update")
                 {
                     int productId;
                     int productCount;
@@ -108,6 +129,13 @@ namespace IKSIR.ECommerce.UI.Pages
 
         protected void imgbtnContinue_Click(object sender, ImageClickEventArgs e)
         {
+            if (basket.BasketItems.Count == 0)
+            {
+                string textForMessage = @"<script language='javascript'> alert('Sepetinizde hiç ürün bulunmamaktadır. Devam etmek için sepetinize ürün ekleyiniz.');</script>";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                return;
+            }
+
             if (cbxComfirmation.Checked)
             {
                 basket.TotalPrice = TotalPrice;

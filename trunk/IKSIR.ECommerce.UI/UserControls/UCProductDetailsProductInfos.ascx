@@ -8,6 +8,11 @@
     </tr>
     <tr>
         <td>
+            <asp:Label runat="server" ID="lblProductDetail"></asp:Label>
+        </td>
+    </tr>
+    <tr>
+        <td>
             <asp:GridView runat="server" ID="gvProductProperties" AutoGenerateColumns="False"
                 Width="100%" ShowHeader="False" CellPadding="4" EnableModelValidation="True"
                 ForeColor="#333333" GridLines="None">
@@ -21,7 +26,9 @@
                                         <asp:Label runat="server" ID="lblTitle" Text='<%# Eval("Property.Title")%>' Font-Bold="true"></asp:Label>
                                     </td>
                                     <td align="right">
-                                        <asp:Label runat="server" ID="lblCreateDate" Text='<%# Eval("Value")%>'></asp:Label>
+                                        <p>
+                                            <asp:Label runat="server" ID="lblCreateDate" Text='<%# DataBinder.Eval(Container.DataItem, "Value", "{0:c}") %>'></asp:Label>
+                                        </p>
                                     </td>
                                 </tr>
                             </table>

@@ -115,15 +115,16 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer
             var returnValue = 0;
             List<SqlParameter> parameters = new List<SqlParameter>();
 
-            parameters.Add(new SqlParameter("@Id", DBHelper.StringValue(itemUser.Id)));
+            parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemUser.Id)));
             parameters.Add(new SqlParameter("@FirstName", DBHelper.StringValue(itemUser.FirstName)));
             parameters.Add(new SqlParameter("@UserName", DBHelper.StringValue(itemUser.UserName)));
             parameters.Add(new SqlParameter("@LastName", DBHelper.StringValue(itemUser.LastName)));
             parameters.Add(new SqlParameter("@EMail", DBHelper.StringValue(itemUser.Email)));
             parameters.Add(new SqlParameter("@MobilePhone", DBHelper.StringValue(itemUser.MobilePhone)));
             parameters.Add(new SqlParameter("@TcId", DBHelper.StringValue(itemUser.TcId)));
-            parameters.Add(new SqlParameter("@Status", DBHelper.StringValue(itemUser.Status)));
-            parameters.Add(new SqlParameter("@SiteId", DBHelper.IntValue(itemUser.Site.Id)));
+            parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemUser.Status)));
+            if (itemUser.Site != null)
+                parameters.Add(new SqlParameter("@SiteId", DBHelper.IntValue(itemUser.Site.Id)));
             parameters.Add(new SqlParameter("@Password", DBHelper.StringValue(itemUser.Password)));
             parameters.Add(new SqlParameter("@BirthDate", DBHelper.DateValue(itemUser.BirthDate)));
             parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemUser.CreateAdminId)));
@@ -158,7 +159,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer
             while (dr.Read())
             {
                 var item = new User();
-                
+
                 item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 item.FirstName = DBHelper.StringValue(dr["FirstName"].ToString());

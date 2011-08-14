@@ -44,6 +44,11 @@ namespace IKSIR.ECommerce.UI.Pages
                 Session.Add("LOGIN_USER", user);
                 retValue = true;
             }
+            else
+            {
+                lblAlert.Text = "Kullanıcı adı ve/veya şifreniz hatalı";
+                lblAlert.ForeColor = System.Drawing.Color.Red;
+            }
             return retValue;
         }
     }

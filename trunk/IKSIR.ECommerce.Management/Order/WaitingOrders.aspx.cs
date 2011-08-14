@@ -106,7 +106,7 @@ namespace IKSIR.ECommerce.Management.Order
                     lblRate.Text = paymetInfo.Rate.ToString();
                     lblCardName.Text = paymetInfo.Name.ToString();
                     lblCardNumber.Text = paymetInfo.CreditCardNumber.ToString();
-                    lblExDate.Text = paymetInfo.Date.ToString();
+                    lblExDate.Text = paymetInfo.Month.ToString() + " / " + paymetInfo.Year.ToString();
                     lblCvv.Text = paymetInfo.Cvc.ToString();
                 }
                 IsOk = true;

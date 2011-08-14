@@ -15,56 +15,69 @@
             </h4>
         </div>
         <table>
-            <tr>
-                <td class="table_header">
-                    Ürün
-                </td>
-                <td class="table_header">
-                    Adet
-                </td>
-                <td class="table_header">
-                    Tutar
-                </td>
-                <td class="table_header">
-                    Toplam
-                </td>
-                <td class="table_header">
-                </td>
-            </tr>
             <asp:Repeater runat="server" ID="rptBasketProducts" OnItemDataBound="rptBasketProducts_ItemDataBound"
                 OnItemCommand="rptBasketProducts_ItemCommand">
+                <HeaderTemplate>
+                    <tr>
+                        <td class="table_header">
+                            Ürün
+                        </td>
+                        <td class="table_header">
+                            Adet
+                        </td>
+                        <td class="table_header">
+                            Tutar
+                        </td>
+                        <td class="table_header">
+                            Toplam
+                        </td>
+                        <td class="table_header">
+                        </td>
+                    </tr>
+                </HeaderTemplate>
                 <ItemTemplate>
                     <tr>
+                        <td colspan="5">
+                            <%# Eval("Product.ProductCategory.Title")%>
+                            /
+                            <%# Eval("Product.Title")%>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="table_first">
-                            <asp:HiddenField runat="server" ID="hdnProductId" Value='<%# Eval("Product.Id")%>' />
-                            <asp:Image runat="server" ID="imgProduct" ImageUrl='<%# Eval("Product.MainImage", "http://212.58.8.103/documents/Images/Small/small_{0:C}")%>' />
-                            <h2>
-                                <%# Eval("Product.ProductCategory.Title")%>
-                                /
-                                <%# Eval("Product.Title")%></h2>
                             <table>
-                                <asp:Repeater runat="server" ID="rptProductProperties">
-                                    <ItemTemplate>
-                                        <tr>
-                                            <td>
-                                                <%# Eval("Property.Title")%></strong>
-                                            </td>
-                                            <td>
-                                                :
-                                            </td>
-                                            <td>
-                                                <%# Eval("Value")%>
-                                            </td>
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                                <tr>
+                                    <td>
+                                        <asp:HiddenField runat="server" ID="hdnProductId" Value='<%# Eval("Product.Id")%>' />
+                                        <asp:Image runat="server" ID="imgProduct" ImageUrl='<%# Eval("Product.MainImage", "http://212.58.8.103/documents/Images/Small/small_{0:C}")%>' />
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <asp:Repeater runat="server" ID="rptProductProperties">
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td>
+                                                            <%# Eval("Property.Title")%></strong>
+                                                        </td>
+                                                        <td>
+                                                            :
+                                                        </td>
+                                                        <td>
+                                                            <%# Eval("Value")%>
+                                                        </td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </table>
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                         <td class="table_second">
                             <form action="">
                             <asp:TextBox runat="server" ID="txtItemCount" CssClass="table_second_text" Text='<%# Eval("Count")%>'></asp:TextBox><br />
                             <asp:ImageButton runat="server" ID="imgbtnRefreshItemCount" ImageUrl="../images/table_second_guncelle.png"
-                                CommandName="Refresh" CommandArgument='<%# Eval("Product.Id")%>' />
+                                CommandName="Update" CommandArgument='<%# Eval("Product.Id")%>' />
                             </form>
                         </td>
                         <td class="table_third">
@@ -87,8 +100,8 @@
             </asp:Repeater>
             <tr>
                 <td colspan="5">
-                    <asp:CheckBox runat="server" ID="cbxComfirmation" Text="" /><a href="#" id="anchorConfirmation">Genel
-                        Kurallar ve Koşullar'ı okudum ve kabul ediyorum.</a>
+                    <asp:CheckBox runat="server" ID="cbxComfirmation" Text="" /><a href="#" id="anchorConfirmation"
+                        runat="server">Genel Kurallar ve Koşullar'ı okudum ve kabul ediyorum.</a>
                     <script type="text/javascript">
                         $("#anchorConfirmation").click(function () {
                             if ($(".divGeneralRules").is(':visible'))
@@ -98,32 +111,21 @@
                         });
                     </script>
                     <br />
-                    <div class="divGeneralRules" style="display: none; width: 100%; background: #F3F6F7;
-                        font: normal 12px tahoma; color: #3F5968; height: 150px; overflow: auto; border: 1px solid #666;
-                        padding: 8px;">
-                        <strong>Genel Kural ve Koşullar</strong>
-                        <p>
-                            <span style="color: Red;">Bu içerik geçici olarak konmuştur düzenlenecektir</span></p>
-                        <p>
-                            Bu siteye girmek ve kullanmak suretiyle aşağıda belirtilen kurallara ve koşullara
-                            bağlı kalmayı kabul etmiş bulunuyorsunuz. ATLASJET ULUSLARARASI HAVACILIK A.Ş.(Bundan
-                            böyle olarak anılacaktır) herhangi bir bildirim yapmaksızın veya sorumluluk kabul
-                            etmeksizin kurallar ve koşulları değiştirme hakkını saklı tutmaktadır. Kayıt anında
-                            size bildirilen bilet ücretinin tamamı(vergiler,harçlar ve hizmet bedeli dahil)
-                            kredi kartınızdan tahsil edilecektir.</p>
-                        <p>
-                            Ödeme yaptıktan sonra seyahatiniz kesinleşmiş kabul edilecek olup daha sonra rezervasyon
-                            kaydınızda ve uçak biletinizde yapacağınız iptal ve değişiklikler aşağıdaki kurallar
-                            doğrultusunda işlem görecektir. Yapılan rezervasyon bir başkasına devredilemez,
-                            isim değişikliği yapılamaz. Yolcu rezervasyon kaydındaki uçuşu gerçekleştirmediği
-                            taktirde hizmet bedeli ve ücret iadesi yapılmaz. Sefer iptali ve gecikme halinde
-                            bir başka havayolu ile devam uçuşu olan yolcuların sorumluluğu Atlasjet Havayollarına
-                            ait değildir. Yolcular devam uçuşları için yeni bilet talebinde bulunamazlar.</p>
+                    <div runat="server" class="divGeneralRules" id="divRules" style="display: none; width: 100%;
+                        background: #F3F6F7; font: normal 12px tahoma; color: #3F5968; height: 150px;
+                        overflow: auto; border: 1px solid #666; padding: 8px;">
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td colspan="5" align="center" style="border: none;">
+                    <asp:HyperLink runat="server" ID="hplNoItem" ForeColor="Red" Font-Size="14px" Visible="false"
+                        Text="Sepetinizde ürün bulunmamaktadır. Ana sayfaya gitmek için tıklayınız."
+                        NavigateUrl="~/Pages/Default.aspx"></asp:HyperLink>
+                </td>
+            </tr>
         </table>
-        <div class="sepet_content_footer">
+        <div class="sepet_content_footer" id="divBasketTotal" runat="server">
             <div style="float: right!important; text-align: left;">
                 <br />
                 <strong>Sepet Toplamı:</strong>
@@ -171,11 +173,12 @@
                 </table>
             </div>
         </div>
-        <div class="sepet_content_end">
+        <div class="sepet_content_end" id="divBasketButtons" runat="server">
             <a href="#">
                 <img src="../images/sepet_end_iptal.jpg" alt="" /></a>
             <asp:ImageButton runat="server" ID="imgbtnContinue" ImageUrl="../images/sepet_end_devam.jpg"
-                AlternateText="Devam Et" onclick="imgbtnContinue_Click" />
+                AlternateText="Devam Et" OnClick="imgbtnContinue_Click" />
         </div>
-    </div>
+        <div>
+        </div>
 </asp:Content>
