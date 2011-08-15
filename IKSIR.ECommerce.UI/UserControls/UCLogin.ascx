@@ -1,5 +1,23 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCLogin.ascx.cs" Inherits="IKSIR.ECommerce.UI.UserControls.UCLogin" %>
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <div id="Div1" class="tabmenu">
+<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+            <AjaxSettings>
+                <telerik:AjaxSetting AjaxControlID="pnlLogin">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="pnlLogin" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
+                <telerik:AjaxSetting AjaxControlID="pnlLogout">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="pnlLogout" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
+            </AjaxSettings>
+        </telerik:RadAjaxManager>
+        <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Web20">
+        </telerik:RadAjaxLoadingPanel>
+
     <asp:Panel runat="server" ID="pnlLogin">
         <ul class="tabnav">
             <li><a href="#uyegirisi"><span>Üye Girişi</span></a></li>
@@ -63,13 +81,10 @@
                         <asp:Label runat="server" ID="lblUserTitle" Text="lblUserTitle"></asp:Label>
                     </p>
                     <p>
-                        <a href="#">[Hesabım]</a>
+                        <a href="../UserPanel/MyAccount.aspx">[Hesabım]</a>
                     </p>
                     <p>
-                        <a href="#">[Favorilerim]</a>
-                    </p>
-                    <p>
-                        <a href="#">[Sepetim]</a>
+                        <a href="../Pages/OrderBasket.aspx">[Sepetim]</a>
                     </p>
                     <p>
                         <asp:LinkButton runat="server" ID="lbtnLogout" Style="color: Red" Text="[Oturumu Kapat]"

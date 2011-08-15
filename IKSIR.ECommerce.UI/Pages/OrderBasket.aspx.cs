@@ -148,20 +148,5 @@ namespace IKSIR.ECommerce.UI.Pages
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
             }
         }
-
-        protected void dlBasketProducts_ItemDataBound(object sender, DataListItemEventArgs e)
-        {
-
-        }
-
-        protected void dlBasketProducts_ItemCommand(object source, DataListCommandEventArgs e)
-        {
-
-        }
-
-        protected void Update(object sender, CommandEventArgs e)
-        {
-
-        }
     }
 }

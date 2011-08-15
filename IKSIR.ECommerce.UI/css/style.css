@@ -271,3 +271,8 @@ body
 {
     color: Red !important;
     }
+    .pnlBasket
+    {
+        margin-left:150px;
+        height:100%;
+        }
