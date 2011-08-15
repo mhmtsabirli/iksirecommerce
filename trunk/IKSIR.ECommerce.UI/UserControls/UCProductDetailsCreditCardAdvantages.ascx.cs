@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer;
 
 namespace IKSIR.ECommerce.UI.UserControls
 {
@@ -20,9 +21,29 @@ namespace IKSIR.ECommerce.UI.UserControls
         private void GetProductCreditCartAdvantages(int productId)
         {
             try
-            { }
+            {
+                rptCreditCards.DataSource = CreditCardData.GetAktiveCreditCardList();
+                rptCreditCards.DataBind();
+            }
             catch (Exception exception)
             {
+            }
+        }
+
+        protected void rptCreditCards_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                HiddenField hdnCardId = e.Item.FindControl("hdnCardId") as HiddenField;
+
+                Repeater rptCreditCardAdvantages = e.Item.FindControl("rptCreditCardAdvantages") as Repeater;
+                int cardId;
+
+                if (rptCreditCardAdvantages != null && hdnCardId.Value != "" && int.TryParse(hdnCardId.Value, out cardId))
+                {
+                    rptCreditCardAdvantages.DataSource = PaymetTermRateData.GetAktivePaymetTermRateList(cardId);
+                    rptCreditCardAdvantages.DataBind();
+                }
             }
         }
     }

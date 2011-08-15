@@ -13,13 +13,31 @@ namespace IKSIR.ECommerce.UI.Pages {
     public partial class OrderBasket {
         
         /// <summary>
-        /// dlBasket control.
+        /// RadAjaxManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList dlBasket;
+        protected global::Telerik.Web.UI.RadAjaxManager RadAjaxManager1;
+        
+        /// <summary>
+        /// RadAjaxLoadingPanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxLoadingPanel RadAjaxLoadingPanel1;
+        
+        /// <summary>
+        /// pnlBasket control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlBasket;
         
         /// <summary>
         /// rptBasketProducts control.
