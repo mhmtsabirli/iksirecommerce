@@ -65,9 +65,9 @@ namespace IKSIR.ECommerce.UI.Pages
             rptBasketProducts.DataSource = basket.BasketItems;
             rptBasketProducts.DataBind();
 
-            lblBasketTotal.Text = BasketTotal.ToString();
-            lblTotalTax.Text = TotalTax.ToString();
-            lblTotalPrice.Text = TotalPrice.ToString();
+            lblBasketTotal.Text = String.Format("{0:0.##}", BasketTotal);
+            lblTotalTax.Text = String.Format("{0:0.##}", TotalTax);
+            lblTotalPrice.Text = String.Format("{0:0.##}", TotalPrice);
         }
 
         protected void rptBasketProducts_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -76,23 +76,40 @@ namespace IKSIR.ECommerce.UI.Pages
             {
                 Image imgProduct = e.Item.FindControl("imgProduct") as Image;
                 HiddenField hdnProductId = e.Item.FindControl("hdnProductId") as HiddenField;
-                TextBox txtItemCount = e.Item.FindControl("txtItemCount") as TextBox;
-                int count = Convert.ToInt32(txtItemCount.Text);
+                DropDownList ddlItemCount = e.Item.FindControl("ddlItemCount") as DropDownList;
+
 
                 Repeater rptProductProperties = e.Item.FindControl("rptProductProperties") as Repeater;
                 int productId;
 
                 if (hdnProductId != null && rptProductProperties != null && hdnProductId.Value != "" && int.TryParse(hdnProductId.Value, out productId))
                 {
+                    var itemProduct = ProductData.Get(productId);
+
+                    if (itemProduct != null)
+                    {
+                        for (int i = 1; i <= itemProduct.MaxQuantity; i++)
+                        {
+                            ddlItemCount.Items.Add(new ListItem(i.ToString(), i.ToString()));
+                        }
+                    }
+
+                    var product = basket.BasketItems.Where(x => x.Product.Id == productId).First();
+
+                    if (product != null)
+                    {
+                        ddlItemCount.SelectedValue = product.Count.ToString();
+                    }
+
                     rptProductProperties.DataSource = ProductPropertyData.GetProductProperties(productId);
                     rptProductProperties.DataBind();
 
                     var productPriceData = ProductPriceData.GetByProduct(productId);
                     if (productPriceData != null)
                     {
-                        BasketTotal += count * productPriceData.Price;
-                        TotalTax += count * productPriceData.Price * productPriceData.Tax / 100;
-                        TotalPrice += count * productPriceData.UnitPrice;
+                        BasketTotal += product.Count * productPriceData.Price;
+                        TotalTax += product.Count * productPriceData.Price * productPriceData.Tax / 100;
+                        TotalPrice += product.Count * productPriceData.UnitPrice;
                     }
                 }
             }
@@ -100,31 +117,16 @@ namespace IKSIR.ECommerce.UI.Pages
 
         protected void rptBasketProducts_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            if (e.CommandName == "Delete")
             {
-                if (e.CommandName == "Update")
+                int productId;
+                ImageButton imgbtnDeleteItem = (ImageButton)e.Item.FindControl("imgbtnDeleteItem");
+                if (imgbtnDeleteItem != null && imgbtnDeleteItem.CommandArgument != null && int.TryParse(imgbtnDeleteItem.CommandArgument, out productId))
                 {
-                    int productId;
-                    int productCount;
-                    ImageButton imgbtnRefreshItemCount = (ImageButton)e.Item.FindControl("imgbtnRefreshItemCount");
-                    TextBox txtItemCount = (TextBox)e.Item.FindControl("txtItemCount");
-                    if (imgbtnRefreshItemCount != null && txtItemCount != null && imgbtnRefreshItemCount.CommandArgument != null && int.TryParse(imgbtnRefreshItemCount.CommandArgument, out productId) && int.TryParse(txtItemCount.Text, out productCount))
-                    {
-                        Shopping.AddToBasket(productId, productCount);
-                    }
+                    Shopping.RemoveBasketItem(productId);
                 }
-
-                if (e.CommandName == "Delete")
-                {
-                    int productId;
-                    ImageButton imgbtnDeleteItem = (ImageButton)e.Item.FindControl("imgbtnDeleteItem");
-                    if (imgbtnDeleteItem != null && imgbtnDeleteItem.CommandArgument != null && int.TryParse(imgbtnDeleteItem.CommandArgument, out productId))
-                    {
-                        Shopping.RemoveBasketItem(productId);
-                    }
-                }
-                GetOrderBasket();
             }
+            GetOrderBasket();
         }
 
         protected void imgbtnContinue_Click(object sender, ImageClickEventArgs e)
@@ -146,6 +148,20 @@ namespace IKSIR.ECommerce.UI.Pages
             {
                 string textForMessage = @"<script language='javascript'> alert('Genel kurallar ve koşulları kabul ediniz!');</script>";
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+            }
+        }
+
+        protected void ddlItemCount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList ddlItemCount = (DropDownList)sender;
+            int productId = 0;
+            int itemCount = 0;
+            int.TryParse(ddlItemCount.ToolTip, out productId);
+            int.TryParse(ddlItemCount.SelectedValue, out itemCount);
+            if (productId != 0 && itemCount != 0)
+            {
+                Shopping.AddToBasket(productId, itemCount);
+                GetOrderBasket();
             }
         }
     }
