@@ -34,14 +34,17 @@ namespace IKSIR.ECommerce.UI.ClassLibrary
 
                 if (existBasketItem != null && existBasketItem.Count > 0)
                 {
-                    basket.BasketItems.Remove(existBasketItem);
+                    //basket.BasketItems.Remove(existBasketItem);
+                    basket.BasketItems.Where(x => x.Product.Id == productId).FirstOrDefault().Count = count;
                 }
-
-                BasketItem basketItem = new BasketItem();
-                basketItem.Product = ProductData.Get(productId);
-                basketItem.ProductPrice = ProductPriceData.GetByProduct(productId);
-                basketItem.Count = count;
-                basket.BasketItems.Add(basketItem);
+                else
+                {
+                    BasketItem basketItem = new BasketItem();
+                    basketItem.Product = ProductData.Get(productId);
+                    basketItem.ProductPrice = ProductPriceData.GetByProduct(productId);
+                    basketItem.Count = count;
+                    basket.BasketItems.Add(basketItem);
+                }
                 HttpContext.Current.Session.Add("USER_BASKET", basket);
             }
             HttpContext.Current.Response.Redirect("../Pages/OrderBasket.aspx", false);

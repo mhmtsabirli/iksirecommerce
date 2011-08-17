@@ -1,6 +1,10 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCProductDetailsMain.ascx.cs"
     Inherits="IKSIR.ECommerce.UI.UserControls.UCProductDetailsMain" %>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+<%--<link rel="stylesheet" href="../css/lightbox.css" type="text/css" media="screen" />
+<script src="../js/lightbox/prototype.js" type="text/javascript"></script>
+<script src="../js/lightbox/scriptaculous.js?load=effects,builder" type="text/javascript"></script>
+<script src="../js/lightbox/lightbox.js" type="text/javascript"></script>--%>
 <script type="text/javascript">
     $(function () {
         $(".image").click(function () {
@@ -30,10 +34,6 @@
     <div class="urun_buyuk_resim" style="float: left;">
         <div id="container" runat="server">
         </div>
-        <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-        </script>
         <script type="text/javascript">
             try {
                 var pageTracker = _gat._getTracker("UA-7025232-1");
@@ -104,8 +104,8 @@
         <table width="292px">
             <tr>
                 <td align="left">
-                    <asp:ImageButton runat="server" ID="imgBtnBuyNow" 
-                        ImageUrl="~/images/hemenal.png" onclick="imgBtnBuyNow_Click" />
+                    <asp:ImageButton runat="server" ID="imgBtnBuyNow" ImageUrl="~/images/hemenal.png"
+                        OnClick="imgBtnBuyNow_Click" />
                     &nbsp;
                 </td>
                 <td align="center">
@@ -114,8 +114,8 @@
                     </asp:DropDownList>
                 </td>
                 <td align="right">
-                    &nbsp;<asp:ImageButton runat="server" ID="imgBtnAddToBasket" 
-                        ImageUrl="~/images/sepeteat.png" onclick="imgBtnAddToBasket_Click" />
+                    &nbsp;<asp:ImageButton runat="server" ID="imgBtnAddToBasket" ImageUrl="~/images/sepeteat.png"
+                        OnClick="imgBtnAddToBasket_Click" />
                 </td>
             </tr>
         </table>

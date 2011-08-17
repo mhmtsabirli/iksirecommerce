@@ -35,7 +35,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                         IsDefault = true
                     });
                 }
-                
+
                 var itemMainImage = productMultimedias.Where(x => x.IsDefault == true).First();
                 string otherImages = "";
                 otherImages = "<div id=\"image\" style=\"height: 250px; width: 350px; background-color:Gray; border: 4px #666 solid; text-align:center;\">";
@@ -43,7 +43,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                 if (itemMainImage != null)
                 {
                     //imgMainImage.ImageUrl = 
-                    otherImages += "<img src=\"http://212.58.8.103/documents/Images/Big/big_" + itemMainImage.FilePath + "\" border=\"0\" /></div><br/>";
+                    otherImages += "<a href=\"http://212.58.8.103/documents/Orginal/Images/" + itemMainImage.FilePath + "\" rel=\"lightbox\"><img src=\"http://212.58.8.103/documents/Images/Big/big_" + itemMainImage.FilePath + "\" border=\"0\" /></a></div><br/>";
                 }
 
                 int imageCount = 0;
@@ -68,6 +68,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                 otherImages += "<li><a href='#'><img src='../images/urun_paylas_7.png' alt='' /></a></li></ul></div>";
                 otherImages += "<div class='urun_yildiz' style='float:left;'></div><div class='clear'></div>";
                 otherImages += "</div>";
+                otherImages += "<a href=\"#\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
 
                 if (product.Video != null && product.Video != "")
                 {

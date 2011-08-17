@@ -51,7 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\jquery.jqzoom.css" />
+    <Content Include="css\lightbox.css" />
     <Content Include="css\style.css" />
+    <Content Include="css\video_lightbox\overlay-minimal.css" />
+    <Content Include="css\video_lightbox\videolightbox.css" />
     <Content Include="Global.asax" />
     <Content Include="images\advertise.jpg" />
     <Content Include="images\carousel_bg.jpg" />
@@ -69,6 +72,8 @@
     <Content Include="images\header_bg.png" />
     <Content Include="images\header_search_bg.png" />
     <Content Include="images\hemenal.png" />
+    <Content Include="images\lightbox\nextlabel.gif" />
+    <Content Include="images\lightbox\prevlabel.gif" />
     <Content Include="images\logo.jpg" />
     <Content Include="images\maintence.jpg" />
     <Content Include="images\navbar_bg.png" />
@@ -138,6 +143,9 @@
     <Content Include="images\urun_thumb_2.jpg" />
     <Content Include="images\urun_video.jpg" />
     <Content Include="images\urun_yildiz.png" />
+    <Content Include="images\video_lightbox\close.png" />
+    <Content Include="images\video_lightbox\loading.gif" />
+    <Content Include="images\video_lightbox\white.png" />
     <Content Include="images\zoomloader.gif" />
     <Content Include="js\functions.js" />
     <Content Include="js\jquery-1.4.2.min.js" />
@@ -146,9 +154,18 @@
     <Content Include="js\jquery-v1.4.4.js" />
     <Content Include="js\jquery.maskedinput-1.2.2.js" />
     <Content Include="js\jquery.swfobject.js" />
+    <Content Include="js\lightbox\builder.js" />
+    <Content Include="js\lightbox\effects.js" />
+    <Content Include="js\lightbox\lightbox-web.js" />
+    <Content Include="js\lightbox\lightbox.js" />
+    <Content Include="js\lightbox\prototype.js" />
+    <Content Include="js\lightbox\scriptaculous.js" />
     <Content Include="js\sprinkle.js" />
     <Content Include="js\urchin.js" />
     <Content Include="js\validate_profile.js" />
+    <Content Include="js\video_lightbox\jquery.tools.min.js" />
+    <Content Include="js\video_lightbox\swfobject.js" />
+    <Content Include="js\video_lightbox\videolightbox.js" />
     <Content Include="MailTemplates\MembershipRegister.htm" />
     <Content Include="MailTemplates\OrderResultMail.htm" />
     <Content Include="MailTemplates\SalesContract.htm" />

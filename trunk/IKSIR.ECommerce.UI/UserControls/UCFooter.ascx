@@ -5,21 +5,21 @@
             <img src="../images/footer_logo.jpg" alt="" /></a></h4>
     <div class="footer_module">
         <h3>
-            <a href="#">Anasayfa</a></h3>
+            <a href="../Pages/Default.aspx">Anasayfa</a></h3>
         <ul>
-            <li><a href="#">Müşteri Hizmetleri</a></li>
-            <li><a href="#">Kurumsal</a></li>
-            <li><a href="#">Sık Sorulan Sorular</a></li>
-            <li><a href="#">Yardım</a></li>
+            <li><a href="../PagesContent.aspx?cid=3">Müşteri Hizmetleri</a></li>
+            <li><a href="../PagesContent.aspx?cid=2">Kurumsal</a></li>
+            <li><a href="../PagesContent.aspx?cid=6">Sık Sorulan Sorular</a></li>
+            <li><a href="../PagesContent.aspx?cid=7">Yardım</a></li>
         </ul>
     </div>
     <div class="footer_module">
         <h3>
-            <a href="#">Sipariş İşlemleri</a></h3>
+            <a href="../PagesContent.aspx?cid=5">Sipariş İşlemleri</a></h3>
         <ul>
-            <li><a href="#">Sipariş Takip</a></li>
-            <li><a href="#">Sipariş Yardım Formu</a></li>
-            <li><a href="#">Ödeme Bildirim Formu</a></li>
+            <li><a href="../PagesContent.aspx?cid=5">Sipariş Takip</a></li>
+            <li><a href="../PagesContent.aspx?cid=5">Sipariş Yardım Formu</a></li>
+            <li><a href="../PagesContent.aspx?cid=5">Ödeme Bildirim Formu</a></li>
         </ul>
     </div>
     <div class="footer_module">
@@ -35,9 +35,9 @@
         <h3>
             <a href="#">Üyelik İşlemleri</a></h3>
         <ul>
-            <li><a href="#">Yeni Üyelik</a></li>
-            <li><a href="#">Üye Girişi</a></li>
-            <li><a href="#">Şifre Hatırlatma</a></li>
+            <li><a href="../Pages/Register.aspx">Yeni Üyelik</a></li>
+            <li><a href="../Pages/Login.aspx">Üye Girişi</a></li>
+            <li><a href="../Pages/ForgetMyPassport.aspx">Şifre Hatırlatma</a></li>
         </ul>
     </div>
     <div class="footer_module">

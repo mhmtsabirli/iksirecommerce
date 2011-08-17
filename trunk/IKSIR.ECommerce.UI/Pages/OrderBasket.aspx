@@ -88,11 +88,9 @@
                                 </table>
                             </td>
                             <td class="table_second">
-                                <form action="">
-                                <asp:TextBox runat="server" ID="txtItemCount" CssClass="table_second_text" Text='<%# Eval("Count")%>'></asp:TextBox><br />
-                                <asp:ImageButton runat="server" ID="imgbtnRefreshItemCount" ImageUrl="../images/table_second_guncelle.png"
-                                    CommandName="Update" CommandArgument='<%# Eval("Product.Id")%>' />
-                                </form>
+                                <asp:DropDownList ID="ddlItemCount" runat="server" OnSelectedIndexChanged="ddlItemCount_SelectedIndexChanged"
+                                    ToolTip='<%# Eval("Product.Id")%>' AutoPostBack="true">
+                                </asp:DropDownList>
                             </td>
                             <td class="table_third">
                                 <p>
@@ -107,37 +105,40 @@
                             <td class="table_fifth">
                                 <a href="#">
                                     <asp:ImageButton runat="server" ID="imgbtnDeleteItem" ImageUrl="../images/table_fifth_one.jpg"
-                                        CommandName="Delete" OnClientClick="javascript:return confirm('Sepetinizden bu ürünü silmek istediğinize emin misiniz?');" CommandArgument='<%# Eval("Product.Id")%>' />
+                                        CommandName="Delete" OnClientClick="javascript:return confirm('Sepetinizden bu ürünü silmek istediğinize emin misiniz?');"
+                                        CommandArgument='<%# Eval("Product.Id")%>' />
                             </td>
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
-                <tr>
-                    <td colspan="5">
-                        <asp:CheckBox runat="server" ID="cbxComfirmation" Text="" /><a href="#" id="anchorConfirmation"
-                            runat="server">Genel Kurallar ve Koşullar'ı okudum ve kabul ediyorum.</a>
-                        <script type="text/javascript">
-                            $("#anchorConfirmation").click(function () {
-                                if ($(".divGeneralRules").is(':visible'))
-                                    $(".divGeneralRules").slideUp('slow');
-                                else
-                                    $(".divGeneralRules").slideDown('slow');
-                            });
-                        </script>
-                        <br />
-                        <div runat="server" class="divGeneralRules" id="divRules" style="display: none; width: 100%;
-                            background: #F3F6F7; font: normal 12px tahoma; color: #3F5968; height: 150px;
-                            overflow: auto; border: 1px solid #666; padding: 8px;">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="5" align="center" style="border: none;">
-                        <asp:HyperLink runat="server" ID="hplNoItem" ForeColor="Red" Font-Size="14px" Visible="false"
-                            Text="Sepetinizde ürün bulunmamaktadır. Ana sayfaya gitmek için tıklayınız."
-                            NavigateUrl="~/Pages/Default.aspx"></asp:HyperLink>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <asp:CheckBox ID="cbxComfirmation" runat="server" Text="" />
+                            <a id="anchorConfirmation" runat="server" href="#">Genel Kurallar ve Koşullar&#39;ı
+                                okudum ve kabul ediyorum.</a>
+                            <script type="text/javascript">
+
+                                $("#anchorConfirmation").click(function () {
+                                    if ($(".divGeneralRules").is(':visible'))
+                                        $(".divGeneralRules").slideUp('slow');
+                                    else
+                                        $(".divGeneralRules").slideDown('slow');
+                                });
+                            </script>
+                            <br />
+                            <div id="divRules" runat="server" class="divGeneralRules" style="display: none; width: 100%;
+                                background: #F3F6F7; font: normal 12px tahoma; color: #3F5968; height: 150px;
+                                overflow: auto; border: 1px solid #666; padding: 8px;">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="border: none;">
+                            <asp:HyperLink ID="hplNoItem" runat="server" Font-Size="14px" ForeColor="Red" NavigateUrl="~/Pages/Default.aspx"
+                                Text="Sepetinizde ürün bulunmamaktadır. Ana sayfaya gitmek için tıklayınız."
+                                Visible="false"></asp:HyperLink>
+                        </td>
+                    </tr>
             </table>
             <div class="sepet_content_footer" id="divBasketTotal" runat="server">
                 <div style="float: right!important; text-align: left;">
