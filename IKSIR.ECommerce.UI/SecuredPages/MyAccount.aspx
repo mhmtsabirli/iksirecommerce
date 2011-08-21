@@ -274,7 +274,8 @@
                                             <tr>
                                                 <td>
                                                     <asp:GridView runat="server" ID="gvList" AutoGenerateColumns="False" CellPadding="4"
-                                                        GridLines="None" PageSize="15" EnableModelValidation="True" Width="500px" EmptyDataText="Listede gösterilecek kayıt bulunamadı" HeaderStyle-HorizontalAlign="Left">
+                                                        GridLines="None" PageSize="15" EnableModelValidation="True" Width="500px" EmptyDataText="Listede gösterilecek kayıt bulunamadı"
+                                                        HeaderStyle-HorizontalAlign="Left">
                                                         <Columns>
                                                             <asp:TemplateField ShowHeader="False">
                                                                 <ItemTemplate>
@@ -316,6 +317,270 @@
                     </td>
                 </tr>
             </table>
+            <div id="dvMyOrder" runat="server" visible="false">
+                <table>
+                    <tr>
+                        <td>
+                            Sipariş No
+                        </td>
+                        <td>
+                            :
+                        </td>
+                        <td>
+                            <asp:Label runat="server" ID="lblId"></asp:Label>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Ödeme Tipi
+                        </td>
+                        <td>
+                            :
+                        </td>
+                        <td>
+                            <asp:DropDownList runat="server" ID="ddlPaymentType">
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1">
+                            Sipariş Toplam Fiyatı
+                        </td>
+                        <td>
+                            :
+                        </td>
+                        <td colspan="2">
+                            <asp:Label runat="server" ID="lbltotalPrice"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1">
+                            Sipariş Vadeli Fiyat
+                        </td>
+                        <td>
+                            :
+                        </td>
+                        <td colspan="2">
+                            <asp:Label runat="server" ID="lbltotalRatedPrice"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Fatura Adres Detayı
+                        </td>
+                        <td>
+                            :
+                        </td>
+                        <td>
+                            <asp:Label runat="server" ID="lblBillingDetail"></asp:Label>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            İl
+                        </td>
+                        <td>
+                            :
+                        </td>
+                        <td>
+                            <asp:Label runat="server" ID="lblBillingCity"></asp:Label>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            İlçe
+                        </td>
+                        <td>
+                            :
+                        </td>
+                        <td>
+                            <asp:Label runat="server" ID="lblBillingDistrict"></asp:Label>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Posta Kodu
+                        </td>
+                        <td>
+                            :
+                        </td>
+                        <td>
+                            <asp:Label runat="server" ID="lblBillingPostalCode"></asp:Label>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div id="dvAdress" runat="server" visible="false">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Adres Detayı
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblDetail"></asp:Label>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            İl
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblCity"></asp:Label>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            İlçe
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblDistrict"></asp:Label>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Posta Kodu
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblPostalCode"></asp:Label>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <asp:GridView runat="server" ID="gvBasketItems" AutoGenerateColumns="False" CellPadding="4"
+                                GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" Caption="Ürünler"
+                                CaptionAlign="Left">
+                                <Columns>
+                                    <asp:TemplateField ShowHeader="False">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="lbtnAddress" runat="server" OnClick="lbtnAddress_Click" CommandArgument='<%# Eval("Id")%>'>[Adres Bilgisi]</asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ShowHeader="False">
+                                        <ItemTemplate>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Ürün Adı">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblTitle" Text='<%# Eval("Product.Title")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Ürün Kodu">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblProductCode" Text='<%# Eval("Product.ProductCode")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Fiyat">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblPrice" Text='<%# Eval("ProductPrice.Price")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Mikarı">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblCount" Text='<%# Eval("Count")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            Sipariş Durumu
+                        </td>
+                        <td>
+                            :
+                        </td>
+                        <td>
+                            <asp:DropDownList runat="server" ID="ddlFilterOrderStatus">
+                            </asp:DropDownList>
+                        </td>
+                        <td rowspan="2">
+                            <asp:Button runat="server" ID="btnFilter" Text="Filtrele" OnClick="btnFilter_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <strong>Liste</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <asp:GridView runat="server" ID="gvOrderList" AutoGenerateColumns="False" CellPadding="4"
+                                GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" EmptyDataText="Listede gösterilecek kayıt bulunamadı">
+                                <Columns>
+                                    <asp:TemplateField ShowHeader="False">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="lbtnView" runat="server" OnClick="lbtnView_Click" CommandArgument='<%# Eval("Id")%>'>[Incele]</asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
+                                        SortExpression="Id" />
+                                    <asp:TemplateField HeaderText="Adı">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblGvFirstName" Text='<%# Eval("User.FirstName")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Soyadı">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblGvLastName" Text='<%# Eval("User.LastName")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Ödeme Tipi">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblPaymentType" Text='<%# Eval("PaymetInfo.PaymentType.Value")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Durumu">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="lblStatus" Text='<%# Eval("Status.Value")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </telerik:RadPageView>
         <telerik:RadPageView ID="RadPageView4" runat="server" Selected="true">
             <table>

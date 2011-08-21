@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Toolkit;
+using IKSIR.ECommerce.Model.MembershipModel;
+using IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer;
+using IKSIR.ECommerce.Model.Order;
 
 namespace IKSIR.ECommerce.UI.SecuredPages
 {
@@ -84,6 +87,21 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             GetItem(itemId);
         }
 
+        protected void lbtnView_Click(object sender, EventArgs e)
+        {
+
+            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
+            gvList.SelectedIndex = index;
+            var itemId = (sender as LinkButton).CommandArgument == ""
+                             ? 0
+                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
+
+            GetOrderItem(itemId);
+            dvMyOrder.Visible = true;
+            ddlPaymentType.Enabled = false;
+
+        }
+
         protected void lbtnDelete_Click(object sender, EventArgs e)
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
@@ -101,6 +119,40 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                 lblError.ForeColor = System.Drawing.Color.Red;
                 lblError.Text = "Item silerken bir hata oluştu.";
             }
+        }
+
+        protected void lbtnAddress_Click(object sender, EventArgs e)
+        {
+            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
+            gvList.SelectedIndex = index;
+            var itemId = (sender as LinkButton).CommandArgument == ""
+                             ? 0
+                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
+
+            Model.Order.Order itemOrder = OrderData.Get(Convert.ToInt32(lblId.Text), 0, new EnumValue() { Id = 0 });
+            foreach (BasketItem basketItem in itemOrder.Basket.BasketItems)
+            {
+                if (basketItem.Id == itemId)
+                {
+                    if (basketItem.ShippingAddress.City != null)
+                    {
+                        string City = basketItem.ShippingAddress.City.Name.ToString();
+                        string District = basketItem.ShippingAddress.District.Name.ToString();
+                        string AddressDetail = basketItem.ShippingAddress.AddressDetail.ToString();
+                        string PostalCode = basketItem.ShippingAddress.PostalCode.ToString();
+                        dvAdress.Visible = true;
+                        lblCity.Text = City;
+                        lblDetail.Text = District;
+                        lblDetail.Text = AddressDetail;
+                        lblPostalCode.Text = PostalCode;
+                    }
+                }
+            }
+        }
+
+        protected void btnFilter_Click(object sender, EventArgs e)
+        {
+            GetOrderList();
         }
 
         protected void ddlCountries_SelectedIndexChanged(object sender, EventArgs e)
@@ -193,6 +245,105 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             pnlForm.Visible = true;
         }
 
+        private bool GetOrderItem(int itemId)
+        {
+            Model.Order.Order itemOrder = OrderData.Get(itemId, 0, new EnumValue() { Id = 0 });
+            bool retValue = false;
+
+            pnlForm.Visible = true;
+
+            if (GetProductInfo(itemOrder.Basket.BasketItems))
+            {
+                divAlert.InnerHtml = "<span style=\"color:Green\">Ürün bilgileri başarıyla yüklendi.</span><br />";
+                retValue = true;
+            }
+            else
+            {
+                divAlert.InnerHtml = "<span style=\"color:Red\">Ürün bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
+            }
+            if (GetPaymentInfo(itemOrder.PaymetInfo))
+            {
+                divAlert.InnerHtml = "<span style=\"color:Green\">Müşteri bilgileri başarıyla yüklendi.</span><br />";
+                retValue = true;
+            }
+            else
+            {
+                divAlert.InnerHtml = "<span style=\"color:Red\">Ürün Genel bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
+            }
+            if (GetBillingInfo(itemOrder.Basket.BillingAddress))
+            {
+                divAlert.InnerHtml = "<span style=\"color:Green\">Müşteri bilgileri başarıyla yüklendi.</span><br />";
+                retValue = true;
+            }
+            else
+            {
+                divAlert.InnerHtml = "<span style=\"color:Red\">Ürün Genel bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
+            }
+            lblId.Text = itemOrder.Id.ToString();
+            lbltotalPrice.Text = itemOrder.TotalPrice.ToString();
+            lbltotalRatedPrice.Text = itemOrder.TotalRatedPrice.ToString();
+            return retValue;
+
+        }
+
+        private bool GetBillingInfo(Address address)
+        {
+            bool isOk = false;
+            try
+            {
+                string City = address.City.Name.ToString();
+                string District = address.District.Name.ToString();
+                string AddressDetail = address.AddressDetail.ToString();
+                string PostalCode = address.PostalCode.ToString();
+                lblBillingCity.Text = City;
+                lblBillingDetail.Text = District;
+                lblBillingDetail.Text = AddressDetail;
+                lblBillingPostalCode.Text = PostalCode;
+
+                isOk = true;
+            }
+            catch
+            {
+                isOk = false;
+            }
+
+            return isOk;
+        }
+
+        private bool GetPaymentInfo(Model.Bank.PaymetInfo paymetInfo)
+        {
+            bool IsOk = false;
+            try
+            {
+                List<EnumValue> ListPaymentType = EnumValueData.GetEnumValues(21);//Ödeme Tipleri
+                Utility.BindDropDownList(ddlPaymentType, ListPaymentType, "Value", "Id");
+                ddlPaymentType.SelectedValue = paymetInfo.PaymentType.Id.ToString();
+
+                IsOk = true;
+            }
+            catch
+            {
+                IsOk = false;
+            }
+            return IsOk;
+        }
+
+        private bool GetProductInfo(List<BasketItem> list)
+        {
+            bool IsOk = false;
+            try
+            {
+                gvBasketItems.DataSource = list;
+                gvBasketItems.DataBind();
+                IsOk = true;
+            }
+            catch
+            {
+                IsOk = false;
+            }
+            return IsOk;
+        }
+
         private bool DeleteItem(int itemId)
         {
             bool returnValue = false;
@@ -232,6 +383,9 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             ddlCountries.SelectedValue = "1"; //Türkiye default seçili geliyor. =>ayhant
             List<City> cityList = CityData.GetCityList(1); //Türkiyenin şehirlerini default getiriyoruz. =>ayhant
             Utility.BindDropDownList(ddlCities, cityList, "Name", "Id");
+
+            List<EnumValue> itemListOrderStatus = EnumValueData.GetEnumValues(20);
+            Utility.BindDropDownList(ddlFilterOrderStatus, itemListOrderStatus, "Value", "Id");
         }
 
         private void GetList()
@@ -239,6 +393,15 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             List<Address> itemList = AddressData.GetMembershipAddresses(1);
             gvList.DataSource = itemList;
             gvList.DataBind();
+        }
+
+        private void GetOrderList()
+        {
+            User User = (User)Session["LOGIN_USER"];
+            List<Model.Order.Order> itemList = OrderData.GetList(Convert.ToInt32(ddlFilterOrderStatus.SelectedValue), User.Id);
+
+            gvOrderList.DataSource = itemList;
+            gvOrderList.DataBind();
         }
 
         private bool SaveItem(int id = 0)
