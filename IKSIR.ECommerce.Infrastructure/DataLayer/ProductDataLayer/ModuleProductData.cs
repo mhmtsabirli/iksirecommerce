@@ -190,5 +190,45 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             dr.Close();
             return itemModuleProductList;
         }
+
+        public static List<Product> GetSearchResult(string searchkey)
+        {
+            List<Product> itemModuleProductList = null;
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            parameters.Add(new SqlParameter("@SearchKey", searchkey));
+            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetProductSearchResult", parameters);
+            itemModuleProductList = new List<Product>();
+
+            while (dr.Read())
+            {
+                var item = new Product();
+                item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                item.Description = DBHelper.StringValue(dr["Description"].ToString());
+                item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                item.Id = DBHelper.IntValue(dr["Id"].ToString());
+                item.Video = DBHelper.StringValue(dr["Video"].ToString());
+                item.Title = DBHelper.StringValue(dr["Title"].ToString());
+                item.Description = DBHelper.StringValue(dr["Description"].ToString());
+                item.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
+                item.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
+                item.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
+                item.ProductStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["ProductStatus"].ToString()) });
+                item.Guarantee = DBHelper.IntValue(dr["Guarantee"].ToString());
+                item.Stok = DBHelper.IntValue(dr["Stok"].ToString());
+                item.MaxQuantity = DBHelper.IntValue(dr["MaxQuantity"].ToString());
+                item.StokStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["StokStatus"].ToString()) });
+                item.ProductCategory = ProductCategoryData.Get(DBHelper.IntValue(dr["ProductCategoryId"].ToString()));
+                item.ProductPrice = ProductPriceData.GetByProduct(DBHelper.IntValue(dr["Id"].ToString()));
+                item.Multimedias = MultimediasData.GetItemMultimedias(3, DBHelper.IntValue(dr["Id"].ToString()));
+                itemModuleProductList.Add(item);
+            }
+
+            dr.Close();
+            return itemModuleProductList;
+        }
     }
 }

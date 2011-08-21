@@ -13,8 +13,9 @@
         <a href="../Pages/Default.aspx">
             <img src="../images/logo.jpg" alt="" /></a></div>
     <div class="search">
-        <input class="search_text" type="text" />
-        <input class="search_submit" type="submit" value="" />
+        <asp:TextBox runat="server" ID="txtSearchText" CssClass="search_text"></asp:TextBox>
+        <asp:ImageButton runat="server" ID="btnSearch" CssClass="search_submit" 
+            onclick="btnSearch_Click" style="height: 16px" />
         <div class="clear">
         </div>
     </div>

@@ -170,6 +170,7 @@
     <Content Include="MailTemplates\MembershipRegister.htm" />
     <Content Include="MailTemplates\OrderResultMail.htm" />
     <Content Include="MailTemplates\SalesContract.htm" />
+    <Content Include="Pages\SearchResult.aspx" />
     <Content Include="Pages\OrderPaymentResult.aspx" />
     <Content Include="SecuredPages\ForgotPassword.aspx" />
     <Content Include="SecuredPages\OrderPayment.aspx" />
@@ -219,6 +220,13 @@
     <Compile Include="ClassLibrary\Shopping.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SearchResult.aspx.cs">
+      <DependentUpon>SearchResult.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\SearchResult.aspx.designer.cs">
+      <DependentUpon>SearchResult.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\OrderPaymentResult.aspx.cs">
       <DependentUpon>OrderPaymentResult.aspx</DependentUpon>

@@ -36,10 +36,9 @@ namespace IKSIR.ECommerce.Toolkit
                 client.Host = IKSIR.ECommerce.Infrastructure.StaticData.Idevit.MailHost;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.Credentials = new System.Net.NetworkCredential(IKSIR.ECommerce.Infrastructure.StaticData.Idevit.MailUserName, IKSIR.ECommerce.Infrastructure.StaticData.Idevit.MailPassword);
-                //client.Port = 25;
                 client.EnableSsl = true;
-                object userState = msg;
                 client.Send(msg);
+                //client.SendAsync(msg, (object)msg);
                 return true;
             }
             catch (Exception ex)

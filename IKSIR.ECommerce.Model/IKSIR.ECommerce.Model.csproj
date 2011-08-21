@@ -68,6 +68,7 @@
     <Compile Include="CommonModel\PropertyValue.cs" />
     <Compile Include="CommonModel\SystemLog.cs" />
     <Compile Include="MembershipModel\User.cs" />
+    <Compile Include="Order\BasketAddress.cs" />
     <Compile Include="Order\BasketItemAddres.cs" />
     <Compile Include="Order\BasketItem.cs" />
     <Compile Include="Order\BasketItemProduct.cs" />

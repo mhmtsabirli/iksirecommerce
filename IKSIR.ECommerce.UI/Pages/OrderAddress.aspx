@@ -478,9 +478,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <a href="#">
-                        <img src="../images/sepet_end_iptal.jpg" alt="" /></a>
-                    <asp:ImageButton runat="server" ID="imgbtnContinue" ImageUrl="../images/sepet_end_devam.jpg"
+                    &nbsp;<asp:ImageButton runat="server" ID="imgbtnContinue" ImageUrl="../images/sepet_end_devam.jpg"
                         AlternateText="Devam Et" OnClick="imgbtnContinue_Click" />
                 </td>
             </tr>

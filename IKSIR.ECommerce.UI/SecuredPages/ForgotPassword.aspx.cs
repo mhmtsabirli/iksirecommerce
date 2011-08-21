@@ -29,10 +29,17 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                 MailBody = MailBody.Replace("%ActivationLink%", "http://www.idevit.com.tr/");
                 MailBody = MailBody.Replace("%UserName%", txtEmail.Text);
                 MailBody = MailBody.Replace("%Password%", user.Password);
-                Mail.sendMail(user.Email, "helpdesk@idevit.com.tr", "İdevit A.Ş. | Üyelik Bilgileriniz", MailBody);
-
-                lblAlert.Text = "Şifreniz mail adresinize gönderilmiştir.";
-                lblAlert.ForeColor = System.Drawing.Color.Green;
+                bool retValue = Mail.sendMail(user.Email, "helpdesk@idevit.com.tr", "İdevit A.Ş. | Üyelik Bilgileriniz", MailBody);
+                if (retValue)
+                {
+                    lblAlert.Text = "Şifreniz mail adresinize gönderilmiştir.";
+                    lblAlert.ForeColor = System.Drawing.Color.Green;
+                }
+                else
+                {
+                    lblAlert.Text = "Şifreniz mail adresinize göndeririken bir hata oluştu lütfen daha sonra tekrar deneyiniz.";
+                    lblAlert.ForeColor = System.Drawing.Color.Red;
+                }
             }
             else
             {

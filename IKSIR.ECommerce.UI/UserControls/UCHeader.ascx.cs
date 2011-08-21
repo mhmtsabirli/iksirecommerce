@@ -26,5 +26,10 @@ namespace IKSIR.ECommerce.UI.UserControls
                 hplToBasket.NavigateUrl = "";
             }
         }
+
+        protected void btnSearch_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("SearchResult.aspx?searchkey=" + txtSearchText.Text);
+        }
     }
 }
