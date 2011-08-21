@@ -25,6 +25,18 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             return returnValue;
         }
 
+        public static int Update(int ItemId,bool IsActive)
+        {
+            var returnValue = 0;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Id", ItemId));
+            parameters.Add(new SqlParameter("@IsActive", IsActive));
+            parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
+            
+            returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateNewsletter", parameters);
+            return returnValue;
+        }
+
         public static int Delete(Newsletter itemNewsletter)
         {
             var returnValue = 0;
@@ -51,12 +63,35 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 item.Email = DBHelper.StringValue(dr["Email"].ToString());
                 item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                item.IsActive = Convert.ToBoolean(dr["IsActive"].ToString());
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
                 itemNewsletterList.Add(item);
             }
 
             dr.Close();
             return itemNewsletterList;
+        }
+        public static Newsletter Get(int NewsLetterId)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Id", NewsLetterId));
+            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetNewsletterEmails",parameters);
+            var item = new Newsletter();
+            while (dr.Read())
+            {
+               
+
+                item.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                item.Email = DBHelper.StringValue(dr["Email"].ToString());
+                item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                item.Id = DBHelper.IntValue(dr["Id"].ToString());
+                item.IsActive = Convert.ToBoolean(dr["IsActive"].ToString());
+            }
+
+            dr.Close();
+            return item;
         }
     }
 }
