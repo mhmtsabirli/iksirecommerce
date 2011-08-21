@@ -62,10 +62,4 @@
             </td>
         </tr>
     </table>
-    <div class="clear">
-    </div>
-    <span class="sidemenu_link"><a href="#">
-        <img src="../images/sidemenu_forgot.jpg" alt="" />Parolamı Unuttum?</a></span>
-    <span class="sidemenu_link"><a href="#">
-        <img src="../images/sidemenu_forgot.jpg" alt="" />Yeni Üyelik</a></span> </div>
 </asp:Content>
