@@ -77,8 +77,10 @@ body
 			   margin:0 0 10px 0; padding:5px 10px; border:0; font:normal 10px trebuchet ms; color:#969696; }
 			   .sidemenu_submit { width:143px; height:28px; background:url(../images/sidemenu_submit.jpg);
 			   margin:0 0 0 15px; padding:0; border:0; cursor:pointer; font:normal 12px trebuchet ms; color:#6D6D6D; }
+			   
 			   .sidemenu_kullanici_adi { width:129px; height:16px; background:url(../images/sidemenu_kullanici_adi.jpg);
 			   margin:15px 0 5px 0; padding:5px 30px 5px 10px; border:0; font:normal 11px trebuchet ms; color:#969696; }
+			   
 			   .sidemenu_sifre { width:129px; height:16px; background:url(../images/sidemenu_sifre.jpg);
 			   margin:0; padding:5px 30px 5px 10px; border:0; font:normal 11px trebuchet ms; color:#969696; }
 			   .sidemenu_checkbox { float:left; width:10px; height:11px; margin-top:13px; }
@@ -276,3 +278,9 @@ body
         margin-left:150px;
         height:100%;
         }
+        
+        .sidemenu_kullanici_adi_login { width:270px; height:16px; background:url(../images/sidemenu_kullanici_adi2.jpg); background-position:right; background-repeat:no-repeat;
+			   margin:15px 0 5px 0; padding:5px 30px 5px 10px; border:0; font:normal 11px trebuchet ms; color:#969696; }
+			   
+.sidemenu_sifre_login { width:270px; height:16px; background:url(../images/sidemenu_sifre2.jpg);
+			   margin:0; padding:5px 30px 5px 10px; border:0; font:normal 11px trebuchet ms; color:#969696; }

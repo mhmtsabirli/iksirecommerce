@@ -83,11 +83,11 @@ namespace IKSIR.ECommerce.UI.Pages
                             if (itemProduct != null && itemProduct.Multimedias != null && itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault() != null)
                             {
                                 var image = itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault();
-                                imgProduct.ImageUrl = "http://212.58.8.103/documents/Images/Small/small_" + image.FilePath;
+                                imgProduct.ImageUrl = "http://banyom.com.tr/documents/Images/Small/small_" + image.FilePath;
                             }
                             else
                             {
-                                imgProduct.ImageUrl = "http://212.58.8.103/documents/Images/Small/small_nopicture.jpg";
+                                imgProduct.ImageUrl = "http://banyom.com.tr/documents/Images/Small/small_nopicture.jpg";
                             }
 
                         }
@@ -145,11 +145,11 @@ namespace IKSIR.ECommerce.UI.Pages
                             if (itemProduct != null && itemProduct.Multimedias != null && itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault() != null)
                             {
                                 var image = itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault();
-                                imgProduct.ImageUrl = "http://212.58.8.103/documents/Images/Small/small_" + image.FilePath;
+                                imgProduct.ImageUrl = "http://banyom.com.tr/documents/Images/Small/small_" + image.FilePath;
                             }
                             else
                             {
-                                imgProduct.ImageUrl = "http://212.58.8.103/documents/Images/Small/small_nopicture.jpg";
+                                imgProduct.ImageUrl = "http://banyom.com.tr/documents/Images/Small/small_nopicture.jpg";
                             }
 
                         }

@@ -22,7 +22,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                 {
                     btnAddComment.Visible = false;
                     hplLogin.Visible = true;
-                    hplLogin.NavigateUrl = "~/Pages/Login.aspx?returl=ProductDetails.aspx?pid=" + productId.ToString();
+                    hplLogin.NavigateUrl = "../SecuredPages/Login.aspx?returl=ProductDetails.aspx?pid=" + productId.ToString();
                 }
                 else
                 {

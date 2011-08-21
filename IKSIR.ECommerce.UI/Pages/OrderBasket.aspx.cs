@@ -36,7 +36,7 @@ namespace IKSIR.ECommerce.UI.Pages
                         rptBasketProducts.Visible = false;
                         hplNoItem.Visible = true;
                         divBasketTotal.Visible = false;
-                        anchorConfirmation.Visible = false;
+                        //trConfirmation.Visible = false;
                         divBasketButtons.Visible = false;
                     }
                     else
@@ -45,7 +45,7 @@ namespace IKSIR.ECommerce.UI.Pages
                         rptBasketProducts.Visible = true;
                         hplNoItem.Visible = false;
                         divBasketTotal.Visible = true;
-                        anchorConfirmation.Visible = true;
+                        //trConfirmation.Visible = true;
                         divBasketButtons.Visible = true;
                         GetOrderBasket();
                     }
@@ -56,7 +56,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                Response.Redirect("Login.aspx?returl=Default.aspx");
+                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/Default.aspx");
             }
         }
 
@@ -64,10 +64,10 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             rptBasketProducts.DataSource = basket.BasketItems;
             rptBasketProducts.DataBind();
-
-            lblBasketTotal.Text = String.Format("{0:0.##}", BasketTotal);
-            lblTotalTax.Text = String.Format("{0:0.##}", TotalTax);
-            lblTotalPrice.Text = String.Format("{0:0.##}", TotalPrice);
+            
+            lblBasketTotal.Text = Toolkit.Utility.CurrencyFormat(BasketTotal);
+            lblTotalTax.Text = Toolkit.Utility.CurrencyFormat(TotalTax);
+            lblTotalPrice.Text = Toolkit.Utility.CurrencyFormat(TotalPrice);
         }
 
         protected void rptBasketProducts_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -146,8 +146,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                string textForMessage = @"<script language='javascript'> alert('Genel kurallar ve koşulları kabul ediniz!');</script>";
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                this.ClientScript.RegisterStartupScript(this.GetType(), "Koşulları okuyup onaylayınız!", "<script language=\"javaScript\">" + "alert('Genel kurallar ve koşulları kabul ediniz!');" + "window.location.href='OrderBasket.aspx';" + "<" + "/script>");
             }
         }
 

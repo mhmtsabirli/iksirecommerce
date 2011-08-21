@@ -166,11 +166,13 @@
     <Content Include="js\video_lightbox\jquery.tools.min.js" />
     <Content Include="js\video_lightbox\swfobject.js" />
     <Content Include="js\video_lightbox\videolightbox.js" />
+    <Content Include="MailTemplates\ForgotPassword.htm" />
     <Content Include="MailTemplates\MembershipRegister.htm" />
     <Content Include="MailTemplates\OrderResultMail.htm" />
     <Content Include="MailTemplates\SalesContract.htm" />
     <Content Include="Pages\OrderPaymentResult.aspx" />
-    <Content Include="Pages\OrderPayment.aspx" />
+    <Content Include="SecuredPages\ForgotPassword.aspx" />
+    <Content Include="SecuredPages\OrderPayment.aspx" />
     <Content Include="Pages\Error.aspx" />
     <Content Include="Pages\Maintenance.aspx" />
     <Content Include="Pages\OrderAddress.aspx" />
@@ -179,11 +181,11 @@
     <Content Include="Pages\Contact.aspx" />
     <Content Include="Pages\Content.aspx" />
     <Content Include="Pages\Default.aspx" />
-    <Content Include="Pages\Login.aspx" />
+    <Content Include="SecuredPages\Login.aspx" />
     <Content Include="Pages\OrderShipping.aspx" />
     <Content Include="Pages\ProductDetails.aspx" />
     <Content Include="Pages\ProductList.aspx" />
-    <Content Include="Pages\Register.aspx" />
+    <Content Include="SecuredPages\Register.aspx" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -202,7 +204,7 @@
     <Content Include="UserControls\UCProductDetailsProductInfos.ascx" />
     <Content Include="UserControls\UCNewsFromUs.ascx" />
     <Content Include="UserControls\UCMainCategories.ascx" />
-    <Content Include="UserPanel\MyAccount.aspx" />
+    <Content Include="SecuredPages\MyAccount.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -225,11 +227,18 @@
     <Compile Include="Pages\OrderPaymentResult.aspx.designer.cs">
       <DependentUpon>OrderPaymentResult.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\OrderPayment.aspx.cs">
+    <Compile Include="SecuredPages\ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredPages\OrderPayment.aspx.cs">
       <DependentUpon>OrderPayment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\OrderPayment.aspx.designer.cs">
+    <Compile Include="SecuredPages\OrderPayment.aspx.designer.cs">
       <DependentUpon>OrderPayment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Error.aspx.cs">
@@ -292,11 +301,11 @@
     <Compile Include="Pages\Content.aspx.designer.cs">
       <DependentUpon>Content.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Login.aspx.cs">
+    <Compile Include="SecuredPages\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Login.aspx.designer.cs">
+    <Compile Include="SecuredPages\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\OrderShipping.aspx.cs">
@@ -320,11 +329,11 @@
     <Compile Include="Pages\ProductList.aspx.designer.cs">
       <DependentUpon>ProductList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Register.aspx.cs">
+    <Compile Include="SecuredPages\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Register.aspx.designer.cs">
+    <Compile Include="SecuredPages\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -334,6 +343,13 @@
     </Compile>
     <Compile Include="MasterPages\UIMasterPage.Master.designer.cs">
       <DependentUpon>UIMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredPages\UIDetailSecuredMasterPage.Master.cs">
+      <DependentUpon>UIDetailSecuredMasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\UIDetailSecuredMasterPage.Master.designer.cs">
+      <DependentUpon>UIDetailSecuredMasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCLogin.ascx.cs">
       <DependentUpon>UCLogin.ascx</DependentUpon>
@@ -440,11 +456,11 @@
     <Compile Include="UserControls\UCMainCategories.ascx.designer.cs">
       <DependentUpon>UCMainCategories.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserPanel\MyAccount.aspx.cs">
+    <Compile Include="SecuredPages\MyAccount.aspx.cs">
       <DependentUpon>MyAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserPanel\MyAccount.aspx.designer.cs">
+    <Compile Include="SecuredPages\MyAccount.aspx.designer.cs">
       <DependentUpon>MyAccount.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -475,6 +491,9 @@
       <Name>IKSIR.ECommerce.Toolkit</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="SecuredPages\UIDetailSecuredMasterPage.Master" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
@@ -483,7 +502,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>4670</DevelopmentServerPort>
+          <DevelopmentServerPort>7319</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
