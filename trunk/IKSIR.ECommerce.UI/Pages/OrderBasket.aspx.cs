@@ -146,7 +146,10 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                this.ClientScript.RegisterStartupScript(this.GetType(), "Koşulları okuyup onaylayınız!", "<script language=\"javaScript\">" + "alert('Genel kurallar ve koşulları kabul ediniz!');" + "window.location.href='OrderBasket.aspx';" + "<" + "/script>");
+                dvAlert.Visible = true;
+                dvAlert.InnerHtml = "<span style=\"color:Red\">Genel kurallar ve koşulları kabul ediniz!</span><br />";
+              
+                //this.ClientScript.RegisterStartupScript(this.GetType(), "Koşulları okuyup onaylayınız!", "<script language=\"javaScript\">" + "alert('Genel kurallar ve koşulları kabul ediniz!');" + "window.location.href='OrderBasket.aspx';" + "<" + "/script>");
             }
         }
 

@@ -176,7 +176,7 @@
                             <td colspan="5">
                                 <asp:CheckBox ID="cbxComfirmation" runat="server" Text="" />
                                 <a href="#" id="anchorConfirmation">Genel Kurallar ve Koşullar&#39;ı okudum ve kabul
-                                    ediyorum.</a>
+                                    ediyorum.</a><div id="dvAlert" runat="server" visible="false"></div>
                                 <script type="text/javascript">
                                     $("#anchorConfirmation").click(function () {
                                         if ($(".divGeneralRules").is(':visible'))
