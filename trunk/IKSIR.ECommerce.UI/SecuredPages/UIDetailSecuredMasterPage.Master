@@ -1,0 +1,77 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="UIDetailSecuredMasterPage.Master.cs"
+    Inherits="IKSIR.ECommerce.UI.SecuredPages.UIDetailSecuredMasterPage" %>
+<%@ Register Src="../UserControls/UCHeader.ascx" TagName="Header" TagPrefix="uc5" %>
+<%@ Register Src="../UserControls/UCFooter.ascx" TagName="Footer" TagPrefix="uc6" %>
+<%@ Register src="../UserControls/UCMainCategories.ascx" tagname="UCMainCategories" tagprefix="uc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>İdevit</title>
+    <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
+    <uc5:Header ID="Header1" runat="server" />
+    <div class="main" style="padding-left:10px">
+        <div class="sidebar_left">
+            <div class="sidemenu">
+                <div class="sidemenu_top">
+                </div>
+                <div class="sidemenu_middle">
+                    <uc1:UCMainCategories ID="UCMainCategories1" runat="server" />
+                </div>
+                <div class="sidemenu_bottom">
+                </div>
+            </div>
+            <div class="sidemenu">
+                <div class="sidemenu_top">
+                </div>
+                <div class="sidemenu_middle">
+                    <div id="tabvanilla" class="tabmenu">
+                        <ul class="tabnav">
+                            <li><a href="#siparistakip"><span>Sipariş Takip</span></a></li>
+                            <li><a href="#siparisyardim"><span>Sipariş Yardım</span></a></li>
+                        </ul>
+                        <div class="clear">
+                        </div>
+                        <div class="sidemenu_hr">
+                        </div>
+                        <div id="siparistakip" class="tabdiv">
+                            <p>
+                                Siparişinizin ne durumda olduğunu buradan öğrene bilirsiniz. Lütfen size verilen
+                                sipariş numarasını aşağıdaki kutucuğa girip takip ediniz</p>
+                        </div>
+                        <input class="sidemenu_text" type="text" value="Sipariş no..." />
+                        <input class="sidemenu_submit" type="submit" value="Sipariş Durumu" />
+                    </div>
+                    <div id="siparisyardim" class="tabdiv">
+                        <p>
+                            Lorem ipsum dolor si Lorem sit amet dolor si dolor sit amet</p>
+                    </div>
+                    &nbsp;
+                </div>
+                 <div class="sidemenu_bottom">
+                </div>
+            </div>
+            <div class="sidebar_advertisement">
+                <a href="#">
+                    <img src="../images/sidebar_advertisement.jpg" alt=""  style="border:none;"/></a></div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        <div class="clear">
+        </div>
+    </div>
+    
+    <uc6:Footer ID="Footer1" runat="server" />
+    </form>
+</body>
+</html>
