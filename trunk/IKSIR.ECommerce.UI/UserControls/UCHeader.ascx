@@ -28,7 +28,7 @@
             <li><a href="../Pages/ProductList.aspx?modid=4">Yeni Ürünler</a></li>
             <li><a href="../Pages/ProductList.aspx?modid=5">Kampanyalı Ürünler</a></li>
             <li><a href="../Pages/ProductList.aspx?modid=6">İndirimli Ürünler</a></li>
-            <li><a href="../Pages/Register.aspx">Yeni Üyelik</a></li>
+            <li><a href="../SecuredPages/Register.aspx">Yeni Üyelik</a></li>
             <li><a href="../Pages/Contact.aspx">İletişim</a></li>
         </ul>
         <div class="clear">

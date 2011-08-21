@@ -35,20 +35,28 @@
         <h3>
             <a href="#">Üyelik İşlemleri</a></h3>
         <ul>
-            <li><a href="../Pages/Register.aspx">Yeni Üyelik</a></li>
-            <li><a href="../Pages/Login.aspx">Üye Girişi</a></li>
-            <li><a href="../Pages/ForgetMyPassport.aspx">Şifre Hatırlatma</a></li>
+            <li><a href="../SecuredPages/Register.aspx">Yeni Üyelik</a></li>
+            <li><a href="../SecuredPages/Login.aspx">Üye Girişi</a></li>
+            <li><a href="../SecuredPages/ForgotPassword.aspx">Şifre Hatırlatma</a></li>
         </ul>
     </div>
     <div class="footer_module">
         <h3>
             E-Bülten</h3>
-        <form action="">
-        <input class="footer_module_text" type="text" value="Mail Adresinizi Giriniz" />
-        <input class="footer_module_submit" type="submit" value="" />
-        </form>
+        <asp:TextBox runat="server" ID="txtUserEmail" CssClass="footer_module_text"></asp:TextBox>
+        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtUserEmail"
+                    ErrorMessage="E-Bülten kaydı için mail adresi giriniz" ValidationGroup="vgNewsletter" SetFocusOnError="true">*</asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator runat="server" ID="regex1" ControlToValidate="txtUserEmail"
+            ErrorMessage="Geçersiz Eposta adresi" ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"
+            ValidationGroup="vgNewsletter" SetFocusOnError="true">*</asp:RegularExpressionValidator>
+        <asp:ImageButton runat="server" ID="imgbtnSaveNewsletter" ImageUrl="../images/footer_module_submit.png"
+            CssClass="footer_module_submit" OnClick="imgbtnSaveNewsletter_Click" ValidationGroup="vgNewsletter" />
         <div class="clear">
         </div>
+        <p>
+            <asp:ValidationSummary runat="server" ID="vsForm" ValidationGroup="vgNewsletter" ForeColor="Red" />
+            <asp:Label runat="server" ID="lblAlert"></asp:Label>
+        </p>
         <p>
             Güncel gelişmelerden kolayca haberdar<br />
             olmak için e-bültenimize üye olun</p>

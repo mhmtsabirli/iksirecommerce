@@ -11,7 +11,7 @@
             <table>
                 <asp:Repeater runat="server" ID="rptDocuments">
                     <ItemTemplate>
-                        <a href='<%# String.Format("http://212.58.8.103/CardImages/{0}", Eval("Image"))%>'>
+                        <a href='<%# String.Format("http://banyom.com.tr/CardImages/{0}", Eval("Image"))%>'>
                             <%# Eval("BasketItemPrice")%>
                         </a>
                     </ItemTemplate>

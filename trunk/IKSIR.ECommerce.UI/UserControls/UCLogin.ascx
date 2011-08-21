@@ -62,9 +62,9 @@
             </table>
             <div class="clear">
             </div>
-            <span class="sidemenu_link"><a href="#">
+            <span class="sidemenu_link"><a href="../SecuredPages/ForgotPassword.aspx">
                 <img src="../images/sidemenu_forgot.jpg" alt="" />Parolamı Unuttum?</a></span>
-            <span class="sidemenu_link"><a href="#">
+            <span class="sidemenu_link"><a href="../SecuredPages/Register.aspx">
                 <img src="../images/sidemenu_forgot.jpg" alt="" />Yeni Üyelik</a></span>
         </div>
     </asp:Panel>
@@ -81,7 +81,7 @@
                         <asp:Label runat="server" ID="lblUserTitle" Text="lblUserTitle"></asp:Label>
                     </p>
                     <p>
-                        <a href="../UserPanel/MyAccount.aspx">[Hesabım]</a>
+                        <a href="../SecuredPages/MyAccount.aspx">[Hesabım]</a>
                     </p>
                     <p>
                         <a href="../Pages/OrderBasket.aspx">[Sepetim]</a>

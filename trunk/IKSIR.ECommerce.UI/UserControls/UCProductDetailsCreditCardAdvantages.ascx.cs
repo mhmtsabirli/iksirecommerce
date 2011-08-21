@@ -22,31 +22,11 @@ namespace IKSIR.ECommerce.UI.UserControls
         {
             try
             {
-                rptCreditCards.DataSource = CreditCardData.GetAktiveCreditCardList();
-                rptCreditCards.DataBind();
-
                 dlCreditCards.DataSource = CreditCardData.GetAktiveCreditCardList();
                 dlCreditCards.DataBind();
             }
             catch (Exception exception)
             {
-            }
-        }
-
-        protected void rptCreditCards_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                HiddenField hdnCardId = e.Item.FindControl("hdnCardId") as HiddenField;
-
-                Repeater rptCreditCardAdvantages = e.Item.FindControl("rptCreditCardAdvantages") as Repeater;
-                int cardId;
-
-                if (rptCreditCardAdvantages != null && hdnCardId.Value != "" && int.TryParse(hdnCardId.Value, out cardId))
-                {
-                    rptCreditCardAdvantages.DataSource = PaymetTermRateData.GetAktivePaymetTermRateList(cardId);
-                    rptCreditCardAdvantages.DataBind();
-                }
             }
         }
 

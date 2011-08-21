@@ -11,11 +11,6 @@ namespace IKSIR.ECommerce.UI.UserControls
 {
     public partial class UCProductDetailsSimilarProducts : UCProductDetailsMaster
     {
-        private int productId = 0;
-        public int ProductId
-        {
-            set { productId = value; }
-        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -42,7 +37,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                     if (itemProduct != null && itemProduct.Multimedias != null && itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault() != null)
                     {
                         var image = itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault();
-                        imgProduct.ImageUrl = "http://212.58.8.103/documents/Images/Icon/icon_" + image.FilePath;
+                        imgProduct.ImageUrl = "http://banyom.com.tr/documents/Images/Icon/icon_" + image.FilePath;
                     }
                 }
             }

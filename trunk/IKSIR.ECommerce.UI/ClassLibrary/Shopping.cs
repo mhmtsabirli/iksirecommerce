@@ -51,7 +51,7 @@ namespace IKSIR.ECommerce.UI.ClassLibrary
             if (HttpContext.Current.Session["LOGIN_USER"] == null)
             {
                 //Ürünü sepetine eklemek isterken login mi? Değilse login sayfasına yönlendir.
-                HttpContext.Current.Response.Redirect("../Pages/Login.aspx?returl=OrderBasket.aspx", false);
+                HttpContext.Current.Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderBasket.aspx", false);
             }
         }
 
@@ -60,7 +60,7 @@ namespace IKSIR.ECommerce.UI.ClassLibrary
             if (HttpContext.Current.Session["LOGIN_USER"] == null)
             {
                 //Ürünü sepetine eklemek isterken login mi? Değilse login sayfasına yönlendir.
-                HttpContext.Current.Response.Redirect("../Pages/Login.aspx", false);
+                HttpContext.Current.Response.Redirect("../SecuredPages/Login.aspx", false);
             }
             else
             {

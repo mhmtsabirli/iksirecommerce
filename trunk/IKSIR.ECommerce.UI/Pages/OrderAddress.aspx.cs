@@ -36,7 +36,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                Response.Redirect("Login.aspx?returl=OrderBasket.aspx");
+                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderBasket.aspx");
             }
         }
 
@@ -62,12 +62,12 @@ namespace IKSIR.ECommerce.UI.Pages
             List<Address> itemList = AddressData.GetMembershipAddresses(1);
             rblShippingAddresses.DataTextField = "Title";
             rblShippingAddresses.DataValueField = "Id";
-            rblShippingAddresses.DataSource = itemList.Where(x => x.Type.Id == 9);
+            rblShippingAddresses.DataSource = itemList;
             rblShippingAddresses.DataBind();
 
             rblBillingAddresses.DataTextField = "Title";
             rblBillingAddresses.DataValueField = "Id";
-            rblBillingAddresses.DataSource = itemList.Where(x => x.Type.Id == 8);
+            rblBillingAddresses.DataSource = itemList;
             rblBillingAddresses.DataBind();
         }
 

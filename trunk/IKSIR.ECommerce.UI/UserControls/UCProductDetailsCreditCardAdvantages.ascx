@@ -15,7 +15,7 @@
                         <tr>
                             <td valign="top">
                                 <asp:HiddenField runat="server" ID="hdnCardId" Value='<%# Eval("Id")%>' />
-                                <asp:Image runat="server" ID="imgCard" ImageUrl='<%# String.Format("http://212.58.8.103/CardImages/{0}", Eval("Image"))%>' />
+                                <asp:Image runat="server" ID="imgCard" ImageUrl='<%# String.Format("http://banyom.com.tr/CardImages/{0}", Eval("Image"))%>' />
                             </td>
                         </tr>
                         <tr>
@@ -57,17 +57,6 @@
                     </table>
                 </ItemTemplate>
             </asp:DataList>
-            <asp:Repeater runat="server" ID="rptCreditCards" OnItemDataBound="rptCreditCards_ItemDataBound">
-                <ItemTemplate>
-                    <%# Eval("Name")%>
-                    <asp:HiddenField runat="server" ID="hdnCardId" Value='<%# Eval("Id")%>' />
-                    <asp:Repeater runat="server" ID="rptCreditCardAdvantages">
-                        <ItemTemplate>
-                            <%# Eval("Month")%>/<%# Eval("Rate")%>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </ItemTemplate>
-            </asp:Repeater>
         </td>
     </tr>
 </table>

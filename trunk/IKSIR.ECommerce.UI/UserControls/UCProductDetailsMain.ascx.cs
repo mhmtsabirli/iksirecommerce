@@ -43,17 +43,17 @@ namespace IKSIR.ECommerce.UI.UserControls
                 if (itemMainImage != null)
                 {
                     //imgMainImage.ImageUrl = 
-                    otherImages += "<a href=\"http://212.58.8.103/documents/Orginal/Images/" + itemMainImage.FilePath + "\" rel=\"lightbox\"><img src=\"http://212.58.8.103/documents/Images/Big/big_" + itemMainImage.FilePath + "\" border=\"0\" /></a></div><br/>";
+                    otherImages += "<a href=\"http://banyom.com.tr/documents/Orginal/Images/" + itemMainImage.FilePath + "\" rel=\"lightbox\"><img src=\"http://banyom.com.tr/documents/Images/Big/big_" + itemMainImage.FilePath + "\" border=\"0\" /></a></div><br/>";
                 }
 
                 int imageCount = 0;
                 foreach (var item in productMultimedias)
                 {
                     imageCount += 1;
-                    //otherImages += "<a href=\"#\"><img src=\"http://212.58.8.103/documents/Images/Icon/icon_" + item.FilePath + "\" alt=\"\" /></a>";
+                    //otherImages += "<a href=\"#\"><img src=\"http://banyom.com.tr/documents/Images/Icon/icon_" + item.FilePath + "\" alt=\"\" /></a>";
 
-                    otherImages += "<a href=\"#\" rel=\"http://212.58.8.103/documents/Images/Big/big_" + item.FilePath + "\" class=\"image\">";
-                    otherImages += "<img src=\"http://212.58.8.103/documents/Images/Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a>";
+                    otherImages += "<a href=\"#\" rel=\"http://banyom.com.tr/documents/Images/Big/big_" + item.FilePath + "\" class=\"image\">";
+                    otherImages += "<img src=\"http://banyom.com.tr/documents/Images/Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a>";
 
                     if (imageCount == 3)
                         break;

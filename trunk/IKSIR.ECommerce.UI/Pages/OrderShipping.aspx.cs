@@ -27,14 +27,14 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                Response.Redirect("Login.aspx?returl=OrderBasket.aspx");
+                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderBasket.aspx");
             }
         }
 
         private void GetShippingCompanies()
         {
             List<IKSIR.ECommerce.Model.ProductModel.Shipment> itemList = ShipmentData.GetShipmentList();
-            rblShippingCompanies.DataTextField = "Title";
+            rblShippingCompanies.DataTextField = "Detail";
             rblShippingCompanies.DataValueField = "Id";
             rblShippingCompanies.DataSource = itemList;
             rblShippingCompanies.DataBind();
@@ -51,7 +51,7 @@ namespace IKSIR.ECommerce.UI.Pages
             {
                 basket.ShippingCompany = ShipmentData.Get(Convert.ToInt32(rblShippingCompanies.SelectedValue));
                 Session.Add("USER_BASKET", basket);
-                Response.Redirect("OrderPayment.aspx");
+                Response.Redirect("../SecuredPages/OrderPayment.aspx");
             }
         }
     }
