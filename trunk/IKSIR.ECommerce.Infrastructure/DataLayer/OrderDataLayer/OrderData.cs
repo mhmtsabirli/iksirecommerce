@@ -103,6 +103,32 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             dr.Close();
             return itemList;
         }
+        public static List<Order> GetList(int status,int UserId)
+        {
+            var itemList = new List<Order>();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Status", status));
+            parameters.Add(new SqlParameter("@UserId", UserId));
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetOrder", parameters);
+            while (dr.Read())
+            {
+                Order returnValue = new Order();
+                returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
+                returnValue.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
+                returnValue.Basket = BasketData.Get(DBHelper.IntValue(dr["BasketId"].ToString()));
+                returnValue.PaymetInfo = PaymetInfoData.Get(DBHelper.IntValue(dr["PaymentInfoId"].ToString()));
+                returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
+                returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                returnValue.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
+                returnValue.TotalRatedPrice = DBHelper.DecValue(dr["TotalRatedPrice"].ToString());
+                returnValue.TotalPrice = DBHelper.DecValue(dr["TotalPrice"].ToString());
+                itemList.Add(returnValue);
+            }
+            dr.Close();
+            return itemList;
+        }
         ////DB'den silmek yerine statüsünü silindi olarak update etmeliyiz.
         //public static int Delete(BasketItemProduct itemBasketItemProduct)
         //{
