@@ -34,19 +34,19 @@ namespace IKSIR.ECommerce.Management.MasterPage
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //if (Session["Login"] != null && Session["Login"] != "")
-            //{
-            //    if (Session["Login"].ToString() == "idevit")
-            //    {
+            if (Session["Login"] != null && Session["Login"] != "")
+            {
+                if (Session["Login"].ToString() == "idevit")
+                {
                     itemContactFormList = ContactFormData.GetContactFormList(10);
-            //    }
-            //    else
-            //    {
-            //        Response.Redirect("http://banyom.com.tr/management/Login.aspx");
-            //    }
-            //}
-            //else
-            //    Response.Redirect("http://banyom.com.tr/management/Login.aspx");
+                }
+                else
+                {
+                    Response.Redirect("http://banyom.com.tr/management/Login.aspx");
+                }
+            }
+            else
+                Response.Redirect("http://banyom.com.tr/management/Login.aspx");
         }
     }
 }
