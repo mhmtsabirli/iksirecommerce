@@ -84,15 +84,23 @@ namespace IKSIR.ECommerce.UI.Pages
                     MailBody = MailBody.Replace("%ActivationLink%", "http://www.idevit.com.tr/");
                     MailBody = MailBody.Replace("%UserName%", txtEmail.Text);
                     MailBody = MailBody.Replace("%Password%", txtPassword.Text);
-                    Mail.sendMail(txtEmail.Text, "helpdesk@idevit.com.tr", "İdevit A.Ş. | Üyelik Bilgileriniz", MailBody);
-                    
-                    string textForMessage = @"<script language='javascript'> alert('Üyelik işleminiz tamamlanmıştır. Üyelik esnasında belirtmiş olduğunuz e-mail adresinize siteye giriş bilgilerinizi yolladık.');</script>";
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                    bool retValueSendMail = Mail.sendMail(txtEmail.Text, "helpdesk@idevit.com.tr", "İdevit A.Ş. | Üyelik Bilgileriniz", MailBody);
+
+                    if (retValueSendMail)
+                    {
+                        lblAlert.Text = "Üyelik işleminiz tamamlanmıştır. Üyelik esnasında belirtmiş olduğunuz e-mail adresinize siteye giriş bilgilerinizi yollanmıştır.";
+                        lblAlert.ForeColor = System.Drawing.Color.Green;
+                    }
+                    else
+                    {
+                        lblAlert.Text = "Bilgilerinizi mail adresinize göndeririken bir hata oluştu.";
+                        lblAlert.ForeColor = System.Drawing.Color.Red;
+                    }
                 }
                 else
                 {
-                    string textForMessage = @"<script language='javascript'> alert('Üyeliğiniz kaydedilirken bir hata oluştu!');</script>";
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                    lblAlert.Text = "Üyeliğiniz kaydedilirken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
+                    lblAlert.ForeColor = System.Drawing.Color.Red;
                 }
 
                 if (ret > 0)

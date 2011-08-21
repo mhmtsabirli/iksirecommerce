@@ -155,7 +155,7 @@
                                             :
                                         </td>
                                         <td>
-                                            <asp:DropDownList runat="server" ID="ddlMount">
+                                            <asp:DropDownList runat="server" ID="ddlMonth">
                                                 <asp:ListItem Text="1" Value="1"></asp:ListItem>
                                             </asp:DropDownList>
                                             &nbsp;
@@ -183,9 +183,7 @@
             </tr>
             <tr>
                 <td align="center">
-                    <a href="#">
-                        <img src="../images/sepet_end_iptal.jpg" alt="" /></a> <a href="OrderShipping.aspx">
-                            <img src="../images/sepet_end_devam.jpg" alt="" /></a>
+                    &nbsp;<a href="OrderShipping.aspx"><img src="../images/sepet_end_devam.jpg" alt="" /></a>
                 </td>
             </tr>
         </table>

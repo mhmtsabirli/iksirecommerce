@@ -68,7 +68,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                 otherImages += "<li><a href='#'><img src='../images/urun_paylas_7.png' alt='' /></a></li></ul></div>";
                 otherImages += "<div class='urun_yildiz' style='float:left;'></div><div class='clear'></div>";
                 otherImages += "</div>";
-                otherImages += "<a href=\"#\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
+                //otherImages += "<a href=\"#\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
 
                 if (product.Video != null && product.Video != "")
                 {

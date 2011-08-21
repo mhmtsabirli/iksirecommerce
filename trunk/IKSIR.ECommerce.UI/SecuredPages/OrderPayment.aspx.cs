@@ -48,6 +48,18 @@ namespace IKSIR.ECommerce.UI.Pages
             rblTransferAccount.DataValueField = "Id";
             rblTransferAccount.DataSource = itemList;
             rblTransferAccount.DataBind();
+
+            ddlMonth.Items.Clear();
+            for (int i = 1; i < 13; i++)
+            {
+                ddlMonth.Items.Add(new ListItem(i.ToString(), i.ToString()));
+            }
+
+            ddlYear.Items.Clear();
+            for (int i = 2011; i < 2030; i++)
+            {
+                ddlYear.Items.Add(new ListItem(i.ToString(), i.ToString()));
+            }
         }
 
 
@@ -105,6 +117,8 @@ namespace IKSIR.ECommerce.UI.Pages
                 int retValue = 0;
                 int basketId = 0;
 
+
+
                 basketId = BasketData.Insert(basket);
                 if (basketId > 0)
                     foreach (BasketItem basketItem in basket.BasketItems)
@@ -117,6 +131,10 @@ namespace IKSIR.ECommerce.UI.Pages
                             break;
                         }
                     }
+                basket.Id = basketId;
+
+                BasketAddressData.Insert(basket.BillingAddress, basketId, 0);
+                BasketAddressData.Insert(basket.ShippingAddress, basketId, 0);
 
                 if (retValue > 0) //itemlar başarıyla kaydedildiyese
                 {
@@ -131,6 +149,24 @@ namespace IKSIR.ECommerce.UI.Pages
                     order.Basket = basket;
                     order.TotalPrice = basket.TotalPrice;
                     order.Status = new Model.CommonModel.EnumValue() { Id = 29 };
+                    var orderPaymentInfo = new PaymetInfo();
+                    if (rblTransferAccount.SelectedIndex != -1)
+                    {
+                        orderPaymentInfo.PaymentType = new Model.CommonModel.EnumValue() { Id = 36 };
+                        orderPaymentInfo.TransferAccount = new TransferAccount()
+                        {
+                            Id = Convert.ToInt32(rblTransferAccount.SelectedValue)
+                        };
+                    }
+                    else
+                    {
+                        orderPaymentInfo.PaymentType = new Model.CommonModel.EnumValue() { Id = 37 };
+                        orderPaymentInfo.Month = Convert.ToInt32(ddlMonth.SelectedValue);
+                        orderPaymentInfo.Year = Convert.ToInt32(ddlYear.SelectedValue);
+                        orderPaymentInfo.Name = txtCustomerName.Text;
+                        orderPaymentInfo.CreditCardNumber = txtCreditCardNumber.Text;
+                    }
+
                     order.PaymetInfo = new PaymetInfo() { Id = retValue };
                     retValue = OrderData.Insert(order);
                 }
