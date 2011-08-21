@@ -37,7 +37,8 @@ namespace IKSIR.ECommerce.Toolkit
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.Credentials = new System.Net.NetworkCredential(IKSIR.ECommerce.Infrastructure.StaticData.Idevit.MailUserName, IKSIR.ECommerce.Infrastructure.StaticData.Idevit.MailPassword);
                 //client.Port = 25;
-                //client.EnableSsl = true;
+                client.EnableSsl = true;
+                object userState = msg;
                 client.Send(msg);
                 return true;
             }
