@@ -42,11 +42,11 @@ namespace IKSIR.ECommerce.Management.MasterPage
             //    }
             //    else
             //    {
-            //        Response.Redirect("http://212.58.8.103/management/Login.aspx");
+            //        Response.Redirect("http://banyom.com.tr/management/Login.aspx");
             //    }
             //}
             //else
-            //    Response.Redirect("http://212.58.8.103/management/Login.aspx");
+            //    Response.Redirect("http://banyom.com.tr/management/Login.aspx");
         }
     }
 }

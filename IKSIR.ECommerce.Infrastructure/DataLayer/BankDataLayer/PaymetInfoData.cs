@@ -49,9 +49,10 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemPaymetInfo.Name)));
             parameters.Add(new SqlParameter("@PaymentType", DBHelper.IntValue(itemPaymetInfo.PaymentType.Id)));
             parameters.Add(new SqlParameter("@CVC", DBHelper.StringValue(itemPaymetInfo.Cvc)));
-            parameters.Add(new SqlParameter("@CreditCardNumber", DBHelper.StringValue(itemPaymetInfo.CreditCardNumber)));            
+            parameters.Add(new SqlParameter("@CreditCardNumber", DBHelper.StringValue(itemPaymetInfo.CreditCardNumber)));
             parameters.Add(new SqlParameter("@CreditCard", DBHelper.IntValue(itemPaymetInfo.CreditCard.Id)));
-            parameters.Add(new SqlParameter("@TransferAccount", DBHelper.IntValue(itemPaymetInfo.TransferAccount.Id)));
+            if (itemPaymetInfo.TransferAccount != null)
+                parameters.Add(new SqlParameter("@TransferAccount", DBHelper.IntValue(itemPaymetInfo.TransferAccount.Id)));
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemPaymetInfo.CreateAdminId)));
             parameters.Add(new SqlParameter("@Month", DBHelper.IntValue(itemPaymetInfo.Month)));
             parameters.Add(new SqlParameter("@Year", DBHelper.IntValue(itemPaymetInfo.Year)));
@@ -69,7 +70,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer
             parameters.Add(new SqlParameter("@Name", DBHelper.StringValue(itemPaymetInfo.Name)));
             parameters.Add(new SqlParameter("@PaymentType", DBHelper.IntValue(itemPaymetInfo.PaymentType.Id)));
             parameters.Add(new SqlParameter("@CVC", DBHelper.StringValue(itemPaymetInfo.Cvc)));
-            parameters.Add(new SqlParameter("@CreditCardNumber", DBHelper.StringValue(itemPaymetInfo.CreditCardNumber)));            
+            parameters.Add(new SqlParameter("@CreditCardNumber", DBHelper.StringValue(itemPaymetInfo.CreditCardNumber)));
             parameters.Add(new SqlParameter("@CreditCard", DBHelper.IntValue(itemPaymetInfo.CreditCard.Id)));
             parameters.Add(new SqlParameter("@TransferAccount", DBHelper.IntValue(itemPaymetInfo.TransferAccount.Id)));
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemPaymetInfo.CreateAdminId)));

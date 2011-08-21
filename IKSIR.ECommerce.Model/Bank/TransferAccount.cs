@@ -13,6 +13,14 @@ namespace IKSIR.ECommerce.Model.Bank
         public string Iban { get; set; }
         public string Description { get; set; }
         public EnumValue Status { get; set; }
+        public string Detail
+        {
+            get
+            {
+                return Bank.Name + "<br />" + Description + "<br />" + "IBAN: " + Iban;
+            }
+        }
+
         public TransferAccount(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Bank bank, string iban, string description, EnumValue status)
             : base(id, createUserId, createDate, editUserId, editDate)
         {

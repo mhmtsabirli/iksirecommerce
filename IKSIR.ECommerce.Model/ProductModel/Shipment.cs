@@ -10,7 +10,10 @@ namespace IKSIR.ECommerce.Model.ProductModel
     {
         public string Title { get; set; }
         public decimal UnitPrice { get; set; }
-
+        public string Detail
+        {
+            get { return this.Title + " / " + this.UnitPrice.ToString(); }
+        }
         public Shipment(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string title,
             decimal unitPrice)
             : base(id, createUserId, createDate, editUserId, editDate)

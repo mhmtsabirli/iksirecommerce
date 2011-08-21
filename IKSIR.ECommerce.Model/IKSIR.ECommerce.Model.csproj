@@ -45,6 +45,7 @@
     <Compile Include="Bank\Bank.cs" />
     <Compile Include="Bank\BinNumber.cs" />
     <Compile Include="Bank\CreditCardRates.cs" />
+    <Compile Include="CommonModel\Newsletter.cs" />
     <Compile Include="Order\Basket.cs" />
     <Compile Include="Bank\PaymetInfo.cs" />
     <Compile Include="Bank\TransferAccount.cs" />
