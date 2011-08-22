@@ -29,7 +29,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                 MailBody = MailBody.Replace("%ActivationLink%", "http://www.idevit.com.tr/");
                 MailBody = MailBody.Replace("%UserName%", txtEmail.Text);
                 MailBody = MailBody.Replace("%Password%", user.Password);
-                bool retValue = Mail.sendMail(user.Email, "helpdesk@idevit.com.tr", "İdevit A.Ş. | Üyelik Bilgileriniz", MailBody);
+                bool retValue = Mail.sendMail(user.Email, "helpdesk@idevit.com.tr", "İdevit A.Ş. | Şifre Hatırlatma", MailBody);
                 if (retValue)
                 {
                     lblAlert.Text = "Şifreniz mail adresinize gönderilmiştir.";
