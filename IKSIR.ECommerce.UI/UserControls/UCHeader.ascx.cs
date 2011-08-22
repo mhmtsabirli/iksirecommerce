@@ -29,7 +29,11 @@ namespace IKSIR.ECommerce.UI.UserControls
 
         protected void btnSearch_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("SearchResult.aspx?searchkey=" + txtSearchText.Text);
+        }
+
+        protected void lbtnSearch_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/SearchResult.aspx?searchkey=" + txtSearchText.Text);
         }
     }
 }

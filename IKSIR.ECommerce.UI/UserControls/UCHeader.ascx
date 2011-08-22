@@ -14,8 +14,8 @@
             <img src="../images/logo.jpg" alt="" /></a></div>
     <div class="search">
         <asp:TextBox runat="server" ID="txtSearchText" CssClass="search_text"></asp:TextBox>
-        <asp:ImageButton runat="server" ID="btnSearch" CssClass="search_submit" 
-            onclick="btnSearch_Click" style="height: 16px" />
+        <asp:LinkButton runat="server" ID="lbtnSearch"  CssClass="search_submit" 
+            onclick="lbtnSearch_Click"></asp:LinkButton>
         <div class="clear">
         </div>
     </div>

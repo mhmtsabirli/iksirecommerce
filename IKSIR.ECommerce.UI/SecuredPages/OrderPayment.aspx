@@ -13,12 +13,13 @@
                 Ödemenizin alınacağı sayfadır. Ödenmenizi kredi kartı ya da havale ile yapabilirsiniz.
             </h4>
         </div>
-        <table width="100%">
+        <table>
             <tr>
                 <td>
                     <strong>Sepeteki Ürünler</strong>
                     <br />
-                    <asp:Repeater runat="server" ID="rptBasketProducts" OnItemDataBound="rptBasketProducts_ItemDataBound">
+                    <table>
+                        <asp:Repeater runat="server" ID="rptBasketProducts" OnItemDataBound="rptBasketProducts_ItemDataBound">
                         <HeaderTemplate>
                             <tr>
                                 <td class="table_header">
@@ -81,7 +82,7 @@
                                     </table>
                                 </td>
                                 <td class="table_second">
-                                    <asp:DropDownList ID="ddlItemCount" Enabled="false" runat="server" OnSelectedIndexChanged="ddlItemCount_SelectedIndexChanged"
+                                    <asp:DropDownList ID="ddlItemCount" Enabled="false" runat="server"
                                         ToolTip='<%# Eval("Product.Id")%>' AutoPostBack="true">
                                     </asp:DropDownList>
                                 </td>
@@ -98,6 +99,7 @@
                             </tr>
                         </ItemTemplate>
                     </asp:Repeater>
+                    </table>
                 </td>
             </tr>
             <tr>
@@ -105,7 +107,7 @@
                     <table width="100%">
                         <tr>
                             <td colspan="2">
-                                Ödeme seçenekleri
+                               <strong>Ödeme seçenekleri</strong>
                             </td>
                         </tr>
                         <tr>
