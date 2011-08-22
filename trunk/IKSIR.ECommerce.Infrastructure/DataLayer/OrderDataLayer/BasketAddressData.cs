@@ -26,7 +26,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
                 returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
-                returnValue.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
+                //returnValue.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
                 returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
                 returnValue.Type = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["TypeId"].ToString()) });
                 returnValue.FirstName = DBHelper.StringValue(dr["FirstName"].ToString());
@@ -58,7 +58,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@BasketId", basketId));
             parameters.Add(new SqlParameter("@BasketItemId", basketItemId));
             parameters.Add(new SqlParameter("@AdminId", itemAddress.CreateAdminId));
-            parameters.Add(new SqlParameter("@UserId", itemAddress.User.Id));
+            //parameters.Add(new SqlParameter("@UserId", itemAddress.User.Id));
             parameters.Add(new SqlParameter("@Title", itemAddress.Title));
             parameters.Add(new SqlParameter("@TypeId", itemAddress.Type.Id));
             parameters.Add(new SqlParameter("@FirstName", itemAddress.FirstName));
@@ -93,7 +93,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@BasketId", basketId));
             parameters.Add(new SqlParameter("@BasketItemId", basketItemId));
             parameters.Add(new SqlParameter("@AdminId", itemAddress.EditAdminId));
-            parameters.Add(new SqlParameter("@UserId", itemAddress.User.Id));
+            //parameters.Add(new SqlParameter("@UserId", itemAddress.User.Id));
             parameters.Add(new SqlParameter("@Title", itemAddress.Title));
             parameters.Add(new SqlParameter("@TypeId", itemAddress.Type.Id));
             parameters.Add(new SqlParameter("@FirstName", itemAddress.FirstName));

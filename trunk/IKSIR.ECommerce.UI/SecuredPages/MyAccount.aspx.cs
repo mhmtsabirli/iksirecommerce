@@ -17,8 +17,13 @@ namespace IKSIR.ECommerce.UI.SecuredPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["LOGIN_USER"] == null)
+            {
+                Response.Redirect("Login.aspx?returl=MyAccount.aspx");
+            }
             if (!Page.IsPostBack)
             {
+
                 BindValues();
                 GetList();
             }
