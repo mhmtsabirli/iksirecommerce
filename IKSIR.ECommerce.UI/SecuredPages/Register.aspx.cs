@@ -81,10 +81,10 @@ namespace IKSIR.ECommerce.UI.Pages
                     string MailBody = File.ReadAllText(HttpContext.Current.Request.MapPath("~") + "/MailTemplates/MembershipRegister.htm");
                     //string ActivationLink = System.Configuration.ConfigurationManager.AppSettings["WebAddress"] + "Membership/Activation.aspx?ActivationCode=" + strActivationCode + "&Email=" + User.Email;
                     MailBody = MailBody.Replace("%NameSurname%", txtFirstName.Text + " " + txtLastName.Text);
-                    MailBody = MailBody.Replace("%ActivationLink%", "http://www.idevit.com.tr/");
+                    MailBody = MailBody.Replace("%ActivationLink%", "http://www.banyom.com.tr/");
                     MailBody = MailBody.Replace("%UserName%", txtEmail.Text);
                     MailBody = MailBody.Replace("%Password%", txtPassword.Text);
-                    bool retValueSendMail = Mail.sendMail(txtEmail.Text, "helpdesk@idevit.com.tr", "İdevit A.Ş. | Üyelik Bilgileriniz", MailBody);
+                    bool retValueSendMail = Mail.sendMail(txtEmail.Text, "helpdesk@banyom.com.tr", "Senar İnşaat A.Ş. | Üyelik Bilgileriniz", MailBody);
 
                     if (retValueSendMail)
                     {

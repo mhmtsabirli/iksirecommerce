@@ -23,7 +23,9 @@
                         </telerik:RadTab>
                         <telerik:RadTab Text="Siparişlerim" PageViewID="RadPageView3">
                         </telerik:RadTab>
-                        <telerik:RadTab Text="Şifre Değiştir" PageViewID="RadPageView4">
+                        <telerik:RadTab Text="Favori Ürünlerim" PageViewID="RadPageView4">
+                        </telerik:RadTab>
+                        <telerik:RadTab Text="Şifre Değiştir" PageViewID="RadPageView5">
                         </telerik:RadTab>
                     </Tabs>
                 </telerik:RadTabStrip>
@@ -586,6 +588,45 @@
                         </div>
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="RadPageView4" runat="server" Selected="true">
+                        <table>
+                            <tr>
+                                <td>
+                                    <strong>Favori Ürünlerim</strong> (Favorilerinize eklediğiniz ürünler)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table>
+                                        <asp:Repeater runat="server" ID="rptUserFavoriteProducts">
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td valign="top" align="center">
+                                                        <asp:HiddenField runat="server" ID="hdnProductId" Value='<%# Eval("Product.Id")%>' />
+                                                        <a href='<%# String.Format("ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
+                                                            target="_blank">
+                                                            <asp:Image runat="server" ID="imgProduct" ImageUrl='<%# Eval("Product.MainImage", "http://banyom.com.tr/documents/Images/Small/small_{0:C}")%>'
+                                                                BorderWidth="0  " />
+                                                        </a>
+                                                    </td>
+                                                    <td valign="top">
+                                                        <h2>
+                                                            <a href='<%# String.Format("../Pages/ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
+                                                                target="_blank">
+                                                                <%# Eval("Product.ProductCategory.Title")%>
+                                                                /
+                                                                <%# Eval("Product.Title")%>
+                                                            </a>
+                                                        </h2>
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </telerik:RadPageView>
+                    <telerik:RadPageView ID="RadPageView5" runat="server" Selected="true">
                         <table>
                             <tr>
                                 <td colspan="4">

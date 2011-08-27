@@ -7,6 +7,6 @@
     <h2>
         Ana Sayfa</h2>
     <p>
-        İdevit yönetim paneline hoşgeldiniz.
+        Senar İnşaat yönetim paneline hoşgeldiniz.
     </p>
 </asp:Content>

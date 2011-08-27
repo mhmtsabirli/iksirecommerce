@@ -13,6 +13,51 @@ namespace IKSIR.ECommerce.UI.UserControls {
     public partial class UCProductDetailsMain {
         
         /// <summary>
+        /// anchorBigImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor anchorBigImage;
+        
+        /// <summary>
+        /// imgBig control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgBig;
+        
+        /// <summary>
+        /// divSmallImages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSmallImages;
+        
+        /// <summary>
+        /// lbtnAddToFavorite control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnAddToFavorite;
+        
+        /// <summary>
+        /// RadRating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadRating RadRating;
+        
+        /// <summary>
         /// container control.
         /// </summary>
         /// <remarks>

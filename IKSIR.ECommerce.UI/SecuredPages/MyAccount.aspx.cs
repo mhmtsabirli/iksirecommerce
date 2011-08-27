@@ -10,11 +10,14 @@ using IKSIR.ECommerce.Toolkit;
 using IKSIR.ECommerce.Model.MembershipModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer;
 using IKSIR.ECommerce.Model.Order;
+using IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer;
 
 namespace IKSIR.ECommerce.UI.SecuredPages
 {
     public partial class MyAccount : System.Web.UI.Page
     {
+        public static User loginUser = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["LOGIN_USER"] == null)
@@ -23,9 +26,14 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             }
             if (!Page.IsPostBack)
             {
-
+                loginUser = (User)Session["LOGIN_USER"];
                 BindValues();
                 GetList();
+                int favoritproductid = 0;
+                if (Page.Request.QueryString["favoritproductid"] != null && Page.Request.QueryString["favoritproductid"] != "" && int.TryParse(Page.Request.QueryString["favoritproductid"], out favoritproductid))
+                {
+                    AddToFavoriteList(favoritproductid);
+                }
             }
         }
 
@@ -395,11 +403,19 @@ namespace IKSIR.ECommerce.UI.SecuredPages
 
         private void GetList()
         {
-            List<Address> itemList = AddressData.GetMembershipAddresses(1);
+            List<Address> itemList = AddressData.GetMembershipAddresses(loginUser.Id);
             gvList.DataSource = itemList;
             gvList.DataBind();
+
+            GetUserFavoriteProducts();
         }
 
+        private void GetUserFavoriteProducts()
+        {
+            List<UserFavoriteProduct> userFavoriteProductList = UserFavoriteProductData.GetList(loginUser.Id);
+            rptUserFavoriteProducts.DataSource = userFavoriteProductList;
+            rptUserFavoriteProducts.DataBind();
+        }
         private void GetOrderList()
         {
             User User = (User)Session["LOGIN_USER"];
@@ -416,7 +432,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             {
                 var addressItem = new Address();
                 addressItem.Id = id;
-                addressItem.User = new Model.MembershipModel.User() { Id = 1 };
+                addressItem.User = new Model.MembershipModel.User() { Id = loginUser.Id };
                 addressItem.Title = txtAddressTitle.Text;
                 int typeId = -1;
                 int.TryParse(ddlAddressType.SelectedValue, out typeId);
@@ -498,6 +514,38 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             txtPhone.Text = string.Empty;
             txtGSMPhone.Text = string.Empty;
             btnSave.CommandArgument = string.Empty;
+        }
+
+        private void AddToFavoriteList(int favoritproductid)
+        {
+            UserFavoriteProduct userFavoriteProduct = new UserFavoriteProduct();
+            userFavoriteProduct.UserId = loginUser.Id;
+            userFavoriteProduct.Product = new Model.ProductModel.Product() { Id = favoritproductid };
+            List<UserFavoriteProduct> userFavoriteProductList = UserFavoriteProductData.GetList(loginUser.Id);
+            UserFavoriteProduct item = null;
+            if(userFavoriteProductList!=null)
+                item = userFavoriteProductList.Where(x => x.Product.Id == favoritproductid).FirstOrDefault();
+            string textForMessage = "";
+            if (item != null)
+            {
+                textForMessage = @"<script language='javascript'> alert('Bu ürün zaten favori ürünleriniz arasında.');</script>";
+            }
+            else
+            {
+                int retValue = UserFavoriteProductData.Insert(userFavoriteProduct);
+                if (retValue > 0)
+                {
+                    textForMessage = @"<script language='javascript'> alert('Ürün favori ürünlerinize eklenmiştir.');</script>";
+                    GetUserFavoriteProducts();
+                    RadTabStrip1.Tabs[3].Selected = true;
+                    RadPageView4.Selected = true;
+                }
+                else
+                {
+                    textForMessage = @"<script language='javascript'> alert('Ürün favori ürünlerinize eklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.');</script>";
+                }
+            }
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
         }
     }
 }
