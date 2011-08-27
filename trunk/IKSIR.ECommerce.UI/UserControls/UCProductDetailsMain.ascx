@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCProductDetailsMain.ascx.cs"
     Inherits="IKSIR.ECommerce.UI.UserControls.UCProductDetailsMain" %>
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
 <%--<link rel="stylesheet" href="../css/lightbox.css" type="text/css" media="screen" />
 <script src="../js/lightbox/prototype.js" type="text/javascript"></script>
@@ -32,6 +33,47 @@
 </style>
 <div class="urun_resimleri">
     <div class="urun_buyuk_resim" style="float: left;">
+        <div id="image" style="height: 250px; width: 350px; background-color: Gray; border: 4px #666 solid;
+            text-align: center;">
+            <a runat="server" id="anchorBigImage">
+                <img runat="server" id="imgBig" style="border: none;" alt="Ana Resim" />
+            </a>
+        </div>
+        <br />
+        <div runat="server" id="divSmallImages">
+        </div>
+        <div class="clear">
+        </div>
+        <div class='favori' style='float: left; width: 350px; padding-top: 3px;'>
+            <asp:LinkButton runat="server" ID="lbtnAddToFavorite" OnClick="lbtnAddToFavorite_Click">
+        <img src='../images/urun_favorilere_ekle.jpg' alt='' />Favorilerime Ekle
+            </asp:LinkButton>
+        </div>
+        <br />
+        <br />
+        <div class='urun_paylas' style='float: left; width: 225px;'>
+            <ul>
+                <li><a href='#'>
+                    <img src='../images/urun_paylas_1.png' alt='' /></a></li>
+                <li><a href='#'>
+                    <img src='../images/urun_paylas_2.png' alt='' /></a></li>
+                <li><a href='#'>
+                    <img src='../images/urun_paylas_3.png' alt='' /></a></li>
+                <li><a href='#'>
+                    <img src='../images/urun_paylas_4.png' alt='' /></a></li>
+                <li><a href='#'>
+                    <img src='../images/urun_paylas_5.png' alt='' /></a></li>
+                <li><a href='#'>
+                    <img src='../images/urun_paylas_6.png' alt='' /></a></li>
+                <li><a href='#'>
+                    <img src='../images/urun_paylas_7.png' alt='' /></a></li></ul>
+        </div>
+        <div class="urun_yildiz" style="float: left;">
+            <telerik:RadRating ID="RadRating" runat="server" Skin="WebBlue" OnRate="RadRating_Rate"
+                AutoPostBack="true" />
+        </div>
+        <div class='clear'>
+        </div>
         <div id="container" runat="server">
         </div>
         <script type="text/javascript">
@@ -119,7 +161,6 @@
                 </td>
             </tr>
         </table>
-        </form>
         <div class="clear">
         </div>
     </div>

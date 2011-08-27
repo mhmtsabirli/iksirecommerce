@@ -233,7 +233,7 @@ body
 		 .urun_paylas li { display:inline; margin-right:6px; }
 		 .urun_paylas img { border:0; }
 	  
-	  .urun_yildiz { float:right; width:125px; height:45px; background:url(../images/urun_yildiz.png); }
+	  .urun_yildiz { float:right; width:125px; height:45px; background:url(../images/urun_yildiz.png); background-repeat:no-repeat; padding-top:10px; padding-left:5px; }
    
    .urun_ozellikleri { float:right; width:316px; height:406px; background:url(../images/urun_ozellikleri_bg.jpg); margin-right:20px; }
       .urun_ozellikleri h2 { margin:13px 0 7px 40px; font:normal 14px arial; color:#FFF; }
@@ -284,3 +284,7 @@ body
 			   
 .sidemenu_sifre_login { width:270px; height:16px; background:url(../images/sidemenu_sifre2.jpg);
 			   margin:0; padding:5px 30px 5px 10px; border:0; font:normal 11px trebuchet ms; color:#969696; }
+			   .thumb
+			   {
+			       padding-top:5px;
+			       }

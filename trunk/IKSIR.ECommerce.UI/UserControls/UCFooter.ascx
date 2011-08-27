@@ -63,12 +63,12 @@
     </div>
     <div class="footer_verisign">
         <a href="#">
-            <img src="../images/footer_verisign.jpg" alt="" /></a></div>
+            <img src="../images/RapidSSL_logo.jpg" alt="" width="100px" /></a></div>
     <div class="clear">
     </div>
     <div class="footer_bottom">
         <img src="../images/footer_bottom.jpg" alt="" />
         <p>
-            İdevit © Copyright 2011</p>
+            Senar İnşaat © Copyright 2011</p>
     </div>
 </div>

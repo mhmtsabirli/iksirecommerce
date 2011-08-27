@@ -69,6 +69,7 @@
     <Compile Include="DataLayer\CommonDataLayer\SystemLogData.cs" />
     <Compile Include="DataLayer\DataBlock\DBHelper.cs" />
     <Compile Include="DataLayer\DataBlock\SqlDataBlock.cs" />
+    <Compile Include="DataLayer\MembershipDataLayer\UserFavoriteProductData.cs" />
     <Compile Include="DataLayer\MembershipDataLayer\UserData.cs" />
     <Compile Include="DataLayer\OrderDataLayer\BasketItemProductData.cs" />
     <Compile Include="DataLayer\OrderDataLayer\BasketItemProductPriceData.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="DataLayer\OrderDataLayer\BasketItemData.cs" />
     <Compile Include="DataLayer\OrderDataLayer\BasketData.cs" />
     <Compile Include="DataLayer\OrderDataLayer\BasketAddressData.cs" />
+    <Compile Include="DataLayer\ProductDataLayer\ProductRateData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\ContactFormData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\SiteModuleData.cs" />
     <Compile Include="DataLayer\SiteDataLayer\SiteCategoryData.cs" />

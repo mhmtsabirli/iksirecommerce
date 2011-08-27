@@ -7,11 +7,15 @@ using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.UI.ClassLibrary;
-
+using Telerik.Web.UI;
+using IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer;
+using IKSIR.ECommerce.Model.ProductModel;
+using IKSIR.ECommerce.Model.MembershipModel;
 namespace IKSIR.ECommerce.UI.UserControls
 {
     public partial class UCProductDetailsMain : UCProductDetailsMaster
     {
+        public static User loginUser = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack && productId != 0)
@@ -37,44 +41,36 @@ namespace IKSIR.ECommerce.UI.UserControls
                 }
 
                 var itemMainImage = productMultimedias.Where(x => x.IsDefault == true).First();
-                string otherImages = "";
-                otherImages = "<div id=\"image\" style=\"height: 250px; width: 350px; background-color:Gray; border: 4px #666 solid; text-align:center;\">";
 
                 if (itemMainImage != null)
                 {
                     //imgMainImage.ImageUrl = 
-                    otherImages += "<a href=\"http://banyom.com.tr/documents/Orginal/Images/" + itemMainImage.FilePath + "\" rel=\"lightbox\"><img src=\"http://banyom.com.tr/documents/Images/Big/big_" + itemMainImage.FilePath + "\" border=\"0\" /></a></div><br/>";
+                    anchorBigImage.HRef = "http://banyom.com.tr/documents/Orginal/Images/" + itemMainImage.FilePath;
+                    imgBig.Src = "http://banyom.com.tr/documents/Images/Big/big_" + itemMainImage.FilePath;
+                }
+                else
+                {
+                    anchorBigImage.HRef = "#";
+                    imgBig.Src = "";
                 }
 
+                RadRating.Value = ProductRateData.GetProductRate(productId);
                 int imageCount = 0;
                 foreach (var item in productMultimedias)
                 {
                     imageCount += 1;
-                    //otherImages += "<a href=\"#\"><img src=\"http://banyom.com.tr/documents/Images/Icon/icon_" + item.FilePath + "\" alt=\"\" /></a>";
-
-                    otherImages += "<a href=\"#\" rel=\"http://banyom.com.tr/documents/Images/Big/big_" + item.FilePath + "\" class=\"image\">";
-                    otherImages += "<img src=\"http://banyom.com.tr/documents/Images/Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a>";
+                    divSmallImages.InnerHtml += "<a href=\"#\" rel=\"http://banyom.com.tr/documents/Images/Big/big_" + item.FilePath + "\" class=\"image\">";
+                    divSmallImages.InnerHtml += "<img src=\"http://banyom.com.tr/documents/Images/Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a>";
 
                     if (imageCount == 3)
                         break;
                 }
-                otherImages += " <div class=\"clear\"></div><div class='favori' style='float:left; width: 350px; padding-top:3px;'><a href='#'><img src='../images/urun_favorilere_ekle.jpg' alt='' />Favorilerime Ekle</a></div>";
-                otherImages += "<br/><br/><div class='urun_paylas' style='float:left; width: 225px;'><ul><li><a href='#'><img src='../images/urun_paylas_1.png' alt='' /></a></li>";
-                otherImages += "<li><a href='#'><img src='../images/urun_paylas_2.png' alt='' /></a></li>";
-                otherImages += "<li><a href='#'><img src='../images/urun_paylas_3.png' alt='' /></a></li>";
-                otherImages += "<li><a href='#'><img src='../images/urun_paylas_4.png' alt='' /></a></li>";
-                otherImages += "<li><a href='#'><img src='../images/urun_paylas_5.png' alt='' /></a></li>";
-                otherImages += "<li><a href='#'><img src='../images/urun_paylas_6.png' alt='' /></a></li>";
-                otherImages += "<li><a href='#'><img src='../images/urun_paylas_7.png' alt='' /></a></li></ul></div>";
-                otherImages += "<div class='urun_yildiz' style='float:left;'></div><div class='clear'></div>";
-                otherImages += "</div>";
-                //otherImages += "<a href=\"#\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
 
                 if (product.Video != null && product.Video != "")
                 {
-                    otherImages += "<a href=\"#\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
+                    divSmallImages.InnerHtml += "<a href=\"#\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
                 }
-                container.InnerHtml = otherImages;
+                //container.InnerHtml = otherImages;
                 lblProductCode.Text = product.ProductCode;
                 lblProductName.Text = product.Title;
                 lblProductWarranty.Text = product.Guarantee.ToString() + " Yıl";
@@ -114,6 +110,74 @@ namespace IKSIR.ECommerce.UI.UserControls
 
             if (int.TryParse(strproductId, out productId) && int.TryParse(ddlProductCount.SelectedValue, out count))
                 Shopping.AddToBasket(productId, count);
+        }
+
+        protected void RadRating_Rate(object sender, EventArgs e)
+        {
+            loginUser = (User)Session["LOGIN_USER"];
+            if (loginUser != null)
+            {
+                var itemList = ProductRateData.GetList(productId);
+                ProductRate retItem = null;
+                if (itemList != null)
+                    retItem = itemList.Where(x => x.UserId == loginUser.Id && x.Product.Id == productId).FirstOrDefault();
+                if (retItem != null)
+                {
+                    string textForMessage = @"<script language='javascript'> alert('Bu ürüne daha önce oy kullanmışsınız.');</script>";
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                }
+                else
+                {
+                    RadRating rating = (RadRating)sender;
+                    var item = new ProductRate();
+                    item.Product = new Product() { Id = productId };
+                    item.UserId = loginUser.Id;
+                    item.Rate = Convert.ToInt32(rating.Value);
+                    var retValue = ProductRateData.Insert(item);
+
+                    if (retValue > 0)
+                    {
+                        string textForMessage = @"<script language='javascript'> alert('Oyunuz alınmıştır. Teşekkür ederiz.');</script>";
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                    }
+                    else
+                    {
+                        string textForMessage = @"<script language='javascript'> alert('Oyunuz alınırken bir hata oluştur. Lütfen daha sonra tekrar deneyiniz.');</script>";
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                    }
+                }
+            }
+            else
+            {
+                string textForMessage = @"<script language='javascript'> alert('Oy vermek için üye girişi yapmanız gerekmektedir.');</script>";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+            }
+            RadRating.Value = ProductRateData.GetProductRate(productId);
+        }
+
+        protected void lbtnAddToFavorite_Click(object sender, EventArgs e)
+        {
+            loginUser = (User)Session["LOGIN_USER"];
+            if (loginUser != null)
+            {
+                List<UserFavoriteProduct> userFavoriteProductList = UserFavoriteProductData.GetList(loginUser.Id);
+                var item = userFavoriteProductList.Where(x => x.Product.Id == productId).FirstOrDefault();
+
+                if (item != null)
+                {
+                    string textForMessage = @"<script language='javascript'> alert('Bu ürün zaten favori ürünleriniz arasında.');</script>";
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                }
+                else
+                {
+                    Response.Redirect("../SecuredPages/MyAccount.aspx?favoritproductid=" + productId.ToString());
+                }
+            }
+            else
+            {
+                string textForMessage = @"<script language='javascript'> alert('Favorilerinize eklemek için üye girişi yapmanız gerekmektedir.');</script>";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+            }
         }
     }
 }
