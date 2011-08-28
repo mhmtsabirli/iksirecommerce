@@ -9,13 +9,13 @@
     <tr>
         <td valign="top">
             <asp:DataList runat="server" ID="dlCreditCards" OnItemDataBound="dlCreditCards_ItemDataBound"
-                RepeatColumns="4" RepeatDirection="Horizontal">
+                RepeatColumns="4" RepeatDirection="Horizontal" ItemStyle-VerticalAlign="Top">
                 <ItemTemplate>
                     <table>
                         <tr>
                             <td valign="top">
                                 <asp:HiddenField runat="server" ID="hdnCardId" Value='<%# Eval("Id")%>' />
-                                <asp:Image runat="server" ID="imgCard" ImageUrl='<%# String.Format("http://banyom.com.tr/CardImages/{0}", Eval("Image"))%>' />
+                                <%--<asp:Image runat="server" ID="imgCard" ImageUrl='<%# String.Format("http://banyom.com.tr/CardImages/{0}", Eval("Image"))%>' />--%>
                             </td>
                         </tr>
                         <tr>
@@ -50,6 +50,16 @@
                                                 </td>
                                             </tr>
                                         </ItemTemplate>
+                                        <AlternatingItemTemplate>
+                                            <tr style="background-color: #F7F6F3">
+                                                <td>
+                                                    <%# Eval("Month")%>
+                                                </td>
+                                                <td>
+                                                    <%# Eval("Rate")%>
+                                                </td>
+                                            </tr>
+                                        </AlternatingItemTemplate>
                                     </asp:Repeater>
                                 </table>
                             </td>

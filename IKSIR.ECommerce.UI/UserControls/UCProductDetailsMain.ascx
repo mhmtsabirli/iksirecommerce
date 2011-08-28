@@ -2,34 +2,38 @@
     Inherits="IKSIR.ECommerce.UI.UserControls.UCProductDetailsMain" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
-<%--<link rel="stylesheet" href="../css/lightbox.css" type="text/css" media="screen" />
-<script src="../js/lightbox/prototype.js" type="text/javascript"></script>
-<script src="../js/lightbox/scriptaculous.js?load=effects,builder" type="text/javascript"></script>
-<script src="../js/lightbox/lightbox.js" type="text/javascript"></script>--%>
+<script type="text/javascript">
+    hs.graphicsDir = '../images/highslide/';
+    hs.align = 'center';
+    hs.transitions = ['expand', 'crossfade'];
+    hs.outlineType = 'rounded-white';
+    hs.fadeInOut = true;
+    hs.numberPosition = 'caption';
+    hs.dimmingOpacity = 0.75;
+
+    // Add the controlbar
+    if (hs.addSlideshow) hs.addSlideshow({
+        //slideshowGroup: 'group1',
+        interval: 5000,
+        repeat: false,
+        useControls: true,
+        fixedControls: 'fit',
+        overlayOptions: {
+            opacity: .75,
+            position: 'bottom center',
+            hideOnMouseOut: true
+        }
+    });
+</script>
 <script type="text/javascript">
     $(function () {
         $(".image").click(function () {
-            Shadowbox.init({
-                modal: true
-            });
             var image = $(this).attr("rel");
             $('#image').hide();
             $('#image').fadeIn('slow');
-            //            $(anchorBigImage).attr("href", "http://banyom.com.tr/documents/Orginal/Images/" + image);
-            //            alert($(anchorBigImage).attr("href"));
-
-            //            $("#imgBig").attr("src", "http://banyom.com.tr/documents/Orginal/Images/Big/big_" + image);
-            //            alert($(imgBig).attr("src"));
-
-            $('#image').html('<a id="anchorBigImage" rel="shadowbox" title="Orjinal Boyut" href="http://banyom.com.tr/documents/Orginal/Images/' + image + '"><img src="http://banyom.com.tr/documents/Images/Big/big_' + image + '"/></a>');
-
-            //debugger;
-            //            
+            $('#image').html('<a id="anchorBigImage" class="highslide" onclick="return hs.expand(this)" title="Orjinal Boyut" href="http://banyom.com.tr/documents/Orginal/Images/' + image + '"><img src="http://banyom.com.tr/documents/Images/Big/big_' + image + '"/></a>');
             return false;
         });
-    });
-    Shadowbox.init({
-        modal: true
     });
 </script>
 <style type="text/javascript">
@@ -54,7 +58,8 @@
     <div class="urun_buyuk_resim" style="float: left;">
         <div id="image" style="height: 250px; width: 350px; background-color: Gray; border: 4px #666 solid;
             text-align: center;">
-            <a id="anchorBigImage" rel="shadowbox" title="Orjinal Boyut">
+            <a runat="server" id="anchorBigImage" class="highslide" onclick="return hs.expand(this)"
+                title="Orjinal Boyut">
                 <img runat="server" id="imgBig" style="border: none;" alt="Ana Resim" />
             </a>
         </div>
