@@ -42,6 +42,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@Id", itemBasket.Id));
             parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemBasket.CreateAdminId)));
             parameters.Add(new SqlParameter("@BillingAddressId", DBHelper.IntValue(itemBasket.BillingAddress.Id)));
+            parameters.Add(new SqlParameter("@ShippingAddressId", DBHelper.IntValue(itemBasket.ShippingAddress.Id)));
             parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemBasket.Status.Id)));
             parameters[0].Direction = ParameterDirection.Output;
 
@@ -57,6 +58,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@Id", itemBasket.Id));
             parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemBasket.EditAdminId)));
             parameters.Add(new SqlParameter("@BillingAddressId", DBHelper.IntValue(itemBasket.BillingAddress.Id)));
+            parameters.Add(new SqlParameter("@ShippingAddressId", DBHelper.IntValue(itemBasket.ShippingAddress.Id)));
             parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemBasket.Status.Id)));
             parameters[0].Direction = ParameterDirection.Output;
 
