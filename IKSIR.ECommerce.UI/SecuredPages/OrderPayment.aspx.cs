@@ -222,11 +222,18 @@ namespace IKSIR.ECommerce.UI.Pages
             }
         }
 
-
+        
         protected void ddlCreditCard_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<PaymetTermRate> ListRates = PaymetTermRateData.GetPaymetTermRateList(Convert.ToInt32(ddlCreditCard.SelectedValue));
             Utility.BindDropDownList(ddlCreditCardMonth, ListRates, "Month", "Rate");
+        }
+
+        protected void ddlCreditCardMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
+            lblMonth.Text = ddlCreditCardMonth.SelectedItem.Text;
+            lblBasketTotal.Text = Toolkit.Utility.CurrencyFormat(basket.TotalRatedPrice * Convert.ToDecimal(ddlCreditCardMonth.SelectedValue));
         }
 
         protected void ddlPaymentType_SelectedIndexChanged(object sender, EventArgs e)
