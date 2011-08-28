@@ -14,8 +14,8 @@ namespace IKSIR.ECommerce.UI.Pages
 {
     public partial class OrderAddress : System.Web.UI.Page
     {
-        public  User loginUser = null;
-        public  Basket basket = null;
+        public User loginUser = null;
+        public Basket basket = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
