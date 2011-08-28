@@ -16,11 +16,13 @@ namespace IKSIR.ECommerce.Model.Order
         public ProductPrice ProductPrice { get; set; }
         public int Count { get; set; }
         public EnumValue Status { get; set; }
+        public decimal ItemPrice { get; set; }
         public decimal BasketItemPrice
         {
-            get { return this.ProductPrice!=null ? this.ProductPrice.UnitPrice * Count : 0; }
+            get { return this.ProductPrice != null ? this.ProductPrice.UnitPrice * Count : 0; }
+           
         }
-        public BasketItem(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Basket basket, Product product, Address shippingAddress, ProductPrice productPrice, int count, EnumValue status)
+        public BasketItem(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, Basket basket, Product product, Address shippingAddress, ProductPrice productPrice,decimal itemPrice, int count, EnumValue status)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.Basket = basket;
@@ -29,6 +31,7 @@ namespace IKSIR.ECommerce.Model.Order
             this.ProductPrice = productPrice;
             this.Count = count;
             this.Status = status;
+            this.ItemPrice = itemPrice;
         }
         public BasketItem()
         {
