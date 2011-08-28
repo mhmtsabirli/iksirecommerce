@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ePayment, Version=1.0.1585.29907, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\IKSIR.ECommerce.Management\bin\ePayment.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -156,6 +160,7 @@
     <Content Include="Pages\SearchResult.aspx" />
     <Content Include="Pages\OrderPaymentResult.aspx" />
     <Content Include="SecuredPages\ForgotPassword.aspx" />
+    <Content Include="SecuredPages\Order.aspx" />
     <Content Include="SecuredPages\OrderPayment.aspx" />
     <Content Include="Pages\Error.aspx" />
     <Content Include="Pages\Maintenance.aspx" />
@@ -224,6 +229,13 @@
     </Compile>
     <Compile Include="SecuredPages\ForgotPassword.aspx.designer.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredPages\Order.aspx.cs">
+      <DependentUpon>Order.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\Order.aspx.designer.cs">
+      <DependentUpon>Order.aspx</DependentUpon>
     </Compile>
     <Compile Include="SecuredPages\OrderPayment.aspx.cs">
       <DependentUpon>OrderPayment.aspx</DependentUpon>
