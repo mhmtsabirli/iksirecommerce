@@ -9,12 +9,22 @@
 <script type="text/javascript">
     $(function () {
         $(".image").click(function () {
+            Shadowbox.init({
+                modal: true
+            });
             var image = $(this).attr("rel");
             $('#image').hide();
             $('#image').fadeIn('slow');
-            $('#image').html('<img src="http://banyom.com.tr/documents/Images/Big/big_' + image + '"/>');
+            //            $(anchorBigImage).attr("href", "http://banyom.com.tr/documents/Orginal/Images/" + image);
+            //            alert($(anchorBigImage).attr("href"));
+
+            //            $("#imgBig").attr("src", "http://banyom.com.tr/documents/Orginal/Images/Big/big_" + image);
+            //            alert($(imgBig).attr("src"));
+
+            $('#image').html('<a id="anchorBigImage" rel="shadowbox" title="Orjinal Boyut" href="http://banyom.com.tr/documents/Orginal/Images/' + image + '"><img src="http://banyom.com.tr/documents/Images/Big/big_' + image + '"/></a>');
+
             //debugger;
-            $('#anchorBigImage').attr("href", "http://banyom.com.tr/documents/Orginal/Images/" + image);
+            //            
             return false;
         });
     });
@@ -42,12 +52,12 @@
 </style>
 <div class="urun_resimleri">
     <div class="urun_buyuk_resim" style="float: left;">
-            <div id="image" style="height: 250px; width: 350px; background-color: Gray; border: 4px #666 solid;
-                text-align: center;">
-                <a id="anchorBigImage" rel="shadowbox" title="Orjinal Boyut">
-                    <img runat="server" id="imgBig" alt="Ana Resim" />
-                </a>
-            </div>
+        <div id="image" style="height: 250px; width: 350px; background-color: Gray; border: 4px #666 solid;
+            text-align: center;">
+            <a id="anchorBigImage" rel="shadowbox" title="Orjinal Boyut">
+                <img runat="server" id="imgBig" style="border: none;" alt="Ana Resim" />
+            </a>
+        </div>
         <br />
         <div runat="server" id="divSmallImages">
         </div>
@@ -62,7 +72,7 @@
         <br />
         <div class='urun_paylas' style='float: left; width: 225px;'>
             <ul>
-                <li><a href='#'>
+                <li><a href='asd' id="ayhan">
                     <img src='../images/urun_paylas_1.png' alt='' /></a></li>
                 <li><a href='#'>
                     <img src='../images/urun_paylas_2.png' alt='' /></a></li>
@@ -94,7 +104,7 @@
 </div>
 <div class="urun_ozellikleri">
     <h2>
-        LAVABO YARIM AYAK 60X50</h2>
+        <asp:Label runat="server" ID="lblProductTitle"></asp:Label></h2>
     <div class="urun_fiyat">
         Fiyatı : <span style="color: #333;">
             <asp:Label runat="server" ID="lblBigProductPrice"></asp:Label>&nbsp;TL </span>

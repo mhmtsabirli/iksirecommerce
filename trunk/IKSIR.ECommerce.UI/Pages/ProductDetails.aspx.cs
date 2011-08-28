@@ -38,6 +38,13 @@ namespace IKSIR.ECommerce.UI.Pages
         private void GetProductDetails()
         {
             GetNextPreviousButtons();
+
+            var item = ProductData.Get(productId);
+            anchorProductCategory.InnerText = item.ProductCategory.Title;
+            anchorProductCategory.HRef = "ProductList.aspx?catid=" + item.ProductCategory.Id;
+
+            anchorProduct.InnerText = item.Title;
+            anchorProduct.HRef = "ProductDetails.aspx?pid=" + item.Id.ToString();
         }
 
         private void GetNextPreviousButtons()

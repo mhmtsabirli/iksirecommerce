@@ -39,7 +39,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                         IsDefault = true
                     });
                 }
-
+                lblProductTitle.Text = product.Title;
                 var itemMainImage = productMultimedias.Where(x => x.IsDefault == true).First();
 
                 if (itemMainImage != null)
@@ -161,12 +161,19 @@ namespace IKSIR.ECommerce.UI.UserControls
             if (loginUser != null)
             {
                 List<UserFavoriteProduct> userFavoriteProductList = UserFavoriteProductData.GetList(loginUser.Id);
-                var item = userFavoriteProductList.Where(x => x.Product.Id == productId).FirstOrDefault();
-
-                if (item != null)
+                if (userFavoriteProductList != null && userFavoriteProductList.Count > 1)
                 {
-                    string textForMessage = @"<script language='javascript'> alert('Bu ürün zaten favori ürünleriniz arasında.');</script>";
-                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                    var item = userFavoriteProductList.Where(x => x.Product.Id == productId).FirstOrDefault();
+
+                    if (item != null)
+                    {
+                        string textForMessage = @"<script language='javascript'> alert('Bu ürün zaten favori ürünleriniz arasında.');</script>";
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                    }
+                    else
+                    {
+                        Response.Redirect("../SecuredPages/MyAccount.aspx?favoritproductid=" + productId.ToString());
+                    }
                 }
                 else
                 {

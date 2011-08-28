@@ -22,9 +22,9 @@
     <div class="sepet_content">
         <div class="sepet_content_top">
             <div class="top_left">
-                <a href="#">
-                    <img src="../images/sepet_content_top_home.jpg" alt="" />Anasayfa</a> <a href="#">Ürünler</a>
-                <a href="#">Seramik Sağlık Gereçleri</a> <a href="#">Vega</a>
+                <a href="Default.aspx"><img src="../images/sepet_content_top_home.jpg" alt="" />Anasayfa</a>                     
+                <a href="#" runat="server" id="anchorProductCategory"></a> 
+                <a href="#" runat="server" id="anchorProduct"></a>
                 <div class="clear">
                 </div>
             </div>

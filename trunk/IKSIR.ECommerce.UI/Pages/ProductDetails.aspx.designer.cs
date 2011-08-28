@@ -13,6 +13,24 @@ namespace IKSIR.ECommerce.UI.Pages {
     public partial class ProductDetails {
         
         /// <summary>
+        /// anchorProductCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor anchorProductCategory;
+        
+        /// <summary>
+        /// anchorProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor anchorProduct;
+        
+        /// <summary>
         /// hplPreviousProduct control.
         /// </summary>
         /// <remarks>
