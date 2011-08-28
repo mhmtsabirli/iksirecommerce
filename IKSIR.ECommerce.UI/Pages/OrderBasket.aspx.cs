@@ -14,8 +14,8 @@ namespace IKSIR.ECommerce.UI.Pages
 {
     public partial class OrderBasket : System.Web.UI.Page
     {
-        public static User loginUser = null;
-        public static Basket basket = null;
+        public  User loginUser = null;
+        public  Basket basket = null;
 
         public decimal BasketTotal = 0;
         public decimal TotalTax = 0;
@@ -62,6 +62,7 @@ namespace IKSIR.ECommerce.UI.Pages
 
         private void GetOrderBasket()
         {
+            basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
             rptBasketProducts.DataSource = basket.BasketItems;
             rptBasketProducts.DataBind();
             
@@ -74,6 +75,7 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
+                basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
                 Image imgProduct = e.Item.FindControl("imgProduct") as Image;
                 HiddenField hdnProductId = e.Item.FindControl("hdnProductId") as HiddenField;
                 DropDownList ddlItemCount = e.Item.FindControl("ddlItemCount") as DropDownList;
@@ -110,6 +112,7 @@ namespace IKSIR.ECommerce.UI.Pages
                         BasketTotal += product.Count * productPriceData.Price;
                         TotalTax += product.Count * productPriceData.Price * productPriceData.Tax / 100;
                         TotalPrice += product.Count * productPriceData.UnitPrice;
+                     
                     }
                 }
             }
@@ -131,16 +134,18 @@ namespace IKSIR.ECommerce.UI.Pages
 
         protected void imgbtnContinue_Click(object sender, ImageClickEventArgs e)
         {
+            basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
             if (basket.BasketItems.Count == 0)
             {
                 string textForMessage = @"<script language='javascript'> alert('Sepetinizde hiç ürün bulunmamaktadır. Devam etmek için sepetinize ürün ekleyiniz.');</script>";
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
                 return;
             }
-
+            
             if (cbxComfirmation.Checked)
             {
-                basket.TotalPrice = TotalPrice;
+                basket.TotalPrice = Convert.ToDecimal(lblTotalPrice.Text);
+                basket.TotalRatedPrice = Convert.ToDecimal(lblBasketTotal.Text);
                 Session.Add("USER_BASKET", basket);
                 Response.Redirect("OrderAddress.aspx");
             }

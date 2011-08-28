@@ -12,8 +12,8 @@ namespace IKSIR.ECommerce.UI.Pages
 {
     public partial class OrderShipping : System.Web.UI.Page
     {
-        public static User loginUser = null;
-        public static Basket basket = null;
+        public  User loginUser = null;
+        public  Basket basket = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["LOGIN_USER"] != null && Session["USER_BASKET"] != null)
@@ -42,6 +42,8 @@ namespace IKSIR.ECommerce.UI.Pages
 
         protected void imgbtnContinue_Click(object sender, ImageClickEventArgs e)
         {
+            loginUser = (User)Session["LOGIN_USER"];
+            basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
             if (rblShippingCompanies.SelectedIndex == -1)
             {
                 string textForMessage = @"<script language='javascript'> alert('Bir kargo firması seçiniz!');</script>";
