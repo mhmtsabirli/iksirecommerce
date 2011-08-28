@@ -40,5 +40,5 @@
     </ItemTemplate>
 </asp:DataList>
 <div style="float: right">
-    <a runat="server" id="anchorContinue">Devamı</a>&nbsp;&nbsp;
+    <a runat="server" id="anchorContinue" visible="false">Devamı</a>&nbsp;&nbsp;
 </div>

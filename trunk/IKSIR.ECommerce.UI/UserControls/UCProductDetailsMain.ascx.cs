@@ -45,12 +45,12 @@ namespace IKSIR.ECommerce.UI.UserControls
                 if (itemMainImage != null)
                 {
                     //imgMainImage.ImageUrl = 
-                    anchorBigImage.HRef = "http://banyom.com.tr/documents/Orginal/Images/" + itemMainImage.FilePath;
+                    //anchorBigImage.HRef = "http://banyom.com.tr/documents/Orginal/Images/" + itemMainImage.FilePath;
                     imgBig.Src = "http://banyom.com.tr/documents/Images/Big/big_" + itemMainImage.FilePath;
                 }
                 else
                 {
-                    anchorBigImage.HRef = "#";
+                    //anchorBigImage.HRef = "#";
                     imgBig.Src = "";
                 }
 
@@ -59,7 +59,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                 foreach (var item in productMultimedias)
                 {
                     imageCount += 1;
-                    divSmallImages.InnerHtml += "<a href=\"#\" rel=\"http://banyom.com.tr/documents/Images/Big/big_" + item.FilePath + "\" class=\"image\">";
+                    divSmallImages.InnerHtml += "<a href=\"#\" rel=\"" + item.FilePath + "\" class=\"image\">";
                     divSmallImages.InnerHtml += "<img src=\"http://banyom.com.tr/documents/Images/Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a>";
 
                     if (imageCount == 3)

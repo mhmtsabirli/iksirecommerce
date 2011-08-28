@@ -11,6 +11,7 @@ using IKSIR.ECommerce.Model.MembershipModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer;
 using IKSIR.ECommerce.Model.Order;
 using IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer;
+using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
 
 namespace IKSIR.ECommerce.UI.SecuredPages
 {
@@ -28,12 +29,14 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             {
                 loginUser = (User)Session["LOGIN_USER"];
                 BindValues();
-                GetList();
+                GetForm();
                 int favoritproductid = 0;
                 if (Page.Request.QueryString["favoritproductid"] != null && Page.Request.QueryString["favoritproductid"] != "" && int.TryParse(Page.Request.QueryString["favoritproductid"], out favoritproductid))
                 {
                     AddToFavoriteList(favoritproductid);
                 }
+                RadTabStrip1.Tabs[0].Selected = true;
+                RadPageView1.Selected = true;
             }
         }
 
@@ -55,7 +58,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                     lblError.Text = "Adresiniz başarıyla güncellendi.";
                     ClearForm();
                     pnlForm.Visible = false;
-                    GetList();
+                    GetAddresses();
                 }
                 else
                 {
@@ -73,7 +76,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                     lblError.Text = "Adresiniz başarıyla kaydedildi.";
                     ClearForm();
                     pnlForm.Visible = false;
-                    GetList();
+                    GetAddresses();
                 }
                 else
                 {
@@ -124,7 +127,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                 lblError.Visible = true;
                 lblError.ForeColor = System.Drawing.Color.Green;
                 lblError.Text = "Item başarıyla silindi.";
-                GetList();
+                GetAddresses();
             }
             else
             {
@@ -166,6 +169,46 @@ namespace IKSIR.ECommerce.UI.SecuredPages
         protected void btnFilter_Click(object sender, EventArgs e)
         {
             GetOrderList();
+        }
+
+        protected void btnUserInfoSave_Click(object sender, EventArgs e)
+        {
+            User itemUser = loginUser;
+            itemUser.Id = loginUser.Id;
+            itemUser.FirstName = txtUserInfoFirstName.Text;
+            itemUser.LastName = txtUserInfoLastName.Text;
+            itemUser.Email = txtUserInfoEmail.Text;
+            itemUser.BirthDate = new DateTime(DBHelper.IntValue(ddlUserInfoBirthDateYear.SelectedValue), DBHelper.IntValue(ddlUserInfoBirthDateMonth.SelectedValue), DBHelper.IntValue(ddlUserInfoBirthDateDay.SelectedValue));
+            itemUser.MobilePhone = txtUserInfoMobilePhone.Text;
+            itemUser.TcId = txtUserInfoTCIdentity.Text;
+            int retValue = UserData.Update(itemUser);
+            if (retValue > 0)
+            {
+                lblUserInfoAlert.Text = "Bilgileriniz başarıyla güncellendi.";
+                lblUserInfoAlert.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                lblUserInfoAlert.Text = "Bilgileriniz güncellenirken hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
+                lblUserInfoAlert.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+
+        protected void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            User itemUser = loginUser;
+            itemUser.Password = txtChangePassword_Password.Text;
+            int retValue = UserData.Update(itemUser);
+            if (retValue > 0)
+            {
+                lblChangePassword_Alert.Text = "Şifreniz başarıyla güncellendi.";
+                lblChangePassword_Alert.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                lblChangePassword_Alert.Text = "Şifreniz güncellenirken hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
+                lblChangePassword_Alert.ForeColor = System.Drawing.Color.Red;
+            }
         }
 
         protected void ddlCountries_SelectedIndexChanged(object sender, EventArgs e)
@@ -401,21 +444,73 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             Utility.BindDropDownList(ddlFilterOrderStatus, itemListOrderStatus, "Value", "Id");
         }
 
-        private void GetList()
+        private void GetForm()
+        {
+            GetAddresses();
+            GetUserFavoriteProducts();
+            GetUserInfos();
+        }
+
+        private void GetAddresses()
         {
             List<Address> itemList = AddressData.GetMembershipAddresses(loginUser.Id);
             gvList.DataSource = itemList;
             gvList.DataBind();
+        }
 
-            GetUserFavoriteProducts();
+        private void GetUserInfos()
+        {
+            BindUserInfosForm();
+            var itemUser = new User();
+            itemUser = UserData.Get(loginUser.Id);
+            txtUserInfoFirstName.Text = itemUser.FirstName;
+            txtUserInfoLastName.Text = itemUser.LastName;
+            txtUserInfoEmail.Text = itemUser.Email;
+            ddlUserInfoBirthDateDay.SelectedValue = itemUser.BirthDate.Day.ToString();
+            ddlUserInfoBirthDateMonth.SelectedValue = itemUser.BirthDate.Month.ToString();
+            ddlUserInfoBirthDateYear.SelectedValue = itemUser.BirthDate.Year.ToString();
+            txtUserInfoMobilePhone.Text = itemUser.MobilePhone;
+            txtUserInfoTCIdentity.Text = itemUser.TcId;
+        }
+
+        private void BindUserInfosForm()
+        {
+            for (int i = 1; i <= 31; i++)
+            {
+                ddlUserInfoBirthDateDay.Items.Add(new ListItem(i.ToString(), i.ToString()));
+            }
+            ddlUserInfoBirthDateDay.Items.Insert(0, new ListItem("Gün", "-1"));
+            for (int i = 1; i <= 12; i++)
+            {
+                ddlUserInfoBirthDateMonth.Items.Add(new ListItem(i.ToString(), i.ToString()));
+            }
+            ddlUserInfoBirthDateMonth.Items.Insert(0, new ListItem("Ay", "-1"));
+            for (int i = 2005; i > 1930; i--)
+            {
+                ddlUserInfoBirthDateYear.Items.Add(new ListItem(i.ToString(), i.ToString()));
+            }
+            ddlUserInfoBirthDateYear.Items.Insert(0, new ListItem("Yıl", "-1"));
+
+            KeyGenerator item = new KeyGenerator();
+            string key = item.GetUniqueKey(6, true, true, false);
+            Session.Add("REGISTER_SECURITYCODE", key);
         }
 
         private void GetUserFavoriteProducts()
         {
             List<UserFavoriteProduct> userFavoriteProductList = UserFavoriteProductData.GetList(loginUser.Id);
-            rptUserFavoriteProducts.DataSource = userFavoriteProductList;
-            rptUserFavoriteProducts.DataBind();
+            if (userFavoriteProductList != null && userFavoriteProductList.Count > 1)
+            {
+                rptUserFavoriteProducts.DataSource = userFavoriteProductList;
+                rptUserFavoriteProducts.DataBind();
+                lblNoUserFavoriteProducts.Visible = false;
+            }
+            else
+            {
+                lblNoUserFavoriteProducts.Visible = true;
+            }
         }
+
         private void GetOrderList()
         {
             User User = (User)Session["LOGIN_USER"];
@@ -523,7 +618,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             userFavoriteProduct.Product = new Model.ProductModel.Product() { Id = favoritproductid };
             List<UserFavoriteProduct> userFavoriteProductList = UserFavoriteProductData.GetList(loginUser.Id);
             UserFavoriteProduct item = null;
-            if(userFavoriteProductList!=null)
+            if (userFavoriteProductList != null)
                 item = userFavoriteProductList.Where(x => x.Product.Id == favoritproductid).FirstOrDefault();
             string textForMessage = "";
             if (item != null)

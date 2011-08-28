@@ -33,8 +33,176 @@
                     <telerik:RadPageView ID="RadPageView1" runat="server" Selected="true">
                         <table>
                             <tr>
-                                <td colspan="4">
+                                <td colspan="5">
                                     <strong>Üye Bilgilerim</strong> (Hesabınız ile ilgili genel bilgiler)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Ad
+                                </td>
+                                <td>
+                                    :
+                                </td>
+                                <td>
+                                    *
+                                </td>
+                                <td>
+                                    <asp:TextBox runat="server" ID="txtUserInfoFirstName"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator12" ControlToValidate="txtUserInfoFirstName"
+                                        ErrorMessage="Ad alanı zorunlu" ValidationGroup="vgUserInfo" SetFocusOnError="true">*</asp:RequiredFieldValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Soyad
+                                </td>
+                                <td>
+                                    :
+                                </td>
+                                <td>
+                                    *
+                                </td>
+                                <td>
+                                    <asp:TextBox runat="server" ID="txtUserInfoLastName"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator13" ControlToValidate="txtUserInfoLastName"
+                                        ErrorMessage="Soyad alanı zorunlu" ValidationGroup="vgUserInfo" SetFocusOnError="true">*</asp:RequiredFieldValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Eposta
+                                </td>
+                                <td>
+                                    :
+                                </td>
+                                <td>
+                                    *
+                                </td>
+                                <td>
+                                    <asp:TextBox runat="server" ID="txtUserInfoEmail"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator14" ControlToValidate="txtUserInfoEmail"
+                                        ErrorMessage="Eposta alanı zorunlu" ValidationGroup="vgUserInfo">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator runat="server" ID="regex1" ControlToValidate="txtUserInfoEmail"
+                                        ErrorMessage="Geçersiz Eposta adresi" ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"
+                                        ValidationGroup="vgUserInfo" SetFocusOnError="true">*</asp:RegularExpressionValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Doğum Tarihi
+                                </td>
+                                <td>
+                                    :
+                                </td>
+                                <td>
+                                    *
+                                </td>
+                                <td>
+                                    <asp:DropDownList runat="server" ID="ddlUserInfoBirthDateDay">
+                                    </asp:DropDownList>
+                                    /
+                                    <asp:DropDownList runat="server" ID="ddlUserInfoBirthDateMonth">
+                                    </asp:DropDownList>
+                                    /
+                                    <asp:DropDownList runat="server" ID="ddlUserInfoBirthDateYear">
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator17" ControlToValidate="ddlUserInfoBirthDateDay"
+                                        InitialValue="-1" ErrorMessage="Doğum Tarihi gün alanı zorunlu" ValidationGroup="vgUserInfo"
+                                        SetFocusOnError="true">*</asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator18" ControlToValidate="ddlUserInfoBirthDateMonth"
+                                        InitialValue="-1" ErrorMessage="Doğum Tarihi ay alanı zorunlu" ValidationGroup="vgUserInfo"
+                                        SetFocusOnError="true">*</asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator19" ControlToValidate="ddlUserInfoBirthDateYear"
+                                        InitialValue="-1" ErrorMessage="Doğum Tarihi yıl alanı zorunlu" ValidationGroup="vgUserInfo"
+                                        SetFocusOnError="true">*</asp:RequiredFieldValidator>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Cep Telefonu
+                                </td>
+                                <td>
+                                    :
+                                </td>
+                                <td>
+                                    *
+                                </td>
+                                <td>
+                                    <asp:TextBox runat="server" ID="txtUserInfoMobilePhone" MaxLength="11"></asp:TextBox> <i>11 karakter</i>
+                                </td>
+                                <td>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator20" ControlToValidate="txtUserInfoMobilePhone"
+                                        ErrorMessage="Cep Telefonu alanı zorunlu" ValidationGroup="vgUserInfo" SetFocusOnError="true">*</asp:RequiredFieldValidator>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    TC Kimlik Numarası
+                                </td>
+                                <td>
+                                    :
+                                </td>
+                                <td>
+                                    *
+                                </td>
+                                <td>
+                                    <asp:TextBox runat="server" ID="txtUserInfoTCIdentity" MaxLength="11"></asp:TextBox> <i>11 karakter</i>
+                                </td>
+                                <td>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator21" ControlToValidate="txtUserInfoTCIdentity"
+                                        ErrorMessage="TC Kimlik Numarası alanı zorunlu" ValidationGroup="vgUserInfo" SetFocusOnError="true">*</asp:RequiredFieldValidator>
+                                </td>
+                            </tr>
+                            <%--<tr>
+            <td valign="top">
+                Güvenlik Kodu
+            </td>
+            <td valign="top">
+                :
+            </td>
+            <td valign="top">
+                *
+            </td>
+            <td valign="top">
+                <asp:Image ID="imgSecurity" CssClass="CaptchaImage" ImageUrl="CaptchaCode.aspx" runat="server"
+                    AlternateText="Güvenlik Kodu" />
+                <asp:LinkButton runat="server" ID="lbtnChangeCode" Text="Değiştir" 
+                    onclick="lbtnChangeCode_Click" Visible="false"></asp:LinkButton>
+                <br />
+                <asp:TextBox runat="server" CssClass="CaptchaValue" ID="txtCode"></asp:TextBox>
+            </td>
+            <td valign="top">
+                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator9" ControlToValidate="txtCode"
+                    ErrorMessage="Güvenlik Kodu alanı zorunlu" ValidationGroup="vgForm"
+                    SetFocusOnError="true">*</asp:RequiredFieldValidator>
+            </td>
+        </tr>--%>
+                            <tr>
+                                <td colspan="5" align="center">
+                                    <asp:Label runat="server" ID="lblUserInfoAlert"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" align="center">
+                                    <asp:ValidationSummary runat="server" ID="ValidationSummary1" ValidationGroup="vgUserInfo"
+                                        ForeColor="Red" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" align="center">
+                                    <asp:Button runat="server" ID="btnUserInfoSave" Text="Kaydet" ValidationGroup="vgUserInfo"
+                                        OnClick="btnUserInfoSave_Click" />
                                 </td>
                             </tr>
                         </table>
@@ -42,12 +210,12 @@
                     <telerik:RadPageView ID="RadPageView2" runat="server" Selected="true">
                         <table>
                             <tr>
-                                <td colspan="4">
+                                <td>
                                     <strong>Adreslerim</strong> (Fatura ve teslimat adreslerinizi yönetin)
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="4">
+                                <td>
                                     <table id="tblMngForm">
                                         <tr>
                                             <td align="left" colspan="2">
@@ -218,7 +386,7 @@
                                                                 :
                                                             </td>
                                                             <td valign="top">
-                                                                <asp:TextBox runat="server" ID="txtAddress" Width="250px" Height="50px"></asp:TextBox>
+                                                                <asp:TextBox runat="server" ID="txtAddress" Width="250px" Height="50px" TextMode="MultiLine"></asp:TextBox>
                                                             </td>
                                                             <td valign="top">
                                                                 <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtAddress"
@@ -317,7 +485,7 @@
                     <telerik:RadPageView ID="RadPageView3" runat="server" Selected="true">
                         <table>
                             <tr>
-                                <td colspan="4">
+                                <td>
                                     <strong>Sipariş</strong> (Geçmiş ve aktif siparişlerinizi listeleyin)
                                 </td>
                             </tr>
@@ -596,6 +764,7 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <asp:Label runat="server" ID="lblNoUserFavoriteProducts" Text="Henüz hiç favori ürün eklememişsiniz."></asp:Label>
                                     <table>
                                         <asp:Repeater runat="server" ID="rptUserFavoriteProducts">
                                             <ItemTemplate>
@@ -629,8 +798,64 @@
                     <telerik:RadPageView ID="RadPageView5" runat="server" Selected="true">
                         <table>
                             <tr>
-                                <td colspan="4">
+                                <td colspan="5">
                                     <strong>Şifre Değiştir</strong> (Şifrenizi değiştirin)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Yeni Şifre
+                                </td>
+                                <td>
+                                    :
+                                </td>
+                                <td>
+                                    *
+                                </td>
+                                <td>
+                                    <asp:TextBox runat="server" ID="txtChangePassword_Password" TextMode="Password"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator15" ControlToValidate="txtChangePassword_Password"
+                                        ErrorMessage="Şifre alanı zorunlu" ValidationGroup="vgChangePassword" SetFocusOnError="true">*</asp:RequiredFieldValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   Yeni Şifre tekrar
+                                </td>
+                                <td>
+                                    :
+                                </td>
+                                <td>
+                                    *
+                                </td>
+                                <td>
+                                    <asp:TextBox runat="server" ID="txtChangePassword_PasswordAgain" TextMode="Password"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator16" ControlToValidate="txtChangePassword_PasswordAgain"
+                                        ErrorMessage="Şifre tekrar alanı zorunlu" ValidationGroup="vgChangePassword" SetFocusOnError="true">*</asp:RequiredFieldValidator>
+                                    <asp:CompareValidator runat="server" ID="cpValidator1" ValidationGroup="vgChangePassword" ControlToCompare="txtChangePassword_Password"
+                                        ControlToValidate="txtChangePassword_PasswordAgain" ErrorMessage="Şifre ve Şifre tekrar alanları aynı olmalı">*
+                                    </asp:CompareValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" align="center">
+                                    <asp:Label runat="server" ID="lblChangePassword_Alert"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" align="center">
+                                    <asp:ValidationSummary runat="server" ID="ValidationSummary2" ValidationGroup="vgChangePassword"
+                                        ForeColor="Red" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" align="center">
+                                    <asp:Button runat="server" ID="btnChangePassword" Text="Şifremi Değiştir" ValidationGroup="vgChangePassword"
+                                        OnClick="btnChangePassword_Click" />
                                 </td>
                             </tr>
                         </table>
