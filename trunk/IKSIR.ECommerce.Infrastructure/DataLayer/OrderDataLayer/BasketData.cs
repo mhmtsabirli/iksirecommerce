@@ -29,6 +29,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.BillingAddress = BasketAddressData.Get(DBHelper.IntValue(dr["BillingAddressId"].ToString()));
                 returnValue.BasketItems = BasketItemData.GetList(id);
                 returnValue.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
+              
             }
             dr.Close();
             return returnValue;
