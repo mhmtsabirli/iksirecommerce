@@ -126,7 +126,6 @@
                                         SetFocusOnError="true">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     Cep Telefonu
@@ -138,14 +137,14 @@
                                     *
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtUserInfoMobilePhone" MaxLength="11"></asp:TextBox> <i>11 karakter</i>
+                                    <asp:TextBox runat="server" ID="txtUserInfoMobilePhone" MaxLength="11"></asp:TextBox>
+                                    <i>11 karakter</i>
                                 </td>
                                 <td>
                                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator20" ControlToValidate="txtUserInfoMobilePhone"
                                         ErrorMessage="Cep Telefonu alanı zorunlu" ValidationGroup="vgUserInfo" SetFocusOnError="true">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     TC Kimlik Numarası
@@ -157,11 +156,13 @@
                                     *
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtUserInfoTCIdentity" MaxLength="11"></asp:TextBox> <i>11 karakter</i>
+                                    <asp:TextBox runat="server" ID="txtUserInfoTCIdentity" MaxLength="11"></asp:TextBox>
+                                    <i>11 karakter</i>
                                 </td>
                                 <td>
                                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator21" ControlToValidate="txtUserInfoTCIdentity"
-                                        ErrorMessage="TC Kimlik Numarası alanı zorunlu" ValidationGroup="vgUserInfo" SetFocusOnError="true">*</asp:RequiredFieldValidator>
+                                        ErrorMessage="TC Kimlik Numarası alanı zorunlu" ValidationGroup="vgUserInfo"
+                                        SetFocusOnError="true">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <%--<tr>
@@ -705,11 +706,32 @@
                                     </td>
                                     <td>
                                         <asp:DropDownList runat="server" ID="ddlFilterOrderStatus">
+                                            <asp:ListItem Text="Bekleyen Siparişler" Value="1"></asp:ListItem>
+                                            <asp:ListItem Text="Tamamlanan Siparişler" Value="2"></asp:ListItem>
+                                            <asp:ListItem Text="İptal olan Siparişler" Value="3"></asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
-                                    <td rowspan="2">
-                                        <asp:Button runat="server" ID="btnFilter" Text="Filtrele" OnClick="btnFilter_Click" />
+                                    <td >
+                                        
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Sipariş Numarası
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" ID="txtOrderNo"></asp:TextBox>
+                                    </td>
+                                    <td >
+                                    </td>
+                                </tr>
+                                <tr>
+                                <td colspan="4">
+                                    <asp:Button runat="server" ID="btnFilter" Text="Filtrele" OnClick="btnFilter_Click" />
+                                </td>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -822,7 +844,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                   Yeni Şifre tekrar
+                                    Yeni Şifre tekrar
                                 </td>
                                 <td>
                                     :
@@ -835,9 +857,11 @@
                                 </td>
                                 <td>
                                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator16" ControlToValidate="txtChangePassword_PasswordAgain"
-                                        ErrorMessage="Şifre tekrar alanı zorunlu" ValidationGroup="vgChangePassword" SetFocusOnError="true">*</asp:RequiredFieldValidator>
-                                    <asp:CompareValidator runat="server" ID="cpValidator1" ValidationGroup="vgChangePassword" ControlToCompare="txtChangePassword_Password"
-                                        ControlToValidate="txtChangePassword_PasswordAgain" ErrorMessage="Şifre ve Şifre tekrar alanları aynı olmalı">*
+                                        ErrorMessage="Şifre tekrar alanı zorunlu" ValidationGroup="vgChangePassword"
+                                        SetFocusOnError="true">*</asp:RequiredFieldValidator>
+                                    <asp:CompareValidator runat="server" ID="cpValidator1" ValidationGroup="vgChangePassword"
+                                        ControlToCompare="txtChangePassword_Password" ControlToValidate="txtChangePassword_PasswordAgain"
+                                        ErrorMessage="Şifre ve Şifre tekrar alanları aynı olmalı">*
                                     </asp:CompareValidator>
                                 </td>
                             </tr>

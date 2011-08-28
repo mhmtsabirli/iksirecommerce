@@ -442,8 +442,8 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             List<City> cityList = CityData.GetCityList(1); //Türkiyenin şehirlerini default getiriyoruz. =>ayhant
             Utility.BindDropDownList(ddlCities, cityList, "Name", "Id");
 
-            List<EnumValue> itemListOrderStatus = EnumValueData.GetEnumValues(20);
-            Utility.BindDropDownList(ddlFilterOrderStatus, itemListOrderStatus, "Value", "Id");
+            //List<EnumValue> itemListOrderStatus = EnumValueData.GetEnumValues(20);
+            //Utility.BindDropDownList(ddlFilterOrderStatus, itemListOrderStatus, "Value", "Id");
         }
 
         private void GetForm()
@@ -519,8 +519,28 @@ namespace IKSIR.ECommerce.UI.SecuredPages
         private void GetOrderList()
         {
             User User = (User)Session["LOGIN_USER"];
-            List<Model.Order.Order> itemList = OrderData.GetList(Convert.ToInt32(ddlFilterOrderStatus.SelectedValue), User.Id);
-
+            List<Model.Order.Order> itemList = OrderData.GetList(0, User.Id);
+            if (txtOrderNo.Text != "")
+            {
+                int OrderNo = Convert.ToInt32(txtOrderNo.Text);
+                itemList = itemList.Where(x => x.Id == OrderNo).ToList();
+            }
+            else
+            {
+                if (ddlFilterOrderStatus.SelectedValue == "1")
+                {
+                    itemList = itemList.Where(x => x.Status.Id != 35).ToList();
+                    itemList = itemList.Where(x => x.Status.Id != 38).ToList();
+                }
+                if (ddlFilterOrderStatus.SelectedValue == "2")
+                {
+                    itemList = itemList.Where(x => x.Status.Id == 35).ToList();
+                }
+                if (ddlFilterOrderStatus.SelectedValue == "3")
+                {
+                    itemList = itemList.Where(x => x.Status.Id == 38).ToList();
+                }
+            }
             gvOrderList.DataSource = itemList;
             gvOrderList.DataBind();
         }
