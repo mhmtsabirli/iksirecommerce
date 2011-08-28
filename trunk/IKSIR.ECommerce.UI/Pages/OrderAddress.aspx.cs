@@ -14,8 +14,8 @@ namespace IKSIR.ECommerce.UI.Pages
 {
     public partial class OrderAddress : System.Web.UI.Page
     {
-        public static User loginUser = null;
-        public static Basket basket = null;
+        public  User loginUser = null;
+        public  Basket basket = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -59,7 +59,9 @@ namespace IKSIR.ECommerce.UI.Pages
 
         private void GetUserAddresses()
         {
-            List<Address> itemList = AddressData.GetMembershipAddresses(1);
+            loginUser = (User)Session["LOGIN_USER"];
+            basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
+            List<Address> itemList = AddressData.GetMembershipAddresses(loginUser.Id);
             rblShippingAddresses.DataTextField = "Title";
             rblShippingAddresses.DataValueField = "Id";
             rblShippingAddresses.DataSource = itemList;
@@ -181,6 +183,8 @@ namespace IKSIR.ECommerce.UI.Pages
 
         protected void imgbtnContinue_Click(object sender, ImageClickEventArgs e)
         {
+            loginUser = (User)Session["LOGIN_USER"];
+            basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
             if (rblShippingAddresses.SelectedIndex == -1)
             {
                 string textForMessage = @"<script language='javascript'> alert('Teslimat adresi seçmelisiniz!');</script>";
