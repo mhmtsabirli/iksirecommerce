@@ -32,7 +32,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock
 
         public static decimal DecValue(object value)
         {
-            if (value == null || value == DBNull.Value)
+            if (value == null || value == DBNull.Value || value == "")
                 return 0M;
             else
                 return Convert.ToDecimal(value);
