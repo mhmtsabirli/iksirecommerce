@@ -179,6 +179,11 @@
             </tr>
             <tr>
                 <td>
+                <div id="IsSendMail" runat="server" visible="false">
+                <span style="color:Red;">
+                Tarıfınıza Bilgilendirme Maili gönderilirken bir sorun ile karşılaşılmıştır. Siparişiniz sistemimizde oluşmutur siparişinizi hesabınızdaki siparişlerim modülünden takip edebilirsiniz. Teşekkür ederiz.
+                </span>
+                </div>
                 </td>
             </tr>
         </table>
