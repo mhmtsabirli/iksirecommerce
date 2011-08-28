@@ -40,6 +40,8 @@
                             </telerik:RadTab>
                             <telerik:RadTab Text="Ödeme Bilgleri" PageViewID="RadPageView3">
                             </telerik:RadTab>
+                            <telerik:RadTab Text="Fatura Bilgileri" PageViewID="RadPageView4">
+                            </telerik:RadTab>
                         </Tabs>
                     </telerik:RadTabStrip>
                     <telerik:RadMultiPage ID="RadMultiPage1" runat="server">
@@ -131,7 +133,7 @@
                                 </tr>
                             </table>
                         </telerik:RadPageView>
-                        <telerik:RadPageView ID="RadPageView2" runat="server" >
+                        <telerik:RadPageView ID="RadPageView2" runat="server">
                             <div id="dvAdress" runat="server" visible="false">
                                 <table>
                                     <tr>
@@ -213,7 +215,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Fiyat">
                                         <ItemTemplate>
-                                            <asp:Label runat="server" ID="lblPrice" Text='<%# Eval("ProductPrice.Price")%>'></asp:Label>
+                                            <asp:Label runat="server" ID="lblPrice" Text='<%# Eval("ItemPrice")%>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Mikarı">
@@ -221,11 +223,10 @@
                                             <asp:Label runat="server" ID="lblCount" Text='<%# Eval("Count")%>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                   
                                 </Columns>
                             </asp:GridView>
                         </telerik:RadPageView>
-                        <telerik:RadPageView ID="RadPageView3" runat="server" >
+                        <telerik:RadPageView ID="RadPageView3" runat="server">
                             <table>
                                 <tr>
                                     <td colspan="4">
@@ -397,6 +398,67 @@
                                 </tr>
                             </table>
                         </telerik:RadPageView>
+                        <telerik:RadPageView ID="RadPageView4" runat="server">
+                            <table>
+                                <tr>
+                                    <td colspan="4">
+                                        <strong>Fatura Bilgileri</strong> (Fatura Adres Bilgileri)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Fatura Adres Detayı
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblBillingDetail"></asp:Label>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        İl
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblBillingCity"></asp:Label>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        İlçe
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblBillingDistrict"></asp:Label>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Posta Kodu
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblBillingPostalCode"></asp:Label>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                        </telerik:RadPageView>
                     </telerik:RadMultiPage>
                     <table>
                         <tr>
@@ -471,7 +533,7 @@
                                                 <asp:Label runat="server" ID="lblPaymentType" Text='<%# Eval("PaymetInfo.PaymentType.Value")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                             <asp:TemplateField HeaderText="Durumu">
+                                        <asp:TemplateField HeaderText="Durumu">
                                             <ItemTemplate>
                                                 <asp:Label runat="server" ID="lblStatus" Text='<%# Eval("Status.Value")%>'></asp:Label>
                                             </ItemTemplate>
