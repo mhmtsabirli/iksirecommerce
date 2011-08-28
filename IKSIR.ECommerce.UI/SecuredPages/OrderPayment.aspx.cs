@@ -209,10 +209,13 @@ namespace IKSIR.ECommerce.UI.Pages
                     if (retValueSendMail)
                     {
                         Response.Redirect("Order.aspx");
+                      
                     }
                     else
                     {
-                        divAlert.InnerHtml = "Mail Gitmedi";
+                        Session.Add("IsSend", 0);
+                        Response.Redirect("Order.aspx");
+                       
                     }
                 }
             }
