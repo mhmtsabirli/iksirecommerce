@@ -20,6 +20,7 @@ namespace IKSIR.ECommerce.UI.ClassLibrary
                 BasketItem basketItem = new BasketItem();
                 basketItem.Product = ProductData.Get(productId);
                 basketItem.ProductPrice = ProductPriceData.GetByProduct(productId);
+                basketItem.ItemPrice = basketItem.ProductPrice.Price * count;
                 basketItem.Count = count;
                 basket.BasketItems = new List<BasketItem>();
                 basket.BasketItems.Add(basketItem);
@@ -42,6 +43,7 @@ namespace IKSIR.ECommerce.UI.ClassLibrary
                     BasketItem basketItem = new BasketItem();
                     basketItem.Product = ProductData.Get(productId);
                     basketItem.ProductPrice = ProductPriceData.GetByProduct(productId);
+                    basketItem.ItemPrice = basketItem.ProductPrice.Price * count;
                     basketItem.Count = count;
                     basket.BasketItems.Add(basketItem);
                 }
