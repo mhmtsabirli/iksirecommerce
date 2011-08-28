@@ -68,6 +68,15 @@ namespace IKSIR.ECommerce.Management.Order
             {
                 divAlert.InnerHtml = "<span style=\"color:Red\">Ürün Genel bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
             }
+            if (GetBillingInfo(itemOrder.Basket.BillingAddress))
+            {
+                divAlert.InnerHtml = "<span style=\"color:Green\">Müşteri bilgileri başarıyla yüklendi.</span><br />";
+                retValue = true;
+            }
+            else
+            {
+                divAlert.InnerHtml = "<span style=\"color:Red\">Ürün Genel bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
+            }
             lbltotalPrice.Text = itemOrder.TotalPrice.ToString();
             lbltotalRatedPrice.Text = itemOrder.TotalRatedPrice.ToString();
             lblId.Text = itemOrder.Id.ToString();
@@ -151,6 +160,30 @@ namespace IKSIR.ECommerce.Management.Order
                 IsOk = false;
             }
             return IsOk;
+        }
+
+        private bool GetBillingInfo(Address address)
+        {
+            bool isOk = false;
+            try
+            {
+                string City = address.City.Name.ToString();
+                string District = address.District.Name.ToString();
+                string AddressDetail = address.AddressDetail.ToString();
+                string PostalCode = address.PostalCode.ToString();
+                lblBillingCity.Text = City;
+                lblBillingDetail.Text = District;
+                lblBillingDetail.Text = AddressDetail;
+                lblBillingPostalCode.Text = PostalCode;
+
+                isOk = true;
+            }
+            catch
+            {
+                isOk = false;
+            }
+
+            return isOk;
         }
 
         private void GetList()
@@ -336,6 +369,7 @@ namespace IKSIR.ECommerce.Management.Order
             GetItem(itemId);
 
         }
+
         protected void lbtnAddress_Click(object sender, EventArgs e)
         {
             var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
@@ -349,15 +383,18 @@ namespace IKSIR.ECommerce.Management.Order
             {
                 if (basketItem.Id == itemId)
                 {
-                    string City = basketItem.ShippingAddress.City.Name.ToString();
-                    string District = basketItem.ShippingAddress.District.Name.ToString();
-                    string AddressDetail = basketItem.ShippingAddress.AddressDetail.ToString();
-                    string PostalCode = basketItem.ShippingAddress.PostalCode.ToString();
-                    dvAdress.Visible = true;
-                    lblCity.Text = City;
-                    lblDetail.Text = District;
-                    lblDetail.Text = AddressDetail;
-                    lblPostalCode.Text = PostalCode;
+                    if (basketItem.ShippingAddress.City != null)
+                    {
+                        string City = basketItem.ShippingAddress.City.Name.ToString();
+                        string District = basketItem.ShippingAddress.District.Name.ToString();
+                        string AddressDetail = basketItem.ShippingAddress.AddressDetail.ToString();
+                        string PostalCode = basketItem.ShippingAddress.PostalCode.ToString();
+                        dvAdress.Visible = true;
+                        lblCity.Text = City;
+                        lblDetail.Text = District;
+                        lblDetail.Text = AddressDetail;
+                        lblPostalCode.Text = PostalCode;
+                    }
                 }
             }
         }
