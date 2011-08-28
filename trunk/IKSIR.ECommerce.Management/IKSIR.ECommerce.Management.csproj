@@ -71,6 +71,7 @@
     <Content Include="Bank\BinNumbers.aspx" />
     <Content Include="Bank\CreditCards.aspx" />
     <Content Include="Common\ContactForm.aspx" />
+    <Content Include="Common\NewsLetter.aspx" />
     <Content Include="Common\NewsFromUs.aspx" />
     <Content Include="Common\Shipment.aspx" />
     <Content Include="Common\StaticPages.aspx" />
@@ -158,6 +159,13 @@
     </Compile>
     <Compile Include="Common\ContactForm.aspx.designer.cs">
       <DependentUpon>ContactForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\NewsLetter.aspx.cs">
+      <DependentUpon>NewsLetter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\NewsLetter.aspx.designer.cs">
+      <DependentUpon>NewsLetter.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\NewsFromUs.aspx.cs">
       <DependentUpon>NewsFromUs.aspx</DependentUpon>
