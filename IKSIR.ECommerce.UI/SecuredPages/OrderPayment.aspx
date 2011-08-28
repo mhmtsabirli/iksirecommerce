@@ -20,86 +20,151 @@
                     <br />
                     <table>
                         <asp:Repeater runat="server" ID="rptBasketProducts" OnItemDataBound="rptBasketProducts_ItemDataBound">
-                        <HeaderTemplate>
-                            <tr>
-                                <td class="table_header">
-                                    Ürün
-                                </td>
-                                <td class="table_header">
-                                    Adet
-                                </td>
-                                <td class="table_header">
-                                    Tutar
-                                </td>
-                                <td class="table_header">
-                                    Toplam
-                                </td>
-                            </tr>
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <tr>
-                                <td colspan="4">
-                                    <a href='<%# String.Format("ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
-                                        target="_blank">
-                                        <%# Eval("Product.ProductCategory.Title")%>
-                                        /
-                                        <%# Eval("Product.Title")%>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="table_first">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <asp:HiddenField runat="server" ID="hdnProductId" Value='<%# Eval("Product.Id")%>' />
-                                                <a href='<%# String.Format("ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
-                                                    target="_blank">
-                                                    <asp:Image runat="server" ID="imgProduct" ImageUrl='<%# Eval("Product.MainImage", "http://banyom.com.tr/documents/Images/Small/small_{0:C}")%>'
-                                                        BorderWidth="0  " />
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <table>
-                                                    <asp:Repeater runat="server" ID="rptProductProperties">
-                                                        <ItemTemplate>
-                                                            <tr>
-                                                                <td>
-                                                                    <%# Eval("Property.Title")%></strong>
-                                                                </td>
-                                                                <td>
-                                                                    :
-                                                                </td>
-                                                                <td>
-                                                                    <%# Eval("Value")%>
-                                                                </td>
-                                                            </tr>
-                                                        </ItemTemplate>
-                                                    </asp:Repeater>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="table_second">
-                                    <asp:DropDownList ID="ddlItemCount" Enabled="false" runat="server"
-                                        ToolTip='<%# Eval("Product.Id")%>' AutoPostBack="true">
-                                    </asp:DropDownList>
-                                </td>
-                                <td class="table_third">
-                                    <p>
-                                        <%# Eval("ProductPrice.UnitPrice")%>
-                                        TL</p>
-                                </td>
-                                <td class="table_fourth">
-                                    <p>
-                                        <%# Eval("BasketItemPrice")%>
-                                        TL</p>
-                                </td>
-                            </tr>
-                        </ItemTemplate>
-                    </asp:Repeater>
+                            <HeaderTemplate>
+                                <tr>
+                                    <td class="table_header">
+                                        Ürün
+                                    </td>
+                                    <td class="table_header">
+                                        Adet
+                                    </td>
+                                    <td class="table_header">
+                                        Tutar
+                                    </td>
+                                    <td class="table_header">
+                                        Toplam
+                                    </td>
+                                </tr>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <tr>
+                                    <td colspan="4">
+                                        <a href='<%# String.Format("ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
+                                            target="_blank">
+                                            <%# Eval("Product.ProductCategory.Title")%>
+                                            /
+                                            <%# Eval("Product.Title")%>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="table_first">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <asp:HiddenField runat="server" ID="hdnProductId" Value='<%# Eval("Product.Id")%>' />
+                                                    <a href='<%# String.Format("ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
+                                                        target="_blank">
+                                                        <asp:Image runat="server" ID="imgProduct" ImageUrl='<%# Eval("Product.MainImage", "http://banyom.com.tr/documents/Images/Small/small_{0:C}")%>'
+                                                            BorderWidth="0  " />
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <table>
+                                                        <asp:Repeater runat="server" ID="rptProductProperties">
+                                                            <ItemTemplate>
+                                                                <tr>
+                                                                    <td>
+                                                                        <%# Eval("Property.Title")%></strong>
+                                                                    </td>
+                                                                    <td>
+                                                                        :
+                                                                    </td>
+                                                                    <td>
+                                                                        <%# Eval("Value")%>
+                                                                    </td>
+                                                                </tr>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td class="table_second">
+                                        <asp:DropDownList ID="ddlItemCount" Enabled="false" runat="server" ToolTip='<%# Eval("Product.Id")%>'
+                                            AutoPostBack="true">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td class="table_third">
+                                        <p>
+                                            <%# Eval("ProductPrice.UnitPrice")%>
+                                            TL</p>
+                                    </td>
+                                    <td class="table_fourth">
+                                        <p>
+                                            <%# Eval("BasketItemPrice")%>
+                                            TL</p>
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" align="right" style="text-align: right;">
+                    <div class="sepet_content_footer" id="divBasketTotal" runat="server" style="float: right">
+                        <div style="float: right!important; text-align: right;">
+                            <br />
+                            <strong>Sepet Toplamı:</strong>
+                            <br />
+                            <table>
+                                <tr>
+                                    <td>
+                                        Kargo Tutarı
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <strong>
+                                            <asp:Label runat="server" ID="lblShippingPrice"></asp:Label>
+                                            TL</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Toplam Ürün Tutarı
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <strong>
+                                            <asp:Label runat="server" ID="lblTotalPrice"></asp:Label>
+                                            TL</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Toplam KDV
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <strong>
+                                            <asp:Label runat="server" ID="lblTotalTax"></asp:Label>
+                                            TL</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Toplam Ödenecek Tutar
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <strong>
+                                            <asp:Label runat="server" ID="lblBasketTotal"></asp:Label>
+                                            TL</strong>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -107,85 +172,119 @@
                     <table width="100%">
                         <tr>
                             <td colspan="2">
-                               <strong>Ödeme seçenekleri</strong>
+                                <strong>Ödeme seçenekleri</strong>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <a href="#">Havale</a>
+                                <a href="#">Ödeme Tipi</a>
                             </td>
                             <td>
-                                <a href="#">Kredi Kartı</a>
+                                <asp:DropDownList runat="server" ID="ddlPaymentType" AutoPostBack="true" OnSelectedIndexChanged="ddlPaymentType_SelectedIndexChanged">
+                                </asp:DropDownList>
                             </td>
                         </tr>
                         <tr>
-                            <td valign="top">
-                                <asp:RadioButtonList runat="server" ID="rblTransferAccount">
-                                </asp:RadioButtonList>
-                            </td>
-                            <td valign="top">
-                                <strong>Kredi Kartı bilgileri:</strong>
-                                <br />
-                                <table>
-                                    <tr>
-                                        <td>
-                                            Kart Üzerindeki İsim
-                                        </td>
-                                        <td>
-                                            :
-                                        </td>
-                                        <td>
-                                            <asp:TextBox runat="server" ID="txtCustomerName"></asp:TextBox>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Kart Numarası
-                                        </td>
-                                        <td>
-                                            :
-                                        </td>
-                                        <td>
-                                            <asp:TextBox runat="server" ID="txtCreditCardNumber"></asp:TextBox>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Son Kullanma Tarihi
-                                        </td>
-                                        <td>
-                                            :
-                                        </td>
-                                        <td>
-                                            <asp:DropDownList runat="server" ID="ddlMonth">
-                                                <asp:ListItem Text="1" Value="1"></asp:ListItem>
-                                            </asp:DropDownList>
-                                            &nbsp;
-                                            <asp:DropDownList runat="server" ID="ddlYear">
-                                                <asp:ListItem Text="1" Value="1"></asp:ListItem>
-                                            </asp:DropDownList>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            CVC2
-                                        </td>
-                                        <td>
-                                            :
-                                        </td>
-                                        <td>
-                                            <asp:TextBox runat="server" ID="txtCvv2" Width="20px"></asp:TextBox>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td colspan="2">
+                                <div id="DvTransferAccount" runat="server" visible="false">
+                                    <asp:RadioButtonList runat="server" ID="rblTransferAccount">
+                                    </asp:RadioButtonList>
+                                </div>
+                                <div id="DvCreditCard" runat="server" visible="false">
+                                    <strong>Kredi Kartı bilgileri:</strong>
+                                    <br />
+                                    <br />
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                Kredi Kartı
+                                            </td>
+                                            <td>
+                                                :
+                                            </td>
+                                            <td>
+                                                <asp:DropDownList runat="server" ID="ddlCreditCard" AutoPostBack="true" OnSelectedIndexChanged="ddlCreditCard_SelectedIndexChanged">
+                                                </asp:DropDownList>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Taksit / Vade
+                                            </td>
+                                            <td>
+                                                :
+                                            </td>
+                                            <td>
+                                                <asp:DropDownList runat="server" ID="ddlCreditCardMonth">
+                                                </asp:DropDownList>
+                                                <asp:Label runat="server" ID="lblRate"></asp:Label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Kart Üzerindeki İsim
+                                            </td>
+                                            <td>
+                                                :
+                                            </td>
+                                            <td>
+                                                <asp:TextBox runat="server" ID="txtCustomerName"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Kart Numarası
+                                            </td>
+                                            <td>
+                                                :
+                                            </td>
+                                            <td>
+                                                <asp:TextBox runat="server" ID="txtCreditCardNumber"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Son Kullanma Tarihi
+                                            </td>
+                                            <td>
+                                                :
+                                            </td>
+                                            <td>
+                                                <asp:DropDownList runat="server" ID="ddlMonth">
+                                                    <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                                </asp:DropDownList>
+                                                &nbsp;
+                                                <asp:DropDownList runat="server" ID="ddlYear">
+                                                    <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                CVC2
+                                            </td>
+                                            <td>
+                                                :
+                                            </td>
+                                            <td>
+                                                <asp:TextBox runat="server" ID="txtCvv2" Width="20px"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </td>
                         </tr>
                     </table>
                 </td>
             </tr>
             <tr>
+                Blgi:<br />
+                <div id="divAlert" runat="server" class="scrolledDiv">
+                </div>
+            </tr>
+            <tr>
                 <td align="center">
-                    &nbsp;<a href="OrderShipping.aspx"><img src="../images/sepet_end_devam.jpg" alt="" /></a>
+                    <asp:ImageButton ID="btnApprove" runat="server" OnClick="btnApprove_Click" ImageUrl="../images/sepet_end_devam.jpg" />
                 </td>
             </tr>
         </table>
