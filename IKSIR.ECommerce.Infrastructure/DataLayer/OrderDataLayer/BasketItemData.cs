@@ -31,6 +31,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.ShippingAddress = BasketAddressData.Get(DBHelper.IntValue(dr["ShippingAddressId"].ToString()));
                 returnValue.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
                 returnValue.ProductPrice = BasketItemProductPriceData.GetByProductId(DBHelper.IntValue(dr["ProductId"].ToString()));
+                returnValue.Count = DBHelper.IntValue(dr["Count"].ToString());
+                returnValue.ItemPrice = DBHelper.DecValue(dr["BasketItemPrice"].ToString());
             }
             dr.Close();
             return returnValue;
@@ -44,6 +46,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemBasketItem.CreateAdminId)));
             parameters.Add(new SqlParameter("@BasketId", DBHelper.IntValue(itemBasketItem.Basket.Id)));
             parameters.Add(new SqlParameter("@ProductId", DBHelper.IntValue(itemBasketItem.Product.Id)));
+            parameters.Add(new SqlParameter("@Count", DBHelper.IntValue(itemBasketItem.Count)));
+            parameters.Add(new SqlParameter("@BasketItemPrice", DBHelper.DecValue(itemBasketItem.ItemPrice)));
             //parameters.Add(new SqlParameter("@ShippingAddressId", DBHelper.IntValue(itemBasketItem.ShippingAddress.Id))); 
             //Basket Item Bazında kargolamayı şimdilik kaldırıyoruz. => Ayhant
             parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemBasketItem.Status.Id)));
@@ -64,6 +68,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@ProductId", DBHelper.IntValue(itemBasketItem.Product.Id)));
             parameters.Add(new SqlParameter("@ShippingAddressId", DBHelper.IntValue(itemBasketItem.ShippingAddress.Id)));
             parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemBasketItem.Status.Id)));
+            parameters.Add(new SqlParameter("@Count", DBHelper.IntValue(itemBasketItem.Count)));
+            parameters.Add(new SqlParameter("@BasketItemPrice", DBHelper.DecValue(itemBasketItem.ItemPrice)));
             parameters[0].Direction = ParameterDirection.Output;
 
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveBasketItem", parameters);
@@ -83,13 +89,14 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
         public static List<BasketItem> GetList(int basketId)
         {
             List<BasketItem> returnValue = null;
-            var basketItem = new BasketItem();
+            
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@BasketId", basketId));
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetBasketItem", parameters);
             returnValue = new List<BasketItem>(); 
             while (dr.Read())
             {
+                var basketItem = new BasketItem();
                 basketItem.Id = DBHelper.IntValue(dr["Id"].ToString());
                 basketItem.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 basketItem.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
@@ -99,6 +106,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 basketItem.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
                 basketItem.ShippingAddress = BasketAddressData.Get(DBHelper.IntValue(dr["ShippingAddressId"].ToString()));
                 basketItem.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
+                basketItem.Count = DBHelper.IntValue(dr["Count"].ToString());
+                basketItem.ItemPrice = DBHelper.DecValue(dr["BasketItemPrice"].ToString());
                 returnValue.Add(basketItem);
             }
             dr.Close();
