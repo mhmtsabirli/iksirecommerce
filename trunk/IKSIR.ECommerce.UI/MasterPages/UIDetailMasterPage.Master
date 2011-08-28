@@ -12,6 +12,8 @@
     <title>İdevit</title>
     <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="../js/highslide.js"></script>
+    <script type="text/javascript" src="../js/highslide_video.js"></script>
+
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/highslide.css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
