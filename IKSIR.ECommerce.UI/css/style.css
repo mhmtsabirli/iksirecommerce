@@ -237,7 +237,7 @@ body
    
    .urun_ozellikleri { float:right; width:316px; height:406px; background:url(../images/urun_ozellikleri_bg.jpg); margin-right:20px; }
       .urun_ozellikleri h2 { margin:13px 0 7px 40px; font:normal 14px arial; color:#FFF; }
-	  .urun_fiyat { padding:20px 0; font:normal 40px arial; color:#D6D6D6; text-align:center; }
+	  .urun_fiyat { padding:20px 0; font:normal 35px arial; color:#D6D6D6; text-align:center; }
 	  .urun_table { padding:0 0 0 30px; height:225px; }
 	     .urun_table td { width:120px; font:normal 13px trebuchet ms; color:#888; padding-top:7px; }
 		 .urun_table_right { text-align:right; color:#333333; }

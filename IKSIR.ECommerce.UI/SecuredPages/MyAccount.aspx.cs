@@ -17,7 +17,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
 {
     public partial class MyAccount : System.Web.UI.Page
     {
-        public static User loginUser = null;
+        public User loginUser = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -173,6 +173,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
 
         protected void btnUserInfoSave_Click(object sender, EventArgs e)
         {
+            loginUser = (User)Session["LOGIN_USER"];
             User itemUser = loginUser;
             itemUser.Id = loginUser.Id;
             itemUser.FirstName = txtUserInfoFirstName.Text;
@@ -196,6 +197,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
 
         protected void btnChangePassword_Click(object sender, EventArgs e)
         {
+            loginUser = (User)Session["LOGIN_USER"];
             User itemUser = loginUser;
             itemUser.Password = txtChangePassword_Password.Text;
             int retValue = UserData.Update(itemUser);
@@ -453,6 +455,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
 
         private void GetAddresses()
         {
+            loginUser = (User)Session["LOGIN_USER"];
             List<Address> itemList = AddressData.GetMembershipAddresses(loginUser.Id);
             gvList.DataSource = itemList;
             gvList.DataBind();
@@ -460,6 +463,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
 
         private void GetUserInfos()
         {
+            loginUser = (User)Session["LOGIN_USER"];
             BindUserInfosForm();
             var itemUser = new User();
             itemUser = UserData.Get(loginUser.Id);
@@ -498,6 +502,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
 
         private void GetUserFavoriteProducts()
         {
+            loginUser = (User)Session["LOGIN_USER"];
             List<UserFavoriteProduct> userFavoriteProductList = UserFavoriteProductData.GetList(loginUser.Id);
             if (userFavoriteProductList != null && userFavoriteProductList.Count > 1)
             {
@@ -525,6 +530,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             bool retValue = false;
             try
             {
+                loginUser = (User)Session["LOGIN_USER"];
                 var addressItem = new Address();
                 addressItem.Id = id;
                 addressItem.User = new Model.MembershipModel.User() { Id = loginUser.Id };
@@ -613,6 +619,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
 
         private void AddToFavoriteList(int favoritproductid)
         {
+            loginUser = (User)Session["LOGIN_USER"];
             UserFavoriteProduct userFavoriteProduct = new UserFavoriteProduct();
             userFavoriteProduct.UserId = loginUser.Id;
             userFavoriteProduct.Product = new Model.ProductModel.Product() { Id = favoritproductid };

@@ -15,7 +15,7 @@ namespace IKSIR.ECommerce.UI.UserControls
 {
     public partial class UCProductDetailsMain : UCProductDetailsMaster
     {
-        public static User loginUser = null;
+        public User loginUser = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack && productId != 0)
@@ -75,9 +75,9 @@ namespace IKSIR.ECommerce.UI.UserControls
                 lblProductName.Text = product.Title;
                 lblProductWarranty.Text = product.Guarantee.ToString() + " Yıl";
                 lblProductStock.Text = product.Stok.ToString();
-                lblProductPrice.Text = product.ProductPrice.UnitPrice.ToString();
-                lblProductPriceWithKDV.Text = product.ProductPrice.Price.ToString();
-                lblBigProductPrice.Text = product.ProductPrice.Price.ToString();
+                lblProductPrice.Text = Toolkit.Utility.CurrencyFormat(product.ProductPrice.UnitPrice);
+                lblProductPriceWithKDV.Text = Toolkit.Utility.CurrencyFormat(product.ProductPrice.Price);
+                lblBigProductPrice.Text = Toolkit.Utility.CurrencyFormat(product.ProductPrice.Price);
                 imgBtnAddToBasket.CommandArgument = product.Id.ToString();
                 imgBtnBuyNow.CommandArgument = product.Id.ToString();
                 for (int i = 1; i <= product.MaxQuantity; i++)
