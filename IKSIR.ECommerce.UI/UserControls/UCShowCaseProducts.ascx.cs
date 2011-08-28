@@ -9,6 +9,7 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.UI.ClassLibrary;
+using IKSIR.ECommerce.Model.ProductModel;
 
 namespace IKSIR.ECommerce.UI.UserControls
 {
@@ -30,16 +31,45 @@ namespace IKSIR.ECommerce.UI.UserControls
         private void GetItems()
         {
             var itemModuleProductList = ModuleProductData.GetModuleProductList(moduleId);
-            if (itemModuleProductList.Count > 6)
+
+            int k = 6; // items to select
+            var selected = new List<Product>();
+            var needed = 6;
+            var available = itemModuleProductList.Count;
+            var rand = new Random();
+            //while (selected.Count < k)
+            //{
+            //    if (rand.NextDouble() < needed / available)
+            //    {
+            //        selected.Add(itemModuleProductList[available - 1]);
+            //        needed--;
+            //    }
+            //    available--;
+            //}
+
+            int count = 0;
+            while (count < 6)
             {
-                anchorContinue.Visible = true;
-                anchorContinue.HRef = "../Pages/ProductList.aspx?modid=" + moduleId.ToString() + "&p=2";
+                Random number = new Random();
+                int randnum = number.Next(itemModuleProductList.Count);
+                var item = itemModuleProductList.ElementAt(randnum);
+                if (selected.Where(x => x.Id == item.Id).FirstOrDefault() != null)
+                    continue;
+                else
+                    selected.Add(item);
+                count++;
             }
-            else
-            {
-                anchorContinue.Visible = false;
-            }
-            dlShowCaseProducts.DataSource = itemModuleProductList.Take(6);
+
+            //if (itemModuleProductList.Count > 6)
+            //{
+            //    anchorContinue.Visible = true;
+            //    anchorContinue.HRef = "../Pages/ProductList.aspx?modid=" + moduleId.ToString() + "&p=2";
+            //}
+            //else
+            //{
+            //    anchorContinue.Visible = false;
+            //}
+            dlShowCaseProducts.DataSource = selected;
             dlShowCaseProducts.DataBind();
 
             foreach (DataListItem item in dlShowCaseProducts.Items)

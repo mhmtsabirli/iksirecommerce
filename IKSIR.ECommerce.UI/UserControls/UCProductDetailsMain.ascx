@@ -12,9 +12,14 @@
             var image = $(this).attr("rel");
             $('#image').hide();
             $('#image').fadeIn('slow');
-            $('#image').html('<img src="' + image + '"/>');
+            $('#image').html('<img src="http://banyom.com.tr/documents/Images/Big/big_' + image + '"/>');
+            //debugger;
+            $('#anchorBigImage').attr("href", "http://banyom.com.tr/documents/Orginal/Images/" + image);
             return false;
         });
+    });
+    Shadowbox.init({
+        modal: true
     });
 </script>
 <style type="text/javascript">
@@ -23,6 +28,10 @@
         border: 4px #666 solid;
         height: 250px;
         width: 350px;
+    }
+    #image img
+    {
+        border: none;
     }
     .thumb
     {
@@ -33,12 +42,12 @@
 </style>
 <div class="urun_resimleri">
     <div class="urun_buyuk_resim" style="float: left;">
-        <div id="image" style="height: 250px; width: 350px; background-color: Gray; border: 4px #666 solid;
-            text-align: center;">
-            <a runat="server" id="anchorBigImage">
-                <img runat="server" id="imgBig" style="border: none;" alt="Ana Resim" />
-            </a>
-        </div>
+            <div id="image" style="height: 250px; width: 350px; background-color: Gray; border: 4px #666 solid;
+                text-align: center;">
+                <a id="anchorBigImage" rel="shadowbox" title="Orjinal Boyut">
+                    <img runat="server" id="imgBig" alt="Ana Resim" />
+                </a>
+            </div>
         <br />
         <div runat="server" id="divSmallImages">
         </div>

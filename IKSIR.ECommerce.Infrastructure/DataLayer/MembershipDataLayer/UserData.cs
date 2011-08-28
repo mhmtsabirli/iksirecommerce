@@ -143,24 +143,19 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
 
             parameters.Add(new SqlParameter("@Id", DBHelper.IntValue(itemUser.Id)));
-            parameters.Add(new SqlParameter("@FirstName", DBHelper.StringValue(itemUser.FirstName)));
+            parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemUser.EditAdminId)));
             parameters.Add(new SqlParameter("@UserName", DBHelper.StringValue(itemUser.UserName)));
+            parameters.Add(new SqlParameter("@FirstName", DBHelper.StringValue(itemUser.FirstName)));
             parameters.Add(new SqlParameter("@LastName", DBHelper.StringValue(itemUser.LastName)));
             parameters.Add(new SqlParameter("@EMail", DBHelper.StringValue(itemUser.Email)));
+            parameters.Add(new SqlParameter("@BirthDate", DBHelper.DateValue(itemUser.BirthDate)));
             parameters.Add(new SqlParameter("@MobilePhone", DBHelper.StringValue(itemUser.MobilePhone)));
             parameters.Add(new SqlParameter("@TcId", DBHelper.StringValue(itemUser.TcId)));
             parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemUser.Status)));
             if (itemUser.Site != null)
                 parameters.Add(new SqlParameter("@SiteId", DBHelper.IntValue(itemUser.Site.Id)));
             parameters.Add(new SqlParameter("@Password", DBHelper.StringValue(itemUser.Password)));
-            parameters.Add(new SqlParameter("@BirthDate", DBHelper.DateValue(itemUser.BirthDate)));
-            parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemUser.CreateAdminId)));
-
-            parameters[0].Direction = ParameterDirection.Output;
-
-            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateUser", parameters));
-
-            int.TryParse(parameters[0].Value.ToString(), out returnValue);
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateUser", parameters));
             return returnValue;
         }
         public static int Delete(User itemUser)
