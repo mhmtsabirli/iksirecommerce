@@ -31,6 +31,11 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                     orders = (Model.Order.Order)HttpContext.Current.Session["USER_ORDER"];
                     GetOrderBasket();
                 }
+                if (Session["IsSend"] != null && Session["IsSend"] != "")
+                {
+                    if (Session["IsSend"].ToString() == "0")
+                        IsSendMail.Visible = true;
+                }
             }
             else
             {
