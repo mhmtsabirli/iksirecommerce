@@ -162,6 +162,19 @@
                                             TL</strong>
                                     </td>
                                 </tr>
+                                 <tr>
+                                    <td>
+                                        Taksit Sayısı
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <strong>
+                                            <asp:Label runat="server" ID="lblMonth"></asp:Label>
+                                            </strong>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -215,7 +228,7 @@
                                                 :
                                             </td>
                                             <td>
-                                                <asp:DropDownList runat="server" ID="ddlCreditCardMonth">
+                                                <asp:DropDownList runat="server" ID="ddlCreditCardMonth" AutoPostBack="true" OnSelectedIndexChanged="ddlCreditCardMonth_SelectedIndexChanged">
                                                 </asp:DropDownList>
                                                 <asp:Label runat="server" ID="lblRate"></asp:Label>
                                             </td>
