@@ -274,7 +274,6 @@
     </Compile>
     <Compile Include="Pages\OrderAddress.aspx.cs">
       <DependentUpon>OrderAddress.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\OrderAddress.aspx.designer.cs">
       <DependentUpon>OrderAddress.aspx</DependentUpon>
