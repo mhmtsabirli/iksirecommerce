@@ -45,12 +45,12 @@ namespace IKSIR.ECommerce.UI.UserControls
                 if (itemMainImage != null)
                 {
                     //imgMainImage.ImageUrl = 
-                    //anchorBigImage.HRef = "http://banyom.com.tr/documents/Orginal/Images/" + itemMainImage.FilePath;
+                    anchorBigImage.HRef = "http://banyom.com.tr/documents/Orginal/Images/" + itemMainImage.FilePath;
                     imgBig.Src = "http://banyom.com.tr/documents/Images/Big/big_" + itemMainImage.FilePath;
                 }
                 else
                 {
-                    //anchorBigImage.HRef = "#";
+                    anchorBigImage.HRef = "#";
                     imgBig.Src = "";
                 }
 

@@ -54,7 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\shadowbox.css" />
+    <Content Include="css\highslide.css" />
     <Content Include="css\style.css" />
     <Content Include="Global.asax" />
     <Content Include="images\advertise.jpg" />
@@ -73,6 +73,30 @@
     <Content Include="images\header_bg.png" />
     <Content Include="images\header_search_bg.png" />
     <Content Include="images\hemenal.png" />
+    <Content Include="images\highslide\close.png" />
+    <Content Include="images\highslide\closeX.png" />
+    <Content Include="images\highslide\controlbar-black-border.gif" />
+    <Content Include="images\highslide\controlbar-text-buttons.png" />
+    <Content Include="images\highslide\controlbar-white-small.gif" />
+    <Content Include="images\highslide\controlbar-white.gif" />
+    <Content Include="images\highslide\controlbar2.gif" />
+    <Content Include="images\highslide\controlbar3.gif" />
+    <Content Include="images\highslide\controlbar4-hover.gif" />
+    <Content Include="images\highslide\controlbar4.gif" />
+    <Content Include="images\highslide\fullexpand.gif" />
+    <Content Include="images\highslide\geckodimmer.png" />
+    <Content Include="images\highslide\icon.gif" />
+    <Content Include="images\highslide\loader.gif" />
+    <Content Include="images\highslide\loader.white.gif" />
+    <Content Include="images\highslide\outlines\beveled.png" />
+    <Content Include="images\highslide\outlines\drop-shadow.png" />
+    <Content Include="images\highslide\outlines\glossy-dark.png" />
+    <Content Include="images\highslide\outlines\outer-glow.png" />
+    <Content Include="images\highslide\outlines\rounded-black.png" />
+    <Content Include="images\highslide\outlines\rounded-white.png" />
+    <Content Include="images\highslide\resize.gif" />
+    <Content Include="images\highslide\scrollarrows.png" />
+    <Content Include="images\highslide\zoomin.cur" />
     <Content Include="images\logo.jpg" />
     <Content Include="images\maintence.jpg" />
     <Content Include="images\navbar_bg.png" />
@@ -97,14 +121,6 @@
     <Content Include="images\sepet_end_iptal.jpg" />
     <Content Include="images\sepet_sepet.jpg" />
     <Content Include="images\sepet_thumb.png" />
-    <Content Include="images\shadowbox\close.png" />
-    <Content Include="images\shadowbox\expressInstall.swf" />
-    <Content Include="images\shadowbox\loading.gif" />
-    <Content Include="images\shadowbox\next.png" />
-    <Content Include="images\shadowbox\pause.png" />
-    <Content Include="images\shadowbox\play.png" />
-    <Content Include="images\shadowbox\player.swf" />
-    <Content Include="images\shadowbox\previous.png" />
     <Content Include="images\sidebar_advertisement.jpg" />
     <Content Include="images\sidebar_advertisement.png" />
     <Content Include="images\sidebar_bottom.jpg" />
@@ -151,8 +167,8 @@
     <Content Include="images\urun_video.jpg" />
     <Content Include="images\urun_yildiz.png" />
     <Content Include="images\zoomloader.gif" />
+    <Content Include="js\highslide.js" />
     <Content Include="js\jquery-1.4.2.min.js" />
-    <Content Include="js\shadowbox.js" />
     <Content Include="MailTemplates\ForgotPassword.htm" />
     <Content Include="MailTemplates\MembershipRegister.htm" />
     <Content Include="MailTemplates\OrderResultMail.htm" />
@@ -175,9 +191,6 @@
     <Content Include="Pages\ProductDetails.aspx" />
     <Content Include="Pages\ProductList.aspx" />
     <Content Include="SecuredPages\Register.aspx" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="UserControls\UCLogin.ascx" />
     <Content Include="UserControls\UCShowCaseProducts.ascx" />
     <Content Include="UserControls\UCModuleProducts.ascx" />
@@ -496,6 +509,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SecuredPages\UIDetailSecuredMasterPage.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\highslide\outlines\Outlines.psd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
