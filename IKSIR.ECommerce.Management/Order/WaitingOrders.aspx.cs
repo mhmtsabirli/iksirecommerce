@@ -16,6 +16,7 @@ using IKSIR.ECommerce.Model.Bank;
 using IKSIR.ECommerce.Toolkit;
 using IKSIR.ECommerce.Model.SiteModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer;
+using System.IO;
 
 namespace IKSIR.ECommerce.Management.Order
 {
@@ -33,6 +34,7 @@ namespace IKSIR.ECommerce.Management.Order
                 BindValues();
                 GetList();
             }
+
         }
 
         private bool GetItem(int itemId)
@@ -40,6 +42,10 @@ namespace IKSIR.ECommerce.Management.Order
             Model.Order.Order itemOrder = OrderData.Get(itemId, 0, new EnumValue() { Id = 0 });
             bool retValue = false;
 
+            formControl(itemOrder);
+
+            txtInvoiceNo.Text = itemOrder.InvoiceNo.ToString();
+            txtShipmentNo.Text = itemOrder.ShippmentNo.ToString();
             pnlForm.Visible = true;
             if (GetCustomerInfo(itemOrder.User))
             {
@@ -77,11 +83,75 @@ namespace IKSIR.ECommerce.Management.Order
             {
                 divAlert.InnerHtml = "<span style=\"color:Red\">Ürün Genel bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
             }
+            if (GetShippingInfo(itemOrder.Basket.ShippingAddress))
+            {
+                divAlert.InnerHtml = "<span style=\"color:Green\">Müşteri bilgileri başarıyla yüklendi.</span><br />";
+                retValue = true;
+            }
+            else
+            {
+                divAlert.InnerHtml = "<span style=\"color:Red\">Ürün Genel bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
+            }
             lbltotalPrice.Text = itemOrder.TotalPrice.ToString();
             lbltotalRatedPrice.Text = itemOrder.TotalRatedPrice.ToString();
             lblId.Text = itemOrder.Id.ToString();
             return retValue;
 
+        }
+
+        private bool GetShippingInfo(Address address)
+        {
+            bool isOk = false;
+            try
+            {
+                if (address != null)
+                {
+                    string City = address.City.Name.ToString();
+                    string District = address.District.Name.ToString();
+                    string AddressDetail = address.AddressDetail.ToString();
+                    string PostalCode = address.PostalCode.ToString();
+
+                    lblCity.Text = City;
+                    lblDistrict.Text = District;
+                    lblDetail.Text = AddressDetail;
+                    lblPostalCode.Text = PostalCode;
+                }
+                isOk = true;
+            }
+            catch
+            {
+                isOk = false;
+            }
+
+            return isOk;
+        }
+
+        private void formControl(Model.Order.Order itemOrder)
+        {
+            txtShipmentNo.Enabled = false;
+            txtInvoiceNo.Enabled = false;
+            btnApprove.Visible = false;
+            btnInvoice.Visible = false;
+            btnShipment.Visible = false;
+            btnOrderApprove.Visible = false;
+            if (itemOrder.Status.Id == 29)
+            {
+                btnApprove.Visible = true;
+            }
+            else if (itemOrder.Status.Id == 32)
+            {
+                txtInvoiceNo.Enabled = true;
+                btnInvoice.Visible = true;
+            }
+            else if (itemOrder.Status.Id == 33)
+            {
+                txtShipmentNo.Enabled = true;
+                btnShipment.Visible = true;
+            }
+            else if (itemOrder.Status.Id == 34)
+            {
+                btnOrderApprove.Visible = true;
+            }
         }
 
         private bool GetPaymentInfo(Model.Bank.PaymetInfo paymetInfo)
@@ -108,7 +178,7 @@ namespace IKSIR.ECommerce.Management.Order
 
                     ddlCreditCard.SelectedValue = paymetInfo.CreditCard.Id.ToString();
                     lblBank.Text = paymetInfo.CreditCard.Bank.Name.ToString();
-                    
+
                     List<PaymetTermRate> ListRates = PaymetTermRateData.GetPaymetTermRateList(paymetInfo.CreditCard.Id);
                     Utility.BindDropDownList(ddlMonth, ListRates, "Month", "Month");
                     ddlMonth.SelectedValue = paymetInfo.SelectedTerm.ToString();
@@ -152,6 +222,7 @@ namespace IKSIR.ECommerce.Management.Order
                 lblFirstName.Text = user.FirstName.ToString();
                 lblLastName.Text = user.LastName.ToString();
                 lblTcIdentity.Text = user.TcId.ToString();
+                lblEmail.Text = user.Email.ToString();
                 lblMobilePhone.Text = user.MobilePhone.ToString();
                 IsOk = true;
             }
@@ -172,7 +243,7 @@ namespace IKSIR.ECommerce.Management.Order
                 string AddressDetail = address.AddressDetail.ToString();
                 string PostalCode = address.PostalCode.ToString();
                 lblBillingCity.Text = City;
-                lblBillingDetail.Text = District;
+                lblBillingDistrict.Text = District;
                 lblBillingDetail.Text = AddressDetail;
                 lblBillingPostalCode.Text = PostalCode;
 
@@ -198,31 +269,121 @@ namespace IKSIR.ECommerce.Management.Order
         {
             Model.Order.Order itemOrder = OrderData.Get(Convert.ToInt32(lblId.Text), 0, new EnumValue() { Id = 0 });
 
-            if (StockControl(itemOrder.Basket.BasketItems))
-            {
-                if (Payment(itemOrder))
-                {
-                    //Mail Gönderilecek =>Tayfun
 
-                    //OrderStatus Update ediliyor
-                    itemOrder.Status = new EnumValue() { Id = 32 };// Ödeme alındı durumuna update ediliyor
-                    int result = OrderData.Update(itemOrder);
-                    if (result == 1)
-                        divAlert.InnerHtml += "<span style=\"color:Red\">Sipariş Durumu güncellenemedi</span><br />";
 
-                    //Stok Güncelleniyor
-                    StokProcess(itemOrder.Basket.BasketItems);
+            //OrderStatus Update ediliyor
+            itemOrder.Status = new EnumValue() { Id = 32 };// Ödeme alındı durumuna update ediliyor
+            int result = OrderData.Update(itemOrder);
+            if (result == 1)
+                divAlert.InnerHtml += "<span style=\"color:Red\">Sipariş Durumu güncellenemedi</span><br />";
 
-                    ClearForm();
-                    pnlForm.Visible = false;
+            //Stok Güncelleniyor
+            ClearForm();
+            pnlForm.Visible = false;
 
-                    divAlert.InnerHtml += "<span style=\"color:Red\">Sipariş Ödeme Onayı alındı durumuna gelmiştir</span><br />";
-                }
+            divAlert.InnerHtml += "<span style=\"color:Red\">Sipariş Ödeme Onayı alındı durumuna gelmiştir</span><br />";
+            GetList();
+        }
+        protected void btnInvoice_Click(object sender, EventArgs e)
+        {
+            Model.Order.Order itemOrder = OrderData.Get(Convert.ToInt32(lblId.Text), 0, new EnumValue() { Id = 0 });
 
-            }
+            //Mail Gönderilecek =>Tayfun
+
+            //OrderStatus Update ediliyor
+            itemOrder.Status = new EnumValue() { Id = 33 };// faturlandı durumuna update ediliyor
+            itemOrder.ShippmentNo = txtShipmentNo.Text;
+            itemOrder.InvoiceNo = txtInvoiceNo.Text;
+            int result = OrderData.Update(itemOrder);
+            if (result == 1)
+                divAlert.InnerHtml += "<span style=\"color:Red\">Sipariş Durumu güncellenemedi</span><br />";
+
+            //Stok Güncelleniyor
+            StokProcess(itemOrder.Basket.BasketItems);
+
+            SendMail(itemOrder);
+            ClearForm();
+            pnlForm.Visible = false;
+
+            divAlert.InnerHtml += "<span style=\"color:Red\">Sipariş faturalandı durumuna gelmiştir</span><br />";
+            GetList();
+        }
+        protected void btnShipment_Click(object sender, EventArgs e)
+        {
+            Model.Order.Order itemOrder = OrderData.Get(Convert.ToInt32(lblId.Text), 0, new EnumValue() { Id = 0 });
+
+
+            //OrderStatus Update ediliyor
+            itemOrder.Status = new EnumValue() { Id = 34 };// faturlandı durumuna update ediliyor
+            itemOrder.ShippmentNo = txtShipmentNo.Text;
+            itemOrder.InvoiceNo = txtInvoiceNo.Text;
+            int result = OrderData.Update(itemOrder);
+            if (result == 1)
+                divAlert.InnerHtml += "<span style=\"color:Red\">Sipariş Durumu güncellenemedi</span><br />";
+
+            ClearForm();
+            pnlForm.Visible = false;
+
+            SendMail(itemOrder);
+            divAlert.InnerHtml += "<span style=\"color:Red\">Sipariş kargoya verildi durumuna gelmiştir</span><br />";
+            GetList();
+        }
+        protected void btnOrderApprove_Click(object sender, EventArgs e)
+        {
+            Model.Order.Order itemOrder = OrderData.Get(Convert.ToInt32(lblId.Text), 0, new EnumValue() { Id = 0 });
+
+
+            //Mail Gönderilecek =>Tayfun
+
+            //OrderStatus Update ediliyor
+            itemOrder.Status = new EnumValue() { Id = 35 };// faturlandı durumuna update ediliyor
+            int result = OrderData.Update(itemOrder);
+            if (result == 1)
+                divAlert.InnerHtml += "<span style=\"color:Red\">Sipariş Durumu güncellenemedi</span><br />";
+
+            ClearForm();
+            pnlForm.Visible = false;
+
+            divAlert.InnerHtml += "<span style=\"color:Red\">Sipariş tamamlandı durumuna gelmiştir</span><br />";
             GetList();
         }
 
+        private void SendMail(Model.Order.Order itemOrder)
+        {
+            string MailBody = File.ReadAllText(HttpContext.Current.Request.MapPath("~") + "/MailTemplates/OrderResultMail.htm");
+            MailBody = MailBody.Replace("%OrderID%", itemOrder.Id.ToString());
+
+            MailBody = MailBody.Replace("%Taxamount%", Convert.ToString((itemOrder.TotalRatedPrice) - (itemOrder.TotalPrice)));
+            MailBody = MailBody.Replace("%TotalAmount%", itemOrder.TotalPrice.ToString());
+            MailBody = MailBody.Replace("%ShippingAmount%", itemOrder.ShippingPrice.ToString());
+            MailBody = MailBody.Replace("%TotalOrderAmount%", itemOrder.TotalRatedPrice.ToString());
+            MailBody = MailBody.Replace("%BillingAddress%", "İl : " + itemOrder.Basket.BillingAddress.City.Name.ToString() + " </br>İlçe : " + itemOrder.Basket.BillingAddress.District.Name.ToString() +
+                "</br> Adres : " + itemOrder.Basket.BillingAddress.AddressDetail.ToString() + "</br>Posta Kodu : " + itemOrder.Basket.BillingAddress.PostalCode.ToString());
+            MailBody = MailBody.Replace("%DeliveryAddress%", "İl : " + itemOrder.Basket.ShippingAddress.City.Name.ToString() + " </br>İlçe : " + itemOrder.Basket.ShippingAddress.District.Name.ToString() +
+              "</br> Adres : " + itemOrder.Basket.ShippingAddress.AddressDetail.ToString() + "</br>Posta Kodu : " + itemOrder.Basket.ShippingAddress.PostalCode.ToString());
+            MailBody = MailBody.Replace("%NameSurname%", itemOrder.User.FirstName.ToString() + " " + itemOrder.User.LastName.ToString());
+            string HtmlProducts = "<table><tr><td>Ürün Adı</td><td>Sayısı</td><td>Fiyatı</td></tr>";
+            foreach (BasketItem basketItem in itemOrder.Basket.BasketItems)
+            {
+                HtmlProducts += "<tr>";
+                HtmlProducts += "<td>" + basketItem.Product.Title.ToString() + "</td>";
+                HtmlProducts += "<td>" + basketItem.Count.ToString() + "</td>";
+                HtmlProducts += "<td>" + basketItem.ItemPrice.ToString() + "</td>";
+                HtmlProducts += "</tr>";
+
+            }
+            HtmlProducts += "</table>";
+
+            MailBody = MailBody.Replace("%Products%", HtmlProducts);
+
+            if (itemOrder.Status.Id == 33)
+                MailBody = MailBody.Replace("%Detail%", "Faturalandırılmış olup Kargoya verildiğinde tarafınıza bilgi verilecektir.");
+            if (itemOrder.Status.Id == 34)
+                MailBody = MailBody.Replace("%Detail%", "Kargoya verilmiş olup kargo numaranız :" + itemOrder.ShippmentNo.ToString() + " 'dır. Kargo takibini sitemiz üzerinden veya kargo numarası ile kargo firması üzerinden yapabilirsiniz ");
+
+            bool retValueSendMail = Mail.sendMail(itemOrder.User.Email.ToString(), "musterihizmetleri@senarinsaat.com.tr", "Senar İnşaat A.Ş. | Şipariş Bilgileriniz", MailBody);
+
+        }
         private void StokProcess(List<BasketItem> list)
         {
             bool isOk = true;
@@ -243,77 +404,6 @@ namespace IKSIR.ECommerce.Management.Order
                 }
             }
 
-        }
-        private bool Payment(Model.Order.Order itemOrder)
-        {
-            if (itemOrder.PaymetInfo.PaymentType.Id == 36)//havale
-            {
-                return true;
-            }
-            else
-            {
-                return true;
-                string term = "";
-                ePayment.cc5payment mycc5pay = new ePayment.cc5payment();
-                mycc5pay.clientid = itemOrder.PaymetInfo.CreditCard.VposId.ToString();
-                mycc5pay.name = itemOrder.PaymetInfo.CreditCard.VposName.ToString();
-                mycc5pay.password = itemOrder.PaymetInfo.CreditCard.VposPassword.ToString();
-                mycc5pay.oid = lblId.Text;
-                mycc5pay.host = itemOrder.PaymetInfo.CreditCard.VposHost.ToString();
-                mycc5pay.ip = HttpContext.Current.Request.ServerVariables["Remote_Addr"];//"127.0.0.7";// Request.UserHostAddress;
-
-                mycc5pay.bname = lblId.Text;
-                divAlert.InnerHtml = NoTurkishChar(lblCardName.Text).ToLower() + "<br>";
-                mycc5pay.orderresult = 0;
-                mycc5pay.chargetype = "Auth";
-                mycc5pay.cardnumber = lblCardNumber.Text;
-                string[] date = lblExDate.ToString().Split('/');
-                mycc5pay.expmonth = date[0].ToString();
-                mycc5pay.expyear = date[1].ToString();
-                mycc5pay.cv2 = lblCvv.Text;
-                mycc5pay.subtotal = lbltotalRatedPrice.Text;
-                mycc5pay.userid = itemOrder.PaymetInfo.CreditCard.VposUser.ToString();
-                mycc5pay.currency = "949";//TL
-                if (ddlMonth.SelectedValue == "1")
-                    term = "";
-                else
-                    term = ddlMonth.SelectedValue;
-
-                mycc5pay.taksit = term;
-                divAlert.InnerHtml = mycc5pay.processorder();
-
-                if (mycc5pay.appr == "Approved")
-                {
-                    divAlert.InnerHtml += "Para çekildi.";
-                    return true;
-                }
-
-                else
-                {
-                    divAlert.InnerHtml += "<span style=\"color:Red\">";
-                    divAlert.InnerHtml += "<br>HataMesaji:" + mycc5pay.errmsg;
-                    divAlert.InnerHtml += "<br>OrderId:" + mycc5pay.oid;
-                    divAlert.InnerHtml += "<br>ApprovalKodu:" + mycc5pay.appr;
-                    divAlert.InnerHtml += "</span><br />";
-                    return false;
-                }
-            }
-        }
-        private string NoTurkishChar(string str)
-        {
-            str = str.Replace("ı", "i");
-            str = str.Replace("ç", "c");
-            str = str.Replace("ö", "o");
-            str = str.Replace("ş", "s");
-            str = str.Replace("ğ", "g");
-            str = str.Replace("ü", "u");
-            str = str.Replace("Ç", "c");
-            str = str.Replace("Ş", "s");
-            str = str.Replace("İ", "i");
-            str = str.Replace("Ö", "o");
-            str = str.Replace("Ğ", "g");
-            str = str.Replace("Ü", "u");
-            return str;
         }
         private bool StockControl(List<BasketItem> list)
         {
