@@ -36,6 +36,9 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 returnValue.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
                 returnValue.TotalRatedPrice = DBHelper.DecValue(dr["TotalRatedPrice"].ToString());
+                returnValue.ShippingPrice = DBHelper.DecValue(dr["ShippingPrice"].ToString());
+                returnValue.InvoiceNo = DBHelper.StringValue(dr["InvoiceNo"].ToString());
+                returnValue.ShippmentNo = DBHelper.StringValue(dr["ShippmentNo"].ToString());
                 returnValue.TotalPrice = DBHelper.DecValue(dr["TotalPrice"].ToString());
             }
             dr.Close();
@@ -52,6 +55,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@BasketId", DBHelper.IntValue(itemOrder.Basket.Id)));
             parameters.Add(new SqlParameter("@PaymentInfoId", DBHelper.IntValue(itemOrder.PaymetInfo.Id)));
             parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemOrder.Status.Id)));
+            parameters.Add(new SqlParameter("@ShippingPrice", DBHelper.DecValue(itemOrder.ShippingPrice)));
             parameters.Add(new SqlParameter("@TotalRatedPrice", DBHelper.DecValue(itemOrder.TotalRatedPrice)));
             parameters.Add(new SqlParameter("@TotalPrice", DBHelper.DecValue(itemOrder.TotalPrice)));
             parameters[0].Direction = ParameterDirection.Output;
@@ -71,6 +75,8 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@BasketId", DBHelper.IntValue(itemOrder.Basket.Id)));
             parameters.Add(new SqlParameter("@PaymentInfoId", DBHelper.IntValue(itemOrder.PaymetInfo.Id)));
             parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemOrder.Status.Id)));
+            parameters.Add(new SqlParameter("@InvoiceNo", DBHelper.StringValue(itemOrder.InvoiceNo)));
+            parameters.Add(new SqlParameter("@ShippmentNo", DBHelper.StringValue(itemOrder.ShippmentNo)));
             parameters.Add(new SqlParameter("@TotalRatedPrice", DBHelper.DecValue(itemOrder.TotalRatedPrice)));
             parameters.Add(new SqlParameter("@TotalPrice", DBHelper.DecValue(itemOrder.TotalPrice)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
@@ -96,6 +102,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 returnValue.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
+                returnValue.ShippingPrice = DBHelper.DecValue(dr["ShippingPrice"].ToString());
                 returnValue.TotalRatedPrice = DBHelper.DecValue(dr["TotalRatedPrice"].ToString());
                 returnValue.TotalPrice = DBHelper.DecValue(dr["TotalPrice"].ToString());
                 itemList.Add(returnValue);
@@ -103,7 +110,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             dr.Close();
             return itemList;
         }
-        public static List<Order> GetList(int status,int UserId)
+        public static List<Order> GetList(int status, int UserId)
         {
             var itemList = new List<Order>();
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -124,19 +131,38 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
                 returnValue.TotalRatedPrice = DBHelper.DecValue(dr["TotalRatedPrice"].ToString());
                 returnValue.TotalPrice = DBHelper.DecValue(dr["TotalPrice"].ToString());
+                returnValue.ShippingPrice = DBHelper.DecValue(dr["ShippingPrice"].ToString());
+                returnValue.InvoiceNo = DBHelper.StringValue(dr["InvoiceNo"].ToString());
+                returnValue.ShippmentNo = DBHelper.StringValue(dr["ShippmentNo"].ToString());
                 itemList.Add(returnValue);
             }
             dr.Close();
             return itemList;
         }
-        ////DB'den silmek yerine statüsünü silindi olarak update etmeliyiz.
-        //public static int Delete(BasketItemProduct itemBasketItemProduct)
-        //{
-        //    var returnValue = 0;
-        //    itemBasketItemProduct.Status = EnumValueData.Get(12);//silindi statüsü olacak =>ayn
-        //    returnValue = Update(itemBasketItemProduct);
-        //    return returnValue;
-        //}
+
+        public static decimal CalculateShippingPrice(decimal TotalDesi)
+        {
+            decimal price = 0;
+
+            if (TotalDesi < 1)
+                price = DBHelper.DecValue("3.94");
+            else if (TotalDesi >= 1 && TotalDesi <= 15)
+                price = DBHelper.DecValue("4.73");
+            else if (TotalDesi >= 16 && TotalDesi <= 30)
+                price = DBHelper.DecValue("9.46");
+            else
+            {
+                price = DBHelper.DecValue(((TotalDesi - 30) * DBHelper.DecValue("0.272")) + DBHelper.DecValue("9.46"));
+            }
+
+            //            0-1 KG/Ds 3,94 TL
+            //1-15 Ds/Kg 4,73 TL
+            //16-30 Ds/Kg 9,46 TL
+            //+ 30 Ds/Kg 0,272 TL ilave edilir
+
+
+            return price;
+        }
     }
 }
 
