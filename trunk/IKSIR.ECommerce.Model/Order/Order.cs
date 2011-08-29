@@ -16,8 +16,10 @@ namespace IKSIR.ECommerce.Model.Order
         public EnumValue Status { get; set; }
         public decimal TotalRatedPrice { get; set; }
         public decimal TotalPrice { get; set; }
-
-        public Order(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, User user, Basket basket, PaymetInfo paymetInfo, EnumValue status, decimal totalRatedPrice, decimal totalPrice)
+        public decimal ShippingPrice { get; set; }
+        public string InvoiceNo { get; set; }
+        public string ShippmentNo { get; set; }
+        public Order(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, User user, Basket basket, PaymetInfo paymetInfo, EnumValue status,string invoiceNo,string shipmentNo,decimal shippingPrice, decimal totalRatedPrice, decimal totalPrice)
             : base(id, createUserId, createDate, editUserId, editDate)
         {
             this.User = user;
@@ -26,6 +28,9 @@ namespace IKSIR.ECommerce.Model.Order
             this.Status = Status;
             this.TotalPrice = totalPrice;
             this.TotalRatedPrice = totalRatedPrice;
+            this.InvoiceNo = invoiceNo;
+            this.ShippmentNo = shipmentNo;
+            this.ShippingPrice = shippingPrice;
         }
         public Order()
         {
