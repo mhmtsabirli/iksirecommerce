@@ -32,6 +32,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 returnValue.Video = DBHelper.StringValue(dr["Video"].ToString());
                 returnValue.Description = DBHelper.StringValue(dr["Description"].ToString());
                 returnValue.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
+                returnValue.Desi = DBHelper.StringValue(dr["Desi"].ToString());
                 returnValue.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
                 returnValue.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
                 returnValue.ProductStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["ProductStatus"].ToString()) });
@@ -70,6 +71,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@ProductCode", DBHelper.StringValue(itemProduct.ProductCode)));
             parameters.Add(new SqlParameter("@MinStock", DBHelper.IntValue(itemProduct.MinStock)));
             parameters.Add(new SqlParameter("@Video", DBHelper.StringValue(itemProduct.Video)));
+            parameters.Add(new SqlParameter("@Desi", DBHelper.StringValue(itemProduct.Desi)));
             parameters.Add(new SqlParameter("@CreateAdminId", DBHelper.IntValue(itemProduct.CreateAdminId)));
             parameters.Add(new SqlParameter("@AlertDate", DBHelper.DateValue(itemProduct.AlertDate)));
             parameters.Add(new SqlParameter("@Guarantee", DBHelper.IntValue(itemProduct.Guarantee)));
@@ -94,6 +96,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@Title", DBHelper.StringValue(itemProduct.Title)));
             parameters.Add(new SqlParameter("@Description", DBHelper.StringValue(itemProduct.Description)));
             parameters.Add(new SqlParameter("@Video", DBHelper.StringValue(itemProduct.Video)));
+            parameters.Add(new SqlParameter("@Desi", DBHelper.StringValue(itemProduct.Desi)));
             parameters.Add(new SqlParameter("@ProductCode", DBHelper.StringValue(itemProduct.ProductCode)));
             parameters.Add(new SqlParameter("@MinStock", DBHelper.IntValue(itemProduct.MinStock)));
             parameters.Add(new SqlParameter("@AlertDate", DBHelper.DateValue(itemProduct.AlertDate)));
@@ -105,7 +108,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             parameters.Add(new SqlParameter("@StokStatus", DBHelper.IntValue(itemProduct.StokStatus.Id)));
             parameters.Add(new SqlParameter("@ProductStatus", DBHelper.IntValue(itemProduct.ProductStatus.Id)));
             parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
-
+            
             returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateProduct", parameters);
             return returnValue;
         }
@@ -144,6 +147,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
                 item.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 item.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
+                item.Desi = DBHelper.StringValue(dr["Desi"].ToString());
                 item.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
                 item.ProductStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["ProductStatus"].ToString()) });
                 item.Guarantee = DBHelper.IntValue(dr["Guarantee"].ToString());
@@ -180,6 +184,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
                 item.Video = DBHelper.StringValue(dr["Video"].ToString());
                 item.Title = DBHelper.StringValue(dr["Title"].ToString());
+                item.Desi = DBHelper.StringValue(dr["Desi"].ToString());
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
                 item.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 item.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());

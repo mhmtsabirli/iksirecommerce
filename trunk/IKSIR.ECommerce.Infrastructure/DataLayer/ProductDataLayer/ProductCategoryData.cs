@@ -285,6 +285,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.Description = DBHelper.StringValue(dr["Description"].ToString());
                 item.ProductCode = DBHelper.StringValue(dr["ProductCode"].ToString());
                 item.MinStock = DBHelper.IntValue(dr["MinStock"].ToString());
+                item.Desi = DBHelper.StringValue(dr["Desi"].ToString());
                 item.AlertDate = DBHelper.DateValue(dr["AlertDate"].ToString());
                 item.ProductStatus = EnumValueData.Get(new EnumValue() { Id = DBHelper.IntValue(dr["ProductStatus"].ToString()) });
                 item.Guarantee = DBHelper.IntValue(dr["Guarantee"].ToString());
