@@ -207,6 +207,22 @@
                                             ForeColor="Red">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
+                                 <tr>
+                                    <td>
+                                        Kg/Ds
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" Width="50px" ID="txtDesi"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtDesi"
+                                            ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Kg/Ds alanı zorunludur kargo fiyatı hesaplamada kullanılır"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         Garanti Süresi (Yıl)
