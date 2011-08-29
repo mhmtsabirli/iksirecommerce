@@ -42,7 +42,7 @@
             <div id="header">
                 <h1>
                     <a href="../Default.aspx">
-                        <img src="../images/logo.jpg" style="border: none;" /></a></h1>
+                        <img alt="" src="../images/logo.jpg" style="border: none;" /></a></h1>
                 <p>
                     Yönetim Paneli</p>
                 <div class="clear">
@@ -62,9 +62,7 @@
                             <li><a href="">
                                 <img src="../Images/Cart.png" />&nbsp;Satış</a>
                                 <ul>
-                                    <li><a href="../Order/WaitingOrders.aspx">Bekleyen Siparişler</a></li>
-                                    <li><a href="">Onaylanan Siparişler</a></li>
-                                    <li><a href="">Tedarikçiler</a></li>
+                                    <li><a href="../Order/WaitingOrders.aspx">Siparişler</a></li>
                                 </ul>
                             </li>
                             <li><a href="">
