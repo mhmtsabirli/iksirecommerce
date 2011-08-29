@@ -279,6 +279,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 ddlProductCategories.SelectedValue = item.ProductCategory.Id.ToString();
                 txtProductCode.Text = item.ProductCode;
                 txtProductName.Text = item.Title;
+                txtDesi.Text = item.Desi;
                 txtVideo.Text = item.Video.ToString();
                 List<EnumValue> itemStokStatus = EnumValueData.GetEnumValues(12);//stok durumu
                 Utility.BindDropDownList(ddlStokStatus, itemStokStatus, "Value", "Id");
@@ -384,6 +385,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 itemProduct.ProductCategory = new ProductCategory() { Id = DBHelper.IntValue(ddlProductCategories.SelectedValue) };
                 itemProduct.ProductCode = txtProductCode.Text;
                 itemProduct.Video = txtVideo.Text;
+                itemProduct.Desi = txtDesi.Text;
                 itemProduct.Stok = Convert.ToInt32(txtStok.Text);
                 itemProduct.MaxQuantity = Convert.ToInt32(txtMaxQuantity.Text);
                 itemProduct.StokStatus = new EnumValue() { Id = Convert.ToInt32(ddlStokStatus.SelectedValue) };
@@ -427,7 +429,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 itemProduct.ProductCode = txtProductCode.Text;
                 itemProduct.Video = txtVideo.Text;
                 itemProduct.Title = txtProductName.Text;
-
+                itemProduct.Desi = txtDesi.Text;
                 itemProduct.Stok = Convert.ToInt32(txtStok.Text);
                 itemProduct.MaxQuantity = Convert.ToInt32(txtMaxQuantity.Text);
                 itemProduct.StokStatus = new EnumValue() { Id = Convert.ToInt32(ddlStokStatus.SelectedValue) };
