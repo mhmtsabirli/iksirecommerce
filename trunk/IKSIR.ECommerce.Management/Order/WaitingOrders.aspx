@@ -134,7 +134,41 @@
                             </table>
                         </telerik:RadPageView>
                         <telerik:RadPageView ID="RadPageView2" runat="server">
-                            <div id="dvAdress" runat="server" visible="false">
+                            <table>
+                                <tr>
+                                    <td>
+                                        Fatura No
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" Enabled="false" MaxLength="100" Width="100%" ID="txtInvoiceNo"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtInvoiceNo"
+                                            ValidationGroup="VGInvoice" SetFocusOnError="true" ErrorMessage="FaturaNo alanı zorunlu"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Kargo No
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" Enabled="false" MaxLength="100" Width="100%" ID="txtShipmentNo"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtShipmentNo"
+                                            ValidationGroup="VGShipment" SetFocusOnError="true" ErrorMessage="Kargo No alanı zorunlu"
+                                            ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div id="dvAdress" runat="server">
                                 <table>
                                     <tr>
                                         <td>
@@ -467,9 +501,16 @@
                         </tr>
                         <tr>
                             <td colspan="4" style="text-align: center">
-                                <asp:Button ID="btnApprove" runat="server" OnClick="btnApprove_Click" Text="Siparişi Onayla" />&#160;
+                                <asp:Button ID="btnInvoice" runat="server" ValidationGroup="VGInvoice" OnClick="btnInvoice_Click"
+                                    Visible="false" Text="Faturalandır" />&#160;
+                                <asp:Button ID="btnShipment" runat="server" ValidationGroup="VGShipment" OnClick="btnShipment_Click"
+                                    Visible="false" Text="Kargolandır" />&#160;
+                                <asp:Button ID="btnOrderApprove" runat="server" OnClick="btnOrderApprove_Click" Visible="false"
+                                    Text="Siparişi Tamamla" />&#160;
+                                <asp:Button ID="btnApprove" runat="server" OnClick="btnApprove_Click" Visible="false"
+                                    Text="Siparişi Onayla" />&#160;
                                 <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Siparişi iptal Et" />&#160;<asp:Button
-                                    ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="Vazgeç" />
+                                    ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="Vazgeç" />&#160;
                             </td>
                         </tr>
                     </table>
