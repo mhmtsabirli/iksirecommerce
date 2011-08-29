@@ -166,6 +166,7 @@ namespace IKSIR.ECommerce.UI.Pages
                     order.Basket = basket;
                     order.TotalPrice = basket.TotalPrice;
                     order.TotalRatedPrice = basket.TotalRatedPrice;
+                    order.ShippingPrice = Convert.ToDecimal(lblShippingPrice.Text);
                     if (ddlPaymentType.SelectedValue == "36")
                         order.Status = new Model.CommonModel.EnumValue() { Id = 29 };
                     else
