@@ -31,6 +31,42 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::System.Web.UI.WebControls.RadioButtonList rblBillingAddresses;
         
         /// <summary>
+        /// lbtnUpdateShippingAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnUpdateShippingAddress;
+        
+        /// <summary>
+        /// lbtnNewShippingAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnNewShippingAddress;
+        
+        /// <summary>
+        /// pnlShippingAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlShippingAddress;
+        
+        /// <summary>
+        /// lblShippingAddresFormTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblShippingAddresFormTitle;
+        
+        /// <summary>
         /// txtShippingAddressTitle control.
         /// </summary>
         /// <remarks>
@@ -47,24 +83,6 @@ namespace IKSIR.ECommerce.UI.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv1;
-        
-        /// <summary>
-        /// ddlShippingAddressType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlShippingAddressType;
-        
-        /// <summary>
-        /// RequiredFieldValidator9 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
         
         /// <summary>
         /// txtShippingAddressFirstName control.
@@ -112,6 +130,15 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::System.Web.UI.WebControls.DropDownList ddlShippingAddressCountries;
         
         /// <summary>
+        /// txtShippingAddressCountryName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtShippingAddressCountryName;
+        
+        /// <summary>
         /// RequiredFieldValidator5 control.
         /// </summary>
         /// <remarks>
@@ -119,6 +146,15 @@ namespace IKSIR.ECommerce.UI.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
+        
+        /// <summary>
+        /// RequiredFieldValidator9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
         
         /// <summary>
         /// ddlShippingAddressCities control.
@@ -130,13 +166,13 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::System.Web.UI.WebControls.DropDownList ddlShippingAddressCities;
         
         /// <summary>
-        /// txtCity control.
+        /// txtShippingAddressCityName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCity;
+        protected global::System.Web.UI.WebControls.TextBox txtShippingAddressCityName;
         
         /// <summary>
         /// RequiredFieldValidator10 control.
@@ -166,13 +202,13 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::System.Web.UI.WebControls.DropDownList ddlShippingAddressDistricts;
         
         /// <summary>
-        /// txtDistrict control.
+        /// txtShippingAddressDistrictName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDistrict;
+        protected global::System.Web.UI.WebControls.TextBox txtShippingAddressDistrictName;
         
         /// <summary>
         /// RequiredFieldValidator11 control.
@@ -274,6 +310,42 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::System.Web.UI.WebControls.Button btnShippingAddressSave;
         
         /// <summary>
+        /// lbtnUpdateBillingAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnUpdateBillingAddress;
+        
+        /// <summary>
+        /// lbtnNewBillingAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnNewBillingAddress;
+        
+        /// <summary>
+        /// pnlBillingAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlBillingAddress;
+        
+        /// <summary>
+        /// lblBillingAddressFormTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBillingAddressFormTitle;
+        
+        /// <summary>
         /// txtBillingAddressTitle control.
         /// </summary>
         /// <remarks>
@@ -290,24 +362,6 @@ namespace IKSIR.ECommerce.UI.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator12;
-        
-        /// <summary>
-        /// ddlBillingAddressType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlBillingAddressType;
-        
-        /// <summary>
-        /// RequiredFieldValidator13 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator13;
         
         /// <summary>
         /// txtBillingAddressFirstName control.
@@ -355,6 +409,15 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::System.Web.UI.WebControls.DropDownList ddlBillingAddressCountries;
         
         /// <summary>
+        /// txtBillingAddressCountryName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBillingAddressCountryName;
+        
+        /// <summary>
         /// RequiredFieldValidator16 control.
         /// </summary>
         /// <remarks>
@@ -362,6 +425,15 @@ namespace IKSIR.ECommerce.UI.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator16;
+        
+        /// <summary>
+        /// RequiredFieldValidator13 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator13;
         
         /// <summary>
         /// ddlBillingAddressCities control.
@@ -373,13 +445,13 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::System.Web.UI.WebControls.DropDownList ddlBillingAddressCities;
         
         /// <summary>
-        /// TextBox4 control.
+        /// txtBillingAddressCityName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::System.Web.UI.WebControls.TextBox txtBillingAddressCityName;
         
         /// <summary>
         /// RequiredFieldValidator17 control.
@@ -409,13 +481,13 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::System.Web.UI.WebControls.DropDownList ddlBillingAddressDistricts;
         
         /// <summary>
-        /// TextBox5 control.
+        /// txtBillingAddressDistrictName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox5;
+        protected global::System.Web.UI.WebControls.TextBox txtBillingAddressDistrictName;
         
         /// <summary>
         /// RequiredFieldValidator19 control.
