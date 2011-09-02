@@ -16,6 +16,8 @@ namespace IKSIR.ECommerce.Model.CommonModel
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Country Country { get; set; }
+        //Türkiye dışında bir ülke seçilirse string olarak ülke adını alıyoruz.
+        public string CountryName { get; set; }
         public City City { get; set; }
         public District District { get; set; }
         public string AddressDetail { get; set; }
