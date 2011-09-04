@@ -22,7 +22,6 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetAddress", parameters);
             while (dr.Read())
             {
-
                 returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
                 returnValue.CreateDate = DBHelper.DateValue(dr["CreateDate"].ToString());
                 returnValue.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
@@ -41,6 +40,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 if (dr["DistrictId"] != null && dr["DistrictId"].ToString() != "0")
                     returnValue.District = DistrictData.Get(new District() { Id = DBHelper.IntValue(dr["DistrictId"].ToString()) });
 
+                returnValue.CountryName = DBHelper.StringValue(dr["CountryName"].ToString());
                 returnValue.CityName = DBHelper.StringValue(dr["CityName"].ToString());
                 returnValue.DistrictName = DBHelper.StringValue(dr["DistrictName"].ToString());
                 returnValue.AddressDetail = DBHelper.StringValue(dr["AddressDetail"].ToString());
@@ -55,12 +55,21 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
         public static int Save(Address itemAddress)
         {
             var returnValue = 0;
+            if (itemAddress.Id > 0)
+                returnValue = Update(itemAddress);
+            else
+                returnValue = Insert(itemAddress);
+            return returnValue;
+        }
+
+        public static int Insert(Address itemAddress)
+        {
+            var returnValue = 0;
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Id", itemAddress.Id));
             parameters.Add(new SqlParameter("@AdminId", itemAddress.CreateAdminId));
             parameters.Add(new SqlParameter("@UserId", itemAddress.User.Id));
             parameters.Add(new SqlParameter("@Title", itemAddress.Title));
-            parameters.Add(new SqlParameter("@TypeId", itemAddress.Type.Id));
             parameters.Add(new SqlParameter("@FirstName", itemAddress.FirstName));
             parameters.Add(new SqlParameter("@LastName", itemAddress.LastName));
             if (itemAddress.Country != null)
@@ -70,6 +79,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             if (itemAddress.District != null)
                 parameters.Add(new SqlParameter("@DistrictId", itemAddress.District.Id));
 
+            parameters.Add(new SqlParameter("@CountryName", itemAddress.CountryName));
             parameters.Add(new SqlParameter("@CityName", itemAddress.CityName));
             parameters.Add(new SqlParameter("@DistrictName", itemAddress.DistrictName));
             parameters.Add(new SqlParameter("@AddressDetail", itemAddress.AddressDetail));
@@ -79,9 +89,38 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
 
             parameters[0].Direction = ParameterDirection.Output;
 
-            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveAddress", parameters));
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertAddress", parameters));
 
             int.TryParse(parameters[0].Value.ToString(), out returnValue);
+            return returnValue;
+        }
+
+        public static int Update(Address itemAddress)
+        {
+            var returnValue = 0;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Id", itemAddress.Id));
+            parameters.Add(new SqlParameter("@AdminId", itemAddress.CreateAdminId));
+            parameters.Add(new SqlParameter("@UserId", itemAddress.User.Id));
+            parameters.Add(new SqlParameter("@Title", itemAddress.Title));
+            parameters.Add(new SqlParameter("@FirstName", itemAddress.FirstName));
+            parameters.Add(new SqlParameter("@LastName", itemAddress.LastName));
+            if (itemAddress.Country != null)
+                parameters.Add(new SqlParameter("@CountryId", itemAddress.Country.Id));
+            if (itemAddress.City != null)
+                parameters.Add(new SqlParameter("@CityId", itemAddress.City.Id));
+            if (itemAddress.District != null)
+                parameters.Add(new SqlParameter("@DistrictId", itemAddress.District.Id));
+
+            parameters.Add(new SqlParameter("@CountryName", itemAddress.CountryName));
+            parameters.Add(new SqlParameter("@CityName", itemAddress.CityName));
+            parameters.Add(new SqlParameter("@DistrictName", itemAddress.DistrictName));
+            parameters.Add(new SqlParameter("@AddressDetail", itemAddress.AddressDetail));
+            parameters.Add(new SqlParameter("@PostalCode", itemAddress.PostalCode.ToString()));
+            parameters.Add(new SqlParameter("@Phone", itemAddress.Phone));
+            parameters.Add(new SqlParameter("@GSMPhone", itemAddress.GSMPhone));
+
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateAddress", parameters));
             return returnValue;
         }
 
@@ -126,6 +165,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 if (dr["DistrictId"] != null && dr["DistrictId"].ToString() != "0")
                     item.District = DistrictData.Get(new District() { Id = DBHelper.IntValue(dr["DistrictId"].ToString()) });
 
+                item.CountryName = DBHelper.StringValue(dr["CountryName"].ToString());
                 item.CityName = DBHelper.StringValue(dr["CityName"].ToString());
                 item.DistrictName = DBHelper.StringValue(dr["DistrictName"].ToString());
                 item.AddressDetail = DBHelper.StringValue(dr["AddressDetail"].ToString());

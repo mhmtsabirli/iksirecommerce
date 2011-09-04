@@ -27,48 +27,13 @@ namespace IKSIR.ECommerce.UI.Pages
 
             if (Session["LOGIN_USER"] != null && Session["USER_BASKET"] != null)
             {
-                if (!Page.IsPostBack)
-                {
-                    loginUser = (User)Session["LOGIN_USER"];
-                    basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
-                    GetUserAddresses();
-                }
+                loginUser = (User)Session["LOGIN_USER"];
+                basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
             }
             else
             {
                 Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderBasket.aspx");
             }
-        }
-
-        private void BindValues()
-        {
-            List<EnumValue> addressTypes = EnumValueData.GetEnumValues(10); //AddressTipleri
-
-            List<Country> countryList = CountryData.GetCountryList();
-            Utility.BindDropDownList(ddlShippingAddressCountries, countryList, "Name", "Id");
-            ddlShippingAddressCountries.SelectedValue = "1"; //Türkiye default seçili geliyor. =>ayhant
-            List<City> cityList = CityData.GetCityList(1); //Türkiyenin şehirlerini default getiriyoruz. =>ayhant
-            Utility.BindDropDownList(ddlShippingAddressCities, cityList, "Name", "Id");
-
-            Utility.BindDropDownList(ddlBillingAddressCountries, countryList, "Name", "Id");
-            ddlBillingAddressCountries.SelectedValue = "1"; //Türkiye default seçili geliyor. =>ayhant
-            Utility.BindDropDownList(ddlBillingAddressCities, cityList, "Name", "Id");
-        }
-
-        private void GetUserAddresses()
-        {
-            loginUser = (User)Session["LOGIN_USER"];
-            basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
-            List<Address> itemList = AddressData.GetMembershipAddresses(loginUser.Id);
-            rblShippingAddresses.DataTextField = "Title";
-            rblShippingAddresses.DataValueField = "Id";
-            rblShippingAddresses.DataSource = itemList;
-            rblShippingAddresses.DataBind();
-
-            rblBillingAddresses.DataTextField = "Title";
-            rblBillingAddresses.DataValueField = "Id";
-            rblBillingAddresses.DataSource = itemList;
-            rblBillingAddresses.DataBind();
         }
 
         protected void ddlShippingAddressCountries_SelectedIndexChanged(object sender, EventArgs e)
@@ -84,7 +49,9 @@ namespace IKSIR.ECommerce.UI.Pages
                     Utility.BindDropDownList(ddlShippingAddressCities, cityList, "Name", "Id");
 
                     ddlShippingAddressCities.Visible = true;
+                    RequiredFieldValidatorShippingAddressCities.Visible = true;
                     ddlShippingAddressDistricts.Visible = true;
+                    RequiredFieldValidatorShippingAddressDistricts.Visible = true;
                     txtShippingAddressCountryName.Visible = false;
                     txtShippingAddressCityName.Visible = false;
                     txtShippingAddressDistrictName.Visible = false;
@@ -94,7 +61,9 @@ namespace IKSIR.ECommerce.UI.Pages
                     //Türkiye dışında bir ülke seçerse city/distrcit textbox olacak.
                     ddlShippingAddressCities.Items.Clear();
                     ddlShippingAddressCities.Visible = false;
+                    RequiredFieldValidatorShippingAddressCities.Visible = false;
                     ddlShippingAddressDistricts.Visible = false;
+                    RequiredFieldValidatorShippingAddressDistricts.Visible = false;
                     txtShippingAddressCountryName.Visible = true;
                     txtShippingAddressCityName.Visible = true;
                     txtShippingAddressDistrictName.Visible = true;
@@ -127,7 +96,9 @@ namespace IKSIR.ECommerce.UI.Pages
                 //Türkiye dışında bir ülke seçerse city/distrcit textbox olacak.
                 ddlBillingAddressCities.Items.Clear();
                 ddlBillingAddressCities.Visible = false;
+                RequiredFieldValidatorBillingAddressCities.Visible = false;
                 ddlBillingAddressDistricts.Visible = false;
+                RequiredFieldValidatorBillingAddressDistricts.Visible = false;
                 txtBillingAddressCityName.Visible = true;
                 txtBillingAddressDistrictName.Visible = true;
             }
@@ -137,7 +108,9 @@ namespace IKSIR.ECommerce.UI.Pages
                 List<City> cityList = CityData.GetCityList(countryId);
                 Utility.BindDropDownList(ddlBillingAddressCities, cityList, "Name", "Id");
                 ddlBillingAddressCities.Visible = true;
+                RequiredFieldValidatorBillingAddressCities.Visible = true;
                 ddlBillingAddressDistricts.Visible = true;
+                RequiredFieldValidatorBillingAddressDistricts.Visible = true;
                 txtBillingAddressCityName.Visible = false;
                 txtBillingAddressDistrictName.Visible = false;
             }
@@ -158,16 +131,6 @@ namespace IKSIR.ECommerce.UI.Pages
             }
         }
 
-        protected void btnShippingAddressSave_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnBillingAddressSave_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void rblShippingAddresses_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -176,29 +139,6 @@ namespace IKSIR.ECommerce.UI.Pages
         protected void rblBillingAddresses_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-
-        protected void imgbtnContinue_Click(object sender, ImageClickEventArgs e)
-        {
-            loginUser = (User)Session["LOGIN_USER"];
-            basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
-            if (rblShippingAddresses.SelectedIndex == -1)
-            {
-                string textForMessage = @"<script language='javascript'> alert('Teslimat adresi seçmelisiniz!');</script>";
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
-            }
-            else if (rblBillingAddresses.SelectedIndex == -1)
-            {
-                string textForMessage = @"<script language='javascript'> alert('Fatura adresi seçmelisiniz!');</script>";
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
-            }
-            else
-            {
-                basket.BillingAddress = AddressData.Get(Convert.ToInt32(rblBillingAddresses.SelectedValue));
-                basket.ShippingAddress = AddressData.Get(Convert.ToInt32(rblShippingAddresses.SelectedValue));
-                Session.Add("USER_BASKET", basket);
-                Response.Redirect("OrderShipping.aspx");
-            }
         }
 
         protected void lbtnUpdateShippingAddress_Click(object sender, EventArgs e)
@@ -239,12 +179,17 @@ namespace IKSIR.ECommerce.UI.Pages
                 }
                 else
                 {
+                    ddlShippingAddressCountries.SelectedValue = "2";
                     txtShippingAddressCountryName.Visible = true;
                     txtShippingAddressCountryName.Text = selectedShippingAddress.CountryName;
 
+                    ddlShippingAddressCities.Visible = false;
+                    RequiredFieldValidatorShippingAddressCities.Visible = false;
                     txtShippingAddressCityName.Visible = true;
                     txtShippingAddressCityName.Text = selectedShippingAddress.CityName;
 
+                    ddlShippingAddressDistricts.Visible = false;
+                    RequiredFieldValidatorShippingAddressDistricts.Visible = false;
                     txtShippingAddressDistrictName.Visible = true;
                     txtShippingAddressDistrictName.Text = selectedShippingAddress.DistrictName;
                 }
@@ -298,9 +243,13 @@ namespace IKSIR.ECommerce.UI.Pages
                     txtBillingAddressCountryName.Visible = true;
                     txtBillingAddressCountryName.Text = selectedBillingAddress.CountryName;
 
+                    ddlBillingAddressCities.Visible = false;
+                    RequiredFieldValidatorBillingAddressCities.Visible = false;
                     txtBillingAddressCityName.Visible = true;
                     txtBillingAddressCityName.Text = selectedBillingAddress.CityName;
 
+                    ddlBillingAddressDistricts.Visible = false;
+                    RequiredFieldValidatorBillingAddressDistricts.Visible = false;
                     txtBillingAddressDistrictName.Visible = true;
                     txtBillingAddressDistrictName.Text = selectedBillingAddress.DistrictName;
                 }
@@ -329,6 +278,254 @@ namespace IKSIR.ECommerce.UI.Pages
             btnBillingAddressSave.Text = "Yeni Fatura Adresimi Kaydet";
         }
 
+        protected void btnShippingAddressSave_Click(object sender, EventArgs e)
+        {
+            int shippingAddressId = 0;
+            if (btnShippingAddressSave.CommandArgument != null && btnShippingAddressSave.CommandArgument != "" && int.TryParse(btnShippingAddressSave.CommandArgument, out shippingAddressId) && shippingAddressId > 0)
+            {
+                //güncelle
+                var shippingAddressItem = AddressData.Get(shippingAddressId);
+                shippingAddressItem.Title = txtShippingAddressTitle.Text;
+                shippingAddressItem.FirstName = txtShippingAddressFirstName.Text;
+                shippingAddressItem.LastName = txtShippingAddressLastName.Text;
+                if (ddlShippingAddressCountries.SelectedValue != "-1" && ddlShippingAddressCountries.SelectedValue != "")
+                {
+                    shippingAddressItem.Country = new Country() { Id = Convert.ToInt32(ddlShippingAddressCountries.SelectedValue) };
+                    if (ddlShippingAddressCountries.SelectedValue == "2") //diğer
+                    {
+                        shippingAddressItem.CountryName = txtShippingAddressCountryName.Text;
+                    }
+                }
+                if (ddlShippingAddressCities.SelectedValue != "-1" && ddlShippingAddressCities.SelectedValue != "")
+                {
+                    shippingAddressItem.City = new City() { Id = Convert.ToInt32(ddlShippingAddressCities.SelectedValue) };
+                }
+
+                if (txtShippingAddressCityName.Visible)
+                {
+                    shippingAddressItem.CityName = txtShippingAddressCityName.Text;
+                }
+                
+                if (ddlShippingAddressDistricts.SelectedValue != "-1" && ddlShippingAddressDistricts.SelectedValue != "")
+                {
+                    shippingAddressItem.District = new District() { Id = Convert.ToInt32(ddlShippingAddressDistricts.SelectedValue) };
+                }
+
+                if(txtShippingAddressDistrictName.Visible)
+                {
+                    shippingAddressItem.DistrictName = txtShippingAddressDistrictName.Text;
+                }
+
+                shippingAddressItem.PostalCode = txtShippingAddressPostCode.Text;
+                shippingAddressItem.AddressDetail = txtShippingAddressLine.Text;
+                shippingAddressItem.Phone = txtShippingAddressPhone.Text;
+                shippingAddressItem.GSMPhone = txtShippingAddressGSMPhone.Text;
+                var returnValue = AddressData.Update(shippingAddressItem);
+                if (returnValue > 0)
+                {
+                    lblShippingAddressAlert.Text = "Teslimat adresiniz başarıyla güncellendi.";
+                    lblShippingAddressAlert.ForeColor = System.Drawing.Color.Green;
+                    ClearShippingForm();
+                    pnlShippingAddress.Visible = false;
+                    rblShippingAddresses.SelectedIndex = -1;
+                }
+                else
+                {
+                    lblShippingAddressAlert.Text = "Teslimat adresiniz güncellenirken hata oluştu lütfen daha sonra tekrar deneyiniz.";
+                    lblShippingAddressAlert.ForeColor = System.Drawing.Color.Red; 
+                }
+            }
+            else
+            {
+                //yeni kayıt
+                var shippingAddressItem = new Address();
+                shippingAddressItem.User = new User() { Id = loginUser.Id };
+                shippingAddressItem.Title = txtShippingAddressTitle.Text;
+                shippingAddressItem.FirstName = txtShippingAddressFirstName.Text;
+                shippingAddressItem.LastName = txtShippingAddressLastName.Text;
+                if (ddlShippingAddressCountries.SelectedValue != "-1" && ddlShippingAddressCountries.SelectedValue != "-1")
+                {
+                    shippingAddressItem.Country = new Country() { Id = Convert.ToInt32(ddlShippingAddressCountries.SelectedValue) };
+                    if (ddlShippingAddressCountries.SelectedValue == "2") //diğer
+                    {
+                        shippingAddressItem.CountryName = txtShippingAddressCountryName.Text;
+                    }
+                }
+
+                if (ddlShippingAddressCities.SelectedValue != "-1" && ddlShippingAddressCities.SelectedValue != "")
+                {
+                    shippingAddressItem.City = new City() { Id = Convert.ToInt32(ddlShippingAddressCities.SelectedValue) };
+                }
+                if (txtShippingAddressCityName.Visible)
+                {
+                    shippingAddressItem.CityName = txtShippingAddressCityName.Text;
+                }
+                if (ddlShippingAddressDistricts.SelectedValue != "-1" && ddlShippingAddressDistricts.SelectedValue != "")
+                {
+                    shippingAddressItem.District = new District() { Id = Convert.ToInt32(ddlShippingAddressDistricts.SelectedValue) };
+                }
+                if (txtShippingAddressDistrictName.Visible)
+                {
+                    shippingAddressItem.DistrictName = txtShippingAddressDistrictName.Text;
+                }
+
+                shippingAddressItem.PostalCode = txtShippingAddressPostCode.Text;
+                shippingAddressItem.AddressDetail = txtShippingAddressLine.Text;
+                shippingAddressItem.Phone = txtShippingAddressPhone.Text;
+                shippingAddressItem.GSMPhone = txtShippingAddressGSMPhone.Text;
+
+                var returnValue = AddressData.Insert(shippingAddressItem);
+                if (returnValue > 0)
+                {
+                    lblShippingAddressAlert.Text = "Yeni teslimat adresiniz başarıyla kaydedildi.";
+                    lblShippingAddressAlert.ForeColor = System.Drawing.Color.Green;
+                    ClearShippingForm();
+                    pnlShippingAddress.Visible = false;
+                    rblShippingAddresses.SelectedIndex = -1;
+                }
+                else
+                {
+                    lblShippingAddressAlert.Text = "Yeni teslimat adresiniz kaydedilirken hata oluştu lütfen daha sonra tekrar deneyiniz.";
+                    lblShippingAddressAlert.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+            GetUserAddresses();
+        }
+
+        protected void btnBillingAddressSave_Click(object sender, EventArgs e)
+        {
+            int billingAddressId = 0;
+            if (btnBillingAddressSave.CommandArgument != null && btnBillingAddressSave.CommandArgument != "" && int.TryParse(btnBillingAddressSave.CommandArgument, out billingAddressId) && billingAddressId > 0)
+            {
+                //güncelle
+                var billingAddressItem = AddressData.Get(billingAddressId);
+                billingAddressItem.Title = txtBillingAddressTitle.Text;
+                billingAddressItem.FirstName = txtBillingAddressFirstName.Text;
+                billingAddressItem.LastName = txtBillingAddressLastName.Text;
+                if (ddlBillingAddressCountries.SelectedValue != "-1" && ddlBillingAddressCountries.SelectedValue != "")
+                {
+                    billingAddressItem.Country = new Country() { Id = Convert.ToInt32(ddlBillingAddressCountries.SelectedValue) };
+                    if (ddlBillingAddressCountries.SelectedValue == "2") //diğer
+                    {
+                        billingAddressItem.CountryName = txtBillingAddressCountryName.Text;
+                    }
+                }
+                if (ddlBillingAddressCities.SelectedValue != "-1" && ddlBillingAddressCities.SelectedValue != "")
+                {
+                    billingAddressItem.City = new City() { Id = Convert.ToInt32(ddlBillingAddressCities.SelectedValue) };
+                }
+                if (txtBillingAddressCityName.Visible)
+                {
+                    billingAddressItem.CityName = txtBillingAddressCityName.Text;
+                }
+                if (ddlBillingAddressDistricts.SelectedValue != "-1" && ddlBillingAddressDistricts.SelectedValue != "")
+                {
+                    billingAddressItem.District = new District() { Id = Convert.ToInt32(ddlBillingAddressDistricts.SelectedValue) };
+                }
+                if(txtBillingAddressDistrictName.Visible)
+                {
+                    billingAddressItem.DistrictName = txtBillingAddressDistrictName.Text;
+                }
+
+                billingAddressItem.PostalCode = txtBillingAddressPostCode.Text;
+                billingAddressItem.AddressDetail = txtBillingAddressLine.Text;
+                billingAddressItem.Phone = txtBillingAddressPhone.Text;
+                billingAddressItem.GSMPhone = txtBillingAddressGSMPhone.Text;
+                AddressData.Update(billingAddressItem);
+
+                var returnValue = AddressData.Update(billingAddressItem);
+                if (returnValue > 0)
+                {
+                    lblBillingAddressAlert.Text = "Fatura adresiniz başarıyla güncellendi.";
+                    lblBillingAddressAlert.ForeColor = System.Drawing.Color.Green;
+                    ClearBillingForm();
+                    pnlBillingAddress.Visible = false;
+                    rblBillingAddresses.SelectedIndex = -1;
+                }
+                else
+                {
+                    lblBillingAddressAlert.Text = "Fatura adresiniz güncellenirken hata oluştu lütfen daha sonra tekrar deneyiniz.";
+                    lblBillingAddressAlert.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+            else
+            {
+                var billingAddressItem = new Address();
+                billingAddressItem.Title = txtBillingAddressTitle.Text;
+                billingAddressItem.FirstName = txtBillingAddressFirstName.Text;
+                billingAddressItem.LastName = txtBillingAddressLastName.Text;
+                if (ddlBillingAddressCountries.SelectedValue != "-1" && ddlBillingAddressCountries.SelectedValue != "")
+                {
+                    billingAddressItem.Country = new Country() { Id = Convert.ToInt32(ddlBillingAddressCountries.SelectedValue) };
+                    if (ddlBillingAddressCountries.SelectedValue == "2") //diğer
+                    {
+                        billingAddressItem.CountryName = txtBillingAddressCountryName.Text;
+                    }
+                }
+                if (ddlBillingAddressCities.SelectedValue != "-1" && ddlBillingAddressCities.SelectedValue != "")
+                {
+                    billingAddressItem.City = new City() { Id = Convert.ToInt32(ddlBillingAddressCities.SelectedValue) };
+                }
+                if (txtBillingAddressCityName.Visible)                
+                {
+                    billingAddressItem.CityName = txtBillingAddressCityName.Text;
+                }
+                if (ddlBillingAddressDistricts.SelectedValue != "-1" && ddlBillingAddressDistricts.SelectedValue != "")
+                {
+                    billingAddressItem.District = new District() { Id = Convert.ToInt32(ddlBillingAddressDistricts.SelectedValue) };
+                }
+                if (txtBillingAddressDistrictName.Visible)
+                {
+                    billingAddressItem.DistrictName = txtBillingAddressDistrictName.Text;
+                }
+
+                billingAddressItem.PostalCode = txtBillingAddressPostCode.Text;
+                billingAddressItem.AddressDetail = txtBillingAddressLine.Text;
+                billingAddressItem.Phone = txtBillingAddressPhone.Text;
+                billingAddressItem.GSMPhone = txtBillingAddressGSMPhone.Text;
+                AddressData.Insert(billingAddressItem);
+
+                var returnValue = AddressData.Insert(billingAddressItem);
+                if (returnValue > 0)
+                {
+                    lblBillingAddressAlert.Text = "Yeni fatura adresiniz başarıyla kaydedildi.";
+                    lblBillingAddressAlert.ForeColor = System.Drawing.Color.Green;
+                    ClearBillingForm();
+                    pnlBillingAddress.Visible = false;
+                    rblBillingAddresses.SelectedIndex = -1;
+                }
+                else
+                {
+                    lblBillingAddressAlert.Text = "Yeni fatura adresiniz kaydedilirken hata oluştu lütfen daha sonra tekrar deneyiniz.";
+                    lblBillingAddressAlert.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+            GetUserAddresses();
+        }
+
+        protected void imgbtnContinue_Click(object sender, ImageClickEventArgs e)
+        {
+            loginUser = (User)Session["LOGIN_USER"];
+            basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
+            if (rblShippingAddresses.SelectedIndex == -1)
+            {
+                string textForMessage = @"<script language='javascript'> alert('Teslimat adresi seçmelisiniz!');</script>";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+            }
+            else if (rblBillingAddresses.SelectedIndex == -1)
+            {
+                string textForMessage = @"<script language='javascript'> alert('Fatura adresi seçmelisiniz!');</script>";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+            }
+            else
+            {
+                basket.BillingAddress = AddressData.Get(Convert.ToInt32(rblBillingAddresses.SelectedValue));
+                basket.ShippingAddress = AddressData.Get(Convert.ToInt32(rblShippingAddresses.SelectedValue));
+                Session.Add("USER_BASKET", basket);
+                Response.Redirect("OrderShipping.aspx");
+            }
+        }
+
         private void ClearShippingForm()
         {
             txtShippingAddressTitle.Text = string.Empty;
@@ -348,6 +545,7 @@ namespace IKSIR.ECommerce.UI.Pages
             txtShippingAddressPhone.Text = string.Empty;
             txtShippingAddressGSMPhone.Text = string.Empty;
             btnShippingAddressSave.CommandArgument = string.Empty;
+            rblShippingAddresses.SelectedIndex = -1;
         }
 
         private void ClearBillingForm()
@@ -369,6 +567,38 @@ namespace IKSIR.ECommerce.UI.Pages
             txtBillingAddressPhone.Text = string.Empty;
             txtBillingAddressGSMPhone.Text = string.Empty;
             btnBillingAddressSave.CommandArgument = string.Empty;
+            rblBillingAddresses.SelectedIndex = -1;
+        }
+
+        private void BindValues()
+        {
+            List<EnumValue> addressTypes = EnumValueData.GetEnumValues(10); //AddressTipleri
+
+            List<Country> countryList = CountryData.GetCountryList();
+            Utility.BindDropDownList(ddlShippingAddressCountries, countryList, "Name", "Id");
+            ddlShippingAddressCountries.SelectedValue = "1"; //Türkiye default seçili geliyor. =>ayhant
+            List<City> cityList = CityData.GetCityList(1); //Türkiyenin şehirlerini default getiriyoruz. =>ayhant
+            Utility.BindDropDownList(ddlShippingAddressCities, cityList, "Name", "Id");
+
+            Utility.BindDropDownList(ddlBillingAddressCountries, countryList, "Name", "Id");
+            ddlBillingAddressCountries.SelectedValue = "1"; //Türkiye default seçili geliyor. =>ayhant
+            Utility.BindDropDownList(ddlBillingAddressCities, cityList, "Name", "Id");
+        }
+
+        private void GetUserAddresses()
+        {
+            loginUser = (User)Session["LOGIN_USER"];
+            basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
+            List<Address> itemList = AddressData.GetMembershipAddresses(loginUser.Id);
+            rblShippingAddresses.DataTextField = "Title";
+            rblShippingAddresses.DataValueField = "Id";
+            rblShippingAddresses.DataSource = itemList;
+            rblShippingAddresses.DataBind();
+
+            rblBillingAddresses.DataTextField = "Title";
+            rblBillingAddresses.DataValueField = "Id";
+            rblBillingAddresses.DataSource = itemList;
+            rblBillingAddresses.DataBind();
         }
     }
 }
