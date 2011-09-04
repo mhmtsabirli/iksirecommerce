@@ -46,6 +46,7 @@
                         </tr>
                     </table>
                     <br />
+                    <asp:Label runat="server" ID="lblShippingAddressAlert"></asp:Label>
                     <asp:Panel runat="server" ID="pnlShippingAddress" Visible="false">
                         <table width="350px">
                             <tr>
@@ -116,12 +117,9 @@
                                     <asp:TextBox runat="server" ID="txtShippingAddressCountryName" Visible="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="ddlShippingAddressCountries"
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorShippingAddressCountries" ControlToValidate="ddlShippingAddressCountries"
                                         ValidationGroup="VGShippingAddressForm" SetFocusOnError="true" InitialValue="-1"
                                         ErrorMessage="Ülke Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator9" ControlToValidate="txtShippingAddressCountryName"
-                                        ValidationGroup="VGShippingAddressForm" SetFocusOnError="true" ErrorMessage="Teslimat Adresi İçin Ülke Girmelisiniz"
-                                        ForeColor="Red">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -138,12 +136,9 @@
                                     <asp:TextBox runat="server" ID="txtShippingAddressCityName" Visible="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator10" ControlToValidate="ddlShippingAddressCities"
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorShippingAddressCities" ControlToValidate="ddlShippingAddressCities"
                                         ValidationGroup="VGShippingAddressForm" SetFocusOnError="true" InitialValue="-1"
                                         ErrorMessage="Şehir Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtShippingAddressCityName"
-                                        ValidationGroup="VGShippingAddressForm" SetFocusOnError="true" ErrorMessage="Teslimat Adresi İçin Şehir Girmelisiniz"
-                                        ForeColor="Red">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -159,12 +154,9 @@
                                     <asp:TextBox runat="server" ID="txtShippingAddressDistrictName" Visible="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator11" ControlToValidate="ddlShippingAddressDistricts"
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorShippingAddressDistricts" ControlToValidate="ddlShippingAddressDistricts"
                                         ValidationGroup="VGShippingAddressForm" SetFocusOnError="true" InitialValue="-1"
                                         ErrorMessage="İlçe Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator7" ControlToValidate="txtShippingAddressDistrictName"
-                                        ValidationGroup="VGShippingAddressForm" SetFocusOnError="true" ErrorMessage="Teslimat Adresi İçin İlçe Girmelisiniz"
-                                        ForeColor="Red">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -257,6 +249,7 @@
                         </tr>
                     </table>
                     <br />
+                    <asp:Label runat="server" ID="lblBillingAddressAlert"></asp:Label>
                     <asp:Panel runat="server" ID="pnlBillingAddress" Visible="false">
                         <table width="350px">
                             <tr>
@@ -330,9 +323,6 @@
                                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator16" ControlToValidate="ddlBillingAddressCountries"
                                         ValidationGroup="VGBillingAddressForm" SetFocusOnError="true" InitialValue="-1"
                                         ErrorMessage="Ülke Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator13" ControlToValidate="txtBillingAddressCountryName"
-                                        ValidationGroup="VGBillingAddressForm" SetFocusOnError="true" ErrorMessage="Fatura Adresi için Ülke Girmelisiniz"
-                                        ForeColor="Red">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -349,12 +339,9 @@
                                     <asp:TextBox runat="server" ID="txtBillingAddressCityName" Visible="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator17" ControlToValidate="ddlBillingAddressCities"
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorBillingAddressCities" ControlToValidate="ddlBillingAddressCities"
                                         ValidationGroup="VGBillingAddressForm" SetFocusOnError="true" InitialValue="-1"
                                         ErrorMessage="Şehir Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator18" ControlToValidate="txtBillingAddressCityName"
-                                        ValidationGroup="VGBillingAddressForm" SetFocusOnError="true" ErrorMessage="Fatura Adresi için Şehir Girmelisiniz"
-                                        ForeColor="Red">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -370,12 +357,9 @@
                                     <asp:TextBox runat="server" ID="txtBillingAddressDistrictName" Visible="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator19" ControlToValidate="ddlBillingAddressDistricts"
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorBillingAddressDistricts" ControlToValidate="ddlBillingAddressDistricts"
                                         ValidationGroup="VGBillingAddressForm" SetFocusOnError="true" InitialValue="-1"
                                         ErrorMessage="İlçe Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator20" ControlToValidate="txtBillingAddressDistrictName"
-                                        ValidationGroup="VGBillingAddressForm" SetFocusOnError="true" ErrorMessage="Fatura Adresi için İlçe Girmelisiniz"
-                                        ForeColor="Red">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
