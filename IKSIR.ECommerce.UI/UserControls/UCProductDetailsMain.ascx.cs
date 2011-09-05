@@ -66,6 +66,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                         break;
                 }
 
+                divSmallImages.InnerHtml += "<a href=\"http://www.youtube.com/embed/a0qMe7Z3EYg?rel=0&amp;wmode=transparent\" onclick=\"return hs.htmlExpand(this, {objectType: 'iframe', width: 480, height: 385, allowSizeReduction: false, wrapperClassName: 'draggable-header no-footer', preserveContent: false, objectLoadTime: 'after'})\"class=\"highslide\"><img style=\"border:none;\" src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
                 if (product.Video != null && product.Video != "")
                 {
                     divSmallImages.InnerHtml += "<a href=\"#\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
