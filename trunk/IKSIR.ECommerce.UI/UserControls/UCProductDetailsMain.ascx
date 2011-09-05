@@ -10,6 +10,7 @@
     hs.fadeInOut = true;
     hs.numberPosition = 'caption';
     hs.dimmingOpacity = 0.75;
+    hs.outlineWhileAnimating = true;
 
     // Add the controlbar
     if (hs.addSlideshow) hs.addSlideshow({

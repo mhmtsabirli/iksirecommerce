@@ -15,7 +15,7 @@
                         <tr>
                             <td valign="top">
                                 <asp:HiddenField runat="server" ID="hdnCardId" Value='<%# Eval("Id")%>' />
-                                <%--<asp:Image runat="server" ID="imgCard" ImageUrl='<%# String.Format("http://banyom.com.tr/CardImages/{0}", Eval("Image"))%>' />--%>
+                                <asp:Image runat="server" ID="imgCard" ImageUrl='<%# String.Format("http://banyom.com.tr/Management/CreditCardImages/{0}", Eval("Image"))%>' />
                             </td>
                         </tr>
                         <tr>
