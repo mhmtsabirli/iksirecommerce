@@ -87,7 +87,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                         if (itemProduct != null && itemProduct.Multimedias != null && itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault() != null)
                         {
                             var image = itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault();
-                            imgProduct.ImageUrl = "http://banyom.com.tr/documents/Images/Small/small_" + image.FilePath;
+                            imgProduct.ImageUrl = "http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.ImagePath + "Small/small_" + image.FilePath;
                         }
                     }
                 }

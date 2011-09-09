@@ -12,10 +12,9 @@
     <div class="logo">
         <a href="../Pages/Default.aspx">
             <img src="../images/logo.jpg" alt="" /></a></div>
-    <div class="search">
-        <asp:TextBox runat="server" ID="txtSearchText" CssClass="search_text"></asp:TextBox>
-        <asp:LinkButton runat="server" ID="lbtnSearch"  CssClass="search_submit" 
-            onclick="lbtnSearch_Click"></asp:LinkButton>
+    <div class="search" id="block">
+        <asp:TextBox runat="server" ID="txtSearchText" title="Arama..." CssClass="search_text"></asp:TextBox>
+        <asp:LinkButton runat="server" ID="lbtnSearch" CssClass="search_submit" OnClick="lbtnSearch_Click"></asp:LinkButton>
         <div class="clear">
         </div>
     </div>
