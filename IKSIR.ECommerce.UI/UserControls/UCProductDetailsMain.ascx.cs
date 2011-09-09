@@ -45,8 +45,8 @@ namespace IKSIR.ECommerce.UI.UserControls
                 if (itemMainImage != null)
                 {
                     //imgMainImage.ImageUrl = 
-                    anchorBigImage.HRef = "http://banyom.com.tr/documents/Orginal/Images/" + itemMainImage.FilePath;
-                    imgBig.Src = "http://banyom.com.tr/documents/Images/Big/big_" + itemMainImage.FilePath;
+                    anchorBigImage.HRef = "http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.DocumentPath + "Orginal/Images/" + itemMainImage.FilePath;
+                    imgBig.Src = "http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.ImagePath + "Big/big_" + itemMainImage.FilePath;
                 }
                 else
                 {
@@ -60,13 +60,13 @@ namespace IKSIR.ECommerce.UI.UserControls
                 {
                     imageCount += 1;
                     divSmallImages.InnerHtml += "<a href=\"#\" rel=\"" + item.FilePath + "\" class=\"image\">";
-                    divSmallImages.InnerHtml += "<img src=\"http://banyom.com.tr/documents/Images/Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a>";
+                    divSmallImages.InnerHtml += "<img src=\"http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.ImagePath + "Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a>";
 
                     if (imageCount == 3)
                         break;
                 }
 
-                divSmallImages.InnerHtml += "<a href=\"http://www.youtube.com/embed/a0qMe7Z3EYg?rel=0&amp;wmode=transparent\" onclick=\"return hs.htmlExpand(this, {objectType: 'iframe', width: 480, height: 385, allowSizeReduction: false, wrapperClassName: 'draggable-header no-footer', preserveContent: false, objectLoadTime: 'after'})\"class=\"highslide\"><img style=\"border:none;\" src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
+                //divSmallImages.InnerHtml += "<a href=\"http://www.youtube.com/embed/a0qMe7Z3EYg?rel=0&amp;wmode=transparent\" onclick=\"return hs.htmlExpand(this, {objectType: 'iframe', width: 480, height: 385, allowSizeReduction: false, wrapperClassName: 'draggable-header no-footer', preserveContent: false, objectLoadTime: 'after'})\"class=\"highslide\"><img style=\"border:none;\" src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
                 if (product.Video != null && product.Video != "")
                 {
                     divSmallImages.InnerHtml += "<a href=\"#\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";

@@ -15,7 +15,7 @@
         <tr>
             <td>
                 <telerik:RadTabStrip ID="RadTabStrip1" runat="server" Skin="Web20" MultiPageID="RadMultiPage1"
-                    SelectedIndex="1" Width="600px">
+                    SelectedIndex="1" Widdth="600px">
                     <Tabs>
                         <telerik:RadTab Text="Üye Bilgilerim" Selected="true" PageViewID="RadPageView1">
                         </telerik:RadTab>

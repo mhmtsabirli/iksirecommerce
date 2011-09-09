@@ -10,7 +10,7 @@
     hs.fadeInOut = true;
     hs.numberPosition = 'caption';
     hs.dimmingOpacity = 0.75;
-    hs.outlineWhileAnimating = true;
+        hs.outlineWhileAnimating = true;
 
     // Add the controlbar
     if (hs.addSlideshow) hs.addSlideshow({
@@ -32,7 +32,7 @@
             var image = $(this).attr("rel");
             $('#image').hide();
             $('#image').fadeIn('slow');
-            $('#image').html('<a id="anchorBigImage" class="highslide" onclick="return hs.expand(this)" title="Orjinal Boyut" href="http://banyom.com.tr/documents/Orginal/Images/' + image + '"><img src="http://banyom.com.tr/documents/Images/Big/big_' + image + '"/></a>');
+            $('#image').html('<a id="anchorBigImage" class="highslide" onclick="return hs.expand(this)" title="Orjinal Boyut" href="http://www.banyom.com.tr/management/ProductDocuments/Orginal/Images/' + image + '"><img src="http://www.banyom.com.tr/management/ProductDocuments/Images/Big/big_' + image + '"/></a>');
             return false;
         });
     });
