@@ -1,5 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCMainCategories.ascx.cs"
     Inherits="IKSIR.ECommerce.UI.UserControls.UCMainCategories" %>
+<h3>
+    Ürün Kategorileri
+</h3>
 <div runat="server" id="divMainCategories">
 </div>
 <script type="text/javascript">

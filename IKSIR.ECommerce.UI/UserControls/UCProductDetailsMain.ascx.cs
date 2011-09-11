@@ -56,21 +56,23 @@ namespace IKSIR.ECommerce.UI.UserControls
 
                 RadRating.Value = ProductRateData.GetProductRate(productId);
                 int imageCount = 0;
+                divSmallImages.InnerHtml += "<div id=\"main\"><ul class=\"gallery clearfix\">";
                 foreach (var item in productMultimedias)
                 {
                     imageCount += 1;
-                    divSmallImages.InnerHtml += "<a href=\"#\" rel=\"" + item.FilePath + "\" class=\"image\">";
-                    divSmallImages.InnerHtml += "<img src=\"http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.ImagePath + "Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a>";
+                    divSmallImages.InnerHtml += "<li style=\"display: inline; margin: 5px; list-style-type:none;\"><a href=\"#\" rel=\"" + item.FilePath + "\" class=\"image\">";
+                    divSmallImages.InnerHtml += "<img src=\"http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.ImagePath + "Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a></li>";
 
                     if (imageCount == 3)
                         break;
                 }
 
-                //divSmallImages.InnerHtml += "<a href=\"http://www.youtube.com/embed/a0qMe7Z3EYg?rel=0&amp;wmode=transparent\" onclick=\"return hs.htmlExpand(this, {objectType: 'iframe', width: 480, height: 385, allowSizeReduction: false, wrapperClassName: 'draggable-header no-footer', preserveContent: false, objectLoadTime: 'after'})\"class=\"highslide\"><img style=\"border:none;\" src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
+                
                 if (product.Video != null && product.Video != "")
                 {
-                    divSmallImages.InnerHtml += "<a href=\"#\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün videosunu izlemek için tıklayınız.\" /></a>";
+                    divSmallImages.InnerHtml += "<li style=\"display: inline; margin: 5px; list-style-type:none;\"><a href=\"http://www.youtube.com/watch?v=vqTU0yQW9GE&feature=topvideos_sports\" rel=\"prettyPhoto\" title=\"Ürün Videosu\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün Videosu\" /></a></li>";                    
                 }
+                divSmallImages.InnerHtml += "</ul></div>";
                 //container.InnerHtml = otherImages;
                 lblProductCode.Text = product.ProductCode;
                 lblProductName.Text = product.Title;
@@ -85,6 +87,12 @@ namespace IKSIR.ECommerce.UI.UserControls
                 {
                     ddlProductCount.Items.Add(new ListItem(i.ToString(), i.ToString()));
                 }
+
+                //Paylaşım Linkleri
+
+                anchor_Facebook.HRef = "http://www.facebook.com/share.php?u=" + Request.Url;
+                anchor_Twitter.HRef = "http://twitter.com/intent/tweet?source=" + Request.Url;
+                anchor_Delicious.HRef = "http://delicious.com/post?url=" + Request.Url;
             }
             catch (Exception exception)
             {
