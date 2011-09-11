@@ -23,7 +23,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
         {
             if (Session["LOGIN_USER"] == null)
             {
-                Response.Redirect("Login.aspx?returl=MyAccount.aspx");
+                Response.Redirect("Login.aspx?returl=" + Request.Url.PathAndQuery);
             }
             if (!Page.IsPostBack)
             {
@@ -37,6 +37,21 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                 }
                 RadTabStrip1.Tabs[0].Selected = true;
                 RadPageView1.Selected = true;
+            }
+
+            if (Request.QueryString["oid"] != null && Request.QueryString["oid"].ToString() != null)
+            {
+                int orderId = 0;
+                if (int.TryParse(Page.Request.QueryString["oid"], out orderId))
+                {
+                    txtOrderNo.Text = orderId.ToString();
+                    GetOrderList();
+                    RadPageView3.Selected = true;
+                    RadTabStrip1.SelectedIndex = 2;
+                    GetOrderItem(orderId);
+                    dvMyOrder.Visible = true;
+                    ddlPaymentType.Enabled = false;
+                }
             }
         }
 
@@ -532,13 +547,17 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                     itemList = itemList.Where(x => x.Status.Id != 35).ToList();
                     itemList = itemList.Where(x => x.Status.Id != 38).ToList();
                 }
-                if (ddlFilterOrderStatus.SelectedValue == "2")
+                else if (ddlFilterOrderStatus.SelectedValue == "2")
                 {
                     itemList = itemList.Where(x => x.Status.Id == 35).ToList();
                 }
-                if (ddlFilterOrderStatus.SelectedValue == "3")
+                else if (ddlFilterOrderStatus.SelectedValue == "3")
                 {
                     itemList = itemList.Where(x => x.Status.Id == 38).ToList();
+                }
+                else
+                {
+
                 }
             }
             gvOrderList.DataSource = itemList;

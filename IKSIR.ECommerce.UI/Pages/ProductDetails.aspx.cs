@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Model.ProductModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
+using System.Web.UI.HtmlControls;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -14,7 +15,6 @@ namespace IKSIR.ECommerce.UI.Pages
         int productId = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (Page.Request.QueryString["pid"] != null && Page.Request.QueryString["pid"].ToString() != "" && int.TryParse(Page.Request.QueryString["pid"].ToString(), out productId))
             {
                 if (!Page.IsPostBack)
@@ -40,11 +40,37 @@ namespace IKSIR.ECommerce.UI.Pages
             GetNextPreviousButtons();
 
             var item = ProductData.Get(productId);
+            if (item == null)
+                return;
+
             anchorProductCategory.InnerText = item.ProductCategory.Title;
             anchorProductCategory.HRef = "ProductList.aspx?catid=" + item.ProductCategory.Id;
 
             anchorProduct.InnerText = item.Title;
             anchorProduct.HRef = "ProductDetails.aspx?pid=" + item.Id.ToString();
+
+            HtmlMeta meta = new HtmlMeta();
+            meta.Name = "description";
+            meta.Content = item.Description;
+            this.Page.Header.Controls.Add(meta);
+
+            meta = new HtmlMeta();
+            meta.Name = "title";
+            meta.Content = item.Title;
+            this.Page.Header.Controls.Add(meta);
+
+            HtmlHead head = (HtmlHead)Page.Header;
+            HtmlLink link = new HtmlLink();
+            link.Attributes.Add("rel", "image_src");
+
+            string hrefValue = "http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.ImagePath + "Small/small_nopicture.jpg";
+            if (item.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault() != null)
+            {
+                var image = item.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault();
+                hrefValue = "http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.ImagePath + "Small/small_" + image.FilePath;
+            }
+            link.Attributes.Add("href", hrefValue);
+            head.Controls.Add(link);
         }
 
         private void GetNextPreviousButtons()
