@@ -18,12 +18,8 @@
     <title>Senar İnşaat</title>
     <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="../js/highslide.js"></script>
-    <script type="text/javascript" src="../js/highslide-with-html.js"></script>
     <script type="text/javascript" src="../js/jquery.prettyPhoto.js"></script>
-    <script type="text/javascript" src="../js/highslide_video.js"></script>
-
-		<script src="../js/jquery-1.6.1.min.js" type="text/javascript"></script>
-
+    <script src="../js/jquery-1.6.1.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/highslide.css" />
     <link rel="stylesheet" type="text/css" href="../css/prettyPhoto.css" />
