@@ -17,7 +17,6 @@
     <script type="text/javascript" src="../js/highslide.js"></script>
     <script type="text/javascript" src="../js/highslide-with-html.js"></script>
     <script type="text/javascript" src="../js/jquery.prettyPhoto.js"></script>
-    <script type="text/javascript" src="../js/highslide_video.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/highslide.css" />
     <link rel="stylesheet" type="text/css" href="../css/prettyPhoto.css" />
