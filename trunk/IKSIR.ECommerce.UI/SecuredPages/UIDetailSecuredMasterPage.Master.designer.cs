@@ -40,13 +40,13 @@ namespace IKSIR.ECommerce.UI.SecuredPages {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// Header1 control.
+        /// UCHeader1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IKSIR.ECommerce.UI.UserControls.UCHeader Header1;
+        protected global::IKSIR.ECommerce.UI.SecuredPages.UserControls.UCHeader UCHeader1;
         
         /// <summary>
         /// UCMainCategories1 control.
@@ -58,6 +58,15 @@ namespace IKSIR.ECommerce.UI.SecuredPages {
         protected global::IKSIR.ECommerce.UI.UserControls.UCMainCategories UCMainCategories1;
         
         /// <summary>
+        /// UCGetOrderStatus1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IKSIR.ECommerce.UI.UserControls.UCGetOrderStatus UCGetOrderStatus1;
+        
+        /// <summary>
         /// ContentPlaceHolder1 control.
         /// </summary>
         /// <remarks>
@@ -67,12 +76,12 @@ namespace IKSIR.ECommerce.UI.SecuredPages {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
         
         /// <summary>
-        /// Footer1 control.
+        /// UCFooter1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IKSIR.ECommerce.UI.UserControls.UCFooter Footer1;
+        protected global::IKSIR.ECommerce.UI.SecuredPages.UserControls.UCFooter UCFooter1;
     }
 }

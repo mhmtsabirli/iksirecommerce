@@ -24,30 +24,30 @@ namespace IKSIR.ECommerce.UI.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             //Kullanıcı login değilse sayfaya giremez.
-            if (Session["LOGIN_USER"] != null && Session["USER_BASKET"] != null)
+            if (Session["LOGIN_USER"] != null)
             {
                 if (!Page.IsPostBack)
                 {
                     loginUser = (User)Session["LOGIN_USER"];
                     basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
-                    if (basket.BasketItems.Count == 0)
-                    {
-                        cbxComfirmation.Visible = false;
-                        rptBasketProducts.Visible = false;
-                        hplNoItem.Visible = true;
-                        divBasketTotal.Visible = false;
-                        //trConfirmation.Visible = false;
-                        divBasketButtons.Visible = false;
-                    }
-                    else
+                    if (basket != null && basket.BasketItems != null && basket.BasketItems.Count > 0)
                     {
                         cbxComfirmation.Visible = true;
                         rptBasketProducts.Visible = true;
                         hplNoItem.Visible = false;
                         divBasketTotal.Visible = true;
-                        //trConfirmation.Visible = true;
+                        divRules.Visible = true;
                         divBasketButtons.Visible = true;
                         GetOrderBasket();
+                    }
+                    else
+                    {
+                        cbxComfirmation.Visible = false;
+                        rptBasketProducts.Visible = false;
+                        hplNoItem.Visible = true;
+                        divBasketTotal.Visible = false;
+                        divRules.Visible = false;
+                        divBasketButtons.Visible = false;
                     }
                     var item = StaticPageData.Get(10);
                     if (item != null)
@@ -56,7 +56,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderBasket.aspx");
+                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderBasket.aspx");               
             }
         }
 

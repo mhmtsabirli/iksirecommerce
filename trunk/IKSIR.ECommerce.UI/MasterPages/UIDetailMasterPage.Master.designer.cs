@@ -58,6 +58,15 @@ namespace IKSIR.ECommerce.UI.MasterPages {
         protected global::IKSIR.ECommerce.UI.UserControls.UCMainCategories UCMainCategories1;
         
         /// <summary>
+        /// UCGetOrderStatus1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IKSIR.ECommerce.UI.UserControls.UCGetOrderStatus UCGetOrderStatus1;
+        
+        /// <summary>
         /// ContentPlaceHolder1 control.
         /// </summary>
         /// <remarks>
