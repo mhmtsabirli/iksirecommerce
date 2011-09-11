@@ -45,6 +45,16 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
             if (GetProductDocuments(itemId))
             {
+                divAlert.InnerHtml = "<span style=\"color:Green\">Ürün resimleri başarıyla yüklendi.</span><br />" + divAlert.InnerHtml;
+                retValue = true;
+            }
+            else
+            {
+                divAlert.InnerHtml = "<span style=\"color:Red\">Ürün resimleri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
+            }
+
+            if (GetProductFiles(itemId))
+            {
                 divAlert.InnerHtml = "<span style=\"color:Green\">Ürün dökümanları başarıyla yüklendi.</span><br />" + divAlert.InnerHtml;
                 retValue = true;
             }
@@ -168,7 +178,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             List<ProductCategory> itemPList = ProductCategoryData.GetParentProductCategoryList();
             Utility.BindDropDownList(ddlParentProductCategories, itemPList, "Title", "Id");
         }
-      
+
         protected void ddlFilterSites_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -201,7 +211,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             List<EnumValue> itemProductStatus = EnumValueData.GetEnumValues(13);//ürün durumu
             Utility.BindDropDownList(ddlProductStatus, itemProductStatus, "Value", "Id");
 
-             List<ProductCategory> itemPList = ProductCategoryData.GetParentProductCategoryList();
+            List<ProductCategory> itemPList = ProductCategoryData.GetParentProductCategoryList();
             Utility.BindDropDownList(ddlParentProductCategories, itemPList, "Title", "Id");
         }
         protected void btnSave_Click(object sender, EventArgs e)
@@ -275,7 +285,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 ddlParentProductCategories.SelectedValue = item.ProductCategory.ParentCategory.Id.ToString();
                 List<ProductCategory> itemCategory = ProductCategoryData.GetProductCategoryById(Convert.ToInt32(ddlParentProductCategories.SelectedValue));
                 Utility.BindDropDownList(ddlProductCategories, itemCategory, "Title", "Id");
-                
+
                 ddlProductCategories.SelectedValue = item.ProductCategory.Id.ToString();
                 txtProductCode.Text = item.ProductCode;
                 txtProductName.Text = item.Title;
@@ -283,7 +293,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 txtVideo.Text = item.Video.ToString();
                 List<EnumValue> itemStokStatus = EnumValueData.GetEnumValues(12);//stok durumu
                 Utility.BindDropDownList(ddlStokStatus, itemStokStatus, "Value", "Id");
-                
+
                 List<EnumValue> itemProductStatus = EnumValueData.GetEnumValues(13);//ürün durumu
                 Utility.BindDropDownList(ddlProductStatus, itemProductStatus, "Value", "Id");
 
@@ -434,7 +444,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 itemProduct.MaxQuantity = Convert.ToInt32(txtMaxQuantity.Text);
                 itemProduct.StokStatus = new EnumValue() { Id = Convert.ToInt32(ddlStokStatus.SelectedValue) };
                 itemProduct.ProductStatus = new EnumValue() { Id = Convert.ToInt32(ddlProductStatus.SelectedValue) };
-                
+
                 itemProduct.Guarantee = Convert.ToInt32(txtguarantee.Text);
                 int result = ProductData.Update(itemProduct);
                 if (result != 1)
@@ -470,7 +480,6 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
         }
 
-
         protected void lbtnDocumentUsed_Click(object sender, EventArgs e)
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
@@ -484,6 +493,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 divAlert.InnerHtml += "<span style=\"color:Red\">Dosya varsayılan yapılırken hata oluştu!</span><br />";
             }
         }
+
         protected void lbtnDocumentDelete_Click(object sender, EventArgs e)
         {
             var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
@@ -649,7 +659,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 {
                     retValue = true;
                 }
-                
+
             }
             catch (Exception exception)
             {
@@ -708,6 +718,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             }
             return retValue;
         }
+
         private bool UsedDocument(int documentId)
         {
             bool retValue = false;
@@ -723,6 +734,201 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 SystemLog itemSystemLog = new SystemLog();
                 itemSystemLog.Title = "Used Document";
                 itemSystemLog.Content = "Id=" + documentId.ToString() + " ile Doküman silinemedi. Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return retValue;
+        }
+
+        #endregion
+
+        #region Files
+
+        protected void lbtnFileEdit_Click(object sender, EventArgs e)
+        {
+            ruProductDocuments.Visible = false;
+            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
+            gvList.SelectedIndex = index;
+            var fileId = (sender as LinkButton).CommandArgument == ""
+                             ? 0
+                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
+            if (!GetProductFile(fileId))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya bilgilerini getirirken hata oluştu!</span><br />";
+            }
+        }
+
+        protected void lbtnFileDelete_Click(object sender, EventArgs e)
+        {
+            var itemId = (sender as LinkButton).CommandArgument == "" ? 0 : Convert.ToInt32((sender as LinkButton).CommandArgument);
+            if (DeleteFile(itemId))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Green\">Dosya başarıyla silindi</span><br />";
+                GetItem(Convert.ToInt32(lblProductId.Text));
+            }
+            else
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Dosya silinirken hata oluştu!</span><br />";
+            }
+        }
+
+        private bool GetProductFiles(int productId)
+        {
+            bool retValue = false;
+            try
+            {
+                var productDocumentList = MultimediasData.GetItemMultimedias(3, productId); //3 Product EnumValueId ayhant
+                gvProductFiles.DataSource = productDocumentList;
+                gvProductFiles.DataBind();
+                retValue = true;
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Get Document List";
+                itemSystemLog.Content = productId.ToString() + " Ürün numarası ile dosya listesi getirilirken hata oluştu. Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return retValue;
+        }
+
+        private bool GetProductFile(int fileId)
+        {
+            bool retValue = false;
+            var item = MultimediasData.Get(fileId);
+            try
+            {
+                if (item != null)
+                {
+                    divAlert.InnerHtml = "";
+                    lblFileId.Text = item.Id.ToString();
+                    txtDocumentDescription.Text = item.Description;
+                    txtDocumentName.Text = item.Title;
+                    divFiles.InnerHtml = "";
+                    string fileExtension = item.Title;
+
+                    {
+                        divFiles.InnerHtml += "Doküman: <a taget=\"_blank\" href=\"../ProductDocuments/Orginal/Others/" + item.FilePath + "\">" + item.FilePath + "</a>";
+                    }
+                    retValue = true;
+                }
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Edit File";
+                itemSystemLog.Content = "Id=" + fileId.ToString() + " ile Dosya güncellenemedi.";
+                itemSystemLog.Type = new EnumValue() { Id = 0 };
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return retValue;
+        }
+
+        private bool SaveFiles(int fileId)
+        {
+            bool retValue = true;
+            bool isOK = false;
+            int i = 0;
+            bool isDefault = false;
+            foreach (Telerik.Web.UI.UploadedFile uploadedFile in ruProductDocuments.UploadedFiles)
+            {
+                System.Threading.Thread.Sleep(1000);
+                string fileName = DateTime.Now.ToString().Replace(".", "").Replace(":", "").Replace("/", "").Replace("-", "").Replace(" ", "");
+                fileName += "_" + fileId.ToString();
+                //Dökümanı kaydet.
+                string targetFolderOther = Server.MapPath("~/ProductDocuments/Orginal/Others");
+
+                //Eğer resim ise 3 farklı boyutta resize et.
+                string fileExtension = uploadedFile.GetExtension();
+                uploadedFile.SaveAs(targetFolderOther, isOK);
+                if (i < 1)
+                    isDefault = true;
+                else
+                    isDefault = false;
+
+                if (InsertDocument(fileId, fileName + fileExtension, fileExtension, isDefault))
+                {
+                    divAlert.InnerHtml += "<span style=\"color:Green\">Dosya veritabanına başarıyla kaydedildi. Dosya Adı: <i>" + uploadedFile.FileName + "</i></span><br />";
+                }
+                else
+                {
+                    divAlert.InnerHtml += "<span style=\"color:Red\">Dosya veritabanına kaydedilerken hata oluştu! Dosya Adı: <i>" + uploadedFile.FileName + "</i></span><br />";
+                }
+
+
+            }
+            return retValue;
+        }
+
+        private bool InsertFile(int fileId, string fileName, string fileExtension)
+        {
+            bool retValue = false;
+            try
+            {
+                var item = new Multimedia();
+                //item.Description = txtDocumentDescription.Text;                
+                item.FilePath = fileName;
+                item.Title = fileExtension;
+                item.ProductId = fileId;
+                if (MultimediasData.Insert(item) > 0)
+                {
+                    retValue = true;
+                }
+
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Insert File";
+                itemSystemLog.Content = "File kaydedilemedi. Hata: " + exception.ToString();
+                itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+                SystemLogData.Insert(itemSystemLog);
+            }
+            return retValue;
+        }
+
+        //private bool UpdateDocument(int documentId)
+        //{
+        //    bool retValue = false;
+        //    try
+        //    {
+        //        var item = MultimediasData.Get(documentId);
+        //        item.Title = txtDocumentName.Text;
+        //        item.Description = txtDocumentDescription.Text;
+        //        item.EditDate = DateTime.Now;
+        //        item.EditAdminId = 100;
+        //        if (MultimediasData.Update(item) >= 0)
+        //        {
+        //            retValue = true;
+        //        }
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        SystemLog itemSystemLog = new SystemLog();
+        //        itemSystemLog.Title = "Update Document";
+        //        itemSystemLog.Content = "Id=" + documentId.ToString() + " ile Doküman güncellenemedi. Hata: " exception.ToString();
+        //        itemSystemLog.Type = new EnumValue() { Id = 0 };//olumsu sonuc 1 olumsuz 0
+        //        SystemLogData.Insert(itemSystemLog);
+        //    }
+        //    return retValue;
+        //}
+
+        private bool DeleteFile(int fileId)
+        {
+            bool retValue = false;
+            try
+            {
+                if (MultimediasData.Delete(fileId) < 0)
+                {
+                    retValue = true;
+                }
+            }
+            catch (Exception exception)
+            {
+                SystemLog itemSystemLog = new SystemLog();
+                itemSystemLog.Title = "Delete File";
+                itemSystemLog.Content = "Id=" + fileId.ToString() + " ile Dosya silinemedi. Hata: " + exception.ToString();
                 itemSystemLog.Type = new EnumValue() { Id = 0 };
                 SystemLogData.Insert(itemSystemLog);
             }

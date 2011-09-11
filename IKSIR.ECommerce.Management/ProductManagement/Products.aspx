@@ -44,6 +44,8 @@
                             </telerik:RadTab>
                             <telerik:RadTab Text="Resimler" PageViewID="RadPageView2">
                             </telerik:RadTab>
+                            <telerik:RadTab Text="Dökümanlar" PageViewID="RadPageView7">
+                            </telerik:RadTab>
                             <telerik:RadTab Text="Video" PageViewID="RadPageView4">
                             </telerik:RadTab>
                             <telerik:RadTab Text="İlişkili Ürünler" PageViewID="RadPageView5">
@@ -297,7 +299,7 @@
                             <table>
                                 <tr>
                                     <td colspan="4">
-                                        <strong>Ürün Resimleri</strong> (jpg, gif, png, pdf, doc, xls)
+                                        <strong>Ürün Resimleri</strong> (jpg, gif, png)
                                     </td>
                                 </tr>
                                 <tr>
@@ -395,6 +397,116 @@
                                             <asp:LinkButton ID="lbtnUsed" runat="server" OnClick="lbtnDocumentUsed_Click" CommandArgument='<%# Eval("Id")%>'
                                                 OnClientClick="javascript:return confirm('Bu kaydı varsayılan yapmak istediğinize emin misiniz?');"
                                                 CausesValidation="false" ForeColor="Blue">[Varsayılan]</asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
+                                        SortExpression="Id" />
+                                    <asp:BoundField DataField="FilePath" HeaderText="Adı" ApplyFormatInEditMode="false"
+                                        ReadOnly="true" SortExpression="Name" />
+                                    <asp:BoundField DataField="IsDefault" HeaderText="Varsayılan" ApplyFormatInEditMode="false"
+                                        ReadOnly="true" SortExpression="IsDefault" />
+                                </Columns>
+                            </asp:GridView>
+                        </telerik:RadPageView>
+                        <telerik:RadPageView ID="RadPageView7" runat="server">
+                            <table>
+                                <tr>
+                                    <td colspan="4">
+                                        <strong>Ürün Dökümanları</strong> (pdf, doc, xls)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Id
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lblFileId" runat="server" Text="Yeni Kayıt"></asp:Label>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <<tr>
+                                    <td>
+                                        Ad
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtDocumentName" runat="server"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Açıklama
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtDocumentDescription" runat="server" TextMode="MultiLine" Width="250px"
+                                            Height="50px"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <%--<tr>
+                                    <td>
+                                        Döküman Tipi
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlDocumentTypes" runat="server">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>--%>
+                                <tr>
+                                    <td valign="top">
+                                        Document
+                                    </td>
+                                    <td valign="top">
+                                        :
+                                    </td>
+                                    <td>
+                                        <telerik:RadUpload ID="RadUploadDocument" runat="server" InitialFileInputsCount="1"
+                                            MaxFileInputsCount="1" AllowedFileExtensions=".jpg,.jpeg,.pdf,.doc,.gif,.png"
+                                            Localization-Add="Ekle" Localization-Clear="Temizle" Localization-Delete="Sil"
+                                            Localization-Remove="Kaldır" Localization-Select="Seç" />
+                                        <div runat="server" id="divFiles">
+                                        </div>
+                                        <%-- <asp:Button runat="server" ID="btnCancelShowDocuments" Text="Vazgeç" OnClick="btnCancelShowDocuments_Click" Visible="false" />--%>
+                                        <%--<telerik:RadProgressArea ID="progressArea1" runat="server" />--%>
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center" colspan="4">
+                                        <asp:Label ID="lblAlertDocument" runat="server" Visible="false"></asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <asp:GridView runat="server" ID="gvProductFiles" AutoGenerateColumns="False" CellPadding="4"
+                                GridLines="None" PageSize="15" EnableModelValidation="True" Width="100%" Caption="Ürün Dökümanları"
+                                CaptionAlign="Left">
+                                <Columns>
+                                    <asp:TemplateField ShowHeader="False">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="lbtnFileEdit" runat="server" OnClick="lbtnFileEdit_Click" CommandArgument='<%# Eval("Id")%>'>[Kontrol Et]</asp:LinkButton>
+                                            <asp:LinkButton ID="lbtnFileDelete" runat="server" OnClick="lbtnFileDelete_Click"
+                                                CommandArgument='<%# Eval("Id")%>' OnClientClick="javascript:return confirm('Bu kaydı silmek istediğinize emin misiniz?');"
+                                                CausesValidation="false" ForeColor="Red">[Sil]</asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="Id" HeaderText="Id" ApplyFormatInEditMode="false" ReadOnly="true"
