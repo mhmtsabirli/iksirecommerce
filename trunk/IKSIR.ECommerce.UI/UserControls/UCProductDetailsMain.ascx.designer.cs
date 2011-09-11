@@ -49,6 +49,33 @@ namespace IKSIR.ECommerce.UI.UserControls {
         protected global::System.Web.UI.WebControls.LinkButton lbtnAddToFavorite;
         
         /// <summary>
+        /// anchor_Facebook control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor anchor_Facebook;
+        
+        /// <summary>
+        /// anchor_Twitter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor anchor_Twitter;
+        
+        /// <summary>
+        /// anchor_Delicious control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor anchor_Delicious;
+        
+        /// <summary>
         /// RadRating control.
         /// </summary>
         /// <remarks>
