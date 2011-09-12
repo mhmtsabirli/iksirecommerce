@@ -52,13 +52,11 @@ namespace IKSIR.ECommerce.UI.Pages
             {
                 if (SaveForm())
                 {
-                    lblAlert.Text = "Üye kaydınız başarıyla gerçekleşmiştir.";
-                    lblAlert.ForeColor = System.Drawing.Color.Green;
+                    divAlert.InnerHtml = "<span style=\"color:Green\">Üye kaydınız başarıyla gerçekleşmiştir.</span><br />";
                 }
                 else
                 {
-                    lblAlert.Text = "Üye kaydınız gerçekleşirken hata oluştu! Lütfen daha sonra tekrar deneyiniz.";
-                    lblAlert.ForeColor = System.Drawing.Color.Red;
+                    divAlert.InnerHtml = "<span style=\"color:Red\">Üye kaydınız gerçekleşirken hata oluştu! Lütfen daha sonra tekrar deneyiniz.</span><br />";
                 }
             }
         }
@@ -88,19 +86,16 @@ namespace IKSIR.ECommerce.UI.Pages
 
                     if (retValueSendMail)
                     {
-                        lblAlert.Text = "Üyelik işleminiz tamamlanmıştır. Üyelik esnasında belirtmiş olduğunuz e-mail adresinize siteye giriş bilgilerinizi yollanmıştır.";
-                        lblAlert.ForeColor = System.Drawing.Color.Green;
+                        divAlert.InnerHtml = "<span style=\"color:Green\">Üyelik işleminiz tamamlanmıştır. Üyelik esnasında belirtmiş olduğunuz e-mail adresinize siteye giriş bilgilerinizi yollanmıştır.</span><br />";
                     }
                     else
                     {
-                        lblAlert.Text = "Bilgilerinizi mail adresinize göndeririken bir hata oluştu.";
-                        lblAlert.ForeColor = System.Drawing.Color.Red;
+                        divAlert.InnerHtml = "<span style=\"color:Green\">Bilgilerinizi mail adresinize göndeririken bir hata oluştu.</span><br />";
                     }
                 }
                 else
                 {
-                    lblAlert.Text = "Üyeliğiniz kaydedilirken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
-                    lblAlert.ForeColor = System.Drawing.Color.Red;
+                    divAlert.InnerHtml = "<span style=\"color:Red\">Üyeliğiniz kaydedilirken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.</span><br />";
                 }
 
                 if (ret > 0)
@@ -118,13 +113,62 @@ namespace IKSIR.ECommerce.UI.Pages
         private bool CheckForm()
         {
             bool retValue = true;
+            divAlert.InnerHtml = "";
+            if (txtFirstName.Text == "")
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Ad alanı zorunlu.</span><br />";
+                retValue = false;
+            }
+            if (txtLastName.Text == "")
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Soyad alanı zorunlu.</span><br />";
+                retValue = false;
+            }
+            if (txtEmail.Text == "")
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">E-posta alanı zorunlu.</span><br />";
+                retValue = false;
+            }
+            if (!Toolkit.Utility.isEmail(txtEmail.Text))
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Geçerli bir e-posta giriniz.</span><br />";
+                retValue = false;         
+            }
+            if (txtPassword.Text == "")
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Şifre alanı zorunlu.</span><br />";
+                retValue = false;
+            }
+            if (txtPasswordAgain.Text == "")
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Şifre tekrar alanı zorunlu.</span><br />";
+                retValue = false;
+            }
+            if (txtPassword.Text != txtPasswordAgain.Text)
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Şifre ve şifre tekrar alanları aynı olmalı..</span><br />";
+                retValue = false;
+            }
+            if (ddlBirthDateDay.SelectedValue == "-1")
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Doğum Tarihi gün alanını seçiniz.</span><br />";
+                retValue = false;
+            }
+            if (ddlBirthDateMonth.SelectedValue == "-1")
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Doğum Tarihi ay alanını seçiniz.</span><br />";
+                retValue = false;
+            }
+            if (ddlBirthDateYear.SelectedValue == "-1")
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Doğum Tarihi yıl alanını seçiniz.</span><br />";
+                retValue = false;
+            }
             var item = UserData.Get(txtEmail.Text);
             if (item != null)
             {
-                lblAlert.Text = "Bu email adresi kullanılıyor. Lütfen başka bir mail adresi giriniz.";
-                txtEmail.Focus();
-                lblAlert.ForeColor = System.Drawing.Color.Red;
-                return false;
+                divAlert.InnerHtml += "<span style=\"color:Red\">Bu email adresi kullanılıyor. Lütfen başka bir mail adresi giriniz.</span><br />";
+                retValue = false;
             }
             return retValue;
         }

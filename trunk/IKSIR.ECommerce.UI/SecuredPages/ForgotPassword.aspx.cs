@@ -19,6 +19,13 @@ namespace IKSIR.ECommerce.UI.SecuredPages
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            if (txtEmail.Text == "")
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">Email girmelisiniz.</span><br />";
+                txtEmail.Focus();
+                return;
+            }
+
             var user = GetEmail();
             if (user != null)
             {
@@ -32,19 +39,16 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                 bool retValue = Mail.sendMail(user.Email, "helpdesk@idevit.com.tr", "İdevit A.Ş. | Şifre Hatırlatma", MailBody);
                 if (retValue)
                 {
-                    lblAlert.Text = "Şifreniz mail adresinize gönderilmiştir.";
-                    lblAlert.ForeColor = System.Drawing.Color.Green;
+                    divAlert.InnerHtml += "<span style=\"color:Green\">Şifreniz mail adresinize gönderilmiştir.</span><br />";
                 }
                 else
                 {
-                    lblAlert.Text = "Şifreniz mail adresinize göndeririken bir hata oluştu lütfen daha sonra tekrar deneyiniz.";
-                    lblAlert.ForeColor = System.Drawing.Color.Red;
+                    divAlert.InnerHtml += "<span style=\"color:Red\">Şifreniz mail adresinize göndeririken bir hata oluştu lütfen daha sonra tekrar deneyiniz.</span><br />";
                 }
             }
             else
             {
-                lblAlert.Text = "Bu mail adresiyle kayıtlı bir üyemiz bulunmamaktadır.";
-                lblAlert.ForeColor = System.Drawing.Color.Red;
+                divAlert.InnerHtml += "<span style=\"color:Red\">Bu mail adresiyle kayıtlı bir üyemiz bulunmamaktadır.</span><br />";
             }
         }
 

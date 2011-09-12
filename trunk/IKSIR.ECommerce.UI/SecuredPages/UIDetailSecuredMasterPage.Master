@@ -19,8 +19,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
     <uc3:UCHeader ID="UCHeader1" runat="server" />
     <div class="main" style="padding-left: 10px">
         <div class="sidebar_left">

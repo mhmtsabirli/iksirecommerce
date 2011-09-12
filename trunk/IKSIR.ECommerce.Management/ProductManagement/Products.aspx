@@ -5,7 +5,6 @@
 <%@ Register Assembly="RadAjax.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>
@@ -150,15 +149,12 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server"  MaxLength='500'  onkeyUp="checkTextAreaMaxLength(this,event,'500','Llbldescription');"   Width="100%" ID="txtProductDescription" TextMode="MultiLine"
-                                            CssClass="descriptionTextBox"></asp:TextBox>
-                                              
-                                           
+                                        <asp:TextBox runat="server" MaxLength='500' onkeyUp="checkTextAreaMaxLength(this,event,'500','Llbldescription');"
+                                            Width="100%" ID="txtProductDescription" TextMode="MultiLine" CssClass="descriptionTextBox"></asp:TextBox>
                                     </td>
                                     <td>
-                                    
-                                    <div id="Llbldescription">500</div>
-                                     
+                                        <div id="Llbldescription">
+                                            500</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -209,7 +205,7 @@
                                             ForeColor="Red">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
-                                 <tr>
+                                <tr>
                                     <td>
                                         Kg/Ds
                                     </td>
@@ -428,7 +424,7 @@
                                     <td>
                                     </td>
                                 </tr>
-                                <<tr>
+                                <tr>
                                     <td>
                                         Ad
                                     </td>
@@ -625,14 +621,12 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" Width="100%" onkeyUp="checkTextAreaMaxLength(this,event,'4000','lblvideo');" Height="100px" ID="txtVideo" TextMode="MultiLine"
-                                            CssClass="descriptionTextBox"></asp:TextBox>
+                                        <asp:TextBox runat="server" Width="100%" onkeyUp="checkTextAreaMaxLength(this,event,'4000','lblvideo');"
+                                            Height="100px" ID="txtVideo" TextMode="MultiLine" CssClass="descriptionTextBox"></asp:TextBox>
                                     </td>
                                     <td>
-                                  
-                                    <div id="lblvideo">4000</div>
-
-
+                                        <div id="lblvideo">
+                                            4000</div>
                                     </td>
                                 </tr>
                             </table>
@@ -667,7 +661,7 @@
                                         :
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server"  MaxLength="100" Width="100%" ID="txtRProductCode"></asp:TextBox>
+                                        <asp:TextBox runat="server" MaxLength="100" Width="100%" ID="txtRProductCode"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:Button runat="server" ID="btnSearch" Text="Ürün Bul" OnClick="btnSearch_Click" />
@@ -855,7 +849,6 @@
                                 </asp:DropDownList>
                             </td>
                             <td>
-                               
                             </td>
                         </tr>
                         <tr>
@@ -866,29 +859,28 @@
                                 :
                             </td>
                             <td>
-                                <asp:DropDownList runat="server"  AutoPostBack="true" ID="ddlFilterParentCategories" 
-                                    onselectedindexchanged="ddlFilterParentCategories_SelectedIndexChanged">
+                                <asp:DropDownList runat="server" AutoPostBack="true" ID="ddlFilterParentCategories"
+                                    OnSelectedIndexChanged="ddlFilterParentCategories_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </td>
                             <td rowspan="2">
                                 <asp:Button runat="server" ID="btnFilter" Text="Filtrele" OnClick="btnFilter_Click" />
                             </td>
                         </tr>
-                           <tr>
-                                    <td>
-                                        Alt Kategori
-                                    </td>
-                                    <td>
-                                        :
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList runat="server" ID="ddlFilterCategories">
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td>
-                                       
-                                    </td>
-                                </tr>
+                        <tr>
+                            <td>
+                                Alt Kategori
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <asp:DropDownList runat="server" ID="ddlFilterCategories">
+                                </asp:DropDownList>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 Ürün Kodu
@@ -930,7 +922,7 @@
                                             ReadOnly="true" SortExpression="ProductCode" />
                                         <asp:BoundField DataField="Title" HeaderText="Başlık" ApplyFormatInEditMode="false"
                                             ReadOnly="true" SortExpression="Title" />
-                                              <asp:TemplateField HeaderText="Kategori">
+                                        <asp:TemplateField HeaderText="Kategori">
                                             <ItemTemplate>
                                                 <asp:Label runat="server" ID="lblCategory" Text='<%# Eval("ProductCategory.Title")%>'></asp:Label>
                                             </ItemTemplate>
@@ -942,7 +934,6 @@
                                                 <asp:Label runat="server" ID="lblProductStatus" Text='<%# Eval("ProductStatus.Value")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                      
                                         <asp:TemplateField HeaderText="Value" Visible="false">
                                             <ItemTemplate>
                                             </ItemTemplate>
