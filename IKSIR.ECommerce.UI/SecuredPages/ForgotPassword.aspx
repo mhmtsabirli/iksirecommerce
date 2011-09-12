@@ -19,8 +19,6 @@
                 :
             </td>
             <td>
-                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtEmail"
-                    ErrorMessage="Kullanıcı adınızı girmelisiniz" SetFocusOnError="true" ValidationGroup="vgLoginControlForm">*</asp:RequiredFieldValidator>
             </td>
             <td>
                 <asp:TextBox runat="server" ID="txtEmail" MaxLength="48" class="sidemenu_kullanici_adi_login"></asp:TextBox>
@@ -28,19 +26,18 @@
         </tr>
         <tr>
             <td colspan="4" style="color: Red !important;">
-                <asp:ValidationSummary runat="server" ID="ValidationSummary1" ValidationGroup="vgLoginControlForm"
-                    CssClass="ValidationSummaryClass" />
                 <asp:Label runat="server" ID="Label1" ForeColor="Red"></asp:Label>
             </td>
         </tr>
         <tr>
             <td colspan="4" align="center">
-                <asp:Label runat="server" ID="lblAlert"></asp:Label>
+                <div runat="server" id="divAlert">
+                </div>
             </td>
         </tr>
         <tr>
             <td colspan="4">
-                <asp:Button runat="server" ID="btnLogin" OnClick="btnLogin_Click" ValidationGroup="vgLoginControlForm"
+                <asp:Button runat="server" ID="btnLogin" OnClick="btnLogin_Click"
                     class="footer_module_submit" />
             </td>
         </tr>
