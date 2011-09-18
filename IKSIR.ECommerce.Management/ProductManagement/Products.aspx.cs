@@ -23,7 +23,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             if (!Page.IsPostBack)
             {
                 BindValues();
-                GetList();
+               // GetList();
             }
         }
 
@@ -226,6 +226,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             {
                 productId = InsertPruductMain();
             }
+            SaveDocuments(productId);
+            SaveFiles(productId);
             SaveDocuments(productId);
             SaveProductProperties(productId);
             SaveProductRelated(productId);
@@ -744,9 +746,8 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
         #region Files
 
-        protected void lbtnFileEdit_Click(object sender, EventArgs e)
+        protected void lbtnFileEdits_Click(object sender, EventArgs e)
         {
-            ruProductDocuments.Visible = false;
             var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
             gvList.SelectedIndex = index;
             var fileId = (sender as LinkButton).CommandArgument == ""
@@ -777,7 +778,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             bool retValue = false;
             try
             {
-                var productDocumentList = MultimediasData.GetItemMultimedias(3, productId); //3 Product EnumValueId ayhant
+                var productDocumentList = FileData.GetItemFiles(3, productId); //3 Product EnumValueId ayhant
                 gvProductFiles.DataSource = productDocumentList;
                 gvProductFiles.DataBind();
                 retValue = true;
@@ -796,7 +797,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private bool GetProductFile(int fileId)
         {
             bool retValue = false;
-            var item = MultimediasData.Get(fileId);
+            var item = FileData.Get(fileId);
             try
             {
                 if (item != null)
@@ -831,7 +832,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             bool isOK = false;
             int i = 0;
             bool isDefault = false;
-            foreach (Telerik.Web.UI.UploadedFile uploadedFile in ruProductDocuments.UploadedFiles)
+            foreach (Telerik.Web.UI.UploadedFile uploadedFile in RadUploadDocument.UploadedFiles)
             {
                 System.Threading.Thread.Sleep(1000);
                 string fileName = DateTime.Now.ToString().Replace(".", "").Replace(":", "").Replace("/", "").Replace("-", "").Replace(" ", "");
@@ -841,13 +842,15 @@ namespace IKSIR.ECommerce.Management.ProductManagement
 
                 //Eğer resim ise 3 farklı boyutta resize et.
                 string fileExtension = uploadedFile.GetExtension();
-                uploadedFile.SaveAs(targetFolderOther, isOK);
+
+                string targetFileNameOther = System.IO.Path.Combine(targetFolderOther, fileName + uploadedFile.GetExtension());
+                uploadedFile.SaveAs(targetFileNameOther, isOK);
                 if (i < 1)
                     isDefault = true;
                 else
                     isDefault = false;
 
-                if (InsertDocument(fileId, fileName + fileExtension, fileExtension, isDefault))
+                if (InsertFile(fileId, fileName + fileExtension, fileExtension, isDefault))
                 {
                     divAlert.InnerHtml += "<span style=\"color:Green\">Dosya veritabanına başarıyla kaydedildi. Dosya Adı: <i>" + uploadedFile.FileName + "</i></span><br />";
                 }
@@ -861,17 +864,17 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             return retValue;
         }
 
-        private bool InsertFile(int fileId, string fileName, string fileExtension)
+        private bool InsertFile(int fileId, string fileName, string fileExtension, bool isDefault)
         {
             bool retValue = false;
             try
             {
-                var item = new Multimedia();
-                //item.Description = txtDocumentDescription.Text;                
+                var item = new Files();
+                item.Description = txtDocumentDescription.Text;                
                 item.FilePath = fileName;
                 item.Title = fileExtension;
                 item.ProductId = fileId;
-                if (MultimediasData.Insert(item) > 0)
+                if (FileData.Insert(item) > 0)
                 {
                     retValue = true;
                 }
@@ -919,7 +922,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             bool retValue = false;
             try
             {
-                if (MultimediasData.Delete(fileId) < 0)
+                if (FileData.Delete(fileId) < 0)
                 {
                     retValue = true;
                 }
@@ -984,8 +987,13 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             {
                 var itemProduct = ProductData.Get(ProductData.FindProductId(txtRProductCode.Text));
 
-                txtRProductName.Text = itemProduct.Title.ToString();
-                lblhRelatedProductId.Text = itemProduct.Id.ToString();
+                if (itemProduct.Title != null)
+                {
+                    txtRProductName.Text = itemProduct.Title.ToString();
+                    lblhRelatedProductId.Text = itemProduct.Id.ToString();
+                }
+
+                
             }
         }
         protected void btnSSearch_Click(object sender, EventArgs e)
@@ -995,8 +1003,11 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             {
                 var itemProduct = ProductData.Get(ProductData.FindProductId(txtSProductCode.Text));
 
-                txtSProductName.Text = itemProduct.Title.ToString();
-                lblhSimilarProductId.Text = itemProduct.Id.ToString();
+                if (itemProduct.Title != null)
+                {
+                    txtSProductName.Text = itemProduct.Title.ToString();
+                    lblhSimilarProductId.Text = itemProduct.Id.ToString();
+                }
             }
         }
         private List<ProductProperty> GetProductPropertyList()
