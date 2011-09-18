@@ -55,6 +55,7 @@
     <Compile Include="DataLayer\CommonDataLayer\AddressData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\CityData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\CommentData.cs" />
+    <Compile Include="DataLayer\CommonDataLayer\FileData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\NewsletterData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\NewsData.cs" />
     <Compile Include="DataLayer\CommonDataLayer\StaticPageData.cs" />
