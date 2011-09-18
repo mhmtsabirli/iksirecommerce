@@ -16,6 +16,7 @@ namespace IKSIR.ECommerce.Management.MasterPage
     public partial class MasterManagement : System.Web.UI.MasterPage
     {
         public List<IKSIR.ECommerce.Model.SiteModel.ContactForm> itemContactFormList = null;
+        public int MinStokCount = 0;
         public string Alert
         {
             set
@@ -34,19 +35,22 @@ namespace IKSIR.ECommerce.Management.MasterPage
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (Session["Login"] != null && Session["Login"] != "")
+            if (Session["LOGIN_ADMIN"] != null)
             {
-                if (Session["Login"].ToString() == "idevit")
+                Model.AdminModel.Admin admin = (Model.AdminModel.Admin)Session["LOGIN_ADMIN"];
+                if (admin.Email != null)
                 {
+
                     itemContactFormList = ContactFormData.GetContactFormList(10);
+                    MinStokCount = ProductData.CheckProductStockCount();
                 }
                 else
-                {
-                    Response.Redirect("../Login.aspx");
-                }
+                   // Response.Redirect("Login.aspx");
+                Response.Redirect("http://www.banyom.com.tr/management/Login.aspx");
             }
             else
-                Response.Redirect("../Login.aspx");
+                //Response.Redirect("Login.aspx");
+                Response.Redirect("http://www.banyom.com.tr/management/Login.aspx");
         }
     }
 }
