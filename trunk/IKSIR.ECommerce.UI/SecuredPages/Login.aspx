@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecuredPages/UIDetailSecuredMasterPage.Master"
     AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="IKSIR.ECommerce.UI.SecuredPages.Login" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -20,7 +19,7 @@
             <td>
             </td>
             <td>
-                <asp:TextBox runat="server" ID="txtEmail" MaxLength="48" class="sidemenu_kullanici_adi_login"
+                <asp:TextBox runat="server" ID="txtEmail" MaxLength="48" CssClass="sidemenu_kullanici_adi_login"
                     title="E-posta Adresiniz"></asp:TextBox>
             </td>
         </tr>
@@ -34,7 +33,7 @@
             <td>
             </td>
             <td>
-                <asp:TextBox runat="server" ID="txtPassword" MaxLength="38" TextMode="Password" class="sidemenu_sifre_login"
+                <asp:TextBox runat="server" ID="txtPassword" MaxLength="38" TextMode="Password" CssClass="sidemenu_sifre_login"
                     title="Şifreniz"></asp:TextBox>
             </td>
         </tr>
@@ -51,7 +50,7 @@
         </tr>
         <tr>
             <td colspan="4">
-                <asp:Button runat="server" ID="btnLogin" OnClick="btnLogin_Click" class="footer_module_submit" />
+                <asp:Button runat="server" ID="btnLogin" OnClick="btnLogin_Click" CssClass="footer_module_submit" />
             </td>
         </tr>
     </table>

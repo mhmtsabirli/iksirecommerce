@@ -32,7 +32,6 @@ namespace IKSIR.ECommerce.UI.UserControls
         {
             var itemModuleProductList = ModuleProductData.GetModuleProductList(moduleId);
 
-            int k = 6; // items to select
             var selected = new List<Product>();
             var needed = 6;
             var available = itemModuleProductList.Count;

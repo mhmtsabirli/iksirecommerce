@@ -181,12 +181,12 @@ namespace IKSIR.ECommerce.UI.UserControls
                     }
                     else
                     {
-                        Response.Redirect("../SecuredPages/MyAccount.aspx?favoritproductid=" + productId.ToString());
+                        Response.Redirect("../SecuredPages/UserAccount/FavoriteProducts.aspx?favoritproductid=" + productId.ToString());
                     }
                 }
                 else
                 {
-                    Response.Redirect("../SecuredPages/MyAccount.aspx?favoritproductid=" + productId.ToString());
+                    Response.Redirect("../SecuredPages/UserAccount/FavoriteProducts.aspx?favoritproductid=" + productId.ToString());
                 }
             }
             else

@@ -52,11 +52,11 @@ namespace IKSIR.ECommerce.UI.Pages
             {
                 if (SaveForm())
                 {
-                    divAlert.InnerHtml = "<span style=\"color:Green\">Üye kaydınız başarıyla gerçekleşmiştir.</span><br />";
+                    divAlert.InnerHtml += "<span style=\"color:Green\">Üye kaydınız başarıyla gerçekleşmiştir. Alışverişe başlayabilirsiniz.</span><br />";
                 }
                 else
                 {
-                    divAlert.InnerHtml = "<span style=\"color:Red\">Üye kaydınız gerçekleşirken hata oluştu! Lütfen daha sonra tekrar deneyiniz.</span><br />";
+                    divAlert.InnerHtml += "<span style=\"color:Red\">Üye kaydınız gerçekleşirken hata oluştu! Lütfen daha sonra tekrar deneyiniz.</span><br />";
                 }
             }
         }
@@ -76,6 +76,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 int ret = UserData.Insert(itemUser);
                 if (ret > 0)
                 {
+                    itemUser.Id = ret;
                     string MailBody = File.ReadAllText(HttpContext.Current.Request.MapPath("~") + "/MailTemplates/MembershipRegister.htm");
                     //string ActivationLink = System.Configuration.ConfigurationManager.AppSettings["WebAddress"] + "Membership/Activation.aspx?ActivationCode=" + strActivationCode + "&Email=" + User.Email;
                     MailBody = MailBody.Replace("%NameSurname%", txtFirstName.Text + " " + txtLastName.Text);
@@ -90,8 +91,9 @@ namespace IKSIR.ECommerce.UI.Pages
                     }
                     else
                     {
-                        divAlert.InnerHtml = "<span style=\"color:Green\">Bilgilerinizi mail adresinize göndeririken bir hata oluştu.</span><br />";
+                        divAlert.InnerHtml = "<span style=\"color:Red\">Bilgilerinizi mail adresinize göndeririken bir hata oluştu.</span><br />";
                     }
+                    Session.Add("LOGIN_USER", itemUser);
                 }
                 else
                 {
@@ -132,7 +134,7 @@ namespace IKSIR.ECommerce.UI.Pages
             if (!Toolkit.Utility.isEmail(txtEmail.Text))
             {
                 divAlert.InnerHtml += "<span style=\"color:Red\">Geçerli bir e-posta giriniz.</span><br />";
-                retValue = false;         
+                retValue = false;
             }
             if (txtPassword.Text == "")
             {

@@ -60,6 +60,14 @@ namespace IKSIR.ECommerce.UI.Pages
 
                     dlPaging.DataSource = pages;
                     dlPaging.DataBind();
+                    if (Page.Request.QueryString["p"] == null)
+                    {
+                        HyperLink hplPageNo = dlPaging.Items[0].FindControl("hplPageNo") as HyperLink;
+                        if (hplPageNo != null)
+                        {
+                            hplPageNo.CssClass = "selectedpage";
+                        }
+                    }
                 }
                 productList = productList.Skip(6 * activePage).Take(6).ToList();
                 dlProductList.DataSource = productList;
@@ -122,6 +130,15 @@ namespace IKSIR.ECommerce.UI.Pages
 
                     dlPaging.DataSource = pages;
                     dlPaging.DataBind();
+
+                    if (Page.Request.QueryString["p"] == null)
+                    {
+                        HyperLink hplPageNo = dlPaging.Items[0].FindControl("hplPageNo") as HyperLink;
+                        if (hplPageNo != null)
+                        {
+                            hplPageNo.CssClass = "selectedpage";
+                        }
+                    }
                 }
                 productList = productList.Skip(6 * activePage).Take(6).ToList();
                 dlProductList.DataSource = productList;
@@ -145,7 +162,7 @@ namespace IKSIR.ECommerce.UI.Pages
                             if (itemProduct != null && itemProduct.Multimedias != null && itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault() != null)
                             {
                                 var image = itemProduct.Multimedias.Where(x => x.IsDefault == true).FirstOrDefault();
-                                 imgProduct.ImageUrl = "http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.ImagePath + "Small/small_" + image.FilePath;
+                                imgProduct.ImageUrl = "http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.ImagePath + "Small/small_" + image.FilePath;
                             }
                             else
                             {

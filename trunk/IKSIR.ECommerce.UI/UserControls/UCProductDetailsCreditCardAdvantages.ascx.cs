@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer;
+using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
+using IKSIR.ECommerce.Model.Bank;
 
 namespace IKSIR.ECommerce.UI.UserControls
 {
@@ -40,8 +42,16 @@ namespace IKSIR.ECommerce.UI.UserControls
 
                 if (rptCreditCardAdvantages != null && hdnCardId.Value != "" && int.TryParse(hdnCardId.Value, out cardId))
                 {
-                    rptCreditCardAdvantages.DataSource = PaymetTermRateData.GetAktivePaymetTermRateList(cardId);
-                    rptCreditCardAdvantages.DataBind();
+                    //rptCreditCardAdvantages.DataSource = PaymetTermRateData.GetAktivePaymetTermRateList(cardId);
+                    //rptCreditCardAdvantages.DataBind();
+
+                    var item = ProductData.Get(productId);
+                    if (item != null)
+                    {
+                        var items = ProductPriceData.GetCalculatedPriceList(item.ProductPrice.Price);
+                        rptCreditCardAdvantages.DataSource = items.Where(x => x.Id == cardId).FirstOrDefault().Rates;
+                        rptCreditCardAdvantages.DataBind();
+                    }
                 }
             }
         }

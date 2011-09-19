@@ -256,6 +256,7 @@ namespace IKSIR.ECommerce.UI.Pages
             if (ddlPaymentType.SelectedValue == "-1") // seçiniz
             {
                 DvTransferAccount.Visible = false;
+                Session.Remove("USER_BASKET");
                 DvCreditCard.Visible = false;
             }
         }

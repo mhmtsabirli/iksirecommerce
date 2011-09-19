@@ -89,16 +89,18 @@
                                 title="E-posta Adresiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator runat="server" ID="regex1" ControlToValidate="txtEmail"
                                 ErrorMessage="Geçersiz E-posta Adresi" ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"
-                                ValidationGroup="vgLoginControlForm" SetFocusOnError="true"  ForeColor="Red">*</asp:RegularExpressionValidator>
+                                ValidationGroup="vgLoginControlForm" SetFocusOnError="true" ForeColor="Red">*</asp:RegularExpressionValidator>
                         </td>
                         <td>
-                            <asp:TextBox runat="server" ID="txtEmail" MaxLength="50" class="sidemenu_kullanici_adi" title="E-posta Adresiniz"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtEmail" MaxLength="50" class="sidemenu_kullanici_adi"
+                                title="E-posta Adresiniz"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtPassword"
-                                SetFocusOnError="true" ErrorMessage="Şifrenizi girmelisiniz" ValidationGroup="vgLoginControlForm"  ForeColor="Red">*</asp:RequiredFieldValidator>
+                                SetFocusOnError="true" ErrorMessage="Şifrenizi girmelisiniz" ValidationGroup="vgLoginControlForm"
+                                ForeColor="Red">*</asp:RequiredFieldValidator>
                         </td>
                         <td>
                             <asp:TextBox runat="server" ID="txtPassword" MaxLength="50" TextMode="Password" class="sidemenu_sifre"
@@ -122,16 +124,16 @@
             <div class="clear">
             </div>
             <span class="sidemenu_link"><a href="../SecuredPages/ForgotPassword.aspx">
-                <img src="../images/sidemenu_forgot.jpg" alt="" style="border: none;" />Parolamı
+                <img src="../images/sidemenu_forgot.jpg" alt="" style="border: none; padding-left:5px; padding-right:3px;" />Parolamı
                 Unuttum?</a></span> <span class="sidemenu_link"><a href="../SecuredPages/Register.aspx">
-                    <img src="../images/sidemenu_forgot.jpg" alt="" style="border: none;" />Yeni Üyelik</a></span>
+                    <img src="../images/sidemenu_forgot.jpg" alt="" style="border: none; padding-left:5px; padding-right:3px;" />Yeni Üyelik</a></span>
         </asp:Panel>
     </div>
     <asp:Panel runat="server" ID="pnlLogout" Visible="false">
         <table cellpadding="0" cellspacing="0" border="0" width="190px">
             <tr>
                 <td align="center">
-                    <img src="../images/default_user_picture.png" style="border: none;" />
+                    <img src="../images/default_user_picture.png" style="border: none;" alt=""/>
                 </td>
             </tr>
             <tr>
@@ -140,7 +142,7 @@
                         <asp:Label runat="server" ID="lblUserTitle" Text="lblUserTitle"></asp:Label>
                     </p>
                     <p>
-                        <a href="../SecuredPages/MyAccount.aspx">[Hesabım]</a>
+                        <a href="../SecuredPages/UserAccount/UserInfos.aspx">[Hesabım]</a>
                     </p>
                     <p>
                         <a href="../Pages/OrderBasket.aspx">[Sepetim]</a>
