@@ -56,26 +56,23 @@ namespace IKSIR.ECommerce.UI.UserControls
 
                 RadRating.Value = ProductRateData.GetProductRate(productId);
                 int imageCount = 0;
-                //divSmallImages.InnerHtml += "<div id=\"main\"><ul class=\"gallery clearfix\">";
+                divSmallImages.InnerHtml += "<div id=\"main\"><ul class=\"gallery clearfix\">";
                 foreach (var item in productMultimedias)
                 {
                     imageCount += 1;
-                    //divSmallImages.InnerHtml += "<li style=\"display: inline; margin: 5px; list-style-type:none;\"><a href=\"#\" rel=\"" + item.FilePath + "\" class=\"image\">";
-                    //divSmallImages.InnerHtml += "<img src=\"http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.ImagePath + "Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a></li>";
-                    divSmallImages.InnerHtml += "<a href=\"#\" rel=\"" + item.FilePath + "\" class=\"image\">";
-                    divSmallImages.InnerHtml += "<img src=\"http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.ImagePath + "Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a>";
-
+                    divSmallImages.InnerHtml += "<li style=\"display: inline; margin: 5px; list-style-type:none;\"><a href=\"#\" rel=\"" + item.FilePath + "\" class=\"image\">";
+                    divSmallImages.InnerHtml += "<img src=\"http://" + IKSIR.ECommerce.Infrastructure.StaticData.Idevit.ImagePath + "Icon/icon_" + item.FilePath + "\" class=\"thumb\" border=\"0\" /></a></li>";
 
                     if (imageCount == 3)
                         break;
                 }
 
-                
+
                 if (product.Video != null && product.Video != "")
                 {
-                    divSmallImages.InnerHtml += "<li style=\"display: inline; margin: 5px; list-style-type:none;\"><a href=\"http://www.youtube.com/watch?v=vqTU0yQW9GE&feature=topvideos_sports\" rel=\"prettyPhoto\" title=\"Ürün Videosu\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün Videosu\" /></a></li>";                    
+                    divSmallImages.InnerHtml += "<li style=\"display: inline; margin: 5px; list-style-type:none;\"><a href=\"http://www.youtube.com/watch?v=vqTU0yQW9GE&feature=topvideos_sports\" rel=\"prettyPhoto\" title=\"Ürün Videosu\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün Videosu\" /></a></li>";
                 }
-                //divSmallImages.InnerHtml += "</ul></div>";
+                divSmallImages.InnerHtml += "</ul></div>";
                 //container.InnerHtml = otherImages;
                 lblProductCode.Text = product.ProductCode;
                 lblProductName.Text = product.Title;
