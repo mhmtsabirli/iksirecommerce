@@ -12,7 +12,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            txtEmail.Focus();
+            
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
@@ -23,12 +23,12 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             }
             if (!Toolkit.Utility.isEmail(txtEmail.Text))
             {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Geçerli bir e-posta giriniz.</span><br />";
+                divAlert.InnerHtml = "<span style=\"color:Red\">Geçerli bir e-posta giriniz.</span><br />";
                 return;
             }
             if (txtPassword.Text == "")
             {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Şifre alanı zorunlu.</span><br />";
+                divAlert.InnerHtml = "<span style=\"color:Red\">Şifre alanı zorunlu.</span><br />";
                 return;
             }
 
@@ -46,7 +46,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             }
             else
             {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Kullanıcı adı ve/veya şifreniz hatalı.</span><br />";
+                divAlert.InnerHtml = "<span style=\"color:Red\">Kullanıcı adı ve/veya şifreniz hatalı.</span><br />";
             }
         }
 
@@ -61,7 +61,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             }
             else
             {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Kullanıcı adı ve/veya şifreniz hatalı.</span><br />";
+                divAlert.InnerHtml = "<span style=\"color:Red\">Kullanıcı adı ve/veya şifreniz hatalı.</span><br />";
             }
             return retValue;
         }

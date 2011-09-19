@@ -46,7 +46,7 @@
                                                     <%# Eval("Month")%>
                                                 </td>
                                                 <td>
-                                                    <%# Eval("Rate")%>
+                                                    <%# Eval("Price")%>
                                                 </td>
                                             </tr>
                                         </ItemTemplate>
@@ -56,7 +56,7 @@
                                                     <%# Eval("Month")%>
                                                 </td>
                                                 <td>
-                                                    <%# Eval("Rate")%>
+                                                    <%# Eval("Price")%>                                                   
                                                 </td>
                                             </tr>
                                         </AlternatingItemTemplate>

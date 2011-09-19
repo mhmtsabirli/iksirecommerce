@@ -19,11 +19,13 @@ namespace IKSIR.ECommerce.UI.UserControls
 
         private void GetProductDocuments(int productId)
         {
-            try
-            { }
-            catch (Exception exception)
-            {
-            }
+            //try
+            //{
+            //    FileData.GetItemFiles(3, productId);
+            //}
+            //catch (Exception exception)
+            //{
+            //}
         }
     }
 }

@@ -72,10 +72,13 @@
                     Siparişinizin ne durumda olduğunu buradan öğrene bilirsiniz. Lütfen size verilen
                     sipariş numarasını aşağıdaki kutucuğa girip takip ediniz</p>
             </div>
-            <asp:TextBox runat="server" ID="txtOrderNo" title="Sipariş No..." CssClass="sidemenu_text"></asp:TextBox>
-            <br />
-            <asp:Button runat="server" ID="btnGetOrder" class="sidemenu_submit" 
-                Text="Sipariş Durumu" onclick="btnGetOrder_Click" />
+            <div style="margin-left: 10px;">
+                <asp:TextBox runat="server" ID="txtOrderNo" title="Sipariş No..." CssClass="sidemenu_text"></asp:TextBox>
+            </div>
+            <div style="margin-left: 10px;">
+                <asp:Button runat="server" ID="btnGetOrder" class="sidemenu_submit" Text="Sipariş Durumu"
+                    OnClick="btnGetOrder_Click" />
+            </div>
         </div>
     </div>
     <div class="sidemenu_bottom">

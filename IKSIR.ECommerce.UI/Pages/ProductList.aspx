@@ -44,12 +44,18 @@
         </ItemTemplate>
     </asp:DataList>
     <div class="page_array">
-        <asp:DataList runat="server" ID="dlPaging" RepeatColumns="10" RepeatDirection="Horizontal"
-            OnItemDataBound="dlPaging_ItemDataBound">
-            <ItemTemplate>
-                <asp:HyperLink runat="server" ID="hplPageNo" Text='<%# Eval("Key")%>' NavigateUrl='<%# Eval("Value")%>'></asp:HyperLink>
-            </ItemTemplate>
-        </asp:DataList>
+        <table width="100%">
+            <tr>
+                <td align="center">
+                    <asp:DataList runat="server" ID="dlPaging" RepeatColumns="10" RepeatDirection="Horizontal"
+                        OnItemDataBound="dlPaging_ItemDataBound">
+                        <ItemTemplate>
+                            <asp:HyperLink runat="server" ID="hplPageNo" Text='<%# Eval("Key")%>' NavigateUrl='<%# Eval("Value")%>'></asp:HyperLink>
+                        </ItemTemplate>
+                    </asp:DataList>
+                </td>
+            </tr>
+        </table>
         <div class="clear">
         </div>
     </div>
