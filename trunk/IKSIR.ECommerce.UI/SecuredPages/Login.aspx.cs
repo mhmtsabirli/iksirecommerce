@@ -12,7 +12,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
@@ -48,6 +48,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             {
                 divAlert.InnerHtml = "<span style=\"color:Red\">Kullanıcı adı ve/veya şifreniz hatalı.</span><br />";
             }
+            ClientScript.GetPostBackEventReference(this, "");
         }
 
         private bool LoginUser()

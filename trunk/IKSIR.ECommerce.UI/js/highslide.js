@@ -14,7 +14,7 @@ lang : {
 	loadingTitle : 'İptal',
 	focusTitle : 'Click to bring to front',
 	fullExpandTitle : 'Expand to actual size (f)',
-	creditsText : 'Powered by <i>Highslide JS</i>',
+	creditsText : '',
 	creditsTitle : 'Go to the Highslide JS homepage',
 	previousText : 'Previous',
 	nextText : 'İleri', 
@@ -31,7 +31,7 @@ lang : {
 	moveTitle : 'Taşı',
 	fullExpandText : '1:1',
 	number: 'Resim %1 of %2',
-	restoreTitle : 'Kapatmak için resmin üzerin tıklayın. Sonraki önceki resimler için sağ sol yön tuşlarını kullanabilirsiniz.'
+	restoreTitle : 'Kapatmak için resmin üzerin tıklayın.'
 },
 // See http://highslide.com/ref for examples of settings  
 graphicsDir : 'highslide/graphics/',
@@ -53,7 +53,7 @@ padToMinWidth : false, // pad the popup width to make room for wide caption
 fullExpandPosition : 'bottom right',
 fullExpandOpacity : 1,
 showCredits : true, // you can set this to false if you want
-creditsHref : 'http://highslide.com/',
+creditsHref : '',
 creditsTarget : '_self',
 enableKeyListener : true,
 openerTagNames : ['a'], // Add more to allow slideshow indexing

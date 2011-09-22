@@ -54,6 +54,9 @@
     }
 </script>
 <%--Arama, login gibi textboxlarda üzerine geldiğinde içini temizleyen bölüm BİTİŞ--%>
+<form id="formOrderStatus" method="post">
+<asp:ScriptManager ID="ScriptManager1" runat="server">
+</asp:ScriptManager>
 <div class="tabmenu">
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
@@ -84,12 +87,6 @@
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td>
-                            <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="txtEmail"
-                                ErrorMessage="Kullanıcı adınızı girmelisiniz" SetFocusOnError="true" ValidationGroup="vgLoginControlForm"
-                                title="E-posta Adresiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator runat="server" ID="regex1" ControlToValidate="txtEmail"
-                                ErrorMessage="Geçersiz E-posta Adresi" ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"
-                                ValidationGroup="vgLoginControlForm" SetFocusOnError="true" ForeColor="Red">*</asp:RegularExpressionValidator>
                         </td>
                         <td>
                             <asp:TextBox runat="server" ID="txtEmail" MaxLength="50" class="sidemenu_kullanici_adi"
@@ -98,9 +95,6 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtPassword"
-                                SetFocusOnError="true" ErrorMessage="Şifrenizi girmelisiniz" ValidationGroup="vgLoginControlForm"
-                                ForeColor="Red">*</asp:RequiredFieldValidator>
                         </td>
                         <td>
                             <asp:TextBox runat="server" ID="txtPassword" MaxLength="50" TextMode="Password" class="sidemenu_sifre"
@@ -109,13 +103,12 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <asp:ValidationSummary runat="server" ForeColor="Red" ID="vsLoginForm" ValidationGroup="vgLoginControlForm" />
                             <asp:Label runat="server" ID="lblAlert" ForeColor="Red"></asp:Label>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <asp:Button runat="server" ID="btnLogin" OnClick="btnLogin_Click" ValidationGroup="vgLoginControlForm"
+                            <asp:Button runat="server" ID="btnLogin" CausesValidation="false" OnClick="btnLogin_Click"
                                 class="footer_module_submit" />
                         </td>
                     </tr>
@@ -124,16 +117,18 @@
             <div class="clear">
             </div>
             <span class="sidemenu_link"><a href="../SecuredPages/ForgotPassword.aspx">
-                <img src="../images/sidemenu_forgot.jpg" alt="" style="border: none; padding-left:5px; padding-right:3px;" />Parolamı
-                Unuttum?</a></span> <span class="sidemenu_link"><a href="../SecuredPages/Register.aspx">
-                    <img src="../images/sidemenu_forgot.jpg" alt="" style="border: none; padding-left:5px; padding-right:3px;" />Yeni Üyelik</a></span>
+                <img src="../images/sidemenu_forgot.jpg" alt="" style="border: none; padding-left: 5px;
+                    padding-right: 3px;" />Parolamı Unuttum?</a></span> <span class="sidemenu_link"><a
+                        href="../SecuredPages/Register.aspx">
+                        <img src="../images/sidemenu_forgot.jpg" alt="" style="border: none; padding-left: 5px;
+                            padding-right: 3px;" />Yeni Üyelik</a></span>
         </asp:Panel>
     </div>
     <asp:Panel runat="server" ID="pnlLogout" Visible="false">
         <table cellpadding="0" cellspacing="0" border="0" width="190px">
             <tr>
                 <td align="center">
-                    <img src="../images/default_user_picture.png" style="border: none;" alt=""/>
+                    <img src="../images/default_user_picture.png" style="border: none;" alt="" />
                 </td>
             </tr>
             <tr>
@@ -156,3 +151,6 @@
         </table>
     </asp:Panel>
 </div>
+<script type="text/javascript" language="javascript">
+</script>
+</form>

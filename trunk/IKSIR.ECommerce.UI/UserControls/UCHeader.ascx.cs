@@ -33,7 +33,7 @@ namespace IKSIR.ECommerce.UI.UserControls
 
         protected void lbtnSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect("http://banyom.com.tr/Pages/SearchResult.aspx?searchkey=" + txtSearchText.Text);
+            Response.Redirect("../Pages/SearchResult.aspx?searchkey=" + txtSearchText.Text);
         }
     }
 }

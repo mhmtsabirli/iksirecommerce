@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 
 namespace IKSIR.ECommerce.UI.UserControls
 {
@@ -19,13 +20,15 @@ namespace IKSIR.ECommerce.UI.UserControls
 
         private void GetProductDocuments(int productId)
         {
-            //try
-            //{
-            //    FileData.GetItemFiles(3, productId);
-            //}
-            //catch (Exception exception)
-            //{
-            //}
+            try
+            {
+                var items = FileData.GetItemFiles(3, productId);
+                rptDocuments.DataSource = items;
+                rptDocuments.DataBind();
+            }
+            catch (Exception exception)
+            {
+            }
         }
     }
 }

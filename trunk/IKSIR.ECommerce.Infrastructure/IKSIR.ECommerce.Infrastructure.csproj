@@ -34,6 +34,9 @@
     <Reference Include="IKSIR.ECommerce.Model">
       <HintPath>..\..\Output\Debug\IKSIR.ECommerce.Model.dll</HintPath>
     </Reference>
+    <Reference Include="IKSIR.ECommerce.Toolkit">
+      <HintPath>..\..\Output\Debug\IKSIR.ECommerce.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />

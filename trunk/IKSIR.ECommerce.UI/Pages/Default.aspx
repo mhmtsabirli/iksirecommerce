@@ -14,7 +14,7 @@
         if ($(this).val() == 'Arama') {
             $(this).val('');
         }
-    }).blur(function () {
+    }).blur(function () {   
         //check for empty input
         if ($(this).val() == '') {
             $(this).val('Arama');

@@ -13,7 +13,6 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer;
 using IKSIR.ECommerce.Model.CommonModel;
 
-
 namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
 {
     public class ProductPriceData
@@ -161,6 +160,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             {
                 var creditCardRates = new CreditCardRates();
                 var RateList = new List<Rates>();
+                creditCardRates.Id = creditCard.Id;
                 creditCardRates.CreditCardImage = creditCard.Image;
                 creditCardRates.CreditCardName = creditCard.Name;
                 creditCardRates.BankName = creditCard.Bank.Name;
@@ -181,5 +181,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
 
             return creditCardRatesList;
         }
+
+        public static CreditCardRates List { get; set; }
     }
 }

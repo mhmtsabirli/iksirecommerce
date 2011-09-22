@@ -1,59 +1,60 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCHeader.ascx.cs" Inherits="IKSIR.ECommerce.UI.UserControls.UCHeader" %>
 <%--Arama, login gibi textboxlarda üzerine geldiğinde içini temizleyen bölüm BAŞLANGIÇ--%>
-    <style type="text/css">
-        input.blur
-        {
-            color: #808080;
-        }
-    </style>
-    <script language="javascript" type="text/javascript">
-        $(document).ready(
+<style type="text/css">
+    input.blur
+    {
+        color: #808080;
+    }
+</style>
+<script language="javascript" type="text/javascript">
+    $(document).ready(
     function () {
         textboxHint("div_header");
     });
 
-        function textboxHint(id, options) {
-            var o = { selector: 'input:text[title]', blurClass: 'blur' };
-            $e = $('#' + id);
-            $.extend(true, o, options || {});
+    function textboxHint(id, options) {
+        var o = { selector: 'input:text[title]', blurClass: 'blur' };
+        $e = $('#' + id);
+        $.extend(true, o, options || {});
 
-            if ($e.is(':text')) {
-                if (!$e.attr('title')) $e = null;
-            } else {
-                $e = $e.find(o.selector);
-            }
-            if ($e) {
-                $e.each(function () {
-                    var $t = $(this);
-                    if ($.trim($t.val()).length == 0) { $t.val($t.attr('title')); }
-                    if ($t.val() == $t.attr('title')) {
-                        $t.addClass(o.blurClass);
-                    } else {
+        if ($e.is(':text')) {
+            if (!$e.attr('title')) $e = null;
+        } else {
+            $e = $e.find(o.selector);
+        }
+        if ($e) {
+            $e.each(function () {
+                var $t = $(this);
+                if ($.trim($t.val()).length == 0) { $t.val($t.attr('title')); }
+                if ($t.val() == $t.attr('title')) {
+                    $t.addClass(o.blurClass);
+                } else {
+                    $t.removeClass(o.blurClass);
+                }
+
+                $t.focus(function () {
+                    if ($.trim($t.val()) == $t.attr('title')) {
+                        $t.val('');
                         $t.removeClass(o.blurClass);
                     }
-
-                    $t.focus(function () {
-                        if ($.trim($t.val()) == $t.attr('title')) {
-                            $t.val('');
-                            $t.removeClass(o.blurClass);
-                        }
-                    }).blur(function () {
-                        var val = $.trim($t.val());
-                        if (val.length == 0 || val == $t.attr('title')) {
-                            $t.val($t.attr('title'));
-                            $t.addClass(o.blurClass);
-                        }
-                    });
-
-                    // empty the text box on form submit
-                    $(this.form).submit(function () {
-                        if ($.trim($t.val()) == $t.attr('title')) $t.val('');
-                    });
+                }).blur(function () {
+                    var val = $.trim($t.val());
+                    if (val.length == 0 || val == $t.attr('title')) {
+                        $t.val($t.attr('title'));
+                        $t.addClass(o.blurClass);
+                    }
                 });
-            }
+
+                // empty the text box on form submit
+                $(this.form).submit(function () {
+                    if ($.trim($t.val()) == $t.attr('title')) $t.val('');
+                });
+            });
         }
-    </script>
-    <%--Arama, login gibi textboxlarda üzerine geldiğinde içini temizleyen bölüm BİTİŞ--%>
+    }
+</script>
+<%--Arama, login gibi textboxlarda üzerine geldiğinde içini temizleyen bölüm BİTİŞ--%>
+<form id="formHeader" method="post">
 <div class="header" id="div_header">
     <div class="top_menu">
         <ul>
@@ -98,3 +99,14 @@
     <div class="clear">
     </div>
 </div>
+<script type="text/javascript" language="javascript">
+    $('#<%=txtSearchText.ClientID%>').keypress(function (event) {
+        if (event.which == 13) {
+            var btn = document.getElementById('<%=lbtnSearch.ClientID%>');
+            if (btn != null) {
+                btn.click();
+            }
+        }
+    });
+</script>
+</form>

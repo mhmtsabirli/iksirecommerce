@@ -82,9 +82,7 @@
     <%--Arama, login gibi textboxlarda üzerine geldiğinde içini temizleyen bölüm BİTİŞ--%>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
+    <form id="formMaster" runat="server">
     <uc6:Header ID="Header1" runat="server"></uc6:Header>
     <div class="clear">
     </div>
