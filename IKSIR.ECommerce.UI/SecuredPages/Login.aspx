@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecuredPages/UIDetailSecuredMasterPage.Master"
     AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="IKSIR.ECommerce.UI.SecuredPages.Login" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -54,4 +55,20 @@
             </td>
         </tr>
     </table>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $('#<%=txtEmail.ClientID%>').keypress(function (event) {
+                if (event.which == 13) {
+                    $('#<%=btnLogin.ClientID%>').trigger("click");
+                    __doPostBack('', '');
+                }
+            });
+
+            $("#txtPassword").keypress(function (event) {
+                if (event.which == 13) {
+                    $('#<%=btnLogin.ClientID%>').trigger("click");
+                }
+            });
+        });
+    </script>
 </asp:Content>

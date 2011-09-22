@@ -37,12 +37,12 @@
                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
                         <tr>
                             <td align="left">
-                                <asp:LinkButton runat="server" ID="lbtnUpdateShippingAddress" Text="Seçili teslimat adresi bilgilerimi güncelle"
+                                &nbsp;<asp:LinkButton runat="server" ID="lbtnUpdateShippingAddress" Text="Seçili teslimat adresi bilgilerimi güncelle"
                                     OnClick="lbtnUpdateShippingAddress_Click"></asp:LinkButton>
                             </td>
                             <td align="right">
                                 <asp:LinkButton runat="server" ID="lbtnNewShippingAddress" Text="Yeni" OnClick="lbtnNewShippingAddress_Click"></asp:LinkButton>
-                            </td>
+                            &nbsp;&nbsp;</td>
                         </tr>
                     </table>
                     <br />
@@ -240,12 +240,12 @@
                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
                         <tr>
                             <td align="left">
-                                <asp:LinkButton runat="server" ID="lbtnUpdateBillingAddress" Text="Seçili fatura adresi bilgilerimi güncelle"
+                                &nbsp;<asp:LinkButton runat="server" ID="lbtnUpdateBillingAddress" Text="Seçili fatura adresi bilgilerimi güncelle"
                                     OnClick="lbtnUpdateBillingAddress_Click"></asp:LinkButton>
                             </td>
                             <td align="right">
                                 <asp:LinkButton runat="server" ID="lbtnNewBillingAddress" Text="Yeni" OnClick="lbtnNewBillingAddress_Click"></asp:LinkButton>
-                            </td>
+                                &nbsp;&nbsp;</td>
                         </tr>
                     </table>
                     <br />

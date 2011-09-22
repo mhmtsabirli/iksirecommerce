@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecuredPages/UIDetailSecuredMasterPage.Master"
     AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.Register"
     UICulture="tr" %>
+
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -142,6 +143,19 @@
         <tr>
             <td colspan="5" align="center">
                 <div runat="server" id="divAlert">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5" align="center">
+                <div style="width: 100%; background: #F3F6F7; font: normal 12px tahoma; color: #3F5968;
+                    height: 100px; overflow: auto; border: 1px solid #666; padding: 8px; text-align:left">
+                    <strong>Üyelik Avantajları</strong><br />
+                    Banyom.com.tr e üye olarak sadece üyelere sunduğumuz avantajlardan anında yararlanmaya
+                    başlayabilirsiniz. Düzenlenecek ortak kampanyalardan, promosyonlardan ilk siz haberdar
+                    olur ve size özel avantajlardan yararlanabilirsiniz.<br />
+                    Size özel kampanya ürünlerini incelemek ve faydalanabilmek için üye girişi yapmanız
+                    yeterlidir. Bu bölümlerden sadece üyelerimiz yararlanabilmektedir.
                 </div>
             </td>
         </tr>
