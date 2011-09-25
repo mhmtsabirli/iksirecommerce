@@ -16,45 +16,39 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserControls
 
         }
 
-        protected void imgbtnSaveNewsletter_Click(object sender, ImageClickEventArgs e)
+        protected void lbtnSaveToList_Click(object sender, EventArgs e)
         {
-            if (txtUserEmail.Text == "")
+            if (!Toolkit.Utility.isEmail(txtUserEmail.Text))
             {
-                lblAlert.Text = "Bir e-posta adresi giriniz.";
-                lblAlert.ForeColor = System.Drawing.Color.Red;
+                string error = "E-bülten aboneliği için hatalı mail adresi girdiniz.";
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "err_msg", "alert('" + error + "');", true);
+                txtUserEmail.Focus();
                 return;
             }
-            else if (!Toolkit.Utility.isEmail(txtUserEmail.Text))
+
+            var item = new Newsletter();
+            item.Email = txtUserEmail.Text;
+            var list = NewsletterData.GetList();
+            var existItem = list.Where(x => x.Email == txtUserEmail.Text).FirstOrDefault();
+            if (existItem != null)
             {
-                lblAlert.Text = "Geçerli bir e-posta adresi giriniz.";
+                lblAlert.Text = "Bu mail adresi zaten kayıtlı.";
                 lblAlert.ForeColor = System.Drawing.Color.Red;
-                return;
             }
             else
             {
-                var item = new Newsletter();
-                item.Email = txtUserEmail.Text;
-                var list = NewsletterData.GetList();
-                var existItem = list.Where(x => x.Email == txtUserEmail.Text).FirstOrDefault();
-                if (existItem != null)
+                if (NewsletterData.Insert(item) > 0)
                 {
-                    lblAlert.Text = "Bu e-posta adresi zaten kayıtlı.";
-                    lblAlert.ForeColor = System.Drawing.Color.Red;
+                    lblAlert.Text = "Mail kaydınız başarıyla alınmıştır.";
+                    lblAlert.ForeColor = System.Drawing.Color.Green;
                 }
                 else
                 {
-                    if (NewsletterData.Insert(item) > 0)
-                    {
-                        lblAlert.Text = "E-posta adresi kaydınız başarıyla alınmıştır.";
-                        lblAlert.ForeColor = System.Drawing.Color.Green;
-                    }
-                    else
-                    {
-                        lblAlert.Text = "E-posta adresi kaydınızı alırken bir hata oluştu lütfen daha sonra tekrar deneyiniz.";
-                        lblAlert.ForeColor = System.Drawing.Color.Red;
-                    }
+                    lblAlert.Text = "Mail kaydınızı alırken bir hata oluştu lütfen daha sonra tekrar deneyiniz.";
+                    lblAlert.ForeColor = System.Drawing.Color.Red;
                 }
             }
+            txtUserEmail.Focus();
         }
     }
 }

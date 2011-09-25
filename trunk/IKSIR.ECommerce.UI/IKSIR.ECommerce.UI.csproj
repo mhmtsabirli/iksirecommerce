@@ -57,6 +57,7 @@
     <Content Include="css\highslide.css" />
     <Content Include="css\prettyPhoto.css" />
     <Content Include="css\style.css" />
+    <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="images\advertise.jpg" />
     <Content Include="images\carousel_bg.jpg" />
@@ -337,8 +338,6 @@
     <Content Include="SecuredPages\UserAccount\UserInfos.aspx" />
     <Content Include="SecuredPages\UserControls\UCFooter.ascx" />
     <Content Include="SecuredPages\UserControls\UCHeader.ascx" />
-    <Content Include="SecuredPages\WebForm1.aspx" />
-    <Content Include="SecuredPages\WebForm2.aspx" />
     <Content Include="UserControls\UCGetOrderStatus.ascx" />
     <Content Include="UserControls\UCLogin.ascx" />
     <Content Include="UserControls\UCShowCaseProducts.ascx" />
@@ -367,6 +366,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassLibrary\Shopping.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -563,20 +569,6 @@
     </Compile>
     <Compile Include="SecuredPages\UserControls\UCHeader.ascx.designer.cs">
       <DependentUpon>UCHeader.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="SecuredPages\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SecuredPages\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SecuredPages\WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SecuredPages\WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCGetOrderStatus.ascx.cs">
       <DependentUpon>UCGetOrderStatus.ascx</DependentUpon>

@@ -24,7 +24,7 @@
                 *
             </td>
             <td>
-                <asp:TextBox runat="server" ID="txtFirstName"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtFirstName" Enabled="false"></asp:TextBox>
             </td>
             <td>
             </td>
@@ -40,7 +40,7 @@
                 *
             </td>
             <td>
-                <asp:TextBox runat="server" ID="txtLastName"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtLastName" Enabled="false"></asp:TextBox>
             </td>
             <td>
             </td>
@@ -56,7 +56,7 @@
                 *
             </td>
             <td>
-                <asp:TextBox runat="server" ID="txtEmail"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtEmail" Enabled="false"></asp:TextBox>
             </td>
             <td>
             </td>
@@ -72,7 +72,7 @@
                 *
             </td>
             <td>
-                <asp:TextBox runat="server" ID="txtPassword" TextMode="Password"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" Enabled="false"></asp:TextBox>
             </td>
             <td>
             </td>
@@ -88,7 +88,7 @@
                 *
             </td>
             <td>
-                <asp:TextBox runat="server" ID="txtPasswordAgain" TextMode="Password"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtPasswordAgain" TextMode="Password" Enabled="false"></asp:TextBox>
             </td>
             <td>
             </td>
@@ -104,13 +104,13 @@
                 *
             </td>
             <td>
-                <asp:DropDownList runat="server" ID="ddlBirthDateDay">
+                <asp:DropDownList runat="server" ID="ddlBirthDateDay" Enabled="false">
                 </asp:DropDownList>
                 /
-                <asp:DropDownList runat="server" ID="ddlBirthDateMonth">
+                <asp:DropDownList runat="server" ID="ddlBirthDateMonth" Enabled="false">
                 </asp:DropDownList>
                 /
-                <asp:DropDownList runat="server" ID="ddlBirthDateYear">
+                <asp:DropDownList runat="server" ID="ddlBirthDateYear" Enabled="false">
                 </asp:DropDownList>
             </td>
             <td>

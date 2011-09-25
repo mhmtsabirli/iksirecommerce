@@ -12,7 +12,6 @@ namespace IKSIR.ECommerce.UI.SecuredPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
@@ -41,7 +40,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                 }
                 else
                 {
-                    Response.Redirect("../Pages/Default.aspx");
+                    Response.Redirect("~/Pages/Default.aspx");
                 }
             }
             else

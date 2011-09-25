@@ -49,7 +49,7 @@
                             <ItemTemplate>
                                 <tr>
                                     <td colspan="4">
-                                        <a href='<%# String.Format("ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
+                                        <a href='<%# String.Format("~/Pages/ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
                                             target="_blank">
                                             <%# Eval("Product.ProductCategory.Title")%>
                                             /
@@ -63,9 +63,9 @@
                                             <tr>
                                                 <td>
                                                     <asp:HiddenField runat="server" ID="hdnProductId" Value='<%# Eval("Product.Id")%>' />
-                                                    <a href='<%# String.Format("ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
+                                                    <a href='<%# String.Format("~/Pages/ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
                                                         target="_blank">
-                                                        <asp:Image runat="server" ID="imgProduct" ImageUrl='<%# Eval("Product.MainImage", "http://banyom.com.tr/documents/Images/Small/small_{0:C}")%>'
+                                                        <asp:Image runat="server" ID="imgProduct" ImageUrl='<%# Eval("Product.MainImage", "http://www.banyom.com.tr/management/ProductDocuments/Images/Small/small_{0:C}")%>'
                                                             BorderWidth="0  " />
                                                     </a>
                                                 </td>
@@ -98,13 +98,11 @@
                                     </td>
                                     <td class="table_third">
                                         <p>
-                                            <%# Eval("ProductPrice.UnitPrice")%>
-                                            TL</p>
+                                            <asp:Label runat="server" ID="lblUnitPrice" Text='<%# Eval("ProductPrice.UnitPrice")%>'></asp:Label>&nbsp;TL</p>
                                     </td>
                                     <td class="table_fourth">
                                         <p>
-                                            <%# Eval("BasketItemPrice")%>
-                                            TL</p>
+                                            <asp:Label runat="server" ID="lblBasketItemPrice" Text='<%# Eval("BasketItemPrice")%>'></asp:Label>&nbsp;TL</p>
                                     </td>
                                 </tr>
                             </ItemTemplate>
@@ -179,11 +177,11 @@
             </tr>
             <tr>
                 <td>
-                <div id="IsSendMail" runat="server" visible="false">
-                <span style="color:Red;">
-                Tarıfınıza Bilgilendirme Maili gönderilirken bir sorun ile karşılaşılmıştır. Siparişiniz sistemimizde oluşmutur siparişinizi hesabınızdaki siparişlerim modülünden takip edebilirsiniz. Teşekkür ederiz.
-                </span>
-                </div>
+                    <div id="IsSendMail" runat="server" visible="false">
+                        <span style="color: Red;">Tarıfınıza Bilgilendirme Maili gönderilirken bir sorun ile
+                            karşılaşılmıştır. Siparişiniz sistemimizde oluşmutur siparişinizi hesabınızdaki
+                            siparişlerim modülünden takip edebilirsiniz. Teşekkür ederiz. </span>
+                    </div>
                 </td>
             </tr>
         </table>

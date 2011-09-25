@@ -70,7 +70,7 @@ namespace IKSIR.ECommerce.UI.UserControls
 
                 if (product.Video != null && product.Video != "")
                 {
-                    divSmallImages.InnerHtml += "<li style=\"display: inline; margin: 5px; list-style-type:none;\"><a href=\"http://www.youtube.com/watch?v=vqTU0yQW9GE&feature=topvideos_sports\" rel=\"prettyPhoto\" title=\"Ürün Videosu\"><img src=\"../images/urun_video.jpg\" alt=\"Ürün Videosu\" /></a></li>";
+                    divSmallImages.InnerHtml += "<li style=\"display: inline; margin: 5px; list-style-type:none;\"><a href=\"" + product.Video + "\" rel=\"prettyPhoto\" title=\"Ürün Videosu\"><img src=\"../images/urun_video.jpg\" style=\"border:none\" alt=\"Ürün Videosu\" /></a></li>";
                 }
                 divSmallImages.InnerHtml += "</ul></div>";
                 //container.InnerHtml = otherImages;

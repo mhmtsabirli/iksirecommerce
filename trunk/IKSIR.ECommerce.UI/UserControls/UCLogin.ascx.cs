@@ -25,6 +25,12 @@ namespace IKSIR.ECommerce.UI.UserControls
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            if (!Toolkit.Utility.isEmail(txtEmail.Text))
+            {
+                lblAlert.Text = "Geçerli bir e-posta giriniz.";
+                lblAlert.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
             if (LoginUser())
             {
                 Response.Redirect("Default.aspx");

@@ -8,14 +8,14 @@
     </tr>
     <tr>
         <td>
-            <asp:Label runat="server" ID="lblProductDetail"></asp:Label>
+            <asp:Label runat="server" ID="lblProductDetail" Font-Size="14px"></asp:Label>
         </td>
     </tr>
     <tr>
         <td>
             <asp:GridView runat="server" ID="gvProductProperties" AutoGenerateColumns="False"
-                Width="100%" ShowHeader="False" CellPadding="4" EnableModelValidation="True"
-                ForeColor="#333333" GridLines="None">
+                Width="100%" ShowHeader="False" CellPadding="0" CellSpacing="0" EnableModelValidation="True"
+                ForeColor="#333333" GridLines="None" Font-Size="14px">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:TemplateField>

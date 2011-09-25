@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <div class="sepet_content_middle">
+            <div class="sepet_content_middle" style="margin-left: 20px;">
                 <div class="sepet_content_header">
                     <img src="../images/sepet_sepet.jpg" alt="" />
                     <h3>
@@ -103,13 +103,11 @@
                                     </td>
                                     <td class="table_third">
                                         <p>
-                                            <%# Eval("ProductPrice.UnitPrice")%>
-                                            TL</p>
+                                            <asp:Label runat="server" ID="lblUnitPrice" Text='<%# Eval("ProductPrice.UnitPrice")%>'></asp:Label>&nbsp;TL</p>
                                     </td>
                                     <td class="table_fourth">
                                         <p>
-                                            <%# Eval("BasketItemPrice")%>
-                                            TL</p>
+                                            <asp:Label runat="server" ID="lblBasketItemPrice" Text='<%# Eval("BasketItemPrice")%>'></asp:Label>&nbsp;TL</p>
                                     </td>
                                     <td class="table_fifth">
                                         <a href="#">
@@ -175,8 +173,9 @@
                         <tr>
                             <td colspan="5">
                                 <asp:CheckBox ID="cbxComfirmation" runat="server" Text="" />
-                                <a href="#" id="anchorConfirmation">Genel Kurallar ve Koşullar&#39;ı okudum ve kabul
-                                    ediyorum.</a><div id="dvAlert" runat="server" visible="false"></div>
+                                <a href="#" id="anchorConfirmation" runat="server">Genel Kurallar ve Koşullar&#39;ı okudum ve kabul
+                                    ediyorum.</a><div id="dvAlert" runat="server" visible="false">
+                                    </div>
                                 <script type="text/javascript">
                                     $("#anchorConfirmation").click(function () {
                                         if ($(".divGeneralRules").is(':visible'))

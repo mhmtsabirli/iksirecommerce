@@ -67,6 +67,16 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                 HiddenField hdnProductId = e.Item.FindControl("hdnProductId") as HiddenField;
                 DropDownList ddlItemCount = e.Item.FindControl("ddlItemCount") as DropDownList;
 
+                Label lblUnitPrice = e.Item.FindControl("lblUnitPrice") as Label;
+                Label lblBasketItemPrice = e.Item.FindControl("lblBasketItemPrice") as Label;
+
+                decimal unitePrice = 0;
+                decimal.TryParse(lblUnitPrice.Text, out unitePrice);
+                lblUnitPrice.Text = Toolkit.Utility.CurrencyFormat(unitePrice);
+
+                decimal basketItemPrice = 0;
+                decimal.TryParse(lblBasketItemPrice.Text, out basketItemPrice);
+                lblBasketItemPrice.Text = Toolkit.Utility.CurrencyFormat(basketItemPrice);
 
                 Repeater rptProductProperties = e.Item.FindControl("rptProductProperties") as Repeater;
                 int productId;

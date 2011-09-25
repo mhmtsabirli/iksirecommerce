@@ -17,6 +17,8 @@ namespace IKSIR.ECommerce.UI.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string error = "Henüz üye alımı yapılmamaktadır. İlginiz için teşekkürler. Lütfen daha sonra tekrar deneyiniz.";
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "err_msg", "alert('" + error + "');", true);
             if (!Page.IsPostBack)
             {
                 BindValues();
@@ -48,6 +50,10 @@ namespace IKSIR.ECommerce.UI.Pages
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
+            string error = "Henüz üye alımı yapılmamaktadır. İlginiz için teşekkürler. Lütfen daha sonra tekrar deneyiniz.";
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "err_msg", "alert('" + error + "');", true);
+            return;
+
             if (CheckForm())
             {
                 if (SaveForm())

@@ -10,12 +10,14 @@
         <ItemTemplate>
             <tr>
                 <td>
+                    <asp:HiddenField runat="server" ID="hdnSimularProductId" Value='<%# Eval("Id")%>' />
                     <a href='<%# "../Pages/ProductDetails.aspx?pid="+ Eval("Id")%>'>
                         <asp:Image runat="server" ID="imgProduct" />
                     </a>
                 </td>
                 <td valign="top">
-                    Ürün Adı: <a href='<%# "../Pages/ProductDetails.aspx?pid="+ Eval("Id")%>'><%# Eval("Title")%></a>
+                    Ürün Adı: <a href='<%# "../Pages/ProductDetails.aspx?pid="+ Eval("Id")%>'>
+                        <%# Eval("Title")%></a>
                     <br />
                     Ürün Kodu:
                     <%# Eval("ProductCode")%>

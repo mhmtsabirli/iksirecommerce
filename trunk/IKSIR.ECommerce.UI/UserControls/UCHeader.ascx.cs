@@ -18,7 +18,7 @@ namespace IKSIR.ECommerce.UI.UserControls
             if (basketItemCount != 0)
             {
                 hplToBasket.Text = "Sepetiniz (" + basketItemCount.ToString() + ")"; ;
-                hplToBasket.NavigateUrl = "../Pages/OrderBasket.aspx";
+                hplToBasket.NavigateUrl = "~/Pages/OrderBasket.aspx";
             }
             else
             {
@@ -33,7 +33,7 @@ namespace IKSIR.ECommerce.UI.UserControls
 
         protected void lbtnSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect("../Pages/SearchResult.aspx?searchkey=" + txtSearchText.Text);
+            Response.Redirect("~/Pages/SearchResult.aspx?searchkey=" + txtSearchText.Text);
         }
     }
 }

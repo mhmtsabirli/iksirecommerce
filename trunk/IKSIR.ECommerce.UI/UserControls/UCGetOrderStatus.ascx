@@ -55,7 +55,6 @@
     }
 </script>
 <%--Arama, login gibi textboxlarda üzerine geldiğinde içini temizleyen bölüm BİTİŞ--%>
-<form id="formOrderStatus" method="post">
 <div class="sidemenu">
     <div class="sidemenu_top">
     </div>
@@ -73,27 +72,17 @@
                     Siparişinizin ne durumda olduğunu buradan öğrene bilirsiniz. Lütfen size verilen
                     sipariş numarasını aşağıdaki kutucuğa girip takip ediniz</p>
             </div>
-            <div style="margin-left: 10px;">
-                <asp:TextBox runat="server" ID="txtOrderNo" title="Sipariş No..." CssClass="sidemenu_text"></asp:TextBox>
-            </div>
-            <div style="margin-left: 10px;">
-                <asp:Button runat="server" ID="btnGetOrder" CausesValidation="false" class="sidemenu_submit"
-                    Text="Sipariş Durumu" OnClick="btnGetOrder_Click" />
-            </div>
+            <asp:Panel runat="server" ID="pnlOrderStatus" DefaultButton="btnGetOrder" CssClass="tabdiv">
+                <div style="margin-left: 10px;">
+                    <asp:TextBox runat="server" ID="txtOrderNo" title="Sipariş No..." CssClass="sidemenu_text"></asp:TextBox>
+                </div>
+                <div style="margin-left: 10px;">
+                    <asp:Button runat="server" ID="btnGetOrder" CausesValidation="false" class="sidemenu_submit"
+                        Text="Sipariş Durumu" OnClick="btnGetOrder_Click"/>
+                </div>
+            </asp:Panel>
         </div>
     </div>
     <div class="sidemenu_bottom">
     </div>
 </div>
-    <script type="text/javascript" language="javascript">
-        $('#<%=txtOrderNo.ClientID%>').keypress(function (event) {
-            if (event.which == 13) {
-                debugger;
-                var btn = document.getElementById('<%=btnGetOrder.ClientID%>');
-                if (btn != null) {
-                    btn.click();
-                }
-            }
-        });
-    </script>
-</form>

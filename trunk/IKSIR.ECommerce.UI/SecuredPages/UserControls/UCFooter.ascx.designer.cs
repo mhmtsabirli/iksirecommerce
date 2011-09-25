@@ -13,6 +13,15 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserControls {
     public partial class UCFooter {
         
         /// <summary>
+        /// pnlFooter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlFooter;
+        
+        /// <summary>
         /// txtUserEmail control.
         /// </summary>
         /// <remarks>
@@ -22,22 +31,13 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserControls {
         protected global::System.Web.UI.WebControls.TextBox txtUserEmail;
         
         /// <summary>
-        /// imgbtnSaveNewsletter control.
+        /// lbtnSaveToList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgbtnSaveNewsletter;
-        
-        /// <summary>
-        /// vsForm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary vsForm;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnSaveToList;
         
         /// <summary>
         /// lblAlert control.

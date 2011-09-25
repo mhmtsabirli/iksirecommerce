@@ -56,5 +56,10 @@ namespace IKSIR.ECommerce.UI.Pages
                 Response.Redirect("../SecuredPages/OrderPayment.aspx");
             }
         }
+
+        protected void btnBackToAddresses_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/OrderAddress.aspx");
+        }
     }
 }
