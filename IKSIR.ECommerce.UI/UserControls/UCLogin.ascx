@@ -54,7 +54,6 @@
     }
 </script>
 <%--Arama, login gibi textboxlarda üzerine geldiğinde içini temizleyen bölüm BİTİŞ--%>
-<form id="formOrderStatus" method="post">
 <asp:ScriptManager ID="ScriptManager1" runat="server">
 </asp:ScriptManager>
 <div class="tabmenu">
@@ -75,7 +74,7 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Web20">
     </telerik:RadAjaxLoadingPanel>
     <div id="div_login">
-        <asp:Panel runat="server" ID="pnlLogin">
+        <asp:Panel runat="server" ID="pnlLogin" DefaultButton="btnLogin">
             <ul class="tabnav">
                 <li><a href="#uyegirisi"><span>Üye Girişi</span></a></li>
             </ul>
@@ -86,7 +85,7 @@
             <div id="uyegirisi" class="tabdiv">
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tr>
-                        <td>
+                    <td>
                         </td>
                         <td>
                             <asp:TextBox runat="server" ID="txtEmail" MaxLength="50" class="sidemenu_kullanici_adi"
@@ -94,7 +93,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                         <td>
                         </td>
                         <td>
                             <asp:TextBox runat="server" ID="txtPassword" MaxLength="50" TextMode="Password" class="sidemenu_sifre"
@@ -153,4 +152,3 @@
 </div>
 <script type="text/javascript" language="javascript">
 </script>
-</form>

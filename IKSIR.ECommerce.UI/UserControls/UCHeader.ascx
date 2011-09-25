@@ -54,7 +54,6 @@
     }
 </script>
 <%--Arama, login gibi textboxlarda üzerine geldiğinde içini temizleyen bölüm BİTİŞ--%>
-<form id="formHeader" method="post">
 <div class="header" id="div_header">
     <div class="top_menu">
         <ul>
@@ -69,10 +68,12 @@
         <a href="../Pages/Default.aspx">
             <img src="../images/logo.jpg" alt="" /></a></div>
     <div class="search" id="block">
-        <asp:TextBox runat="server" ID="txtSearchText" title="Arama.." CssClass="search_text"></asp:TextBox>
-        <asp:LinkButton runat="server" ID="lbtnSearch" CssClass="search_submit" OnClick="lbtnSearch_Click"></asp:LinkButton>
-        <div class="clear">
-        </div>
+        <asp:Panel runat="server" ID="pnlSearch" DefaultButton="lbtnSearch">
+            <asp:TextBox runat="server" ID="txtSearchText" title="Arama.." CssClass="search_text"></asp:TextBox>
+            <asp:LinkButton runat="server" ID="lbtnSearch" CssClass="search_submit" OnClick="lbtnSearch_Click"></asp:LinkButton>
+            <div class="clear">
+            </div>
+        </asp:Panel>
     </div>
     <div class="clear">
     </div>
@@ -109,4 +110,3 @@
         }
     });
 </script>
-</form>

@@ -305,13 +305,13 @@ namespace IKSIR.ECommerce.UI.Pages
                 {
                     shippingAddressItem.CityName = txtShippingAddressCityName.Text;
                 }
-                
+
                 if (ddlShippingAddressDistricts.SelectedValue != "-1" && ddlShippingAddressDistricts.SelectedValue != "")
                 {
                     shippingAddressItem.District = new District() { Id = Convert.ToInt32(ddlShippingAddressDistricts.SelectedValue) };
                 }
 
-                if(txtShippingAddressDistrictName.Visible)
+                if (txtShippingAddressDistrictName.Visible)
                 {
                     shippingAddressItem.DistrictName = txtShippingAddressDistrictName.Text;
                 }
@@ -332,7 +332,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 else
                 {
                     lblShippingAddressAlert.Text = "Teslimat adresiniz güncellenirken hata oluştu lütfen daha sonra tekrar deneyiniz.";
-                    lblShippingAddressAlert.ForeColor = System.Drawing.Color.Red; 
+                    lblShippingAddressAlert.ForeColor = System.Drawing.Color.Red;
                 }
             }
             else
@@ -422,7 +422,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 {
                     billingAddressItem.District = new District() { Id = Convert.ToInt32(ddlBillingAddressDistricts.SelectedValue) };
                 }
-                if(txtBillingAddressDistrictName.Visible)
+                if (txtBillingAddressDistrictName.Visible)
                 {
                     billingAddressItem.DistrictName = txtBillingAddressDistrictName.Text;
                 }
@@ -466,7 +466,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 {
                     billingAddressItem.City = new City() { Id = Convert.ToInt32(ddlBillingAddressCities.SelectedValue) };
                 }
-                if (txtBillingAddressCityName.Visible)                
+                if (txtBillingAddressCityName.Visible)
                 {
                     billingAddressItem.CityName = txtBillingAddressCityName.Text;
                 }
@@ -546,6 +546,7 @@ namespace IKSIR.ECommerce.UI.Pages
             txtShippingAddressGSMPhone.Text = string.Empty;
             btnShippingAddressSave.CommandArgument = string.Empty;
             rblShippingAddresses.SelectedIndex = -1;
+            lblShippingAddressAlert.Text = "";
         }
 
         private void ClearBillingForm()
@@ -568,6 +569,7 @@ namespace IKSIR.ECommerce.UI.Pages
             txtBillingAddressGSMPhone.Text = string.Empty;
             btnBillingAddressSave.CommandArgument = string.Empty;
             rblBillingAddresses.SelectedIndex = -1;
+            lblBillingAddressAlert.Text = "";
         }
 
         private void BindValues()
@@ -599,6 +601,11 @@ namespace IKSIR.ECommerce.UI.Pages
             rblBillingAddresses.DataValueField = "Id";
             rblBillingAddresses.DataSource = itemList;
             rblBillingAddresses.DataBind();
+        }
+
+        protected void btnBackToBasket_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/OrderBasket.aspx");
         }
     }
 }

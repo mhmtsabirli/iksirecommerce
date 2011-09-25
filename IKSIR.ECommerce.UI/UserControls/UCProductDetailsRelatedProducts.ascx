@@ -10,6 +10,7 @@
         <ItemTemplate>
             <tr>
                 <td>
+                    <asp:HiddenField runat="server" ID="hdnRelatedProductId" Value='<%# Eval("Id")%>' />
                     <a href='<%# "../Pages/ProductDetails.aspx?pid="+ Eval("Id")%>'>
                         <asp:Image runat="server" ID="imgProduct" />
                     </a>

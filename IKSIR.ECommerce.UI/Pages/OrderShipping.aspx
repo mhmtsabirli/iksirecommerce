@@ -13,7 +13,7 @@
                 Kargo firmalarından birini seçiniz
             </h4>
         </div>
-        <table>
+        <table width="80%">
             <tr>
                 <td>
                     <asp:RadioButtonList runat="server" ID="rblShippingCompanies">
@@ -22,6 +22,8 @@
             </tr>
             <tr>
                 <td align="center">
+                <asp:Button runat="server" ID="btnBackToAddresses" Text="Geri" 
+                        onclick="btnBackToAddresses_Click" />
                     &nbsp;<asp:ImageButton runat="server" ID="imgbtnContinue" ImageUrl="../images/sepet_end_devam.jpg"
                         AlternateText="Devam Et" OnClick="imgbtnContinue_Click" />
                 </td>

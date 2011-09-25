@@ -29,7 +29,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 }
                 else
                 {
-                    Response.Redirect("/Default.aspx");
+                    Response.Redirect("~/Pages/Default.aspx");
                 }
             }
         }

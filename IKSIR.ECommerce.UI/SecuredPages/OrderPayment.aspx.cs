@@ -187,9 +187,9 @@ namespace IKSIR.ECommerce.UI.Pages
                     MailBody = MailBody.Replace("%TotalAmount%", lblTotalPrice.Text);
                     MailBody = MailBody.Replace("%ShippingAmount%", lblShippingPrice.Text);
                     MailBody = MailBody.Replace("%TotalOrderAmount%", lblBasketTotal.Text);
-                    MailBody = MailBody.Replace("%BillingAddress%", "İl : "+basket.BillingAddress.City.Name.ToString()+" </br>İlçe : " +basket.BillingAddress.District.Name.ToString()+
+                    MailBody = MailBody.Replace("%BillingAddress%", "İl : " + basket.BillingAddress.City != null ? basket.BillingAddress.CityName : basket.BillingAddress.City.Name + " </br>İlçe : " + basket.BillingAddress.District.Name.ToString() +
                         "</br> Adres : " + basket.BillingAddress.AddressDetail.ToString() + "</br>Posta Kodu : " + basket.BillingAddress.PostalCode.ToString());
-                    MailBody = MailBody.Replace("%DeliveryAddress%", "İl : " + basket.ShippingAddress.City.Name.ToString() + " </br>İlçe : " + basket.ShippingAddress.District.Name.ToString() +
+                    MailBody = MailBody.Replace("%DeliveryAddress%", "İl : " + basket.ShippingAddress.City != null ? basket.ShippingAddress.CityName : basket.ShippingAddress.City.Name + " </br>İlçe : " + basket.ShippingAddress.District.Name.ToString() +
                       "</br> Adres : " + basket.ShippingAddress.AddressDetail.ToString() + "</br>Posta Kodu : " + basket.ShippingAddress.PostalCode.ToString());
                     MailBody = MailBody.Replace("%NameSurname%", loginUser.FirstName.ToString() + " " + loginUser.LastName.ToString());
                     string HtmlProducts = "<table><tr><td>Ürün Adı</td><td>Sayısı</td><td>Fiyatı</td></tr>";
@@ -210,13 +210,13 @@ namespace IKSIR.ECommerce.UI.Pages
                     if (retValueSendMail)
                     {
                         Response.Redirect("Order.aspx");
-                      
+
                     }
                     else
                     {
                         Session.Add("IsSend", 0);
                         Response.Redirect("Order.aspx");
-                       
+
                     }
                 }
             }
@@ -226,7 +226,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
         }
 
-        
+
         protected void ddlCreditCard_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<PaymetTermRate> ListRates = PaymetTermRateData.GetPaymetTermRateList(Convert.ToInt32(ddlCreditCard.SelectedValue));
@@ -406,6 +406,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 if (mycc5pay.appr == "Approved")
                 {
                     divAlert.InnerHtml += "Para çekildi.";
+                    Session.Remove("USER_BASKET");
                     return true;
                 }
 
@@ -419,6 +420,11 @@ namespace IKSIR.ECommerce.UI.Pages
                     return false;
                 }
             }
+        }
+
+        protected void btnBackToBasket_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/OrderAddress.aspx");
         }
     }
 }

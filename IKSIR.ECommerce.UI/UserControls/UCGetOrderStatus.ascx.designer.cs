@@ -13,6 +13,15 @@ namespace IKSIR.ECommerce.UI.UserControls {
     public partial class UCGetOrderStatus {
         
         /// <summary>
+        /// pnlOrderStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlOrderStatus;
+        
+        /// <summary>
         /// txtOrderNo control.
         /// </summary>
         /// <remarks>

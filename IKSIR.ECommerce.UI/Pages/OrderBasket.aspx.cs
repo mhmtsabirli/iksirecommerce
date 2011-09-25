@@ -14,8 +14,8 @@ namespace IKSIR.ECommerce.UI.Pages
 {
     public partial class OrderBasket : System.Web.UI.Page
     {
-        public  User loginUser = null;
-        public  Basket basket = null;
+        public User loginUser = null;
+        public Basket basket = null;
 
         public decimal BasketTotal = 0;
         public decimal TotalTax = 0;
@@ -33,6 +33,7 @@ namespace IKSIR.ECommerce.UI.Pages
                     if (basket != null && basket.BasketItems != null && basket.BasketItems.Count > 0)
                     {
                         cbxComfirmation.Visible = true;
+                        anchorConfirmation.Visible = true;
                         rptBasketProducts.Visible = true;
                         hplNoItem.Visible = false;
                         divBasketTotal.Visible = true;
@@ -43,6 +44,7 @@ namespace IKSIR.ECommerce.UI.Pages
                     else
                     {
                         cbxComfirmation.Visible = false;
+                        anchorConfirmation.Visible = false;
                         rptBasketProducts.Visible = false;
                         hplNoItem.Visible = true;
                         divBasketTotal.Visible = false;
@@ -56,7 +58,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderBasket.aspx");               
+                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderBasket.aspx");
             }
         }
 
@@ -65,7 +67,7 @@ namespace IKSIR.ECommerce.UI.Pages
             basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
             rptBasketProducts.DataSource = basket.BasketItems;
             rptBasketProducts.DataBind();
-            
+
             lblBasketTotal.Text = Toolkit.Utility.CurrencyFormat(BasketTotal);
             lblTotalTax.Text = Toolkit.Utility.CurrencyFormat(TotalTax);
             lblTotalPrice.Text = Toolkit.Utility.CurrencyFormat(TotalPrice);
@@ -75,6 +77,17 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
+                Label lblUnitPrice = e.Item.FindControl("lblUnitPrice") as Label;
+                Label lblBasketItemPrice = e.Item.FindControl("lblBasketItemPrice") as Label;
+
+                decimal unitePrice = 0;
+                decimal.TryParse(lblUnitPrice.Text, out unitePrice);
+                lblUnitPrice.Text = Toolkit.Utility.CurrencyFormat(unitePrice);
+
+                decimal basketItemPrice = 0;
+                decimal.TryParse(lblBasketItemPrice.Text, out basketItemPrice);
+                lblBasketItemPrice.Text = Toolkit.Utility.CurrencyFormat(basketItemPrice);
+
                 basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
                 Image imgProduct = e.Item.FindControl("imgProduct") as Image;
                 HiddenField hdnProductId = e.Item.FindControl("hdnProductId") as HiddenField;
@@ -141,7 +154,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
                 return;
             }
-            
+
             if (cbxComfirmation.Checked)
             {
                 basket.TotalPrice = Convert.ToDecimal(lblTotalPrice.Text);
@@ -153,7 +166,7 @@ namespace IKSIR.ECommerce.UI.Pages
             {
                 dvAlert.Visible = true;
                 dvAlert.InnerHtml = "<span style=\"color:Red\">Genel kurallar ve koşulları kabul ediniz!</span><br />";
-              
+
                 //this.ClientScript.RegisterStartupScript(this.GetType(), "Koşulları okuyup onaylayınız!", "<script language=\"javaScript\">" + "alert('Genel kurallar ve koşulları kabul ediniz!');" + "window.location.href='OrderBasket.aspx';" + "<" + "/script>");
             }
         }

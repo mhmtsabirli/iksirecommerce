@@ -4,6 +4,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div runat="server" id="divContent">
+    <div runat="server" id="divContent" style="padding-left:10px; padding-right:10px;">
     </div>
 </asp:Content>

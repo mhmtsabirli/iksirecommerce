@@ -42,7 +42,8 @@
                             </td>
                             <td align="right">
                                 <asp:LinkButton runat="server" ID="lbtnNewShippingAddress" Text="Yeni" OnClick="lbtnNewShippingAddress_Click"></asp:LinkButton>
-                            &nbsp;&nbsp;</td>
+                                &nbsp;&nbsp;
+                            </td>
                         </tr>
                     </table>
                     <br />
@@ -117,9 +118,9 @@
                                     <asp:TextBox runat="server" ID="txtShippingAddressCountryName" Visible="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorShippingAddressCountries" ControlToValidate="ddlShippingAddressCountries"
-                                        ValidationGroup="VGShippingAddressForm" SetFocusOnError="true" InitialValue="-1"
-                                        ErrorMessage="Ülke Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorShippingAddressCountries"
+                                        ControlToValidate="ddlShippingAddressCountries" ValidationGroup="VGShippingAddressForm"
+                                        SetFocusOnError="true" InitialValue="-1" ErrorMessage="Ülke Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -136,9 +137,9 @@
                                     <asp:TextBox runat="server" ID="txtShippingAddressCityName" Visible="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorShippingAddressCities" ControlToValidate="ddlShippingAddressCities"
-                                        ValidationGroup="VGShippingAddressForm" SetFocusOnError="true" InitialValue="-1"
-                                        ErrorMessage="Şehir Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorShippingAddressCities"
+                                        ControlToValidate="ddlShippingAddressCities" ValidationGroup="VGShippingAddressForm"
+                                        SetFocusOnError="true" InitialValue="-1" ErrorMessage="Şehir Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -154,9 +155,9 @@
                                     <asp:TextBox runat="server" ID="txtShippingAddressDistrictName" Visible="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorShippingAddressDistricts" ControlToValidate="ddlShippingAddressDistricts"
-                                        ValidationGroup="VGShippingAddressForm" SetFocusOnError="true" InitialValue="-1"
-                                        ErrorMessage="İlçe Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorShippingAddressDistricts"
+                                        ControlToValidate="ddlShippingAddressDistricts" ValidationGroup="VGShippingAddressForm"
+                                        SetFocusOnError="true" InitialValue="-1" ErrorMessage="İlçe Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -245,7 +246,8 @@
                             </td>
                             <td align="right">
                                 <asp:LinkButton runat="server" ID="lbtnNewBillingAddress" Text="Yeni" OnClick="lbtnNewBillingAddress_Click"></asp:LinkButton>
-                                &nbsp;&nbsp;</td>
+                                &nbsp;&nbsp;
+                            </td>
                         </tr>
                     </table>
                     <br />
@@ -339,9 +341,9 @@
                                     <asp:TextBox runat="server" ID="txtBillingAddressCityName" Visible="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorBillingAddressCities" ControlToValidate="ddlBillingAddressCities"
-                                        ValidationGroup="VGBillingAddressForm" SetFocusOnError="true" InitialValue="-1"
-                                        ErrorMessage="Şehir Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorBillingAddressCities"
+                                        ControlToValidate="ddlBillingAddressCities" ValidationGroup="VGBillingAddressForm"
+                                        SetFocusOnError="true" InitialValue="-1" ErrorMessage="Şehir Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -357,9 +359,9 @@
                                     <asp:TextBox runat="server" ID="txtBillingAddressDistrictName" Visible="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorBillingAddressDistricts" ControlToValidate="ddlBillingAddressDistricts"
-                                        ValidationGroup="VGBillingAddressForm" SetFocusOnError="true" InitialValue="-1"
-                                        ErrorMessage="İlçe Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorBillingAddressDistricts"
+                                        ControlToValidate="ddlBillingAddressDistricts" ValidationGroup="VGBillingAddressForm"
+                                        SetFocusOnError="true" InitialValue="-1" ErrorMessage="İlçe Seçmelisiniz" ForeColor="Red">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -442,6 +444,8 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
+                    <asp:Button runat="server" ID="btnBackToBasket" Text="Geri" 
+                        onclick="btnBackToBasket_Click" />
                     &nbsp;<asp:ImageButton runat="server" ID="imgbtnContinue" ImageUrl="../images/sepet_end_devam.jpg"
                         AlternateText="Devam Et" OnClick="imgbtnContinue_Click" />
                 </td>

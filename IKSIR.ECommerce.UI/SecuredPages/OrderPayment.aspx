@@ -200,14 +200,14 @@
                         <tr>
                             <td colspan="2">
                                 <div id="DvTransferAccount" runat="server" visible="false">
-                                    <asp:RadioButtonList runat="server" ID="rblTransferAccount">
+                                    <asp:RadioButtonList runat="server" ID="rblTransferAccount" Width="100%">
                                     </asp:RadioButtonList>
                                 </div>
                                 <div id="DvCreditCard" runat="server" visible="false">
                                     <strong>Kredi Kartı bilgileri:</strong>
                                     <br />
                                     <br />
-                                    <table>
+                                    <table width="100%">
                                         <tr>
                                             <td>
                                                 Kredi Kartı
@@ -291,12 +291,15 @@
                 </td>
             </tr>
             <tr>
+            <td>
                 Blgi:<br />
                 <div id="divAlert" runat="server" class="scrolledDiv">
                 </div>
-            </tr>
+            </td></tr>
             <tr>
                 <td align="center">
+                <asp:Button runat="server" ID="btnBackToBasket" Text="Geri" 
+                        onclick="btnBackToBasket_Click" />
                     <asp:ImageButton ID="btnApprove" runat="server" OnClick="btnApprove_Click" ImageUrl="../images/sepet_end_devam.jpg" />
                 </td>
             </tr>

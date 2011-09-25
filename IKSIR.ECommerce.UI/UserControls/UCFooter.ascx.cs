@@ -16,8 +16,16 @@ namespace IKSIR.ECommerce.UI.UserControls
 
         }
 
-        protected void imgbtnSaveNewsletter_Click(object sender, ImageClickEventArgs e)
+        protected void lbtnSaveToList_Click(object sender, EventArgs e)
         {
+            if (!Toolkit.Utility.isEmail(txtUserEmail.Text))
+            {
+                string error = "E-bülten aboneliği için hatalı mail adresi girdiniz.";
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "err_msg", "alert('" + error + "');", true);
+                txtUserEmail.Focus();
+                return;
+            }
+
             var item = new Newsletter();
             item.Email = txtUserEmail.Text;
             var list = NewsletterData.GetList();
@@ -40,6 +48,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                     lblAlert.ForeColor = System.Drawing.Color.Red;
                 }
             }
+            txtUserEmail.Focus();
         }
     }
 }

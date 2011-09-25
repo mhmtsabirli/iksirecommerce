@@ -93,10 +93,10 @@ namespace IKSIR.ECommerce.UI.UserControls
             }
         }
 
-        protected void imgbtnAddtoBasket_Click(object sender, ImageClickEventArgs e)
+        protected void lbtnAddToBasket_Click(object sender, EventArgs e)
         {
             int productId = 0;
-            string strproductId = ((ImageButton)sender).CommandArgument;
+            string strproductId = ((LinkButton)sender).CommandArgument;
 
             if (int.TryParse(strproductId, out productId))
                 Shopping.AddToBasket(productId);

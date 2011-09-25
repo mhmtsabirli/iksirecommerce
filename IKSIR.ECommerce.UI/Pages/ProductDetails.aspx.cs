@@ -24,7 +24,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                Response.Redirect("pages/Default.aspx");
+                Response.Redirect("~/Pages/Default.aspx");
             }
             UCProductDetailsCreditCardAdvantages1.ProductId = productId;
             UCProductDetailDocuments1.ProductId = productId;
