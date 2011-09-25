@@ -94,6 +94,18 @@ namespace IKSIR.ECommerce.UI.Pages
                 HiddenField hdnProductId = e.Item.FindControl("hdnProductId") as HiddenField;
                 DropDownList ddlItemCount = e.Item.FindControl("ddlItemCount") as DropDownList;
 
+                Label lblUnitPrice = e.Item.FindControl("lblUnitPrice") as Label;
+                Label lblBasketItemPrice = e.Item.FindControl("lblBasketItemPrice") as Label;
+
+                decimal unitePrice = 0;
+                decimal.TryParse(lblUnitPrice.Text, out unitePrice);
+                lblUnitPrice.Text = Toolkit.Utility.CurrencyFormat(unitePrice);
+
+                decimal basketItemPrice = 0;
+                decimal.TryParse(lblBasketItemPrice.Text, out basketItemPrice);
+                lblBasketItemPrice.Text = Toolkit.Utility.CurrencyFormat(basketItemPrice);
+
+
 
                 Repeater rptProductProperties = e.Item.FindControl("rptProductProperties") as Repeater;
                 int productId;
@@ -133,7 +145,11 @@ namespace IKSIR.ECommerce.UI.Pages
                 int retValue = 0;
                 int basketId = 0;
 
+                int billingAddressId = BasketAddressData.Insert(basket.BillingAddress, basketId, 0);
+                int shippingAddressId = BasketAddressData.Insert(basket.ShippingAddress, basketId, 0);
 
+                basket.BillingAddress.Id = billingAddressId;
+                basket.ShippingAddress.Id = shippingAddressId;
 
                 basketId = BasketData.Insert(basket);
                 if (basketId > 0)
@@ -149,8 +165,7 @@ namespace IKSIR.ECommerce.UI.Pages
                     }
                 basket.Id = basketId;
 
-                BasketAddressData.Insert(basket.BillingAddress, basketId, 0);
-                BasketAddressData.Insert(basket.ShippingAddress, basketId, 0);
+
 
                 if (retValue > 0) //itemlar başarıyla kaydedildiyese
                 {
@@ -210,7 +225,6 @@ namespace IKSIR.ECommerce.UI.Pages
                     if (retValueSendMail)
                     {
                         Response.Redirect("Order.aspx");
-
                     }
                     else
                     {

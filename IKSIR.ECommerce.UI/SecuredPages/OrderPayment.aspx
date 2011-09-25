@@ -88,13 +88,11 @@
                                     </td>
                                     <td class="table_third">
                                         <p>
-                                            <%# Eval("ProductPrice.UnitPrice")%>
-                                            TL</p>
+                                            <asp:Label runat="server" ID="lblUnitPrice" Text='<%# Eval("ProductPrice.UnitPrice")%>'></asp:Label>&nbsp;TL</p>
                                     </td>
                                     <td class="table_fourth">
                                         <p>
-                                            <%# Eval("BasketItemPrice")%>
-                                            TL</p>
+                                            <asp:Label runat="server" ID="lblBasketItemPrice" Text='<%# Eval("BasketItemPrice")%>'></asp:Label>&nbsp;TL</p>
                                     </td>
                                 </tr>
                             </ItemTemplate>
