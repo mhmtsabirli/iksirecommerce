@@ -118,6 +118,9 @@
                             </td>
                             <td>
                               <div id="Llbldescription">500</div>
+                                <asp:RequiredFieldValidator runat="server" ID="rfv1" ControlToValidate="txtSolution"
+                                    ValidationGroup="VGForm" SetFocusOnError="true" ErrorMessage="Çözüm Girmelisiniz"
+                                    ForeColor="Red">*</asp:RequiredFieldValidator>
                             </td>
                         </tr>
                         <tr>
