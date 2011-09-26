@@ -31,7 +31,6 @@
                 <div class="sidemenu_bottom">
                 </div>
             </div>
-            <uc2:UCGetOrderStatus ID="UCGetOrderStatus1" runat="server" />
             <div class="sidebar_advertisement">
                 <a href="#">
                     <img src="https://www.banyom.com.tr/images/sidebar_advertisement.jpg" alt="" style="border: none;" /></a></div>
