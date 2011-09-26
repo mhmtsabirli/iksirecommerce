@@ -15,6 +15,7 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.SiteDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
 using IKSIR.ECommerce.Toolkit;
+using System.IO;
 
 
 namespace IKSIR.ECommerce.Management.Common
@@ -47,7 +48,15 @@ namespace IKSIR.ECommerce.Management.Common
             txtIp.Text = itemContactForm.Ip.ToString();
             txtMessage.Text = itemContactForm.Message.ToString();
             txtTitle.Text = itemContactForm.Title.ToString();
+            txtSolution.Text = itemContactForm.Solution.ToString();
 
+            if (itemContactForm.Status.Id == 11)
+            {
+                btnSave.Visible = false;
+                lblError.Text = "Daha önce çözüm girlip müşteriye geri dönüş yapılmıştır.";
+                lblError.Visible = true;
+                    
+            }
             pnlForm.Visible = true;
 
         }
@@ -83,6 +92,10 @@ namespace IKSIR.ECommerce.Management.Common
                     ClearForm();
                     pnlForm.Visible = false;
                     int count = 0;
+                    if (!SendMail())
+                    {
+                        lblError.Text = "Mail Gönderilirken Bir hata oluştu.";
+                    }
                     GetList();
                 }
                 else
@@ -94,6 +107,17 @@ namespace IKSIR.ECommerce.Management.Common
             }
 
         }
+
+        private bool SendMail()
+        {
+            string MailBody = "";
+            MailBody = txtSolution.Text;
+
+            bool retValueSendMail = Mail.sendMail(txtEmail.Text, "musterihizmetleri@senarinsaat.com.tr", "Senar İnşaat A.Ş. | İletişim Formu", MailBody);
+
+            return retValueSendMail;
+        }
+
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
@@ -164,7 +188,7 @@ namespace IKSIR.ECommerce.Management.Common
                     SystemLogData.Insert(itemSystemLog);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SystemLog itemSystemLog = new SystemLog();
                 itemSystemLog.Title = "Update ContactForm";
@@ -193,7 +217,7 @@ namespace IKSIR.ECommerce.Management.Common
                     SystemLogData.Insert(itemSystemLog);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SystemLog itemSystemLog = new SystemLog();
                 itemSystemLog.Title = "Delete ContactForm";
@@ -206,7 +230,7 @@ namespace IKSIR.ECommerce.Management.Common
 
         private void ClearForm()
         {
-           
+
         }
     }
 }
