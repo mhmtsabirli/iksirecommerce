@@ -80,6 +80,7 @@
                             <li><a href="">
                                 <img src="http://www.banyom.com.tr/management/Images/Reports.png" />&nbsp;Site</a>
                                 <ul>
+                                <li><a href="http://www.banyom.com.tr/management/Common/Customers.aspx">Üyeler</a></li>
                                     <li><a href="http://www.banyom.com.tr/management/Common/Sites.aspx">Site Tanımlama</a></li>
                                     <li><a href="http://www.banyom.com.tr/management/ProductManagement/SiteCategories.aspx">Site Kategori Tanımlama</a></li>
                                     <li><a href="http://www.banyom.com.tr/management/Common/ContactForm.aspx">İletişim Formu</a></li>
