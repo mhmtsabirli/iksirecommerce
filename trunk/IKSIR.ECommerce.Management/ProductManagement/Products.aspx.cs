@@ -703,20 +703,31 @@ namespace IKSIR.ECommerce.Management.ProductManagement
         private bool DeleteDocument(int documentId)
         {
             bool retValue = false;
-            try
+            var productDocumentList = MultimediasData.Get(documentId);
+
+            if (productDocumentList.IsDefault)
             {
-                if (MultimediasData.Delete(documentId) < 0)
-                {
-                    retValue = true;
-                }
+                divAlert.InnerHtml += "<span style=\"color:Red\">Bu Resim Varsayılan Silemezsiniz</span><br />";
+                retValue = false;
             }
-            catch (Exception exception)
+            else
             {
-                SystemLog itemSystemLog = new SystemLog();
-                itemSystemLog.Title = "Delete Document";
-                itemSystemLog.Content = "Id=" + documentId.ToString() + " ile Doküman silinemedi. Hata: " + exception.ToString();
-                itemSystemLog.Type = new EnumValue() { Id = 0 };
-                SystemLogData.Insert(itemSystemLog);
+                try
+                {
+                    if (MultimediasData.Delete(documentId) < 0)
+                    {
+
+                        retValue = true;
+                    }
+                }
+                catch (Exception exception)
+                {
+                    SystemLog itemSystemLog = new SystemLog();
+                    itemSystemLog.Title = "Delete Document";
+                    itemSystemLog.Content = "Id=" + documentId.ToString() + " ile Doküman silinemedi. Hata: " + exception.ToString();
+                    itemSystemLog.Type = new EnumValue() { Id = 0 };
+                    SystemLogData.Insert(itemSystemLog);
+                }
             }
             return retValue;
         }
@@ -835,8 +846,12 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             foreach (Telerik.Web.UI.UploadedFile uploadedFile in RadUploadDocument.UploadedFiles)
             {
                 System.Threading.Thread.Sleep(1000);
-                string fileName = DateTime.Now.ToString().Replace(".", "").Replace(":", "").Replace("/", "").Replace("-", "").Replace(" ", "");
-                fileName += "_" + fileId.ToString();
+                string fileName = "";// DateTime.Now.ToString().Replace(".", "").Replace(":", "").Replace("/", "").Replace("-", "").Replace(" ", "");
+                if (txtDocumentName.Text == "")
+                    fileName = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + "_" + fileId.ToString();
+                else
+                    fileName = txtDocumentName.Text;
+
                 //Dökümanı kaydet.
                 string targetFolderOther = Server.MapPath("~/ProductDocuments/Orginal/Others");
 
@@ -850,7 +865,7 @@ namespace IKSIR.ECommerce.Management.ProductManagement
                 else
                     isDefault = false;
 
-                if (InsertFile(fileId, fileName + fileExtension, fileExtension, isDefault))
+                if (InsertFile(fileId,fileName, fileName + fileExtension, fileExtension, isDefault))
                 {
                     divAlert.InnerHtml += "<span style=\"color:Green\">Dosya veritabanına başarıyla kaydedildi. Dosya Adı: <i>" + uploadedFile.FileName + "</i></span><br />";
                 }
@@ -864,15 +879,15 @@ namespace IKSIR.ECommerce.Management.ProductManagement
             return retValue;
         }
 
-        private bool InsertFile(int fileId, string fileName, string fileExtension, bool isDefault)
+        private bool InsertFile(int fileId,string fileName, string file, string fileExtension, bool isDefault)
         {
             bool retValue = false;
             try
             {
                 var item = new Files();
                 item.Description = txtDocumentDescription.Text;                
-                item.FilePath = fileName;
-                item.Title = fileExtension;
+                item.FilePath = file;
+                item.Title = fileName;
                 item.ProductId = fileId;
                 if (FileData.Insert(item) > 0)
                 {
