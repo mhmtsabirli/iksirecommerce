@@ -106,8 +106,17 @@ namespace IKSIR.ECommerce.Management.Order
             {
                 if (address != null)
                 {
-                    string City = address.City.Name.ToString();
-                    string District = address.District.Name.ToString();
+                    string City="";
+                    if (address.City.Name != null)
+                        City = address.City.Name.ToString();
+                    else
+                        City = address.CityName.ToString();
+                    string District = "";
+                    if (address.District.Name != null)
+                        District = address.District.Name.ToString();
+                    else
+                        District = address.DistrictName.ToString();
+
                     string AddressDetail = address.AddressDetail.ToString();
                     string PostalCode = address.PostalCode.ToString();
 
@@ -238,8 +247,17 @@ namespace IKSIR.ECommerce.Management.Order
             bool isOk = false;
             try
             {
-                string City = address.City.Name.ToString();
-                string District = address.District.Name.ToString();
+                string City="";
+                if (address.City.Name != null)
+                    City = address.City.Name.ToString();
+                else
+                    City = address.CityName.ToString();
+                string District = "";
+                if (address.District.Name != null)
+                    District = address.District.Name.ToString();
+                else
+                    District = address.DistrictName.ToString();
+
                 string AddressDetail = address.AddressDetail.ToString();
                 string PostalCode = address.PostalCode.ToString();
                 lblBillingCity.Text = City;
