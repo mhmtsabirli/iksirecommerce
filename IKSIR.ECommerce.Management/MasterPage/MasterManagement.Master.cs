@@ -45,7 +45,7 @@ namespace IKSIR.ECommerce.Management.MasterPage
                     MinStokCount = ProductData.CheckProductStockCount();
                 }
                 else
-                   // Response.Redirect("Login.aspx");
+                // Response.Redirect("Login.aspx");
                 Response.Redirect("http://www.banyom.com.tr/management/Login.aspx");
             }
             else
