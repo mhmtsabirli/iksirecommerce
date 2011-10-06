@@ -381,6 +381,7 @@ namespace IKSIR.ECommerce.UI.Pages
         private bool Payment(PaymetInfo paymetInfo)
         {
             loginUser = (User)Session["LOGIN_USER"];
+             bool isOk = false;
             basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
             if (paymetInfo.PaymentType.Id == 36)//havale
             {
@@ -388,52 +389,244 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                return true;
-                string term = "";
-                ePayment.cc5payment mycc5pay = new ePayment.cc5payment();
-                mycc5pay.clientid = paymetInfo.CreditCard.VposId.ToString();
-                mycc5pay.name = paymetInfo.CreditCard.VposName.ToString();
-                mycc5pay.password = paymetInfo.CreditCard.VposPassword.ToString();
-                mycc5pay.oid = loginUser.Id.ToString();//Id gerekiyordu loginId yi aldım normalde OrderId olması lazım
-                mycc5pay.host = paymetInfo.CreditCard.VposHost.ToString();
-                mycc5pay.ip = HttpContext.Current.Request.ServerVariables["Remote_Addr"];//"127.0.0.7";// Request.UserHostAddress;
-
-                mycc5pay.bname = loginUser.Id.ToString();//Id gerekiyordu loginId yi aldım normalde OrderId olması lazım
-                divAlert.InnerHtml = NoTurkishChar(paymetInfo.Name.ToString()).ToLower() + "<br>";
-                mycc5pay.orderresult = 0;
-                mycc5pay.chargetype = "Auth";
-                mycc5pay.cardnumber = paymetInfo.CreditCardNumber.ToString();
-                mycc5pay.expmonth = paymetInfo.Month.ToString();
-                mycc5pay.expyear = paymetInfo.Year.ToString();
-                mycc5pay.cv2 = paymetInfo.Cvc.ToString();
-                mycc5pay.subtotal = lblBasketTotal.Text;
-                mycc5pay.userid = paymetInfo.CreditCard.VposUser.ToString();
-                mycc5pay.currency = "949";//TL
-                if (paymetInfo.SelectedTerm.ToString() == "1")
-                    term = "";
-                else
-                    term = paymetInfo.SelectedTerm.ToString();
-
-                mycc5pay.taksit = term;
-                divAlert.InnerHtml = mycc5pay.processorder();
-
-                if (mycc5pay.appr == "Approved")
+               
+                switch (paymetInfo.CreditCard.Id)
                 {
-                    divAlert.InnerHtml += "Para çekildi.";
+                    case 2:
+                        isOk = YapiKredi(paymetInfo);
+                        break;
+                    default:
+                        isOk = DefaultCard(paymetInfo);
+                        break;
+                }
+
+             
+            }
+            return isOk;
+        }
+
+        private bool DefaultCard(PaymetInfo paymetInfo)
+        {
+            bool isOk = false;
+            string term = "";
+            YKBPosnetActiveX.YKBPosnetClassClass myYK = new YKBPosnetActiveX.YKBPosnetClassClass();
+
+            string pccno = paymetInfo.CreditCardNumber.ToString();
+            string pexpdate = paymetInfo.Year.ToString() + paymetInfo.Month.ToString();
+            string pamount = lblBasketTotal.Text.Replace(".", "").Replace(",", "");
+            string pcurrencycode = "YT";
+
+            string pcvc = paymetInfo.Cvc.ToString();
+
+                term = "1";
+
+            string ptaknum = "00";
+
+            string porderid = loginUser.Id.ToString();
+
+            if (porderid.Length < 24)
+            {
+                string nullvalue = "";
+                int m = 24 - porderid.Length;
+                for (int i = 0; i < m; i++)
+                {
+                    nullvalue += "0";
+                }
+                porderid = nullvalue + porderid;
+            }
+
+            myYK.SetMid("6734273367");
+            myYK.SetTid("67932822");
+            myYK.SetHostIP("193.254.228.100");
+
+            myYK.SetOwnIP("212.58.8.103");
+            myYK.SetPort("2222");
+            string outtran = "";
+            outtran = myYK.DoSaleTran(pccno, pexpdate, pcvc, porderid, pamount, pcurrencycode, ptaknum, "00", "000000");
+
+            if (outtran == "100")
+            {
+                divAlert.InnerHtml = "baglantı kuruldu<br>";
+                if (myYK.GetApprovedCode == "1")
+                {
+                    divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
                     Session.Remove("USER_BASKET");
                     return true;
                 }
-
-                else
+                else // (myYK.GetApprovedCode == "0")
                 {
-                    divAlert.InnerHtml += "<span style=\"color:Red\">";
-                    divAlert.InnerHtml += "<br>HataMesaji:" + mycc5pay.errmsg;
-                    divAlert.InnerHtml += "<br>OrderId:" + mycc5pay.oid;
-                    divAlert.InnerHtml += "<br>ApprovalKodu:" + mycc5pay.appr;
-                    divAlert.InnerHtml += "</span><br />";
+                    divAlert.InnerHtml += myYK.GetApprovedCode;
+                    divAlert.InnerHtml += "<span style=\"color:Red\"> Kart onaylanmadı </span><br />";
                     return false;
                 }
             }
+            else
+            {
+                divAlert.InnerHtml = outtran.ToString();
+            }
+
+            return false;
+        }
+
+        private bool YapiKredi(PaymetInfo paymetInfo)
+        {
+            bool isOk = false;
+            string term = "";
+            YKBPosnetActiveX.YKBPosnetClassClass myYK = new YKBPosnetActiveX.YKBPosnetClassClass();
+           
+            string pccno = paymetInfo.CreditCardNumber.ToString();
+            string pexpdate =paymetInfo.Year.ToString() +paymetInfo.Month.ToString();
+            string pamount = lblBasketTotal.Text.Replace(".", "").Replace(",", "");
+            string pcurrencycode = "YT";
+
+            string pcvc = paymetInfo.Cvc.ToString();
+
+            if (paymetInfo.SelectedTerm.ToString() == "1")
+                term = "1";
+            else
+                term = paymetInfo.SelectedTerm.ToString();
+
+            string ptaknum = term;
+            switch (term)
+            {
+                case "1":
+                    ptaknum = "00";
+                    break;
+                case "2":
+                    ptaknum = "02";
+                    break;
+                case "3":
+                    ptaknum = "03";
+                    break;
+                case "4":
+                    ptaknum = "04";
+                    break;
+                case "5":
+                    ptaknum = "05";
+                    break;
+                case "6":
+                    ptaknum = "06";
+                    break;
+                case "7":
+                    ptaknum = "07";
+                    break;
+                case "8":
+                    ptaknum = "08";
+                    break;
+                case "9":
+                    ptaknum = "09";
+                    break;
+                case "10":
+                    ptaknum = "10";
+                    break;
+                case "11":
+                    ptaknum = "11";
+                    break;
+                case "12":
+                    ptaknum = "12";
+                    break;
+                default:
+                    ptaknum = "00";
+                    break;
+            }
+
+
+            string porderid = loginUser.Id.ToString();
+
+
+            if (porderid.Length < 24)
+            {
+                string nullvalue = "";
+                int m = 24 - porderid.Length;
+                for (int i = 0; i < m; i++)
+                {
+                    nullvalue += "0";
+                }
+                porderid = nullvalue + porderid;
+            }
+
+            myYK.SetMid(paymetInfo.CreditCard.VposId.ToString());
+            myYK.SetTid(paymetInfo.CreditCard.VposPassword.ToString());
+            myYK.SetHostIP("193.254.228.100");
+
+            myYK.SetOwnIP(paymetInfo.CreditCard.VposHost.ToString());
+            myYK.SetPort("2222");
+            string outtran = "";
+            outtran = myYK.DoSaleTran(pccno, pexpdate, pcvc, porderid, pamount, pcurrencycode, ptaknum, "00", "000000");
+
+            if (outtran == "100")
+            {
+                divAlert.InnerHtml = "baglantı kuruldu<br>";
+                if (myYK.GetApprovedCode == "1")
+                {
+                    divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
+                    Session.Remove("USER_BASKET");
+                    return true;
+                }
+                else // (myYK.GetApprovedCode == "0")
+                {
+                    divAlert.InnerHtml += myYK.GetApprovedCode;
+                    divAlert.InnerHtml += "<span style=\"color:Red\"> Kart onaylanmadı </span><br />";
+                    return false;
+                }
+            }
+            else
+            {
+                divAlert.InnerHtml = outtran.ToString();
+            }
+
+            return false;
+
+        }
+
+        private bool CreditCard(PaymetInfo paymetInfo)
+        {
+            bool isOk = false;
+            string term = "";
+            ePayment.cc5payment mycc5pay = new ePayment.cc5payment();
+            mycc5pay.clientid = paymetInfo.CreditCard.VposId.ToString();
+            mycc5pay.name = paymetInfo.CreditCard.VposName.ToString();
+            mycc5pay.password = paymetInfo.CreditCard.VposPassword.ToString();
+            mycc5pay.oid = loginUser.Id.ToString();//Id gerekiyordu loginId yi aldım normalde OrderId olması lazım
+            mycc5pay.host = paymetInfo.CreditCard.VposHost.ToString();
+            mycc5pay.ip = HttpContext.Current.Request.ServerVariables["Remote_Addr"];//"127.0.0.7";// Request.UserHostAddress;
+
+            mycc5pay.bname = loginUser.Id.ToString();//Id gerekiyordu loginId yi aldım normalde OrderId olması lazım
+            divAlert.InnerHtml = NoTurkishChar(paymetInfo.Name.ToString()).ToLower() + "<br>";
+            mycc5pay.orderresult = 0;
+            mycc5pay.chargetype = "Auth";
+            mycc5pay.cardnumber = paymetInfo.CreditCardNumber.ToString();
+            mycc5pay.expmonth = paymetInfo.Month.ToString();
+            mycc5pay.expyear = paymetInfo.Year.ToString();
+            mycc5pay.cv2 = paymetInfo.Cvc.ToString();
+            mycc5pay.subtotal = lblBasketTotal.Text;
+            mycc5pay.userid = paymetInfo.CreditCard.VposUser.ToString();
+            mycc5pay.currency = "949";//TL
+            if (paymetInfo.SelectedTerm.ToString() == "1")
+                term = "";
+            else
+                term = paymetInfo.SelectedTerm.ToString();
+
+            mycc5pay.taksit = term;
+            divAlert.InnerHtml = mycc5pay.processorder();
+
+            if (mycc5pay.appr == "Approved")
+            {
+                divAlert.InnerHtml += "Para çekildi.";
+                Session.Remove("USER_BASKET");
+                isOk= true;
+            }
+
+            else
+            {
+                divAlert.InnerHtml += "<span style=\"color:Red\">";
+                divAlert.InnerHtml += "<br>HataMesaji:" + mycc5pay.errmsg;
+                divAlert.InnerHtml += "<br>OrderId:" + mycc5pay.oid;
+                divAlert.InnerHtml += "<br>ApprovalKodu:" + mycc5pay.appr;
+                divAlert.InnerHtml += "</span><br />";
+                isOk= false;
+            }
+            return isOk;
         }
 
         protected void btnBackToBasket_Click(object sender, EventArgs e)
