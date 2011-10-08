@@ -29,7 +29,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
                 returnValue.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 returnValue.Id = DBHelper.IntValue(dr["Id"].ToString());
-                returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["Id"].ToString()));
+                returnValue.Product = ProductData.Get(DBHelper.IntValue(dr["ProductId"].ToString()));
                 returnValue.User = UserData.Get(DBHelper.IntValue(dr["UserId"].ToString()));
                 returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
                 returnValue.Content = DBHelper.StringValue(dr["Content"].ToString());
@@ -83,6 +83,18 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
 
             SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveComment", parameters);
             returnValue = DBHelper.IntValue(parameters[0].Value);
+            return returnValue;
+        }
+
+        public static int Update(int Id, int Status)
+        {
+            var returnValue = 0;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Id", Id));
+            parameters.Add(new SqlParameter("@Status", Status));
+            parameters.Add(new SqlParameter("@ErrorCode", ParameterDirection.Output));
+            returnValue = SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateComment", parameters);
+
             return returnValue;
         }
 
