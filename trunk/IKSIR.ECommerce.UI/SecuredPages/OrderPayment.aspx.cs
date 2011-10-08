@@ -14,6 +14,7 @@ using IKSIR.ECommerce.Toolkit;
 using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using System.IO;
+using _PosnetDotNetModule;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -409,7 +410,7 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             bool isOk = false;
             string term = "";
-            YKBPosnetActiveX.YKBPosnetClassClass myYK = new YKBPosnetActiveX.YKBPosnetClassClass();
+            _PosnetDotNetModule.C_Posnet myYK = new C_Posnet();
 
             string pccno = paymetInfo.CreditCardNumber.ToString();
             string pexpdate = paymetInfo.Year.ToString() + paymetInfo.Month.ToString();
@@ -437,17 +438,16 @@ namespace IKSIR.ECommerce.UI.Pages
 
             myYK.SetMid("6734273367");
             myYK.SetTid("67932822");
-            myYK.SetHostIP("193.254.228.100");
+            myYK.SetURL("212.58.8.103");
 
-            myYK.SetOwnIP("212.58.8.103");
-            myYK.SetPort("2222");
-            string outtran = "";
+
+            bool outtran = false;
             outtran = myYK.DoSaleTran(pccno, pexpdate, pcvc, porderid, pamount, pcurrencycode, ptaknum, "00", "000000");
 
-            if (outtran == "100")
+            if (outtran == true)
             {
                 divAlert.InnerHtml = "baglantı kuruldu<br>";
-                if (myYK.GetApprovedCode == "1")
+                if (myYK.GetApprovedCode() == "1")
                 {
                     divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
                     Session.Remove("USER_BASKET");
@@ -455,7 +455,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 }
                 else // (myYK.GetApprovedCode == "0")
                 {
-                    divAlert.InnerHtml += myYK.GetApprovedCode;
+                    divAlert.InnerHtml += myYK.GetApprovedCode();
                     divAlert.InnerHtml += "<span style=\"color:Red\"> Kart onaylanmadı </span><br />";
                     return false;
                 }
@@ -472,10 +472,12 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             bool isOk = false;
             string term = "";
-            YKBPosnetActiveX.YKBPosnetClassClass myYK = new YKBPosnetActiveX.YKBPosnetClassClass();
+
+           
+            _PosnetDotNetModule.C_Posnet myYK = new C_Posnet();
            
             string pccno = paymetInfo.CreditCardNumber.ToString();
-            string pexpdate =paymetInfo.Year.ToString() +paymetInfo.Month.ToString();
+            string pexpdate =paymetInfo.Year.ToString().Replace("20","") +paymetInfo.Month.ToString();
             string pamount = lblBasketTotal.Text.Replace(".", "").Replace(",", "");
             string pcurrencycode = "YT";
 
@@ -547,17 +549,15 @@ namespace IKSIR.ECommerce.UI.Pages
 
             myYK.SetMid(paymetInfo.CreditCard.VposId.ToString());
             myYK.SetTid(paymetInfo.CreditCard.VposPassword.ToString());
-            myYK.SetHostIP("193.254.228.100");
+            myYK.SetURL(paymetInfo.CreditCard.VposHost.ToString());
 
-            myYK.SetOwnIP(paymetInfo.CreditCard.VposHost.ToString());
-            myYK.SetPort("2222");
-            string outtran = "";
+            bool outtran = false;
             outtran = myYK.DoSaleTran(pccno, pexpdate, pcvc, porderid, pamount, pcurrencycode, ptaknum, "00", "000000");
 
-            if (outtran == "100")
+            if (outtran == true)
             {
                 divAlert.InnerHtml = "baglantı kuruldu<br>";
-                if (myYK.GetApprovedCode == "1")
+                if (myYK.GetApprovedCode() == "1")
                 {
                     divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
                     Session.Remove("USER_BASKET");
@@ -565,7 +565,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 }
                 else // (myYK.GetApprovedCode == "0")
                 {
-                    divAlert.InnerHtml += myYK.GetApprovedCode;
+                    divAlert.InnerHtml += myYK.GetApprovedCode();
                     divAlert.InnerHtml += "<span style=\"color:Red\"> Kart onaylanmadı </span><br />";
                     return false;
                 }
