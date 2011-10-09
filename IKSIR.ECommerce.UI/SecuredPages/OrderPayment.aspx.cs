@@ -70,6 +70,9 @@ namespace IKSIR.ECommerce.UI.Pages
 
             List<CreditCard> ListCreditCard = CreditCardData.GetCreditCardList();
             Utility.BindDropDownList(ddlCreditCard, ListCreditCard, "Name", "Id");
+
+            ListItem ls = new ListItem("Diğer","99");
+            ddlCreditCard.Items.Add(ls);
         }
 
         private void GetOrderBasket()
@@ -244,8 +247,16 @@ namespace IKSIR.ECommerce.UI.Pages
 
         protected void ddlCreditCard_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<PaymetTermRate> ListRates = PaymetTermRateData.GetPaymetTermRateList(Convert.ToInt32(ddlCreditCard.SelectedValue));
-            Utility.BindDropDownList(ddlCreditCardMonth, ListRates, "Month", "Rate");
+            if (ddlCreditCard.SelectedValue == "99")
+            {
+                ListItem ls = new ListItem("1", "1");
+                ddlCreditCardMonth.Items.Add(ls);
+            }
+            else
+            {
+                List<PaymetTermRate> ListRates = PaymetTermRateData.GetPaymetTermRateList(Convert.ToInt32(ddlCreditCard.SelectedValue));
+                Utility.BindDropDownList(ddlCreditCardMonth, ListRates, "Month", "Rate");
+            }
         }
 
         protected void ddlCreditCardMonth_SelectedIndexChanged(object sender, EventArgs e)
@@ -279,14 +290,28 @@ namespace IKSIR.ECommerce.UI.Pages
         protected void btnApprove_Click(object sender, ImageClickEventArgs e)
         {
             PaymetInfo paymetInfo = null;
+            //TEST AMACLI KALDIRILACAK
+            if (Session["LOGIN_USER"] != null && Session["USER_BASKET"] != null)
+            {
+                 loginUser = (User)Session["LOGIN_USER"];
+            }
+
             bool isOk = true;
             divAlert.InnerHtml = " ";
             if (FormControl())
             {
                 if (ddlPaymentType.SelectedValue == "37") // kredikartı
                 {
-                    paymetInfo = new Model.Bank.PaymetInfo() { CreditCard = CreditCardData.Get(Convert.ToInt32(ddlCreditCard.SelectedValue)), Name = txtCustomerName.Text, CreditCardNumber = txtCreditCardNumber.Text, Cvc = txtCvv2.Text, Month = Convert.ToInt32(ddlMonth.SelectedValue), SelectedTerm = Convert.ToInt32(ddlCreditCardMonth.SelectedItem.Text), Rate = Convert.ToDecimal(ddlCreditCardMonth.SelectedValue), Year = Convert.ToInt32(ddlYear.SelectedValue), PaymentType = new Model.CommonModel.EnumValue() { Id = 37 } };
-                    isOk = BinControl(paymetInfo);
+                    if (ddlCreditCard.SelectedValue != "99")
+                    {
+                        paymetInfo = new Model.Bank.PaymetInfo() { CreditCard = CreditCardData.Get(Convert.ToInt32(ddlCreditCard.SelectedValue)), Name = txtCustomerName.Text, CreditCardNumber = txtCreditCardNumber.Text, Cvc = txtCvv2.Text, Month = Convert.ToInt32(ddlMonth.SelectedValue), SelectedTerm = Convert.ToInt32(ddlCreditCardMonth.SelectedItem.Text), Rate = Convert.ToDecimal(ddlCreditCardMonth.SelectedValue), Year = Convert.ToInt32(ddlYear.SelectedValue), PaymentType = new Model.CommonModel.EnumValue() { Id = 37 } };
+                        isOk = BinControl(paymetInfo);
+                    }
+                    else
+                    {
+                        paymetInfo = new Model.Bank.PaymetInfo() { CreditCard = CreditCardData.Get(Convert.ToInt32(ddlCreditCard.SelectedValue)), Name = txtCustomerName.Text, CreditCardNumber = txtCreditCardNumber.Text, Cvc = txtCvv2.Text, Month = Convert.ToInt32(ddlMonth.SelectedValue), SelectedTerm = Convert.ToInt32(ddlCreditCardMonth.SelectedItem.Text), Rate = Convert.ToDecimal(ddlCreditCardMonth.SelectedValue), Year = Convert.ToInt32(ddlYear.SelectedValue), PaymentType = new Model.CommonModel.EnumValue() { Id = 37 } };
+                        isOk = true;
+                    }
                 }
                 else
                 {
@@ -294,10 +319,14 @@ namespace IKSIR.ECommerce.UI.Pages
                 }
                 if (isOk)
                 {
-                    if (Payment(paymetInfo))
+                    if (loginUser.Id == 20 || loginUser.Id == 23)
                     {
-                        SaveOrder(paymetInfo);
+                        if (Payment(paymetInfo))
+                        {
+                            SaveOrder(paymetInfo);
+                        }
                     }
+                    divAlert.InnerHtml += "Test olarak sadece aziz ve tayfun kullanıcısı çekim yapabilir.";
                 }
             }
         }
@@ -390,17 +419,22 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-               
-                switch (paymetInfo.CreditCard.Id)
+                if (ddlCreditCard.SelectedValue == "99")
                 {
-                    case 2:
-                        isOk = YapiKredi(paymetInfo);
-                        break;
-                    default:
-                        isOk = DefaultCard(paymetInfo);
-                        break;
+                    isOk = DefaultCard(paymetInfo);
                 }
-
+                else
+                {
+                    switch (paymetInfo.CreditCard.Id)
+                    {
+                        case 2:
+                            isOk = YapiKredi(paymetInfo);
+                            break;
+                        default:
+                            isOk = CreditCard(paymetInfo);
+                            break;
+                    }
+                }
              
             }
             return isOk;
@@ -413,8 +447,12 @@ namespace IKSIR.ECommerce.UI.Pages
             _PosnetDotNetModule.C_Posnet myYK = new C_Posnet();
 
             string pccno = paymetInfo.CreditCardNumber.ToString();
-            string pexpdate = paymetInfo.Year.ToString() + paymetInfo.Month.ToString();
+            string pexpdate = paymetInfo.Year.ToString().Replace("20", "") + paymetInfo.Month.ToString();
             string pamount = lblBasketTotal.Text.Replace(".", "").Replace(",", "");
+
+            //test için sonra silinecek
+            pamount = "1";
+
             string pcurrencycode = "YT";
 
             string pcvc = paymetInfo.Cvc.ToString();
@@ -438,7 +476,7 @@ namespace IKSIR.ECommerce.UI.Pages
 
             myYK.SetMid("6734273367");
             myYK.SetTid("67932822");
-            myYK.SetURL("212.58.8.103");
+            myYK.SetURL("http://setmpos.ykb.com/PosnetWebService/XML");
 
 
             bool outtran = false;
@@ -456,6 +494,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 else // (myYK.GetApprovedCode == "0")
                 {
                     divAlert.InnerHtml += myYK.GetApprovedCode();
+                    divAlert.InnerHtml += myYK.GetResponseText();
                     divAlert.InnerHtml += "<span style=\"color:Red\"> Kart onaylanmadı </span><br />";
                     return false;
                 }
@@ -479,6 +518,9 @@ namespace IKSIR.ECommerce.UI.Pages
             string pccno = paymetInfo.CreditCardNumber.ToString();
             string pexpdate =paymetInfo.Year.ToString().Replace("20","") +paymetInfo.Month.ToString();
             string pamount = lblBasketTotal.Text.Replace(".", "").Replace(",", "");
+
+            //test için sonra silinecek
+            pamount = "1";
             string pcurrencycode = "YT";
 
             string pcvc = paymetInfo.Cvc.ToString();
@@ -566,6 +608,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 else // (myYK.GetApprovedCode == "0")
                 {
                     divAlert.InnerHtml += myYK.GetApprovedCode();
+                    divAlert.InnerHtml += myYK.GetResponseText();
                     divAlert.InnerHtml += "<span style=\"color:Red\"> Kart onaylanmadı </span><br />";
                     return false;
                 }

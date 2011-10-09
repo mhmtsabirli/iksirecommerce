@@ -298,7 +298,7 @@
                 <td align="center">
                 <asp:ImageButton runat="server" ID="imgbtnBack" 
                         ImageUrl="/images/sepet_end_iptal.jpg" AlternateText="Geri" 
-                        onclick="imgbtnBack_Click" />
+                        />
                     <asp:ImageButton ID="btnApprove" runat="server" OnClick="btnApprove_Click" ImageUrl="../images/sepet_end_devam.jpg" />
                 </td>
             </tr>
