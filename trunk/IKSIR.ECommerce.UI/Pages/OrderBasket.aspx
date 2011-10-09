@@ -195,7 +195,7 @@
                         </tr>
                         <tr>
                             <td colspan="5" align="center" style="border: none;">
-                                <asp:HyperLink ID="hplNoItem" runat="server" Font-Size="14px" ForeColor="Red" NavigateUrl="~/Pages/Default.aspx"
+                                <asp:HyperLink ID="hplNoItem" runat="server" Font-Size="14px" ForeColor="Red" NavigateUrl="/Pages/Default.aspx"
                                     Text="Sepetinizde ürün bulunmamaktadır. Ana sayfaya gitmek için tıklayınız."
                                     Visible="false"></asp:HyperLink>
                             </td>

@@ -62,42 +62,56 @@
         <h3>
             Anasayfa</h3>
         <ul>
-            <li><a href="~/Pages/Content.aspx?cid=3">Müşteri Hizmetleri</a></li>
-            <li><a href="~/Pages/Content.aspx?cid=2">Kurumsal</a></li>
-            <li><a href="~/Pages/Content.aspx?cid=6">Sık Sorulan Sorular</a></li>
-            <li><a href="~/Pages/Content.aspx?cid=7">Yardım</a></li>
+            <li><a href="/Pages/Content.aspx?cid=3">Müşteri Hizmetleri</a></li>
+            <li><a href="/Pages/Content.aspx?cid=2">Kurumsal</a></li>
+            <li><a href="/Pages/Content.aspx?cid=6">Sık Sorulan Sorular</a></li>
+            <li><a href="/Pages/Content.aspx?cid=7">Yardım</a></li>
         </ul>
     </div>
     <div class="footer_module">
         <h3>
             Sipariş İşlemleri</h3>
         <ul>
-            <li><a href="~/Pages/Content.aspx?cid=5">Sipariş Yardım Formu</a></li>
-            <li><a href="~/Pages/Content.aspx?cid=5">Ödeme Bildirim Formu</a></li>
+            <li><a href="/Pages/Content.aspx?cid=5">Sipariş Yardım Formu</a></li>
+            <li><a href="/Pages/Content.aspx?cid=5">Ödeme Bildirim Formu</a></li>
         </ul>
     </div>
     <div class="footer_module">
         <h3>
             Alışveriş İşlemleri</h3>
         <ul>
-            <li><a href="~/Pages/OrderBasket.aspx">Alışveriş Sepeti</a></li>
+            <li><a href="/Pages/OrderBasket.aspx">Alışveriş Sepeti</a></li>
         </ul>
     </div>
     <div class="footer_module">
         <h3>
             Üyelik İşlemleri</h3>
         <ul>
-            <li><a href="~/SecuredPages/Register.aspx">Yeni Üyelik</a></li>
-            <li><a href="~/SecuredPages/Login.aspx">Üye Girişi</a></li>
-            <li><a href="~/SecuredPages/ForgotPassword.aspx">Şifre Hatırlatma</a></li>
+            <li><a href="/SecuredPages/Register.aspx">Yeni Üyelik</a></li>
+            <li><a href="/SecuredPages/Login.aspx">Üye Girişi</a></li>
+            <li><a href="/SecuredPages/ForgotPassword.aspx">Şifre Hatırlatma</a></li>
         </ul>
     </div>
     <asp:Panel runat="server" ID="pnlFooter" DefaultButton="lbtnSaveToList">
         <div class="footer_module">
-            <h3>
-                E-Bülten</h3>
-            <asp:TextBox runat="server" ID="txtUserEmail" CssClass="footer_module_text" title="E-posta Adresiniz"></asp:TextBox>
-            <asp:LinkButton runat="server" ID="lbtnSaveToList" OnClick="lbtnSaveToList_Click">Kayıt Ol</asp:LinkButton>
+            <table>
+                <tr>
+                    <td colspan="2">
+                        <h3>
+                            E-Bülten</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:TextBox runat="server" ID="txtUserEmail" CssClass="footer_module_text" title="E-posta Adresiniz"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:LinkButton runat="server" ID="lbtnSaveToList" OnClick="lbtnSaveToList_Click">
+            <img src="/images/kayitol.jpg" style="border:none" />
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
             <div class="clear">
             </div>
             <p>
@@ -115,9 +129,9 @@
     </div>
     <div class="footer_bottom">
         <p style="font: normal 12px trebuchet ms; color: #464646;">
-            <a href="~/Pages/Content.aspx?cid=1">&nbsp;Gizlilik Politikası&nbsp;</a>&nbsp;&nbsp;&nbsp;<a
-                href="~/Pages/Content.aspx?cid=12">&nbsp;Güvenlik Politikası&nbsp;</a>&nbsp;&nbsp;&nbsp;<a
-                    href="~/Pages/Content.aspx?cid=10">&nbsp;Garanti ve İade Koşulları&nbsp;</a></p>
+            <a href="/Pages/Content.aspx?cid=1">&nbsp;Gizlilik Politikası&nbsp;</a>&nbsp;&nbsp;&nbsp;<a
+                href="/Pages/Content.aspx?cid=12">&nbsp;Güvenlik Politikası&nbsp;</a>&nbsp;&nbsp;&nbsp;<a
+                    href="/Pages/Content.aspx?cid=10">&nbsp;Garanti ve İade Koşulları&nbsp;</a></p>
         <br />
         <img src="../images/footer_bottom.jpg" alt="" />
         <p>

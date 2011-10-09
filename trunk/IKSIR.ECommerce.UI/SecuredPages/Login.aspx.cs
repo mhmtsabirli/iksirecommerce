@@ -40,7 +40,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                 }
                 else
                 {
-                    Response.Redirect("~/Pages/Default.aspx");
+                    Response.Redirect("/Pages/Default.aspx");
                 }
             }
             else

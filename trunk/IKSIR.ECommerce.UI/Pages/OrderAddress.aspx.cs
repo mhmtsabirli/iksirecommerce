@@ -603,9 +603,9 @@ namespace IKSIR.ECommerce.UI.Pages
             rblBillingAddresses.DataBind();
         }
 
-        protected void btnBackToBasket_Click(object sender, EventArgs e)
+        protected void imgbtnBack_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("~/Pages/OrderBasket.aspx");
+            Response.Redirect("/Pages/OrderBasket.aspx");
         }
     }
 }

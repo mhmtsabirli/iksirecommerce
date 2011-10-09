@@ -20,8 +20,8 @@ namespace IKSIR.ECommerce.Management
             if (LoginUser())
             {
                 Session["Login"] = "idevit";
-               Response.Redirect("http://www.banyom.com.tr/management/Default.aspx");
-              // Response.Redirect("Default.aspx");
+                Response.Redirect("http://www.banyom.com.tr/management/Default.aspx");
+                // Response.Redirect("Default.aspx");
             }
         }
 

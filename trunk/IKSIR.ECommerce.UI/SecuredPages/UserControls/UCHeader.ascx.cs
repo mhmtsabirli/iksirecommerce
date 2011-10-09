@@ -18,7 +18,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserControls
             if (basketItemCount != 0)
             {
                 hplToBasket.Text = "Sepetiniz (" + basketItemCount.ToString() + ")"; ;
-                hplToBasket.NavigateUrl = "~/Pages/OrderBasket.aspx";
+                hplToBasket.NavigateUrl = "/Pages/OrderBasket.aspx";
             }
             else
             {

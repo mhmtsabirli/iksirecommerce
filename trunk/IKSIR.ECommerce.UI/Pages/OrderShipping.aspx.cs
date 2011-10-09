@@ -57,9 +57,9 @@ namespace IKSIR.ECommerce.UI.Pages
             }
         }
 
-        protected void btnBackToAddresses_Click(object sender, EventArgs e)
+        protected void imgbtnBackToAddress_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("~/Pages/OrderAddress.aspx");
+            Response.Redirect("/Pages/OrderAddress.aspx");
         }
     }
 }

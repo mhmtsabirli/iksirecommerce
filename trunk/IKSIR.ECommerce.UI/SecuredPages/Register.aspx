@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecuredPages/UIDetailSecuredMasterPage.Master"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="/SecuredPages/UIDetailSecuredMasterPage.Master"
     AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.Register"
     UICulture="tr" %>
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecuredPages/UIDetailSecuredMasterPage.Master"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="/SecuredPages/UIDetailSecuredMasterPage.Master"
     AutoEventWireup="true" CodeBehind="Order.aspx.cs" Inherits="IKSIR.ECommerce.UI.SecuredPages.Order" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -49,7 +49,7 @@
                             <ItemTemplate>
                                 <tr>
                                     <td colspan="4">
-                                        <a href='<%# String.Format("~/Pages/ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
+                                        <a href='<%# String.Format("/Pages/ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
                                             target="_blank">
                                             <%# Eval("Product.ProductCategory.Title")%>
                                             /
@@ -63,7 +63,7 @@
                                             <tr>
                                                 <td>
                                                     <asp:HiddenField runat="server" ID="hdnProductId" Value='<%# Eval("Product.Id")%>' />
-                                                    <a href='<%# String.Format("~/Pages/ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
+                                                    <a href='<%# String.Format("/Pages/ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
                                                         target="_blank">
                                                         <asp:Image runat="server" ID="imgProduct" ImageUrl='<%# Eval("Product.MainImage", "http://www.banyom.com.tr/management/ProductDocuments/Images/Small/small_{0:C}")%>'
                                                             BorderWidth="0  " />

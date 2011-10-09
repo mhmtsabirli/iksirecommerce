@@ -157,30 +157,12 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::Telerik.Web.UI.RadPageView pvSimilarProducts;
         
         /// <summary>
-        /// UCProductDetailsSimilarProducts1 control.
+        /// UCProductDetailsRelatedAndSimilarProducts1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IKSIR.ECommerce.UI.UserControls.UCProductDetailsSimilarProducts UCProductDetailsSimilarProducts1;
-        
-        /// <summary>
-        /// pvRelatedProducts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadPageView pvRelatedProducts;
-        
-        /// <summary>
-        /// UCProductDetailsRelatedProducts1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::IKSIR.ECommerce.UI.UserControls.UCProductDetailsRelatedProducts UCProductDetailsRelatedProducts1;
+        protected global::IKSIR.ECommerce.UI.UserControls.UCProductDetailsRelatedAndSimilarProducts UCProductDetailsRelatedAndSimilarProducts1;
     }
 }
