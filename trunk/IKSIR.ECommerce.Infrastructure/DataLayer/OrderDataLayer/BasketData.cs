@@ -76,6 +76,20 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             returnValue = Update(itemBasket);
             return returnValue;
         }
+
+
+        public static string GetMaxBasket()
+        {
+            string MaxOrderId = "999";
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetMaxBasket", parameters);
+            while (dr.Read())
+            {
+                MaxOrderId = DBHelper.StringValue(dr["OrderId"].ToString());
+            }
+            dr.Close();
+            return MaxOrderId;
+        }
     }
 }
 
