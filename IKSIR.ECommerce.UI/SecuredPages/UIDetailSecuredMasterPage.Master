@@ -3,8 +3,6 @@
 
 <%@ Register Src="../UserControls/UCMainCategories.ascx" TagName="UCMainCategories"
     TagPrefix="uc1" %>
-<%@ Register Src="../UserControls/UCGetOrderStatus.ascx" TagName="UCGetOrderStatus"
-    TagPrefix="uc2" %>
 <%@ Register Src="UserControls/UCHeader.ascx" TagName="UCHeader" TagPrefix="uc3" %>
 <%@ Register Src="UserControls/UCFooter.ascx" TagName="UCFooter" TagPrefix="uc4" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

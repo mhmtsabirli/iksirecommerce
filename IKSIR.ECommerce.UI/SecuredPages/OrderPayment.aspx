@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecuredPages/UIDetailSecuredMasterPage.Master"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="/SecuredPages/UIDetailSecuredMasterPage.Master"
     AutoEventWireup="true" CodeBehind="OrderPayment.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.OrderPayment" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -296,8 +296,9 @@
             </td></tr>
             <tr>
                 <td align="center">
-                <asp:Button runat="server" ID="btnBackToBasket" Text="Geri" 
-                        onclick="btnBackToBasket_Click" />
+                <asp:ImageButton runat="server" ID="imgbtnBack" 
+                        ImageUrl="/images/sepet_end_iptal.jpg" AlternateText="Geri" 
+                        onclick="imgbtnBack_Click" />
                     <asp:ImageButton ID="btnApprove" runat="server" OnClick="btnApprove_Click" ImageUrl="../images/sepet_end_devam.jpg" />
                 </td>
             </tr>

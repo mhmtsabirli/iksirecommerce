@@ -83,7 +83,7 @@
         <ul>
             <li><a style="background: none;" href="../Pages/Default.aspx">Anasayfa</a></li>
             <li><a href="../Pages/ProductList.aspx?modid=4">Yeni Ürünler</a></li>
-            <li><a href="../Pages/ProductList.aspx?modid=5">Kampanyalı Ürünler</a></li>
+            <li><a href="../Pages/ProductList.aspx?modid=3">Kampanyalı Ürünler</a></li>
             <li><a href="../Pages/ProductList.aspx?modid=6">İndirimli Ürünler</a></li>
             <li><a href="../SecuredPages/Register.aspx">Yeni Üyelik</a></li>
             <li><a href="../Pages/Contact.aspx">İletişim</a></li>

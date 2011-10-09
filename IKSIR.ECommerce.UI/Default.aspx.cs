@@ -11,7 +11,7 @@ namespace IKSIR.ECommerce.UI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/Default.aspx");
+            Response.Redirect("/Pages/Default.aspx");
         }
     }
 }

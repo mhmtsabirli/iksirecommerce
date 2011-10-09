@@ -8,7 +8,7 @@
     </tr>
     <tr>
         <td>
-            <table>
+            <table width="100%">
                 <asp:Repeater runat="server" ID="rptDocuments">
                     <ItemTemplate>
                         <a target="_blank" href='<%# String.Format("http://www.banyom.com.tr/management/ProductDocuments/Orginal/Others/{0}", Eval("FilePath"))%>'>

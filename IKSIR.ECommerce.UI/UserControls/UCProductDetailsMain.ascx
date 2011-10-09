@@ -142,7 +142,7 @@
         });
     </script>
     <div class="urun_buyuk_resim" style="float: left;">
-        <div id="image" style="height: 250px; width: 350px; background-color: Gray; border: 4px #666 solid;
+        <div id="image" style="height: 250px; width: 350px; background-color: White; border: 4px #666 solid;
             text-align: center;">
             <a runat="server" id="anchorBigImage" class="highslide" onclick="return hs.expand(this)"
                 title="Orjinal Boyut">
@@ -200,7 +200,7 @@
                     Ürün Kodu :
                 </td>
                 <td style="text-align: right; color: #333">
-                    <asp:Label runat="server" ID="lblProductCode"></asp:Label>
+                    <asp:Label runat="server" ID="lblProductCode" Font-Bold="true" Font-Size="14px"></asp:Label>
                 </td>
             </tr>
             <tr>

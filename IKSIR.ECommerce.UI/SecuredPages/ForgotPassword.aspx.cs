@@ -15,7 +15,6 @@ namespace IKSIR.ECommerce.UI.SecuredPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            txtEmail.Focus();
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
@@ -33,10 +32,10 @@ namespace IKSIR.ECommerce.UI.SecuredPages
                 string MailBody = File.ReadAllText(HttpContext.Current.Request.MapPath("~") + "/MailTemplates/ForgotPassword.htm");
                 //string ActivationLink = System.Configuration.ConfigurationManager.AppSettings["WebAddress"] + "Membership/Activation.aspx?ActivationCode=" + strActivationCode + "&Email=" + User.Email;
                 MailBody = MailBody.Replace("%NameSurname%", user.FirstName + " " + user.LastName);
-                MailBody = MailBody.Replace("%ActivationLink%", "http://www.idevit.com.tr/");
+                MailBody = MailBody.Replace("%ActivationLink%", "http://www.senarinsaat.com.tr/");
                 MailBody = MailBody.Replace("%UserName%", txtEmail.Text);
                 MailBody = MailBody.Replace("%Password%", user.Password);
-                bool retValue = Mail.sendMail(user.Email, "helpdesk@idevit.com.tr", "İdevit A.Ş. | Şifre Hatırlatma", MailBody);
+                bool retValue = Mail.sendMail(user.Email, "musterihizmetleri@senarinsaat.com.tr", "Senar İnşaat A.Ş. | Şifre Hatırlatma", MailBody);
                 if (retValue)
                 {
                     divAlert.InnerHtml += "<span style=\"color:Green\">Şifreniz mail adresinize gönderilmiştir.</span><br />";

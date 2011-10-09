@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SecuredPages/UIDetailSecuredMasterPage.Master"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="/SecuredPages/UIDetailSecuredMasterPage.Master"
     AutoEventWireup="true" CodeBehind="ForgotPassword.aspx.cs" Inherits="IKSIR.ECommerce.UI.SecuredPages.ForgotPassword" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -22,7 +22,7 @@
                 <td>
                 </td>
                 <td>
-                    <asp:TextBox runat="server" ID="txtEmail" MaxLength="48" class="sidemenu_kullanici_adi_login"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtEmail" MaxLength="48" class="sidemenu_kullanici_adi_login" TabIndex="1"></asp:TextBox>
                 </td>
             </tr>
             <tr>

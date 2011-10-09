@@ -16,11 +16,11 @@ namespace IKSIR.ECommerce.UI.UserControls
 
         protected void btnGetOrder_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/SecuredPages/UserAccount/Orders.aspx?oid=" + txtOrderNo.Text);
+            Response.Redirect("/SecuredPages/UserAccount/Orders.aspx?oid=" + txtOrderNo.Text);
         }
         protected void lbtnSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/SecuredPages/UserAccount/Orders.aspx?oid=" + txtOrderNo.Text);
+            Response.Redirect("/SecuredPages/UserAccount/Orders.aspx?oid=" + txtOrderNo.Text);
         }
     }
 }

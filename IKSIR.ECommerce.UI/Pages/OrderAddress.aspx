@@ -444,8 +444,9 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <asp:Button runat="server" ID="btnBackToBasket" Text="Geri" 
-                        onclick="btnBackToBasket_Click" />
+                <asp:ImageButton runat="server" ID="imgbtnBack" 
+                        ImageUrl="/images/sepet_end_iptal.jpg" AlternateText="Geri" 
+                        onclick="imgbtnBack_Click" />
                     &nbsp;<asp:ImageButton runat="server" ID="imgbtnContinue" ImageUrl="../images/sepet_end_devam.jpg"
                         AlternateText="Devam Et" OnClick="imgbtnContinue_Click" />
                 </td>

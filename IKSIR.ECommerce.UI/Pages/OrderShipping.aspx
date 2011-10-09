@@ -22,8 +22,9 @@
             </tr>
             <tr>
                 <td align="center">
-                <asp:Button runat="server" ID="btnBackToAddresses" Text="Geri" 
-                        onclick="btnBackToAddresses_Click" />
+                <asp:ImageButton runat="server" ID="imgbtnBackToAddress" 
+                        ImageUrl="/images/sepet_end_iptal.jpg" AlternateText="Geri" 
+                        onclick="imgbtnBackToAddress_Click" />
                     &nbsp;<asp:ImageButton runat="server" ID="imgbtnContinue" ImageUrl="../images/sepet_end_devam.jpg"
                         AlternateText="Devam Et" OnClick="imgbtnContinue_Click" />
                 </td>

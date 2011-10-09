@@ -34,7 +34,6 @@ namespace IKSIR.ECommerce.Management.MasterPage
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (Session["LOGIN_ADMIN"] != null)
             {
                 Model.AdminModel.Admin admin = (Model.AdminModel.Admin)Session["LOGIN_ADMIN"];

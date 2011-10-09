@@ -36,6 +36,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\IKSIR.ECommerce.Management\bin\ePayment.dll</HintPath>
     </Reference>
+    <Reference Include="Interop.EPAYAPILib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Interop.EPAYAPILib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.YKBPosnetActiveX, Version=52.0.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Interop.YKBPosnetActiveX.dll</HintPath>
+    </Reference>
+    <Reference Include="PosnetDotNetModule, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\PosnetDotNetModule.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -338,6 +352,8 @@
     <Content Include="SecuredPages\UserAccount\UserInfos.aspx" />
     <Content Include="SecuredPages\UserControls\UCFooter.ascx" />
     <Content Include="SecuredPages\UserControls\UCHeader.ascx" />
+    <Content Include="SecuredPages\WebForm1.aspx" />
+    <Content Include="UserControls\UCProductDetailsRelatedAndSimilarProducts.ascx" />
     <Content Include="UserControls\UCGetOrderStatus.ascx" />
     <Content Include="UserControls\UCLogin.ascx" />
     <Content Include="UserControls\UCShowCaseProducts.ascx" />
@@ -570,6 +586,20 @@
     <Compile Include="SecuredPages\UserControls\UCHeader.ascx.designer.cs">
       <DependentUpon>UCHeader.ascx</DependentUpon>
     </Compile>
+    <Compile Include="SecuredPages\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailsRelatedAndSimilarProducts.ascx.cs">
+      <DependentUpon>UCProductDetailsRelatedAndSimilarProducts.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProductDetailsRelatedAndSimilarProducts.ascx.designer.cs">
+      <DependentUpon>UCProductDetailsRelatedAndSimilarProducts.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCGetOrderStatus.ascx.cs">
       <DependentUpon>UCGetOrderStatus.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -717,6 +747,9 @@
     <None Include="images\highslide\outlines\Outlines.psd" />
     <None Include="images\pretty_photo\images\.DS_Store" />
     <None Include="images\pretty_photo\images\fullscreen\.DS_Store" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
