@@ -71,7 +71,7 @@ namespace IKSIR.ECommerce.UI.Pages
             List<CreditCard> ListCreditCard = CreditCardData.GetCreditCardList();
             Utility.BindDropDownList(ddlCreditCard, ListCreditCard, "Name", "Id");
 
-            ListItem ls = new ListItem("Diğer","99");
+            ListItem ls = new ListItem("Diğer", "99");
             ddlCreditCard.Items.Add(ls);
         }
 
@@ -293,7 +293,7 @@ namespace IKSIR.ECommerce.UI.Pages
             //TEST AMACLI KALDIRILACAK
             if (Session["LOGIN_USER"] != null && Session["USER_BASKET"] != null)
             {
-                 loginUser = (User)Session["LOGIN_USER"];
+                loginUser = (User)Session["LOGIN_USER"];
             }
 
             bool isOk = true;
@@ -411,7 +411,7 @@ namespace IKSIR.ECommerce.UI.Pages
         private bool Payment(PaymetInfo paymetInfo)
         {
             loginUser = (User)Session["LOGIN_USER"];
-             bool isOk = false;
+            bool isOk = false;
             basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
             if (paymetInfo.PaymentType.Id == 36)//havale
             {
@@ -435,7 +435,7 @@ namespace IKSIR.ECommerce.UI.Pages
                             break;
                     }
                 }
-             
+
             }
             return isOk;
         }
@@ -457,23 +457,42 @@ namespace IKSIR.ECommerce.UI.Pages
 
             string pcvc = paymetInfo.Cvc.ToString();
 
-                term = "1";
+            term = "1";
 
             string ptaknum = "00";
 
-            string porderid =    BasketData.GetMaxBasket();
+            string yil = "";
+            string ay = "";
+            string gun = "";
+            string sa = "";
+            string dk = "";
+            string sn = "";
+
+            yil = DateTime.Now.Year.ToString().Replace("20", "");
+            ay = DateTime.Now.Month.ToString();
+            gun = DateTime.Now.Day.ToString();
+            sa = DateTime.Now.Hour.ToString();
+            dk = DateTime.Now.Minute.ToString();
+            sn = DateTime.Now.Second.ToString();
+
+            if (ay.Length == 1) ay = "0" + ay;
+            if (gun.Length == 1) gun = "0" + gun;
+            if (sa.Length == 1) sa = "0" + sa;
+            if (dk.Length == 1) dk = "0" + dk;
+            if (sn.Length == 1) sn = "0" + sn;
+            string porderid = "YKBTEST_0000" + yil + ay + gun + sa + dk + sn;
 
 
-            if (porderid.Length < 24)
-            {
-                string nullvalue = "";
-                int m = 24 - porderid.Length;
-                for (int i = 0; i < m; i++)
-                {
-                    nullvalue += "0";
-                }
-                porderid = nullvalue + porderid;
-            }
+            //if (porderid.Length < 24)
+            //{
+            //    string nullvalue = "";
+            //    int m = 24 - porderid.Length;
+            //    for (int i = 0; i < m; i++)
+            //    {
+            //        nullvalue += "0";
+            //    }
+            //    porderid = nullvalue + porderid;
+            //}
 
             myYK.SetMid("6734273367");
             myYK.SetTid("67932822");
@@ -513,11 +532,11 @@ namespace IKSIR.ECommerce.UI.Pages
             bool isOk = false;
             string term = "";
 
-           
+
             _PosnetDotNetModule.C_Posnet myYK = new C_Posnet();
-           
+
             string pccno = paymetInfo.CreditCardNumber.ToString();
-            string pexpdate =paymetInfo.Year.ToString().Replace("20","") +paymetInfo.Month.ToString();
+            string pexpdate = paymetInfo.Year.ToString().Replace("20", "") + paymetInfo.Month.ToString();
             string pamount = lblBasketTotal.Text.Replace(".", "").Replace(",", "");
 
             //test için sonra silinecek
@@ -575,20 +594,38 @@ namespace IKSIR.ECommerce.UI.Pages
                     break;
             }
 
+            string yil = "";
+            string ay = "";
+            string gun = "";
+            string sa = "";
+            string dk = "";
+            string sn = "";
 
-            string porderid =  BasketData.GetMaxBasket();
+            yil = DateTime.Now.Year.ToString().Replace("20", "");
+            ay = DateTime.Now.Month.ToString();
+            gun = DateTime.Now.Day.ToString();
+            sa = DateTime.Now.Hour.ToString();
+            dk = DateTime.Now.Minute.ToString();
+            sn = DateTime.Now.Second.ToString();
+
+            if (ay.Length == 1) ay = "0" + ay;
+            if (gun.Length == 1) gun = "0" + gun;
+            if (sa.Length == 1) sa = "0" + sa;
+            if (dk.Length == 1) dk = "0" + dk;
+            if (sn.Length == 1) sn = "0" + sn;
+            string porderid = "YKBTEST_0000" + yil + ay + gun + sa + dk + sn;
 
 
-            if (porderid.Length < 24)
-            {
-                string nullvalue = "";
-                int m = 24 - porderid.Length;
-                for (int i = 0; i < m; i++)
-                {
-                    nullvalue += "0";
-                }
-                porderid = nullvalue + porderid;
-            }
+            //if (porderid.Length < 24)
+            //{
+            //    string nullvalue = "";
+            //    int m = 24 - porderid.Length;
+            //    for (int i = 0; i < m; i++)
+            //    {
+            //        nullvalue += "0";
+            //    }
+            //    porderid = nullvalue + porderid;
+            //}
 
             myYK.SetMid(paymetInfo.CreditCard.VposId.ToString());
             myYK.SetTid(paymetInfo.CreditCard.VposPassword.ToString());
@@ -658,7 +695,7 @@ namespace IKSIR.ECommerce.UI.Pages
             {
                 divAlert.InnerHtml += "Para çekildi.";
                 Session.Remove("USER_BASKET");
-                isOk= true;
+                isOk = true;
             }
 
             else
@@ -668,7 +705,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 divAlert.InnerHtml += "<br>OrderId:" + mycc5pay.oid;
                 divAlert.InnerHtml += "<br>ApprovalKodu:" + mycc5pay.appr;
                 divAlert.InnerHtml += "</span><br />";
-                isOk= false;
+                isOk = false;
             }
             return isOk;
         }
