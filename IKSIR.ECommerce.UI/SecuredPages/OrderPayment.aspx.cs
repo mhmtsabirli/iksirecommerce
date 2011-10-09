@@ -461,7 +461,8 @@ namespace IKSIR.ECommerce.UI.Pages
 
             string ptaknum = "00";
 
-            string porderid = loginUser.Id.ToString();
+            string porderid =    BasketData.GetMaxBasket();
+
 
             if (porderid.Length < 24)
             {
@@ -575,7 +576,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
 
 
-            string porderid = loginUser.Id.ToString();
+            string porderid =  BasketData.GetMaxBasket();
 
 
             if (porderid.Length < 24)
@@ -630,7 +631,7 @@ namespace IKSIR.ECommerce.UI.Pages
             mycc5pay.clientid = paymetInfo.CreditCard.VposId.ToString();
             mycc5pay.name = paymetInfo.CreditCard.VposName.ToString();
             mycc5pay.password = paymetInfo.CreditCard.VposPassword.ToString();
-            mycc5pay.oid = loginUser.Id.ToString();//Id gerekiyordu loginId yi aldım normalde OrderId olması lazım
+            mycc5pay.oid = BasketData.GetMaxBasket();//Id gerekiyordu loginId yi aldım normalde OrderId olması lazım
             mycc5pay.host = paymetInfo.CreditCard.VposHost.ToString();
             mycc5pay.ip = HttpContext.Current.Request.ServerVariables["Remote_Addr"];//"127.0.0.7";// Request.UserHostAddress;
 
