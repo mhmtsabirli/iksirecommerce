@@ -319,14 +319,12 @@ namespace IKSIR.ECommerce.UI.Pages
                 }
                 if (isOk)
                 {
-                    if (loginUser.Id == 20 || loginUser.Id == 23)
+
+                    if (Payment(paymetInfo))
                     {
-                        if (Payment(paymetInfo))
-                        {
-                            SaveOrder(paymetInfo);
-                        }
+                        SaveOrder(paymetInfo);
                     }
-                    divAlert.InnerHtml += "Test olarak sadece aziz ve tayfun kullanıcısı çekim yapabilir.";
+
                 }
             }
         }
@@ -430,22 +428,31 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                if (ddlCreditCard.SelectedValue == "99")
+                if (loginUser.Id == 20 || loginUser.Id == 23)
                 {
-                    isOk = DefaultCard(paymetInfo);
+                    if (ddlCreditCard.SelectedValue == "99")
+                    {
+                        isOk = DefaultCard(paymetInfo);
+                    }
+                    else
+                    {
+                        switch (paymetInfo.CreditCard.Id)
+                        {
+                            case 2:
+                                isOk = YapiKredi(paymetInfo);
+                                break;
+                            default:
+                                isOk = CreditCard(paymetInfo);
+                                break;
+                        }
+                    }
                 }
                 else
                 {
-                    switch (paymetInfo.CreditCard.Id)
-                    {
-                        case 2:
-                            isOk = YapiKredi(paymetInfo);
-                            break;
-                        default:
-                            isOk = CreditCard(paymetInfo);
-                            break;
-                    }
+                    divAlert.InnerHtml += "Test olarak sadece aziz ve tayfun kullanıcısı çekim yapabilir.";
+                    isOk = false;
                 }
+
 
             }
             return isOk;
