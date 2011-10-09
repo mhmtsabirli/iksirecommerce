@@ -10,8 +10,10 @@
     TagPrefix="uc3" %>
 <%@ Register Src="../UserControls/UCProductDetailDocuments.ascx" TagName="UCProductDetailDocuments"
     TagPrefix="uc4" %>
-<%@ Register Src="../UserControls/UCProductDetailsRelatedAndSimilarProducts.ascx"
-    TagName="UCProductDetailsRelatedAndSimilarProducts" TagPrefix="uc6" %>
+<%@ Register Src="../UserControls/UCProductDetailsRelatedProducts.ascx" TagName="UCProductDetailsRelatedProducts"
+    TagPrefix="uc5" %>
+<%@ Register Src="../UserControls/UCProductDetailsSimilarProducts.ascx" TagName="UCProductDetailsSimilarProducts"
+    TagPrefix="uc6" %>
 <%@ Register Src="../UserControls/UCProductDetailsMain.ascx" TagName="UCProductDetailsMain"
     TagPrefix="uc7" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -55,7 +57,9 @@
                         </telerik:RadTab>
                         <telerik:RadTab Text="Yorumlar" PageViewID="pvProductComments">
                         </telerik:RadTab>
-                        <telerik:RadTab Text="Benzer ve İlişkili Ürünler" PageViewID="pvSimilarProducts">
+                        <telerik:RadTab Text="Benzer Ürünler" PageViewID="pvSimilarProducts">
+                        </telerik:RadTab>
+                        <telerik:RadTab Text="İlişkili Ürünler" PageViewID="pvRelatedProducts">
                         </telerik:RadTab>
                     </Tabs>
                 </telerik:RadTabStrip>
@@ -74,8 +78,10 @@
                         <uc2:UCProductDetailsComments ID="UCProductDetailsComments1" runat="server" />
                     </telerik:RadPageView>
                     <telerik:RadPageView ID="pvSimilarProducts" runat="server">
-                        <uc6:UCProductDetailsRelatedAndSimilarProducts ID="UCProductDetailsRelatedAndSimilarProducts1"
-                            runat="server" />
+                        <uc6:UCProductDetailsSimilarProducts ID="UCProductDetailsSimilarProducts1" runat="server" />
+                    </telerik:RadPageView>
+                    <telerik:RadPageView ID="pvRelatedProducts" runat="server">
+                        <uc5:UCProductDetailsRelatedProducts ID="UCProductDetailsRelatedProducts1" runat="server" />
                     </telerik:RadPageView>
                 </telerik:RadMultiPage>
             </div>

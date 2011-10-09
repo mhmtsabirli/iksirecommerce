@@ -8,6 +8,7 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
 using IKSIR.ECommerce.Model.Order;
 using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
+using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 
 namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
 {
@@ -28,6 +29,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 returnValue.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
                 returnValue.BillingAddress = BasketAddressData.Get(DBHelper.IntValue(dr["BillingAddressId"].ToString()));
                 returnValue.ShippingAddress = BasketAddressData.Get(DBHelper.IntValue(dr["ShippingAddressId"].ToString()));
+                returnValue.ShippingCompany = ShipmentData.Get(DBHelper.IntValue(dr["ShippingCompanyId"].ToString()));
                 returnValue.BasketItems = BasketItemData.GetList(id);
                 returnValue.Status = EnumValueData.Get(DBHelper.IntValue(dr["Status"].ToString()));
               
@@ -44,10 +46,11 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             parameters.Add(new SqlParameter("@AdminId", DBHelper.IntValue(itemBasket.CreateAdminId)));
             parameters.Add(new SqlParameter("@BillingAddressId", DBHelper.IntValue(itemBasket.BillingAddress.Id)));
             parameters.Add(new SqlParameter("@ShippingAddressId", DBHelper.IntValue(itemBasket.ShippingAddress.Id)));
+            parameters.Add(new SqlParameter("@ShippingCompanyId", DBHelper.IntValue(itemBasket.ShippingCompany.Id)));            
             parameters.Add(new SqlParameter("@Status", DBHelper.IntValue(itemBasket.Status.Id)));
             parameters[0].Direction = ParameterDirection.Output;
 
-            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "SaveBasket", parameters));
+            returnValue = Convert.ToInt32(SQLDataBlock.ExecuteScalar(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "InsertBasket", parameters));
             int.TryParse(parameters[0].Value.ToString(), out returnValue);
             return returnValue;
         }

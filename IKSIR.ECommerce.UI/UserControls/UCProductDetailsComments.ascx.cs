@@ -53,6 +53,7 @@ namespace IKSIR.ECommerce.UI.UserControls
             var item = new Comment();
             item.Title = txtTitle.Text;
             item.Content = txtContent.Text;
+            item.Status = new EnumValue() { Id = 40 };
             if (Session["LOGIN_USER"] != null)
             {
                 User user = (User)Session["LOGIN_USER"];

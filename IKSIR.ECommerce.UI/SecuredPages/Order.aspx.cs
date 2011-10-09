@@ -57,6 +57,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             lblTotalTax.Text = Toolkit.Utility.CurrencyFormat(orders.Basket.TotalRatedPrice - orders.Basket.TotalPrice);
             lblTotalPrice.Text = Toolkit.Utility.CurrencyFormat(orders.Basket.TotalPrice);
         }
+
         protected void rptBasketProducts_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)

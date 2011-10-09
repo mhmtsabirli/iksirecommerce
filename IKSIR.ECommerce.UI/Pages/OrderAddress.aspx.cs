@@ -526,6 +526,11 @@ namespace IKSIR.ECommerce.UI.Pages
             }
         }
 
+        protected void imgbtnBack_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("/Pages/OrderBasket.aspx");
+        }
+
         private void ClearShippingForm()
         {
             txtShippingAddressTitle.Text = string.Empty;
@@ -601,11 +606,6 @@ namespace IKSIR.ECommerce.UI.Pages
             rblBillingAddresses.DataValueField = "Id";
             rblBillingAddresses.DataSource = itemList;
             rblBillingAddresses.DataBind();
-        }
-
-        protected void imgbtnBack_Click(object sender, ImageClickEventArgs e)
-        {
-            Response.Redirect("/Pages/OrderBasket.aspx");
         }
     }
 }

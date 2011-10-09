@@ -41,7 +41,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
                     GetOrderList();
                     GetOrderItem(orderId);
                     dvMyOrder.Visible = true;
-                    ddlPaymentType.Enabled = false;
+                    //ddlPaymentType.Enabled = false;
                 }
             }
         }
@@ -142,7 +142,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
                 divAlert.InnerHtml += "<span style=\"color:Red\">Aradığınız sipariş bulunamadı.</span><br />";
                 return retValue;
             }
-            if (GetProductInfo(itemOrder.Basket.BasketItems))
+            if (GetOrderDetail(itemOrder))
             {
                 divAlert.InnerHtml += "<span style=\"color:Green\">Ürün bilgileri başarıyla yüklendi.</span><br />";
                 retValue = true;
@@ -151,29 +151,61 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
             {
                 divAlert.InnerHtml += "<span style=\"color:Red\">Ürün bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
             }
-            if (GetPaymentInfo(itemOrder.PaymetInfo))
-            {
-                divAlert.InnerHtml += "<span style=\"color:Green\">Müşteri bilgileri başarıyla yüklendi.</span><br />";
-                retValue = true;
-            }
-            else
-            {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Ürün Genel bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
-            }
-            if (GetBillingInfo(itemOrder.Basket.BillingAddress))
-            {
-                divAlert.InnerHtml += "<span style=\"color:Green\">Fatura Adresi bilgileri başarıyla yüklendi.</span><br />";
-                retValue = true;
-            }
-            else
-            {
-                divAlert.InnerHtml += "<span style=\"color:Red\">Ürün Genel bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
-            }
-            lblId.Text = itemOrder.Id.ToString();
-            lbltotalPrice.Text = itemOrder.TotalPrice.ToString();
-            lbltotalRatedPrice.Text = itemOrder.TotalRatedPrice.ToString();
+            //if (GetPaymentInfo(itemOrder.PaymetInfo))
+            //{
+            //    divAlert.InnerHtml += "<span style=\"color:Green\">Müşteri bilgileri başarıyla yüklendi.</span><br />";
+            //    retValue = true;
+            //}
+            //else
+            //{
+            //    divAlert.InnerHtml += "<span style=\"color:Red\">Ürün Genel bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
+            //}
+            //if (GetBillingInfo(itemOrder.Basket.BillingAddress))
+            //{
+            //    divAlert.InnerHtml += "<span style=\"color:Green\">Fatura Adresi bilgileri başarıyla yüklendi.</span><br />";
+            //    retValue = true;
+            //}
+            //else
+            //{
+            //    divAlert.InnerHtml += "<span style=\"color:Red\">Ürün Genel bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
+            //}
+            //lblId.Text = itemOrder.Id.ToString();
+            //lbltotalPrice.Text = itemOrder.TotalPrice.ToString();
+            //lbltotalRatedPrice.Text = itemOrder.TotalRatedPrice.ToString();
             return retValue;
 
+        }
+
+        private bool GetOrderDetail(Model.Order.Order orderItem)
+        {
+            bool retValue = true;
+            try
+            {
+                Basket itemBasket = orderItem.Basket;
+                lblShippingAddressNameSurName.Text = itemBasket.ShippingAddress.FirstName + " " + orderItem.Basket.ShippingAddress.LastName;
+                lblShippingAddressDetail.Text = itemBasket.ShippingAddress.AddressDetail;
+                lblShippingAddressPhone.Text = itemBasket.ShippingAddress.Phone;
+
+                lblBillingAddressNameSurname.Text = itemBasket.BillingAddress.FirstName + " " + orderItem.Basket.BillingAddress.LastName;
+                lblBillingAddressDetail.Text = itemBasket.BillingAddress.AddressDetail;
+                lblBillingAddressPhone.Text = itemBasket.BillingAddress.Phone;
+
+                rptBasketProducts.DataSource = orderItem.Basket.BasketItems;
+                rptBasketProducts.DataBind();
+
+                lblShippingCompanyName.Text = itemBasket.ShippingCompany.Title;
+                lblShippingPrice.Text = Toolkit.Utility.CurrencyFormat(itemBasket.ShippingCompany.UnitPrice);
+
+                lblBasketTotal.Text = Toolkit.Utility.CurrencyFormat(orderItem.TotalRatedPrice + itemBasket.ShippingCompany.UnitPrice);
+                lblTotalTax.Text = Toolkit.Utility.CurrencyFormat(orderItem.TotalRatedPrice - orderItem.TotalPrice);
+                lblTotalPrice.Text = Toolkit.Utility.CurrencyFormat(orderItem.TotalPrice);
+            }
+            catch (Exception)
+            {
+                retValue = false;
+                throw;
+            }
+            return retValue;
         }
 
         private bool GetProductInfo(List<BasketItem> list)
@@ -181,8 +213,8 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
             bool IsOk = false;
             try
             {
-                gvBasketItems.DataSource = list;
-                gvBasketItems.DataBind();
+                //gvBasketItems.DataSource = list;
+                //gvBasketItems.DataBind();
                 IsOk = true;
             }
             catch
@@ -192,47 +224,47 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
             return IsOk;
         }
 
-        private bool GetBillingInfo(Address address)
-        {
-            bool isOk = false;
-            try
-            {
-                string City = address.City.Name.ToString();
-                string District = address.District.Name.ToString();
-                string AddressDetail = address.AddressDetail.ToString();
-                string PostalCode = address.PostalCode.ToString();
-                lblBillingCity.Text = City;
-                lblBillingDetail.Text = District;
-                lblBillingDetail.Text = AddressDetail;
-                lblBillingPostalCode.Text = PostalCode;
+        //private bool GetBillingInfo(Address address)
+        //{
+        //    bool isOk = false;
+        //    try
+        //    {
+        //        string City = address.City.Name.ToString();
+        //        string District = address.District.Name.ToString();
+        //        string AddressDetail = address.AddressDetail.ToString();
+        //        string PostalCode = address.PostalCode.ToString();
+        //        lblBillingCity.Text = City;
+        //        lblBillingDetail.Text = District;
+        //        lblBillingDetail.Text = AddressDetail;
+        //        lblBillingPostalCode.Text = PostalCode;
 
-                isOk = true;
-            }
-            catch
-            {
-                isOk = false;
-            }
+        //        isOk = true;
+        //    }
+        //    catch
+        //    {
+        //        isOk = false;
+        //    }
 
-            return isOk;
-        }
+        //    return isOk;
+        //}
 
-        private bool GetPaymentInfo(Model.Bank.PaymetInfo paymetInfo)
-        {
-            bool IsOk = false;
-            try
-            {
-                List<EnumValue> ListPaymentType = EnumValueData.GetEnumValues(21);//Ödeme Tipleri
-                Utility.BindDropDownList(ddlPaymentType, ListPaymentType, "Value", "Id");
-                ddlPaymentType.SelectedValue = paymetInfo.PaymentType.Id.ToString();
+        //private bool GetPaymentInfo(Model.Bank.PaymetInfo paymetInfo)
+        //{
+        //    bool IsOk = false;
+        //    try
+        //    {
+        //        List<EnumValue> ListPaymentType = EnumValueData.GetEnumValues(21);//Ödeme Tipleri
+        //        Utility.BindDropDownList(ddlPaymentType, ListPaymentType, "Value", "Id");
+        //        ddlPaymentType.SelectedValue = paymetInfo.PaymentType.Id.ToString();
 
-                IsOk = true;
-            }
-            catch
-            {
-                IsOk = false;
-            }
-            return IsOk;
-        }
+        //        IsOk = true;
+        //    }
+        //    catch
+        //    {
+        //        IsOk = false;
+        //    }
+        //    return IsOk;
+        //}
 
         private bool DeleteItem(int itemId)
         {
@@ -273,36 +305,36 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
 
             GetOrderItem(itemId);
             dvMyOrder.Visible = true;
-            ddlPaymentType.Enabled = false;
+            //ddlPaymentType.Enabled = false;
         }
 
-        protected void lbtnAddress_Click(object sender, EventArgs e)
-        {
-            var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
-            //gvList.SelectedIndex = index;
-            var itemId = (sender as LinkButton).CommandArgument == ""
-                             ? 0
-                             : Convert.ToInt32((sender as LinkButton).CommandArgument);
+        //protected void lbtnAddress_Click(object sender, EventArgs e)
+        //{
+        //    var index = ((sender as LinkButton).Parent.Parent as GridViewRow).RowIndex;
+        //    //gvList.SelectedIndex = index;
+        //    var itemId = (sender as LinkButton).CommandArgument == ""
+        //                     ? 0
+        //                     : Convert.ToInt32((sender as LinkButton).CommandArgument);
 
-            Model.Order.Order itemOrder = OrderData.Get(Convert.ToInt32(lblId.Text), 0, new EnumValue() { Id = 0 });
-            foreach (BasketItem basketItem in itemOrder.Basket.BasketItems)
-            {
-                if (basketItem.Id == itemId)
-                {
-                    if (basketItem.ShippingAddress.City != null)
-                    {
-                        string City = basketItem.ShippingAddress.City.Name.ToString();
-                        string District = basketItem.ShippingAddress.District.Name.ToString();
-                        string AddressDetail = basketItem.ShippingAddress.AddressDetail.ToString();
-                        string PostalCode = basketItem.ShippingAddress.PostalCode.ToString();
-                        dvAdress.Visible = true;
-                        lblCity.Text = City;
-                        lblDetail.Text = District;
-                        lblDetail.Text = AddressDetail;
-                        lblPostalCode.Text = PostalCode;
-                    }
-                }
-            }
-        }
+        //    Model.Order.Order itemOrder = OrderData.Get(Convert.ToInt32(lblId.Text), 0, new EnumValue() { Id = 0 });
+        //    foreach (BasketItem basketItem in itemOrder.Basket.BasketItems)
+        //    {
+        //        if (basketItem.Id == itemId)
+        //        {
+        //            if (basketItem.ShippingAddress.City != null)
+        //            {
+        //                string City = basketItem.ShippingAddress.City.Name.ToString();
+        //                string District = basketItem.ShippingAddress.District.Name.ToString();
+        //                string AddressDetail = basketItem.ShippingAddress.AddressDetail.ToString();
+        //                string PostalCode = basketItem.ShippingAddress.PostalCode.ToString();
+        //                dvAdress.Visible = true;
+        //                lblCity.Text = City;
+        //                lblDetail.Text = District;
+        //                lblDetail.Text = AddressDetail;
+        //                lblPostalCode.Text = PostalCode;
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
