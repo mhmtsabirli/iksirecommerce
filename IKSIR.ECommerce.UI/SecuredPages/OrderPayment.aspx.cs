@@ -370,6 +370,17 @@ namespace IKSIR.ECommerce.UI.Pages
                     divAlert.InnerHtml += "<span style=\"color:Red\">Lütfen kart numarasını  giriniz!</span><br />";
                     isOk = false;
                 }
+                if (txtCreditCardNumber.Text.Length != 16)
+                {
+                    divAlert.InnerHtml += "<span style=\"color:Red\">Lütfen kart numarasını  giriniz!</span><br />";
+                    isOk = false;
+                }
+
+                if (txtCvv2.Text.Length != 3)
+                {
+                    divAlert.InnerHtml += "<span style=\"color:Red\">Lütfen cvv numarasını  giriniz!</span><br />";
+                    isOk = false;
+                }
                 if (ddlCreditCard.SelectedValue == "-1")
                 {
                     divAlert.InnerHtml += "<span style=\"color:Red\">Lütfen kredi kartı tipini  şeçiniz!</span><br />";
