@@ -14,6 +14,7 @@ namespace IKSIR.ECommerce.UI.Pages
     {
         public  User loginUser = null;
         public  Basket basket = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["LOGIN_USER"] != null && Session["USER_BASKET"] != null)

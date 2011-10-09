@@ -31,130 +31,130 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvMyOrder;
         
         /// <summary>
-        /// lblId control.
+        /// lblShippingAddressNameSurName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblId;
+        protected global::System.Web.UI.WebControls.Label lblShippingAddressNameSurName;
         
         /// <summary>
-        /// ddlPaymentType control.
+        /// lblShippingAddressDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPaymentType;
+        protected global::System.Web.UI.WebControls.Label lblShippingAddressDetail;
         
         /// <summary>
-        /// lbltotalPrice control.
+        /// lblShippingAddressPhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbltotalPrice;
+        protected global::System.Web.UI.WebControls.Label lblShippingAddressPhone;
         
         /// <summary>
-        /// lbltotalRatedPrice control.
+        /// lblBillingAddressNameSurname control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbltotalRatedPrice;
+        protected global::System.Web.UI.WebControls.Label lblBillingAddressNameSurname;
         
         /// <summary>
-        /// lblBillingDetail control.
+        /// lblBillingAddressDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBillingDetail;
+        protected global::System.Web.UI.WebControls.Label lblBillingAddressDetail;
         
         /// <summary>
-        /// lblBillingCity control.
+        /// lblBillingAddressPhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBillingCity;
+        protected global::System.Web.UI.WebControls.Label lblBillingAddressPhone;
         
         /// <summary>
-        /// lblBillingDistrict control.
+        /// rptBasketProducts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBillingDistrict;
+        protected global::System.Web.UI.WebControls.Repeater rptBasketProducts;
         
         /// <summary>
-        /// lblBillingPostalCode control.
+        /// lblShippingCompanyName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBillingPostalCode;
+        protected global::System.Web.UI.WebControls.Label lblShippingCompanyName;
         
         /// <summary>
-        /// dvAdress control.
+        /// lblShippingPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvAdress;
+        protected global::System.Web.UI.WebControls.Label lblShippingPrice;
         
         /// <summary>
-        /// lblDetail control.
+        /// divBasketTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDetail;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBasketTotal;
         
         /// <summary>
-        /// lblCity control.
+        /// lblTotalPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCity;
+        protected global::System.Web.UI.WebControls.Label lblTotalPrice;
         
         /// <summary>
-        /// lblDistrict control.
+        /// lblTotalTax control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDistrict;
+        protected global::System.Web.UI.WebControls.Label lblTotalTax;
         
         /// <summary>
-        /// lblPostalCode control.
+        /// lblBasketTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPostalCode;
+        protected global::System.Web.UI.WebControls.Label lblBasketTotal;
         
         /// <summary>
-        /// gvBasketItems control.
+        /// lblMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvBasketItems;
+        protected global::System.Web.UI.WebControls.Label lblMonth;
         
         /// <summary>
         /// ddlFilterOrderStatus control.

@@ -154,7 +154,7 @@ namespace IKSIR.ECommerce.UI.Pages
 
                 basket.BillingAddress.Id = billingAddressId;
                 basket.ShippingAddress.Id = shippingAddressId;
-
+                basket.ShippingCompany = new Model.ProductModel.Shipment() { Id = basket.ShippingCompany.Id };
                 basketId = BasketData.Insert(basket);
                 if (basketId > 0)
                     foreach (BasketItem basketItem in basket.BasketItems)
@@ -237,6 +237,7 @@ namespace IKSIR.ECommerce.UI.Pages
 
                     }
                 }
+                Session.Remove("USER_BASKET");
             }
             else
             {

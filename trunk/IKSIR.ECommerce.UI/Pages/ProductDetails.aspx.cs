@@ -31,7 +31,8 @@ namespace IKSIR.ECommerce.UI.Pages
             UCProductDetailsProductInfos1.ProductId = productId;
             UCProductDetailsComments1.ProductId = productId;
             UCProductDetailsMain1.ProductId = productId;
-            UCProductDetailsRelatedAndSimilarProducts1.ProductId = productId;
+            UCProductDetailsRelatedProducts1.ProductId = productId;
+            UCProductDetailsSimilarProducts1.ProductId = productId;
         }
 
         private void GetProductDetails()

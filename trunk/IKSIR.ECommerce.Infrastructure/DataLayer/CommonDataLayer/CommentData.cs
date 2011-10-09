@@ -54,9 +54,12 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             parameters.Add(new SqlParameter("@Title", itemComment.Title));
             parameters.Add(new SqlParameter("@Content", itemComment.Content));
             parameters.Add(new SqlParameter("@Ip", itemComment.Ip));
+
             if (itemComment.Site != null)
                 parameters.Add(new SqlParameter("@SiteId", itemComment.Site.Id));
-            parameters.Add(new SqlParameter("@Status", itemComment.Status));
+
+            if(itemComment.Status!=null && itemComment.Status.Id != 0)
+                parameters.Add(new SqlParameter("@Status", itemComment.Status.Id));
 
             parameters[0].Direction = ParameterDirection.Output;
 
