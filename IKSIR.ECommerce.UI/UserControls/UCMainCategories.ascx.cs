@@ -21,16 +21,16 @@ namespace IKSIR.ECommerce.UI.UserControls
                 BindCategories();
                 if (Request.QueryString["catid"] != null && Request.QueryString["catid"] != "")
                 {
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "err_msg", "$('#example4 .expand_all').click(); $('#menu4 > li > a.expanded + ul').show();", true);
+                    //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "err_msg", "$('#example4 .expand_all').click(); $('#menu4 > li > a.expanded + ul').show();", true);
 
-                    int catid = 0;
-                    int.TryParse(Request.QueryString["catid"], out catid);
-                    var catItem = ProductCategoryData.Get(catid);
-                    var item = Request.Form["anchor" + catItem.ParentCategory.Id];
-                    if (item != null)
-                    { 
+                    //int catid = 0;
+                    //int.TryParse(Request.QueryString["catid"], out catid);
+                    //var catItem = ProductCategoryData.Get(catid);
+                    //var item = Request.Form["anchor" + catItem.ParentCategory.Id];
+                    //if (item != null)
+                    //{ 
                         
-                    }
+                    //}
                 }
             }
         }
