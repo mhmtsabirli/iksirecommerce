@@ -446,8 +446,14 @@ namespace IKSIR.ECommerce.UI.Pages
             string term = "";
             _PosnetDotNetModule.C_Posnet myYK = new C_Posnet();
 
+            string Month = "";
+            if (paymetInfo.Month.ToString().Length == 1)
+                Month = "0" + paymetInfo.Month.ToString();
+            else
+                Month = paymetInfo.Month.ToString();
+
             string pccno = paymetInfo.CreditCardNumber.ToString();
-            string pexpdate = paymetInfo.Year.ToString().Replace("20", "") + paymetInfo.Month.ToString();
+            string pexpdate = paymetInfo.Year.ToString().Replace("20", "") + Month;
             string pamount = lblBasketTotal.Text.Replace(".", "").Replace(",", "");
 
             //test için sonra silinecek
@@ -534,9 +540,13 @@ namespace IKSIR.ECommerce.UI.Pages
 
 
             _PosnetDotNetModule.C_Posnet myYK = new C_Posnet();
-
+            string Month = "";
+            if (paymetInfo.Month.ToString().Length == 1)
+                Month = "0" + paymetInfo.Month.ToString();
+            else
+                Month = paymetInfo.Month.ToString();
             string pccno = paymetInfo.CreditCardNumber.ToString();
-            string pexpdate = paymetInfo.Year.ToString().Replace("20", "") + paymetInfo.Month.ToString();
+            string pexpdate = paymetInfo.Year.ToString().Replace("20", "") + Month;
             string pamount = lblBasketTotal.Text.Replace(".", "").Replace(",", "");
 
             //test için sonra silinecek
