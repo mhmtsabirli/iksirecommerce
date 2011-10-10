@@ -476,7 +476,7 @@ namespace IKSIR.ECommerce.UI.Pages
             string pamount = lblBasketTotal.Text.Replace(".", "").Replace(",", "");
 
             //test için sonra silinecek
-            pamount = "100";
+            
 
             string pcurrencycode = "YT";
 
@@ -569,7 +569,7 @@ namespace IKSIR.ECommerce.UI.Pages
             string pamount = lblBasketTotal.Text.Replace(".", "").Replace(",", "");
 
             //test için sonra silinecek
-            pamount = "100";
+            
             string pcurrencycode = "YT";
 
             string pcvc = paymetInfo.Cvc.ToString();
