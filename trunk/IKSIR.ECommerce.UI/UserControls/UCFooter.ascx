@@ -65,7 +65,7 @@
             <li><a href="/Pages/Content.aspx?cid=3">Müşteri Hizmetleri</a></li>
             <li><a href="/Pages/Content.aspx?cid=2">Kurumsal</a></li>
             <li><a href="/Pages/Content.aspx?cid=6">Sık Sorulan Sorular</a></li>
-            <li><a href="/Pages/Content.aspx?cid=7">Yardım</a></li>
+            <li><a href="/Pages/Content.aspx?cid=14">Yardım</a></li>
         </ul>
     </div>
     <div class="footer_module">
