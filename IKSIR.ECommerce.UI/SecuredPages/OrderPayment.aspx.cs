@@ -533,7 +533,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 if (myYK.GetApprovedCode() == "1")
                 {
                     divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
-                    Session.Remove("USER_BASKET");
+                    
                     return true;
                 }
                 else // (myYK.GetApprovedCode == "0")
@@ -669,7 +669,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 if (myYK.GetApprovedCode() == "1")
                 {
                     divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
-                    Session.Remove("USER_BASKET");
+                    
                     return true;
                 }
                 else // (myYK.GetApprovedCode == "0")
