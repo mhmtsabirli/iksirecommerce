@@ -2,6 +2,14 @@
     AutoEventWireup="true" CodeBehind="OrderPayment.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.OrderPayment" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<script language="JavaScript" type="text/JavaScript">
+    function submitFormEx(Form, OpenNewWindowFlag, WindowName) {
+        Form.action = "http://setmpos.ykb.com/3DSWebService/YKBPaymentService"
+        submitForm(Form, OpenNewWindowFlag, WindowName)
+        Form.submit();
+    }
+</script>
+    <script src="../js/posnet.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="sepet_content_middle">
