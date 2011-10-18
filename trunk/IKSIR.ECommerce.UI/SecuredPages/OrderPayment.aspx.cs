@@ -15,6 +15,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using System.IO;
 using _PosnetDotNetModule;
+using _PosnetDotNetTDSOOSModule;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -463,8 +464,8 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             bool isOk = false;
             string term = "";
-            _PosnetDotNetModule.C_Posnet myYK = new C_Posnet();
-
+            
+            _PosnetDotNetTDSOOSModule.C_PosnetOOSTDS myYK = new C_PosnetOOSTDS();
             string Month = "";
             if (paymetInfo.Month.ToString().Length == 1)
                 Month = "0" + paymetInfo.Month.ToString();
@@ -521,15 +522,19 @@ namespace IKSIR.ECommerce.UI.Pages
 
             myYK.SetMid("6734273367");
             myYK.SetTid("67932822");
+            myYK.SetKey("10,10,10,10,10,10,10,10");
+            myYK.SetPosnetID("3261");
             myYK.SetURL("http://setmpos.ykb.com/PosnetWebService/XML");
 
-
             bool outtran = false;
-            outtran = myYK.DoSaleTran(pccno, pexpdate, pcvc, porderid, pamount, pcurrencycode, ptaknum, "00", "000000");
+            outtran=  myYK.CreateTranRequestDatas(txtCustomerName.Text, pamount, pcurrencycode, ptaknum, porderid, "Sale",
+                                               pccno, pexpdate, pcvc);
 
             if (outtran == true)
             {
                 divAlert.InnerHtml = "baglantı kuruldu<br>";
+
+                btnApprove.OnClientClick = "submitFormEx(formName, 0, 'YKBWindow');";
                 if (myYK.GetApprovedCode() == "1")
                 {
                     divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
@@ -557,8 +562,7 @@ namespace IKSIR.ECommerce.UI.Pages
             bool isOk = false;
             string term = "";
 
-
-            _PosnetDotNetModule.C_Posnet myYK = new C_Posnet();
+            _PosnetDotNetTDSOOSModule.C_PosnetOOSTDS myYK = new C_PosnetOOSTDS();
             string Month = "";
             if (paymetInfo.Month.ToString().Length == 1)
                 Month = "0" + paymetInfo.Month.ToString();
