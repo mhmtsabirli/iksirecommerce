@@ -93,6 +93,21 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
             GetOrderList();
         }
 
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            Model.Order.Order itemOrder = OrderData.Get(Convert.ToInt32(CustomerOrderId.Value.ToString()), 0, new EnumValue() { Id = 0 });
+            itemOrder.Status = new EnumValue() { Id = 43 };// Silindi durumuna update ediliyor 
+            int result = OrderData.Update(itemOrder);
+            if (result != 1)
+                divAlert.InnerHtml += "<span style=\"color:Green\">Siparişiniz İptal edilmek üzere kayıt edilmiştir. </span><br />";
+            else
+                divAlert.InnerHtml += "<span style=\"color:Green\">Sipariş güncellemesi sırasında hata oluştu </span><br />";
+
+            dvMyOrder.Visible = false;
+            divAlert.Visible = true;
+            GetOrderList();
+        }
+
         private void GetOrderList()
         {
             List<Model.Order.Order> itemList = OrderData.GetList(0, loginUser.Id);
@@ -114,6 +129,7 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
                 {
                     itemList = itemList.Where(x => x.Status.Id != 35).ToList();
                     itemList = itemList.Where(x => x.Status.Id != 38).ToList();
+                    itemList = itemList.Where(x => x.Status.Id != 43).ToList();
                 }
                 else if (ddlFilterOrderStatus.SelectedValue == "2")
                 {
@@ -121,7 +137,12 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
                 }
                 else if (ddlFilterOrderStatus.SelectedValue == "3")
                 {
-                    itemList = itemList.Where(x => x.Status.Id == 38).ToList();
+
+                    itemList = itemList.Where(x => x.Status.Id != 29).ToList();
+                    itemList = itemList.Where(x => x.Status.Id != 32).ToList();
+                    itemList = itemList.Where(x => x.Status.Id != 33).ToList();
+                    itemList = itemList.Where(x => x.Status.Id != 34).ToList();
+                    itemList = itemList.Where(x => x.Status.Id != 35).ToList();
                 }
                 else
                 {
@@ -151,6 +172,9 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
             {
                 divAlert.InnerHtml += "<span style=\"color:Red\">Ürün bilgileri yüklenirken hata oluştu.</span><br />" + divAlert.InnerHtml;
             }
+
+            if (itemOrder.Status.Id == 34 || itemOrder.Status.Id == 35 || itemOrder.Status.Id == 38 || itemOrder.Status.Id == 43)
+                btnDelete.Visible = false;
             //if (GetPaymentInfo(itemOrder.PaymetInfo))
             //{
             //    divAlert.InnerHtml += "<span style=\"color:Green\">Müşteri bilgileri başarıyla yüklendi.</span><br />";
@@ -302,9 +326,11 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
             var itemId = (sender as LinkButton).CommandArgument == ""
                              ? 0
                              : Convert.ToInt32((sender as LinkButton).CommandArgument);
-
+            CustomerOrderId.Value = itemId.ToString(); ;
             GetOrderItem(itemId);
+
             dvMyOrder.Visible = true;
+
             //ddlPaymentType.Enabled = false;
         }
 
