@@ -41,6 +41,7 @@
                     <table width="100%">
                         <tr>
                             <td colspan="2">
+                            <input type="hidden" value="" runat="server" id="CustomerOrderId" />
                                 <span style="color: Red">Sipariş Detayı</span>
                             </td>
                         </tr>
@@ -483,6 +484,8 @@
                             </td>
                         </tr>
                     </table>--%>
+                     <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Siparişi iptal Et" />&#160;<asp:Button
+                                    
                 </div>
                 <div>
                     <table>
