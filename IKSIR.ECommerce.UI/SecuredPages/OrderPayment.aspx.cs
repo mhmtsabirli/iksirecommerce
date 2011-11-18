@@ -801,7 +801,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 //00 ReasonCode döndüğünde işlem başarılıdır. Müşteriye başarılı veya başarısız şeklinde göstermeniz tavsiye edilir. (Fraud riski)
                 if (xElement1.InnerText == "00")
                 {
-                    divAlert.InnerHtml = "İşlem Başarılı";
+                    divAlert.InnerHtml += "İşlem Başarılı";
                 }
                 else
                 {
@@ -811,7 +811,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             catch (Exception ex)
             {
-                divAlert.InnerHtml = ex.Message;
+                divAlert.InnerHtml += ex.Message;
             }
             //string term = "";
             //ePayment.cc5payment mycc5pay = new ePayment.cc5payment();
