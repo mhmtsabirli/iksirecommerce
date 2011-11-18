@@ -796,7 +796,7 @@ namespace IKSIR.ECommerce.UI.Pages
 
                 //ErrorMsg
                 XmlElement xElement3 = xDoc.SelectSingleNode("//GVPSResponse/Transaction/Response/ErrorMsg") as XmlElement;
-                divAlert.InnerHtml = xElement3.InnerText;
+                divAlert.InnerHtml += xElement3.InnerText;
 
                 //00 ReasonCode döndüğünde işlem başarılıdır. Müşteriye başarılı veya başarısız şeklinde göstermeniz tavsiye edilir. (Fraud riski)
                 if (xElement1.InnerText == "00")
