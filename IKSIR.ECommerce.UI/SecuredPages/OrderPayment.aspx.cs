@@ -805,7 +805,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 }
                 else
                 {
-                    divAlert.InnerHtml = "İşlem Başarısız";
+                    divAlert.InnerHtml += "İşlem Başarısız";
                 }
 
             }
