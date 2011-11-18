@@ -16,6 +16,7 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using System.IO;
 using _PosnetDotNetModule;
 using _PosnetDotNetTDSOOSModule;
+using System.Net;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -464,7 +465,7 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             bool isOk = false;
             string term = "";
-            
+          
             _PosnetDotNetTDSOOSModule.C_PosnetOOSTDS myYK = new C_PosnetOOSTDS();
             string Month = "";
             if (paymetInfo.Month.ToString().Length == 1)
@@ -477,8 +478,10 @@ namespace IKSIR.ECommerce.UI.Pages
             string pamount = lblBasketTotal.Text.Replace(".", "").Replace(",", "");
 
             //test için sonra silinecek
-            
 
+            Session["PaymentInfo"] = paymetInfo;
+            Session["pamount"] = pamount;
+            Session["Shipping"] = lblShippingPrice.Text;
             string pcurrencycode = "YT";
 
             string pcvc = paymetInfo.Cvc.ToString();
@@ -486,7 +489,7 @@ namespace IKSIR.ECommerce.UI.Pages
             term = "1";
 
             string ptaknum = "00";
-
+            
             string yil = "";
             string ay = "";
             string gun = "";
@@ -506,20 +509,12 @@ namespace IKSIR.ECommerce.UI.Pages
             if (sa.Length == 1) sa = "0" + sa;
             if (dk.Length == 1) dk = "0" + dk;
             if (sn.Length == 1) sn = "0" + sn;
-            string porderid = "YKBTEST_0000" + yil + ay + gun + sa + dk + sn;
-
-
-            //if (porderid.Length < 24)
-            //{
-            //    string nullvalue = "";
-            //    int m = 24 - porderid.Length;
-            //    for (int i = 0; i < m; i++)
-            //    {
-            //        nullvalue += "0";
-            //    }
-            //    porderid = nullvalue + porderid;
-            //}
-
+            string porderid = "YKB_0000" + yil + ay + gun + sa + dk + sn;
+            Session["ptaknum"] = ptaknum;
+            Session["pamount"] = pamount;
+            Session["porderid"] = porderid;
+            Session["3ds"] = 0;
+            Response.Redirect("posnettds.aspx");
             myYK.SetMid("6734273367");
             myYK.SetTid("67932822");
             myYK.SetKey("10,10,10,10,10,10,10,10");
@@ -573,7 +568,9 @@ namespace IKSIR.ECommerce.UI.Pages
             string pamount = lblBasketTotal.Text.Replace(".", "").Replace(",", "");
 
             //test için sonra silinecek
-            
+            Session["PaymentInfo"] = paymetInfo;
+            Session["pamount"] = pamount;
+            Session["Shipping"] = lblShippingPrice.Text;
             string pcurrencycode = "YT";
 
             string pcvc = paymetInfo.Cvc.ToString();
@@ -646,8 +643,12 @@ namespace IKSIR.ECommerce.UI.Pages
             if (sa.Length == 1) sa = "0" + sa;
             if (dk.Length == 1) dk = "0" + dk;
             if (sn.Length == 1) sn = "0" + sn;
-            string porderid = "YKBTEST_0000" + yil + ay + gun + sa + dk + sn;
-
+            string porderid = "YKB_0000" + yil + ay + gun + sa + dk + sn;
+            Session["ptaknum"] = ptaknum;
+            Session["pamount"] = pamount;
+            Session["porderid"] = porderid;
+            Session["3ds"] = 0;
+            Response.Redirect("posnettds.aspx");
 
             //if (porderid.Length < 24)
             //{
