@@ -17,6 +17,9 @@ using System.IO;
 using _PosnetDotNetModule;
 //using _PosnetDotNetTDSOOSModule;
 using System.Net;
+using System.Xml;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -441,11 +444,11 @@ namespace IKSIR.ECommerce.UI.Pages
                     {
                         switch (paymetInfo.CreditCard.Id)
                         {
+                            case 1:
+                                isOk = CreditCard(paymetInfo);
+                                break;
                             case 2:
                                 isOk = YapiKredi(paymetInfo);
-                                break;
-                            default:
-                                isOk = CreditCard(paymetInfo);
                                 break;
                         }
                     }
@@ -694,53 +697,166 @@ namespace IKSIR.ECommerce.UI.Pages
 
         }
 
+
+        public string GetSHA1(string SHA1Data)
+        {
+            SHA1 sha = new SHA1CryptoServiceProvider();
+            string HashedPassword = SHA1Data;
+            byte[] hashbytes = Encoding.GetEncoding("ISO-8859-9").GetBytes(HashedPassword);
+            byte[] inputbytes = sha.ComputeHash(hashbytes);
+            return GetHexaDecimal(inputbytes);
+        }
+        public string GetHexaDecimal(byte[] bytes)
+        {
+            StringBuilder s = new StringBuilder();
+            int length = bytes.Length;
+            for (int n = 0; n <= length - 1; n++)
+            {
+                s.Append(String.Format("{0,2:x}", bytes[n]).Replace(" ", "0"));
+            }
+            return s.ToString();
+        }
         private bool CreditCard(PaymetInfo paymetInfo)
         {
             bool isOk = false;
-            string term = "";
-            ePayment.cc5payment mycc5pay = new ePayment.cc5payment();
-            mycc5pay.clientid = paymetInfo.CreditCard.VposId.ToString();
-            mycc5pay.name = paymetInfo.CreditCard.VposName.ToString();
-            mycc5pay.password = paymetInfo.CreditCard.VposPassword.ToString();
-            mycc5pay.oid = BasketData.GetMaxBasket();//Id gerekiyordu loginId yi aldım normalde OrderId olması lazım
-            mycc5pay.host = paymetInfo.CreditCard.VposHost.ToString();
-            mycc5pay.ip = HttpContext.Current.Request.ServerVariables["Remote_Addr"];//"127.0.0.7";// Request.UserHostAddress;
-
-            mycc5pay.bname = loginUser.Id.ToString();//Id gerekiyordu loginId yi aldım normalde OrderId olması lazım
-            divAlert.InnerHtml = NoTurkishChar(paymetInfo.Name.ToString()).ToLower() + "<br>";
-            mycc5pay.orderresult = 0;
-            mycc5pay.chargetype = "Auth";
-            mycc5pay.cardnumber = paymetInfo.CreditCardNumber.ToString();
-            mycc5pay.expmonth = paymetInfo.Month.ToString();
-            mycc5pay.expyear = paymetInfo.Year.ToString();
-            mycc5pay.cv2 = paymetInfo.Cvc.ToString();
-            mycc5pay.subtotal = lblBasketTotal.Text;
-            mycc5pay.userid = paymetInfo.CreditCard.VposUser.ToString();
-            mycc5pay.currency = "949";//TL
-            if (paymetInfo.SelectedTerm.ToString() == "1")
-                term = "";
+            string strMode = "TEST";
+            string strVersion = "v0.01";
+            string strTerminalID = "10012855"; //8 Haneli TerminalID yazılmalı.
+            string _strTerminalID = "0" + strTerminalID;
+            string strProvUserID = "PROVAUT";
+            string strProvisionPassword = "Snr7793748"; //TerminalProvUserID şifresi
+            string strUserID = "PROVAUT";
+            string strMerchantID = "9271569"; //Üye İşyeri Numarası
+            string strIPAddress = Request.UserHostAddress; //Kullanıcının IP adresini alır
+            string strEmailAddress = "info@tradesis.com";
+            string strOrderID = BasketData.GetMaxBasket();
+            string strNumber = paymetInfo.CreditCardNumber.ToString();
+            string Month = "";
+            if (paymetInfo.Month.ToString().Length == 1)
+                Month = "0" + paymetInfo.Month.ToString();
             else
-                term = paymetInfo.SelectedTerm.ToString();
+                Month = paymetInfo.Month.ToString();
+            string pexpdate = paymetInfo.Year.ToString().Replace("20", "") + Month;
 
-            mycc5pay.taksit = term;
-            divAlert.InnerHtml = mycc5pay.processorder();
+            string strExpireDate = pexpdate;
+            string strCVV2 = "";
+            string strAmount = "100"; //İşlem Tutarı 1.00 TL için 100 gönderilmeli
+            string strType = "sales";
+            string strCurrencyCode = "949";
+            string strCardholderPresentCode = "0";
+            string strMotoInd = "N";
+            string strInstallmentCount = "";
+            string strHostAddress = "https://sanalposprov.garanti.com.tr/VPServlet";
 
-            if (mycc5pay.appr == "Approved")
+            string SecurityData = GetSHA1(strProvisionPassword + _strTerminalID).ToUpper();
+            string HashData = GetSHA1(strOrderID + strTerminalID + strNumber + strAmount + SecurityData).ToUpper();
+
+            string strXML = null;
+            strXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + "<GVPSRequest>" + "<Mode>" + strMode + "</Mode>" + "<Version>" + strVersion + "</Version>" + "<Terminal><ProvUserID>" + strProvUserID + "</ProvUserID><HashData>" + HashData + "</HashData><UserID>" + strUserID + "</UserID><ID>" + strTerminalID + "</ID><MerchantID>" + strMerchantID + "</MerchantID></Terminal>" + "<Customer><IPAddress>" + strIPAddress + "</IPAddress><EmailAddress>" + strEmailAddress + "</EmailAddress></Customer>" + "<Card><Number>" + strNumber + "</Number><ExpireDate>" + strExpireDate + "</ExpireDate><CVV2>" + strCVV2 + "</CVV2></Card>" + "<Order><OrderID>" + strOrderID + "</OrderID><GroupID></GroupID><AddressList><Address><Type>S</Type><Name></Name><LastName></LastName><Company></Company><Text></Text><District></District><City></City><PostalCode></PostalCode><Country></Country><PhoneNumber></PhoneNumber></Address></AddressList></Order>" + "<Transaction>" + "<Type>" + strType + "</Type><InstallmentCnt>" + strInstallmentCount + "</InstallmentCnt><Amount>" + strAmount + "</Amount><CurrencyCode>" + strCurrencyCode + "</CurrencyCode><CardholderPresentCode>" + strCardholderPresentCode + "</CardholderPresentCode><MotoInd>" + strMotoInd + "</MotoInd>" + "</Transaction>" + "</GVPSRequest>";
+
+            try
             {
-                divAlert.InnerHtml += "Para çekildi.";
-                Session.Remove("USER_BASKET");
-                isOk = true;
-            }
+                string data = "data=" + strXML;
 
-            else
-            {
-                divAlert.InnerHtml += "<span style=\"color:Red\">";
-                divAlert.InnerHtml += "<br>HataMesaji:" + mycc5pay.errmsg;
-                divAlert.InnerHtml += "<br>OrderId:" + mycc5pay.oid;
-                divAlert.InnerHtml += "<br>ApprovalKodu:" + mycc5pay.appr;
-                divAlert.InnerHtml += "</span><br />";
-                isOk = false;
+                WebRequest _WebRequest = WebRequest.Create(strHostAddress);
+                _WebRequest.Method = "POST";
+
+                byte[] byteArray = Encoding.UTF8.GetBytes(data);
+                _WebRequest.ContentType = "application/x-www-form-urlencoded";
+                _WebRequest.ContentLength = byteArray.Length;
+
+                Stream dataStream = _WebRequest.GetRequestStream();
+                dataStream.Write(byteArray, 0, byteArray.Length);
+                dataStream.Close();
+
+                WebResponse _WebResponse = _WebRequest.GetResponse();
+                Console.WriteLine(((HttpWebResponse)_WebResponse).StatusDescription);
+                dataStream = _WebResponse.GetResponseStream();
+
+                StreamReader reader = new StreamReader(dataStream);
+                string responseFromServer = reader.ReadToEnd();
+
+                Console.WriteLine(responseFromServer);
+
+                //Müşteriye gösterilebilir ama Fraud riski açısından bu değerleri göstermeyelim.
+                //responseFromServer
+
+                //GVPSResponse XML'in değerlerini okuyoruz. İstediğiniz geri dönüş değerlerini gösterebilirsiniz.
+                string XML = responseFromServer;
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.LoadXml(XML);
+
+                //ReasonCode
+                XmlElement xElement1 = xDoc.SelectSingleNode("//GVPSResponse/Transaction/Response/ReasonCode") as XmlElement;
+                //lblResult2.Text = xElement1.InnerText;
+
+                //Message
+                //XmlElement xElement2 = xDoc.SelectSingleNode("//GVPSResponse/Transaction/Response/Message") as XmlElement;
+                //lblResult2.Text = xElement2.InnerText;
+
+                //ErrorMsg
+                XmlElement xElement3 = xDoc.SelectSingleNode("//GVPSResponse/Transaction/Response/ErrorMsg") as XmlElement;
+                divAlert.InnerHtml = xElement3.InnerText;
+
+                //00 ReasonCode döndüğünde işlem başarılıdır. Müşteriye başarılı veya başarısız şeklinde göstermeniz tavsiye edilir. (Fraud riski)
+                if (xElement1.InnerText == "00")
+                {
+                    divAlert.InnerHtml = "İşlem Başarılı";
+                }
+                else
+                {
+                    divAlert.InnerHtml = "İşlem Başarısız";
+                }
+
             }
+            catch (Exception ex)
+            {
+                divAlert.InnerHtml = ex.Message;
+            }
+            //string term = "";
+            //ePayment.cc5payment mycc5pay = new ePayment.cc5payment();
+            //mycc5pay.clientid = paymetInfo.CreditCard.VposId.ToString();
+            //mycc5pay.name = paymetInfo.CreditCard.VposName.ToString();
+            //mycc5pay.password = paymetInfo.CreditCard.VposPassword.ToString();
+            //mycc5pay.oid = BasketData.GetMaxBasket();//Id gerekiyordu loginId yi aldım normalde OrderId olması lazım
+            //mycc5pay.host = paymetInfo.CreditCard.VposHost.ToString();
+            //mycc5pay.ip = HttpContext.Current.Request.ServerVariables["Remote_Addr"];//"127.0.0.7";// Request.UserHostAddress;
+
+            //mycc5pay.bname = loginUser.Id.ToString();//Id gerekiyordu loginId yi aldım normalde OrderId olması lazım
+            //divAlert.InnerHtml = NoTurkishChar(paymetInfo.Name.ToString()).ToLower() + "<br>";
+            //mycc5pay.orderresult = 0;
+            //mycc5pay.chargetype = "Auth";
+            //mycc5pay.cardnumber = paymetInfo.CreditCardNumber.ToString();
+            //mycc5pay.expmonth = paymetInfo.Month.ToString();
+            //mycc5pay.expyear = paymetInfo.Year.ToString();
+            //mycc5pay.cv2 = paymetInfo.Cvc.ToString();
+            //mycc5pay.subtotal = lblBasketTotal.Text;
+            //mycc5pay.userid = paymetInfo.CreditCard.VposUser.ToString();
+            //mycc5pay.currency = "949";//TL
+            //if (paymetInfo.SelectedTerm.ToString() == "1")
+            //    term = "";
+            //else
+            //    term = paymetInfo.SelectedTerm.ToString();
+
+            //mycc5pay.taksit = term;
+            //divAlert.InnerHtml = mycc5pay.processorder();
+
+            //if (mycc5pay.appr == "Approved")
+            //{
+            //    divAlert.InnerHtml += "Para çekildi.";
+            //    Session.Remove("USER_BASKET");
+            //    isOk = true;
+            //}
+
+            //else
+            //{
+            //    divAlert.InnerHtml += "<span style=\"color:Red\">";
+            //    divAlert.InnerHtml += "<br>HataMesaji:" + mycc5pay.errmsg;
+            //    divAlert.InnerHtml += "<br>OrderId:" + mycc5pay.oid;
+            //    divAlert.InnerHtml += "<br>ApprovalKodu:" + mycc5pay.appr;
+            //    divAlert.InnerHtml += "</span><br />";
+            //    isOk = false;
+            //}
             return isOk;
         }
 
