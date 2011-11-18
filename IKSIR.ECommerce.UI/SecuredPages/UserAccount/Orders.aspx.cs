@@ -27,7 +27,8 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
             }
             else
             {
-                BindFilterForm();
+                if (!Page.IsPostBack)
+                    BindFilterForm();
             }
 
             loginUser = (User)Session["LOGIN_USER"];

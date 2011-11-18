@@ -15,7 +15,7 @@ using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using System.IO;
 using _PosnetDotNetModule;
-using _PosnetDotNetTDSOOSModule;
+//using _PosnetDotNetTDSOOSModule;
 using System.Net;
 
 namespace IKSIR.ECommerce.UI.Pages
@@ -466,7 +466,7 @@ namespace IKSIR.ECommerce.UI.Pages
             bool isOk = false;
             string term = "";
           
-            _PosnetDotNetTDSOOSModule.C_PosnetOOSTDS myYK = new C_PosnetOOSTDS();
+            //_PosnetDotNetTDSOOSModule.C_PosnetOOSTDS myYK = new C_PosnetOOSTDS();
             string Month = "";
             if (paymetInfo.Month.ToString().Length == 1)
                 Month = "0" + paymetInfo.Month.ToString();
@@ -515,34 +515,34 @@ namespace IKSIR.ECommerce.UI.Pages
             Session["porderid"] = porderid;
             Session["3ds"] = 0;
             Response.Redirect("posnettds.aspx");
-            myYK.SetMid("6734273367");
-            myYK.SetTid("67932822");
-            myYK.SetKey("10,10,10,10,10,10,10,10");
-            myYK.SetPosnetID("3261");
-            myYK.SetURL("http://setmpos.ykb.com/PosnetWebService/XML");
+            //myYK.SetMid("6734273367");
+            //myYK.SetTid("67932822");
+            //myYK.SetKey("10,10,10,10,10,10,10,10");
+            //myYK.SetPosnetID("3261");
+            //myYK.SetURL("http://setmpos.ykb.com/PosnetWebService/XML");
 
             bool outtran = false;
-            outtran=  myYK.CreateTranRequestDatas(txtCustomerName.Text, pamount, pcurrencycode, ptaknum, porderid, "Sale",
-                                               pccno, pexpdate, pcvc);
+            //outtran=  myYK.CreateTranRequestDatas(txtCustomerName.Text, pamount, pcurrencycode, ptaknum, porderid, "Sale",
+            //                                   pccno, pexpdate, pcvc);
 
             if (outtran == true)
             {
                 divAlert.InnerHtml = "baglantı kuruldu<br>";
 
                 btnApprove.OnClientClick = "submitFormEx(formName, 0, 'YKBWindow');";
-                if (myYK.GetApprovedCode() == "1")
-                {
-                    divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
+                //if (myYK.GetApprovedCode() == "1")
+                //{
+                //    divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
                     
-                    return true;
-                }
-                else // (myYK.GetApprovedCode == "0")
-                {
-                    divAlert.InnerHtml += myYK.GetApprovedCode();
-                    divAlert.InnerHtml += myYK.GetResponseText();
-                    divAlert.InnerHtml += "<span style=\"color:Red\"> Kart onaylanmadı </span><br />";
-                    return false;
-                }
+                //    return true;
+                //}
+                //else // (myYK.GetApprovedCode == "0")
+                //{
+                //    divAlert.InnerHtml += myYK.GetApprovedCode();
+                //    divAlert.InnerHtml += myYK.GetResponseText();
+                //    divAlert.InnerHtml += "<span style=\"color:Red\"> Kart onaylanmadı </span><br />";
+                //    return false;
+                //}
             }
             else
             {
@@ -557,7 +557,7 @@ namespace IKSIR.ECommerce.UI.Pages
             bool isOk = false;
             string term = "";
 
-            _PosnetDotNetTDSOOSModule.C_PosnetOOSTDS myYK = new C_PosnetOOSTDS();
+            //_PosnetDotNetTDSOOSModule.C_PosnetOOSTDS myYK = new C_PosnetOOSTDS();
             string Month = "";
             if (paymetInfo.Month.ToString().Length == 1)
                 Month = "0" + paymetInfo.Month.ToString();
@@ -661,34 +661,34 @@ namespace IKSIR.ECommerce.UI.Pages
             //    porderid = nullvalue + porderid;
             //}
 
-            myYK.SetMid(paymetInfo.CreditCard.VposId.ToString());
-            myYK.SetTid(paymetInfo.CreditCard.VposPassword.ToString());
-            myYK.SetURL(paymetInfo.CreditCard.VposHost.ToString());
+            //myYK.SetMid(paymetInfo.CreditCard.VposId.ToString());
+            //myYK.SetTid(paymetInfo.CreditCard.VposPassword.ToString());
+            //myYK.SetURL(paymetInfo.CreditCard.VposHost.ToString());
 
-            bool outtran = false;
-            outtran = myYK.DoSaleTran(pccno, pexpdate, pcvc, porderid, pamount, pcurrencycode, ptaknum, "00", "000000");
+            //bool outtran = false;
+            //outtran = myYK.DoSaleTran(pccno, pexpdate, pcvc, porderid, pamount, pcurrencycode, ptaknum, "00", "000000");
 
-            if (outtran == true)
-            {
-                divAlert.InnerHtml = "baglantı kuruldu<br>";
-                if (myYK.GetApprovedCode() == "1")
-                {
-                    divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
+            //if (outtran == true)
+            //{
+            //    divAlert.InnerHtml = "baglantı kuruldu<br>";
+            //    if (myYK.GetApprovedCode() == "1")
+            //    {
+            //        divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
                     
-                    return true;
-                }
-                else // (myYK.GetApprovedCode == "0")
-                {
-                    divAlert.InnerHtml += myYK.GetApprovedCode();
-                    divAlert.InnerHtml += myYK.GetResponseText();
-                    divAlert.InnerHtml += "<span style=\"color:Red\"> Kart onaylanmadı </span><br />";
-                    return false;
-                }
-            }
-            else
-            {
-                divAlert.InnerHtml = outtran.ToString();
-            }
+            //        return true;
+            //    }
+            //    else // (myYK.GetApprovedCode == "0")
+            //    {
+            //        divAlert.InnerHtml += myYK.GetApprovedCode();
+            //        divAlert.InnerHtml += myYK.GetResponseText();
+            //        divAlert.InnerHtml += "<span style=\"color:Red\"> Kart onaylanmadı </span><br />";
+            //        return false;
+            //    }
+            //}
+            //else
+            //{
+            //    divAlert.InnerHtml = outtran.ToString();
+            //}
 
             return false;
 

@@ -13,7 +13,6 @@ namespace IKSIR.ECommerce.UI
 {
     public class Global : System.Web.HttpApplication
     {
-
         void Application_BeginRequest(Object sender, EventArgs e)
         {
             // stop sql injection attacks and redirect to homepage
