@@ -256,6 +256,7 @@ namespace IKSIR.ECommerce.UI.Pages
             if (ddlCreditCard.SelectedValue == "99")
             {
                 ListItem ls = new ListItem("1", "1");
+                ddlCreditCardMonth.Items.Clear();
                 ddlCreditCardMonth.Items.Add(ls);
             }
             else
