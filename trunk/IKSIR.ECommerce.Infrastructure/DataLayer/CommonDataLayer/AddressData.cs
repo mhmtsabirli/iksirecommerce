@@ -70,6 +70,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer
             parameters.Add(new SqlParameter("@AdminId", itemAddress.CreateAdminId));
             parameters.Add(new SqlParameter("@UserId", itemAddress.User.Id));
             parameters.Add(new SqlParameter("@Title", itemAddress.Title));
+            parameters.Add(new SqlParameter("@Type", itemAddress.Type.Id));
             parameters.Add(new SqlParameter("@FirstName", itemAddress.FirstName));
             parameters.Add(new SqlParameter("@LastName", itemAddress.LastName));
             if (itemAddress.Country != null)
