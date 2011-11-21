@@ -351,6 +351,7 @@
     <Content Include="SecuredPages\UserAccount\FavoriteProducts.aspx" />
     <Content Include="SecuredPages\UserAccount\Orders.aspx" />
     <Content Include="SecuredPages\UserAccount\UserInfos.aspx" />
+    <Content Include="SecuredPages\Payment.aspx" />
     <Content Include="SecuredPages\UserControls\UCFooter.ascx" />
     <Content Include="SecuredPages\UserControls\UCHeader.ascx" />
     <Content Include="SecuredPages\WebForm1.aspx" />
@@ -572,6 +573,13 @@
     </Compile>
     <Compile Include="SecuredPages\UserAccount\UserInfos.aspx.designer.cs">
       <DependentUpon>UserInfos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredPages\Payment.aspx.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\Payment.aspx.designer.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
     </Compile>
     <Compile Include="SecuredPages\UserControls\UCFooter.ascx.cs">
       <DependentUpon>UCFooter.ascx</DependentUpon>
