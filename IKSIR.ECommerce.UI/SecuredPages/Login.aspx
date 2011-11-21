@@ -54,6 +54,9 @@
                 <tr>
                     <td colspan="4">
                         <asp:Button runat="server" ID="btnLogin" OnClick="btnLogin_Click" CssClass="footer_module_submit" />
+                        <asp:LinkButton runat="server" ID="lbtnNewUser" Text="Yeni Üyelik" 
+                            onclick="lbtnNewUser_Click"></asp:LinkButton>
+                        &nbsp;&nbsp;
                     </td>
                 </tr>
             </table>
