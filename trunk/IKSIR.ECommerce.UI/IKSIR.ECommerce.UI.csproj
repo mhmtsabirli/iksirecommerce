@@ -50,6 +50,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\PosnetDotNetModule.dll</HintPath>
     </Reference>
+    <Reference Include="PosnetDotNetTDSOOSModule">
+      <HintPath>..\..\..\..\Users\tayfuni.INVENOA\Desktop\POSNET_TDS_ASP.NET\ASP.NET\Web\Bin\PosnetDotNetTDSOOSModule.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -68,12 +71,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\global.css" />
+    <Content Include="css\globalsubpage.css" />
     <Content Include="css\highslide.css" />
     <Content Include="css\prettyPhoto.css" />
     <Content Include="css\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="images\advertise.jpg" />
+    <Content Include="images\bottom_left.gif" />
+    <Content Include="images\bottom_middle.gif" />
+    <Content Include="images\bottom_right.gif" />
+    <Content Include="images\button_iptal.gif" />
+    <Content Include="images\button_odeme_yap.gif" />
+    <Content Include="images\button_onayla.gif" />
     <Content Include="images\carousel_bg.jpg" />
     <Content Include="images\carousel_image.jpg" />
     <Content Include="images\carousel_left.jpg" />
@@ -115,6 +126,7 @@
     <Content Include="images\highslide\zoomin.cur" />
     <Content Include="images\logo.jpg" />
     <Content Include="images\maintence.jpg" />
+    <Content Include="images\middle.gif" />
     <Content Include="images\navbar_bg.png" />
     <Content Include="images\navbar_sepet.png" />
     <Content Include="images\nav_menu_link_bg.png" />
@@ -216,6 +228,9 @@
     <Content Include="images\topmenu_bg.png" />
     <Content Include="images\topmenu_left.png" />
     <Content Include="images\topmenu_right.png" />
+    <Content Include="images\top_left.gif" />
+    <Content Include="images\top_middle.gif" />
+    <Content Include="images\top_right.gif" />
     <Content Include="images\urun_buyuk_resim.jpg" />
     <Content Include="images\urun_favorilere_ekle.jpg" />
     <Content Include="images\urun_ozellikleri_bg.jpg" />
@@ -236,11 +251,14 @@
     <Content Include="images\urun_thumb_2.jpg" />
     <Content Include="images\urun_video.jpg" />
     <Content Include="images\urun_yildiz.png" />
+    <Content Include="images\ykblogo.gif" />
     <Content Include="images\zoomloader.gif" />
     <Content Include="js\highslide.js" />
     <Content Include="js\jquery-1.4.2.min.js" />
     <Content Include="js\jquery-1.6.1.min.js" />
     <Content Include="js\jquery.prettyPhoto.js" />
+    <Content Include="js\posnet.js" />
+    <Content Include="js\util.js" />
     <Content Include="MailTemplates\ForgotPassword.htm" />
     <Content Include="MailTemplates\MembershipRegister.htm" />
     <Content Include="MailTemplates\OrderResultMail.htm" />
@@ -304,7 +322,6 @@
     <Content Include="SecuredPages\images\sidemenu_submit.jpg" />
     <Content Include="SecuredPages\images\sidemenu_text.jpg" />
     <Content Include="SecuredPages\images\sidemenu_title_bg.jpg" />
-    <Content Include="SecuredPages\images\tableft.gif" />
     <Content Include="SecuredPages\images\table_fifth_one.jpg" />
     <Content Include="SecuredPages\images\table_fifth_two.jpg" />
     <Content Include="SecuredPages\images\table_first_list.jpg" />
@@ -312,7 +329,6 @@
     <Content Include="SecuredPages\images\table_second_guncelle.png" />
     <Content Include="SecuredPages\images\tabmenu_left.jpg" />
     <Content Include="SecuredPages\images\tabmenu_right.jpg" />
-    <Content Include="SecuredPages\images\tabright.gif" />
     <Content Include="SecuredPages\images\topmenu_bg.png" />
     <Content Include="SecuredPages\images\topmenu_left.png" />
     <Content Include="SecuredPages\images\topmenu_right.png" />
@@ -345,6 +361,9 @@
     <Content Include="Pages\OrderShipping.aspx" />
     <Content Include="Pages\ProductDetails.aspx" />
     <Content Include="Pages\ProductList.aspx" />
+    <Content Include="SecuredPages\Payment.aspx" />
+    <Content Include="SecuredPages\posnettds.aspx" />
+    <Content Include="SecuredPages\posnettds_resp.aspx" />
     <Content Include="SecuredPages\Register.aspx" />
     <Content Include="SecuredPages\UserAccount\Addresses.aspx" />
     <Content Include="SecuredPages\UserAccount\ChangePassword.aspx" />
@@ -354,8 +373,7 @@
     <Content Include="SecuredPages\Payment.aspx" />
     <Content Include="SecuredPages\UserControls\UCFooter.ascx" />
     <Content Include="SecuredPages\UserControls\UCHeader.ascx" />
-    <Content Include="SecuredPages\WebForm1.aspx" />
-    <Content Include="UserControls\UCProductDetailsRelatedAndSimilarProducts.ascx" />
+    <Content Include="SecuredPages\Resp.aspx" />
     <Content Include="UserControls\UCGetOrderStatus.ascx" />
     <Content Include="UserControls\UCLogin.ascx" />
     <Content Include="UserControls\UCShowCaseProducts.ascx" />
@@ -381,6 +399,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="YKB POSNET 3DSECURE Communication DLL.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassLibrary\Shopping.cs" />
@@ -517,6 +536,29 @@
     <Compile Include="Pages\ProductList.aspx.designer.cs">
       <DependentUpon>ProductList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SecuredPages\Payment.aspx.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\Payment.aspx.designer.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredPages\posnettds.aspx.cs">
+      <DependentUpon>posnettds.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\posnettds.aspx.designer.cs">
+      <DependentUpon>posnettds.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredPages\posnettds_config.cs" />
+    <Compile Include="SecuredPages\posnettds_resp.aspx.cs">
+      <DependentUpon>posnettds_resp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\posnettds_resp.aspx.designer.cs">
+      <DependentUpon>posnettds_resp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredPages\posnettds_util.cs" />
     <Compile Include="SecuredPages\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -595,19 +637,12 @@
     <Compile Include="SecuredPages\UserControls\UCHeader.ascx.designer.cs">
       <DependentUpon>UCHeader.ascx</DependentUpon>
     </Compile>
-    <Compile Include="SecuredPages\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="SecuredPages\Resp.aspx.cs">
+      <DependentUpon>Resp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SecuredPages\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCProductDetailsRelatedAndSimilarProducts.ascx.cs">
-      <DependentUpon>UCProductDetailsRelatedAndSimilarProducts.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControls\UCProductDetailsRelatedAndSimilarProducts.ascx.designer.cs">
-      <DependentUpon>UCProductDetailsRelatedAndSimilarProducts.ascx</DependentUpon>
+    <Compile Include="SecuredPages\Resp.aspx.designer.cs">
+      <DependentUpon>Resp.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCGetOrderStatus.ascx.cs">
       <DependentUpon>UCGetOrderStatus.ascx</DependentUpon>
@@ -756,6 +791,7 @@
     <None Include="images\highslide\outlines\Outlines.psd" />
     <None Include="images\pretty_photo\images\.DS_Store" />
     <None Include="images\pretty_photo\images\fullscreen\.DS_Store" />
+    <None Include="images\vssver.scc" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
