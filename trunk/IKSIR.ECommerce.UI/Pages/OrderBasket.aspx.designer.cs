@@ -94,6 +94,15 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::System.Web.UI.WebControls.Label lblBasketTotal;
         
         /// <summary>
+        /// divConfirmation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divConfirmation;
+        
+        /// <summary>
         /// cbxComfirmation control.
         /// </summary>
         /// <remarks>
@@ -101,15 +110,6 @@ namespace IKSIR.ECommerce.UI.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox cbxComfirmation;
-        
-        /// <summary>
-        /// anchorConfirmation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor anchorConfirmation;
         
         /// <summary>
         /// dvAlert control.

@@ -28,7 +28,6 @@ C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Model.dll
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\RadAjax.Net2.dll
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\RadTabStrip.Net2.dll
-C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\Telerik.Web.UI.dll
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Infrastructure.pdb
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Model.pdb
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\ResolveAssemblyReference.cache
@@ -36,3 +35,4 @@ C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\obj\Debug\IKSIR.ECommerce.Management.pdb
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Toolkit.dll
 C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\IKSIR.ECommerce.Toolkit.pdb
+C:\Projects\IKSIR.ECommerce\iksirecommerce\IKSIR.ECommerce.Management\bin\Telerik.Web.UI.dll

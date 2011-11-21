@@ -33,7 +33,9 @@ namespace IKSIR.ECommerce.UI.UserControls
             }
             if (LoginUser())
             {
-                Response.Redirect("Default.aspx");
+                pnlLogin.Visible = false;
+                pnlLogout.Visible = true;
+                //Response.Redirect("Default.aspx");
             }
             else
             {
@@ -58,7 +60,9 @@ namespace IKSIR.ECommerce.UI.UserControls
         {
             Session.Remove("LOGIN_USER");
             Session.Remove("USER_BASKET");
-            Response.Redirect("Default.aspx");
+            pnlLogin.Visible = true;
+            pnlLogout.Visible = false;
+            txtEmail.Text = "E-posta Adresiniz";
         }
     }
 }

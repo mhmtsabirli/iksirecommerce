@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/UIMasterPage.Master" AutoEventWireup="true"
-    CodeBehind="Contact.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.Contact" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/UIMasterPage.Master"
+    AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="IKSIR.ECommerce.UI.Pages.Contact" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -9,6 +9,17 @@
     </h2>
     <p>
         <i>Bizimle iletişime geçin</i>
+    </p>
+    <p style="text-align: center">
+        <br />
+        <strong>SENAR İNŞAAT YATIRIMLARI SAN.TİC.LTD.ŞTİ.</strong>
+        <br />
+        <br />
+        ADRES : Kandilli Mah. Rasathane Cad. Adatepe Sok. No:7 Üsküdar/İstanbul
+        <br />
+        TELEFON : 0216-423-00-66
+        <br />
+        E-MAIL : musterihizmetleri@senarinsaat.com.tr
     </p>
     <table>
         <tr>

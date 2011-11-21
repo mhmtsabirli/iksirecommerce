@@ -33,7 +33,7 @@ namespace IKSIR.ECommerce.UI.Pages
                     if (basket != null && basket.BasketItems != null && basket.BasketItems.Count > 0)
                     {
                         cbxComfirmation.Visible = true;
-                        anchorConfirmation.Visible = true;
+                        divConfirmation.Visible = true;
                         rptBasketProducts.Visible = true;
                         hplNoItem.Visible = false;
                         divBasketTotal.Visible = true;
@@ -44,7 +44,7 @@ namespace IKSIR.ECommerce.UI.Pages
                     else
                     {
                         cbxComfirmation.Visible = false;
-                        anchorConfirmation.Visible = false;
+                        divConfirmation.Visible = false;
                         rptBasketProducts.Visible = false;
                         hplNoItem.Visible = true;
                         divBasketTotal.Visible = false;

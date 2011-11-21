@@ -10,6 +10,8 @@ using IKSIR.ECommerce.Model.MembershipModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
 using IKSIR.ECommerce.Model.SiteModel;
 using System.IO;
+using IKSIR.ECommerce.Model.CommonModel;
+using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -94,6 +96,19 @@ namespace IKSIR.ECommerce.UI.Pages
                     if (retValueSendMail)
                     {
                         divAlert.InnerHtml = "<span style=\"color:Green\">Üyelik işleminiz tamamlanmıştır. Üyelik esnasında belirtmiş olduğunuz e-mail adresinize siteye giriş bilgilerinizi yollanmıştır.</span><br />";
+                        if (cbxEBulten.Checked)
+                        {
+                            var item = new Newsletter();
+                            item.Email = txtEmail.Text;
+                            if (NewsletterData.Insert(item) > 0)
+                            {
+                                divAlert.InnerHtml += "</br><span style=\"color:Green\">E Bülten aboneliğiniz alınmıştır.</span><br />";
+                            }
+                            else
+                            {
+                                divAlert.InnerHtml += "</br><span style=\"color:Red\">E Bülten aboneliğiniz alınırken hata oluştu.</span><br />";
+                            }
+                        }
                     }
                     else
                     {

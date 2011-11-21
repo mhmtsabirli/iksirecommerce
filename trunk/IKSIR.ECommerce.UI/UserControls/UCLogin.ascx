@@ -57,22 +57,6 @@
 <asp:ScriptManager ID="ScriptManager1" runat="server">
 </asp:ScriptManager>
 <div class="tabmenu">
-    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-        <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="pnlLogin">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="pnlLogin" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="pnlLogout">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="pnlLogout" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-        </AjaxSettings>
-    </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Web20">
-    </telerik:RadAjaxLoadingPanel>
     <div id="div_login">
         <asp:Panel runat="server" ID="pnlLogin" DefaultButton="btnLogin">
             <ul class="tabnav">

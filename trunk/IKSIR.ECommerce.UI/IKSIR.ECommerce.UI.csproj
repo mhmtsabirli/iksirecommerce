@@ -270,6 +270,7 @@
     <Content Include="SecuredPages\images\navbar_sepet.png" />
     <Content Include="SecuredPages\images\nav_menu_link_bg.png" />
     <Content Include="SecuredPages\images\page_array_bg.jpg" />
+    <Content Include="SecuredPages\images\RapidSSL_logo.jpg" />
     <Content Include="SecuredPages\images\satis_text.png" />
     <Content Include="SecuredPages\images\section_bg.jpg" />
     <Content Include="SecuredPages\images\section_image_1.jpg" />

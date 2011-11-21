@@ -116,6 +116,21 @@
             <td>
             </td>
         </tr>
+        <tr>
+            <td>
+                E Bülten Aboneliği
+            </td>
+            <td>
+                :
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                <asp:CheckBox runat="server" ID="cbxEBulten" Text="E bülten aboneliği istiyorum" />
+            </td>
+            <td>
+            </td>
+        </tr>
         <%--<tr>
             <td valign="top">
                 Güvenlik Kodu
