@@ -12,8 +12,8 @@ namespace IKSIR.ECommerce.UI.Pages
 {
     public partial class OrderShipping : System.Web.UI.Page
     {
-        public  User loginUser = null;
-        public  Basket basket = null;
+        public User loginUser = null;
+        public Basket basket = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,11 +34,24 @@ namespace IKSIR.ECommerce.UI.Pages
 
         private void GetShippingCompanies()
         {
-            List<IKSIR.ECommerce.Model.ProductModel.Shipment> itemList = ShipmentData.GetShipmentList();
+            decimal totaldesi = 0;
+
+            foreach (var item in basket.BasketItems)
+            {
+                if (item.Product.Desi != null && item.Product.Desi != "")
+                    totaldesi += Convert.ToDecimal(item.Product.Desi);
+            }
+
+            List<IKSIR.ECommerce.Model.ProductModel.Shipment> itemList = ShipmentData.GetShipmentList(totaldesi);
             rblShippingCompanies.DataTextField = "Detail";
             rblShippingCompanies.DataValueField = "Id";
             rblShippingCompanies.DataSource = itemList;
             rblShippingCompanies.DataBind();
+
+            foreach (ListItem item in rblShippingCompanies.Items)
+            {
+                item.Text = item.Text + " TL";
+            }
         }
 
         protected void imgbtnContinue_Click(object sender, ImageClickEventArgs e)

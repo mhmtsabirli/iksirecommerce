@@ -155,7 +155,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
                 price = DBHelper.DecValue(((TotalDesi - 30) * DBHelper.DecValue("0.272")) + DBHelper.DecValue("9.46"));
             }
 
-            //            0-1 KG/Ds 3,94 TL
+            //0-1 KG/Ds 3,94 TL
             //1-15 Ds/Kg 4,73 TL
             //16-30 Ds/Kg 9,46 TL
             //+ 30 Ds/Kg 0,272 TL ilave edilir
