@@ -65,10 +65,5 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             }
             return retValue;
         }
-
-        protected void lbtnNewUser_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Register.aspx");
-        }
     }
 }

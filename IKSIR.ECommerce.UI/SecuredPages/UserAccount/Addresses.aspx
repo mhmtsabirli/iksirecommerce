@@ -241,7 +241,7 @@
                                                                         <asp:Label runat="server" ID="lblAddressType" Text='<%# Eval("Type.Value")%>'></asp:Label>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
-                                                                <asp:BoundField DataField="Title" HeaderText="Addres Tanımı" ApplyFormatInEditMode="false"
+                                                                <asp:BoundField DataField="Title" HeaderText="Adres Tanımı" ApplyFormatInEditMode="false"
                                                                     ReadOnly="true" SortExpression="Title" />
                                                                 <asp:BoundField DataField="FirstName" HeaderText="İsim" ApplyFormatInEditMode="false"
                                                                     ReadOnly="true" SortExpression="FirstName" />

@@ -51,6 +51,7 @@ namespace IKSIR.ECommerce.UI.UserControls
             if (user != null)
             {
                 Session.Add("LOGIN_USER", user);
+                lblUserTitle.Text = "Sayın " + user.FirstName + " " + user.LastName;
                 retValue = true;
             }
             return retValue;

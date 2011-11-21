@@ -10,7 +10,6 @@
         <p>
             <i>Lütfen üye girişi yapınız</i>
         </p>
-        <asp:Panel runat="server" ID="pnlLoginPage" DefaultButton="btnLogin">
             <table cellpadding="0" cellspacing="0" border="0">
                 <tr>
                     <td>
@@ -54,13 +53,12 @@
                 <tr>
                     <td colspan="4">
                         <asp:Button runat="server" ID="btnLogin" OnClick="btnLogin_Click" CssClass="footer_module_submit" />
-                        <asp:LinkButton runat="server" ID="lbtnNewUser" Text="Yeni Üyelik" 
-                            onclick="lbtnNewUser_Click"></asp:LinkButton>
+                        <a href="Register.aspx">Yeni Üyelik</a>
                         &nbsp;&nbsp;
+                        <a href="ForgotPassword.aspx">Şifremi Unuttum</a>
                     </td>
                 </tr>
             </table>
-        </asp:Panel>
     </div>
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {

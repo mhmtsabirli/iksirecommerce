@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -33,7 +33,7 @@ namespace IKSIR.ECommerce.UI.UserControls
             var itemModuleProductList = ModuleProductData.GetModuleProductList(moduleId);
 
             var selected = new List<Product>();
-            var needed = 6;
+            var needed = 9;
             var available = itemModuleProductList.Count;
             var rand = new Random();
             //while (selected.Count < k)
@@ -47,7 +47,7 @@ namespace IKSIR.ECommerce.UI.UserControls
             //}
 
             int count = 0;
-            while (count < 6)
+            while (count < 9)
             {
                 Random number = new Random();
                 int randnum = number.Next(itemModuleProductList.Count);
@@ -59,7 +59,7 @@ namespace IKSIR.ECommerce.UI.UserControls
                 count++;
             }
 
-            //if (itemModuleProductList.Count > 6)
+            //if (itemModuleProductList.Count > 9)
             //{
             //    anchorContinue.Visible = true;
             //    anchorContinue.HRef = "../Pages/ProductList.aspx?modid=" + moduleId.ToString() + "&p=2";

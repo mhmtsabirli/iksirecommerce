@@ -25,7 +25,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
             SqlDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetShipment", parameters);
             while (dr.Read())
             {
-                
+
 
                 returnValue.Title = DBHelper.StringValue(dr["Title"].ToString());
                 returnValue.UnitPrice = DBHelper.DecValue(dr["UnitPrice"].ToString());
@@ -78,9 +78,7 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
         public static List<Shipment> GetShipmentList()
         {
             List<Shipment> itemShipment = null;
-
             List<SqlParameter> parameters = new List<SqlParameter>();
-
             IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetShipment", parameters);
             itemShipment = new List<Shipment>();
 
@@ -95,10 +93,33 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer
                 item.Id = DBHelper.IntValue(dr["Id"].ToString());
                 itemShipment.Add(item);
             }
+            dr.Close(); 
+            return itemShipment;
+        }
+
+        public static List<Shipment> GetShipmentList(decimal totaldesi)
+        {
+            List<Shipment> itemShipment = null;
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            IDataReader dr = SQLDataBlock.ExecuteReader(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "GetShipment", parameters);
+            itemShipment = new List<Shipment>();
+
+            while (dr.Read())
+            {
+                var item = new Shipment();
+                item.Title = DBHelper.StringValue(dr["Title"].ToString());
+                item.UnitPrice = OrderDataLayer.OrderData.CalculateShippingPrice(totaldesi);
+                item.CreateAdminId = DBHelper.IntValue(dr["CreateAdminId"].ToString());
+                item.EditDate = DBHelper.DateValue(dr["EditDate"].ToString());
+                item.EditAdminId = DBHelper.IntValue(dr["EditAdminId"].ToString());
+                item.Id = DBHelper.IntValue(dr["Id"].ToString());
+                itemShipment.Add(item);
+            }
 
             dr.Close();
             return itemShipment;
         }
-
     }
 }
