@@ -16,9 +16,10 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             if (!Page.IsPostBack)
             {
-                if (Page.Request.QueryString["searchkey"] != null && Page.Request.QueryString["searchkey"].ToString() != "")
+
+                if (Session["SEARCH_KEY"] != null && Session["SEARCH_KEY"].ToString() != "")
                 {
-                    var searchkey = Page.Request.QueryString["searchkey"].ToString();
+                    var searchkey = Session["SEARCH_KEY"].ToString();
                     lblSearchKey.Text = searchkey;
                     lblSearchKey.ForeColor = System.Drawing.Color.Red;
                     GetSearchResult(searchkey);
