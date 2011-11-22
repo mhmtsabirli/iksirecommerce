@@ -33,7 +33,14 @@ namespace IKSIR.ECommerce.UI.UserControls
 
         protected void lbtnSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Pages/SearchResult.aspx?searchkey=" + txtSearchText.Text);
+            try
+            {
+                Session.Add("SEARCH_KEY", txtSearchText.Text);
+                Response.Redirect("../Pages/SearchResult.aspx");
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }
