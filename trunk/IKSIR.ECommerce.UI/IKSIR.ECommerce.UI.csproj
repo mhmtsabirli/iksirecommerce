@@ -360,6 +360,8 @@
     <Content Include="Pages\OrderShipping.aspx" />
     <Content Include="Pages\ProductDetails.aspx" />
     <Content Include="Pages\ProductList.aspx" />
+    <Content Include="SecuredPages\posnettds.aspx" />
+    <Content Include="SecuredPages\posnettds_resp.aspx" />
     <Content Include="SecuredPages\Register.aspx" />
     <Content Include="SecuredPages\UserAccount\Addresses.aspx" />
     <Content Include="SecuredPages\UserAccount\ChangePassword.aspx" />
@@ -539,6 +541,22 @@
     <Compile Include="Pages\ProductList.aspx.designer.cs">
       <DependentUpon>ProductList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SecuredPages\posnettds.aspx.cs">
+      <DependentUpon>posnettds.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\posnettds.aspx.designer.cs">
+      <DependentUpon>posnettds.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredPages\posnettds_config.cs" />
+    <Compile Include="SecuredPages\posnettds_resp.aspx.cs">
+      <DependentUpon>posnettds_resp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\posnettds_resp.aspx.designer.cs">
+      <DependentUpon>posnettds_resp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredPages\posnettds_util.cs" />
     <Compile Include="SecuredPages\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
