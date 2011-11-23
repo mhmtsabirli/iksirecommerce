@@ -71,8 +71,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\global.css" />
-    <Content Include="css\globalsubpage.css" />
     <Content Include="css\highslide.css" />
     <Content Include="css\prettyPhoto.css" />
     <Content Include="css\style.css" />
@@ -347,6 +345,7 @@
     <Content Include="SecuredPages\images\urun_yildiz.png" />
     <Content Include="SecuredPages\images\zoomloader.gif" />
     <Content Include="SecuredPages\css\MenuStyle.css" />
+    <Content Include="SecuredPages\MyAccount.aspx" />
     <Content Include="SecuredPages\Order.aspx" />
     <Content Include="SecuredPages\OrderPayment.aspx" />
     <Content Include="Pages\Error.aspx" />
@@ -361,19 +360,17 @@
     <Content Include="Pages\OrderShipping.aspx" />
     <Content Include="Pages\ProductDetails.aspx" />
     <Content Include="Pages\ProductList.aspx" />
-    <Content Include="SecuredPages\Payment.aspx" />
-    <Content Include="SecuredPages\posnettds.aspx" />
-    <Content Include="SecuredPages\posnettds_resp.aspx" />
     <Content Include="SecuredPages\Register.aspx" />
     <Content Include="SecuredPages\UserAccount\Addresses.aspx" />
     <Content Include="SecuredPages\UserAccount\ChangePassword.aspx" />
     <Content Include="SecuredPages\UserAccount\FavoriteProducts.aspx" />
     <Content Include="SecuredPages\UserAccount\Orders.aspx" />
     <Content Include="SecuredPages\UserAccount\UserInfos.aspx" />
-    <Content Include="SecuredPages\Payment.aspx" />
     <Content Include="SecuredPages\UserControls\UCFooter.ascx" />
     <Content Include="SecuredPages\UserControls\UCHeader.ascx" />
     <Content Include="SecuredPages\Resp.aspx" />
+    <Content Include="SecuredPages\WebForm1.aspx" />
+    <Content Include="SecuredPages\WebForm2.aspx" />
     <Content Include="UserControls\UCGetOrderStatus.ascx" />
     <Content Include="UserControls\UCLogin.ascx" />
     <Content Include="UserControls\UCShowCaseProducts.ascx" />
@@ -399,7 +396,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="YKB POSNET 3DSECURE Communication DLL.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassLibrary\Shopping.cs" />
@@ -433,6 +429,13 @@
     </Compile>
     <Compile Include="SecuredPages\ForgotPassword.aspx.designer.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredPages\MyAccount.aspx.cs">
+      <DependentUpon>MyAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\MyAccount.aspx.designer.cs">
+      <DependentUpon>MyAccount.aspx</DependentUpon>
     </Compile>
     <Compile Include="SecuredPages\Order.aspx.cs">
       <DependentUpon>Order.aspx</DependentUpon>
@@ -536,29 +539,6 @@
     <Compile Include="Pages\ProductList.aspx.designer.cs">
       <DependentUpon>ProductList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SecuredPages\Payment.aspx.cs">
-      <DependentUpon>Payment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SecuredPages\Payment.aspx.designer.cs">
-      <DependentUpon>Payment.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SecuredPages\posnettds.aspx.cs">
-      <DependentUpon>posnettds.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SecuredPages\posnettds.aspx.designer.cs">
-      <DependentUpon>posnettds.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SecuredPages\posnettds_config.cs" />
-    <Compile Include="SecuredPages\posnettds_resp.aspx.cs">
-      <DependentUpon>posnettds_resp.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SecuredPages\posnettds_resp.aspx.designer.cs">
-      <DependentUpon>posnettds_resp.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SecuredPages\posnettds_util.cs" />
     <Compile Include="SecuredPages\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -616,13 +596,6 @@
     <Compile Include="SecuredPages\UserAccount\UserInfos.aspx.designer.cs">
       <DependentUpon>UserInfos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SecuredPages\Payment.aspx.cs">
-      <DependentUpon>Payment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SecuredPages\Payment.aspx.designer.cs">
-      <DependentUpon>Payment.aspx</DependentUpon>
-    </Compile>
     <Compile Include="SecuredPages\UserControls\UCFooter.ascx.cs">
       <DependentUpon>UCFooter.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -643,6 +616,20 @@
     </Compile>
     <Compile Include="SecuredPages\Resp.aspx.designer.cs">
       <DependentUpon>Resp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredPages\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredPages\WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuredPages\WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCGetOrderStatus.ascx.cs">
       <DependentUpon>UCGetOrderStatus.ascx</DependentUpon>
