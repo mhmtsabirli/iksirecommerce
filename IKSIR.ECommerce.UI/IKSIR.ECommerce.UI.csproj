@@ -796,7 +796,6 @@
     <None Include="images\highslide\outlines\Outlines.psd" />
     <None Include="images\pretty_photo\images\.DS_Store" />
     <None Include="images\pretty_photo\images\fullscreen\.DS_Store" />
-    <None Include="images\vssver.scc" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
