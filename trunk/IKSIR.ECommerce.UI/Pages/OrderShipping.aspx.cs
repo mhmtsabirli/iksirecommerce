@@ -28,7 +28,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderBasket.aspx");
+                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderShipping.aspx");
             }
         }
 
@@ -47,11 +47,6 @@ namespace IKSIR.ECommerce.UI.Pages
             rblShippingCompanies.DataValueField = "Id";
             rblShippingCompanies.DataSource = itemList;
             rblShippingCompanies.DataBind();
-
-            foreach (ListItem item in rblShippingCompanies.Items)
-            {
-                item.Text = item.Text + " TL";
-            }
         }
 
         protected void imgbtnContinue_Click(object sender, ImageClickEventArgs e)

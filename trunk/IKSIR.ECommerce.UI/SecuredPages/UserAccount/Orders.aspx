@@ -157,7 +157,7 @@
                                         <ItemTemplate>
                                             <tr>
                                                 <td class="table_first">
-                                                    <a href='<%# String.Format("ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
+                                                    <a href='<%# String.Format("../../Pages/ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
                                                         target="_blank">
                                                         <%# Eval("Product.ProductCategory.Title")%>
                                                         /
@@ -614,5 +614,7 @@
                 </div>
             </td>
         </tr>
+    </table>
+</table>
     </table>
 </asp:Content>

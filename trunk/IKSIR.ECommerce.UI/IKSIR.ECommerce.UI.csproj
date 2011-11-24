@@ -77,6 +77,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="images\advertise.jpg" />
+    <Content Include="images\backgraund.jpg" />
     <Content Include="images\bottom_left.gif" />
     <Content Include="images\bottom_middle.gif" />
     <Content Include="images\bottom_right.gif" />
@@ -123,6 +124,11 @@
     <Content Include="images\highslide\scrollarrows.png" />
     <Content Include="images\highslide\zoomin.cur" />
     <Content Include="images\logo.jpg" />
+    <Content Include="images\logo1.jpg" />
+    <Content Include="images\logo2.jpg" />
+    <Content Include="images\logo3.jpg" />
+    <Content Include="images\logo4.jpg" />
+    <Content Include="images\logo5.jpg" />
     <Content Include="images\maintence.jpg" />
     <Content Include="images\middle.gif" />
     <Content Include="images\navbar_bg.png" />
@@ -183,6 +189,7 @@
     <Content Include="images\pretty_photo\images\thumbnails\t_3.jpg" />
     <Content Include="images\pretty_photo\images\thumbnails\t_4.jpg" />
     <Content Include="images\pretty_photo\images\thumbnails\t_5.jpg" />
+    <Content Include="images\RapidSSL_logo.jpg" />
     <Content Include="images\satis_text.png" />
     <Content Include="images\section_bg.jpg" />
     <Content Include="images\section_image_1.jpg" />
@@ -252,6 +259,7 @@
     <Content Include="images\ykblogo.gif" />
     <Content Include="images\zoomloader.gif" />
     <Content Include="js\highslide.js" />
+    <Content Include="js\jquery-1.2.6.min.js" />
     <Content Include="js\jquery-1.4.2.min.js" />
     <Content Include="js\jquery-1.6.1.min.js" />
     <Content Include="js\jquery.prettyPhoto.js" />

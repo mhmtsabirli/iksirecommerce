@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using IKSIR.ECommerce.Model.CommonModel;
+using IKSIR.ECommerce.Toolkit;
 
 namespace IKSIR.ECommerce.Model.ProductModel
 {
@@ -12,7 +13,7 @@ namespace IKSIR.ECommerce.Model.ProductModel
         public decimal UnitPrice { get; set; }
         public string Detail
         {
-            get { return this.Title + " / " + this.UnitPrice.ToString(); }
+            get { return this.Title + " / " + Utility.CurrencyFormat(this.UnitPrice) + " TL"; }
         }
         public Shipment(int id, int createUserId, DateTime createDate, int editUserId, DateTime editDate, string title,
             decimal unitPrice)

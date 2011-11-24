@@ -116,7 +116,7 @@
                             <strong>Sepet Toplamı:</strong>
                             <br />
                             <table>
-                                <tr>
+                                <tr runat="server" id="trShippingPrice">
                                     <td>
                                         Kargo Tutarı
                                     </td>
