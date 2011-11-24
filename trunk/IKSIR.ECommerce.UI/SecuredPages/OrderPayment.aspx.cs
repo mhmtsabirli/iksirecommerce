@@ -248,7 +248,7 @@ namespace IKSIR.ECommerce.UI.Pages
                     HtmlProducts += "</table>";
 
                     MailBody = MailBody.Replace("%Products%", HtmlProducts);
-                    bool retValueSendMail = Mail.sendMail(loginUser.Email.ToString(), "musterihizmetleri@senarinsaat.com.tr", "Senar İnşaat A.Ş. | Şipariş Bilgileriniz", MailBody);
+                    bool retValueSendMail = Mail.sendMail(loginUser.Email.ToString(), "musterihizmetleri@senarinsaat.com.tr", "Banyom.com.tr | Şipariş Bilgileriniz", MailBody);
 
                     if (retValueSendMail)
                     {

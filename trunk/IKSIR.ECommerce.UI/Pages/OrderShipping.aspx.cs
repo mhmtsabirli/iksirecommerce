@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Model.MembershipModel;
 using IKSIR.ECommerce.Model.Order;
+using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -39,7 +40,7 @@ namespace IKSIR.ECommerce.UI.Pages
             foreach (var item in basket.BasketItems)
             {
                 if (item.Product.Desi != null && item.Product.Desi != "")
-                    totaldesi += Convert.ToDecimal(item.Product.Desi);
+                    totaldesi += DBHelper.DecValue(item.Product.Desi);
             }
 
             List<IKSIR.ECommerce.Model.ProductModel.Shipment> itemList = ShipmentData.GetShipmentList(totaldesi);
@@ -56,7 +57,7 @@ namespace IKSIR.ECommerce.UI.Pages
             if (rblShippingCompanies.SelectedIndex == -1)
             {
                 string textForMessage = @"<script language='javascript'> alert('Bir kargo firması seçiniz!');</script>";
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);    
             }
             else
             {
