@@ -19,20 +19,19 @@ namespace IKSIR.ECommerce.UI.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                BindValues();
-                GetUserAddresses();
-            }
-
             if (Session["LOGIN_USER"] != null && Session["USER_BASKET"] != null)
             {
                 loginUser = (User)Session["LOGIN_USER"];
                 basket = (Basket)HttpContext.Current.Session["USER_BASKET"];
+                if (!Page.IsPostBack)
+                {
+                    BindValues();
+                    GetUserAddresses();
+                }
             }
             else
             {
-                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderBasket.aspx");
+                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderAddress.aspx");
             }
         }
 

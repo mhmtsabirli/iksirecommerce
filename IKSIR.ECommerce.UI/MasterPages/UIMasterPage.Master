@@ -98,9 +98,10 @@
                 </div>
             </div>
             <uc3:UCGetOrderStatus ID="UCGetOrderStatus1" runat="server" />
-            <div class="sidebar_advertisement">
+            <div class="sidebar_advertisement" style="padding-bottom:6px">
                 <a href="#">
-                    <img src="../images/sidebar_advertisement.jpg" alt="" style="border: none;" /></a></div>
+                    <img src="../images/sidebar_advertisement.jpg" alt="" style="border: none;" /></a>
+            </div>
             <div class="sidemenu">
                 <div class="sidemenu_top">
                 </div>

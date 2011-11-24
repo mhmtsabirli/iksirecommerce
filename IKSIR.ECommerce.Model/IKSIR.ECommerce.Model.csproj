@@ -103,6 +103,12 @@
     <Compile Include="SiteModel\ShowRoom.cs" />
     <Compile Include="SiteModel\Site.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IKSIR.ECommerce.Toolkit\IKSIR.ECommerce.Toolkit.csproj">
+      <Project>{F710ED4B-34DA-47D5-BEAB-86F1062A123E}</Project>
+      <Name>IKSIR.ECommerce.Toolkit</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

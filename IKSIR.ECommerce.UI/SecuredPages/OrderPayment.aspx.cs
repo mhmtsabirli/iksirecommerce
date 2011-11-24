@@ -41,7 +41,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/Default.aspx");
+                Response.Redirect("../SecuredPages/Login.aspx?returl=../Pages/OrderPayment.aspx");
             }
 
             if (!Page.IsPostBack)
@@ -87,8 +87,26 @@ namespace IKSIR.ECommerce.UI.Pages
             rptBasketProducts.DataSource = basket.BasketItems;
             rptBasketProducts.DataBind();
 
-            lblShippingPrice.Text = Toolkit.Utility.CurrencyFormat(basket.ShippingCompany.UnitPrice);
-            lblBasketTotal.Text = Toolkit.Utility.CurrencyFormat(basket.TotalRatedPrice + basket.ShippingCompany.UnitPrice);
+            if (basket.TotalRatedPrice >= 100)
+            {
+                lblBasketTotal.Text = Toolkit.Utility.CurrencyFormat(basket.TotalRatedPrice);
+                trShippingPrice.Visible = false;
+            }
+            else
+            {
+                trShippingPrice.Visible = true;
+                decimal totaldesi = 0;
+
+                foreach (var item in basket.BasketItems)
+                {
+                    if (item.Product.Desi != null && item.Product.Desi != "")
+                        totaldesi += Convert.ToDecimal(item.Product.Desi);
+                }
+
+                lblShippingPrice.Text = Utility.CurrencyFormat(OrderData.CalculateShippingPrice(totaldesi));
+                lblBasketTotal.Text = Toolkit.Utility.CurrencyFormat(basket.TotalRatedPrice + OrderData.CalculateShippingPrice(totaldesi));
+            }
+
             lblTotalTax.Text = Toolkit.Utility.CurrencyFormat(basket.TotalRatedPrice - basket.TotalPrice);
             lblTotalPrice.Text = Toolkit.Utility.CurrencyFormat(basket.TotalPrice);
         }
@@ -469,7 +487,7 @@ namespace IKSIR.ECommerce.UI.Pages
         {
             bool isOk = false;
             string term = "";
-          
+
             //_PosnetDotNetTDSOOSModule.C_PosnetOOSTDS myYK = new C_PosnetOOSTDS();
             string Month = "";
             if (paymetInfo.Month.ToString().Length == 1)
@@ -493,7 +511,7 @@ namespace IKSIR.ECommerce.UI.Pages
             term = "1";
 
             string ptaknum = "00";
-            
+
             string yil = "";
             string ay = "";
             string gun = "";
@@ -537,7 +555,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 //if (myYK.GetApprovedCode() == "1")
                 //{
                 //    divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
-                    
+
                 //    return true;
                 //}
                 //else // (myYK.GetApprovedCode == "0")
@@ -678,7 +696,7 @@ namespace IKSIR.ECommerce.UI.Pages
             //    if (myYK.GetApprovedCode() == "1")
             //    {
             //        divAlert.InnerHtml += "Para çekildi.(YapiKredi)";
-                    
+
             //        return true;
             //    }
             //    else // (myYK.GetApprovedCode == "0")

@@ -24,7 +24,7 @@ namespace IKSIR.ECommerce.UI.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             //Kullanıcı login değilse sayfaya giremez.
-            if (Session["LOGIN_USER"] != null)
+            if (Session["LOGIN_USER"] != null && Session["USER_BASKET"] != null)
             {
                 if (!Page.IsPostBack)
                 {

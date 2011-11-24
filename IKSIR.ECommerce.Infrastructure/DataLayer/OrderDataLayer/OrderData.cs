@@ -142,17 +142,17 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
 
         public static decimal CalculateShippingPrice(decimal TotalDesi)
         {
-            decimal price = 0;
+            decimal price =  0.0M;
 
             if (TotalDesi < 1)
-                price = DBHelper.DecValue("3.94");
+                price = new decimal(3.94);
             else if (TotalDesi >= 1 && TotalDesi <= 15)
-                price = DBHelper.DecValue("4.73");
+                price = new decimal(4.73);
             else if (TotalDesi >= 16 && TotalDesi <= 30)
-                price = DBHelper.DecValue("9.46");
+                price = new decimal(9.46);
             else
             {
-                price = DBHelper.DecValue(((TotalDesi - 30) * DBHelper.DecValue("0.272")) + DBHelper.DecValue("9.46"));
+                price = DBHelper.DecValue(((TotalDesi - 30) * new decimal(0.272)) + new decimal(9.46));
             }
 
             //0-1 KG/Ds 3,94 TL
@@ -160,8 +160,10 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             //16-30 Ds/Kg 9,46 TL
             //+ 30 Ds/Kg 0,272 TL ilave edilir
 
+           // return price;
 
             return price;
+
         }
     }
 }

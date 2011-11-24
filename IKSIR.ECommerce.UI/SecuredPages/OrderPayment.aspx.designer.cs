@@ -31,6 +31,15 @@ namespace IKSIR.ECommerce.UI.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBasketTotal;
         
         /// <summary>
+        /// trShippingPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trShippingPrice;
+        
+        /// <summary>
         /// lblShippingPrice control.
         /// </summary>
         /// <remarks>
