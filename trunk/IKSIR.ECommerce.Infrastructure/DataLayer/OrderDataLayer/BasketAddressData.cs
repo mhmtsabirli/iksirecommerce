@@ -84,6 +84,22 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             int.TryParse(parameters[0].Value.ToString(), out returnValue);
             return returnValue;
         }
+        
+
+        public static void UpdateBasketId(int billing, int basketId, int shipping)
+        {
+    
+           
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@BasketId", basketId));
+            parameters.Add(new SqlParameter("@Billing", billing));
+            parameters.Add(new SqlParameter("@Shipping", shipping));
+           
+
+            SQLDataBlock.ExecuteNonQuery(StaticData.Idevit.ConnectionString, CommandType.StoredProcedure, "UpdateBasketAddress", parameters);
+
+          
+        }
 
         public static int Update(Address itemAddress, int basketId = 0, int basketItemId = 0)
         {
