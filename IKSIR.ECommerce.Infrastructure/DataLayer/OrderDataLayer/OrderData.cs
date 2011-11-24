@@ -11,6 +11,7 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.BankDataLayer;
 using IKSIR.ECommerce.Infrastructure.DataLayer.CommonDataLayer;
 using IKSIR.ECommerce.Model.CommonModel;
 using IKSIR.ECommerce.Infrastructure.DataLayer.MembershipDataLayer;
+using System.Globalization;
 
 namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
 {
@@ -144,15 +145,26 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
         {
             decimal price =  0.0M;
 
+            //if (TotalDesi < 1)
+            //    price = new decimal(3.94);
+            //else if (TotalDesi >= 1 && TotalDesi <= 15)
+            //    price = new decimal(4.73);
+            //else if (TotalDesi >= 16 && TotalDesi <= 30)
+            //    price = new decimal(9.46);
+            //else
+            //{
+            //    price = DBHelper.DecValue(((TotalDesi - 30) * new decimal(0.272)) + new decimal(9.46));
+            //}
+
             if (TotalDesi < 1)
-                price = new decimal(3.94);
+                price = DBHelper.DecValue("3.94");
             else if (TotalDesi >= 1 && TotalDesi <= 15)
-                price = new decimal(4.73);
+                price = DBHelper.DecValue("4.73");
             else if (TotalDesi >= 16 && TotalDesi <= 30)
-                price = new decimal(9.46);
+                price = DBHelper.DecValue("9.46");
             else
             {
-                price = DBHelper.DecValue(((TotalDesi - 30) * new decimal(0.272)) + new decimal(9.46));
+                price = DBHelper.DecValue(((TotalDesi - 30) * DBHelper.DecValue("0.272")) + DBHelper.DecValue("9.46"));
             }
 
             //0-1 KG/Ds 3,94 TL
@@ -161,6 +173,10 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.OrderDataLayer
             //+ 30 Ds/Kg 0,272 TL ilave edilir
 
            // return price;
+            NumberFormatInfo provider = new NumberFormatInfo();
+            provider.NumberDecimalSeparator = ".";
+            provider.NumberGroupSeparator = ",";
+            provider.NumberGroupSizes = new int[] { 3 };
 
             return price;
 

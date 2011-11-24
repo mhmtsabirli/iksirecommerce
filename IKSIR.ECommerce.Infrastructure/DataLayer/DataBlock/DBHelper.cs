@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Globalization;
 
 namespace IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock
 {
@@ -32,10 +33,15 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock
 
         public static decimal DecValue(object value)
         {
+            NumberFormatInfo provider = new NumberFormatInfo();
+            provider.NumberDecimalSeparator = ".";
+            provider.NumberGroupSeparator = ",";
+            provider.NumberGroupSizes = new int[] { 3 };
+
             if (value == null || value == DBNull.Value || value == "")
                 return 0M;
             else
-                return Convert.ToDecimal(value);
+                return Convert.ToDecimal(value, provider);
         }
 
         public static DateTime DateValue(object value)
@@ -47,3 +53,4 @@ namespace IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock
         }
     }
 }
+    
