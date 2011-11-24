@@ -179,6 +179,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 basket.ShippingAddress.Id = shippingAddressId;
                 basket.ShippingCompany = new Model.ProductModel.Shipment() { Id = basket.ShippingCompany.Id };
                 basketId = BasketData.Insert(basket);
+                BasketAddressData.UpdateBasketId(billingAddressId, basketId, shippingAddressId);
                 if (basketId > 0)
                     foreach (BasketItem basketItem in basket.BasketItems)
                     {
