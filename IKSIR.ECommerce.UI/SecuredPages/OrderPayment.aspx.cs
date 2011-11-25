@@ -468,8 +468,7 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-                if (loginUser.Id == 20 || loginUser.Id == 23)
-                {
+               
                     if (ddlCreditCard.SelectedValue == "99")
                     {
                         isOk = DefaultCard(paymetInfo);
@@ -486,12 +485,7 @@ namespace IKSIR.ECommerce.UI.Pages
                                 break;
                         }
                     }
-                }
-                else
-                {
-                    divAlert.InnerHtml += "Test olarak sadece aziz ve tayfun kullanıcısı çekim yapabilir.";
-                    isOk = false;
-                }
+               
 
 
             }
