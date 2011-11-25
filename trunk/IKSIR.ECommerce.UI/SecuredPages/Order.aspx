@@ -65,7 +65,7 @@
                                                     <asp:HiddenField runat="server" ID="hdnProductId" Value='<%# Eval("Product.Id")%>' />
                                                     <a href='<%# String.Format("/Pages/ProductDetails.aspx?pid={0}", Eval("Product.Id"))%>'
                                                         target="_blank">
-                                                        <asp:Image runat="server" ID="imgProduct" ImageUrl='<%# Eval("Product.MainImage", "http://www.banyom.com.tr/management/ProductDocuments/Images/Small/small_{0:C}")%>'
+                                                        <asp:Image runat="server" ID="imgProduct" ImageUrl='<%# Eval("Product.MainImage", "https://www.banyom.com.tr/management/ProductDocuments/Images/Small/small_{0:C}")%>'
                                                             BorderWidth="0  " />
                                                     </a>
                                                 </td>

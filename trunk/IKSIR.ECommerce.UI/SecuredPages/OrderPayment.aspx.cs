@@ -100,7 +100,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 foreach (var item in basket.BasketItems)
                 {
                     if (item.Product.Desi != null && item.Product.Desi != "")
-                        totaldesi += Convert.ToDecimal(item.Product.Desi);
+                        totaldesi += item.Count * Convert.ToDecimal(item.Product.Desi);
                 }
 
                 lblShippingPrice.Text = Utility.CurrencyFormat(OrderData.CalculateShippingPrice(totaldesi));
@@ -209,7 +209,10 @@ namespace IKSIR.ECommerce.UI.Pages
                     order.Basket = basket;
                     order.TotalPrice = basket.TotalPrice;
                     order.TotalRatedPrice = basket.TotalRatedPrice;
-                    order.ShippingPrice = Convert.ToDecimal(lblShippingPrice.Text);
+                    if (lblShippingPrice.Text != "")
+                        order.ShippingPrice = Convert.ToDecimal(lblShippingPrice.Text);
+                    else
+                        order.ShippingPrice = 0;
                     if (ddlPaymentType.SelectedValue == "36")
                         order.Status = new Model.CommonModel.EnumValue() { Id = 29 };
                     else
@@ -230,10 +233,21 @@ namespace IKSIR.ECommerce.UI.Pages
                     MailBody = MailBody.Replace("%TotalAmount%", lblTotalPrice.Text);
                     MailBody = MailBody.Replace("%ShippingAmount%", lblShippingPrice.Text);
                     MailBody = MailBody.Replace("%TotalOrderAmount%", lblBasketTotal.Text);
-                    MailBody = MailBody.Replace("%BillingAddress%", "İl : " + basket.BillingAddress.City != null ? basket.BillingAddress.CityName : basket.BillingAddress.City.Name + " </br>İlçe : " + basket.BillingAddress.District.Name.ToString() +
+                    
+                    string cityName = basket.BillingAddress.City != null ? basket.BillingAddress.City.Name : basket.BillingAddress.CityName;
+
+                    string districtName = basket.BillingAddress.District != null ? basket.BillingAddress.District.Name : basket.BillingAddress.DistrictName;
+
+                    MailBody = MailBody.Replace("%BillingAddress%", "İl : " + cityName + " </br>İlçe : " + districtName +
                         "</br> Adres : " + basket.BillingAddress.AddressDetail.ToString() + "</br>Posta Kodu : " + basket.BillingAddress.PostalCode.ToString());
-                    MailBody = MailBody.Replace("%DeliveryAddress%", "İl : " + basket.ShippingAddress.City != null ? basket.ShippingAddress.CityName : basket.ShippingAddress.City.Name + " </br>İlçe : " + basket.ShippingAddress.District.Name.ToString() +
+
+                    cityName = basket.ShippingAddress.City != null ? basket.ShippingAddress.City.Name : basket.ShippingAddress.CityName;
+
+                    districtName = basket.ShippingAddress.District != null ? basket.ShippingAddress.District.Name : basket.ShippingAddress.DistrictName;
+
+                    MailBody = MailBody.Replace("%DeliveryAddress%", "İl : " + cityName + " </br>İlçe : " + districtName +
                       "</br> Adres : " + basket.ShippingAddress.AddressDetail.ToString() + "</br>Posta Kodu : " + basket.ShippingAddress.PostalCode.ToString());
+                    
                     MailBody = MailBody.Replace("%NameSurname%", loginUser.FirstName.ToString() + " " + loginUser.LastName.ToString());
                     string HtmlProducts = "<table><tr><td>Ürün Adı</td><td>Sayısı</td><td>Fiyatı</td></tr>";
                     foreach (BasketItem basketItem in basket.BasketItems)
