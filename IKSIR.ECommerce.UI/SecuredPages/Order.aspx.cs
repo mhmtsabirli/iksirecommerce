@@ -65,8 +65,24 @@ namespace IKSIR.ECommerce.UI.SecuredPages
             rptBasketProducts.DataSource = orders.Basket.BasketItems;
             rptBasketProducts.DataBind();
 
-            lblShippingPrice.Text = Toolkit.Utility.CurrencyFormat(orders.Basket.ShippingCompany.UnitPrice);
-            lblBasketTotal.Text = Toolkit.Utility.CurrencyFormat(orders.Basket.TotalRatedPrice + orders.Basket.ShippingCompany.UnitPrice);
+            if (orders.Basket.TotalRatedPrice >= 100)
+            {
+                lblBasketTotal.Text = "0.00";
+            }
+            else
+            {
+                decimal totaldesi = 0;
+
+                foreach (var item in orders.Basket.BasketItems)
+                {
+                    if (item.Product.Desi != null && item.Product.Desi != "")
+                        totaldesi += item.Count * Convert.ToDecimal(item.Product.Desi);
+                }
+
+                lblShippingPrice.Text = Utility.CurrencyFormat(OrderData.CalculateShippingPrice(totaldesi));
+                lblBasketTotal.Text = Toolkit.Utility.CurrencyFormat(orders.Basket.TotalRatedPrice + OrderData.CalculateShippingPrice(totaldesi));
+            }
+
             lblTotalTax.Text = Toolkit.Utility.CurrencyFormat(orders.Basket.TotalRatedPrice - orders.Basket.TotalPrice);
             lblTotalPrice.Text = Toolkit.Utility.CurrencyFormat(orders.Basket.TotalPrice);
         }

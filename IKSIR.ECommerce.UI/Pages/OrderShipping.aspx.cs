@@ -40,7 +40,7 @@ namespace IKSIR.ECommerce.UI.Pages
             foreach (var item in basket.BasketItems)
             {
                 if (item.Product.Desi != null && item.Product.Desi != "")
-                    totaldesi += DBHelper.DecValue(item.Product.Desi);
+                    totaldesi += item.Count * Convert.ToDecimal(item.Product.Desi);
             }
 
             List<IKSIR.ECommerce.Model.ProductModel.Shipment> itemList = ShipmentData.GetShipmentList(totaldesi);
