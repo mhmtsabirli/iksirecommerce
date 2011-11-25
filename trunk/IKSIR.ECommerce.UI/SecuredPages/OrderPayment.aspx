@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <script language="JavaScript" type="text/JavaScript">
     function submitFormEx(Form, OpenNewWindowFlag, WindowName) {
-        Form.action = "http://setmpos.ykb.com/3DSWebService/YKBPaymentService"
+        Form.action = "https://www.posnet.ykb.com/3DSWebService/YKBPaymentService"
         submitForm(Form, OpenNewWindowFlag, WindowName)
         Form.submit();
     }
