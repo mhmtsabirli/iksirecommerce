@@ -285,6 +285,7 @@ namespace IKSIR.ECommerce.UI.Pages
                 //güncelle
                 var shippingAddressItem = AddressData.Get(shippingAddressId);
                 shippingAddressItem.Title = txtShippingAddressTitle.Text;
+                shippingAddressItem.Type = new EnumValue() { Id = 9 }; // Fatura Adresi
                 shippingAddressItem.FirstName = txtShippingAddressFirstName.Text;
                 shippingAddressItem.LastName = txtShippingAddressLastName.Text;
                 if (ddlShippingAddressCountries.SelectedValue != "-1" && ddlShippingAddressCountries.SelectedValue != "")
@@ -338,6 +339,7 @@ namespace IKSIR.ECommerce.UI.Pages
             {
                 //yeni kayıt
                 var shippingAddressItem = new Address();
+                shippingAddressItem.Type = new EnumValue() { Id = 9 }; // Fatura Adresi
                 shippingAddressItem.User = new User() { Id = loginUser.Id };
                 shippingAddressItem.Title = txtShippingAddressTitle.Text;
                 shippingAddressItem.FirstName = txtShippingAddressFirstName.Text;
@@ -367,7 +369,6 @@ namespace IKSIR.ECommerce.UI.Pages
                 {
                     shippingAddressItem.DistrictName = txtShippingAddressDistrictName.Text;
                 }
-
                 shippingAddressItem.PostalCode = txtShippingAddressPostCode.Text;
                 shippingAddressItem.AddressDetail = txtShippingAddressLine.Text;
                 shippingAddressItem.Phone = txtShippingAddressPhone.Text;
@@ -398,6 +399,7 @@ namespace IKSIR.ECommerce.UI.Pages
             {
                 //güncelle
                 var billingAddressItem = AddressData.Get(billingAddressId);
+                billingAddressItem.Type = new EnumValue() { Id = 8 }; // Fatura Adresi
                 billingAddressItem.Title = txtBillingAddressTitle.Text;
                 billingAddressItem.FirstName = txtBillingAddressFirstName.Text;
                 billingAddressItem.LastName = txtBillingAddressLastName.Text;
@@ -430,7 +432,6 @@ namespace IKSIR.ECommerce.UI.Pages
                 billingAddressItem.AddressDetail = txtBillingAddressLine.Text;
                 billingAddressItem.Phone = txtBillingAddressPhone.Text;
                 billingAddressItem.GSMPhone = txtBillingAddressGSMPhone.Text;
-                AddressData.Update(billingAddressItem);
 
                 var returnValue = AddressData.Update(billingAddressItem);
                 if (returnValue > 0)
@@ -450,6 +451,8 @@ namespace IKSIR.ECommerce.UI.Pages
             else
             {
                 var billingAddressItem = new Address();
+                billingAddressItem.Type = new EnumValue() { Id = 8 }; // Fatura Adresi
+                billingAddressItem.User = new User() { Id = loginUser.Id };
                 billingAddressItem.Title = txtBillingAddressTitle.Text;
                 billingAddressItem.FirstName = txtBillingAddressFirstName.Text;
                 billingAddressItem.LastName = txtBillingAddressLastName.Text;
@@ -482,7 +485,6 @@ namespace IKSIR.ECommerce.UI.Pages
                 billingAddressItem.AddressDetail = txtBillingAddressLine.Text;
                 billingAddressItem.Phone = txtBillingAddressPhone.Text;
                 billingAddressItem.GSMPhone = txtBillingAddressGSMPhone.Text;
-                AddressData.Insert(billingAddressItem);
 
                 var returnValue = AddressData.Insert(billingAddressItem);
                 if (returnValue > 0)

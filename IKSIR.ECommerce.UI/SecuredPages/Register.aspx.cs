@@ -19,8 +19,8 @@ namespace IKSIR.ECommerce.UI.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string error = "Henüz üye alımı yapılmamaktadır. İlginiz için teşekkürler. Lütfen daha sonra tekrar deneyiniz.";
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "err_msg", "alert('" + error + "');", true);
+            //string error = "Henüz üye alımı yapılmamaktadır. İlginiz için teşekkürler. Lütfen daha sonra tekrar deneyiniz.";
+            //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "err_msg", "alert('" + error + "');", true);
             if (!Page.IsPostBack)
             {
                 BindValues();
@@ -52,10 +52,6 @@ namespace IKSIR.ECommerce.UI.Pages
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
-            string error = "Henüz üye alımı yapılmamaktadır. İlginiz için teşekkürler. Lütfen daha sonra tekrar deneyiniz.";
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "err_msg", "alert('" + error + "');", true);
-            return;
-
             if (CheckForm())
             {
                 if (SaveForm())
@@ -91,7 +87,7 @@ namespace IKSIR.ECommerce.UI.Pages
                     MailBody = MailBody.Replace("%ActivationLink%", "http://www.banyom.com.tr/");
                     MailBody = MailBody.Replace("%UserName%", txtEmail.Text);
                     MailBody = MailBody.Replace("%Password%", txtPassword.Text);
-                    bool retValueSendMail = Mail.sendMail(txtEmail.Text, "helpdesk@banyom.com.tr", "Senar İnşaat A.Ş. | Üyelik Bilgileriniz", MailBody);
+                    bool retValueSendMail = Mail.sendMail(txtEmail.Text, "musterihizmetleri@senarinsaat.com.tr", "Senar İnşaat A.Ş. | Üyelik Bilgileriniz", MailBody);
 
                     if (retValueSendMail)
                     {

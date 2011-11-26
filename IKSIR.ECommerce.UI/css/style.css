@@ -17,7 +17,7 @@ body
 	     .top_menu li a, .top_menu li a:visited { color:#FFF; text-decoration:none; }
 		 .top_menu li a:hover { text-decoration:underline; }
 
-   .logo { float:left; margin-top:-5px; }
+   .logo { float:left; margin-top:-5px; background-image:url(../images/logo.jpg); }
       .logo img { border:0; }
 
    .search { float:right; padding:25px 35px 0 0; }

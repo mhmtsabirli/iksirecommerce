@@ -68,8 +68,45 @@
         </ul>
     </div>
     <div class="logo">
-        <a href="/Pages/Default.aspx">
-            <img src="https://www.banyom.com.tr/images/logo.jpg" alt="" /></a></div>
+        <a href="../Pages/Default.aspx">
+            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="211" height="71"
+                id="logo" align="middle">
+                <param name="movie" value="https://www.banyom.com.tr/images/logo.swf" />
+                <param name="quality" value="high" />
+                <param name="bgcolor" value="#ffffff" />
+                <param name="play" value="true" />
+                <param name="loop" value="true" />
+                <param name="wmode" value="window" />
+                <param name="scale" value="showall" />
+                <param name="menu" value="false" />
+                <param name="devicefont" value="false" />
+                <param name="salign" value="" />
+                <param name="allowScriptAccess" value="sameDomain" />
+                <!--[if !IE]>-->
+                <object type="application/x-shockwave-flash" data="https://www.banyom.com.tr/logo.swf"
+                    width="211" height="71">
+                    <param name="movie" value="https://www.banyom.com.tr/logo.swf" />
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#ffffff" />
+                    <param name="play" value="true" />
+                    <param name="loop" value="true" />
+                    <param name="wmode" value="window" />
+                    <param name="scale" value="showall" />
+                    <param name="menu" value="false" />
+                    <param name="devicefont" value="false" />
+                    <param name="salign" value="" />
+                    <param name="allowScriptAccess" value="sameDomain" />
+                    <!--<![endif]-->
+                    <a href="http://www.adobe.com/go/getflash">
+                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
+                            alt="Get Adobe Flash player" />
+                    </a>
+                    <!--[if !IE]>-->
+                </object>
+                <!--<![endif]-->
+            </object>
+        </a>
+    </div>
     <div class="search" id="block">
         <asp:TextBox runat="server" ID="txtSearchText" title="Arama.." CssClass="search_text"></asp:TextBox>
         <asp:LinkButton runat="server" ID="lbtnSearch" CssClass="search_submit" OnClick="lbtnSearch_Click"></asp:LinkButton>

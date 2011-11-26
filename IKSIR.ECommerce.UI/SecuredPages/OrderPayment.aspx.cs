@@ -888,9 +888,9 @@ namespace IKSIR.ECommerce.UI.Pages
             return isOk;
         }
 
-        protected void btnBackToBasket_Click(object sender, EventArgs e)
+        protected void imgbtnBack_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("~/Pages/OrderAddress.aspx");
+            Response.Redirect("~/Pages/OrderShipping.aspx");
         }
     }
 }
