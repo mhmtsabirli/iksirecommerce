@@ -96,7 +96,9 @@
             <h3>
                 E-Bülten</h3>
             <asp:TextBox runat="server" ID="txtUserEmail" CssClass="footer_module_text" title="E-posta Adresiniz"></asp:TextBox>
-            <asp:LinkButton runat="server" ID="lbtnSaveToList" OnClick="lbtnSaveToList_Click">Kayıt Ol</asp:LinkButton>
+            <asp:LinkButton runat="server" ID="lbtnSaveToList" OnClick="lbtnSaveToList_Click">
+            <img src="../images/kayitol.jpg" style="border:none" />
+                        </asp:LinkButton>
             <div class="clear">
             </div>
             <p>

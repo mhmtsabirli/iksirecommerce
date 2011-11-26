@@ -33,7 +33,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            Ay
+                                            Ay&nbsp;&nbsp;
                                         </td>
                                         <td>
                                             Vade
@@ -43,9 +43,9 @@
                                         <ItemTemplate>
                                             <tr>
                                                 <td>
-                                                    <%# Eval("Month")%>
+                                                    <%# Eval("Month")%>&nbsp;&nbsp;
                                                 </td>
-                                                <td>
+                                                <td style="padding-top: 3px">
                                                     <%# Eval("Price")%>
                                                 </td>
                                             </tr>
@@ -53,10 +53,10 @@
                                         <AlternatingItemTemplate>
                                             <tr style="background-color: #F7F6F3">
                                                 <td>
-                                                    <%# Eval("Month")%>
+                                                    <%# Eval("Month")%>&nbsp;&nbsp;
                                                 </td>
-                                                <td>
-                                                    <%# Eval("Price")%>                                                   
+                                                <td style="padding-top: 3px">
+                                                    <%# Eval("Price")%>
                                                 </td>
                                             </tr>
                                         </AlternatingItemTemplate>

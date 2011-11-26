@@ -24,7 +24,7 @@ namespace IKSIR.ECommerce.UI.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             //Kullanıcı login değilse sayfaya giremez.
-            if (Session["LOGIN_USER"] != null && Session["USER_BASKET"] != null)
+            if (Session["LOGIN_USER"] != null)
             {
                 if (!Page.IsPostBack)
                 {
@@ -123,7 +123,7 @@ namespace IKSIR.ECommerce.UI.Pages
                     if (productPriceData != null)
                     {
                         BasketTotal += product.Count * productPriceData.Price;
-                        TotalTax += product.Count * productPriceData.Price * productPriceData.Tax / 100;
+                        TotalTax += product.Count * productPriceData.UnitPrice * productPriceData.Tax / 100;
                         TotalPrice += product.Count * productPriceData.UnitPrice;
                      
                     }

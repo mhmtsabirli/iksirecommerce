@@ -67,7 +67,8 @@ namespace IKSIR.ECommerce.UI.SecuredPages
 
             if (orders.Basket.TotalRatedPrice >= 100)
             {
-                lblBasketTotal.Text = "0.00";
+                lblShippingPrice.Text = "0.00";
+                lblBasketTotal.Text = Toolkit.Utility.CurrencyFormat(orders.Basket.TotalRatedPrice);
             }
             else
             {

@@ -124,6 +124,7 @@
     <Content Include="images\highslide\scrollarrows.png" />
     <Content Include="images\highslide\zoomin.cur" />
     <Content Include="images\logo.jpg" />
+    <Content Include="images\logo.swf" />
     <Content Include="images\logo1.jpg" />
     <Content Include="images\logo2.jpg" />
     <Content Include="images\logo3.jpg" />
@@ -288,6 +289,7 @@
     <Content Include="SecuredPages\images\header_bg.png" />
     <Content Include="SecuredPages\images\header_search_bg.png" />
     <Content Include="SecuredPages\images\hemenal.png" />
+    <Content Include="SecuredPages\images\kayitol.jpg" />
     <Content Include="SecuredPages\images\logo.jpg" />
     <Content Include="SecuredPages\images\maintence.jpg" />
     <Content Include="SecuredPages\images\navbar_bg.png" />
