@@ -46,5 +46,40 @@ namespace IKSIR.ECommerce.Toolkit
                 return false;
             }
         }
+
+        public static bool sendMail(string to, string from, string password, string subject, string body)
+        {
+            try
+            {
+                System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+                String[] recipientList = to.TrimEnd(';').Split(';');
+                foreach (String email in recipientList)
+                {
+                    msg.To.Add(email);
+                }
+                msg.From = new MailAddress(from);
+                msg.Subject = subject;
+                msg.SubjectEncoding = System.Text.Encoding.UTF8;
+                msg.BodyEncoding = System.Text.Encoding.UTF8;
+                msg.IsBodyHtml = true;
+                msg.Priority = System.Net.Mail.MailPriority.High;
+                msg.Body = body;
+
+                //Add the Creddentials
+                SmtpClient client = new SmtpClient();
+                client.Port = Convert.ToInt32(IKSIR.ECommerce.Infrastructure.StaticData.Idevit.MailPort);
+                client.Host = IKSIR.ECommerce.Infrastructure.StaticData.Idevit.MailHost;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.Credentials = new System.Net.NetworkCredential(from, password);
+                //client.EnableSsl = true;
+                client.Send(msg);
+                //client.SendAsync(msg, (object)msg);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

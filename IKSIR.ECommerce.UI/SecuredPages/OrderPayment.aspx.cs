@@ -233,7 +233,7 @@ namespace IKSIR.ECommerce.UI.Pages
                     MailBody = MailBody.Replace("%TotalAmount%", lblTotalPrice.Text);
                     MailBody = MailBody.Replace("%ShippingAmount%", lblShippingPrice.Text);
                     MailBody = MailBody.Replace("%TotalOrderAmount%", lblBasketTotal.Text);
-                    
+
                     string cityName = basket.BillingAddress.City != null ? basket.BillingAddress.City.Name : basket.BillingAddress.CityName;
 
                     string districtName = basket.BillingAddress.District != null ? basket.BillingAddress.District.Name : basket.BillingAddress.DistrictName;
@@ -247,7 +247,7 @@ namespace IKSIR.ECommerce.UI.Pages
 
                     MailBody = MailBody.Replace("%DeliveryAddress%", "İl : " + cityName + " </br>İlçe : " + districtName +
                       "</br> Adres : " + basket.ShippingAddress.AddressDetail.ToString() + "</br>Posta Kodu : " + basket.ShippingAddress.PostalCode.ToString());
-                    
+
                     MailBody = MailBody.Replace("%NameSurname%", loginUser.FirstName.ToString() + " " + loginUser.LastName.ToString());
                     string HtmlProducts = "<table><tr><td>Ürün Adı</td><td>Sayısı</td><td>Fiyatı</td></tr>";
                     foreach (BasketItem basketItem in basket.BasketItems)
@@ -262,7 +262,7 @@ namespace IKSIR.ECommerce.UI.Pages
                     HtmlProducts += "</table>";
 
                     MailBody = MailBody.Replace("%Products%", HtmlProducts);
-                    bool retValueSendMail = Mail.sendMail(loginUser.Email.ToString(), "musterihizmetleri@senarinsaat.com.tr", "Banyom.com.tr | Şipariş Bilgileriniz", MailBody);
+                    bool retValueSendMail = Mail.sendMail(loginUser.Email.ToString(), "musterihizmetleri@banyom.com.tr", "m171007", "Banyom.com.tr | Şipariş Bilgileriniz", MailBody);
 
                     if (retValueSendMail)
                     {
@@ -468,24 +468,24 @@ namespace IKSIR.ECommerce.UI.Pages
             }
             else
             {
-               
-                    if (ddlCreditCard.SelectedValue == "99")
+
+                if (ddlCreditCard.SelectedValue == "99")
+                {
+                    isOk = DefaultCard(paymetInfo);
+                }
+                else
+                {
+                    switch (paymetInfo.CreditCard.Id)
                     {
-                        isOk = DefaultCard(paymetInfo);
+                        case 1:
+                            isOk = CreditCard(paymetInfo);
+                            break;
+                        case 2:
+                            isOk = YapiKredi(paymetInfo);
+                            break;
                     }
-                    else
-                    {
-                        switch (paymetInfo.CreditCard.Id)
-                        {
-                            case 1:
-                                isOk = CreditCard(paymetInfo);
-                                break;
-                            case 2:
-                                isOk = YapiKredi(paymetInfo);
-                                break;
-                        }
-                    }
-               
+                }
+
 
 
             }
