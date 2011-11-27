@@ -48,7 +48,7 @@
                                 *
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtExPassword"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtExPassword" TextMode="Password"></asp:TextBox>
                             </td>
                             <td>
                             </td>
@@ -64,7 +64,7 @@
                                 *
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtChangePassword_Password"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtChangePassword_Password" TextMode="Password"></asp:TextBox>
                             </td>
                             <td>
                             </td>
@@ -80,7 +80,7 @@
                                 *
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtChangePassword_PasswordAgain"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtChangePassword_PasswordAgain" TextMode="Password"></asp:TextBox>
                             </td>
                             <td>
                             </td>

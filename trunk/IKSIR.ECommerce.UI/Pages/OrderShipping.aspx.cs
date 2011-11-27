@@ -8,6 +8,8 @@ using IKSIR.ECommerce.Infrastructure.DataLayer.ProductDataLayer;
 using IKSIR.ECommerce.Model.MembershipModel;
 using IKSIR.ECommerce.Model.Order;
 using IKSIR.ECommerce.Infrastructure.DataLayer.DataBlock;
+using IKSIR.ECommerce.Toolkit;
+using IKSIR.ECommerce.Model.ProductModel;
 
 namespace IKSIR.ECommerce.UI.Pages
 {
@@ -43,7 +45,22 @@ namespace IKSIR.ECommerce.UI.Pages
                     totaldesi += item.Count * Convert.ToDecimal(item.Product.Desi);
             }
 
-            List<IKSIR.ECommerce.Model.ProductModel.Shipment> itemList = ShipmentData.GetShipmentList(totaldesi);
+            List<Shipment> itemList = ShipmentData.GetShipmentList(totaldesi);
+
+            if (basket.TotalRatedPrice >= 100)
+            {
+                foreach (Shipment item in itemList)
+                {
+                    item.Detail = item.Title + " / <span style=\"color:red;\">Ücretsiz</span>";
+                }
+            }
+            else
+            {
+                foreach (Shipment item in itemList)
+                {
+                    item.Detail = item.Title + " / " + Utility.CurrencyFormat(item.UnitPrice) + " TL";
+                }
+            }
             rblShippingCompanies.DataTextField = "Detail";
             rblShippingCompanies.DataValueField = "Id";
             rblShippingCompanies.DataSource = itemList;
@@ -57,7 +74,7 @@ namespace IKSIR.ECommerce.UI.Pages
             if (rblShippingCompanies.SelectedIndex == -1)
             {
                 string textForMessage = @"<script language='javascript'> alert('Bir kargo firması seçiniz!');</script>";
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);    
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "UserPopup", textForMessage);
             }
             else
             {

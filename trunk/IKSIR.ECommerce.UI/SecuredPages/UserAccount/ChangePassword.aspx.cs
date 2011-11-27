@@ -25,6 +25,10 @@ namespace IKSIR.ECommerce.UI.SecuredPages.UserAccount
             {
                 Response.Redirect("../Login.aspx?returl=" + Request.Url.PathAndQuery);
             }
+            else
+            {
+                loginUser = (User)Session["LOGIN_USER"];            
+            }
         }
 
         protected void btnChangePassword_Click(object sender, EventArgs e)
